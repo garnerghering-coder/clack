@@ -397,7 +397,7 @@ final class ExploreModel {
         guard zoom >= Self.detailZoom, let bbox else {
             if detailShownKey != nil {
                 detailHasStructures = false
-                if lantmateriet3D { lantmateriet3D = false }
+                if laserCredit3D != nil { laserCredit3D = nil }
                 updateTilt()
                 detailShownKey = nil
                 detailShownJSON = nil
@@ -437,8 +437,9 @@ final class ExploreModel {
         detailTracks = tracks
         let structures = ((json["features"] as? [[String: Any]]) ?? []).compactMap { $0["properties"] as? [String: Any] }.filter { $0["kind"] as? String == "structure" }
         detailHasStructures = !structures.isEmpty
-        let credit = structures.contains { $0["lantmateriet"] as? Bool == true }
-        if lantmateriet3D != credit { lantmateriet3D = credit }
+        // The laser the heights on screen come from (older servers only say whether it is Lantmäteriet's).
+        let credit = structures.compactMap { ($0["credit"] as? String).flatMap { $0.isEmpty ? nil : $0 } ?? ($0["lantmateriet"] as? Bool == true ? "lantmateriet" : nil) }.first
+        if laserCredit3D != credit { laserCredit3D = credit }
         controller.setStationDetail(json)
         updateTilt()
         needsFullRender = true
@@ -454,8 +455,8 @@ final class ExploreModel {
     /// The camera stays on the selected train until the map is dragged.
     @ObservationIgnored private var followingSelected = false
     @ObservationIgnored private var tilted = false
-    /// The heights on screen come from Lantmäteriet's laser data: the attribution line credits it.
-    private(set) var lantmateriet3D = false
+    /// Whose laser data the heights on screen come from: the attribution line credits it.
+    private(set) var laserCredit3D: String?
 
     private func updateTilt() {
         let want = detailHasStructures && zoom >= (tilted ? Self.model3DZoom - 0.5 : Self.model3DZoom)

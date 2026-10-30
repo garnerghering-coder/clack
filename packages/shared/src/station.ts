@@ -125,7 +125,11 @@ export interface StationPoi {
   where?: string;
   _source?: SourceRef;
 }
-export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'lantmateriet' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons';
+export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'lantmateriet' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons'
+  // The other countries' laser (heights, ground) and platform registers (the research passes).
+  | 'helsinki' | 'nls' | 'kartverket' | 'sdfi' | 'digitraffic' | 'banenor' | 'banedanmark';
+/** The laser sources whose credit the map must show where their heights are drawn. */
+export const LASER_SOURCES: StationSourceType[] = ['lantmateriet', 'helsinki', 'nls', 'kartverket', 'sdfi'];
 export interface StationMap {
   /** 1 (or absent): the original format; 2: with sources on every element, heights and platform edges. */
   schema?: 1 | 2;

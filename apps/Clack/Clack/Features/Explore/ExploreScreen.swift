@@ -315,7 +315,7 @@ struct ExploreScreen: View {
                     MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation")) { model.centreOnMe() }
                 }
             }
-            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen" + (model.lantmateriet3D ? " · Laserdata Nedladdning, skog © Lantmäteriet (processed), CC BY 4.0" : ""))
+            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen" + (model.laserCredit3D.map { " · " + l10n.t("explore.credit.\($0)") } ?? ""))
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
         }
         .padding(.leading, 12).padding(.bottom, 8)

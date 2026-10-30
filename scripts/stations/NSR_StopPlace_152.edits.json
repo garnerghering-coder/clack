@@ -16,13 +16,168 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-SKØ)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 9 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-SKØ)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/ (track table), read 2026-10-30: tracks 1,2, class 700/500 mm = 0.7 m above rail, 300.0 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/ (track table), read 2026-10-30: tracks 4,3, class 700/575 mm = 0.7 m above rail, 249.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-SKØ/skoyen_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w88600731",
+      "kind": "building",
+      "name": "office",
+      "top_m": 0.62,
+      "base_m": -4.95,
+      "_source": "Outline OSM w88600731 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w88600734",
+      "kind": "building",
+      "name": "office",
+      "top_m": 5.68,
+      "base_m": -4.57,
+      "_source": "Outline OSM w88600734 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w88600738",
+      "kind": "building",
+      "name": "office",
+      "top_m": 10.43,
+      "base_m": -6.01,
+      "_source": "Outline OSM w88600738 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w134161108",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.84,
+      "_source": "Outline OSM w134161108 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w134161110",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.25,
+      "_source": "Outline OSM w134161110 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w134161111",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.9,
+      "base_m": -0.79,
+      "_source": "Outline OSM w134161111 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w134161113",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.59,
+      "base_m": 0.16,
+      "_source": "Outline OSM w134161113 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w148114388",
+      "kind": "building",
+      "name": "office",
+      "top_m": 9.14,
+      "base_m": -6.82,
+      "_source": "Outline OSM w148114388 (ODbL); roof = median of 38 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w700228370",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.83,
+      "_source": "Outline OSM w700228370 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SKØ/skoyen_structures_heights.geojson (metres above the platform surface, 8.14 m RH 2000, laser 2019-09-14); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-SKØ/skoyen_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 8.14,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-SKØ/skoyen_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (8.14 m NN2000, laser 2019-09-14)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "rese2c8020495",
+      "category": "waiting",
+      "name": "Venterom",
+      "level": "1",
+      "x": -26.9,
+      "y": -1.9,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:10-01:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-SKØ/station_facts.json)",
+      "approximate": true,
+      "where": "in the station hall"
+    },
+    {
+      "id": "res92fda13626",
+      "category": "taxi",
+      "name": "Taxiholdeplass",
+      "level": "1",
+      "x": -26.9,
+      "y": -1.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-SKØ/station_facts.json)",
+      "approximate": true,
+      "where": "by the station building"
+    },
+    {
+      "id": "resc6eb26c8b1",
+      "category": "bus",
+      "name": "Buss for tog",
+      "level": "1",
+      "x": -26.9,
+      "y": -1.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-SKØ/station_facts.json)",
+      "approximate": true,
+      "where": "from the stop by the station building"
+    }
+  ]
 }

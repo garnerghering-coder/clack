@@ -244,8 +244,8 @@ struct StationScene3DView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(l10n.t("station3d.credits")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     Text(l10n.t("station3d.credit.osm")).clack(.micro).foregroundStyle(Ink.text3)
-                    if notes.lantmateriet { Text(l10n.t("station3d.credit.lantmateriet")).clack(.micro).foregroundStyle(Ink.text3) }
-                    if notes.trafikverket { Text(l10n.t("station3d.credit.trafikverket")).clack(.micro).foregroundStyle(Ink.text3) }
+                    if let laser = notes.laserCredit { Text(l10n.t("station3d.credit.\(laser)")).clack(.micro).foregroundStyle(Ink.text3) }
+                    if let register = notes.registerCredit { Text(l10n.t("station3d.credit.\(register)")).clack(.micro).foregroundStyle(Ink.text3) }
                 }
                 Text(l10n.t("station3d.hint")).clack(.micro).foregroundStyle(Ink.text3)
             }

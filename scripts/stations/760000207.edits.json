@@ -16,13 +16,299 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-LLS)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 12 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-LLS)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30: tracks 2,1, class 700 mm = 0.7 m above rail, 350.0 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30: tracks 3,4, class 700 mm = 0.7 m above rail, 350.0 m long; a recorded design class, not a survey"
+    },
+    "6–7": {
+      "height_m": 0.56,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30: tracks 6,7, class 560 mm = 0.56 m above rail, 350.0 m long; a recorded design class, not a survey"
+    },
+    "8–9": {
+      "height_m": 0.56,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30: tracks 8,9, class 560 mm = 0.56 m above rail, 250.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-LLS/lillestrom_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w108333263",
+      "kind": "building",
+      "name": "Lillestrøm bussterminal (transportation)",
+      "top_m": 0.52,
+      "base_m": -3.69,
+      "_source": "Outline OSM w108333263 (ODbL); roof = median of 331 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    },
+    {
+      "from": "w115788728",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.2,
+      "base_m": -4.19,
+      "_source": "Outline OSM w115788728 (ODbL); roof = median of 203 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    },
+    {
+      "from": "w195999517",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.75,
+      "_source": "Outline OSM w195999517 (ODbL); roof = median of 172 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w299869119",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -0.81,
+      "_source": "Outline OSM w299869119 (ODbL); roof = median of 171 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w482568151",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.4,
+      "_source": "Outline OSM w482568151 (ODbL); roof = median of 27 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w732214187",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.6,
+      "_source": "Outline OSM w732214187 (ODbL); roof = median of 112 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w732214188",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -0.51,
+      "_source": "Outline OSM w732214188 (ODbL); roof = median of 129 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w992072013",
+      "kind": "building",
+      "name": "Ekko (office)",
+      "top_m": 4.45,
+      "base_m": -3.7,
+      "_source": "Outline OSM w992072013 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    },
+    {
+      "from": "w992072014",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.14,
+      "base_m": -3.79,
+      "_source": "Outline OSM w992072014 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    },
+    {
+      "from": "w997574371",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.87,
+      "_source": "Outline OSM w997574371 (ODbL); roof = median of 43 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06); underside not measured"
+    },
+    {
+      "from": "w1002255542",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.15,
+      "base_m": -4.19,
+      "_source": "Outline OSM w1002255542 (ODbL); roof = median of 79 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    },
+    {
+      "from": "w1059055240",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.22,
+      "base_m": -3.73,
+      "_source": "Outline OSM w1059055240 (ODbL); roof = median of 19 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-LLS/lillestrom_structures_heights.geojson (metres above the platform surface, 110.0 m RH 2000, laser 2013-07-06)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-LLS/lillestrom_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 110,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-LLS/lillestrom_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (110.0 m NN2000, laser 2013-07-06)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resc06352f655",
+      "category": "waiting",
+      "name": "Venterom",
+      "level": "1",
+      "x": -88.1,
+      "y": -78.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:00-02:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "res3a99272462",
+      "category": "toilet",
+      "name": "Toalett (HC)",
+      "level": "1",
+      "x": 41,
+      "y": -64.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n6965857073 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res6d30c3e9c9",
+      "category": "locker",
+      "name": "Oppbevaringsbokser (Speedbox / Speed Service)",
+      "level": "1",
+      "x": 33,
+      "y": -59.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n11806735428 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "resee0b4e4ee8",
+      "category": "atm",
+      "name": "Nordea",
+      "level": "1",
+      "x": 21,
+      "y": -0.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; placed OSM node n6874391695 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res432edf7941",
+      "category": "atm",
+      "name": "Forex",
+      "level": "1",
+      "x": 5.7,
+      "y": -21.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; placed OSM node n5729021028 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res8ca231636d",
+      "category": "cafe",
+      "name": "Garcon Express",
+      "level": "1",
+      "x": 14.1,
+      "y": 40.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-14:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n5728701143 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res06b26f14c9",
+      "category": "restaurant",
+      "name": "Go' Bento",
+      "level": "1",
+      "x": 15.8,
+      "y": -19.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n6864709206 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res5835833626",
+      "category": "cafe",
+      "name": "Tea Fusion",
+      "level": "1",
+      "x": 11.2,
+      "y": -37,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-18:00; Sa-Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n9587304965 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res6fc619df63",
+      "category": "restaurant",
+      "name": "Big Bite",
+      "level": "1",
+      "x": 28.1,
+      "y": 20.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed OSM node n10025607075 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)"
+    },
+    {
+      "id": "res1a918506ca",
+      "category": "bus",
+      "name": "Lillestrøm bussterminal",
+      "level": "1",
+      "x": -85.4,
+      "y": -87.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-23:59; Sa,Su 07:00-23:59",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Store norske leksikon https://snl.no/Lillestr%C3%B8m_stasjon, read 2026-10-30; placed representative point of the OSM area w108333263 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res791a7945f8",
+      "category": "taxi",
+      "name": "Drosjeholdeplass",
+      "level": "1",
+      "x": -0.4,
+      "y": -79.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; placed representative point of the OSM area w991544509 (research pass 2026-10-30, data/stations/research/NO-LLS/station_facts.json)",
+      "approximate": true
+    }
+  ]
 }

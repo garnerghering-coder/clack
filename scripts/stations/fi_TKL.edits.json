@@ -8,20 +8,534 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platform / street level (Ratatie)",
+      "order": 0,
+      "name_source": "Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-TKL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_TKL)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 6 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_TKL)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3068769, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 415 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_TKL/tikkurila_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w322534933",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.77,
+      "_source": "Outline OSM w322534933 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15); underside not measured"
+    },
+    {
+      "from": "w322534936",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.75,
+      "_source": "Outline OSM w322534936 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15); underside not measured"
+    },
+    {
+      "from": "w384000586",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.68,
+      "_source": "Outline OSM w384000586 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15); underside not measured"
+    },
+    {
+      "from": "w395603996",
+      "kind": "building",
+      "name": "Dixi (retail)",
+      "top_m": 17.49,
+      "base_m": -1.39,
+      "_source": "Outline OSM w395603996 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15)"
+    },
+    {
+      "from": "w395613156",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.68,
+      "base_m": -0.93,
+      "_source": "Outline OSM w395613156 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15)"
+    },
+    {
+      "from": "w395613192",
+      "kind": "building",
+      "name": "building",
+      "top_m": 15.59,
+      "base_m": -0.7,
+      "_source": "Outline OSM w395613192 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa); from data/stations/research/fi_TKL/tikkurila_structures_heights.geojson (metres above the platform surface, 20.01 m RH 2000, laser 2024-06-15)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_TKL/tikkurila_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 20.01,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_TKL/tikkurila_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (20.01 m N2000, laser 2024-06-15)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res480eda27b0",
+      "category": "kiosk",
+      "name": "R-kioski Kauppakeskus Dixi Tikkurila",
+      "level": "0",
+      "x": -7.5,
+      "y": -104.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-21:30; Sa 07:00-21:30; Su 09:00-21:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/vantaa-kauppakeskus-dixi-tikkurila/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n3293095367 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res8e7788b2a7",
+      "category": "restaurant",
+      "name": "Maltainen Metso",
+      "level": "0",
+      "x": 47,
+      "y": -89.8,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-23:00; Fr,Sa 11:00-02:00; Su 11:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n3346184919 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res53c8d4be2b",
+      "category": "cafe",
+      "name": "CandyTown",
+      "level": "0",
+      "x": 30.7,
+      "y": -95.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-20:00; Su 12:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n13086340161 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res2f6aa6fc80",
+      "category": "shop",
+      "name": "S-market",
+      "level": "0",
+      "x": 3.3,
+      "y": -147.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-22:00; Sa 07:00-22:00; Su 09:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n3293095368 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resf307b726dc",
+      "category": "cafe",
+      "name": "Picnic",
+      "level": "0",
+      "x": -10.7,
+      "y": -88.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:30-20:00; Sa 09:00-18:00; Su 11:00-18:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n3293095366 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res6bb5616c1c",
+      "category": "cafe",
+      "name": "Karkkitori",
+      "level": "0",
+      "x": 3.9,
+      "y": -126.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n3293095364 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res357fe854a6",
+      "category": "kiosk",
+      "name": "JK Shop",
+      "level": "0",
+      "x": -1.2,
+      "y": -131,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n13300261563 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res2b4394e509",
+      "category": "atm",
+      "name": "Bittimaatti",
+      "level": "0",
+      "x": 6,
+      "y": -141.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n10560516700 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "rese062c8fec0",
+      "category": "toilet",
+      "name": "Dixi toilets",
+      "level": "0",
+      "x": -14.5,
+      "y": -99.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; placed OSM node n10560516693 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resd7ca1d481a",
+      "category": "restaurant",
+      "name": "Kotipizza",
+      "level": "0",
+      "x": -21,
+      "y": -50.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:30-21:00; Fr 10:30-22:00; Sa 11:00-22:00; Su 11:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed OSM node n10560516689 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res7a159a83cb",
+      "category": "bus",
+      "name": "Tikkurila bus terminal (closed) / temporary terminals",
+      "level": "0",
+      "x": 91.3,
+      "y": -504.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; placed representative point of the OSM area w1448053839 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res4a0abdf46e",
+      "category": "toilet",
+      "name": "Dixi",
+      "level": "0",
+      "x": -14.5,
+      "y": -99.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n10560516693 (read 2026-10-30); placed OSM node n10560516693 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res0ed727d4e5",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -18.3,
+      "y": -6.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n13300261558 (read 2026-10-30); placed OSM node n13300261558 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res5f41f17c32",
+      "category": "restaurant",
+      "name": "Grande Parilla",
+      "level": "0",
+      "x": -17,
+      "y": -54.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-22:00; Sa 09:00-22:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3293095361 (ODbL), read 2026-10-30; placed OSM node n3293095361 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res7d9e175baf",
+      "category": "restaurant",
+      "name": "Hao King",
+      "level": "0",
+      "x": -12.7,
+      "y": -68.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa 11:00-21:00; Su 11:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3293095362 (ODbL), read 2026-10-30; placed OSM node n3293095362 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resd9cc46d55f",
+      "category": "shop",
+      "name": "Kaivokukka",
+      "level": "0",
+      "x": 0.2,
+      "y": -109.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-19:00; Sa 09:00-18:00; Su 10:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3293095363 (ODbL), read 2026-10-30; placed OSM node n3293095363 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res7b038a91b7",
+      "category": "restaurant",
+      "name": "Taco Bell",
+      "level": "0",
+      "x": -37.2,
+      "y": 15.9,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:30-24:00, Fr 10:30-05:00, Sa 11:00-05:00, Su 11:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5906735165 (ODbL), read 2026-10-30; placed OSM node n5906735165 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res74df2a6b7b",
+      "category": "kiosk",
+      "name": "K-Market",
+      "level": "0",
+      "x": -31.8,
+      "y": -0.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-24:00; Sa 07:00-24:00; Su 09:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5906735166 (ODbL), read 2026-10-30; placed OSM node n5906735166 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res55bb5c2b45",
+      "category": "restaurant",
+      "name": "Burger King",
+      "level": "0",
+      "x": -29.8,
+      "y": -10.8,
+      "fee": null,
+      "opening_hours": "Su-Th 09:00-24:00; Fr,Sa 09:00-05:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6139263845 (ODbL), read 2026-10-30; placed OSM node n6139263845 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res1e7637d4ee",
+      "category": "shop",
+      "name": "Synsam",
+      "level": "0",
+      "x": -4.5,
+      "y": -121.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-18:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6139263848 (ODbL), read 2026-10-30; placed OSM node n6139263848 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res496066fece",
+      "category": "restaurant",
+      "name": "Subway",
+      "level": "0",
+      "x": -25.6,
+      "y": -17.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:30-20:30; Sa 11:00-20:00; Su 12:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6139263850 (ODbL), read 2026-10-30; placed OSM node n6139263850 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res397890d540",
+      "category": "shop",
+      "name": "Nissen",
+      "level": "0",
+      "x": -22.2,
+      "y": -28.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-18:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6139263854 (ODbL), read 2026-10-30; placed OSM node n6139263854 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resec32133014",
+      "category": "shop",
+      "name": "New Hairstore",
+      "level": "0",
+      "x": -6.9,
+      "y": -112.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6139263855 (ODbL), read 2026-10-30; placed OSM node n6139263855 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resa083cbf7cb",
+      "category": "shop",
+      "name": "Hair Design 5",
+      "level": "0",
+      "x": -4.5,
+      "y": -88.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n6139263861 (ODbL), read 2026-10-30; placed OSM node n6139263861 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resa5c3852568",
+      "category": "restaurant",
+      "name": "Houwei Sushi Tikkurila",
+      "level": "0",
+      "x": 81,
+      "y": -38,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-21:00; Sa 11:00-21:00; Su 12:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10144692966 (ODbL), read 2026-10-30; placed OSM node n10144692966 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res1f61979997",
+      "category": "restaurant",
+      "name": "Arnolds",
+      "level": "0",
+      "x": -24.9,
+      "y": -33.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 08:00-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10560516688 (ODbL), read 2026-10-30; placed OSM node n10560516688 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resb37a0af30c",
+      "category": "pharmacy",
+      "name": "Normal",
+      "level": "0",
+      "x": -10,
+      "y": -65.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-21:00; Sa 10:00-19:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11774324872 (ODbL), read 2026-10-30; placed OSM node n11774324872 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res2bdfdffa2f",
+      "category": "restaurant",
+      "name": "Kiva Korean Kitchen",
+      "level": "0",
+      "x": -27.2,
+      "y": -5.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13300261557 (ODbL), read 2026-10-30; placed OSM node n13300261557 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resd34fa85f23",
+      "category": "shop",
+      "name": "Specsavers",
+      "level": "0",
+      "x": -21.1,
+      "y": -34.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13300261560 (ODbL), read 2026-10-30; placed OSM node n13300261560 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "resb09b91b1ef",
+      "category": "restaurant",
+      "name": "Pretty Boy",
+      "level": "0",
+      "x": -11.6,
+      "y": -80.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13300261565 (ODbL), read 2026-10-30; placed OSM node n13300261565 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res5fde78b80c",
+      "category": "shop",
+      "name": "Paku kympillä",
+      "level": "0",
+      "x": 11.1,
+      "y": -164.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13300261570 (ODbL), read 2026-10-30; placed OSM node n13300261570 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res2fb9b23cc3",
+      "category": "atm",
+      "name": "ValuuttaOtto",
+      "level": "0",
+      "x": -17.2,
+      "y": -39.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-22:00; Sa 07:00-22:00; Su 09:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13657031418 (ODbL), read 2026-10-30; placed OSM node n13657031418 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
+    },
+    {
+      "id": "res45c7e0c049",
+      "category": "atm",
+      "name": "Otto",
+      "level": "0",
+      "x": -16.8,
+      "y": -42.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-22:00; Sa 07:00-22:00; Su 09:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13657031419 (ODbL), read 2026-10-30; placed OSM node n13657031419 (research pass 2026-10-30, data/stations/research/fi_TKL/station_facts.json)"
     }
   ]
 }

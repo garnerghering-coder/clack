@@ -32,12 +32,1037 @@
       "order": -1
     }
   ],
-  "sources": [],
+  "sources": [
+    {
+      "type": "helsinki",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hri.fi/",
+      "note": "Helsingin laserkeilausaineisto 2021, © Helsingin kaupunki, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_HKI)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
   "changelog": [
     {
       "date": "2026-10-29",
       "who": "the owner's assistant",
       "what": "First draft from OpenStreetMap (Overpass, cached 2026-10-28), schema 2."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 30 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_HKI)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904203, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 278 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904213, read 2026-10-30, CC BY 4.0: tracks 2, class korkea = 0.55 m above rail, 290 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904306, read 2026-10-30, CC BY 4.0: tracks 3, class korkea = 0.55 m above rail, 288 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904389, read 2026-10-30, CC BY 4.0: tracks 4, class korkea = 0.55 m above rail, 423 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3165889, read 2026-10-30, CC BY 4.0: tracks 5, class korkea = 0.55 m above rail, 392 m long; a recorded design class, not a survey"
+    },
+    "6": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904472, read 2026-10-30, CC BY 4.0: tracks 6, class korkea = 0.55 m above rail, 416 m long; a recorded design class, not a survey"
+    },
+    "7": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904479, read 2026-10-30, CC BY 4.0: tracks 7, class korkea = 0.55 m above rail, 438 m long; a recorded design class, not a survey"
+    },
+    "8": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904557, read 2026-10-30, CC BY 4.0: tracks 8, class korkea = 0.55 m above rail, 444 m long; a recorded design class, not a survey"
+    },
+    "9": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3165900, read 2026-10-30, CC BY 4.0: tracks 9, class korkea = 0.55 m above rail, 407 m long; a recorded design class, not a survey"
+    },
+    "10": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3165910, read 2026-10-30, CC BY 4.0: tracks 10, class korkea = 0.55 m above rail, 377 m long; a recorded design class, not a survey"
+    },
+    "11": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904628, read 2026-10-30, CC BY 4.0: tracks 11, class korkea = 0.55 m above rail, 363 m long; a recorded design class, not a survey"
+    },
+    "12": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904712, read 2026-10-30, CC BY 4.0: tracks 12, class korkea = 0.55 m above rail, 275 m long; a recorded design class, not a survey"
+    },
+    "13": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904783, read 2026-10-30, CC BY 4.0: tracks 13, class korkea = 0.55 m above rail, 236 m long; a recorded design class, not a survey"
+    },
+    "14": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904854, read 2026-10-30, CC BY 4.0: tracks 14, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    },
+    "15": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904924, read 2026-10-30, CC BY 4.0: tracks 15, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    },
+    "16": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2904995, read 2026-10-30, CC BY 4.0: tracks 16, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    },
+    "17": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2905065, read 2026-10-30, CC BY 4.0: tracks 17, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    },
+    "18": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2905136, read 2026-10-30, CC BY 4.0: tracks 18, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    },
+    "19": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2905207, read 2026-10-30, CC BY 4.0: tracks 19, class korkea = 0.55 m above rail, 246 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_HKI/helsinki_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w28908668",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 10.57,
+      "_source": "Outline OSM w28908668 (ODbL); roof = median of 50 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w28908670",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.85,
+      "_source": "Outline OSM w28908670 (ODbL); roof = median of 148234 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w29072452",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 24.74,
+      "base_m": -7.29,
+      "_source": "Outline OSM w29072452 (ODbL); roof = median of 5603 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w29072646",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.28,
+      "_source": "Outline OSM w29072646 (ODbL); roof = median of 580 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w30368518",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.74,
+      "_source": "Outline OSM w30368518 (ODbL); roof = median of 1574 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w89381377",
+      "kind": "building",
+      "name": "building",
+      "top_m": 21.97,
+      "base_m": -0.09,
+      "_source": "Outline OSM w89381377 (ODbL); roof = median of 356 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w89381381",
+      "kind": "building",
+      "name": "building",
+      "top_m": 17.09,
+      "base_m": -0.82,
+      "_source": "Outline OSM w89381381 (ODbL); roof = median of 1500 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w89384389",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.98,
+      "base_m": 0.02,
+      "_source": "Outline OSM w89384389 (ODbL); roof = median of 4807 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w122595198",
+      "kind": "building",
+      "name": "Helsingin päärautatieasema (station building)",
+      "top_m": 11.42,
+      "base_m": -2.58,
+      "_source": "Outline OSM w122595198 (ODbL); roof = median of 10795 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w122595207",
+      "kind": "building",
+      "name": "Suomen Kansallisteatteri (public)",
+      "top_m": 13.69,
+      "base_m": -2.38,
+      "_source": "Outline OSM w122595207 (ODbL); roof = median of 854 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w122595238",
+      "kind": "building",
+      "name": "Sokos (retail)",
+      "top_m": 18.98,
+      "base_m": 0.02,
+      "_source": "Outline OSM w122595238 (ODbL); roof = median of 4807 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w262601390",
+      "kind": "building",
+      "name": "KPMG (office)",
+      "top_m": 21.55,
+      "base_m": -0.9,
+      "_source": "Outline OSM w262601390 (ODbL); roof = median of 12895 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w396370569",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 21.45,
+      "_source": "Outline OSM w396370569 (ODbL); roof = median of 3007 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w396371418",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 21.46,
+      "_source": "Outline OSM w396371418 (ODbL); roof = median of 2275 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w396371905",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 21.52,
+      "_source": "Outline OSM w396371905 (ODbL); roof = median of 1700 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w470004887",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 2.79,
+      "base_m": -0.04,
+      "_source": "Outline OSM w470004887 (ODbL); roof = median of 461 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w470004888",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 2.8,
+      "base_m": -0.05,
+      "_source": "Outline OSM w470004888 (ODbL); roof = median of 359 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w470004889",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 2.8,
+      "base_m": -0.07,
+      "_source": "Outline OSM w470004889 (ODbL); roof = median of 448 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w470004898",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.8,
+      "_source": "Outline OSM w470004898 (ODbL); roof = median of 390 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w612014375",
+      "kind": "building",
+      "name": "building",
+      "top_m": 25.61,
+      "base_m": -0.55,
+      "_source": "Outline OSM w612014375 (ODbL); roof = median of 3323 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w644615094",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.91,
+      "base_m": -1.96,
+      "_source": "Outline OSM w644615094 (ODbL); roof = median of 480 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w655097862",
+      "kind": "building",
+      "name": "Entinen VR:n pääkonttori, nykyään hotelli (office)",
+      "top_m": 13.72,
+      "base_m": -2.38,
+      "_source": "Outline OSM w655097862 (ODbL); roof = median of 6878 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1025787754",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.98,
+      "base_m": 0.02,
+      "_source": "Outline OSM w1025787754 (ODbL); roof = median of 4807 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1032889414",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.25,
+      "base_m": -0.74,
+      "_source": "Outline OSM w1032889414 (ODbL); roof = median of 223 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134655277",
+      "kind": "building",
+      "name": "UPM (office)",
+      "top_m": 21.56,
+      "base_m": -1.94,
+      "_source": "Outline OSM w1134655277 (ODbL); roof = median of 2710 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1176578948",
+      "kind": "building",
+      "name": "building",
+      "top_m": 22.1,
+      "base_m": -7.16,
+      "_source": "Outline OSM w1176578948 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1280860265",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.58,
+      "_source": "Outline OSM w1280860265 (ODbL); roof = median of 434 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w1280860268",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.62,
+      "_source": "Outline OSM w1280860268 (ODbL); roof = median of 520 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w1497383655",
+      "kind": "building",
+      "name": "building",
+      "top_m": 21.56,
+      "base_m": -1.94,
+      "_source": "Outline OSM w1497383655 (ODbL); roof = median of 2346 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "r1319474",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.98,
+      "base_m": 0.02,
+      "_source": "Outline OSM r1319474 (ODbL); roof = median of 4807 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_673496c, clack_fi_hel2021_673496d), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_HKI/helsinki_structures_heights.geojson (metres above the platform surface, 4.09 m RH 2000, laser 2021)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_HKI/helsinki_ground_1m.tif",
+    "crs": 3879,
+    "reference_m": 4.09,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_HKI/helsinki_ground_1m.tif), sampled every 5 m; Helsingin laserkeilausaineisto 2021, © Helsingin kaupunki, CC BY 4.0. Heights above the platform surface (4.09 m N2000, laser 2021)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res68f6a591b6",
+      "category": "cafe",
+      "name": "Café Eliel",
+      "level": "0",
+      "x": -46.1,
+      "y": 34.5,
+      "fee": null,
+      "opening_hours": "Mo-We 07:00-20:00; Th-Sa 07:00-21:00; Su 08:00-18:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/52/ravintolat/cafe-eliel, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n10300470509 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resfb344c72bc",
+      "category": "cafe",
+      "name": "Gateau Rautatieasema",
+      "level": "0",
+      "x": 8.3,
+      "y": 37.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa 07:30-20:00; Su 08:30-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/89/ravintolat/fazer-gateau, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n10271214809 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res9d9e929743",
+      "category": "restaurant",
+      "name": "Kellotorni Panimoravintola",
+      "level": "0",
+      "x": 44.5,
+      "y": 30.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-24:00; Fr,Sa 10:00-02:00; Su 12:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/91/ravintolat/kellotorni-panimoravintola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n600140089 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resbb63b45cb6",
+      "category": "restaurant",
+      "name": "Picnic",
+      "level": "0",
+      "x": -469.5,
+      "y": 265.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-19:30; Sa 09:00-17:30; Su 10:00-17:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/50/ravintolat/picnic, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)",
+      "approximate": true,
+      "where": "in the station, Kaivokatu 1"
+    },
+    {
+      "id": "res1f35b8feb0",
+      "category": "restaurant",
+      "name": "Pronto (Italian food to go)",
+      "level": "0",
+      "x": -13.6,
+      "y": 60.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 10:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/51/ravintolat/pronto, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n13304356586 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res4150d1ddd6",
+      "category": "restaurant",
+      "name": "Burger King Rautatieasema",
+      "level": "0",
+      "x": -29,
+      "y": 20.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-01:30; Sa,Su 09:00-01:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/95/ravintolat/burger-king, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n12688142626 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res79066e38c2",
+      "category": "restaurant",
+      "name": "Taulu (café, bar, restaurant)",
+      "level": "0",
+      "x": 40.7,
+      "y": 45.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 08:00-23:00; Fr 08:00-24:00; Sa 09:00-24:00; Su 09:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/93/ravintolat/Taulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n1369465577 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resda932fcaf1",
+      "category": "kiosk",
+      "name": "R-kioski Rautatieasema Elielinaukio",
+      "level": "0",
+      "x": -57.3,
+      "y": -92,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-23:00; Sa 08:00-23:00; Su 09:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-elielinaukio/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n11371593967 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resaf506f9ae4",
+      "category": "kiosk",
+      "name": "R-kioski Rautatieasema Asema-aukio",
+      "level": "0",
+      "x": -38.6,
+      "y": 10.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:00-24:00; Fr,Sa 05:00-01:00; Su 06:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-asema-aukio-2/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n317551811 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res011d9dac7b",
+      "category": "kiosk",
+      "name": "R-kioski Kioskihalli (Lähtevät ja saapuvat junat)",
+      "level": "0",
+      "x": 23.7,
+      "y": 28.8,
+      "fee": null,
+      "opening_hours": "Mo 14:00-24:00; Tu-Th 05:30-24:00; Fr 05:30-01:00; Sa,Su 07:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-lahtevat-ja-saapuvat-junat-2/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n317551808 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resbd249997dc",
+      "category": "shop",
+      "name": "SIXT Autovuokraamo",
+      "level": "0",
+      "x": -469.5,
+      "y": 265.7,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:00-16:00; Fr 09:00-18:00; Sa 09:00-15:00; PH 09:00-15:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/105/palvelut/sixt-autovuokraamo, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)",
+      "approximate": true,
+      "where": "in the station, Kaivokatu 1"
+    },
+    {
+      "id": "res08f32aa588",
+      "category": "ticket",
+      "name": "VR-kohtaamispiste (VR Customer Point)",
+      "level": "0",
+      "x": -469.5,
+      "y": 265.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/64/palvelut/vr-kohtaamispiste, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)",
+      "approximate": true,
+      "where": "in the station, Kaivokatu 1"
+    },
+    {
+      "id": "reseaa6e28e67",
+      "category": "toilet",
+      "name": "Yleisö-WC (incl. Inva-WC)",
+      "level": "-1",
+      "x": -41.2,
+      "y": 1,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/79/palvelut/yleiso-wc, read 2026-10-30; https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n4642563718 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res42c6884a9e",
+      "category": "locker",
+      "name": "Matkatavarasäilytys (luggage lockers)",
+      "level": "-1",
+      "x": -49.9,
+      "y": -19.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://paarautatieasema.fi/p/66/palvelut/matkatavarasailytys, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed OSM node n12099238398 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res61d734cfe4",
+      "category": "bus",
+      "name": "Elielinaukio bus terminal",
+      "level": "0",
+      "x": -105.3,
+      "y": -49.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://paarautatieasema.fi/liikenne, read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; placed representative point of the OSM area w33386599 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res0f571ec2f1",
+      "category": "toilet",
+      "name": "Rautatientorin yleisövessa",
+      "level": "0",
+      "x": 176.6,
+      "y": -36.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n251337995 (read 2026-10-30); placed OSM node n251337995 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res2d88b997ca",
+      "category": "locker",
+      "name": "VR",
+      "level": "-1",
+      "x": -43.4,
+      "y": -3.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n5155503077 (read 2026-10-30); placed OSM node n5155503077 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res4f1c47d9d5",
+      "category": "shop",
+      "name": "S-market",
+      "level": "-1",
+      "x": -152.6,
+      "y": 78.1,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n288130404 (ODbL), read 2026-10-30; placed OSM node n288130404 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res355c7cac2c",
+      "category": "restaurant",
+      "name": "Hesburger",
+      "level": "0",
+      "x": -48.3,
+      "y": 83.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-22:00; Sa 11:00-22:00; Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n293903992 (ODbL), read 2026-10-30; placed OSM node n293903992 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res68c31d5517",
+      "category": "shop",
+      "name": "Kultajousi",
+      "level": "0",
+      "x": -22.2,
+      "y": 132.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n316412722 (ODbL), read 2026-10-30; placed OSM node n316412722 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resa846743850",
+      "category": "restaurant",
+      "name": "Casa Largo",
+      "level": "0",
+      "x": -129.9,
+      "y": 115.7,
+      "fee": null,
+      "opening_hours": "We,Th 12:00-24:00, Fr,Sa 12:00-02:00, Su-Tu 12:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1369465568 (ODbL), read 2026-10-30; placed OSM node n1369465568 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res84409946fa",
+      "category": "restaurant",
+      "name": "10. Kerros",
+      "level": "0",
+      "x": -142.5,
+      "y": 122.6,
+      "fee": null,
+      "opening_hours": "06:30-10:00, 11:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1369465615 (ODbL), read 2026-10-30; placed OSM node n1369465615 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res6628fca8d8",
+      "category": "restaurant",
+      "name": "Pino",
+      "level": "0",
+      "x": -51.6,
+      "y": 133,
+      "fee": null,
+      "opening_hours": "Mo-Tu 10:00-01:00; We-Sa 10:00-02:00; Su 10:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1369465651 (ODbL), read 2026-10-30; placed OSM node n1369465651 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resfe184fc7af",
+      "category": "restaurant",
+      "name": "Rautatieaseman grilli",
+      "level": "0",
+      "x": 82.3,
+      "y": 70.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n1369465663 (ODbL), read 2026-10-30; placed OSM node n1369465663 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res9a900da31d",
+      "category": "restaurant",
+      "name": "Brasserie Le Havre",
+      "level": "0",
+      "x": -107.1,
+      "y": 142.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n1369465673 (ODbL), read 2026-10-30; placed OSM node n1369465673 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resee1325d606",
+      "category": "kiosk",
+      "name": "K-Market",
+      "level": "-1",
+      "x": -43.3,
+      "y": 83.3,
+      "fee": null,
+      "opening_hours": "Su 10:00-22:00; Mo-Fr 06:30-22:00; Sa 07:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1876042175 (ODbL), read 2026-10-30; placed OSM node n1876042175 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resa0166d0227",
+      "category": "restaurant",
+      "name": "Zaap",
+      "level": "0",
+      "x": -125.2,
+      "y": -260.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-21:00, Fr 11:00-22:00, Sa 13:00-01:00, Su 13:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2333014364 (ODbL), read 2026-10-30; placed OSM node n2333014364 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resdd72c367aa",
+      "category": "restaurant",
+      "name": "Bierhaus München",
+      "level": "0",
+      "x": -115.3,
+      "y": -191.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n2917442967 (ODbL), read 2026-10-30; placed OSM node n2917442967 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res78396a2826",
+      "category": "shop",
+      "name": "Le Mans",
+      "level": "0",
+      "x": -132.2,
+      "y": -231.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-19:00; Sa 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2917442968 (ODbL), read 2026-10-30; placed OSM node n2917442968 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "rese3349e0f1a",
+      "category": "restaurant",
+      "name": "Hungry Hub",
+      "level": "0",
+      "x": -135.4,
+      "y": -328.9,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2917442969 (ODbL), read 2026-10-30; placed OSM node n2917442969 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res0ddec21d06",
+      "category": "restaurant",
+      "name": "Woolshed",
+      "level": "0",
+      "x": -128.8,
+      "y": -241.8,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-24:00, Fr 11:00-01:00, Sa 12:00-01:00, Su 12:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2917442971 (ODbL), read 2026-10-30; placed OSM node n2917442971 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "rescb1429a0c1",
+      "category": "restaurant",
+      "name": "Jufu",
+      "level": "0",
+      "x": -131.5,
+      "y": -223.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-21:00; Sa 11:00-21:00; Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2917442972 (ODbL), read 2026-10-30; placed OSM node n2917442972 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res086243020e",
+      "category": "cafe",
+      "name": "Café Cook",
+      "level": "0",
+      "x": -69.1,
+      "y": 134,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4714489589 (ODbL), read 2026-10-30; placed OSM node n4714489589 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res5911a7b7db",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "-1",
+      "x": -22.8,
+      "y": 121.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n5012343136 (ODbL), read 2026-10-30; placed OSM node n5012343136 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res07f9fcdd45",
+      "category": "shop",
+      "name": "Salon Sensitive",
+      "level": "0",
+      "x": -131.5,
+      "y": -195,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6357738384 (ODbL), read 2026-10-30; placed OSM node n6357738384 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resce1e3403b6",
+      "category": "restaurant",
+      "name": "Brasserie Grand",
+      "level": "0",
+      "x": 45.7,
+      "y": -79.8,
+      "fee": null,
+      "opening_hours": "Tu-Sa 17:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n8601392838 (ODbL), read 2026-10-30; placed OSM node n8601392838 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resd685f4af83",
+      "category": "restaurant",
+      "name": "My Salad Bar",
+      "level": "-1",
+      "x": -35.2,
+      "y": 122.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10559145548 (ODbL), read 2026-10-30; placed OSM node n10559145548 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res45f8dd36a3",
+      "category": "cafe",
+      "name": "QiTea",
+      "level": "0",
+      "x": -35,
+      "y": 133.4,
+      "fee": null,
+      "opening_hours": "Mo-Sa 11:00-21:30; Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10574301409 (ODbL), read 2026-10-30; placed OSM node n10574301409 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resd212295a96",
+      "category": "cafe",
+      "name": "Little Big Café",
+      "level": "0",
+      "x": -63.4,
+      "y": -126.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-19:00; Sa 09:00-19:00; Su 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11371603779 (ODbL), read 2026-10-30; placed OSM node n11371603779 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res32fb63533d",
+      "category": "cafe",
+      "name": "Shin Café",
+      "level": "-1",
+      "x": -4.6,
+      "y": 137.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n11771650439 (ODbL), read 2026-10-30; placed OSM node n11771650439 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res36354b3ae5",
+      "category": "shop",
+      "name": "Lush",
+      "level": "-1",
+      "x": 5.2,
+      "y": 109.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n11771745593 (ODbL), read 2026-10-30; placed OSM node n11771745593 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res65883b2f34",
+      "category": "shop",
+      "name": "Kukkamyynti Piilola Oy",
+      "level": "-1",
+      "x": 9.1,
+      "y": 135.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n11771777458 (ODbL), read 2026-10-30; placed OSM node n11771777458 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res54325a0eae",
+      "category": "cafe",
+      "name": "CandyTown",
+      "level": "-1",
+      "x": -13.3,
+      "y": 121.1,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-22:00; Su 11:30-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11771870273 (ODbL), read 2026-10-30; placed OSM node n11771870273 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res6eb6831e1d",
+      "category": "shop",
+      "name": "Intian Bazaari",
+      "level": "-1",
+      "x": 22.4,
+      "y": 90.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-20:00; Sa 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11772137555 (ODbL), read 2026-10-30; placed OSM node n11772137555 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res0ae868937f",
+      "category": "shop",
+      "name": "Shop Tetuan",
+      "level": "-1",
+      "x": 1.5,
+      "y": 89.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-19:00; Sa 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11772137556 (ODbL), read 2026-10-30; placed OSM node n11772137556 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res01fabbbebf",
+      "category": "restaurant",
+      "name": "King Kebab",
+      "level": "-1",
+      "x": 21.8,
+      "y": 110.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-22:00; Su 11:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11772137557 (ODbL), read 2026-10-30; placed OSM node n11772137557 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res95ffbbcdb8",
+      "category": "shop",
+      "name": "Cybershop",
+      "level": "-1",
+      "x": -78.5,
+      "y": 83.5,
+      "fee": null,
+      "opening_hours": "Mo-Sa 10:00-21:00; Su 12:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11799930697 (ODbL), read 2026-10-30; placed OSM node n11799930697 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res53ddde833b",
+      "category": "cafe",
+      "name": "Karkkitori",
+      "level": "0",
+      "x": -30.9,
+      "y": 119.6,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-22:00; Su 11:30-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11799946830 (ODbL), read 2026-10-30; placed OSM node n11799946830 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "res5496f9c01e",
+      "category": "shop",
+      "name": "Kaivokukka",
+      "level": "0",
+      "x": -71.4,
+      "y": 96.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-20:00; Su 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11799956967 (ODbL), read 2026-10-30; placed OSM node n11799956967 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "rese6863c3e5b",
+      "category": "restaurant",
+      "name": "Maltainen Minuutti",
+      "level": "0",
+      "x": -79.5,
+      "y": -125.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-00:00; Fr-Sa 11:00-02:00; Su 14:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12000770060 (ODbL), read 2026-10-30; placed OSM node n12000770060 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "rese7d25a50e6",
+      "category": "restaurant",
+      "name": "Ristorante Momento",
+      "level": "0",
+      "x": -121.7,
+      "y": -150.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13173771083 (ODbL), read 2026-10-30; placed OSM node n13173771083 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)"
+    },
+    {
+      "id": "resbbea4aa478",
+      "category": "restaurant",
+      "name": "Helsingin Pystygrilli",
+      "level": "0",
+      "x": 181.7,
+      "y": 37.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap w300626401 (ODbL), read 2026-10-30; placed representative point of the OSM area w300626401 (research pass 2026-10-30, data/stations/research/fi_HKI/station_facts.json)",
+      "approximate": true
     }
   ]
 }

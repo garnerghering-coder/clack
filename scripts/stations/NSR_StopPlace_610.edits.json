@@ -16,13 +16,226 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-SV)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 10 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-SV)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/ (track table), read 2026-10-30: tracks 1,2, class 700 mm = 0.7 m above rail, 268.0 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/ (track table), read 2026-10-30: tracks 4,3, class 700 mm = 0.7 m above rail, 268.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-SV/sandvika_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w103142988",
+      "kind": "building",
+      "name": "office",
+      "top_m": 19.98,
+      "base_m": -2.69,
+      "_source": "Outline OSM w103142988 (ODbL); roof = median of 112 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w133659769",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.4,
+      "base_m": -0.77,
+      "_source": "Outline OSM w133659769 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w187993308",
+      "kind": "building",
+      "name": "office",
+      "top_m": 5.85,
+      "base_m": -0.93,
+      "_source": "Outline OSM w187993308 (ODbL); roof = median of 131 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w187993309",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -2.97,
+      "_source": "Outline OSM w187993309 (ODbL); roof = median of 2501 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27); underside not measured"
+    },
+    {
+      "from": "w188026781",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.03,
+      "base_m": -1.12,
+      "_source": "Outline OSM w188026781 (ODbL); roof = median of 60 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w188026793",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 3.32,
+      "base_m": -0.92,
+      "_source": "Outline OSM w188026793 (ODbL); roof = median of 222 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w1033730390",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.12,
+      "base_m": -0.78,
+      "_source": "Outline OSM w1033730390 (ODbL); roof = median of 157 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w1033730393",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.2,
+      "base_m": -0.86,
+      "_source": "Outline OSM w1033730393 (ODbL); roof = median of 54 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "w1033730394",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.15,
+      "base_m": -0.82,
+      "_source": "Outline OSM w1033730394 (ODbL); roof = median of 96 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27)"
+    },
+    {
+      "from": "#11",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.43,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-SV/sandvika_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 12.87,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-SV/sandvika_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (12.87 m NN2000, laser 2013-04-27)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res2a92f86c2e",
+      "category": "waiting",
+      "name": "Venterom",
+      "level": "1",
+      "x": -30.9,
+      "y": 11.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building under the tracks"
+    },
+    {
+      "id": "resde06db3f8f",
+      "category": "kiosk",
+      "name": "Narvesen",
+      "level": "1",
+      "x": -72,
+      "y": 46.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30; placed OSM node n2260304949 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    },
+    {
+      "id": "resd4be9cdf69",
+      "category": "kiosk",
+      "name": "Joker Sandvika stasjon",
+      "level": "1",
+      "x": -76.3,
+      "y": 40.6,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; placed OSM node n9841851834 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    },
+    {
+      "id": "res727c9a6b21",
+      "category": "cafe",
+      "name": "Backstube Sandvika Stasjon",
+      "level": "1",
+      "x": -69,
+      "y": 30.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Backstube, Visit us https://backstube.no/visit-us, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; placed OSM node n13788913459 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    },
+    {
+      "id": "resa6bc182d38",
+      "category": "bus",
+      "name": "Sandvika bussterminal",
+      "level": "1",
+      "x": -66.4,
+      "y": -0.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; placed OSM node n570206829 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    },
+    {
+      "id": "res98da2ceebe",
+      "category": "shop",
+      "name": "Joker Sandvika stasjon",
+      "level": "1",
+      "x": -76.3,
+      "y": 40.6,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9841851834 (ODbL), read 2026-10-30; placed OSM node n9841851834 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    },
+    {
+      "id": "res8147fe4259",
+      "category": "cafe",
+      "name": "Backstube",
+      "level": "1",
+      "x": -69,
+      "y": 30.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13788913459 (ODbL), read 2026-10-30; placed OSM node n13788913459 (research pass 2026-10-30, data/stations/research/NO-SV/station_facts.json)"
+    }
+  ]
 }

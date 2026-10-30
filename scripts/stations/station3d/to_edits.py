@@ -14,7 +14,7 @@ and data/stations/research/trafikverket_platforms_SE.csv, and sets in scripts/st
 - `terrain`: the ground grid, heights above the station's platform surface.
 - `sources` and `changelog` entries for the pass (replaced, not duplicated, on a re-run).
 
-Then run the drafter and the validator. Usage: python3 scripts/stations/station3d/to_edits.py 740000170
+Then run the drafter and the validator. Usage: python3 scripts/stations/station3d/to_edits.py 740000170 | NSR:StopPlace:288 --pack NO-NTH [--surface]
 """
 import csv
 import json
@@ -24,6 +24,32 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 LM = "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0"
+# Per country: the platform register (file in data/stations/research/, how it's cited, its licence and link).
+COUNTRY = {
+    "SE": ("trafikverket_platforms_SE.csv", "Trafikverket register (CC0)", "trafikverket", "CC0", "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5"),
+    "FI": ("vayla_platforms_FI.csv", "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0)", "digitraffic", "CC BY 4.0", "https://rata.digitraffic.fi/infra-api/"),
+    "NO": ("banenor_platforms_NO.csv", "Bane NOR's station page, track table (facts)", "banenor", None, "https://www.banenor.no/"),
+    "DK": ("banedanmark_platforms_DK.csv", "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts)", "banedanmark", None, "https://www.bane.dk/"),
+}
+# The laser credit, from the pack's README (each pack says which open laser it used).
+LASERS = [
+    ("Helsingin laserkeilausaineisto", "helsinki", "Helsingin laserkeilausaineisto 2021, © Helsingin kaupunki, CC BY 4.0", "https://hri.fi/"),
+    ("Laserkeilausaineisto 0,5 p", "nls", "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0", "https://www.maanmittauslaitos.fi/"),
+    ("Høydedata", "kartverket", "Høydedata, © Kartverket, CC BY 4.0", "https://hoydedata.no/"),
+    ("Danmarks Højdemodel", "sdfi", "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0", "https://dataforsyningen.dk/"),
+]
+
+
+def country_of(pack):
+    return "FI" if pack.startswith("fi_") else "NO" if pack.startswith("NO-") else "DK" if pack.startswith(("860", "gtfs")) else "SE"
+
+
+def laser_credit(rdir):
+    text = open(os.path.join(ROOT, rdir, "README.md")).read() if os.path.exists(os.path.join(ROOT, rdir, "README.md")) else ""
+    for key, kind, credit, url in LASERS:
+        if key in text:
+            return kind, credit, url
+    return "lantmateriet", LM, "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/"
 TAG = "3D research pass"
 MIN_CLEAR_ABOVE_RAIL = 5.9
 
@@ -39,20 +65,27 @@ def track_numbers(tracks):
 
 def main():
     sid = sys.argv[1]
+    # --pack <folder>: the research folder when it isn't named by the app's id (Norway: NO-OSL_S for 760000100).
+    pack = sys.argv[sys.argv.index("--pack") + 1] if "--pack" in sys.argv else sid.replace(":", "_")
+    safe = sid.replace(":", "_")
     # --surface: the platforms are in a tunnel the laser can't see (Varberg C, Triangeln): heights are measured from the
     # street (the ground's median in the box), and the platforms get no height, so nothing raises them at the surface.
     surface = "--surface" in sys.argv[2:]
-    rdir = f"data/stations/research/{sid}"
+    rdir = f"data/stations/research/{pack}"
+    cc = country_of(pack)
+    reg_file, reg_name, reg_type, reg_licence, reg_url = COUNTRY[cc]
+    laser_type, LM, laser_url = laser_credit(rdir)
     report = json.load(open(os.path.join(ROOT, rdir, "_report.json")))
     slug = report["slug"]
     level = report["ground"].get("median_m") if surface else report.get("platform_surface_m")
     if level is None:
         raise SystemExit(f"{sid}: the pack has no platform surface level (underground?): run with --surface for the buildings and ground only")
     scan = report["laser"].get("scan_date", "?")
-    m = json.load(open(os.path.join(ROOT, f"data/stations/{sid}.json")))
-    epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
+    m = json.load(open(os.path.join(ROOT, f"data/stations/{safe}.json")))
+    epath = os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")
     e = json.load(open(epath))
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT, "data/stations/research/trafikverket_platforms_SE.csv"))) if r["clack_id"] == sid]
+    pack_id = report.get("clack_id") or sid
+    rows = [r for r in csv.DictReader(open(os.path.join(ROOT, "data/stations/research", reg_file))) if r["clack_id"] in (sid, pack_id, pack)]
 
     # Platform heights.
     heights, notes = {}, []
@@ -69,7 +102,7 @@ def main():
             continue
         best = max(cands, key=lambda r: float(r["length_m"] or 0))
         others = [r for r in cands if r is not best and r["height_m"] != best["height_m"]]
-        src = (f"Trafikverket register (CC0), {best['source_row']}: tracks {best['tracks']}, class {best['height_class']} = "
+        src = (f"{reg_name}, {best['source_row']}: tracks {best['tracks']}, class {best['height_class']} = "
                f"{best['height_m']} m above rail, {best['length_m'] or '?'} m long; a recorded design class, not a survey")
         if others:
             src += "; other rows for this track: " + "; ".join(f"{r['tracks']} {r['height_class']} {r['height_m']} m ({r['length_m'] or '?'} m, {r['source_row'].split(';')[0]})" for r in others)
@@ -130,16 +163,21 @@ def main():
     e["platform_heights"] = heights
     e["structures_file"] = gpath
     e["structures"] = structures
-    e["terrain"] = {"geotiff": f"{rdir}/{slug}_ground_1m.tif", "reference_m": level, "step_m": 5,
-                    "_source": f"ground from Lantmäteriet's laser and terrain model, 1 m ({rdir}/{slug}_ground_1m.tif), sampled every 5 m; {LM}. Heights above {'the street' if surface else 'the platform surface'} ({level} m RH 2000, laser {scan})"}
+    # The ground grid's projection (the pack's heightmap JSON says: SWEREF 99 TM, TM35FIN, GK25, UTM 32N).
+    hm = os.path.join(ROOT, rdir, f"{slug}_ground_1m_heightmap.json")
+    crs_text = json.load(open(hm)).get("crs", "EPSG:3006") if os.path.exists(hm) else "EPSG:3006"
+    crs = int(re.search(r"EPSG:(\d+)", crs_text).group(1)) if re.search(r"EPSG:(\d+)", crs_text) else 3006
+    datum = {"SE": "RH 2000", "FI": "N2000", "NO": "NN2000", "DK": "DVR90"}[cc]
+    e["terrain"] = {"geotiff": f"{rdir}/{slug}_ground_1m.tif", "crs": crs, "reference_m": level, "step_m": 5,
+                    "_source": f"ground from the laser's ground points, 1 m ({rdir}/{slug}_ground_1m.tif), sampled every 5 m; {LM}. Heights above {'the street' if surface else 'the platform surface'} ({level} m {datum}, laser {scan})"}
     e["sources"] = [s for s in e.get("sources", []) if TAG not in (s.get("note") or "")] + [
-        {"type": "lantmateriet", "license": "CC BY 4.0", "retrieved": "2026-10-30", "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+        {"type": laser_type, "license": "CC BY 4.0", "retrieved": "2026-10-30", "url": laser_url,
          "note": f"{LM}: building and roof heights and the ground ({TAG}; pack in {rdir})."},
-        {"type": "trafikverket", "license": "CC0", "retrieved": "2026-10-30", "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
-         "note": f"JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes ({TAG}; data/stations/research/trafikverket_platforms_SE.csv)."},
+        {"type": reg_type, **({"license": reg_licence} if reg_licence else {}), "retrieved": "2026-10-30", "url": reg_url,
+         "note": f"{reg_name}: platform heights ({TAG}; data/stations/research/{reg_file})."},
     ]
     e["changelog"] = [c for c in e.get("changelog", []) if TAG not in c.get("what", "")] + [
-        {"date": "2026-10-30", "who": "the owner's assistant", "what": f"Platform heights from Trafikverket's register; {len(structures)} buildings, roofs and footbridges with laser heights; the ground as a 5 m grid ({TAG}, {rdir})."}]
+        {"date": "2026-10-30", "who": "the owner's assistant", "what": f"Platform heights from {reg_name}; {len(structures)} buildings, roofs and footbridges with laser heights; the ground as a 5 m grid ({TAG}, {rdir})."}]
     json.dump(e, open(epath, "w"), ensure_ascii=False, indent=2)
     open(epath, "a").write("\n")
     print(f"{sid} {m['name']}: {len(heights)}/{len(m['platforms'])} platform heights, {len(structures)} structures, level {level} m")

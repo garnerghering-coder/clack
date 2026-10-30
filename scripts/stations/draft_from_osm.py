@@ -1174,9 +1174,15 @@ def apply_structures(shapes, edits, xy, ground_level):
             shapes[at] = shape
 
 
-def sweref99tm(lat, lon):
-    """WGS84 → SWEREF 99 TM (EPSG:3006), Lantmäteriet's Gauss–Krüger formulas."""
-    a, f, lon0, k0, fe = 6378137.0, 1 / 298.257222101, 15.0, 0.9996, 500000.0
+# Transverse Mercator grids the research's ground files use (all GRS80/ETRS89): central meridian, scale, false easting.
+TM_GRIDS = {3006: (15.0, 0.9996, 500000.0), 3067: (27.0, 0.9996, 500000.0), 3879: (25.0, 1.0, 25500000.0), 25832: (9.0, 0.9996, 500000.0), 25833: (15.0, 0.9996, 500000.0)}
+
+
+def sweref99tm(lat, lon, crs=3006):
+    """WGS84 → a Transverse Mercator grid (SWEREF 99 TM by default; TM35FIN, GK25, UTM 32/33), Lantmäteriet's
+    Gauss–Krüger formulas."""
+    a, f = 6378137.0, 1 / 298.257222101
+    lon0, k0, fe = TM_GRIDS[crs]
     e2, n = f * (2 - f), f / (2 - f)
     ah = a / (1 + n) * (1 + n * n / 4 + n ** 4 / 64)
     A, B = e2, (5 * e2 * e2 - e2 ** 3) / 6
@@ -1194,8 +1200,8 @@ def sweref99tm(lat, lon):
 
 def terrain_grid(spec, lat0, lon0, K, out):
     """`terrain` in the edits: the ground under the station as a coarse grid in the map's frame, heights in metres
-    above the platform surface (`reference_m`, RH 2000), sampled bilinearly from a 1 m ground GeoTIFF in SWEREF 99 TM
-    every `step_m` metres over the extent of the map's shapes and platforms. Cells off the GeoTIFF are null."""
+    above the platform surface (`reference_m`), sampled bilinearly from a 1 m ground GeoTIFF in `crs` (SWEREF 99 TM
+    unless it says another TM grid) every `step_m` metres over the extent of the map's shapes and platforms. Cells off the GeoTIFF are null."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from terrain_preview import read_tiff
     w, h, grid, tags = read_tiff(os.path.join(ROOT, spec["geotiff"]), with_tags=True)
@@ -1226,7 +1232,7 @@ def terrain_grid(spec, lat0, lon0, K, out):
         for i in range(cols):
             x, y = x0 + i * step, y0 + j * step
             # The map's frame back to WGS84 (the inverse of `xy` in main), then to SWEREF 99 TM.
-            z = sample(*sweref99tm(lat0 - y / 111320, lon0 + x / K))
+            z = sample(*sweref99tm(lat0 - y / 111320, lon0 + x / K, spec.get("crs", 3006)))
             row.append(None if z is None else round(z - spec["reference_m"], 2))
         heights.append(row)
     return dict(x0=x0, y0=y0, step=step, cols=cols, rows=rows, heights=heights, _source=spec["_source"])

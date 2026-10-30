@@ -8,21 +8,285 @@
     {
       "osm": "1",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Footbridge over the tracks at the west end (overgangsbroen)",
+      "order": 0,
+      "name_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-ASR)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 12 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-ASR)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_heights": {
+    "1": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30: tracks 1, class 700 mm = 0.7 m above rail, 354.0 m long; a recorded design class, not a survey"
+    },
+    "6": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30: tracks 6, class 700 mm = 0.7 m above rail, 259.0 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30: tracks 3,2, class 700 mm = 0.7 m above rail, 365.0 m long; a recorded design class, not a survey"
+    },
+    "4–5": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30: tracks 4,5, class 700 mm = 0.7 m above rail, 261.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-ASR/asker_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w87870849",
+      "kind": "building",
+      "name": "parking",
+      "top_m": 10.94,
+      "base_m": -2.27,
+      "_source": "Outline OSM w87870849 (ODbL); roof = median of 3904 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w92350484",
+      "kind": "building",
+      "name": "Galleri Trafo (civic)",
+      "top_m": 14.63,
+      "base_m": 3.06,
+      "_source": "Outline OSM w92350484 (ODbL); roof = median of 1897 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w92350485",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.65,
+      "base_m": 5.46,
+      "_source": "Outline OSM w92350485 (ODbL); roof = median of 1503 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w92351813",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 6.54,
+      "base_m": -1.67,
+      "_source": "Outline OSM w92351813 (ODbL); roof = median of 2720 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w126671122",
+      "kind": "building",
+      "name": "parking",
+      "top_m": 5.57,
+      "base_m": -0.09,
+      "_source": "Outline OSM w126671122 (ODbL); roof = median of 1112 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w152904610",
+      "kind": "building",
+      "name": "Asker brannstasjon (fire_station)",
+      "top_m": 21.09,
+      "base_m": 14.22,
+      "_source": "Outline OSM w152904610 (ODbL); roof = median of 1595 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w306981117",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 2.53,
+      "base_m": -1.38,
+      "_source": "Outline OSM w306981117 (ODbL); roof = median of 369 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w306981118",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 3.57,
+      "base_m": -1.36,
+      "_source": "Outline OSM w306981118 (ODbL); roof = median of 34 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w306981119",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.56,
+      "_source": "Outline OSM w306981119 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21); underside not measured"
+    },
+    {
+      "from": "w306981121",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.05,
+      "_source": "Outline OSM w306981121 (ODbL); roof = median of 375 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21); underside not measured"
+    },
+    {
+      "from": "w565834708",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.63,
+      "base_m": -1.27,
+      "_source": "Outline OSM w565834708 (ODbL); roof = median of 379 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    },
+    {
+      "from": "w1014090512",
+      "kind": "building",
+      "name": "service",
+      "top_m": 1.93,
+      "base_m": -0.46,
+      "_source": "Outline OSM w1014090512 (ODbL); roof = median of 103 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-ASR/asker_structures_heights.geojson (metres above the platform surface, 105.44 m RH 2000, laser 2012-08-21)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-ASR/asker_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 105.44,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-ASR/asker_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (105.44 m NN2000, laser 2012-08-21)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res82ac2a8781",
+      "category": "waiting",
+      "name": "Venterom",
+      "level": "1",
+      "x": 47,
+      "y": -117.4,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:15-01:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/, read 2026-10-30; Wikipedia, \"Asker Station\" https://en.wikipedia.org/wiki/Asker_Station, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res1fae21f8da",
+      "category": "restaurant",
+      "name": "Peppes Pizza",
+      "level": "1",
+      "x": -26.2,
+      "y": -86.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 14:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; placed OSM node n1910691572 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "res2d0f7333e1",
+      "category": "bus",
+      "name": "Asker stasjon (bus)",
+      "level": "1",
+      "x": -43.1,
+      "y": 3.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; placed OSM node n1175143489 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "res2354899df2",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "1",
+      "x": 6.9,
+      "y": -74.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; placed OSM node n1910691576 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "res291083b82b",
+      "category": "pharmacy",
+      "name": "Vitusapotek Asker",
+      "level": "1",
+      "x": 1.7,
+      "y": -109.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:00, Sa 10:00-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2501000580 (ODbL), read 2026-10-30; placed OSM node n2501000580 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "reseed210d2e2",
+      "category": "restaurant",
+      "name": "Egon Asker",
+      "level": "1",
+      "x": 62.8,
+      "y": -159.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-23:00; Fr-Sa 10:00-23:30; Su 11:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7964121643 (ODbL), read 2026-10-30; placed OSM node n7964121643 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "res7706485cba",
+      "category": "atm",
+      "name": "Sparebanken Øst Asker",
+      "level": "1",
+      "x": -2.7,
+      "y": -103.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30; placed OSM node n9253807110 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "res7e715b8491",
+      "category": "atm",
+      "name": "Danske bank Asker og Bærum",
+      "level": "1",
+      "x": 67.6,
+      "y": -173.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30; placed OSM node n9264747033 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)"
+    },
+    {
+      "id": "resf7bad0721f",
+      "category": "cafe",
+      "name": "Kårner",
+      "level": "1",
+      "x": -12.5,
+      "y": -136.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:30-18:00; Sa 08:00-18:00; Su 09:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap w87862755 (ODbL), read 2026-10-30; placed representative point of the OSM area w87862755 (research pass 2026-10-30, data/stations/research/NO-ASR/station_facts.json)",
+      "approximate": true
+    }
+  ]
 }

@@ -46,9 +46,12 @@ def norm(s):
 
 def main():
     sid = sys.argv[1]
-    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{sid}/station_facts.json")))
-    m = json.load(open(os.path.join(ROOT, f"data/stations/{sid}.json")))
-    epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
+    # --pack <folder> when the research folder isn't named by the app's id (Norway); files use "_" for ":".
+    pack = sys.argv[sys.argv.index("--pack") + 1] if "--pack" in sys.argv else sid.replace(":", "_")
+    safe = sid.replace(":", "_")
+    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{pack}/station_facts.json")))
+    m = json.load(open(os.path.join(ROOT, f"data/stations/{safe}.json")))
+    epath = os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")
     e = json.load(open(epath))
     if "origin" in e:
         lat0, lon0 = e["origin"]["lat"], e["origin"]["lon"]
@@ -111,7 +114,7 @@ def main():
         pid = "res" + hashlib.sha1(f"{sid}|{name}|{cat}".encode()).hexdigest()[:10]
         poi = {"id": pid, "category": cat, "name": name, "level": level, "x": x, "y": y, "fee": None,
                "opening_hours": None, "hours_source": None, "hours_verified": None,
-               "_source": f"{a.get('_source') or 'research'}; placed {how} ({TAG}, data/stations/research/{sid}/station_facts.json)"}
+               "_source": f"{a.get('_source') or 'research'}; placed {how} ({TAG}, data/stations/research/{pack}/station_facts.json)"}
         if a.get("opening_hours") and a.get("hours_checked") and a.get("_source"):
             poi.update(opening_hours=a["opening_hours"], hours_source="website" if "website" in str(a.get("hours_source")) else "manual", hours_verified=a["hours_checked"])
         if approximate:

@@ -6,7 +6,7 @@
 // platform's height, for the map's 3D at the closest zooms.
 import zlib from 'node:zlib';
 import { and, gte, lte } from 'drizzle-orm';
-import { fromLocal, type StationMap } from '@clack/shared';
+import { fromLocal, LASER_SOURCES, type StationMap } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { stations } from '../db/schema.js';
 import { stationMap } from '../stations/maps.js';
@@ -89,6 +89,8 @@ export function structureFeatures(m: StationMap, stationId: string) {
   const r6 = (v: number) => Math.round(v * 1e6) / 1e6;
   const rail = railToPlatformM(m);
   const lantmateriet = m.sources.some((s) => s.type === 'lantmateriet');
+  // Which laser the heights come from, for the map's credit line ("lantmateriet", "kartverket", "nls", …).
+  const credit = m.sources.find((s) => LASER_SOURCES.includes(s.type))?.type ?? '';
   const r2 = (v: number) => Math.round(v * 100) / 100;
   return m.shapes
     .filter((s) => (s.kind === 'building' || s.kind === 'roof' || s.kind === 'bridge') && s.top_m !== undefined && s.points.length >= 3)
@@ -103,7 +105,7 @@ export function structureFeatures(m: StationMap, stationId: string) {
       ring.push(ring[0]!);
       return {
         type: 'Feature' as const,
-        properties: { kind: 'structure', cls: s.kind === 'bridge' ? 'building' : s.kind, stationId, name: s.name ?? '', base: r2(base), height: r2(top), lantmateriet },
+        properties: { kind: 'structure', cls: s.kind === 'bridge' ? 'building' : s.kind, stationId, name: s.name ?? '', base: r2(base), height: r2(top), lantmateriet, credit },
         geometry: { type: 'Polygon' as const, coordinates: [ring] },
       };
     });

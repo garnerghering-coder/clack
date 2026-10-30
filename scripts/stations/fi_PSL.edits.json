@@ -8,20 +8,793 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platform level (tracks 1–11)",
+      "order": 0,
+      "name_source": "Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-PSL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "helsinki",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hri.fi/",
+      "note": "Helsingin laserkeilausaineisto 2021, © Helsingin kaupunki, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_PSL)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 33 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_PSL)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3166214, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 332 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3166221, read 2026-10-30, CC BY 4.0: tracks 2, class korkea = 0.55 m above rail, 321 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3167430, read 2026-10-30, CC BY 4.0: tracks 3, class korkea = 0.55 m above rail, 418 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3167444, read 2026-10-30, CC BY 4.0: tracks 4, class korkea = 0.55 m above rail, 418 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3167749, read 2026-10-30, CC BY 4.0: tracks 5, class korkea = 0.55 m above rail, 433 m long; a recorded design class, not a survey"
+    },
+    "6": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3167954, read 2026-10-30, CC BY 4.0: tracks 6, class korkea = 0.55 m above rail, 447 m long; a recorded design class, not a survey"
+    },
+    "7": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3168952, read 2026-10-30, CC BY 4.0: tracks 7, class korkea = 0.55 m above rail, 320 m long; a recorded design class, not a survey"
+    },
+    "8": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3168959, read 2026-10-30, CC BY 4.0: tracks 8, class korkea = 0.55 m above rail, 322 m long; a recorded design class, not a survey"
+    },
+    "9": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3168967, read 2026-10-30, CC BY 4.0: tracks 9, class korkea = 0.55 m above rail, 321 m long; a recorded design class, not a survey"
+    },
+    "10": {
+      "height_m": 0.265,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3168974, read 2026-10-30, CC BY 4.0: tracks 10, class matala = 0.265 m above rail, 320 m long; a recorded design class, not a survey"
+    },
+    "11": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3443983, read 2026-10-30, CC BY 4.0: tracks 11, class korkea = 0.55 m above rail, 250 m long; a recorded design class, not a survey"
+    },
+    "5–5b": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3167749, read 2026-10-30, CC BY 4.0: tracks 5, class korkea = 0.55 m above rail, 433 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_PSL/pasila_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w9647598",
+      "kind": "building",
+      "name": "building",
+      "top_m": 33.51,
+      "base_m": 1.49,
+      "_source": "Outline OSM w9647598 (ODbL); roof = median of 1082 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w31713670",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 26.55,
+      "_source": "Outline OSM w31713670 (ODbL); roof = median of 585 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w621975025",
+      "kind": "building",
+      "name": "Tripla Workery West (commercial)",
+      "top_m": 55.17,
+      "base_m": -9.05,
+      "_source": "Outline OSM w621975025 (ODbL); roof = median of 11996 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w621975602",
+      "kind": "building",
+      "name": "Pasilan rautatieasema (station building)",
+      "top_m": 31.61,
+      "base_m": -1.65,
+      "_source": "Outline OSM w621975602 (ODbL); roof = median of 17136 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w621975603",
+      "kind": "building",
+      "name": "building",
+      "top_m": 44.93,
+      "base_m": -1.65,
+      "_source": "Outline OSM w621975603 (ODbL); roof = median of 3523 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w621975604",
+      "kind": "building",
+      "name": "building",
+      "top_m": 45.02,
+      "base_m": -1.06,
+      "_source": "Outline OSM w621975604 (ODbL); roof = median of 9849 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w721657452",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.67,
+      "base_m": 0.09,
+      "_source": "Outline OSM w721657452 (ODbL); roof = median of 66 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1024911731",
+      "kind": "building",
+      "name": "building",
+      "top_m": 7.12,
+      "base_m": -9.15,
+      "_source": "Outline OSM w1024911731 (ODbL); roof = median of 257 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1025824935",
+      "kind": "building",
+      "name": "building",
+      "top_m": 24.22,
+      "base_m": -1.12,
+      "_source": "Outline OSM w1025824935 (ODbL); roof = median of 3788 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134455891",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.83,
+      "base_m": -1.48,
+      "_source": "Outline OSM w1134455891 (ODbL); roof = median of 189 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134546152",
+      "kind": "building",
+      "name": "3-4 (transportation)",
+      "top_m": 4.06,
+      "base_m": -0.35,
+      "_source": "Outline OSM w1134546152 (ODbL); roof = median of 437 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134546153",
+      "kind": "building",
+      "name": "5-6 (transportation)",
+      "top_m": 4.01,
+      "base_m": -0.94,
+      "_source": "Outline OSM w1134546153 (ODbL); roof = median of 513 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134546154",
+      "kind": "building",
+      "name": "7-8 (transportation)",
+      "top_m": 4.02,
+      "base_m": -1.06,
+      "_source": "Outline OSM w1134546154 (ODbL); roof = median of 438 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134546155",
+      "kind": "building",
+      "name": "9-10 (transportation)",
+      "top_m": 4.12,
+      "base_m": -0.76,
+      "_source": "Outline OSM w1134546155 (ODbL); roof = median of 234 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134546156",
+      "kind": "building",
+      "name": "11 (transportation)",
+      "top_m": 4.19,
+      "base_m": -1.17,
+      "_source": "Outline OSM w1134546156 (ODbL); roof = median of 248 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134723992",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 7.2,
+      "base_m": -9.11,
+      "_source": "Outline OSM w1134723992 (ODbL); roof = median of 8535 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1134729404",
+      "kind": "building",
+      "name": "building",
+      "top_m": 33.63,
+      "base_m": -9.15,
+      "_source": "Outline OSM w1134729404 (ODbL); roof = median of 20020 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1245442056",
+      "kind": "building",
+      "name": "1-2 (transportation)",
+      "top_m": 52.66,
+      "base_m": -0.3,
+      "_source": "Outline OSM w1245442056 (ODbL); roof = median of 300 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1284814285",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.62,
+      "_source": "Outline OSM w1284814285 (ODbL); roof = median of 275 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w1284814286",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.82,
+      "_source": "Outline OSM w1284814286 (ODbL); roof = median of 343 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w1284814287",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.36,
+      "_source": "Outline OSM w1284814287 (ODbL); roof = median of 374 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "w1307088408",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": -5.31,
+      "base_m": -7.78,
+      "_source": "Outline OSM w1307088408 (ODbL); roof = median of 781 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1355619972",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 29.09,
+      "base_m": 5.79,
+      "_source": "Outline OSM w1355619972 (ODbL); roof = median of 2124 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1355619982",
+      "kind": "building",
+      "name": "building",
+      "top_m": 29.09,
+      "base_m": 5.79,
+      "_source": "Outline OSM w1355619982 (ODbL); roof = median of 2124 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1362426141",
+      "kind": "building",
+      "name": "Pasilan virastokeskus (office)",
+      "top_m": 33.37,
+      "base_m": 1.49,
+      "_source": "Outline OSM w1362426141 (ODbL); roof = median of 1411 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1557701180",
+      "kind": "building",
+      "name": "building",
+      "top_m": -3,
+      "base_m": -6.95,
+      "_source": "Outline OSM w1557701180 (ODbL); roof = median of 131 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "w1557701186",
+      "kind": "building",
+      "name": "building",
+      "top_m": -4.75,
+      "base_m": -7.38,
+      "_source": "Outline OSM w1557701186 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "r13706934",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 14.6,
+      "_source": "Outline OSM r13706934 (ODbL); roof = median of 567 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "r13756565",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 13.5,
+      "_source": "Outline OSM r13756565 (ODbL); roof = median of 5162 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021); underside not measured"
+    },
+    {
+      "from": "r15350849",
+      "kind": "building",
+      "name": "Pasilan asemahalli (building)",
+      "top_m": 26.79,
+      "base_m": -1.48,
+      "_source": "Outline OSM r15350849 (ODbL); roof = median of 828 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "r16121663",
+      "kind": "building",
+      "name": "Kulttuuriaukio (building)",
+      "top_m": 68.82,
+      "base_m": 7.99,
+      "_source": "Outline OSM r16121663 (ODbL); roof = median of 366 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "r19097175",
+      "kind": "building",
+      "name": "Mall of Tripla (retail)",
+      "top_m": 31.91,
+      "base_m": -9.77,
+      "_source": "Outline OSM r19097175 (ODbL); roof = median of 84384 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    },
+    {
+      "from": "r21358353",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.09,
+      "base_m": -0.38,
+      "_source": "Outline OSM r21358353 (ODbL); roof = median of 641 unclassified laser points >2 m above the terrain model inside the outline; Helsingin laserkeilausaineisto 2021 (kaikki pisteet, 0.5 km tiles clack_fi_hel2021_676496a, clack_fi_hel2021_676496b), City of Helsinki, Kaupunkimittauspalvelut, CC BY 4.0; from data/stations/research/fi_PSL/pasila_structures_heights.geojson (metres above the platform surface, 24.33 m RH 2000, laser 2021)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_PSL/pasila_ground_1m.tif",
+    "crs": 3879,
+    "reference_m": 24.33,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_PSL/pasila_ground_1m.tif), sampled every 5 m; Helsingin laserkeilausaineisto 2021, © Helsingin kaupunki, CC BY 4.0. Heights above the platform surface (24.33 m N2000, laser 2021)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res084abba2f0",
+      "category": "kiosk",
+      "name": "R-kioski Tripla Asema Itä",
+      "level": "0",
+      "x": 30.1,
+      "y": -18.8,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:00-19:30; Fr 06:00-20:00; Sa 08:00-19:30; Su 08:30-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-ita-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6909741008 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res8bfd4ce67e",
+      "category": "kiosk",
+      "name": "R-kioski Tripla Asema Länsi",
+      "level": "0",
+      "x": -49.2,
+      "y": -6.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:30-22:30; Fr 05:30-23:30; Sa,Su 07:30-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-lansi-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n7054828649 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res99a83308a6",
+      "category": "pharmacy",
+      "name": "Pasilan Apteekki",
+      "level": "0",
+      "x": 28.8,
+      "y": -24.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-22:00; Sa,Su 09:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n3635432312 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "reseb75a77942",
+      "category": "shop",
+      "name": "Alepa",
+      "level": "0",
+      "x": -45.7,
+      "y": 25.8,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6888053756 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resbabfc2a8d1",
+      "category": "kiosk",
+      "name": "K-Market",
+      "level": "0",
+      "x": 39.8,
+      "y": 5.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-22:00; Sa,Su 09:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6888053757 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "rese6a96d9b3f",
+      "category": "restaurant",
+      "name": "Hesburger",
+      "level": "0",
+      "x": -22,
+      "y": 9.2,
+      "fee": null,
+      "opening_hours": "Mo-Su 00:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6938652927 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res915e0e11d4",
+      "category": "restaurant",
+      "name": "Burger King",
+      "level": "0",
+      "x": 3.8,
+      "y": 1.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 07:00-01:00; Fr 07:00-24:00; Sa 00:00-24:00; Su 00:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n12182734894 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resd94fef7b90",
+      "category": "restaurant",
+      "name": "KFC",
+      "level": "0",
+      "x": 25.9,
+      "y": -63.7,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:00-24:00; Fr,Sa 09:00-04:00; Su 10:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n14090237169 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res2b4137ecc1",
+      "category": "cafe",
+      "name": "Picnic",
+      "level": "0",
+      "x": -43.3,
+      "y": -31.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-21:00; Su 09:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n8977942412 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resbbba89ce43",
+      "category": "cafe",
+      "name": "Gateau",
+      "level": "0",
+      "x": -12.9,
+      "y": -18.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-19:00; Su 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6987659787 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res1dfa06b4ec",
+      "category": "cafe",
+      "name": "Bär Bar",
+      "level": "0",
+      "x": -12.2,
+      "y": 6.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-22:00; Sa,Su 07:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6938652928 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res59621d8b55",
+      "category": "restaurant",
+      "name": "Bar Pikajuna",
+      "level": "0",
+      "x": 12.5,
+      "y": -45.4,
+      "fee": null,
+      "opening_hours": "Mo-Su 10:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n8977942409 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resd444a50b57",
+      "category": "restaurant",
+      "name": "Oluthuone Ratamo",
+      "level": "0",
+      "x": -15.2,
+      "y": 12,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-24:00; Fr 10:00-02:00; Sa 10:00-01:00; Su 10:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6938652926 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res7996a9a22a",
+      "category": "shop",
+      "name": "Kaivokukka Tripla",
+      "level": "0",
+      "x": 12,
+      "y": 5.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n6938652930 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res45e9c7b93a",
+      "category": "atm",
+      "name": "Nosto (3 machines)",
+      "level": "0",
+      "x": -13.3,
+      "y": -10.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res7179cc70ce",
+      "category": "toilet",
+      "name": "Toilet",
+      "level": "0",
+      "x": -61.4,
+      "y": -23,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; placed OSM node n7054579577 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res6e14ca3393",
+      "category": "taxi",
+      "name": "Pasilan asema taxi",
+      "level": "0",
+      "x": -8.5,
+      "y": 33,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; placed representative point of the OSM area w1134266686 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res6bdc03283e",
+      "category": "restaurant",
+      "name": "Rauhankahvila Fredrika",
+      "level": "0",
+      "x": 140.8,
+      "y": -128.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-13:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n75795843 (ODbL), read 2026-10-30; placed OSM node n75795843 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resa704314653",
+      "category": "restaurant",
+      "name": "Ravintola Vaunu",
+      "level": "0",
+      "x": 99,
+      "y": -140.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-13:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1665559316 (ODbL), read 2026-10-30; placed OSM node n1665559316 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res9fb168d6e0",
+      "category": "kiosk",
+      "name": "Alepa",
+      "level": "0",
+      "x": -45.7,
+      "y": 25.8,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6888053756 (ODbL), read 2026-10-30; placed OSM node n6888053756 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res49feea6a93",
+      "category": "restaurant",
+      "name": "Brokadi Tripla",
+      "level": "0",
+      "x": -33.5,
+      "y": -28.7,
+      "fee": null,
+      "opening_hours": "Mo-Sa 10:30-21:00, Sa,Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6977655469 (ODbL), read 2026-10-30; placed OSM node n6977655469 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res64284b2be9",
+      "category": "cafe",
+      "name": "Arnolds",
+      "level": "0",
+      "x": -67.1,
+      "y": -3.8,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-21:00; Su 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7054853570 (ODbL), read 2026-10-30; placed OSM node n7054853570 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res7d09085e90",
+      "category": "cafe",
+      "name": "SIS. Deli+Café",
+      "level": "0",
+      "x": -63.2,
+      "y": 10.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-21:00; Su 08:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7054853571 (ODbL), read 2026-10-30; placed OSM node n7054853571 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res68ab7c7941",
+      "category": "restaurant",
+      "name": "Delhi Rasoi Tripla",
+      "level": "0",
+      "x": -105.3,
+      "y": -33.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7063273821 (ODbL), read 2026-10-30; placed OSM node n7063273821 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res1c6be2a2c9",
+      "category": "restaurant",
+      "name": "Teppanyaki",
+      "level": "0",
+      "x": 12.9,
+      "y": -42.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-21:00; Sa 11:00-21:00; Su 12:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7820604205 (ODbL), read 2026-10-30; placed OSM node n7820604205 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res6225cf1cb6",
+      "category": "shop",
+      "name": "Specsavers",
+      "level": "0",
+      "x": -50.2,
+      "y": -0.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9015171079 (ODbL), read 2026-10-30; placed OSM node n9015171079 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "rese0c504b6c8",
+      "category": "cafe",
+      "name": "Candytown",
+      "level": "0",
+      "x": -36.8,
+      "y": -14,
+      "fee": null,
+      "opening_hours": "Mo-Sa 07:00-22:00; Su 09:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10577656167 (ODbL), read 2026-10-30; placed OSM node n10577656167 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res44e6f317fe",
+      "category": "shop",
+      "name": "Scandia Rent",
+      "level": "0",
+      "x": -77.3,
+      "y": 42.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10578487664 (ODbL), read 2026-10-30; placed OSM node n10578487664 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resbe981f40ce",
+      "category": "atm",
+      "name": "Change Group",
+      "level": "0",
+      "x": -72.5,
+      "y": 15.9,
+      "fee": null,
+      "opening_hours": "Mo-Su 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11219554883 (ODbL), read 2026-10-30; placed OSM node n11219554883 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resc8ff11d922",
+      "category": "shop",
+      "name": "Synsam",
+      "level": "0",
+      "x": -89.2,
+      "y": -13.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11966340412 (ODbL), read 2026-10-30; placed OSM node n11966340412 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "resf2b199cfb7",
+      "category": "shop",
+      "name": "Aleksi 13",
+      "level": "0",
+      "x": -88.1,
+      "y": 14.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n11966347720 (ODbL), read 2026-10-30; placed OSM node n11966347720 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res1893086cd5",
+      "category": "shop",
+      "name": "H&M",
+      "level": "0",
+      "x": -98.5,
+      "y": -8.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11966354640 (ODbL), read 2026-10-30; placed OSM node n11966354640 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
+    },
+    {
+      "id": "res5f835b9706",
+      "category": "shop",
+      "name": "Cropp",
+      "level": "0",
+      "x": -86.7,
+      "y": 18.5,
+      "fee": null,
+      "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11966371609 (ODbL), read 2026-10-30; placed OSM node n11966371609 (research pass 2026-10-30, data/stations/research/fi_PSL/station_facts.json)"
     }
   ]
 }

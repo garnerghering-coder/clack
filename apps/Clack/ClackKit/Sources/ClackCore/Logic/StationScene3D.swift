@@ -93,6 +93,10 @@ public nonisolated enum StationScene3D {
         public var lantmateriet = false
         /// Platform heights from Trafikverket's register.
         public var trafikverket = false
+        /// The laser source whose credit the panel shows ("lantmateriet", "kartverket", "nls", "helsinki", "sdfi").
+        public var laserCredit: String?
+        /// The register the platform heights come from ("trafikverket", "digitraffic", "banenor", "banedanmark").
+        public var registerCredit: String?
     }
 
     /// Scene heights are the map's: metres above the platform surface (0). The rails sit at `railY`, the platform
@@ -118,6 +122,10 @@ public nonisolated enum StationScene3D {
         public let focus: (minX: Double, minZ: Double, maxX: Double, maxZ: Double)
         public let notes: Notes
     }
+
+    /// Source types whose credit must show where their data is drawn.
+    public static let laserSources: Set<String> = ["lantmateriet", "helsinki", "nls", "kartverket", "sdfi"]
+    public static let registerSources: Set<String> = ["trafikverket", "digitraffic", "banenor", "banedanmark"]
 
     // MARK: stated defaults
 
@@ -157,6 +165,8 @@ public nonisolated enum StationScene3D {
         var notes = Notes()
         notes.draft = map.quality == .osmDraft
         notes.lantmateriet = map.sources.contains { $0.type == "lantmateriet" }
+        notes.laserCredit = map.sources.first { StationScene3D.laserSources.contains($0.type) }?.type
+        notes.registerCredit = map.platforms.contains { $0.heightM != nil } ? map.sources.first { StationScene3D.registerSources.contains($0.type) }?.type : nil
         notes.trafikverket = map.sources.contains { $0.type == "trafikverket" } && map.platforms.contains { $0.heightM != nil }
         let nodes = Dictionary(map.nodes.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
         let ground0 = map.levels.min { $0.order < $1.order }?.id

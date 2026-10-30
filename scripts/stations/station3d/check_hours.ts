@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { parseHours } from '../../../packages/shared/src/hours.js';
 
 for (const id of process.argv.slice(2)) {
-  const p = `scripts/stations/${id}.edits.json`;
+  const p = `scripts/stations/${id.replace(/:/g, '_')}.edits.json`;
   const e = JSON.parse(fs.readFileSync(p, 'utf8'));
   const hours: Record<string, { opening_hours: string }> = e.poi_hours ?? {};
   const bad = Object.entries(hours).filter(([, h]) => !parseHours(h.opening_hours));

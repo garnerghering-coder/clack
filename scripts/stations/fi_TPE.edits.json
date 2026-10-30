@@ -8,20 +8,446 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street / station-hall level (Rautatienkatu side, station hall, the tunnels under the tracks)",
+      "order": 0,
+      "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_TPE)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 7 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_TPE)."
+    }
+  ],
+  "platform_heights": {},
+  "structures_file": "data/stations/research/fi_TPE/tampere_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w89322118",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.58,
+      "base_m": -6.49,
+      "_source": "Outline OSM w89322118 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08)"
+    },
+    {
+      "from": "w719386125",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.82,
+      "_source": "Outline OSM w719386125 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured"
+    },
+    {
+      "from": "w1424026794",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.86,
+      "_source": "Outline OSM w1424026794 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured"
+    },
+    {
+      "from": "w1536302175",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.27,
+      "_source": "Outline OSM w1536302175 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured"
+    },
+    {
+      "from": "#40",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.47,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#41",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.52,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#42",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.58,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_TPE/tampere_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 96.14,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_TPE/tampere_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (96.14 m N2000, laser 2023-06-08)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res0fca68bf2e",
+      "category": "waiting",
+      "name": "Odotustila (station hall)",
+      "level": "0",
+      "x": -24.7,
+      "y": -37.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res35f1c7b7ea",
+      "category": "ticket",
+      "name": "VR lippuautomaatit",
+      "level": "0",
+      "x": -32.8,
+      "y": -27.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed OSM node n4070180045 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res30a51d5751",
+      "category": "toilet",
+      "name": "WC",
+      "level": "0",
+      "x": -24.7,
+      "y": -37.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true,
+      "where": "station building, platform-1 side"
+    },
+    {
+      "id": "resfcd884a3ac",
+      "category": "locker",
+      "name": "Matkatavaralokerikko (VR luggage lockers)",
+      "level": "0",
+      "x": -24.7,
+      "y": -37.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true,
+      "where": "luggage storage corridor in the station building"
+    },
+    {
+      "id": "res470bedfeb9",
+      "category": "atm",
+      "name": "Otto",
+      "level": "0",
+      "x": -23.7,
+      "y": -9.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed OSM node n13091349705 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "resc881b44ff6",
+      "category": "kiosk",
+      "name": "R-Kioski",
+      "level": "0",
+      "x": -16.3,
+      "y": -23.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-24:00; Sa 06:00-24:00; Su 07:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287107 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res9d48e94b37",
+      "category": "restaurant",
+      "name": "Subway",
+      "level": "0",
+      "x": -15.4,
+      "y": -11.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:00-23:30; Fr-Sa 08:30-01:00; Su 08:30-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287109 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res8a745996cf",
+      "category": "cafe",
+      "name": "Brander",
+      "level": "0",
+      "x": -15.2,
+      "y": -4.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-19:00; Sa 06:30-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287110 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res6bcb5e0ebf",
+      "category": "restaurant",
+      "name": "Asemamestari",
+      "level": "0",
+      "x": -15.1,
+      "y": 3.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 10:00-24:00; Su 11:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287111 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res5a4f1d0606",
+      "category": "kiosk",
+      "name": "Punnitse ja Säästä",
+      "level": "0",
+      "x": -14.8,
+      "y": 18.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-19:00; Su 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287112 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resbd37a53903",
+      "category": "restaurant",
+      "name": "Bento Ya!",
+      "level": "0",
+      "x": -16.6,
+      "y": -42.3,
+      "fee": null,
+      "opening_hours": "11:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287116 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res98a29e34f2",
+      "category": "cafe",
+      "name": "Aitoleipä",
+      "level": "0",
+      "x": -14,
+      "y": 30.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-18:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287113 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resd92314a2dd",
+      "category": "cafe",
+      "name": "Aseman Kahvila",
+      "level": "0",
+      "x": -17.2,
+      "y": 51.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 07:30-18:00; Fr,Sa 07:30-19:00; Su 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287114 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res9ae4fa5421",
+      "category": "restaurant",
+      "name": "Semafori",
+      "level": "0",
+      "x": -18.8,
+      "y": -72.2,
+      "fee": null,
+      "opening_hours": "We-Sa 10:00-03:00; Su-Tu 10:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed OSM node n139581997 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res9271fed95b",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -6.7,
+      "y": -39.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n9845031505 (read 2026-10-30); placed OSM node n9845031505 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "resc2291f9b4e",
+      "category": "locker",
+      "name": "VR",
+      "level": "0",
+      "x": 4.1,
+      "y": 7.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n13089508006 (read 2026-10-30); placed OSM node n13089508006 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res432ab475a3",
+      "category": "restaurant",
+      "name": "Ale-pupi",
+      "level": "0",
+      "x": -107.7,
+      "y": -50.4,
+      "fee": null,
+      "opening_hours": "Mo-Su 09:00-02:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n139581203 (ODbL), read 2026-10-30; placed OSM node n139581203 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res70c6b6c2a9",
+      "category": "atm",
+      "name": "Ålandsbanken",
+      "level": "0",
+      "x": -148.5,
+      "y": -43,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-16:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n774502317 (ODbL), read 2026-10-30; placed OSM node n774502317 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res11e215df14",
+      "category": "atm",
+      "name": "Forex",
+      "level": "0",
+      "x": -155.1,
+      "y": -51.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:30, Sa 10:00-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4031481032 (ODbL), read 2026-10-30; placed OSM node n4031481032 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "resfb31f536cf",
+      "category": "shop",
+      "name": "Asematunnelin Silmälasi",
+      "level": "0",
+      "x": -118.3,
+      "y": -8.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:30-17:30; Sa 10:00-14:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9135406866 (ODbL), read 2026-10-30; placed OSM node n9135406866 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "resd4fe6bdac6",
+      "category": "restaurant",
+      "name": "Bistro Koo",
+      "level": "0",
+      "x": -149.5,
+      "y": -41.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:00-18:00; Fr 09:00-20:00; Sa 09:00-18:00; Su 11:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10250605877 (ODbL), read 2026-10-30; placed OSM node n10250605877 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "resbac54037c9",
+      "category": "cafe",
+      "name": "Relove Stockmann Tampere 1. krs",
+      "level": "0",
+      "x": -143,
+      "y": -45.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11964129622 (ODbL), read 2026-10-30; placed OSM node n11964129622 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "rese7a0f6bb76",
+      "category": "restaurant",
+      "name": "Pizzamestarit",
+      "level": "0",
+      "x": -143.6,
+      "y": -4.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30; placed OSM node n12112370926 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res8d1ae2e967",
+      "category": "shop",
+      "name": "Parturi-kampaamo Prime",
+      "level": "0",
+      "x": -121.6,
+      "y": -7.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30; placed OSM node n14001718622 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+    },
+    {
+      "id": "res20743e00b6",
+      "category": "shop",
+      "name": "Relove Stockmann Tampere 3. krs",
+      "level": "0",
+      "x": -140.5,
+      "y": -47.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-18:00; Su 12:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n14107110258 (ODbL), read 2026-10-30; placed OSM node n14107110258 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
     }
   ]
 }

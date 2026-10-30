@@ -8,21 +8,456 @@
     {
       "osm": "1",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Bybrua (the new city bridge, deck over the west end of the platforms)",
+      "order": 0,
+      "name_source": "Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-DRM)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 28 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-DRM)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_heights": {
+    "6": {
+      "height_m": 0.76,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30: tracks 6, class 760/735 mm = 0.76 m above rail, 350.0 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.76,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30: tracks 3,2, class 760/740 mm = 0.76 m above rail, 350.0 m long; a recorded design class, not a survey"
+    },
+    "4–5": {
+      "height_m": 0.76,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30: tracks 4,5, class 760/755 mm = 0.76 m above rail, 350.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-DRM/drammen_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w111633153",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 5.36,
+      "base_m": 0.31,
+      "_source": "Outline OSM w111633153 (ODbL); roof = median of 167 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w134395837",
+      "kind": "building",
+      "name": "Drammen stasjon (station building)",
+      "top_m": 14.17,
+      "base_m": 0.18,
+      "_source": "Outline OSM w134395837 (ODbL); roof = median of 404 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w134395844",
+      "kind": "building",
+      "name": "Drammen stasjon (station building)",
+      "top_m": 5.05,
+      "base_m": 0.06,
+      "_source": "Outline OSM w134395844 (ODbL); roof = median of 204 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w134396697",
+      "kind": "building",
+      "name": "office",
+      "top_m": 12.01,
+      "base_m": 0.19,
+      "_source": "Outline OSM w134396697 (ODbL); roof = median of 255 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w134396699",
+      "kind": "building",
+      "name": "office",
+      "top_m": 18.61,
+      "base_m": 0.03,
+      "_source": "Outline OSM w134396699 (ODbL); roof = median of 219 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w134396701",
+      "kind": "building",
+      "name": "service",
+      "top_m": 6,
+      "base_m": 0.15,
+      "_source": "Outline OSM w134396701 (ODbL); roof = median of 250 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w139976887",
+      "kind": "building",
+      "name": "Drammen busstasjon (transportation)",
+      "top_m": 4.16,
+      "base_m": 0.04,
+      "_source": "Outline OSM w139976887 (ODbL); roof = median of 776 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w152126642",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 9.32,
+      "base_m": 0.29,
+      "_source": "Outline OSM w152126642 (ODbL); roof = median of 352 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w152251029",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.43,
+      "base_m": 0.12,
+      "_source": "Outline OSM w152251029 (ODbL); roof = median of 215 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w486952622",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.42,
+      "_source": "Outline OSM w486952622 (ODbL); roof = median of 103 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w487054823",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.03,
+      "_source": "Outline OSM w487054823 (ODbL); roof = median of 245 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w490626523",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.3,
+      "base_m": 0.12,
+      "_source": "Outline OSM w490626523 (ODbL); roof = median of 348 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w491749404",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 1.06,
+      "_source": "Outline OSM w491749404 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w491749406",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 1.05,
+      "_source": "Outline OSM w491749406 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w594335608",
+      "kind": "bridge",
+      "name": "Bybrua (bridge)",
+      "top_m": 6.74,
+      "base_m": 5.14,
+      "_source": "Outline OSM w594335608 (ODbL); roof = median of 132 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w930916193",
+      "kind": "roof",
+      "name": "service",
+      "top_m": 7.7,
+      "_source": "Outline OSM w930916193 (ODbL); roof = median of 138 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w980248930",
+      "kind": "building",
+      "name": "Quality Hotel River Station (hotel)",
+      "top_m": 7.33,
+      "base_m": -0.37,
+      "_source": "Outline OSM w980248930 (ODbL); roof = median of 57 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w991416887",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.1,
+      "base_m": 0.95,
+      "_source": "Outline OSM w991416887 (ODbL); roof = median of 158 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w991418896",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 5.8,
+      "base_m": -0.06,
+      "_source": "Outline OSM w991418896 (ODbL); roof = median of 660 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w991466242",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 7.15,
+      "base_m": 0.95,
+      "_source": "Outline OSM w991466242 (ODbL); roof = median of 58 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w991466420",
+      "kind": "building",
+      "name": "garage",
+      "top_m": 2.77,
+      "base_m": 0.11,
+      "_source": "Outline OSM w991466420 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w1116374192",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 6.21,
+      "base_m": 0.93,
+      "_source": "Outline OSM w1116374192 (ODbL); roof = median of 282 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
+    },
+    {
+      "from": "w1535657340",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 10.98,
+      "_source": "Outline OSM w1535657340 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w1535657349",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.65,
+      "_source": "Outline OSM w1535657349 (ODbL); roof = median of 510 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "w1535657350",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.71,
+      "_source": "Outline OSM w1535657350 (ODbL); roof = median of 227 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured"
+    },
+    {
+      "from": "#31",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.7,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#32",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.61,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#33",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-DRM/drammen_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 2.17,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-DRM/drammen_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (2.17 m NN2000, laser 2015-07-07)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res4634a1c4b3",
+      "category": "kiosk",
+      "name": "Narvesen (Drammen jbst., store 030)",
+      "level": "1",
+      "x": -99,
+      "y": -21.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.narvesen.no/finn-butikk, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; placed OSM node n1262634963 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "resa6021350f2",
+      "category": "cafe",
+      "name": "Backstube Drammen Stasjon",
+      "level": "1",
+      "x": -93.2,
+      "y": -3.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-18:00; Sa,Su 08:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://backstube.no/visit-us, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; placed OSM node n11409520977 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "resee04fd01ea",
+      "category": "toilet",
+      "name": "Toalett (HC)",
+      "level": "1",
+      "x": -74.9,
+      "y": 6.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; placed OSM node n4322828524 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "resd8c4422961",
+      "category": "waiting",
+      "name": "Venterom / stasjonshall",
+      "level": "1",
+      "x": -83.4,
+      "y": -8.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)",
+      "approximate": true,
+      "where": "station hall at street level"
+    },
+    {
+      "id": "resa7f97295b1",
+      "category": "bus",
+      "name": "Buss for tog (rail replacement)",
+      "level": "1",
+      "x": -83.4,
+      "y": -8.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)",
+      "approximate": true,
+      "where": "Vy and Go-Ahead replacement buses from the stop by the station building"
+    },
+    {
+      "id": "resf6a553d833",
+      "category": "bus",
+      "name": "Drammen busstasjon (rutebilstasjon)",
+      "level": "1",
+      "x": -284.1,
+      "y": -55.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; placed OSM node n6372878163 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "rescabd204227",
+      "category": "ticket",
+      "name": "Brakar kundesenter",
+      "level": "1",
+      "x": -301,
+      "y": -63.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-18:00; Sa 09:00-16:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.brakar.no/kundesenter/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; placed OSM node n7128020343 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "res49c89dd2e7",
+      "category": "toilet",
+      "name": "Bane NOR Eiendom",
+      "level": "1",
+      "x": -74.9,
+      "y": 6.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n4322828524 (read 2026-10-30); placed OSM node n4322828524 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "res6b714fc985",
+      "category": "cafe",
+      "name": "Baker Hansen St. Hallvard",
+      "level": "1",
+      "x": -111.7,
+      "y": 20.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-18:00; Sa 09:00-16:00; Su 10:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2381292116 (ODbL), read 2026-10-30; placed OSM node n2381292116 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "res9095656725",
+      "category": "restaurant",
+      "name": "Strømsø Sportspub",
+      "level": "1",
+      "x": -109.1,
+      "y": 199.9,
+      "fee": null,
+      "opening_hours": "11:00-03:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3129939726 (ODbL), read 2026-10-30; placed OSM node n3129939726 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "resecf1a7cef6",
+      "category": "restaurant",
+      "name": "Palmen",
+      "level": "1",
+      "x": -166.4,
+      "y": 184.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4194763830 (ODbL), read 2026-10-30; placed OSM node n4194763830 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "res6e7929b66a",
+      "category": "restaurant",
+      "name": "Fuji sushi",
+      "level": "1",
+      "x": -137.5,
+      "y": 207.8,
+      "fee": null,
+      "opening_hours": "Mo-Sa 14:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9858546152 (ODbL), read 2026-10-30; placed OSM node n9858546152 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    },
+    {
+      "id": "res66e86d6649",
+      "category": "restaurant",
+      "name": "Champs Grill og Pizza",
+      "level": "1",
+      "x": -118.5,
+      "y": 29.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:30-00:45, Fr 10:30-04:00, Sa 11:00-04:00, Su 11:00-00:45",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9962266921 (ODbL), read 2026-10-30; placed OSM node n9962266921 (research pass 2026-10-30, data/stations/research/NO-DRM/station_facts.json)"
+    }
+  ]
 }

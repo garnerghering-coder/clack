@@ -24,9 +24,12 @@ def clean_name(n):
 
 def main():
     sid = sys.argv[1]
-    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{sid}/station_facts.json")))
-    m = json.load(open(os.path.join(ROOT, f"data/stations/{sid}.json")))
-    epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
+    # --pack <folder> when the research folder isn't named by the app's id (Norway); files use "_" for ":".
+    pack = sys.argv[sys.argv.index("--pack") + 1] if "--pack" in sys.argv else sid.replace(":", "_")
+    safe = sid.replace(":", "_")
+    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{pack}/station_facts.json")))
+    m = json.load(open(os.path.join(ROOT, f"data/stations/{safe}.json")))
+    epath = os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")
     e = json.load(open(epath))
     ids = {p["id"] for p in m["pois"]}
     hours = {}
