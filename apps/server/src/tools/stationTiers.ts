@@ -10,6 +10,30 @@ import type { Db } from '../db/client.js';
 
 export type Tier = 'hub' | 'mid' | 'default';
 export const NAMED_HUBS: Record<string, string> = { 'fi:HKI': 'Helsinki: the capital terminus; the counts undersell a terminus (owner, 2026-10-27)' };
+// Denmark and Finland get their own mid rule (owner, 2026-10-30): with Sweden's, Denmark's coastal and local lines
+// (not marked commuter in the Danish feed) made 50 mid stations out of trains passing on one line, and Finland's sparse
+// long-distance network reached only 3. A Danish mid is a real interchange: 150+ changes where lines meet (3+
+// neighbours) or many trains start or end, on 15+ routes (or 50+ ends), or 1500+ changes anywhere (the Copenhagen
+// core). A Finnish mid has 20+ trains and 10+ changes or 15+ trains starting or ending there.
+export const NAMED_MIDS: Record<string, string> = {
+  'fi:LH': 'Lahti: a large regional station whose counts are low because commuter trains are left out (owner, 2026-10-30)',
+  'fi:KUO': 'Kuopio: a large regional station on a simple line (owner, 2026-10-30)',
+};
+export const NAMED_DEFAULTS: Record<string, string> = {
+  '860000717': 'Tølløse: a junction of local lines only (owner, 2026-10-30)',
+  '860000116': 'Lindholm: mainly local Nordjyske trains (owner, 2026-10-30)',
+  '860000027': 'Skørping: mainly local Nordjyske trains (owner, 2026-10-30)',
+  'fi:PAR': 'Parikkala: a real junction, but a small town (owner, 2026-10-30)',
+  'fi:YV': 'Ylivieska: a real junction, but a small town (owner, 2026-10-30)',
+  'fi:OV': 'Orivesi: a real junction, but a small town (owner, 2026-10-30)',
+};
+
+/** Whether a station is mid tier by its own country's rule (only Denmark and Finland differ from the general one). */
+export function countryMid(country: string, c: { changes: number; routes: number; neighbours: number; ends: number; trains: number }): boolean {
+  if (country === 'DK') return (c.changes >= 150 && (c.neighbours >= 3 || c.ends >= 20) && (c.routes >= 15 || c.ends >= 50)) || c.changes >= 1500;
+  if (country === 'FI') return c.trains >= 20 && (c.changes >= 10 || c.ends >= 15);
+  return c.changes >= MID_CHANGES;
+}
 const HUB_CHANGES = 1400, HUB_ROUTES = 45, MID_CHANGES = 150, MID_ROUTES = 20;
 
 export interface StationTier { id: string; name: string; country: string; tier: Tier; changes: number; routes: number; neighbours: number; ends: number; trains: number; review?: string }
@@ -59,10 +83,11 @@ export async function stationTiers(db: Db, date: string): Promise<{ date: string
       }
     }
     const r = routes.get(s)?.size ?? 0;
-    const named = NAMED_HUBS[s];
-    const tier: Tier = named || (changes >= HUB_CHANGES && r >= HUB_ROUTES) ? 'hub' : changes >= MID_CHANGES ? 'mid' : 'default';
-    const byRoutes: Tier = r >= HUB_ROUTES ? 'hub' : r >= MID_ROUTES ? 'mid' : 'default';
     const nbs = nb.get(s)?.size ?? 0, e = ends.get(s) ?? 0;
+    const named = NAMED_HUBS[s] ?? NAMED_MIDS[s] ?? NAMED_DEFAULTS[s];
+    const mid = countryMid(info.country, { changes, routes: r, neighbours: nbs, ends: e, trains: trains.get(s) ?? 0 });
+    const tier: Tier = NAMED_HUBS[s] || (changes >= HUB_CHANGES && r >= HUB_ROUTES) ? 'hub' : NAMED_DEFAULTS[s] ? 'default' : NAMED_MIDS[s] || mid ? 'mid' : 'default';
+    const byRoutes: Tier = r >= HUB_ROUTES ? 'hub' : r >= MID_ROUTES ? 'mid' : 'default';
     const byLines: Tier = e >= 150 ? 'hub' : e >= 20 || nbs >= 5 ? 'mid' : 'default';
     const disagree = [byRoutes !== tier ? `routes say ${byRoutes}` : null, byLines !== tier ? `lines/ends say ${byLines}` : null].filter(Boolean);
     out.push({ id: s, name: info.name, country: info.country, tier, changes, routes: r, neighbours: nbs, ends: e, trains: trains.get(s) ?? 0, ...(named ? { review: named } : disagree.length && tier !== 'default' || byRoutes !== 'default' && tier === 'default' ? { review: disagree.join('; ') } : {}) });

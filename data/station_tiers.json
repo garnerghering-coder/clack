@@ -6,7 +6,7 @@
    "name": "Stockholm C",
    "country": "SE",
    "tier": "hub",
-   "changes": 4084,
+   "changes": 4082,
    "routes": 62,
    "neighbours": 13,
    "ends": 516,
@@ -16,38 +16,38 @@
    "name": "Göteborg C",
    "country": "SE",
    "tier": "hub",
-   "changes": 1457,
-   "routes": 48,
+   "changes": 1444,
+   "routes": 49,
    "neighbours": 15,
-   "ends": 364,
-   "trains": 365
+   "ends": 363,
+   "trains": 364
   },
   "740000003": {
    "name": "Malmö C",
    "country": "SE",
    "tier": "mid",
-   "changes": 941,
-   "routes": 45,
+   "changes": 946,
+   "routes": 46,
    "neighbours": 4,
-   "ends": 79,
-   "trains": 235,
+   "ends": 80,
+   "trains": 236,
    "review": "routes say hub"
   },
   "740000004": {
    "name": "Alvesta",
    "country": "SE",
    "tier": "mid",
-   "changes": 721,
-   "routes": 26,
+   "changes": 653,
+   "routes": 27,
    "neighbours": 9,
-   "ends": 10,
-   "trains": 149
+   "ends": 13,
+   "trains": 143
   },
   "740000005": {
    "name": "Uppsala C",
    "country": "SE",
    "tier": "mid",
-   "changes": 912,
+   "changes": 913,
    "routes": 35,
    "neighbours": 9,
    "ends": 183,
@@ -78,21 +78,21 @@
    "name": "Skövde C",
    "country": "SE",
    "tier": "mid",
-   "changes": 564,
-   "routes": 26,
+   "changes": 545,
+   "routes": 25,
    "neighbours": 10,
    "ends": 63,
-   "trains": 157
+   "trains": 155
   },
   "740000009": {
    "name": "Linköping C",
    "country": "SE",
    "tier": "mid",
-   "changes": 236,
-   "routes": 22,
-   "neighbours": 7,
-   "ends": 80,
-   "trains": 120
+   "changes": 209,
+   "routes": 21,
+   "neighbours": 6,
+   "ends": 75,
+   "trains": 115
   },
   "740000031": {
    "name": "Flemingsberg",
@@ -109,8 +109,8 @@
    "name": "Herrljunga C",
    "country": "SE",
    "tier": "mid",
-   "changes": 625,
-   "routes": 40,
+   "changes": 621,
+   "routes": 41,
    "neighbours": 9,
    "ends": 32,
    "trains": 138
@@ -119,7 +119,7 @@
    "name": "Södertälje Syd",
    "country": "SE",
    "tier": "mid",
-   "changes": 899,
+   "changes": 900,
    "routes": 34,
    "neighbours": 7,
    "ends": 0,
@@ -129,11 +129,11 @@
    "name": "Falköping C",
    "country": "SE",
    "tier": "mid",
-   "changes": 299,
+   "changes": 290,
    "routes": 27,
    "neighbours": 7,
    "ends": 13,
-   "trains": 112
+   "trains": 111
   },
   "740000070": {
    "name": "Karlstad C",
@@ -149,18 +149,18 @@
    "name": "Hallsberg",
    "country": "SE",
    "tier": "mid",
-   "changes": 356,
+   "changes": 347,
    "routes": 33,
    "neighbours": 9,
-   "ends": 80,
-   "trains": 136
+   "ends": 78,
+   "trains": 134
   },
   "740000090": {
    "name": "Jönköping C",
    "country": "SE",
    "tier": "mid",
    "changes": 162,
-   "routes": 21,
+   "routes": 22,
    "neighbours": 3,
    "ends": 76,
    "trains": 110
@@ -199,18 +199,18 @@
    "name": "Örebro C",
    "country": "SE",
    "tier": "mid",
-   "changes": 340,
+   "changes": 310,
    "routes": 34,
    "neighbours": 3,
-   "ends": 51,
-   "trains": 133
+   "ends": 49,
+   "trains": 127
   },
   "740000140": {
    "name": "Nässjö C",
    "country": "SE",
    "tier": "mid",
-   "changes": 574,
-   "routes": 32,
+   "changes": 576,
+   "routes": 33,
    "neighbours": 10,
    "ends": 98,
    "trains": 169
@@ -229,41 +229,41 @@
    "name": "Eskilstuna C",
    "country": "SE",
    "tier": "mid",
-   "changes": 268,
+   "changes": 261,
    "routes": 23,
    "neighbours": 5,
-   "ends": 43,
+   "ends": 45,
    "trains": 110
   },
   "740000173": {
    "name": "Öxnered",
    "country": "SE",
    "tier": "mid",
-   "changes": 268,
+   "changes": 260,
    "routes": 22,
    "neighbours": 5,
    "ends": 2,
-   "trains": 110
+   "trains": 109
   },
   "740000191": {
    "name": "Trollhättan",
    "country": "SE",
    "tier": "mid",
-   "changes": 542,
+   "changes": 534,
    "routes": 24,
    "neighbours": 7,
    "ends": 0,
-   "trains": 142
+   "trains": 141
   },
   "740000192": {
    "name": "Kumla",
    "country": "SE",
    "tier": "mid",
-   "changes": 173,
+   "changes": 168,
    "routes": 22,
    "neighbours": 2,
    "ends": 0,
-   "trains": 88,
+   "trains": 86,
    "review": "lines/ends say default"
   },
   "740000206": {
@@ -290,17 +290,17 @@
    "name": "Örebro S",
    "country": "SE",
    "tier": "mid",
-   "changes": 209,
+   "changes": 196,
    "routes": 28,
    "neighbours": 2,
-   "ends": 22,
-   "trains": 110
+   "ends": 20,
+   "trains": 106
   },
   "740000556": {
    "name": "Arlanda C",
    "country": "SE",
    "tier": "mid",
-   "changes": 329,
+   "changes": 330,
    "routes": 26,
    "neighbours": 3,
    "ends": 0,
@@ -323,21 +323,21 @@
    "country": "SE",
    "tier": "mid",
    "changes": 449,
-   "routes": 22,
+   "routes": 23,
    "neighbours": 2,
-   "ends": 4,
-   "trains": 153,
+   "ends": 5,
+   "trains": 154,
    "review": "lines/ends say default"
   },
   "740001587": {
    "name": "Triangeln",
    "country": "SE",
    "tier": "mid",
-   "changes": 487,
-   "routes": 22,
+   "changes": 488,
+   "routes": 23,
    "neighbours": 2,
    "ends": 0,
-   "trains": 153,
+   "trains": 154,
    "review": "lines/ends say default"
   },
   "760000100": {
@@ -403,17 +403,6 @@
    "ends": 29,
    "trains": 147
   },
-  "860000027": {
-   "name": "Skørping",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 189,
-   "routes": 18,
-   "neighbours": 2,
-   "ends": 27,
-   "trains": 139,
-   "review": "routes say default"
-  },
   "860000053": {
    "name": "Aarhus H",
    "country": "DK",
@@ -424,17 +413,6 @@
    "ends": 289,
    "trains": 289,
    "review": "lines/ends say hub"
-  },
-  "860000054": {
-   "name": "Viby Jylland",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 170,
-   "routes": 13,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 166,
-   "review": "routes say default; lines/ends say default"
   },
   "860000061": {
    "name": "Skanderborg",
@@ -479,28 +457,6 @@
    "trains": 123,
    "review": "routes say default; lines/ends say default"
   },
-  "860000116": {
-   "name": "Lindholm",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 432,
-   "routes": 17,
-   "neighbours": 3,
-   "ends": 0,
-   "trains": 126,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000117": {
-   "name": "Aalborg Vestby",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 410,
-   "routes": 17,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 126,
-   "review": "routes say default; lines/ends say default"
-  },
   "860000215": {
    "name": "Esbjerg",
    "country": "DK",
@@ -511,17 +467,6 @@
    "ends": 193,
    "trains": 193,
    "review": "routes say default; lines/ends say hub"
-  },
-  "860000219": {
-   "name": "Bramming",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 266,
-   "routes": 10,
-   "neighbours": 3,
-   "ends": 0,
-   "trains": 131,
-   "review": "routes say default; lines/ends say default"
   },
   "860000275": {
    "name": "Herning",
@@ -565,17 +510,6 @@
    "ends": 84,
    "trains": 210
   },
-  "860000608": {
-   "name": "Sorø",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 271,
-   "routes": 27,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 155,
-   "review": "lines/ends say default"
-  },
   "860000611": {
    "name": "Ringsted",
    "country": "DK",
@@ -596,28 +530,6 @@
    "neighbours": 4,
    "ends": 76,
    "trains": 320
-  },
-  "860000619": {
-   "name": "Hedehusene",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 272,
-   "routes": 32,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 254,
-   "review": "lines/ends say default"
-  },
-  "860000624": {
-   "name": "Valby",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 648,
-   "routes": 29,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 223,
-   "review": "lines/ends say default"
   },
   "860000626": {
    "name": "København H",
@@ -651,116 +563,6 @@
    "trains": 445,
    "review": "lines/ends say hub"
   },
-  "860000655": {
-   "name": "Hellerup",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 292,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000659": {
-   "name": "Klampenborg",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 239,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000661": {
-   "name": "Skodsborg",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 240,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000662": {
-   "name": "Vedbæk",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 216,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000663": {
-   "name": "Rungsted Kyst",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 237,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000664": {
-   "name": "Kokkedal",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 328,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000665": {
-   "name": "Nivå",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 329,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000666": {
-   "name": "Humlebæk",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 274,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000667": {
-   "name": "Espergærde",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 310,
-   "routes": 9,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 173,
-   "review": "routes say default; lines/ends say default"
-  },
-  "860000668": {
-   "name": "Snekkersten",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 771,
-   "routes": 13,
-   "neighbours": 3,
-   "ends": 4,
-   "trains": 246,
-   "review": "routes say default; lines/ends say default"
-  },
   "860000669": {
    "name": "Helsingør",
    "country": "DK",
@@ -783,17 +585,6 @@
    "trains": 285,
    "review": "routes say default; lines/ends say hub"
   },
-  "860000717": {
-   "name": "Tølløse",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 157,
-   "routes": 13,
-   "neighbours": 3,
-   "ends": 55,
-   "trains": 164,
-   "review": "routes say default"
-  },
   "860000719": {
    "name": "Holbæk",
    "country": "DK",
@@ -805,17 +596,6 @@
    "trains": 177,
    "review": "routes say default"
   },
-  "860000755": {
-   "name": "Trekroner",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 661,
-   "routes": 32,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 254,
-   "review": "lines/ends say default"
-  },
   "860000783": {
    "name": "Köbenhavn Syd",
    "country": "DK",
@@ -825,17 +605,6 @@
    "neighbours": 8,
    "ends": 0,
    "trains": 226
-  },
-  "860000792": {
-   "name": "Ølby",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 442,
-   "routes": 8,
-   "neighbours": 3,
-   "ends": 0,
-   "trains": 134,
-   "review": "routes say default; lines/ends say default"
   },
   "860000797": {
    "name": "Køge Nord",
@@ -881,17 +650,6 @@
    "trains": 215,
    "review": "lines/ends say default"
   },
-  "860000857": {
-   "name": "Tårnby",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 805,
-   "routes": 28,
-   "neighbours": 2,
-   "ends": 0,
-   "trains": 215,
-   "review": "lines/ends say default"
-  },
   "860000858": {
    "name": "CPH Airport",
    "country": "DK",
@@ -901,28 +659,6 @@
    "neighbours": 2,
    "ends": 66,
    "trains": 215
-  },
-  "860000905": {
-   "name": "Hårlev",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 349,
-   "routes": 13,
-   "neighbours": 4,
-   "ends": 27,
-   "trains": 149,
-   "review": "routes say default"
-  },
-  "860001421": {
-   "name": "Kagerup St. (Hillerød)",
-   "country": "DK",
-   "tier": "mid",
-   "changes": 429,
-   "routes": 4,
-   "neighbours": 5,
-   "ends": 0,
-   "trains": 137,
-   "review": "routes say default"
   },
   "NSR:StopPlace:157": {
    "name": "Lysaker",
@@ -1014,11 +750,11 @@
    "name": "Pasila",
    "country": "FI",
    "tier": "mid",
-   "changes": 310,
+   "changes": 295,
    "routes": 29,
    "neighbours": 4,
    "ends": 0,
-   "trains": 121,
+   "trains": 118,
    "review": "lines/ends say default"
   },
   "fi:TPE": {
@@ -1046,12 +782,155 @@
    "name": "Helsinki",
    "country": "FI",
    "tier": "hub",
-   "changes": 153,
+   "changes": 143,
    "routes": 29,
    "neighbours": 1,
-   "ends": 121,
-   "trains": 121,
+   "ends": 118,
+   "trains": 118,
    "review": "Helsinki: the capital terminus; the counts undersell a terminus (owner, 2026-10-27)"
+  },
+  "fi:SK": {
+   "name": "Seinäjoki",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 43,
+   "routes": 19,
+   "neighbours": 4,
+   "ends": 14,
+   "trains": 55,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:TL": {
+   "name": "Toijala",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 22,
+   "routes": 23,
+   "neighbours": 3,
+   "ends": 0,
+   "trains": 80,
+   "review": "lines/ends say default"
+  },
+  "fi:PM": {
+   "name": "Pieksämäki",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 18,
+   "routes": 12,
+   "neighbours": 4,
+   "ends": 10,
+   "trains": 24,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:OL": {
+   "name": "Oulu",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 16,
+   "routes": 11,
+   "neighbours": 3,
+   "ends": 24,
+   "trains": 38,
+   "review": "routes say default"
+  },
+  "fi:TKU": {
+   "name": "Turku",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 14,
+   "routes": 8,
+   "neighbours": 3,
+   "ends": 28,
+   "trains": 39,
+   "review": "routes say default"
+  },
+  "fi:KV": {
+   "name": "Kouvola",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 13,
+   "routes": 11,
+   "neighbours": 3,
+   "ends": 1,
+   "trains": 28,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:HL": {
+   "name": "Hämeenlinna",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 13,
+   "routes": 19,
+   "neighbours": 2,
+   "ends": 0,
+   "trains": 66,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:RI": {
+   "name": "Riihimäki",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 13,
+   "routes": 19,
+   "neighbours": 2,
+   "ends": 0,
+   "trains": 66,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:LH": {
+   "name": "Lahti",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 6,
+   "routes": 10,
+   "neighbours": 2,
+   "ends": 0,
+   "trains": 27,
+   "review": "Lahti: a large regional station whose counts are low because commuter trains are left out (owner, 2026-10-30)"
+  },
+  "fi:JY": {
+   "name": "Jyväskylä",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 6,
+   "routes": 11,
+   "neighbours": 3,
+   "ends": 18,
+   "trains": 26,
+   "review": "routes say default; lines/ends say default"
+  },
+  "fi:JNS": {
+   "name": "Joensuu",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 5,
+   "routes": 6,
+   "neighbours": 3,
+   "ends": 20,
+   "trains": 20,
+   "review": "routes say default"
+  },
+  "fi:VS": {
+   "name": "Vaasa",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 0,
+   "routes": 5,
+   "neighbours": 1,
+   "ends": 20,
+   "trains": 20,
+   "review": "routes say default"
+  },
+  "fi:KUO": {
+   "name": "Kuopio",
+   "country": "FI",
+   "tier": "mid",
+   "changes": 0,
+   "routes": 9,
+   "neighbours": 2,
+   "ends": 6,
+   "trains": 16,
+   "review": "Kuopio: a large regional station on a simple line (owner, 2026-10-30)"
   }
  }
 }
