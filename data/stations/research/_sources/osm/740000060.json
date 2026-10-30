@@ -1,0 +1,265 @@
+{
+ "clack_id": "740000060",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w42605016",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 96.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.5511522,
+    58.1758818
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w42605017",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.5524903,
+    58.1753824
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w453710170",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.5524903,
+    58.1753824
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n765051038",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Järnvägsgatan",
+   "nearest_named_street": "Järnvägsgatan",
+   "nearest_street_m": 28.6,
+   "lonlat": [
+    13.5526395,
+    58.1755226
+   ]
+  },
+  {
+   "osm_id": "n2645179173",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Järnvägsgatan",
+   "nearest_named_street": "Järnvägsgatan",
+   "nearest_street_m": 18.6,
+   "lonlat": [
+    13.5536704,
+    58.1755715
+   ]
+  },
+  {
+   "osm_id": "n2645179180",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Järnvägsgatan",
+   "nearest_named_street": "Järnvägsgatan",
+   "nearest_street_m": 20.7,
+   "lonlat": [
+    13.5541723,
+    58.1759037
+   ]
+  },
+  {
+   "osm_id": "n2645179182",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Järnvägsgatan",
+   "nearest_named_street": null,
+   "nearest_street_m": 41.0,
+   "lonlat": [
+    13.5544575,
+    58.175802
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n13135957673",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 84,
+   "lonlat": [
+    13.5525122,
+    58.1754715
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "w30174157",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 117,
+   "lonlat": [
+    13.551957,
+    58.1752572
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w453712341",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 52,
+   "lonlat": [
+    13.5528737,
+    58.1756184
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406452",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 31,
+   "lonlat": [
+    13.5532338,
+    58.1757396
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406453",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 8,
+   "lonlat": [
+    13.5534424,
+    58.1759114
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406454",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 2,
+   "lonlat": [
+    13.5535574,
+    58.1759857
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406456",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 38,
+   "lonlat": [
+    13.5539406,
+    58.1762851
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406457",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 45,
+   "lonlat": [
+    13.5540175,
+    58.1763336
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1552406458",
+   "category": "bus_station",
+   "name": "Falköping resecentrum",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 0,
+   "lonlat": [
+    13.5538087,
+    58.1761471
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

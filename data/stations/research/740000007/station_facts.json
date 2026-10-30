@@ -1,0 +1,410 @@
+{
+ "clack_id": "740000007",
+ "compiled": "2026-10-30",
+ "levels": [],
+ "platform_sides": [
+  {
+   "platform_bis": "1849",
+   "track": null,
+   "side": "north",
+   "meaning": "the platform lies on the north side of track None (the train stops with the platform to its north)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1849; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1841",
+   "track": "2b",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2b (the train stops with the platform to its north)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1841; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1850",
+   "track": null,
+   "side": "north",
+   "meaning": "the platform lies on the north side of track None (the train stops with the platform to its north)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1850; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1843",
+   "track": "2a",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2a (the train stops with the platform to its north)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1843; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1230",
+   "track": "1",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 1 (the train stops with the platform to its south)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1230; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "1846",
+   "track": "2a",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2a (the train stops with the platform to its north)",
+   "_source": "laser (2020-02-03, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1846; read 2026-10-30"
+  }
+ ],
+ "connections": [],
+ "entrances": [
+  {
+   "name": "Huvudentré",
+   "street": "Norra Promenaden",
+   "level": "0",
+   "where": "station building, Norra Promenaden 94 (OSM n1097882336 entrance=main)",
+   "_source": "OSM (local osmfacts/740000007.json), read 2026-10-30; address from https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré",
+   "street": null,
+   "level": "0",
+   "where": "Jernhusen says the station has an accessible entrance but not where",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1097882336",
+   "street": "Norra Promenaden",
+   "street_how": "nearest named street, 27.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1097882336 (already in OSM)",
+   "position": {
+    "lon": 16.1834597,
+    "lat": 58.5962998,
+    "how": "OSM n1097882336",
+    "_source": "OpenStreetMap n1097882336 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station)",
+   "where": "station building, Norra Promenaden 94",
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa 05:30-22:15; Su 06:45-00:15",
+   "hours_raw": "Måndag–fredag 04.30–00.15, Lördag 05.30–22.15, Söndag 06.45–00.15",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card)",
+   "wheelchair": "yes",
+   "where": "in the station (no position given)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/toalett/ and https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/started hour (max 149 kr/24 h), Medium 39 kr (max 199 kr), Large 49 kr (max 249 kr); max 7 days",
+   "where": "in the station (OSM n12186425107 'Speed Services', indoor); opened by QR code; open during the station's hours",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/forvaringsboxar/, read 2026-10-30; OSM"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Östgötatrafiken Kundcenter",
+   "where": "by the bus waiting room (bussväntsalen) at the resecentrum",
+   "opening_hours": "Mo-Fr 06:20-20:00; Sa,Su 10:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/trafik-och-biljetter/, read 2026-10-30"
+  },
+  {
+   "category": "hotel",
+   "name": "Centralstationens Hotell och Vandrarhem",
+   "phone": "011-10 18 28",
+   "website": "https://www.centralstationens.se/",
+   "where": "at the station, Norra Promenaden 94 (Jernhusen's shop list); own website not readable (robots), so no reception hours",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "phone": "011-12 55 18",
+   "where": "in the station building (Norra Promenaden 94)",
+   "note": "Jernhusen gives no hours; Pressbyrån's store finder is dynamic and could not be read; OSM's opening_hours (Mo-Fr 05:15-22:00; Sa 07:00-22:00; Su 08:00-22:00) is the only hours source.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 16.184261,
+    "lat": 58.596397,
+    "osm_id": "n1177971710",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 32.4,
+    "how": "OSM node n1177971710",
+    "_source": "OpenStreetMap n1177971710 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests",
+   "fee": "no",
+   "where": "station-wide",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering",
+   "where": "at the station; open 24/7; run by Apcoa",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Norrköpings resecentrum",
+   "where": "by the station; bus stops A1–A4, B1–B3, C1–C2 (replacement buses for train), C3–C6 (long-distance buses), D1–D2 (city lines 2E, 10, 12, 13, 21)",
+   "_source": "https://www.ostgotatrafiken.se/globalassets/media/kartor-och-tidtabeller/hallplatsoversikter/hallplatsoversikt_norrkopings_resecentrum-oktober2025.pdf (Hitta rätt hållplats, oktober 2025), read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa 05:30-22:15; Su 06:45-00:15",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Norrköping centralstation.",
+   "owner_text": "Allt om tillgängligheten på Norrköping centralstation. Tillgänglig entré Stationen har en tillgänglig entré. Universaltoalett Stationen har en universaltoalett. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Östgötatrafiken Kundcenter Ligger vid bussväntsalen. Öppettider Mån–fre 06.20–20.00 Lör–sön 10.00–20.00 0771-21 10 10 ostgotatrafiken.se Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Östgötatrafiken Snälltåget TIB (Tåg i Bergslagen) Mälartåg (Mälardalstrafik) Vy bus4you Flixbus För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": "Mån–fre 06.20–20.00; Lör–sön 10.00–20.00 (hours named in the text; see owner_text for what they belong to)",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Centralstationens Hotell och Vandrarhem",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.centralstationens.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": null,
+   "name": "Espresso House",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 05:30-21:00; Sa 06:30-20:00; Su 07:00-21:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.espressohouse.com/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 16.183214,
+    "lat": 58.5963869,
+    "osm_id": "n10905994713",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 19.2,
+    "how": "OSM node n10905994713",
+    "_source": "OpenStreetMap n10905994713 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 16.184261,
+    "lat": 58.596397,
+    "osm_id": "n1177971710",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 32.4,
+    "how": "OSM node n1177971710",
+    "_source": "OpenStreetMap n1177971710 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Speed Services",
+   "osm_id": "n12186425107",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n12186425107 (read 2026-10-30)",
+   "position": {
+    "lon": 16.1835116,
+    "lat": 58.5963472,
+    "osm_id": "n12186425107",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 26.2,
+    "how": "OSM node n12186425107",
+    "_source": "OpenStreetMap n12186425107 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [
+  {
+   "title": "Norrköpings resecentrum – Hitta rätt hållplats / Find your bus stop (oktober 2025)",
+   "publisher": "Östgötatrafiken",
+   "url": "https://www.ostgotatrafiken.se/globalassets/media/kartor-och-tidtabeller/hallplatsoversikter/hallplatsoversikt_norrkopings_resecentrum-oktober2025.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Bus stop table only; no station layout. Jernhusen's 'Stationsområdet' link goes to Östgötatrafiken's dynamic web map https://www.ostgotatrafiken.se/res-med-oss/karta?hallplats=1000, which could not be read."
+  }
+ ],
+ "open": [
+  "Ways to the platforms: OSM maps no tunnel, stairs or lift at Norrköping C, and no owner/Trafikverket text or plan found describes them. Which platforms (1, 2a/2b, 3a/3b, 6a/6b, 7a/7b) have stairs/lifts stays open.",
+  "Level names: none found.",
+  "Accessible entrance position, and positions of toilets, lockers and the kundcenter inside the buildings: not stated.",
+  "Centralstationens Hotell och Vandrarhem reception hours and exact position: website not readable.",
+  "Pressbyrån hours: OSM only.",
+  "Floor heights: no open source."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "platform D2: no platform edges (which side the trains stop at)"
+ ],
+ "answers": [
+  {
+   "question": "platform D2: no platform edges (which side the trains stop at)",
+   "answer": "D2 is not a train platform: in Östgötatrafiken's stop overview for Norrköpings resecentrum, D1 and D2 are bus stop positions (hållplatslägen) for city lines 2E, 10, 12, 13 and 21 (D1 towards Söder Tull/Vrinnevisjukhuset/Lindö/Rambodal, D2 towards Fridvalla/Åby/Ingelsta/Söder Tull). OSM's ways w287588687 (D2) and w287588703 (D1) are bus platforms, so they have no rail edges; they should be dropped from the train platform list rather than given edges.",
+   "_source": "https://www.ostgotatrafiken.se/globalassets/media/kartor-och-tidtabeller/hallplatsoversikter/hallplatsoversikt_norrkopings_resecentrum-oktober2025.pdf, read 2026-10-30; OSM"
+  }
+ ]
+}

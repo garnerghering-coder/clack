@@ -1,0 +1,116 @@
+{
+ "clack_id": "740000009",
+ "slug": "linkoping_c",
+ "flags": [
+  "w39983371 Linköpings centralstation (station building): p95 52.4 m is 6.8 m above the median 45.7 m (a taller neighbour or a mast inside the outline?).",
+  "w450434287 Gumpekullabron (bridge): p95 55.9 m is 6.8 m above the median 49.1 m (a taller neighbour or a mast inside the outline?).",
+  "Laser-traced roof (315 m², top 3.8 m above the platform, 4.6 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 36.63 m over 1645 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=15.617945,58.413713,15.630841,58.420537",
+ "ground": {
+  "min_m": 36.58,
+  "median_m": 40.99,
+  "max_m": 47.42,
+  "nan_cells": 0,
+  "size_m": [
+   506,
+   508
+  ],
+  "box_sweref": [
+   536224,
+   6475067,
+   536730,
+   6475575
+  ],
+  "tiles": [
+   "647_53 (2023-04-28)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y21c011-64750_5350_25.copc.laz"
+  ],
+  "scan_date": "2021-03-26",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 864949,
+  "density_in_box": 3.36,
+  "classes": {
+   "1": 356235,
+   "2": 476107,
+   "7": 449,
+   "9": 21495,
+   "17": 10663
+  },
+  "train_points_class64": 1385
+ },
+ "platforms": [
+  {
+   "bis_object": "1205",
+   "track": "2",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 376.0,
+   "width_m": 10.0,
+   "roof": "Skydd",
+   "track_bed_m": 40.8,
+   "track_bed_points": 1209,
+   "platform_surface_m": 41.62,
+   "platform_points": 5344,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.82,
+   "laser_estimate_above_rail_m": 0.64
+  },
+  {
+   "bis_object": "1204",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 371.0,
+   "width_m": null,
+   "roof": "Skydd",
+   "track_bed_m": 40.76,
+   "track_bed_points": 1159,
+   "platform_surface_m": 41.5,
+   "platform_points": 1287,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "1594",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 152.0,
+   "width_m": null,
+   "roof": "Skydd",
+   "track_bed_m": 40.85,
+   "track_bed_points": 316,
+   "platform_surface_m": 41.65,
+   "platform_points": 1182,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.8,
+   "laser_estimate_above_rail_m": 0.62
+  }
+ ],
+ "platform_surface_m": 41.62,
+ "track_bed_m": 40.8,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 4,
+  "footbridge": 1,
+  "canopy_osm": 4,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 97,
+ "photos_station_related": 62
+}

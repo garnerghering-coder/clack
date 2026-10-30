@@ -5,9 +5,8 @@ from shapely.geometry import LineString
 from pyproj import Transformer
 fw = Transformer.from_crs(4326, 3006, always_xy=True).transform
 ID = sys.argv[1]; want = set(sys.argv[2:])
-import os
-B = os.path.join(os.environ.get('STATION3D_BUNDLES', 'bundles'), ID); meta = json.load(open(B + '/meta.json'))
-l = laspy.read(glob.glob(os.path.join(os.environ.get('STATION3D_RESEARCH', 'data/stations/research'), ID, '*.laz'))[0])
+B = os.environ.get('BUNDLES', '/home/claude/bundles') + f'/{ID}'; meta = json.load(open(B + '/meta.json'))
+l = laspy.read(glob.glob(os.environ.get('RESEARCH', '/home/claude/packs') + f'/{ID}/*.laz')[0])
 X, Y, Z, C = np.asarray(l.x), np.asarray(l.y), np.asarray(l.z), np.asarray(l.classification)
 for f in meta['baninfo']['plat']:
     if want and f['BisObjektNr'] not in want:

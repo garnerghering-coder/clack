@@ -1,0 +1,305 @@
+{
+ "clack_id": "740000055",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w89680909",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w92223847",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w243726210",
+   "ref": "8",
+   "level": null
+  },
+  {
+   "osm_id": "w243726211",
+   "ref": "7",
+   "level": null
+  },
+  {
+   "osm_id": "w243726212",
+   "ref": "6",
+   "level": null
+  },
+  {
+   "osm_id": "w243726213",
+   "ref": "5",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w136288009",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 29.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6498088,
+    59.1634331
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456925",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "reversible",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 26.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6446283,
+    59.1630542
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1533456926",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "stroller",
+   "length_m": 26.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6449074,
+    59.16324
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456927",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "reversible",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 26.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.644678,
+    59.1630373
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456932",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "reversible",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 26.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6448964,
+    59.1629329
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1533456933",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "stroller",
+   "length_m": 26.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6449281,
+    59.1629217
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456934",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "reversible",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 26.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6451983,
+    59.1631111
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13974157804",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6445798,
+    59.1630628
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13974157812",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    17.6448634,
+    59.1629435
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n2510987088",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 47.3,
+   "lonlat": [
+    17.644956,
+    59.1632796
+   ]
+  },
+  {
+   "osm_id": "n13974035496",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 47.4,
+   "lonlat": [
+    17.6452284,
+    59.1631617
+   ]
+  },
+  {
+   "osm_id": "n13974157810",
+   "name": null,
+   "entrance": "train_station_entrance",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Sydgatan",
+   "nearest_street_m": 26.8,
+   "lonlat": [
+    17.6453054,
+    59.1626754
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n1070627103",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 99,
+   "lonlat": [
+    17.6452525,
+    59.1626659
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.4
+  },
+  {
+   "osm_id": "n11001818568",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 131,
+   "lonlat": [
+    17.6459078,
+    59.1624738
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n11001818569",
+   "category": "cafe",
+   "name": "Fågelsången",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 122,
+   "lonlat": [
+    17.6457652,
+    59.1624162
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w5731550",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 124,
+   "lonlat": [
+    17.6465773,
+    59.1617588
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 9.4
+  },
+  {
+   "osm_id": "w89677426",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 211,
+   "lonlat": [
+    17.645731,
+    59.1645232
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 24.1,
+   "operator": "Scania"
+  }
+ ]
+}

@@ -1,0 +1,181 @@
+{
+ "clack_id": "740000206",
+ "compiled": "2026-10-30",
+ "levels": [],
+ "platform_sides": [
+  {
+   "platform_bis": "457",
+   "track": "6",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 6 (the train stops with the platform to its north)",
+   "_source": "laser (2019-10-29, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 457; read 2026-10-30"
+  },
+  {
+   "platform_bis": "454",
+   "track": "2",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2 (the train stops with the platform to its north)",
+   "_source": "laser (2019-10-29, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 454; read 2026-10-30"
+  },
+  {
+   "platform_bis": "455",
+   "track": null,
+   "side": "south",
+   "meaning": "the platform lies on the south side of track None (the train stops with the platform to its south)",
+   "_source": "laser (2019-10-29, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 455; read 2026-10-30"
+  }
+ ],
+ "connections": [],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": null,
+   "level": "0",
+   "where": "track side of the station building, into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/ (\"Det finns en tillgänglig entré till väntsalen från spårsidan\"), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Järnvägscafé",
+   "where": "in the station building (Jernhusen gives the address as \"Stationsplan (Järnvägsstation) Kil\")",
+   "phone": "0554-415 55",
+   "website": "https://www.facebook.com/jarnvagscafe",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/mat-och-butik/, read 2026-10-30",
+   "position": {
+    "lon": 13.3164702,
+    "lat": 59.5046089,
+    "osm_id": "n12125029961",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.2,
+    "how": "OSM node n12125029961",
+    "_source": "OpenStreetMap n12125029961 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "where": "in the station building; accessible entrance from the track side",
+   "opening_hours": "Mo-Fr 05:30-22:45; Sa 07:15-18:30; Su 08:30-22:45",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/ and https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "wheelchair": "yes",
+   "where": "in the station (Jernhusen gives no position)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/toalett/ (\"På stationen finns universaltoalett\"), read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:30-22:45; Sa 07:15-18:30; Su 08:30-22:45",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Kil station.",
+   "owner_text": "Allt om tillgängligheten på Kil station. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns universaltoalett.",
+   "owner_text": "På stationen finns universaltoalett.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Värmlandstrafik Tågab (Tågåkeriet i Bergslagen) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "supermarket",
+   "name": "PeKås",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.3173624,
+    "lat": 59.5042583,
+    "osm_id": "w296470000",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 40.3,
+    "how": "representative point of the OSM area w296470000",
+    "_source": "OpenStreetMap w296470000 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap w296470000 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Järnvägscafé opening hours: no allowed source states them (only Facebook, unreadable).",
+  "Where the café is inside the building: no plan or owner text says.",
+  "How the island platforms (2 & 3, 4 & 5, 6 & 7) are reached (tunnel, level crossing, lifts): OSM maps no stairs, underpass or lift at Kil and no owner/Trafikverket/Värmlandstrafik text was found.",
+  "Entrance street: Jernhusen's address is Stationsplan 3; OSM tags no entrance node, so no entrance position.",
+  "No published plan of Kil station was found (Jernhusen links none; no Värmlandstrafik station map for Kil found).",
+  "Ticket machines, lockers: Jernhusen lists none for Kil; not confirmed either way.",
+  "cafe Järnvägscafeet: no opening hours: not on the owner's page and no other source found"
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/kil-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "cafe Järnvägscafeet: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "cafe Järnvägscafeet: no opening hours",
+   "answer": "Still open. Jernhusen lists the café (Järnvägscafé, tel. 0554-415 55, links only to its Facebook page) without hours; the Facebook page can't be read (robots). Visit Värmland's page (regional tourism body, not on the allowed source list, so not used for hours) mentions only weekday breakfast 08–09:45 and lunch 11–14, not full opening hours. Leave without hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/mat-och-butik/; https://www.facebook.com/jarnvagscafe (not readable); https://www.visitvarmland.com/kil/en/food-drinks/cafe-bakery/jarnvagscafe — all read 2026-10-30"
+  }
+ ]
+}

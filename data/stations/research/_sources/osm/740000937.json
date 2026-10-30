@@ -1,0 +1,327 @@
+{
+ "clack_id": "740000937",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w810867473",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 51.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.0802283,
+    55.6409161
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w817956551",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 26.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.0794185,
+    55.6411425
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1028750298",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 11.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.0796931,
+    55.6408607
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1028750299",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.079851,
+    55.6409562
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1050897700",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.0800455,
+    55.6408075
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1050897701",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 16.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.080088,
+    55.6408327
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1339804611",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.0809099,
+    55.6405186
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1354677581",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 0.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.080756,
+    55.6405937
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1354677582",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.080792,
+    55.6405645
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9484460026",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.079851,
+    55.6409562
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9657266583",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    13.080088,
+    55.6408327
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n7638938140",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 50,
+   "lonlat": [
+    13.0798154,
+    55.6412177
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n7638938141",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 37,
+   "lonlat": [
+    13.0805166,
+    55.6405449
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n9484460005",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 11,
+   "lonlat": [
+    13.0801612,
+    55.6409061
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12618141871",
+   "category": "clinic",
+   "name": "Vårdcentral Stationstorget",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-17:00",
+   "wheelchair": null,
+   "distance_m": 37,
+   "lonlat": [
+    13.080287,
+    55.6404881
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://www.ptj.se/vardcentral-stationstorget/",
+   "contact:website": "https://www.ptj.se/vardcentral-stationstorget/kontakt--oppettider/",
+   "operator": "Praktikertjänst Vårdcentral Stationstorget"
+  },
+  {
+   "osm_id": "n13338784401",
+   "category": "fast_food",
+   "name": "The Gem",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 34,
+   "lonlat": [
+    13.0803677,
+    55.6405289
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "cuisine": "burger"
+  },
+  {
+   "osm_id": "w126923785",
+   "category": "shop=bakery",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 57,
+   "lonlat": [
+    13.081588,
+    55.6412661
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1028750294",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 57,
+   "lonlat": [
+    13.0795208,
+    55.6412218
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1028750295",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 40,
+   "lonlat": [
+    13.080292,
+    55.6412116
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1028750296",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 53,
+   "lonlat": [
+    13.0804729,
+    55.6413149
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

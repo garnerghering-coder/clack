@@ -1,0 +1,46 @@
+{
+ "levels": [
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Lövatunneln",
+   "_source": "OSM w444809214 name=Lövatunneln, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform 1: no stairs, escalator or lift of its own",
+   "answer": "Likely correct: platform 1 is the side platform at the station building, and OSM's only tunnel (Lövatunneln, w444809214) is tagged as reaching platforms 1, 3, 4 and 5; stairs w479773862/3 serve 5 and 3–4, none serve 1. Only in OSM.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "waiting plan-k-waiting: no opening hours",
+   "answer": "Jernhusen gives the station's opening hours (Mo-Fr 05:30-23:30; Sa 07:00-22:00; Su 08:30-23:00) and says the accessible entrance leads into the waiting room from the track side; it does not give separate waiting-room hours, so these are the hours of the station building.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/, https://www.jernhusen.se/hitta-din-station/katrineholm-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Partly: Jernhusen names an accessible entrance into the waiting room from the track side; OSM has one entrance node, on Stationsplan.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "question": "levels L0/L-1: height not measured",
+   "answer": "Still open: no open source measures them.",
+   "_source": "this pass"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "opening_hours": "Mo-Fr 05:30-23:30; Sa 07:00-22:00; Su 08:30-23:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "No published plan of Katrineholm station was found (Jernhusen's page links none)."
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "clack_id": "740000191",
+ "slug": "trollhattan",
+ "flags": [
+  "Platform BIS 1333 (track 1): laser gives 0.73 m above the track bed (≈0.56 m above rail after −0.15…0.2 m), register class hög = 0.73 m. Not decided; add to REVIEW.md.",
+  "w88526977 Trollhättan C (station building): p95 54.2 m is 3.2 m above the median 51.0 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.293314,58.284150,12.305115,58.290586",
+ "ground": {
+  "min_m": 38.23,
+  "median_m": 43.93,
+  "max_m": 47.48,
+  "nan_cells": 0,
+  "size_m": [
+   432,
+   476
+  ],
+  "box_sweref": [
+   341450,
+   6463642,
+   341882,
+   6464118
+  ],
+  "tiles": [
+   "646_34 (2023-02-08)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20b016-64625_3400_25.copc.laz"
+  ],
+  "scan_date": "2020-03-21",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3200,
+  "points_in_box": 367561,
+  "density_in_box": 1.79,
+  "classes": {
+   "1": 142896,
+   "2": 223688,
+   "17": 972,
+   "18": 5
+  },
+  "train_points_class64": 147
+ },
+ "platforms": [
+  {
+   "bis_object": "1336",
+   "track": "2",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 299.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 43.79,
+   "track_bed_points": 613,
+   "platform_surface_m": 44.65,
+   "platform_points": 1573,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.86,
+   "laser_estimate_above_rail_m": 0.68
+  },
+  {
+   "bis_object": "1333",
+   "track": "1",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 299.0,
+   "width_m": null,
+   "roof": "Skydd",
+   "track_bed_m": 43.82,
+   "track_bed_points": 598,
+   "platform_surface_m": 44.55,
+   "platform_points": 1685,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.56
+  }
+ ],
+ "platform_surface_m": 44.6,
+ "track_bed_m": 43.8,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 3,
+  "footbridge": 0,
+  "canopy_osm": 5,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 59,
+ "photos_station_related": 40
+}

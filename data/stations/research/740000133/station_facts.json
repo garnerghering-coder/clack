@@ -1,0 +1,826 @@
+{
+ "clack_id": "740000133",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street, station building and platforms",
+   "other_names": [],
+   "note": "No signposted name found.",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Pedestrian tunnels under the tracks",
+   "other_names": [],
+   "note": "OSM has three passages under the tracks: one at the station building (with lifts), one north of it, and one at the south end by the Resecentrum bus terminal. No source gives their signposted names.",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1217",
+   "track": null,
+   "side": "east",
+   "meaning": "the platform lies on the east side of track None (the train stops with the platform to its east)",
+   "_source": "laser (2023-07-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1217; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1220",
+   "track": "1a",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 1a (the train stops with the platform to its east)",
+   "_source": "laser (2023-07-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1220; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "platform 1 (1b)",
+    "tunnel at the station building"
+   ],
+   "where": "platform 1b, by the station building",
+   "confirmed_by": "OSM only",
+   "osm_id": "n12450754767",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2113024,
+    "lat": 59.2785356,
+    "how": "OSM n12450754767",
+    "_source": "OpenStreetMap n12450754767 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "island platform 3/4",
+    "tunnel at the station building"
+   ],
+   "where": "on the 3/4 platform, opposite the station building",
+   "confirmed_by": "OSM only",
+   "osm_id": "n12450754765",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2109535,
+    "lat": 59.2786047,
+    "how": "OSM n12450754765",
+    "_source": "OpenStreetMap n12450754765 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "west side",
+    "tunnel at the station building"
+   ],
+   "where": "west end of the tunnel, beyond the tracks",
+   "confirmed_by": "OSM only",
+   "osm_id": "n12450754763",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2106643,
+    "lat": 59.2786725,
+    "how": "OSM n12450754763",
+    "_source": "OpenStreetMap n12450754763 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platform 1 (1b)",
+    "tunnel at the station building"
+   ],
+   "where": "platform 1b",
+   "confirmed_by": "OSM only",
+   "osm_id": "w383771876, w525673337",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "island platform 3/4",
+    "tunnel at the station building"
+   ],
+   "where": "3/4 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "w383771875",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.210736,
+    "lat": 59.278342,
+    "how": "OSM w383771875 (point on the way)",
+    "_source": "OpenStreetMap w383771875 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "west side",
+    "tunnel at the station building"
+   ],
+   "where": "west end of the tunnel",
+   "confirmed_by": "OSM only",
+   "osm_id": "w1346128878",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2106133,
+    "lat": 59.2786444,
+    "how": "OSM w1346128878 (point on the way)",
+    "_source": "OpenStreetMap w1346128878 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "platform 1b",
+    "island platform 3/4"
+   ],
+   "where": "north of the station building; OSM ramp w525673328 at its east end",
+   "confirmed_by": "OSM only",
+   "osm_id": "w43328250, w1052204528, w525673327",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platform 1 (1a)",
+    "south tunnel"
+   ],
+   "where": "south end of platform 1, by the Resecentrum bus terminal",
+   "confirmed_by": "OSM only",
+   "osm_id": "w277432540",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2096283,
+    "lat": 59.2764769,
+    "how": "OSM w277432540 (point on the way)",
+    "_source": "OpenStreetMap w277432540 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "island platform 3/4",
+    "south tunnel"
+   ],
+   "where": "south end of the 3/4 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "w329389192",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 15.2092737,
+    "lat": 59.2764385,
+    "how": "OSM w329389192 (point on the way)",
+    "_source": "OpenStreetMap w329389192 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w43328250",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b",
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 50.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w43328250 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2121376,
+    "lat": 59.2793142,
+    "how": "OSM w43328250 (point on the way)",
+    "_source": "OpenStreetMap w43328250 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w277432540",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w277432540 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2096283,
+    "lat": 59.2764769,
+    "how": "OSM w277432540 (point on the way)",
+    "_source": "OpenStreetMap w277432540 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w329389192",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 22.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w329389192 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2092737,
+    "lat": 59.2764385,
+    "how": "OSM w329389192 (point on the way)",
+    "_source": "OpenStreetMap w329389192 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w383771875",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 28.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w383771875 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.210736,
+    "lat": 59.278342,
+    "how": "OSM w383771875 (point on the way)",
+    "_source": "OpenStreetMap w383771875 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w383771876",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 25.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w383771876 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2114038,
+    "lat": 59.2785913,
+    "how": "OSM w383771876 (point on the way)",
+    "_source": "OpenStreetMap w383771876 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w383771877",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b",
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 43.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w383771877 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2109264,
+    "lat": 59.2785739,
+    "how": "OSM w383771877 (point on the way)",
+    "_source": "OpenStreetMap w383771877 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w525673327",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 30.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w525673327 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2124189,
+    "lat": 59.2797936,
+    "how": "OSM w525673327 (point on the way)",
+    "_source": "OpenStreetMap w525673327 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w525673337",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w525673337 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2112297,
+    "lat": 59.2783754,
+    "how": "OSM w525673337 (point on the way)",
+    "_source": "OpenStreetMap w525673337 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w825053443",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w825053443 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.212262,
+    "lat": 59.2795337,
+    "how": "OSM w825053443 (point on the way)",
+    "_source": "OpenStreetMap w825053443 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1052204528",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b",
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 44.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1052204528 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2121885,
+    "lat": 59.279547,
+    "how": "OSM w1052204528 (point on the way)",
+    "_source": "OpenStreetMap w1052204528 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1346128883",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1346128883 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2109535,
+    "lat": 59.2786047,
+    "how": "OSM w1346128883 (point on the way)",
+    "_source": "OpenStreetMap w1346128883 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1346128885",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1346128885 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2113024,
+    "lat": 59.2785356,
+    "how": "OSM w1346128885 (point on the way)",
+    "_source": "OpenStreetMap w1346128885 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12450754763",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12450754763 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2106643,
+    "lat": 59.2786725,
+    "how": "OSM n12450754763",
+    "_source": "OpenStreetMap n12450754763 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12450754765",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12450754765 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2109535,
+    "lat": 59.2786047,
+    "how": "OSM n12450754765",
+    "_source": "OpenStreetMap n12450754765 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12450754767",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12450754767 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2113024,
+    "lat": 59.2785356,
+    "how": "OSM n12450754767",
+    "_source": "OpenStreetMap n12450754767 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Väntsal, track-side entrance",
+   "where": "from the platform side into the waiting room; the step-free entrance",
+   "note": "Jernhusen: 'Det finns en tillgänglig entré till väntsalen från spårsidan.'",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Station building",
+   "street": "Östra Bangatan",
+   "where": "station address Östra Bangatan 1; OSM entrance n5113428442 (nearest street Östra Bangatan)",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/mat/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n5113428442",
+   "street": "Östra Bangatan",
+   "street_how": "nearest named street, 39.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5113428442 (already in OSM)",
+   "position": {
+    "lon": 15.211648,
+    "lat": 59.2786686,
+    "how": "OSM n5113428442",
+    "_source": "OpenStreetMap n5113428442 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "Länstrafikens Kundcenter",
+   "where": "Resecentrum Örebro, Ö:a Bangatan 1 (position inside not stated)",
+   "opening_hours": "Mo-Fr 07:00-17:00",
+   "hours_source": "website (Länstrafiken Örebro)",
+   "hours_checked": "2026-10-30",
+   "note": "Länstrafiken: hours change on public holidays. Marked 'Kundcenter' on Länstrafiken's resecentrum map.",
+   "_source": "Länstrafiken Örebro, https://lanstrafiken.se/en/customer-service/contact-details/customer-service-contact, read 2026-10-30; Länstrafiken Örebro map \"Hitta till rätt hållplatsläge vid Örebro Resecentrum\" (December 2024 v2), https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "fee": "yes, card (accessibility page says card or coins)",
+   "where": "in the station",
+   "opening_hours": "Mo-Fr 04:30-22:30; Sa 06:15-22:30; Su 08:00-22:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours are the station's opening hours.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "yes",
+   "where": "in the station",
+   "opening_hours": "Mo-Fr 04:30-22:30; Sa 06:15-22:30; Su 08:00-22:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen: 'Se även stationens öppettider'.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "where": "at the station building",
+   "note": "Jernhusen says only 'På Örebro Centralstation finns en butik' without naming it; the resecentrum map marks a 'Kiosk'. That this is Pressbyrån is OSM only.",
+   "_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/mat/, read 2026-10-30; Länstrafiken Örebro map \"Hitta till rätt hållplatsläge vid Örebro Resecentrum\" (December 2024 v2), https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf, read 2026-10-30; facts only",
+   "position": {
+    "lon": 15.2117789,
+    "lat": 59.2786929,
+    "osm_id": "n2360919603",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.9,
+    "how": "OSM node n2360919603",
+    "_source": "OpenStreetMap n2360919603 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Apcoa parking: Östra Bangatan 7A, Örebro station västra, Örebro station långtidsparkering",
+   "fee": "yes",
+   "where": "around the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/orebro-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "marked on Länstrafiken's resecentrum map; position not readable from the text",
+   "_source": "Länstrafiken Örebro map \"Hitta till rätt hållplatsläge vid Örebro Resecentrum\" (December 2024 v2), https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Örebro Resecentrum lägen A–O and X",
+   "where": "bus terminal south of the station building; city lines 1–7 at D–J and O, regional lines at A–C, K, L; M and N for arriving regional buses; separate stops for long-distance coaches and rail replacement buses",
+   "_source": "Länstrafiken Örebro map \"Hitta till rätt hållplatsläge vid Örebro Resecentrum\" (December 2024 v2), https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf, read 2026-10-30; facts only; Länstrafiken stop page https://www.lanstrafiken.se/en/bus-stop/18990920/, read 2026-10-30; position south of the station building from OSM (bus_station w1083627239), read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:30-22:30; Sa 06:15-22:30; Su 08:00-22:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Örebro centralstation.",
+   "owner_text": "Allt om tillgängligheten på Örebro centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns det en universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns det en universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Parkeringen vid Örebro centralstation drivs av Apcoa och innefattar parkeringarna Östra bangatan 7A, Örebro station västra och Örebro station långtidsparkering.",
+   "owner_text": "Parkeringen vid Örebro centralstation drivs av Apcoa och innefattar parkeringarna Östra bangatan 7A, Örebro station västra och Örebro station långtidsparkering.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Förvaringsbox information Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] . Se även stationens öppettider.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Flixbus Vy bus4you Länstrafiken Örebro TIB (Tåg i Bergslagen) Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se Kundcenter Länstrafiken Örebro 0771-55 30 00 lanstrafiken.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2269310056",
+   "osm_level": null,
+   "fee": "5 SEK",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2269310056 (read 2026-10-30)",
+   "position": {
+    "lon": 15.2097794,
+    "lat": 59.2763176,
+    "osm_id": "n2269310056",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.9,
+    "how": "OSM node n2269310056",
+    "_source": "OpenStreetMap n2269310056 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Coffee Central",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 15.209641,
+    "lat": 59.2763701,
+    "osm_id": "n2360919822",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 11.1,
+    "how": "OSM node n2360919822",
+    "_source": "OpenStreetMap n2360919822 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n2360919822 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "brand": "Espresso House",
+   "cuisine": "coffee_shop",
+   "opening_hours": "Mo-Fr 05:30-19:00; Sa 08:00-18:00; Su 08:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 15.2115057,
+    "lat": 59.2783559,
+    "osm_id": "n4807469945",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.6,
+    "how": "OSM node n4807469945",
+    "_source": "OpenStreetMap n4807469945 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n4807469945 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hitta till rätt hållplatsläge vid Örebro Resecentrum (December 2024 v2)",
+   "publisher": "Länstrafiken Örebro (Region Örebro län)",
+   "url": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen. Text gives bus stops and lines, and the symbols Taxi, Kiosk, Tågperrong, Kundcenter; no lifts, stairs or platform numbers."
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.lanstrafiken.se",
+   "url": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-orebro-december-2024-v2.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "All tunnel stairs and lifts are OSM only; no plan or owner text lists them. Platform 1a (south part of platform 1) has OSM stairs only at the south tunnel and no lift.",
+  "Signposted names of the three tunnels: none found.",
+  "Which shop Jernhusen means by 'en butik': not named; OSM has Pressbyrån at the building and Espresso House and Coffee Central nearby (Coffee Central at the south/Resecentrum end).",
+  "Where in the building the waiting room, Kundcenter, toilet and lockers are: no plan found.",
+  "Heights: no source.",
+  "Platform numbering: OSM has 1a, 1b, 3, 4; no owner source checked for current numbering."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/orebro-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

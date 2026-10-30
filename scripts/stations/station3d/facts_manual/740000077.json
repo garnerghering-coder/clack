@@ -1,0 +1,102 @@
+{
+ "connections": [
+  {
+   "kind": "footbridge",
+   "between": [
+    "station side",
+    "platforms 1/2 and 3/5a, and the far side of the yard"
+   ],
+   "where": "OSM way w9891871 (layer 1, 188 m) over the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "footbridge",
+    "platform 1/2"
+   ],
+   "where": "OSM w201201912 (ramp=no)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "footbridge",
+    "platform 3/5a"
+   ],
+   "where": "OSM w201201913 (ramp=no)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": "track side (spårsidan)",
+   "where": "from the platform side into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hallsberg-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Station building (Stationshus)",
+   "street": "Östra Storgatan 1 (Jernhusen's address); OSM entrance nodes n9911660234, n9911660254, n9911660258 have addr:street=Västra Storgatan",
+   "where": "street side of the station building",
+   "_source": "Jernhusen and OSM, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station)",
+   "opening_hours": "Mo-Fr 05:00-23:00; Sa 06:00-22:00; Su 06:00-23:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hallsberg-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes, paid by card (amount not stated)",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hallsberg-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hallsberg-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hallsbergs resecentrum, lägen A-E",
+   "where": "per Länstrafiken map (Dec 2025): A 703/704 Kumla; B 831 Pålsboda; C Reservhållplats; D 704 Askersund, 707 (alighting from Askersund); E no lines listed. Separate stop 'Resecentrum norra' serves 705 Östansjö-Vretstorp, 707 Askersund, 795 (weekends). Rail replacement buses and external coach operators also marked. Note: Länstrafiken's live stop page (2026-10-30) puts 831 at läge C and 704 Askersund at läge E, so lettering may have changed.",
+   "_source": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-hallsberg-december-2025.pdf and https://www.lanstrafiken.se/en/bus-stop/18910010/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hitta din buss – Hallsberg (december 2025)",
+   "publisher": "Länstrafiken Örebro",
+   "url": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-hallsberg-december-2025.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "bus stop positions around Resecentrum / Resecentrum norra and the Stationshus; shows no lifts, stairs or platforms in its text"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Hallsberg (`740000077`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly answered. OSM has platforms 1, 2, 3 and 5a, a 188 m footbridge (w9891871) over the tracks and two stairs down from it, one to platform 1/2 and one to platform 3/5a. It also has three entrance nodes on Västra Storgatan. Länstrafiken lists tracks 1, 3, 5a and 5b. Jernhusen confirms an accessible entrance from the track side into the waiting room. No source found mentions a lift or ramp to the island platforms.",
+   "_source": "OSM; https://www.lanstrafiken.se/en/bus-stop/18910010/; https://www.jernhusen.se/hitta-din-station/hallsberg-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Step-free route to the island platforms (lift, ramp or level crossing): no owner text or plan found.",
+  "Jernhusen's Hallsberg accessibility page has the same text as its Falköping page ('parkering för rörelsehindrade vid bussangöringen på Kungsplan' during the rebuild of Stationsplan). It may be copied from one to the other, so the disabled-parking position is not recorded here.",
+  "Footbridge name and whether it is signposted: none found."
+ ]
+}

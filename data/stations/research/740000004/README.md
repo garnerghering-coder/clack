@@ -15,6 +15,7 @@ Station box (SWEREF 99 TM): E 472735–473168, N 6305767–6306383
 | `alvesta_laser_station_2026.laz` (5.6 MB) | Laser points clipped to the station box, original classes, **trains as class 64** (2736 points) | Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0 |
 | `alvesta_platform_trafikverket.geojson` | BanInfo platform objects as track lines, with track numbers, register values and the laser levels | Trafikverket, CC0 |
 | `photos.json` | Wikimedia Commons files near the station, with author, licence and link | each file's own licence (listed) |
+| `station_facts.json` | Part 2 of the brief: levels, platform sides, ways between levels, entrances, amenities (every shop, café, restaurant and kiosk) with opening hours and a `position` (lon/lat, OSM level, inside the station building or not) for the 2D map, plans, open points; every entry has its `_source`. Shops with several same-name places in OSM have `position_candidates` instead; shops not in OSM have `position: null` | facts from the owner's pages and plans (not open: facts only), OSM (ODbL), laser + BanInfo |
 | `_report.json` | Machine-readable summary of this pass | — |
 
 Never upload the Lantmäteriet-derived values to OpenStreetMap (no OSMF waiver).

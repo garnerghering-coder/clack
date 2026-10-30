@@ -1,0 +1,389 @@
+{
+ "clack_id": "740000004",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w110582075",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w110582081",
+   "ref": "3a",
+   "level": null
+  },
+  {
+   "osm_id": "w360040466",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w360040467",
+   "ref": "3b",
+   "level": null
+  },
+  {
+   "osm_id": "w360040468",
+   "ref": "4a",
+   "level": null
+  },
+  {
+   "osm_id": "w360040469",
+   "ref": "4b",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w235987032",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 93.9,
+   "reaches_platforms": [
+    "1",
+    "2",
+    "3b",
+    "4b"
+   ],
+   "lonlat": [
+    14.5571385,
+    56.8986603
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w403479011",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 24.0,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    14.5569264,
+    56.8987136
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w403479018",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 21.3,
+   "reaches_platforms": [
+    "3b",
+    "4b"
+   ],
+   "lonlat": [
+    14.5571385,
+    56.8986603
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134003",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.7,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    14.5568326,
+    56.8986113
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134004",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.8,
+   "reaches_platforms": [
+    "3b",
+    "4b"
+   ],
+   "lonlat": [
+    14.5570424,
+    56.8985581
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134005",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 11.7,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    14.5568089,
+    56.8985961
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134006",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.6,
+   "reaches_platforms": [
+    "3b",
+    "4b"
+   ],
+   "lonlat": [
+    14.5571128,
+    56.8986359
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n13952610723",
+   "category": "parcel_locker",
+   "name": "Instabox",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 7,
+   "lonlat": [
+    14.5567078,
+    56.8989513
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 21.0,
+   "brand": "Instabox"
+  },
+  {
+   "osm_id": "n13952617595",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    14.5566299,
+    56.8992638
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 41.0
+  },
+  {
+   "osm_id": "n13952623318",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    14.5566533,
+    56.8992693
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 40.0
+  },
+  {
+   "osm_id": "n13952629814",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    14.5566596,
+    56.8992707
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 39.7
+  },
+  {
+   "osm_id": "n13952642255",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su 08:00-21:00",
+   "wheelchair": null,
+   "distance_m": 12,
+   "lonlat": [
+    14.5566868,
+    56.8989994
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 24.6,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "w223923168",
+   "category": "townhall",
+   "name": "Alvesta kommunhus",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-12:00,13:00-16:00",
+   "distance_m": 61,
+   "lonlat": [
+    14.5561725,
+    56.8994854
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 67.7
+  },
+  {
+   "osm_id": "w309948281",
+   "category": "post_depot",
+   "name": "Alvesta Brevterminal",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 62,
+   "lonlat": [
+    14.5549446,
+    56.8973272
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.1,
+   "operator": "PostNord Sverige AB"
+  },
+  {
+   "osm_id": "w940158742",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 88,
+   "lonlat": [
+    14.5572662,
+    56.8998385
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 33.7
+  },
+  {
+   "osm_id": "w940158743",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 50,
+   "lonlat": [
+    14.5559472,
+    56.8992426
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 64.1
+  },
+  {
+   "osm_id": "w940158744",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 48,
+   "lonlat": [
+    14.5561298,
+    56.8993441
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 57.3
+  },
+  {
+   "osm_id": "w940158762",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 79,
+   "lonlat": [
+    14.5556407,
+    56.8981725
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.8,
+   "operator": "PostNord"
+  },
+  {
+   "osm_id": "w940158766",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 27,
+   "lonlat": [
+    14.5563452,
+    56.8988135
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.4
+  },
+  {
+   "osm_id": "w940158775",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 92,
+   "lonlat": [
+    14.5579492,
+    56.8982945
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 54.5
+  }
+ ]
+}

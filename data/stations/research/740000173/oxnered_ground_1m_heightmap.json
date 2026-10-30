@@ -1,0 +1,18 @@
+{
+ "file": "oxnered_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 1000",
+ "base_m": 58,
+ "scale": 1000,
+ "nodata_value": 0,
+ "crs": "EPSG:3006 (SWEREF 99 TM)",
+ "vertical_datum": "RH 2000",
+ "origin_top_left_EN": [
+  340347,
+  6472154
+ ],
+ "pixel_m": 1,
+ "width": 448,
+ "height": 444,
+ "source": "oxnered_ground_1m.tif (Lantm\u00e4teriet Markh\u00f6jdmodell, CC BY 4.0)"
+}

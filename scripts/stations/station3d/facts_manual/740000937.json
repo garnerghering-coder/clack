@@ -1,0 +1,151 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": null,
+   "note": "Street level on both sides of the line (east: Burlöv Center and the new station square; west: Arlöv west). No signposted name found.",
+   "_source": "https://bransch.trafikverket.se/en/startpage/projects/Railway-construction-projects/lund-arlov-four-tracks/Arlov/ (last updated 2023-10-24), read 2026-10-30; Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); Burlövs kommun press release \"Pendeltågsstation Burlöv är invigd\", https://www.mynewsdesk.com/se/burlovs_kommun/news/pendeltaagsstation-burloev-aer-invigd-taeta-avgaangar-moejliggoer-haallbara-resor-i-regionen-476629, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Gång- och cykeltunnel",
+   "note": "Pedestrian and cycle tunnel under all four tracks, 15 m wide with 3–4 m ceiling height (design figures), linking east and west Arlöv and serving as the station's access; daylight through a domed lantern and glazed stairwell roofs.",
+   "_source": "https://bransch.trafikverket.se/en/startpage/projects/Railway-construction-projects/lund-arlov-four-tracks/Arlov/ (last updated 2023-10-24), read 2026-10-30; Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text)"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "street (east, Burlöv Center side)",
+    "street (west)"
+   ],
+   "where": "under all four tracks; the platforms are reached from it (OSM w810867473, about 52 m)",
+   "confirmed_by": "owner text",
+   "_source": "https://bransch.trafikverket.se/en/startpage/projects/Railway-construction-projects/lund-arlov-four-tracks/Arlov/ (last updated 2023-10-24), read 2026-10-30; Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "island platform (tracks 61–62)"
+   ],
+   "where": "from the tunnel up to the platform; transparent lift (OSM n9484460026 or n9657266583, level -1;0)",
+   "confirmed_by": "owner text",
+   "note": "The design text says each platform is reached by lift or stairs from the tunnel; which OSM lift serves which platform is not tagged.",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "island platform (tracks 63–64)"
+   ],
+   "where": "from the tunnel up to the platform; transparent lift (OSM n9484460026 or n9657266583, level -1;0)",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "island platform (tracks 61–62)"
+   ],
+   "where": "from the tunnel, under a glazed stairwell roof (OSM w1028750298 or w1050897700)",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "island platform (tracks 63–64)"
+   ],
+   "where": "from the tunnel, under a glazed stairwell roof (OSM w1028750298 or w1050897700)",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "street (east)",
+    "tunnel"
+   ],
+   "where": "east tunnel mouth: stairs and an accessible ramp, with a roofed flat area at the tunnel mouth",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text)"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "street (west)",
+    "tunnel"
+   ],
+   "where": "west tunnel mouth: stairs and an accessible ramp (OSM stairs w817956551 with ramp=yes)",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "East (Burlöv Center / stationstorg)",
+   "street": null,
+   "level": "0",
+   "where": "east tunnel mouth facing Burlöv Center, where the municipality is building an open square",
+   "_source": "https://bransch.trafikverket.se/en/startpage/projects/Railway-construction-projects/lund-arlov-four-tracks/Arlov/ (last updated 2023-10-24), read 2026-10-30; Burlövs kommun press release \"Pendeltågsstation Burlöv är invigd\", https://www.mynewsdesk.com/se/burlovs_kommun/news/pendeltaagsstation-burloev-aer-invigd-taeta-avgaangar-moejliggoer-haallbara-resor-i-regionen-476629, read 2026-10-30"
+  },
+  {
+   "name": "West",
+   "street": null,
+   "level": "0",
+   "where": "west tunnel mouth (west Arlöv)",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text)"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "shelter",
+   "name": "Väderskydd",
+   "where": "on the platforms (design text); OSM has two shelters by the platforms",
+   "_source": "Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Vending machine (possibly Skånetrafiken ticket machine)",
+   "where": "in the tunnel area (OSM n9484460005)",
+   "note": "OSM tags only amenity=vending_machine; that it sells tickets is not confirmed.",
+   "_source": "OSM (osmfacts 740000937), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "west side by the stairs (OSM w1028750294)",
+   "_source": "OSM (osmfacts 740000937), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Burlöv (`740000937`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Trafikverket confirms the layout: two island platforms (one serving tracks 61–62, one 63–64) between the four tracks, reached by stairs and a lift each from a pedestrian and cycle tunnel under the tracks; the tunnel opens to the street on the east (Burlöv Center) and west sides by stairs and accessible ramps. OSM has the tunnel, two lifts (-1;0) and stairs, but not the platform refs or entrance nodes, so the app needs the footways joined (tunnel → lift/stairs → each platform) and the two tunnel mouths as entrances. Station opened 9 December 2023.",
+   "_source": "https://bransch.trafikverket.se/en/startpage/projects/Railway-construction-projects/lund-arlov-four-tracks/Arlov/ (last updated 2023-10-24), read 2026-10-30; Trafikverket, \"Flackarp–Arlöv, fyra spår\", Gestaltningsprogram (järnvägsplan, 2015-01-26), section 6.3 \"Burlöv station – Burlöv C\", pp. 64–70, https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf, read 2026-10-30 (design-stage text); Burlövs kommun press release \"Pendeltågsstation Burlöv är invigd\", https://www.mynewsdesk.com/se/burlovs_kommun/news/pendeltaagsstation-burloev-aer-invigd-taeta-avgaangar-moejliggoer-haallbara-resor-i-regionen-476629, read 2026-10-30; Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 rows 111–112 and BanInfo BIS 2522/2601 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30; OSM (osmfacts 740000937), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Flackarp–Arlöv, fyra spår: Gestaltningsprogram (pp. 61–86)",
+   "publisher": "Trafikverket",
+   "url": "https://bransch.trafikverket.se/contentassets/449e349b1ae34e3fa089f0b376b5cee5/gestaltningsprogram-sid-61-86-av-86.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Design programme dated 2015-01-26; illustrations of Burlöv station on pp. 64–70. Design stage, not as-built."
+  }
+ ],
+ "open": [
+  "No owner page: Burlöv is not on Jernhusen's list; Skånetrafiken's station page was not read in this pass.",
+  "Skånetrafiken's terminal map for Burlöv was not found (80800_burlov tried).",
+  "Which OSM lift and stairs serve which platform: OSM does not tag platform refs here and the design text does not say.",
+  "Street names at the two tunnel mouths: no source names them (the station square on the east side was still being finished at the opening).",
+  "Whether the station matches the 2015 design text in every detail (ramps, transparent lifts): no as-built plan read.",
+  "No shops in the station; the nearby burger bar (The Gem) and clinic are on the east side per OSM."
+ ]
+}

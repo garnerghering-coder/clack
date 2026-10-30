@@ -1,0 +1,249 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.276117287,
+      58.359707369
+     ],
+     [
+      12.276644192,
+      58.35998146800001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "2472",
+    "track": "3",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 44.0,
+    "width_m": 4.0,
+    "roof": "Saknas",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S & L",
+    "km_from": "22+683",
+    "km_to": "22+727",
+    "side": "1",
+    "valid_from": "20260127",
+    "reflink_oid": "a216cfbd-543b-4f05-ae03-df056a253520",
+    "measure_from": "0.638784588181364",
+    "measure_to": "0.847909872629774",
+    "laser_platform_surface_m": 62.46,
+    "laser_track_bed_m": 61.72,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.27606296,
+      58.359616959
+     ],
+     [
+      12.276069056,
+      58.35962011599999
+     ],
+     [
+      12.276718154,
+      58.359958578
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "2471",
+    "track": "4",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 54.0,
+    "width_m": 4.0,
+    "roof": "Saknas",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S & L",
+    "km_from": "22+673",
+    "km_to": "22+727",
+    "side": "2",
+    "valid_from": "20260218",
+    "reflink_oid": "05da6acd-1df7-4de3-abaf-7607fec99c39",
+    "measure_from": "0.59257005755113",
+    "measure_to": "0.727230109596343",
+    "laser_platform_surface_m": 62.46,
+    "laser_track_bed_m": 61.72,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.274469491,
+      58.360107609
+     ],
+     [
+      12.273590626,
+      58.358597866
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "920",
+    "track": "2",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 172.0,
+    "width_m": 2.4,
+    "roof": "Tak",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S",
+    "km_from": "396+115",
+    "km_to": "396+290",
+    "side": "1",
+    "valid_from": "20251219",
+    "reflink_oid": "961b7c27-dd8c-41fe-8a37-96820f6e35aa",
+    "measure_from": "0.534893170506381",
+    "measure_to": "0.833088936343593",
+    "laser_platform_surface_m": 62.46,
+    "laser_track_bed_m": 61.69,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.274168944,
+      58.35972943500002
+     ],
+     [
+      12.273314292000002,
+      58.358261249999984
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "918",
+    "track": "1",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 172.0,
+    "width_m": 5.6,
+    "roof": "Skydd",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S & L",
+    "km_from": "396+163",
+    "km_to": "396+334",
+    "side": "2",
+    "valid_from": "20251219",
+    "reflink_oid": "6a7cc9ea-974c-42e1-b95b-929351a7fc9e",
+    "measure_from": "0.483587324450658",
+    "measure_to": "0.872200534688598",
+    "laser_platform_surface_m": 62.44,
+    "laser_track_bed_m": 61.69,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.27462044,
+      58.358928666000004
+     ],
+     [
+      12.276117286,
+      58.359707369
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "2029",
+    "track": "3",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 129.0,
+    "width_m": 3.0,
+    "roof": "Skydd",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S & L",
+    "km_from": "22+558",
+    "km_to": "22+683",
+    "side": "1",
+    "valid_from": "20251219",
+    "reflink_oid": "a216cfbd-543b-4f05-ae03-df056a253520",
+    "measure_from": "0.044678610552435",
+    "measure_to": "0.638784569992672",
+    "laser_platform_surface_m": 62.49,
+    "laser_track_bed_m": 61.73,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.274662775,
+      58.358892035
+     ],
+     [
+      12.27606296,
+      58.359616959
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "924",
+    "track": "4",
+    "height_class": "mellan",
+    "height_m": 0.58,
+    "height_text": "Höjd=0.58 m",
+    "length_m": 129.0,
+    "width_m": 3.0,
+    "roof": "Skydd",
+    "edge_material": "betong",
+    "surface": "asfalt",
+    "safety_zone": "S & L",
+    "km_from": "22+558",
+    "km_to": "22+673",
+    "side": "2",
+    "valid_from": "20251219",
+    "reflink_oid": "05da6acd-1df7-4de3-abaf-7607fec99c39",
+    "measure_from": "0.305794010133922",
+    "measure_to": "0.59257005755113",
+    "laser_platform_surface_m": 62.48,
+    "laser_track_bed_m": 61.73,
+    "geometry_note": "Trafikverket track line (track centre) along the platform, not the platform edge",
+    "source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo 2026-10-30, CC0"
+   }
+  }
+ ]
+}

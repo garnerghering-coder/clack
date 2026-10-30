@@ -1,0 +1,133 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "app_level": "L1",
+   "name": "Gångbron (footbridge over tracks 1–4)",
+   "note": "The map shows one footbridge over all four tracks; it gives no level name.",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": "Street, station building and platforms",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "between": [
+    "street (station building side, by bus stops A–C)",
+    "footbridge"
+   ],
+   "where": "west end of the footbridge, next to the station building",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street (station building side)",
+    "footbridge"
+   ],
+   "where": "west end of the footbridge, by the stairs",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "island platform (tracks 2–3)",
+    "footbridge"
+   ],
+   "where": "middle of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "island platform (tracks 2–3)",
+    "footbridge"
+   ],
+   "where": "middle of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Sjögatan side (east, parking)",
+    "footbridge"
+   ],
+   "where": "east end of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Sjögatan side (east, parking)",
+    "footbridge"
+   ],
+   "where": "east end of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "where": "in the station building west of the tracks",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "where": "in the station building",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat",
+   "where": "at the west foot of the footbridge and on the footbridge",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "by the station building",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "where": "east of the tracks, off Sjögatan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Lägen A–C (local and regional buses)",
+   "where": "west of the station building on Centralgatan/Lillsjögatan; läge D (replacement buses) east of the tracks",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ],
+ "answers": [
+  {
+   "question": "level L1 (Footbridge over tracks 1–4): height not measured",
+   "answer": "Still open: no source measures the deck; the laser gives only the footbridge roof/top (see the structures file).",
+   "_source": "this pass"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Partly: the map shows the station building on the west side (Centralgatan) and the footbridge ends on both sides as the ways in; it marks no named entrances or doors.",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ],
+ "open": [
+  "Entrance doors of the station building (names, which street): not on the map and not in OSM.",
+  "The map is from December 2023; OSM also has escalators at the footbridge (w1391134003–6) that the map does not show."
+ ]
+}

@@ -1,0 +1,378 @@
+{
+ "clack_id": "740000166",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Lövatunneln",
+   "_source": "OSM w444809214 name=Lövatunneln, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1297",
+   "track": "1",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1 (the train stops with the platform to its north)",
+   "_source": "laser (2020-11-20, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1297; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1296",
+   "track": "4",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 4 (the train stops with the platform to its north)",
+   "_source": "laser (2020-11-20, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1296; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1295",
+   "track": "5",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 5 (the train stops with the platform to its south)",
+   "_source": "laser (2020-11-20, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1295; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w444809214",
+   "name": "Lövatunneln",
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 3",
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 51.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w444809214 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 16.2070862,
+    "lat": 58.9966365,
+    "how": "OSM w444809214 (point on the way)",
+    "_source": "OpenStreetMap w444809214 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w479773862",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 31.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w479773862 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 16.2070473,
+    "lat": 58.9964657,
+    "how": "OSM w479773862 (point on the way)",
+    "_source": "OpenStreetMap w479773862 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w479773863",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 30.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w479773863 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 16.2070862,
+    "lat": 58.9966365,
+    "how": "OSM w479773863 (point on the way)",
+    "_source": "OpenStreetMap w479773863 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": null,
+   "osm_id": "n11098706955",
+   "street": "Stationsplan",
+   "street_how": "nearest named street, 11.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11098706955 (already in OSM)",
+   "position": {
+    "lon": 16.2081674,
+    "lat": 58.996927,
+    "how": "OSM n11098706955",
+    "_source": "OpenStreetMap n11098706955 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "opening_hours": "Mo-Fr 05:30-23:30; Sa 07:00-22:00; Su 08:30-23:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:30-23:30; Sa 07:00-22:00; Su 08:30-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Katrineholm station.",
+   "owner_text": "Allt om tillgängligheten på Katrineholm station. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Tågab (Tågåkeriet i Bergslagen) Mälartåg (Mälardalstrafik) VR Snabbtåg För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm3017854633",
+   "level": "L0",
+   "level_name": "Street, station and platforms",
+   "where": null,
+   "opening_hours": "Mo-Fr 05:45-19:00; Sa 09:00-17:00; Su 10:00-17:00",
+   "hours_source": "osm",
+   "hours_checked": null,
+   "_source": "the app map (osm)",
+   "position": {
+    "lon": 16.2068866,
+    "lat": 58.9970062,
+    "osm_id": "n3017854633",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 4.5,
+    "how": "OSM node n3017854633",
+    "_source": "OpenStreetMap n3017854633 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11098659701",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11098659701 (read 2026-10-30)",
+   "position": {
+    "lon": 16.2082283,
+    "lat": 58.996836,
+    "osm_id": "n11098659701",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.5,
+    "how": "OSM node n11098659701",
+    "_source": "OpenStreetMap n11098659701 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Järnvägsgrillen",
+   "brand": null,
+   "cuisine": "kebab;burger;pizza",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.jvgrillen.se/",
+   "position": {
+    "lon": 16.2068965,
+    "lat": 58.9971067,
+    "osm_id": "n13056615976",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 15.7,
+    "how": "OSM node n13056615976",
+    "_source": "OpenStreetMap n13056615976 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n13056615976 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "O'Learys",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 16.2086107,
+    "lat": 58.9972023,
+    "osm_id": "n14056285484",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 50.2,
+    "how": "OSM node n14056285484",
+    "_source": "OpenStreetMap n14056285484 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n14056285484 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Best Western Hotel Statt i Katrineholm",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 16.2093122,
+    "lat": 58.9971637,
+    "osm_id": "w301655858",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 36.6,
+    "how": "representative point of the OSM area w301655858",
+    "_source": "OpenStreetMap w301655858 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap w301655858 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Stationsområdet",
+   "publisher": "sormlandstrafiken.se",
+   "url": "https://sormlandstrafiken.se/globalassets/terminalkartor/klara-terminalkartor-mars-25/t25-katrineholm-resecentrum-uppdaterad-20250225.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "No published plan of Katrineholm station was found (Jernhusen's page links none).",
+  "waiting plan-k-waiting: no opening hours: not on the owner's page and no other source found"
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L0 (Street, station and platforms): height not measured",
+  "level L-1 (Lövatunneln): height not measured",
+  "no entrances mapped",
+  "platform 1: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "waiting plan-k-waiting: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "platform 1: no stairs, escalator or lift of its own",
+   "answer": "Likely correct: platform 1 is the side platform at the station building, and OSM's only tunnel (Lövatunneln, w444809214) is tagged as reaching platforms 1, 3, 4 and 5; stairs w479773862/3 serve 5 and 3–4, none serve 1. Only in OSM.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "waiting plan-k-waiting: no opening hours",
+   "answer": "Jernhusen gives the station's opening hours (Mo-Fr 05:30-23:30; Sa 07:00-22:00; Su 08:30-23:00) and says the accessible entrance leads into the waiting room from the track side; it does not give separate waiting-room hours, so these are the hours of the station building.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/, https://www.jernhusen.se/hitta-din-station/katrineholm-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Partly: Jernhusen names an accessible entrance into the waiting room from the track side; OSM has one entrance node, on Stationsplan.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "question": "levels L0/L-1: height not measured",
+   "answer": "Still open: no open source measures them.",
+   "_source": "this pass"
+  }
+ ]
+}

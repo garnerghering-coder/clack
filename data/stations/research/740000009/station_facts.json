@@ -1,0 +1,902 @@
+{
+ "clack_id": "740000009",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "-1",
+   "name": "Gångtunnel (pedestrian tunnel under the tracks)",
+   "note": "No signposted name found; OSM gives the tunnels layer=-1 and no name.",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1205",
+   "track": "2",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 2 (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-03-26, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1205; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1204",
+   "track": "1",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1 (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-03-26, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1204; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1594",
+   "track": "4",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 4 (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-03-26, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1594; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side (Järnvägsgatan)",
+    "platforms 1, 2–3, 4–5"
+   ],
+   "where": "main passenger tunnel by the station building (OSM w226305766)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platform 1"
+   ],
+   "where": "three stair ways from the tunnel up to platform 1 (OSM w39983381, w39983382, w404988558; w404988558 tagged ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platform 2–3 (island)"
+   ],
+   "where": "two stair ways (OSM w39983378; w39983379 tagged ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platform 4–5 (island)"
+   ],
+   "where": "one stair way (OSM w39983377, tagged ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "resecentrum (bus terminal) side, west",
+    "platforms 1, 2–3"
+   ],
+   "where": "second tunnel at the west (resecentrum) end (OSM w37080086)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w37080086",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 61.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w37080086 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6227157,
+    "lat": 58.4176645,
+    "how": "OSM w37080086 (point on the way)",
+    "_source": "OpenStreetMap w37080086 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w39983377",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 13.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39983377 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6259353,
+    "lat": 58.4166508,
+    "how": "OSM w39983377 (point on the way)",
+    "_source": "OpenStreetMap w39983377 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w39983378",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39983378 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6259815,
+    "lat": 58.4164013,
+    "how": "OSM w39983378 (point on the way)",
+    "_source": "OpenStreetMap w39983378 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w39983379",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39983379 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6257224,
+    "lat": 58.4165311,
+    "how": "OSM w39983379 (point on the way)",
+    "_source": "OpenStreetMap w39983379 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w39983381",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39983381 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6255498,
+    "lat": 58.4164268,
+    "how": "OSM w39983381 (point on the way)",
+    "_source": "OpenStreetMap w39983381 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w39983382",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39983382 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6255366,
+    "lat": 58.4164338,
+    "how": "OSM w39983382 (point on the way)",
+    "_source": "OpenStreetMap w39983382 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w226305766",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3",
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 59.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w226305766 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6257224,
+    "lat": 58.4165311,
+    "how": "OSM w226305766 (point on the way)",
+    "_source": "OpenStreetMap w226305766 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w404988558",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w404988558 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6252895,
+    "lat": 58.4163027,
+    "how": "OSM w404988558 (point on the way)",
+    "_source": "OpenStreetMap w404988558 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1175262957",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 0.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1175262957 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6255366,
+    "lat": 58.4164338,
+    "how": "OSM w1175262957 (point on the way)",
+    "_source": "OpenStreetMap w1175262957 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1175262958",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 0.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1175262958 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.6255498,
+    "lat": 58.4164268,
+    "how": "OSM w1175262958 (point on the way)",
+    "_source": "OpenStreetMap w1175262958 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré (two main doors)",
+   "street": "Järnvägsgatan",
+   "level": "0",
+   "where": "front of the station building, Järnvägsgatan 3 (OSM n4072223829, n4072223843 entrance=main)",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30; address from https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "name": "Side entrances",
+   "street": "Järnvägsgatan",
+   "level": "0",
+   "where": "three further doors at the west part of the building (OSM n4072223852, n4072223853, n4072223854)",
+   "_source": "OSM (local osmfacts/740000009.json), read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": null,
+   "level": "0",
+   "where": "from the track side into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/tillganglighet/ (\"Det finns en tillgänglig entré till väntsalen från spårsidan\"), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n4072223829",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 32.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4072223829 (already in OSM)",
+   "position": {
+    "lon": 15.62641,
+    "lat": 58.4157622,
+    "how": "OSM n4072223829",
+    "_source": "OpenStreetMap n4072223829 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4072223843",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 28.5 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4072223843 (already in OSM)",
+   "position": {
+    "lon": 15.6258072,
+    "lat": 58.4160257,
+    "how": "OSM n4072223843",
+    "_source": "OpenStreetMap n4072223843 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4072223852",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 29.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4072223852 (already in OSM)",
+   "position": {
+    "lon": 15.6250074,
+    "lat": 58.416447,
+    "how": "OSM n4072223852",
+    "_source": "OpenStreetMap n4072223852 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4072223853",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 30.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4072223853 (already in OSM)",
+   "position": {
+    "lon": 15.6249595,
+    "lat": 58.4164764,
+    "how": "OSM n4072223853",
+    "_source": "OpenStreetMap n4072223853 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4072223854",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4072223854 (already in OSM)",
+   "position": {
+    "lon": 15.6251694,
+    "lat": 58.416574,
+    "how": "OSM n4072223854",
+    "_source": "OpenStreetMap n4072223854 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station)",
+   "where": "station building; accessible entrance from the track side",
+   "opening_hours": "Mo-Fr 05:00-23:00; Sa 05:00-22:00; Su 05:00-23:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "shelter",
+   "name": "Värmekur",
+   "where": "on platform 2",
+   "hours_raw": "Fridays and Saturdays travellers are referred to the heated shelter on platform 2; it is locked at 02:00 on Friday and Saturday nights",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/ (\"Fredag och lördag hänvisas resenärer till värmekuren på plattform 2. Värmekuren låses kl 02.00 fre och lör\"), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card; the accessibility page says card or coins for the universal toilet)",
+   "wheelchair": "yes",
+   "where": "in the station (no position given)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/toalett/ and https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "where": "in the station (no position given); electronic lock with code; open during the station's hours",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Östgötatrafiken Kundcenter",
+   "where": "by the bus waiting room (bussväntsalen) at the resecentrum",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 10:00-16:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/trafik-och-biljetter/, read 2026-10-30; location also https://ostgotatrafiken.se/info/ogt/how-to-use-public-transport (\"located at the Travel Centres in Linköping and Norrköping\")"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat",
+   "where": "in the station (Jernhusen gives no position; OSM n582718223 'Bankomat' 24/7 inside the building)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/uttagsautomat/ (\"På stationen finns uttagsautomat\"), read 2026-10-30; OSM",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "where": "in the station (no position given)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Korttidsparkering",
+   "where": "by the station building; run by Dukaten Parkering",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Långtidsparkering, kvarteret Gesällen",
+   "where": "on the opposite side of the tracks; run by Dukaten Parkering (OSM w37080089 'Gesällen')",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/parkering/, read 2026-10-30; OSM"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Linköpings resecentrum",
+   "where": "west of the station building; bus stops A1–A6, B1–B6, C1–C5, D1–D2 (D2 replacement buses), E1–E2",
+   "_source": "https://ostgotatrafiken.se/globalassets/media/kartor-och-tidtabeller/hallplatsoversikter/hallplatsoversikt_linkoping_juni-2024.pdf (Hitta rätt hållplats, juni 2024), read 2026-10-30; OSM n301553771"
+  },
+  {
+   "category": "fast_food",
+   "name": "Järnvägens Take Away",
+   "phone": "073-996 22 50",
+   "where": "in the station building (address Järnvägsgatan 3)",
+   "note": "Jernhusen gives no hours. OSM has a 'Takeaway Linköpings centralstation' (n11396985469, Mo-Fr 05:30-20:00; Sa 06:00-17:00; Su 06:00-20:00) that may be the same place; not confirmed by an owner/shop source.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "phone": "013-10 29 08",
+   "where": "in the station building (Järnvägsgatan 3)",
+   "note": "Jernhusen gives no hours; Pressbyrån's store finder loads dynamically and could not be read. OSM's opening_hours (Mo-Fr 05:30-22:00; Sa 07:00-22:00; Su 08:00-22:00) is the only hours source.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 15.6260601,
+    "lat": 58.4160348,
+    "osm_id": "n6199037684",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.5,
+    "how": "OSM node n6199037684",
+    "_source": "OpenStreetMap n6199037684 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:00-23:00; Sa 05:00-22:00; Su 05:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Linköping centralstation.",
+   "owner_text": "Allt om tillgängligheten på Linköping centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "wifi",
+   "owner_text": "",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Vid stationsbyggnaden finns en korttidsparkering. Långtidsparkering finns på motsatta sidan spåren i kvarteret Gesällen. Följ skyltning i vägnätet. Parkeringen drivs av Dukaten Parkering.",
+   "owner_text": "Vid stationsbyggnaden finns en korttidsparkering. Långtidsparkering finns på motsatta sidan spåren i kvarteret Gesällen. Följ skyltning i vägnätet. Parkeringen drivs av Dukaten Parkering.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Förvaringsbox information Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] . Se även stationens öppettider.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Östgötatrafiken Kundcenter Ligger vid bussväntsalen. Öppettider Mån–fre 7–19 Lör–sön 10–16 0771-21 10 10 ostgotatrafiken.se Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Östgötatrafiken Kalmar länstrafik Snälltåget Mälartåg (Mälardalstrafik) Tågab (Tågåkeriet i Bergslagen) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": "Mån–fre 7–19; Lör–sön 10–16 (hours named in the text; see owner_text for what they belong to)",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "uttagsautomat",
+   "owner_text": "",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/uttagsautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Fotoautomats information",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Espresso House",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 05:30-21:00; Sa 06:30-20:00; Su 06:30-21:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.espressohouse.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 15.6258307,
+    "lat": 58.4161577,
+    "osm_id": "n6199037683",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.6,
+    "how": "OSM node n6199037683",
+    "_source": "OpenStreetMap n6199037683 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Järnvägens café och restaurang",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 08:00-22:00; Sa-Su 09:00-22:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": null,
+   "name": "Järnvägens Take Away",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 15.6260601,
+    "lat": 58.4160348,
+    "osm_id": "n6199037684",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.5,
+    "how": "OSM node n6199037684",
+    "_source": "OpenStreetMap n6199037684 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n6488732885",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "Su-Fr 05:00-23:00; Sa 05:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n6488732885 (read 2026-10-30)",
+   "position": {
+    "lon": 15.6262772,
+    "lat": 58.4158226,
+    "osm_id": "n6488732885",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.8,
+    "how": "OSM node n6488732885",
+    "_source": "OpenStreetMap n6488732885 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 15.6253596,
+    "lat": 58.416264,
+    "osm_id": "n582718223",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 17.2,
+    "how": "OSM node n582718223",
+    "_source": "OpenStreetMap n582718223 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n582718223 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Järnvägscaféet",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 11:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 15.626027,
+    "lat": 58.4159166,
+    "osm_id": "n7104857867",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.0,
+    "how": "OSM node n7104857867",
+    "_source": "OpenStreetMap n7104857867 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n7104857867 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Gatukök",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 15.6261047,
+    "lat": 58.4157908,
+    "osm_id": "n9081941517",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.5,
+    "how": "OSM node n9081941517",
+    "_source": "OpenStreetMap n9081941517 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n9081941517 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Takeaway Linköpings centralstation",
+   "brand": null,
+   "cuisine": "sandwich;sausage",
+   "opening_hours": "Mo-Fr 05:30-20:00; Sa 06:00-17:00; Su 06:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 15.6259305,
+    "lat": 58.4159861,
+    "osm_id": "n11396985469",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 14.7,
+    "how": "OSM node n11396985469",
+    "_source": "OpenStreetMap n11396985469 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n11396985469 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Linköpings resecentrum – Hitta rätt hållplats / Find your bus stop (juni 2024)",
+   "publisher": "Östgötatrafiken",
+   "url": "https://ostgotatrafiken.se/globalassets/media/kartor-och-tidtabeller/hallplatsoversikter/hallplatsoversikt_linkoping_juni-2024.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Bus stop table only; no station layout, lifts or stairs."
+  }
+ ],
+ "open": [
+  "Gatukök (OSM n9081941517): no hours from any allowed source; possibly the same as Järnvägens Take Away or outdated.",
+  "Lifts: OSM maps no lift at Linköping C; no owner/Trafikverket text or plan found that says whether the tunnel has lifts to platforms 2–3 and 4–5 (the stairs there are tagged ramp=yes in OSM). Unconfirmed.",
+  "Tunnels and stairs are OSM only; no published plan of Linköping C was found (Jernhusen links only Google Maps and Östgötatrafiken's dynamic web map).",
+  "Signposted names of the tunnels: none found.",
+  "Positions of toilets, lockers, ATM and photo booth inside the building: not stated by Jernhusen.",
+  "Floor heights: no open source.",
+  "Järnvägens Take Away and Pressbyrån hours: no shop/owner source."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "restaurant Gatukök: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "restaurant Gatukök: no opening hours",
+   "answer": "Still open. Jernhusen's shop list (Espresso House, Järnvägens café och restaurang, Järnvägens Take Away, Pressbyrån) has no 'Gatukök'; the closest match is Järnvägens Take Away, for which Jernhusen gives no hours and no website. OSM's separate node 'Takeaway Linköpings centralstation' carries hours but no owner/shop source confirms it or that it is the same as the 'Gatukök' node (n9081941517). The 'Gatukök' node may be outdated or a duplicate; check on site.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/linkoping-centralstation/mat-och-butiker/, read 2026-10-30; OSM"
+  }
+ ]
+}

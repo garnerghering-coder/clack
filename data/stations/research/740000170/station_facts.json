@@ -1,0 +1,406 @@
+{
+ "clack_id": "740000170",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level (no signposted name found)",
+   "other_names": [],
+   "_source": "OSM platforms 1-4 (no level tag), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel",
+   "other_names": [
+    "Tunnelplan (label on Sörmlandstrafiken's map; the map does not say whether it is a level name or a place name)"
+   ],
+   "_source": "Sörmlandstrafiken, Eskilstuna resecentrum terminalkarta, version 2025-09-12, labels 'Tunnel' (twice) and 'Tunnelplan'; OSM underpass w336123540 layer -1, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "687",
+   "track": "1",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 1 (the train stops with the platform to its north-east)",
+   "_source": "laser (2020-02-27, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 687; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1208",
+   "track": "4",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 4 (the train stops with the platform to its south-west)",
+   "_source": "laser (2020-02-27, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1208; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side",
+    "platforms 1, 2, 3, 4"
+   ],
+   "where": "OSM w336123540 (layer -1, 50 m); Sörmlandstrafiken map labels 'Tunnel' twice",
+   "confirmed_by": "plan",
+   "_source": "OSM; Sörmlandstrafiken terminalkarta Eskilstuna resecentrum 2025-09-12, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platform 1"
+   ],
+   "where": "OSM w30651905 (ramp=yes, probably a wheel/bike ramp beside the steps)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "street"
+   ],
+   "where": "OSM w30651903 (ramp=yes), not joined to a platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "Sörmlandstrafiken's map has 'Hiss' in its legend; the text layer does not say where the lifts are or which platforms they reach; OSM tags no lift here",
+   "confirmed_by": "plan",
+   "_source": "Sörmlandstrafiken terminalkarta Eskilstuna resecentrum 2025-09-12, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w30651905",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w30651905 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 16.5068116,
+    "lat": 59.3691994,
+    "how": "OSM w30651905 (point on the way)",
+    "_source": "OpenStreetMap w30651905 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w336123540",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 50.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w336123540 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 16.5065743,
+    "lat": 59.3691686,
+    "how": "OSM w336123540 (point on the way)",
+    "_source": "OpenStreetMap w336123540 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": "track side (spårsidan)",
+   "where": "from the platform side into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Centralstation (street side)",
+   "street": "Västermarksgatan (Pressbyrån's address Västermarksgatan 4; map names Västermarksgatan and Bruksgatan)",
+   "where": "station building; no OSM entrance nodes",
+   "_source": "Jernhusen; Sörmlandstrafiken terminalkarta 2025-09-12, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa,Su 06:30-22:30",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building (Sörmlandstrafiken map shows a 'Väntsal' symbol)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/ and Sörmlandstrafiken terminalkarta, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes; toilet by card, universal toilet by card or coin (amount not stated)",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/toalett/ and /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days",
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa,Su 06:30-22:30",
+   "hours_source": "website (Jernhusen: the station's hours, which the locker page refers to)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat",
+   "where": "in the station (OSM n13966052408)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/uttagsautomat/ and OSM, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa), incl. paid disabled parking",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/parkering/ and /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Eskilstuna resecentrum, lägen A-D",
+   "where": "A: city lines 1 Centrum-Torshälla, 3 Centrum-Viptorp, 4 Centrum-Mälarsjukhuset, 5 Centrum-Ekängen, 7 Centrum-Trumtorp, 31, 40, night 65. B: 1 Mesta-Borsökna, 3 Hällby, 4 Skogstorp, 5 Hemlaås, 7 Brunnsta-Folkesta, 30, 23, night 61, 62. C: 203, 230, 701, 801. D: 550 Kungsör-Köping and rail replacement/charter buses. Also Färdtjänst, taxi, information point, cycle garage and cycle parking on the map.",
+   "_source": "Sörmlandstrafiken terminalkarta Eskilstuna resecentrum, version 2025-09-12, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Eskilstuna station360",
+   "where": "OSM shop=ticket n9897534709",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa 06:30-22:30; Su 06:30-22:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Eskilstuna centralstation.",
+   "owner_text": "Allt om tillgängligheten på Eskilstuna centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr. Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr. Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se Sörmlandstrafiken Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "På stationen finns uttagsautomat.",
+   "owner_text": "På stationen finns uttagsautomat.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/uttagsautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 16.5063851,
+    "lat": 59.3693173,
+    "osm_id": "n5175868005",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 11.5,
+    "how": "OSM node n5175868005",
+    "_source": "OpenStreetMap n5175868005 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Eskilstuna station360",
+   "osm_id": "n9897534709",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9897534709 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Eskilstuna resecentrum terminalkarta (A4), version 2025-09-12",
+   "publisher": "Sörmlandstrafiken (Länstrafiken Sörmland)",
+   "url": "https://sormlandstrafiken.se/globalassets/st_terminalkarta_eskilstuna_resecentrum_a4_original_rgb_250912_v2.pdf",
+   "licence": "not open: facts only (basemap ©OpenStreetMap)",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "T25 Eskilstuna resecentrum, uppdaterad 2025-03-03",
+   "publisher": "Sörmlandstrafiken",
+   "url": "https://sormlandstrafiken.se/globalassets/terminalkartor/klara-terminalkartor-mars-25/t25-eskilstuna-resecentrum-uppdaterad-20250303.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "older version, superseded by 2025-09-12"
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "sormlandstrafiken.se",
+   "url": "https://sormlandstrafiken.se/globalassets/st_terminalkarta_eskilstuna_resecentrum_a4_original_rgb_250912_v2.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Lifts: Sörmlandstrafiken's map legend shows 'Hiss', but the text layer does not say which platforms have lifts and OSM tags none. Someone needs to look at the drawing (facts only).",
+  "Whether 'Tunnelplan' is the signposted name of the tunnel level or a place name: not settled."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no queue questions listed for Eskilstuna C in STATION_OPEN_QUESTIONS_SWEDEN.md)",
+   "answer": "Not in the review queue. Facts added: the tunnel to platforms 1-4 (plan + OSM), a lift shown in the map legend, the 'Tunnelplan' label, the accessible entrance from the track side, and bus stop positions A-D.",
+   "_source": "this pass, 2026-10-30"
+  }
+ ]
+}

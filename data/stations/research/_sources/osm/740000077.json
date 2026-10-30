@@ -1,0 +1,291 @@
+{
+ "clack_id": "740000077",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w201201765",
+   "ref": "4",
+   "level": null
+  },
+  {
+   "osm_id": "w201201888",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w361931984",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w361931986",
+   "ref": "3",
+   "level": null
+  },
+  {
+   "osm_id": "w361931988",
+   "ref": "5a",
+   "level": null
+  },
+  {
+   "osm_id": "w361931989",
+   "ref": "5a",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w9891871",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 187.9,
+   "reaches_platforms": [
+    "1",
+    "2",
+    "3",
+    "5a"
+   ],
+   "lonlat": [
+    15.1114087,
+    59.0672595
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w201201912",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 26.0,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    15.1110889,
+    59.0670086
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w201201913",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 34.5,
+   "reaches_platforms": [
+    "3",
+    "5a"
+   ],
+   "lonlat": [
+    15.1108363,
+    59.0671628
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n9911660234",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Västra Storgatan",
+   "nearest_named_street": "Västra Storgatan",
+   "nearest_street_m": 5.1,
+   "lonlat": [
+    15.1103798,
+    59.0662573
+   ]
+  },
+  {
+   "osm_id": "n9911660254",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Västra Storgatan",
+   "nearest_named_street": "Västra Storgatan",
+   "nearest_street_m": 5.2,
+   "lonlat": [
+    15.1101769,
+    59.0662194
+   ]
+  },
+  {
+   "osm_id": "n9911660258",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": "Västra Storgatan",
+   "nearest_named_street": "Västra Storgatan",
+   "nearest_street_m": 5.2,
+   "lonlat": [
+    15.1098786,
+    59.0661637
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n6456604261",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 50,
+   "lonlat": [
+    15.10979,
+    59.0662854
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 53.8
+  },
+  {
+   "osm_id": "n6456604262",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    15.1100099,
+    59.0663171
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 54.3
+  },
+  {
+   "osm_id": "n6456604263",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 32,
+   "lonlat": [
+    15.1102835,
+    59.066375
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 53.0
+  },
+  {
+   "osm_id": "w247522003",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 96,
+   "lonlat": [
+    15.1123083,
+    59.0668082
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 35.3
+  },
+  {
+   "osm_id": "w247522008",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 122,
+   "lonlat": [
+    15.112441,
+    59.0670245
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.2
+  },
+  {
+   "osm_id": "w247522009",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 103,
+   "lonlat": [
+    15.1121244,
+    59.066966
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.0
+  },
+  {
+   "osm_id": "w308178288",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 150,
+   "lonlat": [
+    15.1128374,
+    59.067011
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.5
+  },
+  {
+   "osm_id": "w308181649",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 185,
+   "lonlat": [
+    15.1067385,
+    59.0661497
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.3
+  },
+  {
+   "osm_id": "w308182015",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 218,
+   "lonlat": [
+    15.1062744,
+    59.0659648
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 22.6
+  }
+ ]
+}

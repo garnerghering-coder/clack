@@ -1,0 +1,506 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "app_level": "L1",
+   "name": "Mittelbron / Skyttelbron",
+   "other_names": [
+    "Norra övergången (Jernhusen; which of the two bridges it means is not stated)"
+   ],
+   "note": "Two separate footbridges over all tracks, not one level: Mittelbron (built 1996, middle of the platforms) and Skyttelbron (opened 2014, further north). With Rydes undergång the platform area has three access points (sv Wikipedia).",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30; OSM (osmfacts 740000120), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/lund-centralstation/, read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": null,
+   "note": "Platforms and street. Station buildings at this level: Stationshuset (1850s, listed 1972, east, Bangatan 1), Västra stationsbyggnaden (glass, 2001, west, Västra Stationstorget) and Godsmagasinet (east, by Bangatan). No signposted level name found.",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Rydes undergång",
+   "note": "Popular name (\"i folkmun\") of the 1920s pedestrian tunnel at the south end, from the station building in the east to Västra stationsbyggnaden in the west. Jernhusen: open daily 05:00–00:00.",
+   "opening_hours": "Mo-Su 05:00-24:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/lund-centralstation/, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "Mittelbron",
+    "platform 1"
+   ],
+   "where": "east end of Mittelbron (OSM n2328068830)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Mittelbron",
+    "platform 1"
+   ],
+   "where": "east end of Mittelbron (OSM w223970285)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "on the 2–3 platform under Mittelbron (OSM w223970293)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "on the 2–3 platform under Mittelbron (OSM w157599616)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "on the 2–3 platform under Mittelbron (OSM w223970284)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "on the 4–5 platform under Mittelbron (OSM w223970286)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "on the 4–5 platform under Mittelbron (OSM w157599622)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Mittelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "on the 4–5 platform under Mittelbron (OSM w223970292)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Mittelbron",
+    "platform 6"
+   ],
+   "where": "west end of Mittelbron (OSM w223970287)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Mittelbron",
+    "platform 6"
+   ],
+   "where": "west end of Mittelbron (OSM w157599621)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Mittelbron",
+    "platform 6"
+   ],
+   "where": "west end of Mittelbron (OSM w223970283)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Skyttelbron",
+    "platform 1"
+   ],
+   "where": "east end of Skyttelbron (OSM w334180508)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Skyttelbron",
+    "platform 1"
+   ],
+   "where": "east end of Skyttelbron (OSM w334180519)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "under Skyttelbron (OSM w334180501)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "under Skyttelbron (OSM w334180522)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 2–3"
+   ],
+   "where": "under Skyttelbron (OSM w334190507)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "under Skyttelbron (OSM w334180507)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "under Skyttelbron (OSM w334180513)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Skyttelbron",
+    "island platform tracks 4–5"
+   ],
+   "where": "under Skyttelbron (OSM w334190506)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Skyttelbron",
+    "platform 6"
+   ],
+   "where": "west end of Skyttelbron (OSM w334180505)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Skyttelbron",
+    "platform 6"
+   ],
+   "where": "west end of Skyttelbron (OSM w334180517)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Skyttelbron",
+    "platform 6"
+   ],
+   "where": "west end of Skyttelbron (OSM w334190509)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Rydes undergång",
+    "island platform tracks 2–3"
+   ],
+   "where": "south end of the 2–3 platform (OSM w334199096)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Rydes undergång",
+    "island platform tracks 2–3"
+   ],
+   "where": "south end of the 2–3 platform (OSM w157599617)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Rydes undergång",
+    "island platform tracks 4–5"
+   ],
+   "where": "south end of the 4–5 platform (OSM w334199095)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Rydes undergång",
+    "island platform tracks 4–5"
+   ],
+   "where": "south end of the 4–5 platform (OSM w157599612)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Rydes undergång",
+    "platform 6"
+   ],
+   "where": "south end of platform 6, by Västra stationen (OSM w157599620)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Rydes undergång",
+    "Västra stationen / platform 6 / Mittelbron level"
+   ],
+   "where": "west end of the tunnel, in Västra stationen (levels -2;-1;0;1) (OSM n3412964910)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Rydes undergång",
+    "Stationshuset (street level)"
+   ],
+   "where": "east end of the tunnel, by the station building (OSM n3412964785)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street (by Godsmagasinet)",
+    "footbridge to Väster"
+   ],
+   "where": "by Godsmagasinet: escalators and a lift up to the bridge that links the platforms with the Väster district",
+   "confirmed_by": "OSM only",
+   "note": "Stated by sv Wikipedia (not an owner text); likely the east end of Mittelbron (OSM w223970285, n2328068830).",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stationshuset",
+   "street": "Bangatan",
+   "level": "0",
+   "where": "east side, Bangatan 1; Espresso House, Pressbyrån, Viggo and Skånetrafiken share this address",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30; https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  },
+  {
+   "name": "Västra stationen",
+   "street": "Västra Stationstorget",
+   "level": "0",
+   "where": "west side; reached from the east via Rydes undergång (daily 05:00–00:00) or the north footbridge (24 h)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/, read 2026-10-30; https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  },
+  {
+   "name": "Godsmagasinet",
+   "street": "Bangatan",
+   "level": "0",
+   "where": "north of the station building along Bangatan; escalators and lift up to the footbridge",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes; card only",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n5833582897/9)",
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa 05:30-24:00; Su 06:30-24:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/toalett/, read 2026-10-30; OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "yes (amount not stated)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa 05:30-24:00; Su 06:30-24:00",
+   "hours_source": "website (Jernhusen: see the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat (Stationshuset)",
+   "where": "in the station building",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat (Västra stationen)",
+   "where": "in Västra stationen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Skånetrafiken (kundcenter)",
+   "address": "Bangatan 1",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/lund-centralstation/trafik-och-biljetter/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "Västra Stationstorget (the rank on Bangatan closed on 25 June; reach it via Rydes undergång or the north footbridge)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen outdoor parking (Apcoa)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering (several levels)",
+   "where": "north of Godsmagasinet",
+   "_source": "https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Asian Express",
+   "address": "Västra Stationstorget 10",
+   "where": "in/at Västra stationen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Viggo Restaurang & Bar",
+   "address": "Bangatan 1",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "address": "Bangatan 1",
+   "note": "OSM has three Pressbyrån nodes (station building, Västra stationen side, by Mittelbron/Godsmagasinet); Jernhusen lists one, without hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30; OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Godsmagasinet",
+   "where": "in Godsmagasinet (sv Wikipedia: a restaurant, a hairdresser, a Pressbyrån and a Skånetrafiken ticket office are in Godsmagasinet)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30; https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Stationshuset",
+   "where": "in the station building",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Västra stationen",
+   "where": "in Västra stationen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/lund-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Lund C terminalkarta (Stationsområdet)",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/81216_lundc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Updated December 2025. Text layer: tracks 1–6, bus stops A–U, streets (Bangatan, Bantorget, Spolegatan, Bruksgatan, Lokföraregatan, Knut den Stores torg, Clemenstorget, Västra Stationstorget, Byggmästaregatan) and the legend (Hiss, Trappa, Biljettautomat, Kundcenter, Cykelparkering, Parkering); symbol positions need a visual read."
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Tracks 2 and 3 share one island platform (Trafikverket: platform \"2,3\", BIS 1022). Its stairs, escalators and lifts (Mittelbron, Skyttelbron, Rydes undergång) are tagged for 2–3 in OSM, so they serve track 2 too; the app should attach them to p2 as well as p3.",
+   "_source": "Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 rows 545–548 and BanInfo BIS 1022/2097/1031/1060 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30; OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "question": "platform 4: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Tracks 4 and 5 share one island platform (Trafikverket: platform \"4,5\", BIS 2097). Its stairs, escalators and lifts (Mittelbron, Skyttelbron, Rydes undergång) serve track 4 too; the app should attach them to p4 as well as p5.",
+   "_source": "Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 rows 545–548 and BanInfo BIS 1022/2097/1031/1060 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30; OSM (osmfacts 740000120), read 2026-10-30"
+  },
+  {
+   "question": "level L1 (Footbridges (Mittelbron, Skyttelbron)): height not measured",
+   "answer": "Still open: no open source measures it. Note the two bridges are separate structures (OSM tags Skyttelbron layer 2, Mittelbron layer 1).",
+   "_source": "OSM (osmfacts 740000120), read 2026-10-30; https://sv.wikipedia.org/wiki/Lunds_centralstation, read 2026-10-30"
+  },
+  {
+   "question": "level L0 (Platforms and street): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L-1 (Rydes undergång (tunnel)): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass"
+  }
+ ],
+ "open": [
+  "Floor heights of the footbridges and Rydes undergång: no open source.",
+  "Which bridge Jernhusen calls \"Norra övergången\" (open 24 h): Skyttelbron is the northernmost, but Jernhusen does not name it.",
+  "Lift/stair positions rest on OSM only here; Skånetrafiken's terminal map (used for the app's map) shows them but its symbols are not machine-readable.",
+  "Hours for Pressbyrån, Viggo, Asian Express, Godsmagasinet, Stationshuset and Västra stationen: Jernhusen gives none and the shops' sites could not be read (robots or no store page); OSM hours exist for Pressbyrån and Asian Express only.",
+  "Skånetrafiken kundcenter hours: Jernhusen refers to Skånetrafiken's site, which did not list them in the text read."
+ ]
+}

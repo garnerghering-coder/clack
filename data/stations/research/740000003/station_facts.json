@@ -1,0 +1,2696 @@
+{
+ "clack_id": "740000003",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": null,
+   "other_names": [
+    "Glashallen (glass hall, built 2010 with the City Tunnel)",
+    "Centralhallen / food court (\"Food Courten\")",
+    "Entréhallen",
+    "Gröna Hallen",
+    "train shed with tracks 5–11"
+   ],
+   "note": "No source gives a signposted level name (\"Plan 0\" etc.). Jernhusen's pages name the halls on this level: Glashallen, Entréhall (Espresso House Entréhall), Gröna Hallen (unstaffed toilets) and the Food Court (Tawana). Wikipedia: two perpendicular buildings (central hall, food court since 2011; terminus train shed) joined by the 2010 glass corridor, which is the main waiting area and holds ticket sales, exchange and kiosks.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "app_level": "L-2",
+   "name": "Malmö C Nedre",
+   "other_names": [],
+   "note": "\"Malmö C Nedre (Lower)\" is the name Wikipedia gives the City Tunnel station section under Malmö C; whether that or a \"Plan -x\" is what the signs say is not stated by any source read. Tracks 1–4 here are two island platforms (1–2 north, usually southbound; 3–4 south, usually northbound). OSM tags the lifts down to it as level -2, with an intermediate -1 at the Anna Lindhs plats (west) entrance; no source names a -1 level.",
+   "_source": "https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; OSM (osmfacts 740000003), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2082",
+   "track": "5",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 5 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2082; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2083",
+   "track": "7",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 7 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2083; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2084",
+   "track": "9",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 9 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2084; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2482",
+   "track": "10",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 10 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2482; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2602",
+   "track": "11",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 11 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2602; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2603",
+   "track": "11",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 11 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2603; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "Glashallen (street level)",
+    "platform tracks 1–2"
+   ],
+   "where": "from the Glashallen area down to the north island platform (OSM w157823830, w157823833)",
+   "confirmed_by": "OSM only",
+   "note": "Wikipedia confirms escalators down to the lower-level platforms; Jernhusen's and Skånetrafiken's plan legends list escalators/lifts/stairs but their positions are not machine-readable.",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Glashallen (street level)",
+    "platform tracks 3–4"
+   ],
+   "where": "from the Glashallen area down to the south island platform (OSM w157823832, w157823838)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level",
+    "platform tracks 1–2"
+   ],
+   "where": "two lifts by the Glashallen escalators (OSM n11455037402, n11455037403, level -2;0)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level",
+    "platform tracks 3–4"
+   ],
+   "where": "two lifts by the Glashallen escalators (OSM n11455037404, n11455037405, level -2;0)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (east end, towards Lokgatan)",
+    "platform tracks 1–2"
+   ],
+   "where": "east end of the City Tunnel platforms (OSM n11455041755, level -2;0-5)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (east end, towards Lokgatan)",
+    "platform tracks 3–4"
+   ],
+   "where": "east end of the City Tunnel platforms (OSM n11455041749, level -2;0-5)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (Lokgatan side)",
+    "platform tracks 1–2"
+   ],
+   "where": "east end (OSM w81391565)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (Lokgatan side)",
+    "platform tracks 3–4"
+   ],
+   "where": "east end (OSM w81391567)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Anna Lindhs plats entrance (west)",
+    "City Tunnel platforms"
+   ],
+   "where": "west entrance just west of the station; OSM escalators w1234240703, w1234240705 (layer -2) and lifts n11454178876, n11454178882 (-1;0) at the Hjälmarekajen/Neptunigatan entrances",
+   "confirmed_by": "OSM only",
+   "note": "Wikipedia: the underground platforms have an entrance just west of the station at Anna Lindhs plats. Skånetrafiken's map labels \"Anna Lindhs plats\" and \"Malmö C Norra\".",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "walk_level",
+   "between": [
+    "Glashallen",
+    "platforms tracks 5–11"
+   ],
+   "where": "tracks 5–11 are terminal tracks at street level in the train shed north of Centralhallen; reached on the level",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30",
+   "note": "Level access stated by Wikipedia (terminal tracks above ground), not by an owner text or plan."
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w81391565",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w81391565 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0014995,
+    "lat": 55.6099995,
+    "how": "OSM w81391565 (point on the way)",
+    "_source": "OpenStreetMap w81391565 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w81391567",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w81391567 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0018524,
+    "lat": 55.6098574,
+    "how": "OSM w81391567 (point on the way)",
+    "_source": "OpenStreetMap w81391567 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w89295954",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 33.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w89295954 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9973476,
+    "lat": 55.6089704,
+    "how": "OSM w89295954 (point on the way)",
+    "_source": "OpenStreetMap w89295954 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157823830",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 22.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157823830 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0001003,
+    "lat": 55.6097804,
+    "how": "OSM w157823830 (point on the way)",
+    "_source": "OpenStreetMap w157823830 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157823832",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 25.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157823832 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9995205,
+    "lat": 55.609484,
+    "how": "OSM w157823832 (point on the way)",
+    "_source": "OpenStreetMap w157823832 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157823833",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 14.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157823833 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9995901,
+    "lat": 55.6096997,
+    "how": "OSM w157823833 (point on the way)",
+    "_source": "OpenStreetMap w157823833 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157823838",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 22.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157823838 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.000168,
+    "lat": 55.609591,
+    "how": "OSM w157823838 (point on the way)",
+    "_source": "OpenStreetMap w157823838 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w412677122",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 120.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w412677122 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0014133,
+    "lat": 55.6099853,
+    "how": "OSM w412677122 (point on the way)",
+    "_source": "OpenStreetMap w412677122 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w412677126",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 119.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w412677126 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0014841,
+    "lat": 55.6097993,
+    "how": "OSM w412677126 (point on the way)",
+    "_source": "OpenStreetMap w412677126 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w412677129",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 146.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w412677129 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9983642,
+    "lat": 55.6092652,
+    "how": "OSM w412677129 (point on the way)",
+    "_source": "OpenStreetMap w412677129 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w412677132",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 158.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w412677132 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9982676,
+    "lat": 55.6094115,
+    "how": "OSM w412677132 (point on the way)",
+    "_source": "OpenStreetMap w412677132 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1234240703",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 31.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1234240703 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9973451,
+    "lat": 55.6090137,
+    "how": "OSM w1234240703 (point on the way)",
+    "_source": "OpenStreetMap w1234240703 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1234240705",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 33.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1234240705 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9967897,
+    "lat": 55.6090203,
+    "how": "OSM w1234240705 (point on the way)",
+    "_source": "OpenStreetMap w1234240705 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1255057561",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 36.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1255057561 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9972272,
+    "lat": 55.6091975,
+    "how": "OSM w1255057561 (point on the way)",
+    "_source": "OpenStreetMap w1255057561 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1255057574",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 31.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1255057574 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9973829,
+    "lat": 55.6089595,
+    "how": "OSM w1255057574 (point on the way)",
+    "_source": "OpenStreetMap w1255057574 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n8706408029",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n8706408029 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0024543,
+    "lat": 55.6090024,
+    "how": "OSM n8706408029",
+    "_source": "OpenStreetMap n8706408029 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11454178876",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11454178876 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9967041,
+    "lat": 55.6091411,
+    "how": "OSM n11454178876",
+    "_source": "OpenStreetMap n11454178876 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11454178882",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11454178882 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9969757,
+    "lat": 55.6088016,
+    "how": "OSM n11454178882",
+    "_source": "OpenStreetMap n11454178882 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455037402",
+   "name": null,
+   "osm_level": "-2;0",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455037402 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9999223,
+    "lat": 55.6097541,
+    "how": "OSM n11455037402",
+    "_source": "OpenStreetMap n11455037402 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455037403",
+   "name": null,
+   "osm_level": "-2;0",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455037403 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.999963,
+    "lat": 55.6097602,
+    "how": "OSM n11455037403",
+    "_source": "OpenStreetMap n11455037403 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455037404",
+   "name": null,
+   "osm_level": "-2;0",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455037404 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0000165,
+    "lat": 55.6095673,
+    "how": "OSM n11455037404",
+    "_source": "OpenStreetMap n11455037404 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455037405",
+   "name": null,
+   "osm_level": "-2;0",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455037405 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.000066,
+    "lat": 55.609575,
+    "how": "OSM n11455037405",
+    "_source": "OpenStreetMap n11455037405 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455041749",
+   "name": null,
+   "osm_level": "-2;0-5",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455041749 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0023284,
+    "lat": 55.609926,
+    "how": "OSM n11455041749",
+    "_source": "OpenStreetMap n11455041749 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11455041755",
+   "name": null,
+   "osm_level": "-2;0-5",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11455041755 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0022551,
+    "lat": 55.6101022,
+    "how": "OSM n11455041755",
+    "_source": "OpenStreetMap n11455041755 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Glashallen (accessible entrances)",
+   "street": null,
+   "level": "0",
+   "where": "north side; Jernhusen's recommended accessible entrances (\"Undvik ingångarna från Skeppsbron\")",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrance from the bus square (Centralplan)",
+   "street": "Centralplan",
+   "level": "0",
+   "where": "south side; SJ Lounge is directly to the right inside, opposite Skånetrafiken",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Main entrance (Skeppsbron 1)",
+   "street": "Skeppsbron",
+   "level": "0",
+   "where": "front of the old station building; Jernhusen advises wheelchair users to avoid the Skeppsbron entrances",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Anna Lindhs plats (City Tunnel entrance)",
+   "street": null,
+   "level": "0",
+   "where": "just west of the station, leading to the underground platforms (tracks 1–4)",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "name": "Taxi side (north)",
+   "street": "Lokgatan",
+   "level": "0",
+   "where": "north side, at the taxi rank by tracks 3a/4a (Glashallen links the bus stops in the south with the taxi station in the north)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n948345633",
+   "street": "Lokgatan",
+   "street_how": "nearest named street, 14.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n948345633 (already in OSM)",
+   "position": {
+    "lon": 13.001771,
+    "lat": 55.6100441,
+    "how": "OSM n948345633",
+    "_source": "OpenStreetMap n948345633 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n948345637",
+   "street": "Lokgatan",
+   "street_how": "nearest named street, 18.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n948345637 (already in OSM)",
+   "position": {
+    "lon": 13.0018524,
+    "lat": 55.6098574,
+    "how": "OSM n948345637",
+    "_source": "OpenStreetMap n948345637 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1179544271",
+   "street": "Neptunigatan",
+   "street_how": "nearest named street, 20.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n1179544271 (already in OSM)",
+   "position": {
+    "lon": 12.9998522,
+    "lat": 55.6096558,
+    "how": "OSM n1179544271",
+    "_source": "OpenStreetMap n1179544271 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1677336238",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 7.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n1677336238 (already in OSM)",
+   "position": {
+    "lon": 13.0001144,
+    "lat": 55.6086371,
+    "how": "OSM n1677336238",
+    "_source": "OpenStreetMap n1677336238 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1677336250",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 7.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n1677336250 (already in OSM)",
+   "position": {
+    "lon": 13.0004733,
+    "lat": 55.6087056,
+    "how": "OSM n1677336250",
+    "_source": "OpenStreetMap n1677336250 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1677336275",
+   "street": "Skeppsbron",
+   "street_how": "nearest named street, 25.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1677336275 (already in OSM)",
+   "position": {
+    "lon": 12.9993749,
+    "lat": 55.6087809,
+    "how": "OSM n1677336275",
+    "_source": "OpenStreetMap n1677336275 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1677336364",
+   "street": "Skeppsbron",
+   "street_how": "nearest named street, 27.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1677336364 (already in OSM)",
+   "position": {
+    "lon": 12.9992909,
+    "lat": 55.6092119,
+    "how": "OSM n1677336364",
+    "_source": "OpenStreetMap n1677336364 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1677336398",
+   "street": "Lokgatan",
+   "street_how": "nearest named street, 23.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n1677336398 (already in OSM)",
+   "position": {
+    "lon": 13.0001119,
+    "lat": 55.6096976,
+    "how": "OSM n1677336398",
+    "_source": "OpenStreetMap n1677336398 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1700743058",
+   "street": "Neptunigatan",
+   "street_how": "nearest named street, 26.5 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1700743058 (already in OSM)",
+   "position": {
+    "lon": 12.9969779,
+    "lat": 55.6086934,
+    "how": "OSM n1700743058",
+    "_source": "OpenStreetMap n1700743058 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1700743147",
+   "street": "Hjälmarekajen",
+   "street_how": "nearest named street, 18.6 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1700743147 (already in OSM)",
+   "position": {
+    "lon": 12.9965678,
+    "lat": 55.6092081,
+    "how": "OSM n1700743147",
+    "_source": "OpenStreetMap n1700743147 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3376448163",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 28.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3376448163 (already in OSM)",
+   "position": {
+    "lon": 13.0005046,
+    "lat": 55.6089027,
+    "how": "OSM n3376448163",
+    "_source": "OpenStreetMap n3376448163 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3376448165",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3376448165 (already in OSM)",
+   "position": {
+    "lon": 13.0004282,
+    "lat": 55.6090566,
+    "how": "OSM n3376448165",
+    "_source": "OpenStreetMap n3376448165 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3376448167",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3376448167 (already in OSM)",
+   "position": {
+    "lon": 13.0003548,
+    "lat": 55.6092035,
+    "how": "OSM n3376448167",
+    "_source": "OpenStreetMap n3376448167 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3376448169",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3376448169 (already in OSM)",
+   "position": {
+    "lon": 13.0002762,
+    "lat": 55.6093615,
+    "how": "OSM n3376448169",
+    "_source": "OpenStreetMap n3376448169 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8706408030",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 18.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8706408030 (already in OSM)",
+   "position": {
+    "lon": 13.0024404,
+    "lat": 55.6090309,
+    "how": "OSM n8706408030",
+    "_source": "OpenStreetMap n8706408030 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8706408033",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 18.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8706408033 (already in OSM)",
+   "position": {
+    "lon": 13.0023849,
+    "lat": 55.609022,
+    "how": "OSM n8706408033",
+    "_source": "OpenStreetMap n8706408033 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13009309649",
+   "street": "Neptunigatan",
+   "street_how": "nearest named street, 27.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13009309649 (already in OSM)",
+   "position": {
+    "lon": 12.999736,
+    "lat": 55.6094047,
+    "how": "OSM n13009309649",
+    "_source": "OpenStreetMap n13009309649 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Bemannade toaletter och dusch (staffed)",
+   "fee": "yes (amount not stated)",
+   "level_per_plan": "0",
+   "where": "by track 5",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa,Su 06:00-23:00",
+   "hours_source": "website (Jernhusen, Toalett)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Obemannade toaletter (unstaffed)",
+   "level_per_plan": "0",
+   "where": "in Gröna Hallen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett (staffed, accessible)",
+   "fee": "yes; card or cash",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:00-24:00",
+   "hours_source": "website (Jernhusen, Tillgänglighet)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Services)",
+   "fee": "small 39 kr/h (max 199 kr/24 h), large 69 kr/h (max 299 kr/24 h); max 7 days; card or coins",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 04:40-24:00; Sa,Su 06:00-24:00",
+   "hours_source": "website (Jernhusen: reachable while the station is open)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat (2)",
+   "level_per_plan": "0",
+   "note": "Jernhusen: two cash machines; OSM has two Bankomat machines side by side (n12124755075/6).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/uttagsautomat/, read 2026-10-30; OSM (osmfacts 740000003), read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "lounge",
+   "name": "SJ Lounge",
+   "level_per_plan": "0",
+   "where": "entering from the bus square (Centralplan), directly to the right of the entrance, opposite Skånetrafiken",
+   "opening_hours": "Mo-Fr 06:30-17:00; Sa,Su off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen's shop list gives these hours under \"SJ Lounge\" (its parser filed them under Salads & Smoothies).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/ and https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Skånetrafiken Kundcenter",
+   "level_per_plan": "0",
+   "where": "in Glashallen",
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/trafik-och-biljetter/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "outside the station by tracks 3a/4a (north side); taxi hosts weekdays 08:00–12:30 and 16:00–21:30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Sixt",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30",
+   "position": {
+    "lon": 13.0024304,
+    "lat": 55.6101203,
+    "osm_id": "n1677336158",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n1677336158",
+    "_source": "OpenStreetMap n1677336158 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_sharing",
+   "name": "Sunfleet bilpool",
+   "where": "Lokgatan 7; follow signs to Taxi, cars along the facade towards the car park, bays signed \"Reserverat för poolbil\"",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Bike & Ride (Malmö stad) with Cykelkliniken",
+   "where": "at the end of Kungalängan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Apcoa (outdoor parking and garage)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Centralplan bus terminal",
+   "where": "just south of the station building; western part (stops A–F) city buses, eastern part (G–I) regional, long-distance and replacement buses; Skånetrafiken's map shows stops A–N, with N for departures and M for arrivals of long-distance coaches",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "category": "supermarket",
+   "name": "Coop Nära",
+   "address": "Skeppsbron 1C",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Doz Apotek",
+   "address": "Centralplan 6",
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 09:00-17:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives Mo–Fr 7–20, Sa–Su 10–18 and, from 2026-10-19, Mo–Fr 06–19, Sa–Su 09–17; the later hours apply today.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 13.0001908,
+    "lat": 55.6090852,
+    "osm_id": "n8993076819",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 49.1,
+    "how": "OSM node n8993076819",
+    "_source": "OpenStreetMap n8993076819 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (Entréhall)",
+   "address": "Skeppsbron 1",
+   "where": "in the entrance hall (Entréhall)",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 12.9995291,
+     "lat": 55.6087207,
+     "osm_id": "n444845100",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 76.9,
+     "how": "OSM node n444845100",
+     "_source": "OpenStreetMap n444845100 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 13.0004214,
+     "lat": 55.6094643,
+     "osm_id": "n1677336035",
+     "osm_level": null,
+     "in_station_building": false,
+     "to_nearest_platform_m": 14.3,
+     "how": "OSM node n1677336035",
+     "_source": "OpenStreetMap n1677336035 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (Glashallen)",
+   "address": "Lokgatan 3",
+   "where": "in Glashallen",
+   "opening_hours": "Mo-Fr 08:00-18:00; Sa,Su 07:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 12.9995291,
+     "lat": 55.6087207,
+     "osm_id": "n444845100",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 76.9,
+     "how": "OSM node n444845100",
+     "_source": "OpenStreetMap n444845100 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 13.0004214,
+     "lat": 55.6094643,
+     "osm_id": "n1677336035",
+     "osm_level": null,
+     "in_station_building": false,
+     "to_nearest_platform_m": 14.3,
+     "how": "OSM node n1677336035",
+     "_source": "OpenStreetMap n1677336035 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån Glashallen",
+   "address": "Lokgatan 1",
+   "where": "in Glashallen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 13.0000798,
+    "lat": 55.6093053,
+    "osm_id": "n430003688",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 25.6,
+    "how": "OSM node n430003688",
+    "_source": "OpenStreetMap n430003688 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Tawana",
+   "where": "in the food court (\"Malmö Centralstation Food Courten\")",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 13.0000462,
+    "lat": 55.6089649,
+    "osm_id": "n1677336020",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 61.4,
+    "how": "OSM node n1677336020",
+    "_source": "OpenStreetMap n1677336020 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Oakberry Açaí",
+   "address": "Centralplan 4",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 12.9997983,
+    "lat": 55.6091117,
+    "osm_id": "n1677335977",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 41.0,
+    "how": "OSM node n1677335977",
+    "_source": "OpenStreetMap n1677335977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "station_hall",
+   "name": "Centralstationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:40-24:00; Sa 06:00-24:00; Su 06:00-24:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Malmö centralstation.",
+   "owner_text": "Allt om tillgängligheten på Malmö centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Tillgängliga entréer till stationen finns i den så kallade Glashallen på den norra sidan. Undvik ingångarna från Skeppsbron. Universaltoalett På stationen finns en bemannad universaltoalett som är avgiftsbelagd. Du kan betala med kort eller kontant. Mån-fre 5–24 Lör-sön 5–24 Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": "Mån-fre 5–24; Lör-sön 5–24 (hours named in the text; see owner_text for what they belong to)",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "Det finns bemannade toaletter och dusch vid spår 5 samt obemannade toaletter i Gröna Hallen.",
+   "owner_text": "Det finns bemannade toaletter och dusch vid spår 5 samt obemannade toaletter i Gröna Hallen. Öppettider Mån-fre 05.00-23.30 Lör-sön 06.00-23.00 Telefon. 040-607 84 00",
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa-Su 06:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "taxi",
+   "name": "Utanför stationen, vid spår 3a/4a, finns kvalitetssäkrade taxibilar. Bil finns att hyra hos Sixt och bilpool från Sunfleet.",
+   "owner_text": "Utanför stationen, vid spår 3a/4a, finns kvalitetssäkrade taxibilar. Bil finns att hyra hos Sixt och bilpool från Sunfleet. Taxi Trygghet – Utbildade och uniformerade taxichaufförer som hittar väl i staden. Säkerhet – Taxichaufförer som är noga med att följa trafikregler och med fordon som är hela, säkra och inte äldre än 6 år. Valfrihet – Du får alltid själv bestämma taxibil och bolag utan påverkan från taxichaufför. Prisgaranti – Taxibolagen förbinder sig till att priset inte överstiger områdets normaltaxa med mer än 10 procent. Taxivärdar i gula jackor finns på plats för hjälp och eventuella frågor: Vardagar 08.00–12.30 samt 16.00–21.30 Biluthyrning Sixt biluthyrning Telefon 040-12 99 50 [email protected] www.sixt.se Bilpool Sunfleet Pool-lösning Öppen pool, tillgänglig för alla Sunfleets medlemmar, dygnet runt. Adress Lokgatan 7 21120 Malmö Hitta hit Gående från Centralstationen, föl",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Parkeringen vid Malmö centralstation drivs av Apcoa och innefattar utomhusparkering och parkeringsgarage. I änden av Kungalängan ligger cykelgaraget Bike & Ride som drivs av Malmö Stad. Här finns även företaget Cykelkliniken.",
+   "owner_text": "Parkeringen vid Malmö centralstation drivs av Apcoa och innefattar utomhusparkering och parkeringsgarage. I änden av Kungalängan ligger cykelgaraget Bike & Ride som drivs av Malmö Stad. Här finns även företaget Cykelkliniken.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Liten box (bredd 36 cm, höjd 44 cm, djup 60 cm) 39 kr per påbörjad timme. Du debiteras för första timmen när du hyr boxen, resterande påbörjade timmer debiteras när du hämtar ditt bagage. Maxpris per 24 h 199 kr. Stor box (bredd 46 cm, höjd 60 cm, djup 85 cm) 69 kr per påbörjad timme. Du debiteras för första timmen när du hyr boxen, resterande påbörjade timme debiteras när du hämtar ditt bagage. Maxpris per 24 h 299 kr. Du betalar endast för första timmen när du hyr boxen, när du sedan hämtar ut ditt gods betalar du för resterande tid som är förbrukad. Kan betalas med kort eller mynt. Koden på kvittot öppnar din box. Förvaring i max 7 dygn. Vid fel eller problem - ring Speed Services 070-886 71 23. Se även stationens öppettider. Här kan du se en film hur du använder förvaringsboxarna",
+   "fee": "39 kr per påbörjad timme; 199 kr; 69 kr per påbörjad timme; 299 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Skånetrafikens kundcenter Ligger i Glashallen. Öppettider Se Skånetrafikens webbplats. 0451-288 400 skanetrafiken.se Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se Skånetrafiken SJ Snälltåget För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "På stationen finns två stycken uttagsautomater.",
+   "owner_text": "På stationen finns två stycken uttagsautomater.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/uttagsautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Fotoautomats information",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lounge",
+   "name": "SJ Lounge finns i Malmö Centralstation",
+   "owner_text": "SJ Lounge finns i Malmö Centralstation Går du in på centralstationen från busstorget så ligger loungen direkt till höger om entrén, mitt emot Skånetrafiken för mer information; https://www.sj.se/allt-om-resan/sj-lounge",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "Cash machine",
+   "app_poi": "jh-mc-27",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": null,
+   "_source": null,
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "atm",
+   "name": "Forex Bank",
+   "app_poi": "osm901520737",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.forex.se/",
+   "position": {
+    "lon": 13.0002963,
+    "lat": 55.6089448,
+    "osm_id": "n901520737",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 47.0,
+    "how": "OSM node n901520737",
+    "_source": "OpenStreetMap n901520737 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "app_poi": "osm444845100",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "hours_by_unit": [
+    {
+     "where": "Skeppsbron",
+     "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 08:00-18:00",
+     "hours_raw": "Mån–fre 7–19; Lör–sön 8–18"
+    },
+    {
+     "where": "Glashallen",
+     "opening_hours": "Mo-Fr 08:00-18:00; Sa-Su 07:00-18:00",
+     "hours_raw": "Mån–fre 8–18; Lör–sön 7–18"
+    }
+   ],
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.espressohouse.com/",
+   "position": {
+    "lon": 12.9995291,
+    "lat": 55.6087207,
+    "osm_id": "n444845100",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 76.9,
+    "how": "OSM node n444845100",
+    "_source": "OpenStreetMap n444845100 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "app_poi": "jh-mc-38",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "hours_by_unit": [
+    {
+     "where": "Skeppsbron",
+     "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 08:00-18:00",
+     "hours_raw": "Mån–fre 7–19; Lör–sön 8–18"
+    },
+    {
+     "where": "Glashallen",
+     "opening_hours": "Mo-Fr 08:00-18:00; Sa-Su 07:00-18:00",
+     "hours_raw": "Mån–fre 8–18; Lör–sön 7–18"
+    }
+   ],
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.espressohouse.com/",
+   "position_candidates": [
+    {
+     "lon": 12.9995291,
+     "lat": 55.6087207,
+     "osm_id": "n444845100",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 76.9,
+     "how": "OSM node n444845100",
+     "_source": "OpenStreetMap n444845100 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 13.0004214,
+     "lat": 55.6094643,
+     "osm_id": "n1677336035",
+     "osm_level": null,
+     "in_station_building": false,
+     "to_nearest_platform_m": 14.3,
+     "how": "OSM node n1677336035",
+     "_source": "OpenStreetMap n1677336035 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled (this name appears 2 times in the list)"
+  },
+  {
+   "category": "cafe",
+   "name": "Gateau",
+   "app_poi": "osm8993117217",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa-Su 07:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.gateau.se/",
+   "position": {
+    "lon": 13.0002906,
+    "lat": 55.6087229,
+    "osm_id": "n8993117217",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 55.0,
+    "how": "OSM node n8993117217",
+    "_source": "OpenStreetMap n8993117217 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "St Jakobs Stenugnsbageri",
+   "app_poi": "osm10024758396",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 09:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.facebook.com/stjakobsglasvasen",
+   "position": {
+    "lon": 12.9999747,
+    "lat": 55.6096939,
+    "osm_id": "n10024758396",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 3.5,
+    "how": "OSM node n10024758396",
+    "_source": "OpenStreetMap n10024758396 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "7-Eleven",
+   "app_poi": "osm2747390883",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Th 06:00-24:00; Fr 06:00-03:00; Sa 06:00-03:00; Su 07:00-24:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.7-eleven.se/",
+   "position": {
+    "lon": 13.0008532,
+    "lat": 55.6087867,
+    "osm_id": "n2747390883",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 23.0,
+    "how": "OSM node n2747390883",
+    "_source": "OpenStreetMap n2747390883 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "7-Eleven",
+   "app_poi": "osm5834378330",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Th 06:00-24:00; Fr 06:00-03:00; Sa 06:00-03:00; Su 07:00-24:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.7-eleven.se/",
+   "position": {
+    "lon": 13.0000166,
+    "lat": 55.6096197,
+    "osm_id": "n5834378330",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.6,
+    "how": "OSM node n5834378330",
+    "_source": "OpenStreetMap n5834378330 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm430003688",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 06:55-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.pressbyran.se/",
+   "position": {
+    "lon": 13.0000798,
+    "lat": 55.6093053,
+    "osm_id": "n430003688",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 25.6,
+    "how": "OSM node n430003688",
+    "_source": "OpenStreetMap n430003688 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "locker",
+   "name": "Luggage lockers",
+   "app_poi": "jh-mc-40",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 04:40-24:00; Sa,Su 06:00-24:00",
+   "hours_source": "website",
+   "hours_checked": "2026-10-22",
+   "_source": "the app map (website)"
+  },
+  {
+   "category": "other",
+   "name": "Sixt car hire",
+   "app_poi": "jh-mc-35",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "pharmacy",
+   "name": "DOZ Apotek",
+   "app_poi": "osm8993076819",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": "Mån–fre 7–20*; Lör–sön 10–18*; * Öppettider from 2026-10-19; Mån-fre 06.00-19.00; Lör-sön 09.00-17.00",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "dozapotek.se/",
+   "position": {
+    "lon": 13.0001908,
+    "lat": 55.6090852,
+    "osm_id": "n8993076819",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 49.1,
+    "how": "OSM node n8993076819",
+    "_source": "OpenStreetMap n8993076819 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Bistro Royal",
+   "app_poi": "osm3402678105",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 10:00-22:00; Sa 10:00-23:00; Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "bistroroyal.se/",
+   "position": {
+    "lon": 13.000635,
+    "lat": 55.60877,
+    "osm_id": "n3402678105",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 33.9,
+    "how": "OSM node n3402678105",
+    "_source": "OpenStreetMap n3402678105 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Burger King",
+   "app_poi": "osm429998727",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 10:00-22:00; Sa-Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.burgerking.se/",
+   "position": {
+    "lon": 13.0003333,
+    "lat": 55.6088803,
+    "osm_id": "n429998727",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.4,
+    "how": "OSM node n429998727",
+    "_source": "OpenStreetMap n429998727 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Chao Oriental Express",
+   "app_poi": "osm1677336009",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 10:00-19:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "position": {
+    "lon": 12.9999817,
+    "lat": 55.6091068,
+    "osm_id": "n1677336009",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 45.1,
+    "how": "OSM node n1677336009",
+    "_source": "OpenStreetMap n1677336009 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Holy Greens",
+   "app_poi": "jh-mc-33",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa-Su 10:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "Holygrens.se",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "restaurant",
+   "name": "O'Learys",
+   "app_poi": "osm444845102",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Su-Th 11:30-20:30; Fr-Sa 11:30-22:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "olearys.se/malmo-central/",
+   "position": {
+    "lon": 12.9995021,
+    "lat": 55.6088778,
+    "osm_id": "n444845102",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 59.8,
+    "how": "OSM node n444845102",
+    "_source": "OpenStreetMap n444845102 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Pölsemannen",
+   "app_poi": "osm1181418068",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Su 11:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "position": {
+    "lon": 13.0002658,
+    "lat": 55.6095944,
+    "osm_id": "n1181418068",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n1181418068",
+    "_source": "OpenStreetMap n1181418068 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Salads and smoothies",
+   "app_poi": "osm1677336092",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "hours_by_unit": [
+    {
+     "where": "SJ Lounge",
+     "opening_hours": null,
+     "hours_raw": "0771–75 75 75"
+    },
+    {
+     "where": "Skeppsbron 1",
+     "opening_hours": "Mo-Fr 06:30-17:00; Sa-Su off",
+     "hours_raw": "Mån–fre 06.30–17.00; Lör-sön stängt"
+    }
+   ],
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 10:00-16:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "saladsandsmoothies.se/",
+   "position": {
+    "lon": 12.999825,
+    "lat": 55.6090522,
+    "osm_id": "n1677336092",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 47.8,
+    "how": "OSM node n1677336092",
+    "_source": "OpenStreetMap n1677336092 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Sofra",
+   "app_poi": "osm1677336148",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 10:00-21:00; Su 10:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "sofra.nu/",
+   "position": {
+    "lon": 12.9998827,
+    "lat": 55.6092746,
+    "osm_id": "n1677336148",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 25.4,
+    "how": "OSM node n1677336148",
+    "_source": "OpenStreetMap n1677336148 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Spazio",
+   "app_poi": "osm1677336183",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 09:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "spazio.nu/",
+   "position": {
+    "lon": 13.0001656,
+    "lat": 55.608817,
+    "osm_id": "n1677336183",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 58.5,
+    "how": "OSM node n1677336183",
+    "_source": "OpenStreetMap n1677336183 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Subway",
+   "app_poi": "osm1677335991",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa-Su 09:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.subway.se/",
+   "position": {
+    "lon": 13.0003588,
+    "lat": 55.6088219,
+    "osm_id": "n1677335991",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.7,
+    "how": "OSM node n1677335991",
+    "_source": "OpenStreetMap n1677335991 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Tawana",
+   "app_poi": "osm1677336020",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Th 11:00-22:00; Fr-Sa 11:00-23:00; Su 12:00-21:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "hours_unit": "Jernhusen lists this brand in several places; these are the hours for \"Malmö Centralstation Food Courten\"",
+   "website": "www.tawana.se",
+   "position": {
+    "lon": 13.0000462,
+    "lat": 55.6089649,
+    "osm_id": "n1677336020",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 61.4,
+    "how": "OSM node n1677336020",
+    "_source": "OpenStreetMap n1677336020 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Woso Sushi",
+   "app_poi": "osm11249031237",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "woso.se/",
+   "position": {
+    "lon": 13.0002103,
+    "lat": 55.60871,
+    "osm_id": "n11249031237",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 60.2,
+    "how": "OSM node n11249031237",
+    "_source": "OpenStreetMap n11249031237 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop",
+   "name": "Coop Nära",
+   "app_poi": "osm1512477367",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": "Må–fre 06.00–23.00; Lör–sön 07.00–23.00",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.coop.se/Butiker-varor--erbjudanden/Butiker-import/Coop-Nara/Coop-Nara-Malmo-Central/",
+   "position": {
+    "lon": 12.9994913,
+    "lat": 55.6092142,
+    "osm_id": "n1512477367",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.0,
+    "how": "OSM node n1512477367",
+    "_source": "OpenStreetMap n1512477367 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop",
+   "name": "Kjell & Co",
+   "app_poi": "jh-mc-34",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa off; Su off",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.kjell.com/se",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "shop",
+   "name": "Pocket Shop",
+   "app_poi": "osm1677336121",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:30-21:00; Sa-Su 08:00-19:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.pocketshop.se/",
+   "position": {
+    "lon": 13.0002534,
+    "lat": 55.6090204,
+    "osm_id": "n1677336121",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 47.3,
+    "how": "OSM node n1677336121",
+    "_source": "OpenStreetMap n1677336121 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop",
+   "name": "Synsam",
+   "app_poi": "jh-mc-32",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa-Su off",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.Synsam.se",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "ticket",
+   "name": "Skånetrafiken Kundcenter",
+   "app_poi": "osm1677336163",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "website": "www.skanetrafiken.se/"
+  },
+  {
+   "category": "toilet",
+   "name": "Toilets and luggage lockers",
+   "app_poi": "jh-mc-37",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "waiting",
+   "name": "SJ Lounge",
+   "app_poi": "jh-mc-3",
+   "level": "L0",
+   "level_name": "Street and main hall",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:30-17:00; Sa-Su off",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/"
+  },
+  {
+   "category": null,
+   "name": "OAKBERRY ACAI",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "centralplan 4",
+     "opening_hours": null
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "HTTP://oakberry.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 12.9997983,
+    "lat": 55.6091117,
+    "osm_id": "n1677335977",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 41.0,
+    "how": "OSM node n1677335977",
+    "_source": "OpenStreetMap n1677335977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Pølsemannen",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Su 11:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.polsemannen.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 13.0002658,
+    "lat": 55.6095944,
+    "osm_id": "n1181418068",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n1181418068",
+    "_source": "OpenStreetMap n1181418068 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Sushi Yama",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 10:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "sushiyama.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 13.0002103,
+    "lat": 55.60871,
+    "osm_id": "n11249031237",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 60.2,
+    "how": "OSM node n11249031237",
+    "_source": "OpenStreetMap n11249031237 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Skånetrafiken",
+   "osm_id": "n1677336163",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n1677336163 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n1719405846",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n1719405846 (read 2026-10-30)",
+   "position": {
+    "lon": 12.9997192,
+    "lat": 55.6090188,
+    "osm_id": "n1719405846",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 49.2,
+    "how": "OSM node n1719405846",
+    "_source": "OpenStreetMap n1719405846 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2715064772",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": "Su-Th 06:30-22:30,22:45-05:45; Fr-Sa 06:00-23:30,23:45-05:45",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n2715064772 (read 2026-10-30)",
+   "position": {
+    "lon": 13.000909,
+    "lat": 55.6095117,
+    "osm_id": "n2715064772",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 2.5,
+    "how": "OSM node n2715064772",
+    "_source": "OpenStreetMap n2715064772 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "DSB",
+   "osm_id": "n10024749276",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n10024749276 (read 2026-10-30)",
+   "position": {
+    "lon": 12.999824,
+    "lat": 55.6097794,
+    "osm_id": "n10024749276",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.8,
+    "how": "OSM node n10024749276",
+    "_source": "OpenStreetMap n10024749276 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "DSB",
+   "osm_id": "n10024749286",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n10024749286 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0000132,
+    "lat": 55.6098093,
+    "osm_id": "n10024749286",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.8,
+    "how": "OSM node n10024749286",
+    "_source": "OpenStreetMap n10024749286 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "left_luggage",
+   "name": null,
+   "osm_id": "n13592643543",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13592643543 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0010131,
+    "lat": 55.6095233,
+    "osm_id": "n13592643543",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 1.9,
+    "how": "OSM node n13592643543",
+    "_source": "OpenStreetMap n13592643543 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Speed Box",
+   "osm_id": "n13594624260",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13594624260 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0014936,
+    "lat": 55.6096696,
+    "osm_id": "n13594624260",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 9.4,
+    "how": "OSM node n13594624260",
+    "_source": "OpenStreetMap n13594624260 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n13930551322",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13930551322 (read 2026-10-30)",
+   "position": {
+    "lon": 13.000011,
+    "lat": 55.6094092,
+    "osm_id": "n13930551322",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.3,
+    "how": "OSM node n13930551322",
+    "_source": "OpenStreetMap n13930551322 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n14135894392",
+   "osm_level": "-1",
+   "fee": "no",
+   "opening_hours": "Oct-Apr: Mo-Su,PH 09:00-18:00; May-Sep: Mo-Su,PH 09:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n14135894392 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0024181,
+    "lat": 55.608837,
+    "osm_id": "n14135894392",
+    "osm_level": "-1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 36.0,
+    "how": "OSM node n14135894392",
+    "_source": "OpenStreetMap n14135894392 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "brand": "McDonald's",
+   "cuisine": "burger",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.9961702,
+    "lat": 55.6094318,
+    "osm_id": "n514143378",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 95.2,
+    "how": "OSM node n514143378",
+    "_source": "OpenStreetMap n514143378 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n514143378 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.9962489,
+    "lat": 55.6091022,
+    "osm_id": "n625987377",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 91.1,
+    "how": "OSM node n625987377",
+    "_source": "OpenStreetMap n625987377 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n625987377 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Gottelisa",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.000956,
+    "lat": 55.608803,
+    "osm_id": "n3402696470",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 18.3,
+    "how": "OSM node n3402696470",
+    "_source": "OpenStreetMap n3402696470 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n3402696470 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "St. Jakobs Stenugnsbageri",
+   "brand": null,
+   "cuisine": "bakery;coffee_shop",
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa-Su 08:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.999973,
+    "lat": 55.6101016,
+    "osm_id": "n8072027420",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 32.9,
+    "how": "OSM node n8072027420",
+    "_source": "OpenStreetMap n8072027420 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n8072027420 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bicycle",
+   "name": "Bike&Ride cykelservice",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.0024482,
+    "lat": 55.6087493,
+    "osm_id": "n10755624816",
+    "osm_level": "-1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 45.9,
+    "how": "OSM node n10755624816",
+    "_source": "OpenStreetMap n10755624816 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n10755624816 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "brand": "Bankomat",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 04:40-24:00, Sa-Su 06:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.0000459,
+    "lat": 55.6095545,
+    "osm_id": "n12124755075",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n12124755075",
+    "_source": "OpenStreetMap n12124755075 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n12124755075 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "brand": "Bankomat",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 04:40-24:00, Sa-Su 06:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.000037,
+    "lat": 55.609553,
+    "osm_id": "n12124755076",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n12124755076",
+    "_source": "OpenStreetMap n12124755076 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n12124755076 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Malmö Centralstation (station plan)",
+   "publisher": "Jernhusen",
+   "url": "https://www.datocms-assets.com/163536/1769697321-malmo-centralstation.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Only the legend (Entré, Tåg, Taxi, Förvaring, Hiss, Buss, Cykelparkering, Hjärtstartare, Rulltrappa, Flygbuss, Parkering, Toalett, Trappa, Ersättningsbussar, Ledsagarservice, Uttagsautomat) is machine-readable; positions need a visual read."
+  },
+  {
+   "title": "Malmö C terminalkarta (Stationsområdet)",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/80000_malmoc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Updated June 2026; bus stops A–N, tracks 1–11, legend with Biljettautomat, Kundcenter, Hiss, Trappa, Cykelgarage, Ledsagarplats; symbol positions not machine-readable."
+  },
+  {
+   "title": "Malmö Centralstation",
+   "publisher": "Jernhusen",
+   "url": "https://www.datocms-assets.com/163536/1769697321-malmo-centralstation.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/karta-over-stationen/"
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.skanetrafiken.se",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/80000_malmoc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Signposted level names (e.g. \"Plan 0\", \"Plan -2\") and the floor heights/depth of L0 and L-2: no open text source gives them; Jernhusen's and Skånetrafiken's plans are image-only apart from the legend.",
+  "Exact positions of lifts, escalators and stairs to tracks 1–4 rest on OSM only; the plans would confirm them on a visual read.",
+  "Jernhusen's hours block lists \"Glashallen\" and \"Öppet dygnet runt\" without hours; it probably means Glashallen is open around the clock (Wikipedia: after midnight a smaller area near the underground platforms stays open, reached by side doors), but the text does not say so outright.",
+  "Where in the building the shops given only by street address are (Centralplan 1/4/6/10, Skeppsbron 1, Lokgatan 1/6/8/9, Rälsplatsen 6): needs the plan.",
+  "Gottelisa (OSM n3402696470, confectionery) is not on Jernhusen's list: may have closed.",
+  "Bike & Ride hours: malmo.se returned a server error.",
+  "Fee for the staffed toilets: Jernhusen does not state the amount."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L0 (Street and main hall): height not measured",
+  "level L-2 (City Tunnel (tracks 1–4)): height not measured",
+  "cafe Espresso House: no opening hours",
+  "cafe St Jakobs Stenugnsbageri: no opening hours",
+  "kiosk 7-Eleven: no opening hours",
+  "restaurant Chao Oriental Express: no opening hours",
+  "restaurant Holy Greens: no opening hours",
+  "restaurant Tawana: no opening hours",
+  "restaurant Woso Sushi: no opening hours",
+  "shop Kjell & Co: no opening hours",
+  "shop Synsam: no opening hours",
+  "waiting SJ Lounge: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "level L0 (Street and main hall): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L-2 (City Tunnel (tracks 1–4)): height not measured",
+   "answer": "Still open: no source gives the depth of Malmö C Nedre (Wikipedia gives 25 m only for Triangeln and ~7 m for Hyllie).",
+   "_source": "https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30"
+  },
+  {
+   "question": "cafe Espresso House: no opening hours",
+   "answer": "Two units. Entréhall (Skeppsbron 1): Mo-Fr 07:00-19:00; Sa,Su 08:00-18:00. Glashallen (Lokgatan 3): Mo-Fr 08:00-18:00; Sa,Su 07:00-18:00. The app's jh-mc-38 needs matching to one of them; OSM n444845100 has older hours (Mo-Fr 05:30-20:00).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "cafe St Jakobs Stenugnsbageri: no opening hours",
+   "answer": "Mo-Fr 07:00-19:00; Sa,Su 09:00-18:00 (Jernhusen, \"St Jakobs\", Lokgatan 8).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "kiosk 7-Eleven: no opening hours",
+   "answer": "Jernhusen lists one 7-Eleven (Skeppsbron 1): Mo-Th 06:00-24:00; Fr,Sa 06:00-03:00; Su 07:00-24:00. The app has two 7-Eleven POIs (OSM n2747390883 with other hours, and n5834378330 by the City Tunnel ticket machines); which one Jernhusen's hours belong to, and whether both still exist, stays open.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Chao Oriental Express: no opening hours",
+   "answer": "Mo-Fr 10:00-20:00; Sa,Su 10:00-19:00 (Centralplan 1).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Holy Greens: no opening hours",
+   "answer": "Mo-Fr 07:00-21:00; Sa,Su 10:00-20:00 (Lokgatan 6).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Tawana: no opening hours",
+   "answer": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-21:00 (in the food court).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Woso Sushi: no opening hours",
+   "answer": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00 (Centralplan 1). Jernhusen also lists a separate Sushi Yama (Lokgatan 6, Mo-Su 10:00-20:00).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Kjell & Co: no opening hours",
+   "answer": "Kjell & Company, Lokgatan 9: Mo-Fr 09:00-18:00; Sa,Su off.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Synsam: no opening hours",
+   "answer": "Rälsplatsen 6: Mo-Fr 09:00-18:00; Sa,Su off.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "waiting SJ Lounge: no opening hours",
+   "answer": "Mo-Fr 06:30-17:00; Sa,Su off. Location: right of the entrance from the bus square, opposite Skånetrafiken.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/ and https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ]
+}

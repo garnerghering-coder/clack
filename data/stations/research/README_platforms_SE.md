@@ -1,6 +1,6 @@
 # Platform register for the 33 Swedish hub and mid stations (batch step 1)
 
-Read 2026-10-30. Licence: Trafikverket data (Network Statement annex and BanInfo, CC0). Credit "Trafikverket".
+Read 2026-10-30; rebuilt the same day from the fuller per-station BanInfo sweeps of the 3D pass (more objects matched, e.g. Eskilstuna C track 4 = BIS 1208). Licence: Trafikverket data (Network Statement annex and BanInfo, CC0). Credit "Trafikverket".
 
 | File | What it is |
 |---|---|
@@ -23,8 +23,9 @@ Read 2026-10-30. Licence: Trafikverket data (Network Statement annex and BanInfo
 - **Stockholm City** BanInfo objects (tracks 2 and 3, hög) fell inside the Stockholm C search box and were left out: separate station.
 - **Örebro S:** Bilaga row 1141 (tracks 2,30, mellan, 207 m) is out of date. Tab 5 says the middle platform goes and track 30 gets a new 240 m mellan side platform (planned 2026-05-30); BanInfo has that platform (BIS 2618, valid from 2026-06-26) plus BIS 1219 (track 1, låg, 188 m).
 - **Göteborg C, tracks 22 and 23:** new BanInfo objects valid from 2026-10-29 (mellan, 250 m, 14.2 m wide, steel edge), not in Bilaga 2A.
-- **Eskilstuna C:** two "ej norm" objects on tracks 12 and 14, 0.7–0.9 km north-west, kept as BanInfo-only rows. Bilaga row 161 (track 4, 142 m, Tak) found no BanInfo object.
+- **Eskilstuna C:** two "ej norm" objects on tracks 12 and 14, 0.7–0.9 km north-west, kept as BanInfo-only rows.
+- **BanInfo track numbers are provisional:** BanInfo was being re-issued on 2026-10-28…30 and some objects changed track link and side between queries.
 - **Uppsala C:** two "ej norm" objects on tracks z9/z10 at km 114, another line; kept as BanInfo-only rows.
 - **Södertälje Syd** is two places in Bilaga: *undre* (bandel 412, tracks 3 and 4, hög) and *övre* (bandel 418, tracks 5–8, mellan).
 - **Malmö C** includes the Citytunneln platforms (bandel 960, tracks 1a–4a/2a–4b).
-- The laser cross-check against these classes is per station, still to do.
+- The laser cross-check against these classes is in each station's `3D_SOURCES_FINDINGS.md`, gathered in `REVIEW_platform_heights_SE.md`.

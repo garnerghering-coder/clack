@@ -1,0 +1,228 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Station level (OSM level 0; signposted name not found)",
+   "note": "OSM tags the hall's shops, toilets, lockers and photo booth level 0.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "2",
+   "name": "OSM level 2 (signposted name not found)",
+   "note": "OSM's escalators and lifts run between levels 0 and 2 and are tagged as reaching platforms 1 and 2; some stairs are tagged 0;1 and 1;2, so OSM also has a level 1. No owner source names or confirms these levels.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1 (layer, no level tag)",
+   "name": "Underpass (gångtunnel; signposted name not found)",
+   "note": "OSM underpass w52143375 (layer -1, 46 m) reaches platforms 2 and 3a; a second underpass w103156302 (41 m) reaches no platform.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "level 0",
+    "level 2 / platform 1"
+   ],
+   "where": "two escalators, one each way (OSM w1458552030, w1458552032)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level 0",
+    "level 2 / platform 2"
+   ],
+   "where": "two escalators, one each way (OSM w1458552041, w1458552043)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 2 / platform 2"
+   ],
+   "where": "OSM w1458552039",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 2"
+   ],
+   "where": "OSM w1465328969; reaches no platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "level 0",
+    "level 2"
+   ],
+   "where": "OSM w1458552025 (plus w1458552021 0;1 and w1458552015 1;2)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "street",
+    "platforms 2 and 3a"
+   ],
+   "where": "OSM w52143375 (layer -1)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "between": [
+    "unknown"
+   ],
+   "where": "OSM w56316922 (layer 1, 42 m); reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré",
+   "street": "Stationsgatan",
+   "where": "OSM n13376527995 (entrance=main), about 40 m from Stationsgatan; station address Stationsgatan 7–9. Jernhusen: all entrances are accessible ('Samtliga entréer till stationen är tillgängliga').",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrances on Stationsgatan (several doors)",
+   "street": "Stationsgatan",
+   "level": "0",
+   "where": "OSM n7900314295, n13376527961, n13376527966, n13376527992 and others along the Stationsgatan side",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Kurortsvägen side",
+   "street": "Kurortsvägen",
+   "level": "0;2",
+   "where": "OSM n13439785260 (level 0;2) and n1039096055 (entrance=staircase, level 0), both about 17 m from Kurortsvägen",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "level_per_plan": "0",
+   "where": "in Skövde resecentrum (Stationsgatan 7–9); position in the building not stated",
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa 06:30-19:00; Su 07:00-20:00",
+   "hours_source": "website (shop): Espresso House café data, coffeeShopId 248 'Skövde Central SKÖ'",
+   "hours_checked": "2026-10-30",
+   "note": "Three sources disagree: Jernhusen says Mo-Fr 05:45-21:00; Sa 07:00-19:00; Su 07:00-20:00, OSM says Mo-Fr 06:00-19:00; Sa,Su 08:00-18:00. The shop's own data is given here.",
+   "_source": "https://myespressohouse.com/beproud/api/CoffeeShop/v2/248, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM, level 0)",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa 07:30-22:00; Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours (Pressbyrån's store finder loads by script and could not be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Resecentrumfrisörerna",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM 'Resecentrumfrisören', level 0)",
+   "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours (no own website found)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card)",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020253, level 0)",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/toalett/ and https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "S 29 kr/h (max 149 kr/24 h), M 39 kr/h (max 199), L 49 kr/h (max 249); max 7 days",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020251, level 0)",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/forvaringsboxar/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020252, level 0)",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationshall",
+   "level_per_plan": "0",
+   "where": "Skövde resecentrum's hall",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Skövde resecentrum (bus)",
+   "where": "by the station on Stationsgatan (OSM n14167707296); Västtrafik's train stop lists lägen 1, 2, 3A, 3B, X and E",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; Västtrafik stop page 'Skövde resecentrum (tåg)', https://www.vasttrafik.se/reseplanering/hallplatser/9021014035004000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "fee": "yes",
+   "where": "by the station; also paid parking for disabled people",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/parkering/ and https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests",
+   "fee": "no",
+   "where": "station-wide",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/wifi/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Skövde resecentrum (tåg), stop page with map",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014035004000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "interactive map only; no PDF station plan found; lists lägen 1, 2, 3A, 3B, X, E"
+  }
+ ],
+ "open": [
+  "The review queue lists no questions for Skövde; nothing to answer.",
+  "Level names as signposted and what OSM's levels 0, 1 and 2 are (hall, mezzanine, platforms?): no owner plan or text found; Jernhusen links only Västtrafik's interactive stop page; English Wikipedia says only 2 platforms, 3 tracks.",
+  "Every lift, escalator, stair and underpass here is OSM only; no owner text says Skövde has lifts or escalators (Jernhusen's accessibility page mentions only accessible entrances, toilet and parking).",
+  "Floor heights: no open source measures them.",
+  "Espresso House hours: shop data, Jernhusen and OSM disagree (shop data used).",
+  "Pressbyrån and Resecentrumfrisörerna hours only from OSM."
+ ]
+}

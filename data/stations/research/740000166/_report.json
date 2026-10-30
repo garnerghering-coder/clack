@@ -1,0 +1,113 @@
+{
+ "clack_id": "740000166",
+ "slug": "katrineholm_c",
+ "flags": [
+  "Platform BIS 1297 (track 1): laser gives 0.71 m above the track bed (≈0.54 m above rail after −0.15…0.2 m), register class hög = 0.73 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 1295 (track 5): laser gives 0.72 m above the track bed (≈0.54 m above rail after −0.15…0.2 m), register class hög = 0.73 m. Not decided; add to REVIEW.md.",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1223482268 (cycleway, primary)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=16.200899,58.994011,16.216626,58.999156",
+ "ground": {
+  "min_m": 42.08,
+  "median_m": 46.38,
+  "max_m": 54.02,
+  "nan_cells": 0,
+  "size_m": [
+   663,
+   317
+  ],
+  "box_sweref": [
+   569119,
+   6540141,
+   569782,
+   6540458
+  ],
+  "tiles": [
+   "654_56 (2023-08-11)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20c018-65400_5675_25.copc.laz"
+  ],
+  "scan_date": "2020-11-20",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 460153,
+  "density_in_box": 2.19,
+  "classes": {
+   "1": 178751,
+   "2": 275879,
+   "7": 695,
+   "17": 4828
+  },
+  "train_points_class64": 507
+ },
+ "platforms": [
+  {
+   "bis_object": "1297",
+   "track": "1",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 364.0,
+   "width_m": null,
+   "roof": "Skydd",
+   "track_bed_m": 45.93,
+   "track_bed_points": 1238,
+   "platform_surface_m": 46.64,
+   "platform_points": 4217,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.54
+  },
+  {
+   "bis_object": "1296",
+   "track": "4",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 365.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 45.96,
+   "track_bed_points": 1102,
+   "platform_surface_m": 46.79,
+   "platform_points": 4134,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.83,
+   "laser_estimate_above_rail_m": 0.65
+  },
+  {
+   "bis_object": "1295",
+   "track": "5",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 367.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 45.95,
+   "track_bed_points": 1297,
+   "platform_surface_m": 46.67,
+   "platform_points": 4168,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.72,
+   "laser_estimate_above_rail_m": 0.54
+  }
+ ],
+ "platform_surface_m": 46.67,
+ "track_bed_m": 45.95,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 3,
+  "footbridge": 0,
+  "canopy_osm": 1,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 103,
+ "photos_station_related": 43
+}

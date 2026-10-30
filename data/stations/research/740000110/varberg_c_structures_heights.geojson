@@ -1,0 +1,811 @@
+{
+ "type": "FeatureCollection",
+ "name": "varberg_c_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m RH 2000",
+ "platform_surface_m": null,
+ "track_bed_m": null,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2488738,
+       57.1107174
+      ],
+      [
+       12.249136600000002,
+       57.1106985
+      ],
+      [
+       12.249374200000002,
+       57.1106813
+      ],
+      [
+       12.249435400000001,
+       57.110931199999996
+      ],
+      [
+       12.2494427,
+       57.1109612
+      ],
+      [
+       12.2494653,
+       57.1110533
+      ],
+      [
+       12.2494744,
+       57.111090700000005
+      ],
+      [
+       12.249513800000003,
+       57.111087899999994
+      ],
+      [
+       12.249551400000001,
+       57.1110852
+      ],
+      [
+       12.2496098,
+       57.1113241
+      ],
+      [
+       12.2492889,
+       57.1113472
+      ],
+      [
+       12.2490324,
+       57.11136570000001
+      ],
+      [
+       12.2489786,
+       57.11114560000001
+      ],
+      [
+       12.2489739,
+       57.1111266
+      ],
+      [
+       12.2488738,
+       57.1107174
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1414446572",
+    "name": "station building",
+    "osm_tags": {
+     "building": "train_station",
+     "layer": "1",
+     "start_date": "2025-07-13"
+    },
+    "ground_min_m": 1.64,
+    "ground_median_m": 2.28,
+    "ground_max_m": 3.27,
+    "roof_top_median_m": 6.86,
+    "roof_top_p95_m": 8.45,
+    "laser_points": 534,
+    "height_above_ground_median_m": 4.58,
+    "height_above_ground_p95_m": 6.17,
+    "source": "Outline OSM w1414446572 (ODbL); roof = median of 534 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.250095200000002,
+       57.11306119999999
+      ],
+      [
+       12.250137600000002,
+       57.11318679999998
+      ],
+      [
+       12.2493586,
+       57.1132435
+      ],
+      [
+       12.249315200000002,
+       57.113116599999984
+      ],
+      [
+       12.250095200000002,
+       57.11306119999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1463599003",
+    "name": "Linda Hanssons Bro (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Linda Hanssons Bro"
+    },
+    "ground_min_m": -5.72,
+    "ground_median_m": -4.97,
+    "ground_max_m": 2.87,
+    "roof_top_median_m": 2.31,
+    "roof_top_p95_m": 6.04,
+    "laser_points": 550,
+    "height_above_ground_median_m": 7.28,
+    "height_above_ground_p95_m": 11.01,
+    "source": "Outline OSM w1463599003 (ODbL); roof = median of 550 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2498501,
+       57.1123543
+      ],
+      [
+       12.2498336,
+       57.1123537
+      ],
+      [
+       12.249811200000002,
+       57.11235289999999
+      ],
+      [
+       12.249787400000002,
+       57.112352099999995
+      ],
+      [
+       12.249720500000002,
+       57.112349699999996
+      ],
+      [
+       12.249234600000001,
+       57.112384600000006
+      ],
+      [
+       12.249108900000001,
+       57.11240309999999
+      ],
+      [
+       12.249068900000001,
+       57.11224159999998
+      ],
+      [
+       12.2491964,
+       57.11224369999999
+      ],
+      [
+       12.2496807,
+       57.11220999999998
+      ],
+      [
+       12.249750000000002,
+       57.11220029999999
+      ],
+      [
+       12.2497718,
+       57.1121972
+      ],
+      [
+       12.249791400000001,
+       57.11219439999999
+      ],
+      [
+       12.249808200000002,
+       57.112192099999994
+      ],
+      [
+       12.249828600000003,
+       57.1122711
+      ],
+      [
+       12.2498501,
+       57.1123543
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1463599004",
+    "name": "Alida Svenssons gång- och cykelbro (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Alida Svenssons gång- och cykelbro"
+    },
+    "ground_min_m": -6.22,
+    "ground_median_m": -3.68,
+    "ground_max_m": 3.63,
+    "roof_top_median_m": 3.19,
+    "roof_top_p95_m": 6.22,
+    "laser_points": 859,
+    "height_above_ground_median_m": 6.87,
+    "height_above_ground_p95_m": 9.9,
+    "source": "Outline OSM w1463599004 (ODbL); roof = median of 859 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249787400000002,
+       57.112352099999995
+      ],
+      [
+       12.249811200000002,
+       57.11235289999999
+      ],
+      [
+       12.2498336,
+       57.1123537
+      ],
+      [
+       12.249817,
+       57.11257539999999
+      ],
+      [
+       12.249795500000001,
+       57.11257499999999
+      ],
+      [
+       12.2497706,
+       57.11257439999999
+      ],
+      [
+       12.249787400000002,
+       57.112352099999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463599038",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.47,
+    "ground_median_m": -3.32,
+    "ground_max_m": 2.17,
+    "roof_top_median_m": 2.56,
+    "roof_top_p95_m": 4.16,
+    "laser_points": 80,
+    "height_above_ground_median_m": 5.88,
+    "height_above_ground_p95_m": 7.48,
+    "source": "Outline OSM w1463599038 (ODbL); roof = median of 80 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249750000000002,
+       57.11220029999999
+      ],
+      [
+       12.2496406,
+       57.1120041
+      ],
+      [
+       12.249661500000002,
+       57.1120007
+      ],
+      [
+       12.249681500000001,
+       57.1119974
+      ],
+      [
+       12.249791400000001,
+       57.11219439999999
+      ],
+      [
+       12.2497718,
+       57.1121972
+      ],
+      [
+       12.249750000000002,
+       57.11220029999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463599039",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.65,
+    "ground_median_m": -2.12,
+    "ground_max_m": 3.2,
+    "roof_top_median_m": 3.51,
+    "roof_top_p95_m": 3.55,
+    "laser_points": 61,
+    "height_above_ground_median_m": 5.63,
+    "height_above_ground_p95_m": 5.67,
+    "source": "Outline OSM w1463599039 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249679400000002,
+       57.11159889999998
+      ],
+      [
+       12.249678300000001,
+       57.111604499999984
+      ],
+      [
+       12.249661500000002,
+       57.11169389999999
+      ],
+      [
+       12.2496525,
+       57.111742299999996
+      ],
+      [
+       12.249642000000001,
+       57.1117982
+      ],
+      [
+       12.2496402,
+       57.111807899999995
+      ],
+      [
+       12.2496178,
+       57.11180659999999
+      ],
+      [
+       12.249596500000003,
+       57.111805399999994
+      ],
+      [
+       12.2496358,
+       57.11159589999999
+      ],
+      [
+       12.249657300000003,
+       57.1115974
+      ],
+      [
+       12.249679400000002,
+       57.11159889999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463599048",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.8,
+    "ground_median_m": -3.29,
+    "ground_max_m": 3.24,
+    "roof_top_median_m": 3.36,
+    "roof_top_p95_m": 3.45,
+    "laser_points": 35,
+    "height_above_ground_median_m": 6.65,
+    "height_above_ground_p95_m": 6.74,
+    "source": "Outline OSM w1463599048 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249116,
+       57.11161769999999
+      ],
+      [
+       12.2492129,
+       57.11161169999998
+      ],
+      [
+       12.2492464,
+       57.111820400000006
+      ],
+      [
+       12.249287,
+       57.1120207
+      ],
+      [
+       12.2493358,
+       57.11223170000001
+      ],
+      [
+       12.249234700000002,
+       57.11223899999999
+      ],
+      [
+       12.2491884,
+       57.1120268
+      ],
+      [
+       12.249149300000001,
+       57.11182589999998
+      ],
+      [
+       12.249116,
+       57.11161769999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602333",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -6.22,
+    "ground_median_m": -5.94,
+    "ground_max_m": 1.8,
+    "roof_top_median_m": 2.27,
+    "roof_top_p95_m": 6.02,
+    "laser_points": 420,
+    "height_above_ground_median_m": 8.21,
+    "height_above_ground_p95_m": 11.96,
+    "source": "Outline OSM w1463602333 (ODbL); roof = median of 420 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2492708,
+       57.1123843
+      ],
+      [
+       12.249368700000002,
+       57.11237699999999
+      ],
+      [
+       12.2494242,
+       57.112597699999995
+      ],
+      [
+       12.249486400000002,
+       57.11281929999999
+      ],
+      [
+       12.2495708,
+       57.113089800000004
+      ],
+      [
+       12.249473,
+       57.113099000000005
+      ],
+      [
+       12.2493828,
+       57.112808900000005
+      ],
+      [
+       12.249325500000001,
+       57.1126041
+      ],
+      [
+       12.2492708,
+       57.1123843
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602334",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.86,
+    "ground_median_m": -5.4,
+    "ground_max_m": -4.23,
+    "roof_top_median_m": 2.25,
+    "roof_top_p95_m": 4.18,
+    "laser_points": 442,
+    "height_above_ground_median_m": 7.65,
+    "height_above_ground_p95_m": 9.58,
+    "source": "Outline OSM w1463602334 (ODbL); roof = median of 442 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2491145,
+       57.11239799999999
+      ],
+      [
+       12.2492326,
+       57.11238060000001
+      ],
+      [
+       12.249720600000002,
+       57.11234569999999
+      ],
+      [
+       12.2498413,
+       57.11235
+      ],
+      [
+       12.249802,
+       57.11219719999999
+      ],
+      [
+       12.249682500000002,
+       57.11221389999999
+      ],
+      [
+       12.2491968,
+       57.11224759999999
+      ],
+      [
+       12.249076900000002,
+       57.1122459
+      ],
+      [
+       12.2491145,
+       57.11239799999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602335",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "2"
+    },
+    "ground_min_m": -6.21,
+    "ground_median_m": -3.74,
+    "ground_max_m": 3.03,
+    "roof_top_median_m": 3.05,
+    "roof_top_p95_m": 6.18,
+    "laser_points": 778,
+    "height_above_ground_median_m": 6.79,
+    "height_above_ground_p95_m": 9.92,
+    "source": "Outline OSM w1463602335 (ODbL); roof = median of 778 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249712900000002,
+       57.1126072
+      ],
+      [
+       12.2497974,
+       57.11259989999999
+      ],
+      [
+       12.249856,
+       57.112776100000005
+      ],
+      [
+       12.249905600000002,
+       57.11292710000001
+      ],
+      [
+       12.249951800000002,
+       57.113064599999994
+      ],
+      [
+       12.249862300000002,
+       57.1130719
+      ],
+      [
+       12.2498106,
+       57.112916399999996
+      ],
+      [
+       12.2497684,
+       57.11278329999998
+      ],
+      [
+       12.249712900000002,
+       57.1126072
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602336",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.78,
+    "ground_median_m": -5.56,
+    "ground_max_m": -4.94,
+    "roof_top_median_m": 2.41,
+    "roof_top_p95_m": 4.11,
+    "laser_points": 346,
+    "height_above_ground_median_m": 7.97,
+    "height_above_ground_p95_m": 9.67,
+    "source": "Outline OSM w1463602336 (ODbL); roof = median of 346 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249908,
+       57.1132098
+      ],
+      [
+       12.2499993,
+       57.1132027
+      ],
+      [
+       12.2500718,
+       57.1134089
+      ],
+      [
+       12.250162600000001,
+       57.113664199999995
+      ],
+      [
+       12.250077900000003,
+       57.11367389999999
+      ],
+      [
+       12.2499867,
+       57.11343249999999
+      ],
+      [
+       12.249908,
+       57.1132098
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602337",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.55,
+    "ground_median_m": -5.13,
+    "ground_max_m": -4.74,
+    "roof_top_median_m": 2.32,
+    "roof_top_p95_m": 2.48,
+    "laser_points": 168,
+    "height_above_ground_median_m": 7.45,
+    "height_above_ground_p95_m": 7.61,
+    "source": "Outline OSM w1463602337 (ODbL); roof = median of 168 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.249520400000002,
+       57.11323739999999
+      ],
+      [
+       12.2496186,
+       57.1132301
+      ],
+      [
+       12.249685500000002,
+       57.11340439999999
+      ],
+      [
+       12.2497455,
+       57.113567499999995
+      ],
+      [
+       12.249799,
+       57.113689399999984
+      ],
+      [
+       12.2496973,
+       57.1137012
+      ],
+      [
+       12.2496473,
+       57.113575700000005
+      ],
+      [
+       12.2495847,
+       57.113412
+      ],
+      [
+       12.249520400000002,
+       57.11323739999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1463602338",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": -5.01,
+    "ground_median_m": -4.78,
+    "ground_max_m": -4.57,
+    "roof_top_median_m": 2.24,
+    "roof_top_p95_m": 2.3,
+    "laser_points": 203,
+    "height_above_ground_median_m": 7.02,
+    "height_above_ground_p95_m": 7.08,
+    "source": "Outline OSM w1463602338 (ODbL); roof = median of 203 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20a030, scanned 2020-01-20), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  }
+ ]
+}

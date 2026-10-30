@@ -1,0 +1,921 @@
+{
+ "clack_id": "740000006",
+ "compiled": "2026-10-30",
+ "levels": [],
+ "platform_sides": [
+  {
+   "platform_bis": "1227",
+   "track": "1b",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 1b (the train stops with the platform to its east)",
+   "_source": "laser (2025-02-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1227; read 2026-10-30"
+  },
+  {
+   "platform_bis": "499",
+   "track": "1b",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 1b (the train stops with the platform to its east)",
+   "_source": "laser (2025-02-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 499; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2541",
+   "track": "1b",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 1b (the train stops with the platform to its east)",
+   "_source": "laser (2025-02-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2541; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1224",
+   "track": "15",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 15 (the train stops with the platform to its east)",
+   "_source": "laser (2025-02-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1224; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "between": [
+    "L0 (station side, platform 1a)",
+    "platforms 2, 4, 6b, 7b, 8b"
+   ],
+   "where": "OSM way w55226306 (layer 1, 85 m) crossing the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OSM w55226306, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "platform 1b",
+    "platforms 2, 4, 6b"
+   ],
+   "where": "OSM way w39303495 (layer -1, 63 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39303495, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms",
+    "footbridge"
+   ],
+   "where": "Skånetrafiken's terminal map has 'Hiss' in its legend; its text layer does not say where the lifts are or which platforms they reach, and OSM tags no lift here",
+   "confirmed_by": "plan",
+   "_source": "Skånetrafiken, Hässleholm C terminalkarta (uppdaterad december 2025), https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/93070_hassleholmc_terminalkarta_a3.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w39303495",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1b",
+    "platform 2",
+    "platform 4",
+    "platform 6b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 62.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39303495 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7647388,
+    "lat": 56.1593241,
+    "how": "OSM w39303495 (point on the way)",
+    "_source": "OpenStreetMap w39303495 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w55226306",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a",
+    "platform 2",
+    "platform 4",
+    "platform 6b",
+    "platform 7b",
+    "platform 8b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 85.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w55226306 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7629679,
+    "lat": 56.1582637,
+    "how": "OSM w55226306 (point on the way)",
+    "_source": "OpenStreetMap w55226306 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238704",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7b",
+    "platform 8b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238704 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7631003,
+    "lat": 56.1584331,
+    "how": "OSM w415238704 (point on the way)",
+    "_source": "OpenStreetMap w415238704 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238705",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 29.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238705 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7633294,
+    "lat": 56.1579242,
+    "how": "OSM w415238705 (point on the way)",
+    "_source": "OpenStreetMap w415238705 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238706",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7a",
+    "platform 7b",
+    "platform 8a",
+    "platform 8b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238706 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7628148,
+    "lat": 56.1580577,
+    "how": "OSM w415238706 (point on the way)",
+    "_source": "OpenStreetMap w415238706 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238707",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 6a",
+    "platform 6b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238707 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7630402,
+    "lat": 56.1579953,
+    "how": "OSM w415238707 (point on the way)",
+    "_source": "OpenStreetMap w415238707 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238708",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a",
+    "platform 1b",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238708 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7635086,
+    "lat": 56.1581675,
+    "how": "OSM w415238708 (point on the way)",
+    "_source": "OpenStreetMap w415238708 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415238709",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 6b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w415238709 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.7633056,
+    "lat": 56.1583618,
+    "how": "OSM w415238709 (point on the way)",
+    "_source": "OpenStreetMap w415238709 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Accessible entrance (Tillgänglig entré)",
+   "street": "Järnvägsgatan (station building, Järnvägsgatan 4)",
+   "where": "Jernhusen says only that the station has one accessible entrance; it does not say which door. OSM has main-entrance nodes n694200085 and n11335405981 on the Järnvägsgatan side.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "name": "Entrances on Första Avenyen",
+   "street": "Första Avenyen",
+   "where": "OSM entrance nodes n6713055924 and n6713055925 (addr:street Första Avenyen)",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n694200083",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 22.2 m",
+   "level": null,
+   "kind": "emergency",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n694200083 (already in OSM)",
+   "position": {
+    "lon": 13.7636683,
+    "lat": 56.1581402,
+    "how": "OSM n694200083",
+    "_source": "OpenStreetMap n694200083 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n694200085",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 9.9 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n694200085 (already in OSM)",
+   "position": {
+    "lon": 13.7638861,
+    "lat": 56.158194,
+    "how": "OSM n694200085",
+    "_source": "OpenStreetMap n694200085 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3298095661",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 12.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3298095661 (already in OSM)",
+   "position": {
+    "lon": 13.7636735,
+    "lat": 56.1577976,
+    "how": "OSM n3298095661",
+    "_source": "OpenStreetMap n3298095661 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5714913174",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5714913174 (already in OSM)",
+   "position": {
+    "lon": 13.7649282,
+    "lat": 56.1595686,
+    "how": "OSM n5714913174",
+    "_source": "OpenStreetMap n5714913174 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6713055924",
+   "street": "Första Avenyen",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6713055924 (already in OSM)",
+   "position": {
+    "lon": 13.764386,
+    "lat": 56.1579988,
+    "how": "OSM n6713055924",
+    "_source": "OpenStreetMap n6713055924 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6713055925",
+   "street": "Första Avenyen",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6713055925 (already in OSM)",
+   "position": {
+    "lon": 13.7643474,
+    "lat": 56.1580525,
+    "how": "OSM n6713055925",
+    "_source": "OpenStreetMap n6713055925 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9681945442",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9681945442 (already in OSM)",
+   "position": {
+    "lon": 13.7637965,
+    "lat": 56.1575461,
+    "how": "OSM n9681945442",
+    "_source": "OpenStreetMap n9681945442 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11335405976",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11335405976 (already in OSM)",
+   "position": {
+    "lon": 13.7642772,
+    "lat": 56.1584134,
+    "how": "OSM n11335405976",
+    "_source": "OpenStreetMap n11335405976 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11335405977",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11335405977 (already in OSM)",
+   "position": {
+    "lon": 13.7642275,
+    "lat": 56.1583207,
+    "how": "OSM n11335405977",
+    "_source": "OpenStreetMap n11335405977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11335405981",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 7.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11335405981 (already in OSM)",
+   "position": {
+    "lon": 13.7645044,
+    "lat": 56.1588007,
+    "how": "OSM n11335405981",
+    "_source": "OpenStreetMap n11335405981 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "where": "in the station (Jernhusen gives no position; OSM has two fee toilets ~26-29 m from the station node, n12872609087 wheelchair=yes, n11513113019 wheelchair=no)",
+   "fee": "yes (OSM); amount not published by Jernhusen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days; opened with code/QR",
+   "opening_hours": "Mo-Su 03:50-02:45",
+   "hours_source": "website (Jernhusen: the station's hours, which the locker page refers to)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationen (station building)",
+   "opening_hours": "Mo-Su 03:50-02:45",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (Skånetrafiken)",
+   "where": "shown on the terminal map (legend 'Biljettautomat'); positions not readable from the text layer",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "on the terminal map (legend); OSM has bicycle parking ~180-225 m from the station node",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C and OSM, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hässleholm C bus stops (lägen A, B, C, D, E, G, K)",
+   "where": "on the streets around the station (Järnvägsgatan, Första Avenyen, Magasinsgatan per the map); per terminal map: läge A city bus 1 Sjörröd, Närtrafik, Plusresa; B 2 Gäddastorp, 3 Tormestorp; C 542 Sibbhult; D 511 Ängelholm; E 532 Markaryd; K 1 Ljungdala, 2 Röinge, 3 Läreda; G rail replacement buses (Malmö/Helsingborg/Karlskrona/Växjö)",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C (uppdaterad december 2025), read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 03:50-02:45; Sa 03:50-02:45; Su 03:50-02:45",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Hässleholm centralstation.",
+   "owner_text": "Allt om tillgängligheten på Hässleholm centralstation. Tillgänglig entré Stationen har en tillgänglig entré. Universaltoalett Stationen har en universaltoalett. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "toalett",
+   "owner_text": "",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "wifi",
+   "owner_text": "",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Skånetrafiken Snälltåget För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "app_poi": "osm5714913207",
+   "level": "L0",
+   "level_name": "Platforms and street",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:00-20:00; Sa 08:00-18:00; Su 09:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/mat-och-butiker/",
+   "website": "www.espressohouse.se/",
+   "position": {
+    "lon": 13.7636778,
+    "lat": 56.1579241,
+    "osm_id": "n5714913207",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 15.3,
+    "how": "OSM node n5714913207",
+    "_source": "OpenStreetMap n5714913207 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm5714913208",
+   "level": "L0",
+   "level_name": "Platforms and street",
+   "where": null,
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa 08:00-22:00; Su 09:00-22:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/mat-och-butiker/",
+   "website": "www.pressbyran.se/",
+   "position": {
+    "lon": 13.7636483,
+    "lat": 56.1578659,
+    "osm_id": "n5714913208",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 15.9,
+    "how": "OSM node n5714913208",
+    "_source": "OpenStreetMap n5714913208 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11513113019",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11513113019 (read 2026-10-30)",
+   "position": {
+    "lon": 13.7636488,
+    "lat": 56.1579345,
+    "osm_id": "n11513113019",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.2,
+    "how": "OSM node n11513113019",
+    "_source": "OpenStreetMap n11513113019 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n12872609087",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n12872609087 (read 2026-10-30)",
+   "position": {
+    "lon": 13.7636756,
+    "lat": 56.158161,
+    "osm_id": "n12872609087",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.9,
+    "how": "OSM node n12872609087",
+    "_source": "OpenStreetMap n12872609087 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Hässleholmsgrillen",
+   "brand": null,
+   "cuisine": "kebab",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.7643054,
+    "lat": 56.1583543,
+    "osm_id": "n5714913199",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.6,
+    "how": "OSM node n5714913199",
+    "_source": "OpenStreetMap n5714913199 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5714913199 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Lial Cafe",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-22:00; Sa 10:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7642598,
+    "lat": 56.1582781,
+    "osm_id": "n5714913200",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.8,
+    "how": "OSM node n5714913200",
+    "_source": "OpenStreetMap n5714913200 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5714913200 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "beauty",
+   "name": "Diems Nails",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "\"Boka tid\"",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7642196,
+    "lat": 56.1581437,
+    "osm_id": "n5714913202",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 32.6,
+    "how": "OSM node n5714913202",
+    "_source": "OpenStreetMap n5714913202 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5714913202 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "electronics",
+   "name": "Elgiganten",
+   "brand": "Elgiganten",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7641445,
+    "lat": 56.1576971,
+    "osm_id": "n5714913204",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 51.2,
+    "how": "OSM node n5714913204",
+    "_source": "OpenStreetMap n5714913204 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5714913204 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "brand": "Subway",
+   "cuisine": "sandwich",
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa 11:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7639943,
+    "lat": 56.1577195,
+    "osm_id": "n5714913205",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 41.6,
+    "how": "OSM node n5714913205",
+    "_source": "OpenStreetMap n5714913205 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5714913205 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Salong A M",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7638131,
+    "lat": 56.1575291,
+    "osm_id": "n10603223388",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.5,
+    "how": "OSM node n10603223388",
+    "_source": "OpenStreetMap n10603223388 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n10603223388 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "5 minuters livs",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7638648,
+    "lat": 56.1576162,
+    "osm_id": "n10603223389",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.5,
+    "how": "OSM node n10603223389",
+    "_source": "OpenStreetMap n10603223389 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n10603223389 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Harrys",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Tu 11:30-14:00,16:00-22:00; We-Th 11:30-14:00,16:00-23:00; Fr 11:30-14:00,16:00-24:00; Sa 16:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.7637165,
+    "lat": 56.1571729,
+    "osm_id": "n11235740393",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 43.3,
+    "how": "OSM node n11235740393",
+    "_source": "OpenStreetMap n11235740393 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n11235740393 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hässleholm C terminalkarta (A3)",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/93070_hassleholmc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Uppdaterad december 2025. Read with WebFetch: text layer gives streets, track numbers (1, 1a, 1b, 2, 3, 4, 5, 6a, 6b, 7a, 7b, 8), bus stop letters and legend (Biljettautomat, Hiss, Trappa, Parkering, Cykelparkering, Ersättningstrafik), but not where the symbols sit."
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.skanetrafiken.se",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/93070_hassleholmc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Floor heights of the footbridge: no open source.",
+  "Skånetrafiken's terminal map (linked from Jernhusen) could not be read from the browser (cross-site block); read it on skanetrafiken.se for lifts and entrances.",
+  "2026-10-30: Skånetrafiken's terminal map was read with WebFetch; its legend lists Hiss and Trappa, but the text layer does not give where the lifts/stairs are or which platforms they reach. Someone needs to look at the drawing itself (facts only).",
+  "Lifts: OSM tags no lift at Hässleholm; number and positions unconfirmed.",
+  "Toilet fee amount and exact position: Jernhusen's toilet page is empty."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L1 (Footbridge): height not measured",
+  "level L0 (Platforms and street): height not measured"
+ ],
+ "answers": [
+  {
+   "question": "level L1 (Footbridge) / L0: height not measured",
+   "answer": "Still open: no source measures the footbridge deck; the laser gives only tops.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L0 (Platforms and street): height not measured",
+   "answer": "Still open: no open source (Jernhusen, Skånetrafiken terminal map, Wikipedia) gives heights.",
+   "_source": "this pass, 2026-10-30"
+  },
+  {
+   "question": "(extra, not in queue) level L1 (Footbridge): signposted name",
+   "answer": "No signposted name found: neither Jernhusen nor Skånetrafiken's map names the footbridge; OSM w55226306 has no name.",
+   "_source": "Jernhusen, Skånetrafiken terminalkarta, OSM, read 2026-10-30"
+  }
+ ]
+}

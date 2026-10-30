@@ -19,8 +19,6 @@ import warnings; warnings.filterwarnings('ignore')
 from scipy import ndimage
 
 SRC, OUT = sys.argv[1], sys.argv[2]
-# folder holding trafikverket_platforms_SE.csv and bilaga2a_raw.txt (the batch files)
-RESEARCH = os.environ.get('STATION3D_RESEARCH', 'data/stations/research')
 os.makedirs(OUT, exist_ok=True)
 meta = json.load(open(f'{SRC}/meta.json'))
 osm = json.load(open(f'{SRC}/osm.json'))
@@ -41,63 +39,42 @@ if 'osm_api_xml' in osm:   # fallback when Overpass was busy: raw OSM API 0.6 ma
         els_.append({'type': 'relation', 'id': int(r.get('id')), 'tags': tags(r), 'members': mem})
     osm = {'elements': els_, '_endpoint': osm['_endpoint']}
 CID, SLUG = meta['clack_id'], meta['slug']
-E0, N0, E1, N1 = meta['box_sweref']
+E0, N0, E1, N1 = meta.get('box_sweref') or meta['box']
+COUNTRY = meta.get('country', 'SE')
+EPSG = int(meta.get('crs_epsg', 3006)); CRS_NAME = meta.get('crs_name', 'SWEREF 99 TM'); VDATUM = meta.get('vertical_datum', 'RH 2000')
 W, H = E1 - E0, N1 - N0
-fw = Transformer.from_crs(4326, 3006, always_xy=True).transform
-bw = Transformer.from_crs(3006, 4326, always_xy=True).transform
-H_CLS = {'låg': 0.35, 'mellan': 0.58, 'hög': 0.73, 'tsd mellan': 0.55, 'tsd hög': 0.76}
+fw = Transformer.from_crs(4326, EPSG, always_xy=True).transform
+bw = Transformer.from_crs(EPSG, 4326, always_xy=True).transform
+H_CLS = meta.get('height_classes') or {'låg': 0.35, 'mellan': 0.58, 'hög': 0.73, 'tsd mellan': 0.55, 'tsd hög': 0.76}
 EXCLUDE_BIS = {'740000001': {'2308', '2309', '811', '812'}, '740000361': {'1220'}, '740000170': {'2489', '2490'},
                '740001586': {'2597'}, '740000005': {'2335', '2336'}}
 import csv
-IN_BILAGA = {r['bis_object'] for r in csv.DictReader(open(os.path.join(RESEARCH, 'trafikverket_platforms_SE.csv'), encoding='utf-8'))
-             if r['clack_id'] == CID and r['source_row'].startswith('Bilaga') and r['bis_object']}
+_SE_DIR = os.environ.get('SE_REGISTER_DIR', '/home/claude/work/out')
+IN_BILAGA = {r['bis_object'] for r in csv.DictReader(open(f'{_SE_DIR}/trafikverket_platforms_SE.csv', encoding='utf-8'))
+             if r['clack_id'] == CID and r['source_row'].startswith('Bilaga') and r['bis_object']} if COUNTRY == 'SE' else set()
 BILAGA_ROWS = [(r_.split('|')[3].lower(), {t.strip().lower() for t in r_.split('|')[2].split(',')})
-               for r_ in open(os.path.join(RESEARCH, 'bilaga2a_raw.txt'), encoding='utf-8') if not r_.startswith('#') and CID.endswith(r_.split('|')[0])]
+               for r_ in open(f'{_SE_DIR}/bilaga2a_raw.txt', encoding='utf-8') if not r_.startswith('#') and CID.endswith(r_.split('|')[0])] if COUNTRY == 'SE' else []
 report = {'clack_id': CID, 'slug': SLUG, 'flags': [], 'notes': [], 'osm_source': osm.get('_endpoint', '?')}
 flag = lambda s: report['flags'].append(s)
 
 # ---------------------------------------------------------------- terrain model window
 dtm = np.fromfile(f'{SRC}/dtm_window.f32', dtype='<f4').reshape(H, W)
 dtm_items = meta['dtm']['items']
+_zero = (dtm == 0.0)
+if _zero.sum() > 1000 and np.nanmedian(dtm[~_zero]) > 20:
+    dtm[_zero] = np.nan            # exact 0.00 far above sea level: no data in the terrain model tile, not ground
+    ZERO_NOTE = f'{int(_zero.sum())} m² of the box hold exactly 0.00 in the terrain model (no data at a tile edge); left as no-data'
+else:
+    ZERO_NOTE = None
 def dtm_at(x, y):
     c = np.clip(np.floor(np.asarray(x) - E0).astype(int), 0, W - 1)
     r = np.clip(np.floor(N1 - np.asarray(y)).astype(int), 0, H - 1)
     return dtm[r, c]
 
-tif = f'{OUT}/{SLUG}_ground_1m.tif'
-with rasterio.open(tif, 'w', driver='GTiff', height=H, width=W, count=1, dtype='float32', crs='EPSG:3006',
-                   transform=from_origin(E0, N1, 1, 1), compress='deflate', nodata=np.nan) as d:
-    d.write(dtm, 1)
-    d.update_tags(source='Lantmäteriet Markhöjdmodell Nedladdning (dtm-cog) ' + ', '.join(i['id'] + ' ' + i['datetime'][:10] for i in dtm_items)
-                  + '; © Lantmäteriet, bearbetad, CC BY 4.0', vertical_datum='RH 2000', units='m')
-lo, hi = np.nanpercentile(dtm, 0.5), np.nanpercentile(dtm, 99.5)
-prev = np.clip((dtm - lo) / max(hi - lo, 0.01) * 255, 0, 255)
-prev = np.where(np.isnan(dtm), 0, prev).astype('uint8')
-Image.fromarray(prev, 'L').save(f'{OUT}/{SLUG}_ground_1m_preview.png')
-base = math.floor(np.nanmin(dtm))
-span = np.nanmax(dtm) - base
-scale = 1000 if span < 65 else 100
-hm = np.where(np.isnan(dtm), 0, np.round((dtm - base) * scale)).astype('uint16')
-Image.fromarray(hm).save(f'{OUT}/{SLUG}_ground_1m_heightmap.png')
-json.dump({'file': f'{SLUG}_ground_1m_heightmap.png', 'format': 'PNG 16-bit grey, row 0 = north edge',
-           'height_m': f'base_m + value / {scale}', 'base_m': base, 'scale': scale, 'nodata_value': 0,
-           'crs': 'EPSG:3006 (SWEREF 99 TM)', 'vertical_datum': 'RH 2000', 'origin_top_left_EN': [E0, N1], 'pixel_m': 1,
-           'width': W, 'height': H, 'source': f'{SLUG}_ground_1m.tif (Lantmäteriet Markhöjdmodell, CC BY 4.0)'},
-          open(f'{OUT}/{SLUG}_ground_1m_heightmap.json', 'w'), indent=1)
-report['ground'] = {'min_m': round(float(np.nanmin(dtm)), 2), 'median_m': round(float(np.nanmedian(dtm)), 2),
-                    'max_m': round(float(np.nanmax(dtm)), 2), 'nan_cells': int(np.isnan(dtm).sum()), 'size_m': [W, H],
-                    'box_sweref': [E0, N0, E1, N1], 'tiles': [i['id'] + ' (' + i['datetime'][:10] + ')' for i in dtm_items]}
-# flat constant patches (lakes / sea): exactly equal values over large areas — playbook rule
-vals, cnts = np.unique(dtm[~np.isnan(dtm)], return_counts=True)
-big = [(float(v), int(c)) for v, c in zip(vals, cnts) if c > 1500]
-if big:
-    report['notes'].append('terrain model is exactly flat over large areas (a water surface, not ground): ' +
-                           ', '.join(f'{v:.2f} m over {c} m²' for v, c in big))
-
 # ---------------------------------------------------------------- laser points in the box
 xs, ys, zs, cl, rn, nr, it, gps = [], [], [], [], [], [], [], []
 hdr = None
-tiles = sorted(glob.glob(f'{SRC}/*.copc.laz'))
+tiles = sorted(glob.glob(f'{SRC}/*.copc.laz')) or sorted(glob.glob(f'{SRC}/*.laz'))
 for t in tiles:
     las = laspy.read(t)
     hdr = hdr or las.header
@@ -112,15 +89,67 @@ C, RN, NR, I, T = map(np.concatenate, (cl, rn, nr, it, gps))
 key = np.round(X * 100).astype(np.int64) * 10**12 + np.round(Y * 100).astype(np.int64) * 10**3 + (np.round(Z * 10).astype(np.int64) % 1000)
 _, uniq = np.unique(key, return_index=True)
 X, Y, Z, C, RN, NR, I, T = (a[uniq] for a in (X, Y, Z, C, RN, NR, I, T))
+# where the terrain model has no data, fill 1 m cells from the laser's own ground points (median per cell)
+FILL_NOTE = None
+if np.isnan(dtm).any() and not meta['dtm'].get('from_laser'):
+    gm = (C == 2)
+    cc = np.clip((X[gm] - E0).astype(int), 0, W - 1); rr = np.clip((N1 - Y[gm]).astype(int), 0, H - 1)
+    order = np.lexsort((Z[gm], rr * W + cc))
+    keys = (rr * W + cc)[order]; zz = Z[gm][order]
+    uk, start, cnt = np.unique(keys, return_index=True, return_counts=True)
+    med = zz[start + cnt // 2]
+    flat = dtm.ravel()
+    hole = np.isnan(flat[uk])
+    flat[uk[hole]] = med[hole]
+    dtm = flat.reshape(H, W)
+    FILL_NOTE = (f'{int(hole.sum())} m² of terrain-model no-data filled from the laser ground points (class 2, median per 1 m cell); '
+                 f'{int(np.isnan(dtm).sum())} m² still have no ground value')
+tif = f'{OUT}/{SLUG}_ground_1m.tif'
+with rasterio.open(tif, 'w', driver='GTiff', height=H, width=W, count=1, dtype='float32', crs=f'EPSG:{EPSG}',
+                   transform=from_origin(E0, N1, 1, 1), compress='deflate', nodata=np.nan) as d:
+    d.write(dtm, 1)
+    d.update_tags(source=(meta['dtm'].get('source_line') or ('Lantmäteriet Markhöjdmodell Nedladdning (dtm-cog) ' + ', '.join(i['id'] + ' ' + i['datetime'][:10] for i in dtm_items)
+                  + '; © Lantmäteriet, bearbetad, CC BY 4.0')) + ('; ' + FILL_NOTE + ' (' + (meta['laser'][0].get('licence_line') or 'Laserdata Nedladdning, skog, © Lantmäteriet, CC BY 4.0') + ')' if FILL_NOTE else ''),
+                  vertical_datum=VDATUM, units='m')
+lo, hi = np.nanpercentile(dtm, 0.5), np.nanpercentile(dtm, 99.5)
+prev = np.clip((dtm - lo) / max(hi - lo, 0.01) * 255, 0, 255)
+prev = np.where(np.isnan(dtm), 0, prev).astype('uint8')
+Image.fromarray(prev, 'L').save(f'{OUT}/{SLUG}_ground_1m_preview.png')
+base = math.floor(np.nanmin(dtm))
+span = np.nanmax(dtm) - base
+scale = 1000 if span < 65 else 100
+hm = np.where(np.isnan(dtm), 0, np.round((dtm - base) * scale)).astype('uint16')
+Image.fromarray(hm).save(f'{OUT}/{SLUG}_ground_1m_heightmap.png')
+json.dump({'file': f'{SLUG}_ground_1m_heightmap.png', 'format': 'PNG 16-bit grey, row 0 = north edge',
+           'height_m': f'base_m + value / {scale}', 'base_m': base, 'scale': scale, 'nodata_value': 0,
+           'crs': f'EPSG:{EPSG} ({CRS_NAME})', 'vertical_datum': VDATUM, 'origin_top_left_EN': [E0, N1], 'pixel_m': 1,
+           'width': W, 'height': H, 'source': f'{SLUG}_ground_1m.tif (' + meta['dtm'].get('short_source', 'Lantmäteriet Markhöjdmodell, CC BY 4.0') + ')'},
+          open(f'{OUT}/{SLUG}_ground_1m_heightmap.json', 'w'), indent=1)
+report['ground'] = {'min_m': round(float(np.nanmin(dtm)), 2), 'median_m': round(float(np.nanmedian(dtm)), 2),
+                    'max_m': round(float(np.nanmax(dtm)), 2), 'nan_cells': int(np.isnan(dtm).sum()), 'size_m': [W, H],
+                    'box_sweref': [E0, N0, E1, N1], 'tiles': [i['id'] + ' (' + i['datetime'][:10] + ')' for i in dtm_items]}
+if ZERO_NOTE:
+    report['notes'].append(ZERO_NOTE)
+if FILL_NOTE:
+    report['notes'].append(FILL_NOTE)
+# flat constant patches (lakes / sea): exactly equal values over large areas — playbook rule
+vals, cnts = np.unique(dtm[~np.isnan(dtm)], return_counts=True)
+big = [(float(v), int(c)) for v, c in zip(vals, cnts) if c > 1500]
+if big:
+    report['notes'].append('terrain model is exactly flat over large areas (a water surface, not ground): ' +
+                           ', '.join(f'{v:.2f} m over {c} m²' for v, c in big))
+
+
 G = dtm_at(X, Y)
 HAG = Z - G
 scan = meta['laser'][0]
 scan_date = scan['datetime'][:10]
 report['laser'] = {'tiles': [os.path.basename(t) for t in tiles], 'scan_date': scan_date,
-                   'density_pts_m2_nominal': scan['props'].get('punkttathet'), 'flight_height_m': scan['props'].get('flyghojd'),
+                   'density_pts_m2_nominal': scan.get('props', {}).get('punkttathet'), 'flight_height_m': scan.get('props', {}).get('flyghojd'),
                    'points_in_box': int(len(X)), 'density_in_box': round(len(X) / (W * H), 2),
                    'classes': {str(k): int(v) for k, v in zip(*np.unique(C, return_counts=True))}}
-LINE = f"Laserdata Nedladdning, skog ({scan['id'].split('-')[0]}, scanned {scan_date}), © Lantmäteriet, bearbetad, CC BY 4.0"
+OBJ = np.isin(C, scan.get('object_classes', [1]))   # classes that hold roofs, canopies and trains (Lantmäteriet: 1 unclassified)
+LINE = scan.get('licence_line') or f"Laserdata Nedladdning, skog ({scan['id'].split('-')[0]}, scanned {scan_date}), © Lantmäteriet, bearbetad, CC BY 4.0"
 
 # ---------------------------------------------------------------- OSM geometry
 def to_sweref(g):
@@ -206,7 +235,8 @@ def along_across(L, px, py):
     d = (px - shapely.get_x(q)) * (-ty / n) + (py - shapely.get_y(q)) * (tx / n)
     return s, d
 
-UNDERGROUND = {'740000556': 'all', '740001587': 'all', '740000003': {'2092', '2093'}}   # Arlanda C, Triangeln, Malmö C Citytunneln
+UNDERGROUND = {'740000556': 'all', '740001587': 'all', '740000003': {'2092', '2093'}, '740000110': 'all'}   # Arlanda C, Triangeln, Malmö C Citytunneln, Varberg (tunnel)
+UG_NOTE = {'740000110': 'platform of the new Varberg station in the railway tunnel (opened after the January 2020 scan): the laser shows only the ground of the old site on its line, not the platform or its track bed'}
 plat_rows = []
 for p in plat_bi:
     L, f = p['L'], p['f']
@@ -217,6 +247,12 @@ for p in plat_bi:
     s, d = along_across(L, X[idx], Y[idx])
     inr = (s > 2) & (s < L.length - 2)
     gi = ground_m[idx] & inr
+    on_bridge = False
+    n2 = int(np.sum(gi & (np.abs(d) < 0.8)))
+    n17 = int(np.sum((C[idx] == 17) & inr & (np.abs(d) < 0.8)))
+    if n17 > max(3 * n2, 30):                 # the track runs on a bridge: the laser classes the deck as 17, not ground
+        gi = (C[idx] == 17) & inr
+        on_bridge = True
     bed_pts = Z[idx][gi & (np.abs(d) < 0.8)]
     bed = float(np.median(bed_pts)) if len(bed_pts) >= 15 else None
     sides = {}
@@ -248,6 +284,9 @@ for p in plat_bi:
            'roof': f.get('Väderskydd'), 'track_bed_m': round(bed, 2) if bed is not None else None, 'track_bed_points': int(len(bed_pts)),
            'platform_surface_m': round(plat_lvl, 2) if plat_lvl is not None else None, 'platform_points': npts,
            'platform_side': {1: 'left', -1: 'right'}.get(side), 'baninfo_side': f.get('SIDE')}
+    if on_bridge:
+        row['on_bridge'] = True
+        row['bridge_note'] = 'track and platform on a bridge: bed and surface from laser class 17 (bridge deck) instead of ground'
     if both is not None:
         row['other_side_surface_m'] = round(both, 2)
         row['side_note'] = 'raised ground on both sides of the track; BanInfo SIDE picked the side'
@@ -273,7 +312,7 @@ for p in plat_bi:
     if ug == 'all' or (ug and f.get('BisObjektNr') in ug):
         row = {k: row[k] for k in ('bis_object', 'track', 'height_class', 'class_height_m', 'length_m', 'width_m', 'roof', 'baninfo_side')}
         row.update(track_bed_m=None, track_bed_points=0, platform_surface_m=None, platform_points=0, platform_side=None, underground=True,
-                   note='underground platform: the airborne laser sees the surface above it, not the platform or the track bed')
+                   note=UG_NOTE.get(CID, 'underground platform: the airborne laser sees the surface above it, not the platform or the track bed'))
         report['flags'][:] = [x for x in report['flags'] if f"BIS {f.get('BisObjektNr')} " not in x]
     plat_rows.append(row)
 report['platforms'] = plat_rows
@@ -281,7 +320,8 @@ _beds = [r['track_bed_m'] for r in plat_rows if r['track_bed_m'] is not None]
 if _beds:
     _mb = float(np.median(_beds))
     for r_ in plat_rows:
-        if r_['track_bed_m'] is not None and abs(r_['track_bed_m'] - _mb) > 1.5:
+        surf_ok = r_.get('platform_surface_m') is not None and r_['platform_surface_m'] - r_['track_bed_m'] > 0.35 if r_['track_bed_m'] is not None else False
+        if r_['track_bed_m'] is not None and abs(r_['track_bed_m'] - _mb) > 1.5 and not surf_ok:
             r_['note'] = (f"'track bed' here is {r_['track_bed_m']:.2f} m, {r_['track_bed_m'] - _mb:+.1f} m from the station's median {_mb:.2f} m: "
                           'the ground-class points over this track are a deck, roof or bridge, not the bed; values left out')
             r_['after_scan'] = True
@@ -304,7 +344,7 @@ is_train = np.zeros(len(X), bool)
 trains = []
 tlines = [r[2] for r in rails]
 if tlines and len(X):
-    cand_t = np.where((C == 1) & (HAG > 2.6) & (HAG < 5.0))[0]
+    cand_t = np.where(OBJ & (HAG > 2.6) & (HAG < 5.0))[0]
     if len(cand_t):
         P = shapely.points(X[cand_t], Y[cand_t])
         D = np.stack([shapely.distance(l, P) for l in tlines])
@@ -376,7 +416,7 @@ for oid, tg, g in cand:
         continue
     gr = ring_ground(g)
     idx = pts_in(g)
-    idx = idx[(C[idx] == 1) & ~is_train[idx]]
+    idx = idx[OBJ[idx] & ~is_train[idx]]
     hag = HAG[idx]
     roof = idx[hag > 2.0]
     kind = 'building'
@@ -425,7 +465,7 @@ if BRIDGES:
 osm_cover = unary_union([f['_g'] for f in feats]) if feats else None
 if REF is not None and plat_bi:
     zone = unary_union([p['L'].buffer(float(p['f'].get('Bredd_m') or 0) + 4) for p in plat_bi])
-    sel = np.where((C == 1) & ~is_train & (Z > REF + 2.4) & (Z < REF + 14))[0]
+    sel = np.where(OBJ & ~is_train & (Z > REF + 2.4) & (Z < REF + 14))[0]
     if len(sel):
         sel = sel[shapely.contains_xy(zone, X[sel], Y[sel])]
     if osm_cover is not None and len(sel):
@@ -475,7 +515,7 @@ for t in trains:
 
 for f in feats:
     f.pop('_g', None)
-gj = {'type': 'FeatureCollection', 'name': f'{SLUG}_structures_heights', 'crs_note': 'WGS84 lon/lat; heights m RH 2000',
+gj = {'type': 'FeatureCollection', 'name': f'{SLUG}_structures_heights', 'crs_note': f'WGS84 lon/lat; heights m {VDATUM}',
       'platform_surface_m': REF, 'track_bed_m': report['track_bed_m'], 'features': feats}
 json.dump(gj, open(f'{OUT}/{SLUG}_structures_heights.geojson', 'w'), ensure_ascii=False, indent=1)
 report['structures'] = {k: sum(1 for f in feats if f['properties']['kind'] == k) for k in
@@ -485,7 +525,7 @@ report['structures'] = {k: sum(1 for f in feats if f['properties']['kind'] == k)
 year = scan_date[:4]
 hdr_out = laspy.LasHeader(point_format=6, version='1.4')
 hdr_out.scales = np.array([0.01, 0.01, 0.01]); hdr_out.offsets = np.array([E0, N0, 0.0])
-hdr_out.add_crs(rasterio.crs.CRS.from_epsg(3006)) if hasattr(hdr_out, 'add_crs') else None
+hdr_out.add_crs(rasterio.crs.CRS.from_epsg(EPSG)) if hasattr(hdr_out, 'add_crs') else None
 out = laspy.LasData(hdr_out)
 out.x, out.y, out.z = X, Y, Z
 cls_out = C.astype(np.uint8).copy(); cls_out[is_train] = 64
@@ -506,9 +546,13 @@ for p, r in zip(plat_bi, plat_rows):
         'km_from': f.get('Kmtal'), 'km_to': f.get('Kmtalti'), 'side': f.get('SIDE'), 'valid_from': f.get('VALID_FROM'),
         'reflink_oid': f.get('REFLINK_OID'), 'measure_from': f.get('MEASURE_FROM'), 'measure_to': f.get('MEASURE_TO'),
         'laser_platform_surface_m': r['platform_surface_m'], 'laser_track_bed_m': r['track_bed_m'],
-        'geometry_note': 'Trafikverket track line (track centre) along the platform, not the platform edge',
-        'source': 'Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo ' + meta['retrieved'][:10] + ', CC0'}})
-json.dump({'type': 'FeatureCollection', 'features': pf}, open(f'{OUT}/{SLUG}_platform_trafikverket.geojson', 'w'), ensure_ascii=False, indent=1)
+        'geometry_note': meta.get('platform_geometry_note', 'Trafikverket track line (track centre) along the platform, not the platform edge'),
+        **({k: f[k] for k in f if k.startswith('x_')}),
+        'source': f.get('_source') or ('Trafikverket BanInfo WMS BanInfo_1_5, layers Plattform + Sparnummer, GetFeatureInfo ' + meta['retrieved'][:10] + ', CC0')}})
+    if f.get('_outline'):
+        pf.append({'type': 'Feature', 'geometry': f['_outline'], 'properties': {'bis_object': f.get('BisObjektNr'), 'track': p['track'],
+                   'what': 'platform outline as published by the register', 'source': f.get('_source')}})
+json.dump({'type': 'FeatureCollection', 'features': pf}, open(f"{OUT}/{SLUG}_platform_{meta.get('platform_file_suffix', 'trafikverket')}.geojson", 'w'), ensure_ascii=False, indent=1)
 
 # ---------------------------------------------------------------- photos
 com = json.load(open(f'{SRC}/commons.json'))

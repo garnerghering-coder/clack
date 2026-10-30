@@ -1,0 +1,101 @@
+{
+ "clack_id": "740000361",
+ "slug": "orebro_s",
+ "flags": [
+  "Platform BIS 1219 (track 1): register låg, laser 0.68 m above the bed; record valid from 2026-01-27, not in Bilaga 2A; the scan is from 2023-07-11: probably built after the scan."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 26.45 m over 1580 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=15.196084,59.266066,15.206920,59.272400",
+ "ground": {
+  "min_m": 24.64,
+  "median_m": 28.33,
+  "max_m": 34.0,
+  "nan_cells": 0,
+  "size_m": [
+   379,
+   457
+  ],
+  "box_sweref": [
+   511297,
+   6569821,
+   511676,
+   6570278
+  ],
+  "tiles": [
+   "657_51 (2024-10-02)",
+   "656_51 (2024-10-02)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y23c023-65675_5100_25.copc.laz",
+   "y23c023-65700_5100_25.copc.laz"
+  ],
+  "scan_date": "2023-07-11",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 484681,
+  "density_in_box": 2.8,
+  "classes": {
+   "1": 229779,
+   "2": 253110,
+   "7": 241,
+   "9": 187,
+   "17": 1333,
+   "18": 31
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "2618",
+   "track": "30",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 240.0,
+   "width_m": 5.0,
+   "roof": "Skydd",
+   "track_bed_m": 28.38,
+   "track_bed_points": 826,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "1",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "1219",
+   "track": "1",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 188.0,
+   "width_m": null,
+   "roof": "Saknas",
+   "track_bed_m": 28.35,
+   "track_bed_points": 619,
+   "platform_surface_m": 29.03,
+   "platform_points": 2118,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.68,
+   "laser_estimate_above_rail_m": 0.5,
+   "note": "not in Bilaga 2A (report 2026-02-04) and the BanInfo record is from 2026-01-27: probably built or rebuilt after the scan, so the laser value is not this platform; left out of the station level",
+   "after_scan": true
+  }
+ ],
+ "platform_surface_m": null,
+ "track_bed_m": 28.38,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 2,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 59,
+ "photos_station_related": 13
+}

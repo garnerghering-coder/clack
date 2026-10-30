@@ -1,0 +1,129 @@
+{
+ "clack_id": "740000206",
+ "slug": "kil",
+ "flags": [
+  "w1190455488 residential: p95 106.9 m is 3.7 m above the median 103.3 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=13.308627,59.502293,13.324135,59.507422",
+ "ground": {
+  "min_m": 95.47,
+  "median_m": 98.46,
+  "max_m": 103.34,
+  "nan_cells": 0,
+  "size_m": [
+   645,
+   312
+  ],
+  "box_sweref": [
+   404376,
+   6597321,
+   405021,
+   6597633
+  ],
+  "tiles": [
+   "659_40 (2022-08-02)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y19b030-65950_4025_25.copc.laz",
+   "y19b030-65950_4050_25.copc.laz",
+   "y19b030-65975_4025_25.copc.laz",
+   "y19b030-65975_4050_25.copc.laz"
+  ],
+  "scan_date": "2019-10-29",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 548528,
+  "density_in_box": 2.73,
+  "classes": {
+   "1": 167433,
+   "2": 381028,
+   "7": 67
+  },
+  "train_points_class64": 7047
+ },
+ "platforms": [
+  {
+   "bis_object": "456",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 218.0,
+   "width_m": 6.5,
+   "roof": "Skydd",
+   "track_bed_m": 99.21,
+   "track_bed_points": 389,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "457",
+   "track": "6",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 121.0,
+   "width_m": 6.0,
+   "roof": "Skydd",
+   "track_bed_m": 98.5,
+   "track_bed_points": 498,
+   "platform_surface_m": 98.99,
+   "platform_points": 1616,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.49,
+   "laser_estimate_above_rail_m": 0.32
+  },
+  {
+   "bis_object": "454",
+   "track": "2",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 197.0,
+   "width_m": 5.0,
+   "roof": "Skydd",
+   "track_bed_m": 98.57,
+   "track_bed_points": 479,
+   "platform_surface_m": 99.28,
+   "platform_points": 1275,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "455",
+   "track": null,
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 108.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 98.46,
+   "track_bed_points": 126,
+   "platform_surface_m": 98.98,
+   "platform_points": 289,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.52,
+   "laser_estimate_above_rail_m": 0.34
+  }
+ ],
+ "platform_surface_m": 98.99,
+ "track_bed_m": 98.53,
+ "trains_in_scan": 11,
+ "structures": {
+  "building": 5,
+  "footbridge": 0,
+  "canopy_osm": 1,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 11
+ },
+ "photos": 53,
+ "photos_station_related": 25
+}

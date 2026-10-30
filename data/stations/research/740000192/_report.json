@@ -1,0 +1,96 @@
+{
+ "clack_id": "740000192",
+ "slug": "kumla",
+ "flags": [
+  "w292266414 station building: p95 65.5 m is 5.4 m above the median 60.1 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1104909311 (cycleway, residential); w1104909312 (no mapped ways)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=15.135980,59.124060,15.145360,59.130731",
+ "ground": {
+  "min_m": 46.56,
+  "median_m": 51.73,
+  "max_m": 53.95,
+  "nan_cells": 0,
+  "size_m": [
+   296,
+   494
+  ],
+  "box_sweref": [
+   507904,
+   6553999,
+   508200,
+   6554493
+  ],
+  "tiles": [
+   "655_50 (2024-09-29)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y23c023-65525_5075_25.copc.laz"
+  ],
+  "scan_date": "2023-07-11",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 197673,
+  "density_in_box": 1.35,
+  "classes": {
+   "1": 78838,
+   "2": 116998,
+   "7": 149,
+   "17": 1655,
+   "18": 33
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "1146",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 197.0,
+   "width_m": 6.0,
+   "roof": "Skydd",
+   "track_bed_m": 51.74,
+   "track_bed_points": 305,
+   "platform_surface_m": 52.56,
+   "platform_points": 775,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.82,
+   "laser_estimate_above_rail_m": 0.65
+  },
+  {
+   "bis_object": "1148",
+   "track": "2",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 38.0,
+   "width_m": 6.0,
+   "roof": "Skydd",
+   "track_bed_m": 51.77,
+   "track_bed_points": 61,
+   "platform_surface_m": 52.28,
+   "platform_points": 127,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.51,
+   "laser_estimate_above_rail_m": 0.33
+  }
+ ],
+ "platform_surface_m": 52.42,
+ "track_bed_m": 51.76,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 1,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 61,
+ "photos_station_related": 27
+}

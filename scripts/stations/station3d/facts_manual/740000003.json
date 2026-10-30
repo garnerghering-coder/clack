@@ -1,0 +1,436 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": null,
+   "other_names": [
+    "Glashallen (glass hall, built 2010 with the City Tunnel)",
+    "Centralhallen / food court (\"Food Courten\")",
+    "Entréhallen",
+    "Gröna Hallen",
+    "train shed with tracks 5–11"
+   ],
+   "note": "No source gives a signposted level name (\"Plan 0\" etc.). Jernhusen's pages name the halls on this level: Glashallen, Entréhall (Espresso House Entréhall), Gröna Hallen (unstaffed toilets) and the Food Court (Tawana). Wikipedia: two perpendicular buildings (central hall, food court since 2011; terminus train shed) joined by the 2010 glass corridor, which is the main waiting area and holds ticket sales, exchange and kiosks.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "app_level": "L-2",
+   "name": "Malmö C Nedre",
+   "other_names": [],
+   "note": "\"Malmö C Nedre (Lower)\" is the name Wikipedia gives the City Tunnel station section under Malmö C; whether that or a \"Plan -x\" is what the signs say is not stated by any source read. Tracks 1–4 here are two island platforms (1–2 north, usually southbound; 3–4 south, usually northbound). OSM tags the lifts down to it as level -2, with an intermediate -1 at the Anna Lindhs plats (west) entrance; no source names a -1 level.",
+   "_source": "https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; OSM (osmfacts 740000003), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "Glashallen (street level)",
+    "platform tracks 1–2"
+   ],
+   "where": "from the Glashallen area down to the north island platform (OSM w157823830, w157823833)",
+   "confirmed_by": "OSM only",
+   "note": "Wikipedia confirms escalators down to the lower-level platforms; Jernhusen's and Skånetrafiken's plan legends list escalators/lifts/stairs but their positions are not machine-readable.",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Glashallen (street level)",
+    "platform tracks 3–4"
+   ],
+   "where": "from the Glashallen area down to the south island platform (OSM w157823832, w157823838)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level",
+    "platform tracks 1–2"
+   ],
+   "where": "two lifts by the Glashallen escalators (OSM n11455037402, n11455037403, level -2;0)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level",
+    "platform tracks 3–4"
+   ],
+   "where": "two lifts by the Glashallen escalators (OSM n11455037404, n11455037405, level -2;0)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (east end, towards Lokgatan)",
+    "platform tracks 1–2"
+   ],
+   "where": "east end of the City Tunnel platforms (OSM n11455041755, level -2;0-5)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (east end, towards Lokgatan)",
+    "platform tracks 3–4"
+   ],
+   "where": "east end of the City Tunnel platforms (OSM n11455041749, level -2;0-5)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (Lokgatan side)",
+    "platform tracks 1–2"
+   ],
+   "where": "east end (OSM w81391565)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (Lokgatan side)",
+    "platform tracks 3–4"
+   ],
+   "where": "east end (OSM w81391567)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Anna Lindhs plats entrance (west)",
+    "City Tunnel platforms"
+   ],
+   "where": "west entrance just west of the station; OSM escalators w1234240703, w1234240705 (layer -2) and lifts n11454178876, n11454178882 (-1;0) at the Hjälmarekajen/Neptunigatan entrances",
+   "confirmed_by": "OSM only",
+   "note": "Wikipedia: the underground platforms have an entrance just west of the station at Anna Lindhs plats. Skånetrafiken's map labels \"Anna Lindhs plats\" and \"Malmö C Norra\".",
+   "_source": "OSM (osmfacts 740000003), read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "walk_level",
+   "between": [
+    "Glashallen",
+    "platforms tracks 5–11"
+   ],
+   "where": "tracks 5–11 are terminal tracks at street level in the train shed north of Centralhallen; reached on the level",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30",
+   "note": "Level access stated by Wikipedia (terminal tracks above ground), not by an owner text or plan."
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Glashallen (accessible entrances)",
+   "street": null,
+   "level": "0",
+   "where": "north side; Jernhusen's recommended accessible entrances (\"Undvik ingångarna från Skeppsbron\")",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrance from the bus square (Centralplan)",
+   "street": "Centralplan",
+   "level": "0",
+   "where": "south side; SJ Lounge is directly to the right inside, opposite Skånetrafiken",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Main entrance (Skeppsbron 1)",
+   "street": "Skeppsbron",
+   "level": "0",
+   "where": "front of the old station building; Jernhusen advises wheelchair users to avoid the Skeppsbron entrances",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Anna Lindhs plats (City Tunnel entrance)",
+   "street": null,
+   "level": "0",
+   "where": "just west of the station, leading to the underground platforms (tracks 1–4)",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "name": "Taxi side (north)",
+   "street": "Lokgatan",
+   "level": "0",
+   "where": "north side, at the taxi rank by tracks 3a/4a (Glashallen links the bus stops in the south with the taxi station in the north)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30; https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Bemannade toaletter och dusch (staffed)",
+   "fee": "yes (amount not stated)",
+   "level_per_plan": "0",
+   "where": "by track 5",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa,Su 06:00-23:00",
+   "hours_source": "website (Jernhusen, Toalett)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Obemannade toaletter (unstaffed)",
+   "level_per_plan": "0",
+   "where": "in Gröna Hallen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett (staffed, accessible)",
+   "fee": "yes; card or cash",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:00-24:00",
+   "hours_source": "website (Jernhusen, Tillgänglighet)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Services)",
+   "fee": "small 39 kr/h (max 199 kr/24 h), large 69 kr/h (max 299 kr/24 h); max 7 days; card or coins",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 04:40-24:00; Sa,Su 06:00-24:00",
+   "hours_source": "website (Jernhusen: reachable while the station is open)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat (2)",
+   "level_per_plan": "0",
+   "note": "Jernhusen: two cash machines; OSM has two Bankomat machines side by side (n12124755075/6).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/uttagsautomat/, read 2026-10-30; OSM (osmfacts 740000003), read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "lounge",
+   "name": "SJ Lounge",
+   "level_per_plan": "0",
+   "where": "entering from the bus square (Centralplan), directly to the right of the entrance, opposite Skånetrafiken",
+   "opening_hours": "Mo-Fr 06:30-17:00; Sa,Su off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen's shop list gives these hours under \"SJ Lounge\" (its parser filed them under Salads & Smoothies).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/ and https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Skånetrafiken Kundcenter",
+   "level_per_plan": "0",
+   "where": "in Glashallen",
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/trafik-och-biljetter/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "outside the station by tracks 3a/4a (north side); taxi hosts weekdays 08:00–12:30 and 16:00–21:30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Sixt",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "car_sharing",
+   "name": "Sunfleet bilpool",
+   "where": "Lokgatan 7; follow signs to Taxi, cars along the facade towards the car park, bays signed \"Reserverat för poolbil\"",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Bike & Ride (Malmö stad) with Cykelkliniken",
+   "where": "at the end of Kungalängan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Apcoa (outdoor parking and garage)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Centralplan bus terminal",
+   "where": "just south of the station building; western part (stops A–F) city buses, eastern part (G–I) regional, long-distance and replacement buses; Skånetrafiken's map shows stops A–N, with N for departures and M for arrivals of long-distance coaches",
+   "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only"
+  },
+  {
+   "category": "supermarket",
+   "name": "Coop Nära",
+   "address": "Skeppsbron 1C",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Doz Apotek",
+   "address": "Centralplan 6",
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 09:00-17:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives Mo–Fr 7–20, Sa–Su 10–18 and, from 2026-10-19, Mo–Fr 06–19, Sa–Su 09–17; the later hours apply today.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (Entréhall)",
+   "address": "Skeppsbron 1",
+   "where": "in the entrance hall (Entréhall)",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (Glashallen)",
+   "address": "Lokgatan 3",
+   "where": "in Glashallen",
+   "opening_hours": "Mo-Fr 08:00-18:00; Sa,Su 07:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån Glashallen",
+   "address": "Lokgatan 1",
+   "where": "in Glashallen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Tawana",
+   "where": "in the food court (\"Malmö Centralstation Food Courten\")",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Oakberry Açaí",
+   "address": "Centralplan 4",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Malmö Centralstation (station plan)",
+   "publisher": "Jernhusen",
+   "url": "https://www.datocms-assets.com/163536/1769697321-malmo-centralstation.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Only the legend (Entré, Tåg, Taxi, Förvaring, Hiss, Buss, Cykelparkering, Hjärtstartare, Rulltrappa, Flygbuss, Parkering, Toalett, Trappa, Ersättningsbussar, Ledsagarservice, Uttagsautomat) is machine-readable; positions need a visual read."
+  },
+  {
+   "title": "Malmö C terminalkarta (Stationsområdet)",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/80000_malmoc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Updated June 2026; bus stops A–N, tracks 1–11, legend with Biljettautomat, Kundcenter, Hiss, Trappa, Cykelgarage, Ledsagarplats; symbol positions not machine-readable."
+  }
+ ],
+ "answers": [
+  {
+   "question": "level L0 (Street and main hall): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L-2 (City Tunnel (tracks 1–4)): height not measured",
+   "answer": "Still open: no source gives the depth of Malmö C Nedre (Wikipedia gives 25 m only for Triangeln and ~7 m for Hyllie).",
+   "_source": "https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30"
+  },
+  {
+   "question": "cafe Espresso House: no opening hours",
+   "answer": "Two units. Entréhall (Skeppsbron 1): Mo-Fr 07:00-19:00; Sa,Su 08:00-18:00. Glashallen (Lokgatan 3): Mo-Fr 08:00-18:00; Sa,Su 07:00-18:00. The app's jh-mc-38 needs matching to one of them; OSM n444845100 has older hours (Mo-Fr 05:30-20:00).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "cafe St Jakobs Stenugnsbageri: no opening hours",
+   "answer": "Mo-Fr 07:00-19:00; Sa,Su 09:00-18:00 (Jernhusen, \"St Jakobs\", Lokgatan 8).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "kiosk 7-Eleven: no opening hours",
+   "answer": "Jernhusen lists one 7-Eleven (Skeppsbron 1): Mo-Th 06:00-24:00; Fr,Sa 06:00-03:00; Su 07:00-24:00. The app has two 7-Eleven POIs (OSM n2747390883 with other hours, and n5834378330 by the City Tunnel ticket machines); which one Jernhusen's hours belong to, and whether both still exist, stays open.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Chao Oriental Express: no opening hours",
+   "answer": "Mo-Fr 10:00-20:00; Sa,Su 10:00-19:00 (Centralplan 1).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Holy Greens: no opening hours",
+   "answer": "Mo-Fr 07:00-21:00; Sa,Su 10:00-20:00 (Lokgatan 6).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Tawana: no opening hours",
+   "answer": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-21:00 (in the food court).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Woso Sushi: no opening hours",
+   "answer": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00 (Centralplan 1). Jernhusen also lists a separate Sushi Yama (Lokgatan 6, Mo-Su 10:00-20:00).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Kjell & Co: no opening hours",
+   "answer": "Kjell & Company, Lokgatan 9: Mo-Fr 09:00-18:00; Sa,Su off.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Synsam: no opening hours",
+   "answer": "Rälsplatsen 6: Mo-Fr 09:00-18:00; Sa,Su off.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "waiting SJ Lounge: no opening hours",
+   "answer": "Mo-Fr 06:30-17:00; Sa,Su off. Location: right of the entrance from the bus square, opposite Skånetrafiken.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/lounge/ and https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Signposted level names (e.g. \"Plan 0\", \"Plan -2\") and the floor heights/depth of L0 and L-2: no open text source gives them; Jernhusen's and Skånetrafiken's plans are image-only apart from the legend.",
+  "Exact positions of lifts, escalators and stairs to tracks 1–4 rest on OSM only; the plans would confirm them on a visual read.",
+  "Jernhusen's hours block lists \"Glashallen\" and \"Öppet dygnet runt\" without hours; it probably means Glashallen is open around the clock (Wikipedia: after midnight a smaller area near the underground platforms stays open, reached by side doors), but the text does not say so outright.",
+  "Where in the building the shops given only by street address are (Centralplan 1/4/6/10, Skeppsbron 1, Lokgatan 1/6/8/9, Rälsplatsen 6): needs the plan.",
+  "Gottelisa (OSM n3402696470, confectionery) is not on Jernhusen's list: may have closed.",
+  "Bike & Ride hours: malmo.se returned a server error.",
+  "Fee for the staffed toilets: Jernhusen does not state the amount."
+ ]
+}

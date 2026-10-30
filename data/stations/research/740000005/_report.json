@@ -1,0 +1,187 @@
+{
+ "clack_id": "740000005",
+ "slug": "uppsala_c",
+ "flags": [
+  "Platform BIS 2014 (track 7a,7b): laser gives 0.89 m above the track bed (≈0.71 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 2127 (track 2a,2b): laser gives 1.00 m above the track bed (≈0.82 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 2052 (track 3): laser gives 0.70 m above the track bed (≈0.52 m above rail after −0.15…0.2 m), register class hög = 0.73 m. Not decided; add to REVIEW.md.",
+  "Platform surfaces differ by 0.59 m across the station (7.24–7.83 m); the station reference above is their median — check which level the app should use.",
+  "w55897474 Gamla stationshuset (station building): p95 18.4 m is 6.4 m above the median 12.0 m (a taller neighbour or a mast inside the outline?).",
+  "w207791536 Stationsgallerian (office): p95 34.6 m is 3.6 m above the median 31.0 m (a taller neighbour or a mast inside the outline?).",
+  "Laser-traced roof (197 m², top 3.1 m above the platform, 3.9 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=17.641506,59.853327,17.656721,59.861247",
+ "ground": {
+  "min_m": 1.51,
+  "median_m": 6.58,
+  "max_m": 13.37,
+  "nan_cells": 0,
+  "size_m": [
+   638,
+   619
+  ],
+  "box_sweref": [
+   648052,
+   6638175,
+   648690,
+   6638794
+  ],
+  "tiles": [
+   "663_64 (2023-04-26)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y21c037-66375_6475_25.copc.laz"
+  ],
+  "scan_date": "2021-03-19",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 692348,
+  "density_in_box": 1.75,
+  "classes": {
+   "1": 274281,
+   "2": 412077,
+   "7": 368,
+   "17": 5617,
+   "18": 5
+  },
+  "train_points_class64": 1835
+ },
+ "platforms": [
+  {
+   "bis_object": "2100",
+   "track": "5",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 96.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 6.53,
+   "track_bed_points": 60,
+   "platform_surface_m": 7.32,
+   "platform_points": 613,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.79,
+   "laser_estimate_above_rail_m": 0.61
+  },
+  {
+   "bis_object": "2126",
+   "track": "1a,1b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 463.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 6.54,
+   "track_bed_points": 1198,
+   "platform_surface_m": 7.24,
+   "platform_points": 1370,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.7,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "2000",
+   "track": "8a,8b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 480.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 6.62,
+   "track_bed_points": 1089,
+   "platform_surface_m": 7.42,
+   "platform_points": 1925,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.8,
+   "laser_estimate_above_rail_m": 0.62
+  },
+  {
+   "bis_object": "2014",
+   "track": "7a,7b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 401.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 6.64,
+   "track_bed_points": 947,
+   "platform_surface_m": 7.53,
+   "platform_points": 1405,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.89,
+   "laser_estimate_above_rail_m": 0.71
+  },
+  {
+   "bis_object": "2127",
+   "track": "2a,2b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 388.0,
+   "width_m": 10.5,
+   "roof": "Tak",
+   "track_bed_m": 6.55,
+   "track_bed_points": 978,
+   "platform_surface_m": 7.55,
+   "platform_points": 2265,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "other_side_surface_m": 7.27,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 1.0,
+   "laser_estimate_above_rail_m": 0.82
+  },
+  {
+   "bis_object": "2052",
+   "track": "3",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 353.0,
+   "width_m": 4.0,
+   "roof": "Tak",
+   "track_bed_m": 7.13,
+   "track_bed_points": 315,
+   "platform_surface_m": 7.83,
+   "platform_points": 1002,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.7,
+   "laser_estimate_above_rail_m": 0.52
+  },
+  {
+   "bis_object": "2051",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 348.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 7.69,
+   "track_bed_points": 120,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  }
+ ],
+ "platform_surface_m": 7.47,
+ "track_bed_m": 6.62,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 17,
+  "footbridge": 0,
+  "canopy_osm": 2,
+  "canopy_laser": 5,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 140,
+ "photos_station_related": 68
+}

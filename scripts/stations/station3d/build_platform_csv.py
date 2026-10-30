@@ -16,7 +16,8 @@ ORDER = list(NAMES)
 
 # BanInfo objects that belong to another station or are not part of these stations: left out of the CSV (see README)
 EXCLUDE = {('740000001', '2308'): 'Stockholm City (Citybanan), separate station',
-           ('740000001', '2309'): 'Stockholm City (Citybanan), separate station'}
+           ('740000001', '2309'): 'Stockholm City (Citybanan), separate station',
+           ('740000361', '1220'): 'Örebro C platform (track 1a), inside the Örebro S search box'}
 NOTE = {('740000170', '2489'): 'BanInfo only; about 0.7 km NW of the station building, not in Bilaga 2A',
         ('740000170', '2490'): 'BanInfo only; about 0.9 km NW of the station building, not in Bilaga 2A',
         ('740000005', '2335'): 'BanInfo only; track z10 on another line (km 114+), not in Bilaga 2A',

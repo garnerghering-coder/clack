@@ -1,0 +1,94 @@
+{
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "street/station side",
+    "far side of the tracks"
+   ],
+   "where": "OSM way w42605016 (layer -1, 96 m) under the tracks, with stairs w42605017 and w453710170; OSM does not join it to any platform and maps no platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": "track side (spårsidan)",
+   "where": "from the platform side straight into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Station building entrances, street side",
+   "street": "Järnvägsgatan (station address Järnvägsgatan 5)",
+   "where": "OSM entrance nodes n765051038, n2645179173, n2645179180, n2645179182 tagged addr:street=Järnvägsgatan (the brief's summary says OSM 'tags no entrance' joined to the platforms)",
+   "_source": "OSM and Jernhusen address, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station)",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa 07:00-23:00; Su 07:00-23:30",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes, paid by card (amount not stated)",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat (Speed Services)",
+   "fee": "149 kr",
+   "where": "in the station",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "where": "during the rebuild of Stationsplan in front of the station: at the bus drop-off (bussangöringen) on Kungsplan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Falköping resecentrum (Västtrafik stop 9021014041001000)",
+   "where": "Västtrafik lists lägen F, G, H, J, K, L, M, N, O, R, T, X (bus) and 1, 1A, 1B, 2, 3, 4 (these look like the train tracks; Västtrafik does not say so)",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014041001000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "Järnvägsgatan 5 (station building)",
+   "hours_raw": "no hours on Jernhusen's page; not looked up on pressbyran.se in this pass",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Falköping resecentrum stop page (map of positions)",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014041001000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "interactive page, no PDF; text gives only stop position letters"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Falköping C (`740000060`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly answered. OSM has no platform areas here at all, so nothing can be joined. It does have a 96 m pedestrian underpass (w42605016, layer -1) with stairs, and four entrance nodes on Järnvägsgatan. Jernhusen confirms an accessible entrance from the track side directly into the waiting room. No source found says which platforms the underpass reaches or whether it has lifts or ramps.",
+   "_source": "OSM; https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Platform layout (which tracks share which platform, and how each platform is reached: underpass stairs, lifts, ramps or level crossing): no owner text or plan found. Västtrafik's page gives no PDF, Jernhusen links no plan, and the Swedish Wikipedia page could not be fetched.",
+  "Pressbyrån hours: not on Jernhusen's page.",
+  "Jernhusen's Falköping and Hallsberg accessibility pages have word-for-word the same text about disabled parking 'vid bussangöringen på Kungsplan'. Check on site which station this belongs to."
+ ]
+}

@@ -1,0 +1,153 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": null,
+   "note": "Street level with two entrance buildings: Triangeln Norra (north, by Rådmansgatan / S:t Johannes kyrka) and Triangeln Södra (south, by Smedjegatan / Kapellgatan). Names as on Skånetrafiken's map; OSM names the entrances \"Norra uppgången\" and \"Södra uppgången\".",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": null,
+   "note": "Intermediate level in OSM (escalator w158755495 at the north entrance, lift n2409796063 stops at -1 at the south entrance). Wikipedia mentions a \"North entrance hall\"; no source gives a signposted name or says what is on this level.",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30; https://en.wikipedia.org/wiki/Triangeln_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": null,
+   "note": "Platform level: one island platform, two tracks signposted Spår 1 and Spår 2 (Skånetrafiken), about 25 m below ground in a mined rock tunnel (Wikipedia, KHR). Trafikverket: platform 250 m long, 14.5 m wide, register tracks 71/74.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; https://en.wikipedia.org/wiki/Triangeln_station, read 2026-10-30; https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; https://khr.dk/en/projekter/triangeln-station-i-malmo/ (architect's page; context only), read 2026-10-30; Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 row 952 and BanInfo BIS 2089 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "Triangeln Norra (street, Rådmansgatan)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "north entrance (OSM w232639038, level 0;-2, wheelchair=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30",
+   "note": "Skånetrafiken's map legend includes Hiss; its symbol positions are not machine-readable."
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Triangeln Norra (street)",
+    "level -1"
+   ],
+   "where": "north entrance (OSM w158755495)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level -1 (north)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "north end of the platform (OSM w917403339)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30",
+   "note": "Wikipedia shows \"North entrance escalators\" (photo caption)."
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Triangeln Södra (street, Smedjegatan)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "south entrance, stops at -1 as well (OSM n2409796063, level 0;-2;-1, wheelchair=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Triangeln Södra (street)",
+    "level -1"
+   ],
+   "where": "south entrance (OSM w158755493)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level -1 (south)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "south end of the platform; long run (about 67 m in OSM) (OSM w232639039)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Triangeln Norra (Norra uppgången)",
+   "street": "Rådmansgatan",
+   "level": "0",
+   "where": "north end, by S:t Johannes kyrka and Triangeln square; wheelchair accessible per OSM (n1708994518, lift w232639038)",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "name": "Triangeln Södra (Södra uppgången)",
+   "street": "Smedjegatan",
+   "level": "0",
+   "where": "south end, between Smedjegatan and Kapellgatan, by Tandvårdshögskolan; wheelchair accessible per OSM (n1761549703, lift n2409796063)",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (Skånetrafiken)",
+   "note": "Skånetrafiken's map legend lists ticket machines; their position is not machine-readable and OSM has none.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "where": "by the south entrance building (OSM n2409034813, wheelchair entrance)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "where": "by the north entrance (OSM w1032365215)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Triangeln bus stops",
+   "note": "Skånetrafiken's map shows city bus stops at Triangeln and Tandvårdshögskolan, VY Flygbussarna to Malmö Airport, and a marked rail-replacement stop.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "near the south entrance (OSM n883524014)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Malmö Triangeln terminalkarta",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/80140_malmo-triangeln_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Updated December 2025. Text: Triangeln Norra, Triangeln Södra, Spår 1, Spår 2, streets (Carl Gustafs väg, Smedjegatan, Rådmansgatan, Klerkgatan, Kapellgatan), S:t Johannes kyrka, Tandvårdshögskolan; legend Cykelparkering, Parkering, Hiss, Tågspår, Biljettautomat, Stadsbuss."
+  }
+ ],
+ "open": [
+  "No owner page: Triangeln is not a Jernhusen station; Trafikverket/Skånetrafiken publish no station plan beyond the terminal map.",
+  "Lift and escalator positions rest on OSM; Skånetrafiken's map confirms lifts exist (legend) but not where. Whether there are fixed stairs besides the escalators is not in any source read.",
+  "Name and role of the intermediate level -1 (OSM) and its depth; platform depth is only \"about 25 m\" (Wikipedia, KHR).",
+  "Shops: none are inside the station per OSM; nearby 7-Eleven, Gateau, Joe & The Juice and WOSO are at the north entrance in Triangeln's buildings, Coffee Square at the south; their own websites were not read for hours.",
+  "Toilets: OSM only; no hours."
+ ]
+}

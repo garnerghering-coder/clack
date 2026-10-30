@@ -1,0 +1,135 @@
+{
+ "connections": [
+  {
+   "kind": "footbridge",
+   "between": [
+    "L0 (station side, platform 1a)",
+    "platforms 2, 4, 6b, 7b, 8b"
+   ],
+   "where": "OSM way w55226306 (layer 1, 85 m) crossing the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OSM w55226306, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "platform 1b",
+    "platforms 2, 4, 6b"
+   ],
+   "where": "OSM way w39303495 (layer -1, 63 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM w39303495, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms",
+    "footbridge"
+   ],
+   "where": "Skånetrafiken's terminal map has 'Hiss' in its legend; its text layer does not say where the lifts are or which platforms they reach, and OSM tags no lift here",
+   "confirmed_by": "plan",
+   "_source": "Skånetrafiken, Hässleholm C terminalkarta (uppdaterad december 2025), https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/93070_hassleholmc_terminalkarta_a3.pdf, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Accessible entrance (Tillgänglig entré)",
+   "street": "Järnvägsgatan (station building, Järnvägsgatan 4)",
+   "where": "Jernhusen says only that the station has one accessible entrance; it does not say which door. OSM has main-entrance nodes n694200085 and n11335405981 on the Järnvägsgatan side.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "name": "Entrances on Första Avenyen",
+   "street": "Första Avenyen",
+   "where": "OSM entrance nodes n6713055924 and n6713055925 (addr:street Första Avenyen)",
+   "_source": "OSM, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "where": "in the station (Jernhusen gives no position; OSM has two fee toilets ~26-29 m from the station node, n12872609087 wheelchair=yes, n11513113019 wheelchair=no)",
+   "fee": "yes (OSM); amount not published by Jernhusen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days; opened with code/QR",
+   "opening_hours": "Mo-Su 03:50-02:45",
+   "hours_source": "website (Jernhusen: the station's hours, which the locker page refers to)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationen (station building)",
+   "opening_hours": "Mo-Su 03:50-02:45",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (Skånetrafiken)",
+   "where": "shown on the terminal map (legend 'Biljettautomat'); positions not readable from the text layer",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "on the terminal map (legend); OSM has bicycle parking ~180-225 m from the station node",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C and OSM, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hässleholm C bus stops (lägen A, B, C, D, E, G, K)",
+   "where": "on the streets around the station (Järnvägsgatan, Första Avenyen, Magasinsgatan per the map); per terminal map: läge A city bus 1 Sjörröd, Närtrafik, Plusresa; B 2 Gäddastorp, 3 Tormestorp; C 542 Sibbhult; D 511 Ängelholm; E 532 Markaryd; K 1 Ljungdala, 2 Röinge, 3 Läreda; G rail replacement buses (Malmö/Helsingborg/Karlskrona/Växjö)",
+   "_source": "Skånetrafiken terminalkarta Hässleholm C (uppdaterad december 2025), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hässleholm C terminalkarta (A3)",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/93070_hassleholmc_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Uppdaterad december 2025. Read with WebFetch: text layer gives streets, track numbers (1, 1a, 1b, 2, 3, 4, 5, 6a, 6b, 7a, 7b, 8), bus stop letters and legend (Biljettautomat, Hiss, Trappa, Parkering, Cykelparkering, Ersättningstrafik), but not where the symbols sit."
+  }
+ ],
+ "answers": [
+  {
+   "question": "level L1 (Footbridge) / L0: height not measured",
+   "answer": "Still open: no source measures the footbridge deck; the laser gives only tops.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L0 (Platforms and street): height not measured",
+   "answer": "Still open: no open source (Jernhusen, Skånetrafiken terminal map, Wikipedia) gives heights.",
+   "_source": "this pass, 2026-10-30"
+  },
+  {
+   "question": "(extra, not in queue) level L1 (Footbridge): signposted name",
+   "answer": "No signposted name found: neither Jernhusen nor Skånetrafiken's map names the footbridge; OSM w55226306 has no name.",
+   "_source": "Jernhusen, Skånetrafiken terminalkarta, OSM, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights of the footbridge: no open source.",
+  "Skånetrafiken's terminal map (linked from Jernhusen) could not be read from the browser (cross-site block); read it on skanetrafiken.se for lifts and entrances.",
+  "2026-10-30: Skånetrafiken's terminal map was read with WebFetch; its legend lists Hiss and Trappa, but the text layer does not give where the lifts/stairs are or which platforms they reach. Someone needs to look at the drawing itself (facts only).",
+  "Lifts: OSM tags no lift at Hässleholm; number and positions unconfirmed.",
+  "Toilet fee amount and exact position: Jernhusen's toilet page is empty."
+ ]
+}

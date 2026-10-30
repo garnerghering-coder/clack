@@ -1,0 +1,936 @@
+{
+ "clack_id": "740000110",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w71499098",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w71499118",
+   "ref": "3",
+   "level": null
+  },
+  {
+   "osm_id": "w307498378",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w307498379",
+   "ref": "4",
+   "level": null
+  },
+  {
+   "osm_id": "w541968303",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w1411878530",
+   "ref": "4",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1411878531",
+   "ref": "2",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1411878532",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w1411878533",
+   "ref": "5",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684961",
+   "ref": "2B",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684962",
+   "ref": "4B",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684963",
+   "ref": "5B",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684964",
+   "ref": "2A",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684965",
+   "ref": "4A",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684966",
+   "ref": "5A",
+   "level": "-1"
+  },
+  {
+   "osm_id": "w1463684967",
+   "ref": "1B",
+   "level": "-1"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w1415607100",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 23.8,
+   "reaches_platforms": [
+    "2",
+    "2B"
+   ],
+   "lonlat": [
+    12.2496573,
+    57.1115974
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415607101",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 24.0,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2491779,
+    57.1117015
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1415619326",
+   "name": "Alida Svenssons gång- och cykelbro",
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 42.8,
+   "reaches_platforms": [
+    "2",
+    "2B",
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2493002,
+    57.1123067
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619328",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 25.9,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2493752,
+    57.112601
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619329",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 25.6,
+   "reaches_platforms": [
+    "1",
+    "1B",
+    "2",
+    "2B"
+   ],
+   "lonlat": [
+    12.2498112,
+    57.1123529
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619330",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 25.5,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2492364,
+    57.1120184
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619331",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 23.8,
+   "reaches_platforms": [
+    "2",
+    "2B"
+   ],
+   "lonlat": [
+    12.2497718,
+    57.1121972
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1417184719",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 16.7,
+   "reaches_platforms": [
+    "2"
+   ],
+   "lonlat": [
+    12.2495011,
+    57.1113225
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1417184720",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.8,
+   "reaches_platforms": [
+    "4",
+    "5"
+   ],
+   "lonlat": [
+    12.2491628,
+    57.1113461
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1417184723",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 8.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2494862,
+    57.1112446
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1417184724",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2491628,
+    57.1113461
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1463599037",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 14.0,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2493002,
+    57.1123067
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1463599040",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2497933,
+    57.1122735
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1463599044",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 18.9,
+   "reaches_platforms": [
+    "2",
+    "2B"
+   ],
+   "lonlat": [
+    12.2495393,
+    57.1115893
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1463599050",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 20.2,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5"
+   ],
+   "lonlat": [
+    12.2491912,
+    57.1114283
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1463599060",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2491304,
+    57.111214
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1463599061",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 6.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.249475,
+    57.1111902
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835362",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "4",
+    "4B",
+    "5",
+    "5B"
+   ],
+   "lonlat": [
+    12.2493002,
+    57.1123067
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835364",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "2",
+    "2B"
+   ],
+   "lonlat": [
+    12.2497343,
+    57.1122775
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636685",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2491174,
+    57.1113088
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636687",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.2495203,
+    57.1112846
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n5240151253",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Eskilsgatan",
+   "nearest_street_m": 21.3,
+   "lonlat": [
+    12.249032,
+    57.1093376
+   ]
+  },
+  {
+   "osm_id": "n5240151254",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Eskilsgatan",
+   "nearest_street_m": 39.1,
+   "lonlat": [
+    12.2487385,
+    57.1093523
+   ]
+  },
+  {
+   "osm_id": "n13022636700",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": "yes",
+   "door": "sliding",
+   "addr_street": null,
+   "nearest_named_street": "Västra Vallgatan",
+   "nearest_street_m": 10.0,
+   "lonlat": [
+    12.2495138,
+    57.1110879
+   ]
+  },
+  {
+   "osm_id": "n13022665704",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": "yes",
+   "door": "sliding",
+   "addr_street": null,
+   "nearest_named_street": "Västra Vallgatan",
+   "nearest_street_m": 27.2,
+   "lonlat": [
+    12.2492889,
+    57.1113472
+   ]
+  },
+  {
+   "osm_id": "n13599636704",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": "yes",
+   "door": "sliding",
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 43.0,
+   "lonlat": [
+    12.2489786,
+    57.1111456
+   ]
+  },
+  {
+   "osm_id": "n13599636716",
+   "name": null,
+   "entrance": "shop",
+   "level": null,
+   "wheelchair": null,
+   "door": "hinged",
+   "addr_street": null,
+   "nearest_named_street": "Västra Vallgatan",
+   "nearest_street_m": 12.5,
+   "lonlat": [
+    12.2494653,
+    57.1110533
+   ]
+  },
+  {
+   "osm_id": "n13599636717",
+   "name": null,
+   "entrance": "shop",
+   "level": null,
+   "wheelchair": null,
+   "door": "hinged",
+   "addr_street": null,
+   "nearest_named_street": "Västra Vallgatan",
+   "nearest_street_m": 12.9,
+   "lonlat": [
+    12.2494427,
+    57.1109612
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n5240151251",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 192,
+   "lonlat": [
+    12.2488855,
+    57.1094483
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.8
+  },
+  {
+   "osm_id": "n5240151252",
+   "category": "fast_food",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:20-19:00; Sa 08:00-17:00; Su 09:00-17:00",
+   "wheelchair": null,
+   "distance_m": 194,
+   "lonlat": [
+    12.2488781,
+    57.1094289
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.6,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "n12139193406",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 118,
+   "lonlat": [
+    12.2486286,
+    57.110135
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n12156323069",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 243,
+   "lonlat": [
+    12.2487868,
+    57.1089974
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.4
+  },
+  {
+   "osm_id": "n12156323070",
+   "category": "shop=travel_agency",
+   "name": "Hallandstrafiken Kundservice",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-17:00",
+   "wheelchair": null,
+   "distance_m": 221,
+   "lonlat": [
+    12.2488257,
+    57.1091933
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "n12156323072",
+   "category": "luggage_locker",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 209,
+   "lonlat": [
+    12.2489387,
+    57.1092913
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.3,
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n13022665703",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    12.249579,
+    57.1109642
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 50.8
+  },
+  {
+   "osm_id": "n13069363690",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 22,
+   "lonlat": [
+    12.2493573,
+    57.1110543
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 41.2,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "n13074151324",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 20,
+   "lonlat": [
+    12.2493811,
+    57.1111032
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 35.6
+  },
+  {
+   "osm_id": "n13074151325",
+   "category": "shop=ticket",
+   "name": "Hallandstrafiken Kundservice",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-17:00",
+   "wheelchair": null,
+   "distance_m": 18,
+   "lonlat": [
+    12.2492073,
+    57.1113096
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 13.2
+  },
+  {
+   "osm_id": "n13074151326",
+   "category": "shop=hairdresser",
+   "name": "Barber Station",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-We 10:00-19:00; Tu 10:00-21:00; Fr 10:00-19:00; Sa 10:00-15:00",
+   "wheelchair": null,
+   "distance_m": 28,
+   "lonlat": [
+    12.2493276,
+    57.1109619
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 50.2,
+   "website": "https://barberstationvarberg.se/"
+  },
+  {
+   "osm_id": "n13074151327",
+   "category": "shop=clothes",
+   "name": "Studio Terra",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 10:00-16:00; Sa-Su 10:00-14:00",
+   "wheelchair": null,
+   "distance_m": 21,
+   "lonlat": [
+    12.249089,
+    57.1109781
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 40.0,
+   "website": "https://www.studio-terra-varberg.com/"
+  },
+  {
+   "osm_id": "n13075136943",
+   "category": "atm",
+   "name": "Bankomat",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 37,
+   "lonlat": [
+    12.2494415,
+    57.1109112
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 53.6,
+   "operator": "Bankomat"
+  },
+  {
+   "osm_id": "n13599636702",
+   "category": "shop=vacant",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 11,
+   "lonlat": [
+    12.2491159,
+    57.1110732
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 39.7
+  },
+  {
+   "osm_id": "n13599636713",
+   "category": "parcel_locker",
+   "name": "Instabox",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 32,
+   "lonlat": [
+    12.2491691,
+    57.1108855
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 37.6,
+   "brand": "Instabox"
+  },
+  {
+   "osm_id": "n13599636714",
+   "category": "shop=vacant",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 43,
+   "lonlat": [
+    12.2490452,
+    57.110784
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 26.2
+  },
+  {
+   "osm_id": "n13599636715",
+   "category": "shop=vacant",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 47,
+   "lonlat": [
+    12.2492856,
+    57.1107644
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 40.1
+  },
+  {
+   "osm_id": "n13779993917",
+   "category": "atm",
+   "name": "Bankomat",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 37,
+   "lonlat": [
+    12.2494395,
+    57.1109011
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 53.1,
+   "operator": "Bankomat"
+  },
+  {
+   "osm_id": "n13790440294",
+   "category": "luggage_locker",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    12.2493483,
+    57.1113129
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 13.8
+  },
+  {
+   "osm_id": "n13790485666",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 4,
+   "lonlat": [
+    12.2490942,
+    57.111205
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 25.2
+  },
+  {
+   "osm_id": "n13793725540",
+   "category": "waiting_room",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 17,
+   "lonlat": [
+    12.2493248,
+    57.1112409
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 21.6
+  },
+  {
+   "osm_id": "w336647738",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 66,
+   "lonlat": [
+    12.2502517,
+    57.111519
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 31.5
+  }
+ ]
+}

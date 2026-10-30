@@ -1,0 +1,619 @@
+{
+ "clack_id": "740001586",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Hyllie Stationstorg (street level)",
+   "other_names": [],
+   "note": "Street level around the station; Malmö Arena gives its address as \"Hyllie Stationstorg at Malmö Hyllie Station\". No source gives a signposted level name.",
+   "_source": "https://www.malmoarena.com/en/find-us, read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": null,
+   "note": "Platform level: two island platforms serving four tracks in an open cut about 7 m deep (Wikipedia). OSM tags the lifts -1;0. No signposted name found.",
+   "_source": "https://en.wikipedia.org/wiki/Hyllie_railway_station, read 2026-10-30; https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2090",
+   "track": "72N",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 72N (the train stops with the platform to its north-west)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2090; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "2091",
+   "track": "74",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 74 (the train stops with the platform to its north-west)",
+   "_source": "laser (2025-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2091; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "street level (Hyllie Stationstorg)",
+    "island platform tracks 1–2"
+   ],
+   "where": "from the station entrance area off Hyllie boulevard (OSM n1698439660)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (Hyllie Stationstorg)",
+    "island platform tracks 3–4"
+   ],
+   "where": "from the station entrance area off Hyllie boulevard (OSM n1698439638)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street level",
+    "island platform tracks 1–2"
+   ],
+   "where": "by the main entrance (OSM w157598214)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street level",
+    "island platform tracks 3–4"
+   ],
+   "where": "by the main entrance (OSM w157598218)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level",
+    "island platform tracks 1–2"
+   ],
+   "where": "by the main entrance (OSM w157598217)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level",
+    "island platform tracks 3–4"
+   ],
+   "where": "by the main entrance (OSM w157598212)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (west)",
+    "island platform tracks 1–2"
+   ],
+   "where": "west end of the platform (OSM w157006137)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (west)",
+    "island platform tracks 3–4"
+   ],
+   "where": "west end of the platform (OSM w157006144)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (east, towards the Bike & Ride / P-huset)",
+    "island platform tracks 1–2"
+   ],
+   "where": "east end of the platform, with ramp (OSM w157598221)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "note": "OSM ramp=yes: a ramp alongside the steps (type not tagged)."
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (east, towards the Bike & Ride / P-huset)",
+    "island platform tracks 3–4"
+   ],
+   "where": "east end of the platform, with ramp (OSM w157598213)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "note": "OSM ramp=yes: a ramp alongside the steps (type not tagged)."
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157006137",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157006137 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.974883,
+    "lat": 55.5624675,
+    "how": "OSM w157006137 (point on the way)",
+    "_source": "OpenStreetMap w157006137 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157006144",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 21.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157006144 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9748557,
+    "lat": 55.5622364,
+    "how": "OSM w157006144 (point on the way)",
+    "_source": "OpenStreetMap w157006144 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598212",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 22.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598212 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9762796,
+    "lat": 55.5628075,
+    "how": "OSM w157598212 (point on the way)",
+    "_source": "OpenStreetMap w157598212 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598213",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598213 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9770769,
+    "lat": 55.5631422,
+    "how": "OSM w157598213 (point on the way)",
+    "_source": "OpenStreetMap w157598213 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157598214",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 23.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598214 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9755129,
+    "lat": 55.5627196,
+    "how": "OSM w157598214 (point on the way)",
+    "_source": "OpenStreetMap w157598214 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598217",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598217 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9760444,
+    "lat": 55.562933,
+    "how": "OSM w157598217 (point on the way)",
+    "_source": "OpenStreetMap w157598217 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157598218",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 24.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598218 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9755291,
+    "lat": 55.5625034,
+    "how": "OSM w157598218 (point on the way)",
+    "_source": "OpenStreetMap w157598218 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598221",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w157598221 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9771031,
+    "lat": 55.5633641,
+    "how": "OSM w157598221 (point on the way)",
+    "_source": "OpenStreetMap w157598221 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1698439638",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n1698439638 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9759618,
+    "lat": 55.5626873,
+    "how": "OSM n1698439638",
+    "_source": "OpenStreetMap n1698439638 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1698439660",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n1698439660 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.9757887,
+    "lat": 55.5628255,
+    "how": "OSM n1698439660",
+    "_source": "OpenStreetMap n1698439660 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance",
+   "street": "Hyllie boulevard",
+   "level": "0",
+   "where": "OSM's only entrance node (n6283632850, entrance=main), between the lifts/escalators",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n6283632850",
+   "street": "Hyllie boulevard",
+   "street_how": "nearest named street, 22.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6283632850 (already in OSM)",
+   "position": {
+    "lon": 12.975576,
+    "lat": 55.5628597,
+    "how": "OSM n6283632850",
+    "_source": "OpenStreetMap n6283632850 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "level_per_plan": "0",
+   "where": "at street level by the west stairs/bus shelters (OSM n1985852004)",
+   "opening_hours": "Apr 29-Sep 30 06:00-22:00; Oct 01-Apr 28 06:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "level_per_plan": "0",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "where": "by the station entrance (OSM n11057831932)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "position": {
+    "lon": 12.9763619,
+    "lat": 55.5630542,
+    "osm_id": "n11057831932",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n11057831932",
+    "_source": "OpenStreetMap n11057831932 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Hyllie Bike & Ride (Malmö stad)",
+   "where": "east of the station (OSM n1218863346)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-huset Hyllie",
+   "fee": "yes",
+   "where": "east of the station (OSM w94780041)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Hyllie Stationstorg bus stops",
+   "note": "City bus lines 6, 9, 10 and 51 and regional lines 150, 170 and 300 serve Hyllie (Malmö Arena). OSM has bus shelters at the west end of the platforms.",
+   "_source": "https://www.malmoarena.com/en/find-us, read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "next to the station entrance (OSM n1692398183, level 1)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "position": {
+    "lon": 12.9763831,
+    "lat": 55.5628562,
+    "osm_id": "n1692398183",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n1692398183",
+    "_source": "OpenStreetMap n1692398183 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "where": "next to the station entrance (OSM n6466666264)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "position": {
+    "lon": 12.9764192,
+    "lat": 55.5627097,
+    "osm_id": "n6466666264",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 8.1,
+    "how": "OSM node n6466666264",
+    "_source": "OpenStreetMap n6466666264 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n1985852004",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": "Apr 29-Sep 30 06:00-22:00, Oct 1-Apr 28 06:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n1985852004 (read 2026-10-30)",
+   "position": {
+    "lon": 12.9753048,
+    "lat": 55.5623167,
+    "osm_id": "n1985852004",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 4.4,
+    "how": "OSM node n1985852004",
+    "_source": "OpenStreetMap n1985852004 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Brödernas",
+   "brand": "Brödernas",
+   "cuisine": "burger",
+   "opening_hours": "Mo-Tu 11:00-21:00; Sa 12:00-22:00; We-Fr 11:00-22:00; Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.brodernas.nu/restauranger/",
+   "position": {
+    "lon": 12.9765265,
+    "lat": 55.5634006,
+    "osm_id": "n1692398169",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 18.8,
+    "how": "OSM node n1692398169",
+    "_source": "OpenStreetMap n1692398169 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n1692398169 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "brand": "Subway",
+   "cuisine": "sandwich",
+   "opening_hours": "Mo-Fr 08:00-22:00; Sa,Su 10:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://restaurants.subway.com",
+   "position": {
+    "lon": 12.9764176,
+    "lat": 55.5633239,
+    "osm_id": "n1692398174",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 15.9,
+    "how": "OSM node n1692398174",
+    "_source": "OpenStreetMap n1692398174 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n1692398174 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Sultan kebab",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 10:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://sultan-kebab.se/",
+   "position": {
+    "lon": 12.9764172,
+    "lat": 55.5632753,
+    "osm_id": "n1692398193",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 11.5,
+    "how": "OSM node n1692398193",
+    "_source": "OpenStreetMap n1692398193 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n1692398193 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bank",
+   "name": "Swedbank",
+   "brand": "Swedbank",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.9763072,
+    "lat": 55.5623532,
+    "osm_id": "n1692398196",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 36.5,
+    "how": "OSM node n1692398196",
+    "_source": "OpenStreetMap n1692398196 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n1692398196 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Kung Fu Dumplings",
+   "brand": null,
+   "cuisine": "asian;chinese",
+   "opening_hours": "Mo-Su 11:00-21:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://kung-fu.se/",
+   "position": {
+    "lon": 12.976409,
+    "lat": 55.5632222,
+    "osm_id": "n2396630557",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.0,
+    "how": "OSM node n2396630557",
+    "_source": "OpenStreetMap n2396630557 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n2396630557 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Track numbering: OSM numbers the platform faces 1–4; Trafikverket's register lists them as tracks 71/72N (BIS 2090) and 73N/74 (BIS 2091), plus a separate track-75 platform (BIS 2597) about 0.9 km south-west, outside the station. Which public number (1–4) matches which register track is not stated in any source read. (Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 rows 333–335 and BanInfo BIS 2090/2091/2597 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30)",
+  "No owner pages: Hyllie is not a Jernhusen station; Skånetrafiken's terminal map for Hyllie was not found (file names tried: 80120_hyllie, 80120/80044/80045_malmo-hyllie).",
+  "All stairs, lifts and escalators rest on OSM only; no plan or owner text confirms them.",
+  "Signposted level names and the platform depth (~7 m per Wikipedia, not measured by the owner).",
+  "Shops around the station (Pressbyrån, McDonald's, Subway, Sultan kebab, Kung Fu Dumplings, Brödernas, Swedbank) are outside the station structure per OSM; their own websites could not be read for hours, so only OSM hours exist and they are not repeated here.",
+  "Ticket machines and a ticket office: no source read lists them for Hyllie."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

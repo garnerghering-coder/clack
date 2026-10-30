@@ -1,0 +1,156 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level (no signposted name found)",
+   "other_names": [],
+   "_source": "OSM platforms 1-4 (no level tag), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel",
+   "other_names": [
+    "Tunnelplan (label on Sörmlandstrafiken's map; the map does not say whether it is a level name or a place name)"
+   ],
+   "_source": "Sörmlandstrafiken, Eskilstuna resecentrum terminalkarta, version 2025-09-12, labels 'Tunnel' (twice) and 'Tunnelplan'; OSM underpass w336123540 layer -1, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side",
+    "platforms 1, 2, 3, 4"
+   ],
+   "where": "OSM w336123540 (layer -1, 50 m); Sörmlandstrafiken map labels 'Tunnel' twice",
+   "confirmed_by": "plan",
+   "_source": "OSM; Sörmlandstrafiken terminalkarta Eskilstuna resecentrum 2025-09-12, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platform 1"
+   ],
+   "where": "OSM w30651905 (ramp=yes, probably a wheel/bike ramp beside the steps)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "street"
+   ],
+   "where": "OSM w30651903 (ramp=yes), not joined to a platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "Sörmlandstrafiken's map has 'Hiss' in its legend; the text layer does not say where the lifts are or which platforms they reach; OSM tags no lift here",
+   "confirmed_by": "plan",
+   "_source": "Sörmlandstrafiken terminalkarta Eskilstuna resecentrum 2025-09-12, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": "track side (spårsidan)",
+   "where": "from the platform side into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Centralstation (street side)",
+   "street": "Västermarksgatan (Pressbyrån's address Västermarksgatan 4; map names Västermarksgatan and Bruksgatan)",
+   "where": "station building; no OSM entrance nodes",
+   "_source": "Jernhusen; Sörmlandstrafiken terminalkarta 2025-09-12, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa,Su 06:30-22:30",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building (Sörmlandstrafiken map shows a 'Väntsal' symbol)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/ and Sörmlandstrafiken terminalkarta, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes; toilet by card, universal toilet by card or coin (amount not stated)",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/toalett/ and /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days",
+   "opening_hours": "Mo-Fr 04:30-00:15; Sa,Su 06:30-22:30",
+   "hours_source": "website (Jernhusen: the station's hours, which the locker page refers to)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat",
+   "where": "in the station (OSM n13966052408)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/uttagsautomat/ and OSM, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa), incl. paid disabled parking",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/parkering/ and /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Eskilstuna resecentrum, lägen A-D",
+   "where": "A: city lines 1 Centrum-Torshälla, 3 Centrum-Viptorp, 4 Centrum-Mälarsjukhuset, 5 Centrum-Ekängen, 7 Centrum-Trumtorp, 31, 40, night 65. B: 1 Mesta-Borsökna, 3 Hällby, 4 Skogstorp, 5 Hemlaås, 7 Brunnsta-Folkesta, 30, 23, night 61, 62. C: 203, 230, 701, 801. D: 550 Kungsör-Köping and rail replacement/charter buses. Also Färdtjänst, taxi, information point, cycle garage and cycle parking on the map.",
+   "_source": "Sörmlandstrafiken terminalkarta Eskilstuna resecentrum, version 2025-09-12, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Eskilstuna station360",
+   "where": "OSM shop=ticket n9897534709",
+   "_source": "OSM, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Eskilstuna resecentrum terminalkarta (A4), version 2025-09-12",
+   "publisher": "Sörmlandstrafiken (Länstrafiken Sörmland)",
+   "url": "https://sormlandstrafiken.se/globalassets/st_terminalkarta_eskilstuna_resecentrum_a4_original_rgb_250912_v2.pdf",
+   "licence": "not open: facts only (basemap ©OpenStreetMap)",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "T25 Eskilstuna resecentrum, uppdaterad 2025-03-03",
+   "publisher": "Sörmlandstrafiken",
+   "url": "https://sormlandstrafiken.se/globalassets/terminalkartor/klara-terminalkartor-mars-25/t25-eskilstuna-resecentrum-uppdaterad-20250303.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "older version, superseded by 2025-09-12"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no queue questions listed for Eskilstuna C in STATION_OPEN_QUESTIONS_SWEDEN.md)",
+   "answer": "Not in the review queue. Facts added: the tunnel to platforms 1-4 (plan + OSM), a lift shown in the map legend, the 'Tunnelplan' label, the accessible entrance from the track side, and bus stop positions A-D.",
+   "_source": "this pass, 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Lifts: Sörmlandstrafiken's map legend shows 'Hiss', but the text layer does not say which platforms have lifts and OSM tags none. Someone needs to look at the drawing (facts only).",
+  "Whether 'Tunnelplan' is the signposted name of the tunnel level or a place name: not settled."
+ ]
+}

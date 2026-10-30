@@ -1,0 +1,104 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Footbridge over the tracks",
+   "note": "OSM only (w45583777, layer 1); no source gives a signposted name.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Street, station and platforms",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w45583777",
+   "between": [
+    "Spår 1",
+    "Spår 2"
+   ],
+   "where": "across the tracks between the platforms of Spår 1 and Spår 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583776",
+   "between": [
+    "footbridge",
+    "Spår 1"
+   ],
+   "where": "platform of Spår 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583778",
+   "between": [
+    "footbridge",
+    "Spår 2"
+   ],
+   "where": "platform of Spår 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station entrances (all accessible)",
+   "street": "Öxneredsvägen",
+   "level": "0",
+   "where": "Jernhusen says all entrances to the station are accessible; its location link is labelled 'Öxneredsvägen'. OSM maps no entrance nodes.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/tillganglighet/ and https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station (indoor waiting)",
+   "opening_hours": "Mo-Su 06:20-20:15",
+   "hours_source": "website (Jernhusen: station hours)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives only the station's opening hours; no shops, toilets or lockers are listed for Öxnered.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering för rörelsehindrade",
+   "note": "Accessible parking at the station (no fee mentioned). OSM also maps a car park w448274422 tagged fee=no.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/tillganglighet/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Öxnered station (Västtrafik)",
+   "where": "Västtrafik lists lägen A and B (bus) plus 1–4 (tracks)",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "No station plan published: Jernhusen's 'Karta över stationsområdet' links only to Västtrafik's stop page (no PDF)",
+   "publisher": "Jernhusen / Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform Spår 4: no platform edges (which side the trains stop at)",
+   "answer": "Still open. No owner, Trafikverket, Västtrafik or Wikipedia source describes which side of the Spår 4 platform trains use; Västtrafik only confirms that läge 4 exists. OSM has a platform ref 'Spår 4' (w45583759) with no stairs or footbridge joined to it, so how it is reached is also unknown.",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; Wikipedia en 'Öxnered' (no layout), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Spår 4 platform edge and how platforms for Spår 3 and 4 are reached (OSM joins the footbridge only to Spår 1 and 2).",
+  "Lifts: Jernhusen says all entrances are accessible, but no source states whether the footbridge has lifts or whether platforms are reached at grade.",
+  "No published station plan; sv/no Wikipedia pages could not be fetched (site error).",
+  "Floor heights: no source."
+ ]
+}

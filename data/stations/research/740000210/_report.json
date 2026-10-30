@@ -1,0 +1,172 @@
+{
+ "clack_id": "740000210",
+ "slug": "gavle_c",
+ "flags": [
+  "Platform BIS 1978 (track 3): laser gives 0.93 m above the track bed (≈0.75 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 1800 (track None): laser gives 0.68 m above the track bed (≈0.50 m above rail after −0.15…0.2 m), register class låg = 0.35 m. Not decided; add to REVIEW.md.",
+  "Platform surfaces differ by 0.51 m across the station (5.38–5.89 m); the station reference above is their median — check which level the app should use.",
+  "w96964467 roof: p95 15.8 m is 7.9 m above the median 7.9 m (a taller neighbour or a mast inside the outline?).",
+  "w141054585 Gävle brandstation (building): p95 13.1 m is 3.8 m above the median 9.3 m (a taller neighbour or a mast inside the outline?).",
+  "w720417460 roof: p95 20.8 m is 10.5 m above the median 10.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1387859854 roof: p95 18.5 m is 12.0 m above the median 6.5 m (a taller neighbour or a mast inside the outline?).",
+  "w1387859857 roof: p95 11.7 m is 4.3 m above the median 7.4 m (a taller neighbour or a mast inside the outline?).",
+  "w1388314299 roof: p95 10.3 m is 4.2 m above the median 6.2 m (a taller neighbour or a mast inside the outline?).",
+  "w1388314323 roof: p95 19.5 m is 8.5 m above the median 11.0 m (a taller neighbour or a mast inside the outline?).",
+  "w1388314333 roof: p95 19.1 m is 10.4 m above the median 8.7 m (a taller neighbour or a mast inside the outline?).",
+  "w1388314348 roof: p95 23.9 m is 3.0 m above the median 20.9 m (a taller neighbour or a mast inside the outline?).",
+  "w1388863126 roof: p95 14.5 m is 4.0 m above the median 10.5 m (a taller neighbour or a mast inside the outline?).",
+  "w1388863127 roof: p95 20.0 m is 4.7 m above the median 15.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1388863134 roof: p95 15.5 m is 5.2 m above the median 10.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1388863153 roof: p95 11.7 m is 4.0 m above the median 7.7 m (a taller neighbour or a mast inside the outline?).",
+  "w1388869100 roof: p95 17.8 m is 7.7 m above the median 10.1 m (a taller neighbour or a mast inside the outline?).",
+  "w1389176521 roof: p95 23.9 m is 9.1 m above the median 14.8 m (a taller neighbour or a mast inside the outline?).",
+  "w1389176522 roof: p95 22.4 m is 6.7 m above the median 15.7 m (a taller neighbour or a mast inside the outline?).",
+  "w1389176523 roof: p95 21.5 m is 13.3 m above the median 8.2 m (a taller neighbour or a mast inside the outline?).",
+  "w1389176524 roof: p95 24.9 m is 11.3 m above the median 13.6 m (a taller neighbour or a mast inside the outline?).",
+  "w1389444720 roof: p95 11.4 m is 4.9 m above the median 6.6 m (a taller neighbour or a mast inside the outline?).",
+  "w1389444731 roof: p95 20.9 m is 10.5 m above the median 10.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1389444744 roof: p95 13.2 m is 5.0 m above the median 8.2 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w499890259 Islandsbron (cycleway, secondary); w499890262 Murénbron (cycleway, footway, tertiary)."
+ ],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 0.23,
+  "median_m": 4.13,
+  "max_m": 11.83,
+  "nan_cells": 0,
+  "size_m": [
+   512,
+   696
+  ],
+  "box_sweref": [
+   617306,
+   6728193,
+   617818,
+   6728889
+  ],
+  "tiles": [
+   "672_61 (2023-05-07)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y21c051-67275_6150_25.copc.laz",
+   "y21c051-67275_6175_25.copc.laz"
+  ],
+  "scan_date": "2021-04-11",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 676846,
+  "density_in_box": 1.9,
+  "classes": {
+   "1": 252436,
+   "2": 416594,
+   "7": 364,
+   "9": 1525,
+   "17": 5926,
+   "18": 1
+  },
+  "train_points_class64": 347
+ },
+ "platforms": [
+  {
+   "bis_object": "1585",
+   "track": "5",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 85.0,
+   "width_m": 9.0,
+   "roof": "Saknas",
+   "track_bed_m": 4.73,
+   "track_bed_points": 221,
+   "platform_surface_m": 5.38,
+   "platform_points": 1250,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.65,
+   "laser_estimate_above_rail_m": 0.47
+  },
+  {
+   "bis_object": "1978",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 411.0,
+   "width_m": 6.7,
+   "roof": "Tak",
+   "track_bed_m": 4.96,
+   "track_bed_points": 738,
+   "platform_surface_m": 5.89,
+   "platform_points": 1484,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.93,
+   "laser_estimate_above_rail_m": 0.75
+  },
+  {
+   "bis_object": "1980",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 384.0,
+   "width_m": 6.0,
+   "roof": "Saknas",
+   "track_bed_m": 5.03,
+   "track_bed_points": 656,
+   "platform_surface_m": 5.75,
+   "platform_points": 1738,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.72,
+   "laser_estimate_above_rail_m": 0.54
+  },
+  {
+   "bis_object": "1800",
+   "track": null,
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 123.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 4.81,
+   "track_bed_points": 146,
+   "platform_surface_m": 5.49,
+   "platform_points": 101,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.68,
+   "laser_estimate_above_rail_m": 0.5
+  },
+  {
+   "bis_object": "1977",
+   "track": "1s",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 300.0,
+   "width_m": null,
+   "roof": "Saknas",
+   "track_bed_m": 5.19,
+   "track_bed_points": 498,
+   "platform_surface_m": 5.83,
+   "platform_points": 1638,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.64,
+   "laser_estimate_above_rail_m": 0.46
+  }
+ ],
+ "platform_surface_m": 5.75,
+ "track_bed_m": 4.96,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 4,
+  "footbridge": 0,
+  "canopy_osm": 50,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 138,
+ "photos_station_related": 73
+}

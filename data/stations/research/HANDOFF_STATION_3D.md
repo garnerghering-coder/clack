@@ -1,8 +1,7 @@
 # Station 3D research (Sweden): handoff for Claude Code
 
-State at 2026-10-30 09:50. This continues the brief `STATION_3D_RESEARCH_BRIEF_SWEDEN.md` (33 hub/mid stations) with the
-recipe in `STATION_3D_RESEARCH.md` (the playbook). **9 of 33 stations have finished packs; 2 more have raw bundles waiting;
-22 are not started.** Nothing has been written into `scripts/stations/<id>.edits.json`, redrafted or committed to git.
+State at 2026-10-30 (updated 11:00: Part 2 "what is at the station" added, see the end). This continues the brief `STATION_3D_RESEARCH_BRIEF_SWEDEN.md` (33 hub/mid stations) with the
+recipe in `STATION_3D_RESEARCH.md` (the playbook). **All 33 stations are done** (32 in this pass + Jönköping C earlier). Nothing has been written into `scripts/stations/<id>.edits.json`, redrafted or committed to git.
 
 ## Where things are
 
@@ -12,37 +11,32 @@ recipe in `STATION_3D_RESEARCH.md` (the playbook). **9 of 33 stations have finis
 | `data/stations/research/trafikverket_platforms_SE.csv` | Batch step 1: all 33 stations, one row per Bilaga 2A platform row joined to BanInfo (+ BanInfo-only rows). `README_platforms_SE.md` explains it and lists the flags. |
 | `data/stations/research/bilaga2a_raw.txt`, `baninfo_platforms_raw.txt`, `stac_index_SE.txt` | Raw register rows, BanInfo objects, and the Lantmäteriet tile index (scan block, date, density, tiles, DTM tile) for all 33 stations |
 | `scripts/stations/station3d/` | The pipeline (below) and `notes/<id>.md` (hand-written "unusual at this station" text that goes into each README) |
-| `~/Downloads/clack3d_740000077_hallsberg.tar`, `~/Downloads/clack3d_740000210_gavle_c.tar` | Raw bundles already collected, not yet built: run step 2 on them |
+| `~/Downloads/clack_station3d/raw_bundles/` (on the owner's Mac) | The browser's raw bundle per station (laser tiles, terrain window, BanInfo, OSM, Commons): rebuild any pack from it |
+| `REVIEW_platform_heights_SE.md` | All laser-vs-register platform disagreements and every station's levels, in one table |
 
 ## Finished stations
 
-Levels are m RH 2000 from the laser. "Platforms measured" = BanInfo platform objects with a laser surface level.
+**All 33 stations are done**: 32 packs from this pass plus Jönköping C from the earlier one. Every pack has the 3D files
+and `station_facts.json`. Levels per station and every laser-vs-register disagreement are gathered in
+**`REVIEW_platform_heights_SE.md`** (26 flagged platforms, not decided). Each station's `3D_SOURCES_FINDINGS.md` has the
+details, its `README.md` what is unusual there.
 
-| Station | Clack id | Laser scan | Platform surface | Track bed | Platforms measured | Trains in scan | Structures | Flags |
-|---|---|---|---|---|---|---|---|---|
-| Göteborg C | 740000002 | 2020-03-21 | 2.91 | 2.21 | 9/15 | 17 | 38 | 6 |
-| Stockholm C | 740000001 | 2021-03-23 | 4.48 | 3.64 | 7/13 | 3 | 26 | 20 |
-| Alvesta | 740000004 | 2026-03-08 | 145.31 | 144.59 | 2/3 | 6 | 7 | 1 |
-| Arlanda C | 740000556 | 2021-04-17 | – (underground) | – | 0/3 | 0 | 37 (terminals above) | 10 |
-| Burlöv | 740000937 | 2025-03-07 | 7.46 | 6.86 | 2/2 | 0 | 8 | 2 |
-| Eskilstuna C | 740000170 | 2020-02-27 | 18.20 | 17.42 | 2/3 | 1 | 16 | 0 |
-| Falköping C | 740000060 | 2022-03-07 | 217.31 | 216.46 | 2/3 | 3 | 14 | 0 |
-| Flemingsberg | 740000031 | 2020-03-31 | 34.40 | 33.65 | 2/3 | 1 | 7 | 1 |
-| Hässleholm C | 740000006 | 2025-02-19 | 53.81 | 53.13 | 4/11 | 6 | 5 | 4 |
-
-Each station's `3D_SOURCES_FINDINGS.md` has the per-platform table, the structures table, the trains and the flags.
+Special cases:
+- **No laser level** (underground or built after the scan): Arlanda C, Triangeln, Malmö C's City Tunnel platforms,
+  Varberg (the new tunnel station opened after the January 2020 scan).
+- **Rebuilt after the scan:** Örebro S (new track-30 platform 2026), Karlstad C (tracks 3–4), Hässleholm C (southern
+  platforms), Göteborg C tracks 22–23.
+- **Södertälje Syd has two levels**: övre ≈41.2 m on the bridge (read from bridge-deck laser points, class 17) and
+  undre ≈16.6 m. Don't use its single median (28.95 m).
+- **Nässjö C**: the terrain model has no data over part of the box; filled from the laser's ground points (noted in the
+  GeoTIFF tags and README).
 
 ## Not done yet
 
-- **22 stations not started:** Herrljunga C, Hyllie, Karlstad C, Katrineholm C, Kil, Kumla, Linköping C, Lund C, Malmö C,
-  Norrköping C, Nässjö C, Skövde C, Södertälje Syd, Triangeln, Trollhättan, Uppsala C, Varberg C, Västerås C, Örebro C,
-  Örebro S, Öxnered. (Jönköping C was done earlier.) Plus building the two raw bundles (Hallsberg, Gävle C).
-- **Playbook step 10** (edits files, redraft, validate, 3D view) for all stations.
-- **Photos:** `photos.json` lists Commons files near each station with author/licence, marked `station_related` by title;
-  none were viewed (`viewed: false`). Labels come from OSM tags + the laser. **Mapillary was not searched.**
-- **`data/stations/REVIEW.md`:** the platform-height flags below have not been added to it yet.
-- **CSV refresh:** `trafikverket_platforms_SE.csv` came from a coarser BanInfo sweep. Rebuild it at the end from the
-  per-station `_platform_trafikverket.geojson` files (e.g. Eskilstuna Bilaga row 161 now has its BanInfo object, BIS 1208).
+- **Playbook step 10** (edits files, redraft, validate) for the new packs — Claude Code's `to_edits.py` does this.
+- **`data/stations/REVIEW.md`**: copy the flags from `REVIEW_platform_heights_SE.md` once decided how.
+- **Photos:** `photos.json` lists Commons files with author/licence; none were viewed one by one. **Mapillary not searched.**
+- **Floor heights** of halls, footbridges and tunnels: no open source measures them.
 
 ## Pipeline
 
@@ -83,7 +77,9 @@ looks wrong (set `STATION3D_BUNDLES` to where the bundle was unpacked).
 - **Cross-check:** surface − bed − 0.175 m vs the class height. A difference > 0.125 m is flagged ("not decided; add to REVIEW.md").
 - **Deck-level beds:** a "bed" more than 1.5 m from the station median is a deck or roof over the track (Stockholm C). Those values are dropped and flagged.
 - **Platforms newer than the scan:** BanInfo record ≥ scan year + 2 and no matching Bilaga row (by BIS, or by track + class) means probably built after the scan. Those are left out of the level (Göteborg tracks 22/23).
-- **Underground platforms are never measured** (`UNDERGROUND` in `station_pack.py`): Arlanda C, Triangeln, Malmö C Citytunneln (BIS 2092/2093). Add any others there.
+- **Platforms on bridges:** where laser class 17 (bridge) outnumbers ground within 0.8 m of the track, bed and surface come from class 17 (Södertälje Syd övre).
+- **Terrain gaps:** exact 0.00 cells far above sea level are no-data; any no-data cell with laser ground points gets their median (noted).
+- **Underground platforms are never measured** (`UNDERGROUND` in `station_pack.py`): Arlanda C, Triangeln, Malmö C Citytunneln (BIS 2092/2093), Varberg (tunnel opened after the scan). Add any others there.
 - **Trains:**
   - Which points: unclassified points 2.6–5.0 m above the terrain model, within 2.2 m of a surface OSM rail (tunnels and negative layers excluded), along one track.
   - Accepted as a train if: median offset ≤ 1.0 m, p90 ≤ 1.9 m, ≥ 15 m long, ≥ 1.5 points/m, 3.0–4.8 m above the bed.
@@ -126,3 +122,39 @@ looks wrong (set `STATION3D_BUNDLES` to where the bundle was unpacked).
 - **Outlines:** OSM, ODbL.
 - **Photos:** each file's own licence, listed in `photos.json`.
 - Never upload Lantmäteriet-derived values to OSM.
+
+
+## Part 2: what is at the station (`station_facts.json`)
+
+The brief now also asks, per station, for the walking-map facts (levels and their signposted names, platform sides,
+stairs/lifts/escalators and what they reach, entrances, amenities with opening hours, published plans), starting from
+`STATION_OPEN_QUESTIONS_SWEDEN.md`. Each finished pack now has `station_facts.json` in the brief's format, plus:
+`answers` (the station's open questions, answered or marked open, with sources), `_open_questions_in` (the questions as
+listed), and `_sources`.
+
+**Sources used, all read 2026-10-30:**
+- **Jernhusen "Hitta din station"** (`https://www.jernhusen.se/hitta-din-station/<station>/` and its sub-pages: mat-och-butiker,
+  toalett, tillgänglighet, förvaringsboxar, trafik-och-biljetter, lounge, karta-över-stationen…), 28 of the 33 stations
+  (not Arlanda C, Burlöv, Hyllie, Triangeln, Örebro S). Gives hall opening hours, every shop's hours (sometimes per
+  unit/hall), toilets with fee and hours, lockers, ticket offices, plans. Saved raw as
+  `data/stations/research/_sources/clack_jernhusen_pages_SE*.json` (page HTML). Facts only, not copied.
+  Note: jernhusen.se went down (Cloudflare 521) for ~20 minutes after the first full sweep: fetch slowly (≥ 1 s between pages).
+- **Owner/authority plans** (PDF): Jernhusen's Stockholm C hall plans (Centralhallen, Nedre hallen, Övre hallen, overview)
+  and Malmö C plan; Länstrafiken Kronoberg's Alvesta map; links to SL, Skånetrafiken, UL, JLT, VL, Hallandstrafiken and
+  Länstrafiken Örebro maps are in each `plans` list (those sites block cross-site fetches: open them on their own site).
+  Read as pictures for facts (what is where); never traced. Licence: not open, facts only.
+- **OSM** via the API 0.6 `map` call (Overpass was overloaded all morning): `scripts/stations/station3d/osm_station.py`
+  picks rail platforms, lifts/escalators/stairs/footbridges/underpasses and the platforms each reaches (within 6–10 m),
+  entrances (with nearest named street), and toilets/lockers/ticket machines. These are marked `confirmed_by: "OSM only"`.
+- **Platform sides** come from the 3D pass: the laser's raised ground beside each BanInfo track line, turned into a compass
+  side ("the platform lies on the north side of track 2").
+
+**How it is built:** `facts.py <id> <pack dir>` merges Jernhusen (parsed by `jernhusen.py`, Swedish hours → OSM syntax;
+lines it can't read stay in `hours_raw`), the app's own map (`data/stations/<id>.json`, to match its POIs by name and
+level: a brand with several units gets the unit whose hall matches the POI's level via `hall_aliases`), OSM, the laser
+sides, and the hand-read facts in `scripts/stations/station3d/facts_manual/<id>.json` (plans, photos, answers, open).
+Stockholm C and Alvesta have full hand-read plan facts; the others have answers where a source settled them.
+
+**Still open across the batch:** floor heights (no open source measures them; the laser sees roofs only), hours for shops
+the owner's page doesn't list (aggregators such as Thatsup were not used), Göteborg C's platform access (no plan
+published), Mapillary and photo checks.

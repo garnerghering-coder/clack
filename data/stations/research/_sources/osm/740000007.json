@@ -1,0 +1,567 @@
+{
+ "clack_id": "740000007",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w128221668",
+   "ref": "7a",
+   "level": null
+  },
+  {
+   "osm_id": "w128444017",
+   "ref": "3b",
+   "level": null
+  },
+  {
+   "osm_id": "w129117226",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w287588687",
+   "ref": "D2",
+   "level": null
+  },
+  {
+   "osm_id": "w287588703",
+   "ref": "D1",
+   "level": null
+  },
+  {
+   "osm_id": "w310768130",
+   "ref": "3a",
+   "level": null
+  },
+  {
+   "osm_id": "w310768131",
+   "ref": "7b",
+   "level": null
+  },
+  {
+   "osm_id": "w336123489",
+   "ref": "2a",
+   "level": null
+  },
+  {
+   "osm_id": "w336123490",
+   "ref": "2b",
+   "level": null
+  },
+  {
+   "osm_id": "w336123499",
+   "ref": "6a",
+   "level": null
+  },
+  {
+   "osm_id": "w336123500",
+   "ref": "6b",
+   "level": null
+  }
+ ],
+ "connections": [],
+ "entrances": [
+  {
+   "osm_id": "n1097882336",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Norra Promenaden",
+   "nearest_street_m": 27.8,
+   "lonlat": [
+    16.1834597,
+    58.5962998
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n441304646",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 120,
+   "lonlat": [
+    16.1823589,
+    58.5961988
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.2
+  },
+  {
+   "osm_id": "n1177971710",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "wheelchair": "yes",
+   "distance_m": 8,
+   "lonlat": [
+    16.184261,
+    58.596397
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 32.4,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "n3946598178",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 110,
+   "lonlat": [
+    16.1826669,
+    58.5959793
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n3946598179",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 102,
+   "lonlat": [
+    16.1828107,
+    58.5960005
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n3946598180",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 138,
+   "lonlat": [
+    16.1821405,
+    58.596003
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n3946598181",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 129,
+   "lonlat": [
+    16.1822822,
+    58.5960229
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n3946598184",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 110,
+   "lonlat": [
+    16.1861535,
+    58.5967522
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.2
+  },
+  {
+   "osm_id": "n3946598186",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 137,
+   "lonlat": [
+    16.1866061,
+    58.5968164
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.5
+  },
+  {
+   "osm_id": "n3946598191",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 138,
+   "lonlat": [
+    16.1865416,
+    58.5969231
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.1
+  },
+  {
+   "osm_id": "n3946598194",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 164,
+   "lonlat": [
+    16.1869727,
+    58.5969828
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.4
+  },
+  {
+   "osm_id": "n5863282611",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 117,
+   "lonlat": [
+    16.1824161,
+    58.5962031
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.6
+  },
+  {
+   "osm_id": "n5863282612",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 120,
+   "lonlat": [
+    16.1823908,
+    58.5961263
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.6
+  },
+  {
+   "osm_id": "n5863282613",
+   "category": "compressed_air",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    16.1850648,
+    58.5964477
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 39.2
+  },
+  {
+   "osm_id": "n5863282615",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 64,
+   "lonlat": [
+    16.1832979,
+    58.5962898
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 30.6
+  },
+  {
+   "osm_id": "n5863282616",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 70,
+   "lonlat": [
+    16.183206,
+    58.5962807
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 29.1
+  },
+  {
+   "osm_id": "n5863282617",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 74,
+   "lonlat": [
+    16.1831356,
+    58.5962706
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.1
+  },
+  {
+   "osm_id": "n5863282618",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 79,
+   "lonlat": [
+    16.1830491,
+    58.596259
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 21.8
+  },
+  {
+   "osm_id": "n5863282619",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 84,
+   "lonlat": [
+    16.1829659,
+    58.5962489
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.2
+  },
+  {
+   "osm_id": "n5863282620",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 89,
+   "lonlat": [
+    16.1828848,
+    58.596236
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 15.5
+  },
+  {
+   "osm_id": "n10905994713",
+   "category": "cafe",
+   "name": "Espresso House",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:30-20:30; Sa 07:00-19:00; Su 08:00-20:00",
+   "wheelchair": "yes",
+   "distance_m": 68,
+   "lonlat": [
+    16.183214,
+    58.5963869
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 19.2,
+   "brand": "Espresso House",
+   "cuisine": "coffee_shop"
+  },
+  {
+   "osm_id": "n11099010399",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 47,
+   "lonlat": [
+    16.1836032,
+    58.5963035
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 32.3
+  },
+  {
+   "osm_id": "n11099010400",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    16.1837029,
+    58.5963538
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 28.5
+  },
+  {
+   "osm_id": "n11099010401",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 24,
+   "lonlat": [
+    16.1839786,
+    58.5963808
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 29.8
+  },
+  {
+   "osm_id": "n12186425107",
+   "category": "luggage_locker",
+   "name": "Speed Services",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    16.1835116,
+    58.5963472
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 26.2,
+   "operator": "Speed Services",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "w27187377",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 145,
+   "lonlat": [
+    16.1813335,
+    58.5960336
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 6.4
+  },
+  {
+   "osm_id": "w94513210",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 6,
+   "lonlat": [
+    16.1847378,
+    58.5965286
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.0
+  },
+  {
+   "osm_id": "w244139352",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 81,
+   "lonlat": [
+    16.1817343,
+    58.5962299
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w244139353",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 117,
+   "lonlat": [
+    16.1819946,
+    58.5966178
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w244139355",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 59,
+   "lonlat": [
+    16.1842602,
+    58.5969349
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w263216413",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 181,
+   "lonlat": [
+    16.1806032,
+    58.5967152
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.6
+  }
+ ]
+}

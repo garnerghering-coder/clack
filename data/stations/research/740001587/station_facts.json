@@ -1,0 +1,809 @@
+{
+ "clack_id": "740001587",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": null,
+   "note": "Street level with two entrance buildings: Triangeln Norra (north, by Rådmansgatan / S:t Johannes kyrka) and Triangeln Södra (south, by Smedjegatan / Kapellgatan). Names as on Skånetrafiken's map; OSM names the entrances \"Norra uppgången\" and \"Södra uppgången\".",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": null,
+   "note": "Intermediate level in OSM (escalator w158755495 at the north entrance, lift n2409796063 stops at -1 at the south entrance). Wikipedia mentions a \"North entrance hall\"; no source gives a signposted name or says what is on this level.",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30; https://en.wikipedia.org/wiki/Triangeln_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": null,
+   "note": "Platform level: one island platform, two tracks signposted Spår 1 and Spår 2 (Skånetrafiken), about 25 m below ground in a mined rock tunnel (Wikipedia, KHR). Trafikverket: platform 250 m long, 14.5 m wide, register tracks 71/74.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; https://en.wikipedia.org/wiki/Triangeln_station, read 2026-10-30; https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; https://khr.dk/en/projekter/triangeln-station-i-malmo/ (architect's page; context only), read 2026-10-30; Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 row 952 and BanInfo BIS 2089 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "Triangeln Norra (street, Rådmansgatan)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "north entrance (OSM w232639038, level 0;-2, wheelchair=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30",
+   "note": "Skånetrafiken's map legend includes Hiss; its symbol positions are not machine-readable."
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Triangeln Norra (street)",
+    "level -1"
+   ],
+   "where": "north entrance (OSM w158755495)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level -1 (north)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "north end of the platform (OSM w917403339)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30",
+   "note": "Wikipedia shows \"North entrance escalators\" (photo caption)."
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Triangeln Södra (street, Smedjegatan)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "south entrance, stops at -1 as well (OSM n2409796063, level 0;-2;-1, wheelchair=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Triangeln Södra (street)",
+    "level -1"
+   ],
+   "where": "south entrance (OSM w158755493)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level -1 (south)",
+    "platform (Spår 1–2)"
+   ],
+   "where": "south end of the platform; long run (about 67 m in OSM) (OSM w232639039)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w158755493",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 20.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w158755493 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0018038,
+    "lat": 55.5919612,
+    "how": "OSM w158755493 (point on the way)",
+    "_source": "OpenStreetMap w158755493 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w158755495",
+   "name": null,
+   "osm_level": "-1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 26.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w158755495 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0004296,
+    "lat": 55.5943632,
+    "how": "OSM w158755495 (point on the way)",
+    "_source": "OpenStreetMap w158755495 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w232639038",
+   "name": null,
+   "osm_level": "0;-2",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 31.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w232639038 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0003631,
+    "lat": 55.594502,
+    "how": "OSM w232639038 (point on the way)",
+    "_source": "OpenStreetMap w232639038 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w232639039",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform Triangeln"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 67.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w232639039 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0018053,
+    "lat": 55.5920197,
+    "how": "OSM w232639039 (point on the way)",
+    "_source": "OpenStreetMap w232639039 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w917403339",
+   "name": null,
+   "osm_level": "-2",
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform Triangeln"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w917403339 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0004478,
+    "lat": 55.594189,
+    "how": "OSM w917403339 (point on the way)",
+    "_source": "OpenStreetMap w917403339 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n2409796063",
+   "name": "Södra uppgången",
+   "osm_level": "0;-2;-1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n2409796063 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0016895,
+    "lat": 55.5920072,
+    "how": "OSM n2409796063",
+    "_source": "OpenStreetMap n2409796063 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Triangeln Norra (Norra uppgången)",
+   "street": "Rådmansgatan",
+   "level": "0",
+   "where": "north end, by S:t Johannes kyrka and Triangeln square; wheelchair accessible per OSM (n1708994518, lift w232639038)",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "name": "Triangeln Södra (Södra uppgången)",
+   "street": "Smedjegatan",
+   "level": "0",
+   "where": "south end, between Smedjegatan and Kapellgatan, by Tandvårdshögskolan; wheelchair accessible per OSM (n1761549703, lift n2409796063)",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only; OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "name": "Norra uppgången",
+   "osm_id": "n1708994518",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 14.9 m",
+   "level": null,
+   "kind": "train_station_entrance",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n1708994518 (already in OSM)",
+   "position": {
+    "lon": 13.0004291,
+    "lat": 55.5944888,
+    "how": "OSM n1708994518",
+    "_source": "OpenStreetMap n1708994518 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1708994587",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 14.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1708994587 (already in OSM)",
+   "position": {
+    "lon": 13.000429,
+    "lat": 55.5945271,
+    "how": "OSM n1708994587",
+    "_source": "OpenStreetMap n1708994587 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Södra uppgången",
+   "osm_id": "n1761549703",
+   "street": "Smedjegatan",
+   "street_how": "nearest named street, 18.0 m",
+   "level": null,
+   "kind": "train_station_entrance",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n1761549703 (already in OSM)",
+   "position": {
+    "lon": 13.0018038,
+    "lat": 55.5919612,
+    "how": "OSM n1761549703",
+    "_source": "OpenStreetMap n1761549703 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1780224914",
+   "street": "Smedjegatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1780224914 (already in OSM)",
+   "position": {
+    "lon": 13.0017601,
+    "lat": 55.5917053,
+    "how": "OSM n1780224914",
+    "_source": "OpenStreetMap n1780224914 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2403601385",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 10.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2403601385 (already in OSM)",
+   "position": {
+    "lon": 13.0000053,
+    "lat": 55.5941991,
+    "how": "OSM n2403601385",
+    "_source": "OpenStreetMap n2403601385 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2403601386",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 10.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2403601386 (already in OSM)",
+   "position": {
+    "lon": 12.9999961,
+    "lat": 55.5940862,
+    "how": "OSM n2403601386",
+    "_source": "OpenStreetMap n2403601386 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2408139411",
+   "street": "Smedjegatan",
+   "street_how": "nearest named street, 11.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2408139411 (already in OSM)",
+   "position": {
+    "lon": 13.001773,
+    "lat": 55.5919,
+    "how": "OSM n2408139411",
+    "_source": "OpenStreetMap n2408139411 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2408139414",
+   "street": "Smedjegatan",
+   "street_how": "nearest named street, 17.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2408139414 (already in OSM)",
+   "position": {
+    "lon": 13.0015787,
+    "lat": 55.5919644,
+    "how": "OSM n2408139414",
+    "_source": "OpenStreetMap n2408139414 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2408139421",
+   "street": "Smedjegatan",
+   "street_how": "nearest named street, 25.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2408139421 (already in OSM)",
+   "position": {
+    "lon": 13.0017834,
+    "lat": 55.5920304,
+    "how": "OSM n2408139421",
+    "_source": "OpenStreetMap n2408139421 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2409034807",
+   "street": "Kapellgatan",
+   "street_how": "nearest named street, 29.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2409034807 (already in OSM)",
+   "position": {
+    "lon": 13.002144,
+    "lat": 55.5922,
+    "how": "OSM n2409034807",
+    "_source": "OpenStreetMap n2409034807 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2409034808",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2409034808 (already in OSM)",
+   "position": {
+    "lon": 13.0014975,
+    "lat": 55.5922147,
+    "how": "OSM n2409034808",
+    "_source": "OpenStreetMap n2409034808 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2409034813",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n2409034813 (already in OSM)",
+   "position": {
+    "lon": 13.0012601,
+    "lat": 55.5922752,
+    "how": "OSM n2409034813",
+    "_source": "OpenStreetMap n2409034813 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2409034814",
+   "street": "Kapellgatan",
+   "street_how": "nearest named street, 33.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2409034814 (already in OSM)",
+   "position": {
+    "lon": 13.0020954,
+    "lat": 55.5923585,
+    "how": "OSM n2409034814",
+    "_source": "OpenStreetMap n2409034814 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2409034815",
+   "street": "Kapellgatan",
+   "street_how": "nearest named street, 33.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2409034815 (already in OSM)",
+   "position": {
+    "lon": 13.0020961,
+    "lat": 55.592371,
+    "how": "OSM n2409034815",
+    "_source": "OpenStreetMap n2409034815 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Södra uppgången",
+   "osm_id": "n2409796063",
+   "street": "Smedjegatan",
+   "street_how": "nearest named street, 22.8 m",
+   "level": "0;-2;-1",
+   "kind": "train_station_entrance",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n2409796063 (already in OSM)",
+   "position": {
+    "lon": 13.0016895,
+    "lat": 55.5920072,
+    "how": "OSM n2409796063",
+    "_source": "OpenStreetMap n2409796063 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Norra uppgången",
+   "osm_id": "n2409796066",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 12.4 m",
+   "level": "-2",
+   "kind": "subway_entrance",
+   "wheelchair": "yes",
+   "door": "yes",
+   "_source": "OSM n2409796066 (already in OSM)",
+   "position": {
+    "lon": 13.0003625,
+    "lat": 55.594219,
+    "how": "OSM n2409796066",
+    "_source": "OpenStreetMap n2409796066 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2732141552",
+   "street": "Rådmansgatan",
+   "street_how": "nearest named street, 20.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2732141552 (already in OSM)",
+   "position": {
+    "lon": 13.0006971,
+    "lat": 55.5947977,
+    "how": "OSM n2732141552",
+    "_source": "OpenStreetMap n2732141552 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10992235079",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "double",
+   "_source": "OSM n10992235079 (already in OSM)",
+   "position": {
+    "lon": 13.0012843,
+    "lat": 55.5942098,
+    "how": "OSM n10992235079",
+    "_source": "OpenStreetMap n10992235079 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (Skånetrafiken)",
+   "note": "Skånetrafiken's map legend lists ticket machines; their position is not machine-readable and OSM has none.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "where": "by the south entrance building (OSM n2409034813, wheelchair entrance)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "where": "by the north entrance (OSM w1032365215)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Triangeln bus stops",
+   "note": "Skånetrafiken's map shows city bus stops at Triangeln and Tandvårdshögskolan, VY Flygbussarna to Malmö Airport, and a marked rail-replacement stop.",
+   "_source": "Skånetrafiken terminal map Malmö Triangeln (80140_malmo-triangeln_terminalkarta_a3.pdf, updated December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "near the south entrance (OSM n883524014)",
+   "_source": "OSM (osmfacts 740001587), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2409034813",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2409034813 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0012601,
+    "lat": 55.5922752,
+    "osm_id": "n2409034813",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 20.0,
+    "how": "OSM node n2409034813",
+    "_source": "OpenStreetMap n2409034813 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "w1032365215",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM w1032365215 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0006681,
+    "lat": 55.5938766,
+    "osm_id": "w1032365215",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1032365215",
+    "_source": "OpenStreetMap w1032365215 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Corfitz Taverna",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.mah.se/fakulteter-och-omraden/Odontologiska-fakulteten/Funktioner-och-tjanster1/Restaurant-Corfitz-Taverna/",
+   "position": {
+    "lon": 13.0014645,
+    "lat": 55.5916799,
+    "osm_id": "n1780224911",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 74.4,
+    "how": "OSM node n1780224911",
+    "_source": "OpenStreetMap n1780224911 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n1780224911 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:15-23:00; Sa 06:00-23:00; Su 07:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.9999785,
+    "lat": 55.594312,
+    "osm_id": "n2403601384",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 45.0,
+    "how": "OSM node n2403601384",
+    "_source": "OpenStreetMap n2403601384 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n2403601384 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Gateau",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-18:00; Sa,Su 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.0000284,
+    "lat": 55.5944238,
+    "osm_id": "n2732141551",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 52.7,
+    "how": "OSM node n2732141551",
+    "_source": "OpenStreetMap n2732141551 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n2732141551 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "brand": "Joe & The Juice",
+   "cuisine": "coffee_shop",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.000547,
+    "lat": 55.594843,
+    "osm_id": "n3402696488",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 88.4,
+    "how": "OSM node n3402696488",
+    "_source": "OpenStreetMap n3402696488 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n3402696488 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "WOSO",
+   "brand": null,
+   "cuisine": "sushi;sallad;poké",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://woso.se/",
+   "position": {
+    "lon": 13.0008032,
+    "lat": 55.5948266,
+    "osm_id": "n10129165432",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 87.6,
+    "how": "OSM node n10129165432",
+    "_source": "OpenStreetMap n10129165432 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n10129165432 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Coffee Square",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-18:00; Sa,Su 08:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.0014405,
+    "lat": 55.5922642,
+    "osm_id": "w189510000",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 2.6,
+    "how": "representative point of the OSM area w189510000",
+    "_source": "OpenStreetMap w189510000 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap w189510000 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bicycle",
+   "name": "BikeDrop Malmö AB",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "no",
+   "position": {
+    "lon": 13.0022653,
+    "lat": 55.5922763,
+    "osm_id": "w219950727",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 28.5,
+    "how": "representative point of the OSM area w219950727",
+    "_source": "OpenStreetMap w219950727 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap w219950727 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Triangelns köpcentrum",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.0018033,
+    "lat": 55.5955335,
+    "osm_id": "w219950736",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 83.6,
+    "how": "representative point of the OSM area w219950736",
+    "_source": "OpenStreetMap w219950736 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap w219950736 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Malmö Triangeln terminalkarta",
+   "publisher": "Skånetrafiken",
+   "url": "https://www.skanetrafiken.se/globalassets/kartor/terminalkartor/80140_malmo-triangeln_terminalkarta_a3.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Updated December 2025. Text: Triangeln Norra, Triangeln Södra, Spår 1, Spår 2, streets (Carl Gustafs väg, Smedjegatan, Rådmansgatan, Klerkgatan, Kapellgatan), S:t Johannes kyrka, Tandvårdshögskolan; legend Cykelparkering, Parkering, Hiss, Tågspår, Biljettautomat, Stadsbuss."
+  }
+ ],
+ "open": [
+  "No owner page: Triangeln is not a Jernhusen station; Trafikverket/Skånetrafiken publish no station plan beyond the terminal map.",
+  "Lift and escalator positions rest on OSM; Skånetrafiken's map confirms lifts exist (legend) but not where. Whether there are fixed stairs besides the escalators is not in any source read.",
+  "Name and role of the intermediate level -1 (OSM) and its depth; platform depth is only \"about 25 m\" (Wikipedia, KHR).",
+  "Shops: none are inside the station per OSM; nearby 7-Eleven, Gateau, Joe & The Juice and WOSO are at the north entrance in Triangeln's buildings, Coffee Square at the south; their own websites were not read for hours.",
+  "Toilets: OSM only; no hours."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

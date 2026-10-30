@@ -1,0 +1,117 @@
+{
+ "clack_id": "740000099",
+ "slug": "vasteras_c",
+ "flags": [
+  "Platform BIS 1306 (track 1b): laser gives 0.68 m above the track bed (≈0.51 m above rail after −0.15…0.2 m), register class hög = 0.73 m. Not decided; add to REVIEW.md.",
+  "w1424625004 roof: p95 37.9 m is 29.6 m above the median 8.2 m (a taller neighbour or a mast inside the outline?).",
+  "Laser-traced roof (53 m², top 9.6 m above the platform) could be a building or hall roof, not a canopy: check OSM and a platform photo.",
+  "Laser-traced roof (53 m², top 9.6 m above the platform, 10.4 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 0.76 m over 2555 m², 0.81 m over 24678 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=16.544330,59.603565,16.559850,59.610906",
+ "ground": {
+  "min_m": -1.11,
+  "median_m": 3.06,
+  "max_m": 8.15,
+  "nan_cells": 0,
+  "size_m": [
+   635,
+   578
+  ],
+  "box_sweref": [
+   587273,
+   6608406,
+   587908,
+   6608984
+  ],
+  "tiles": [
+   "660_58 (2023-04-07)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y21c035-66075_5850_25.copc.laz",
+   "y21c035-66075_5875_25.copc.laz"
+  ],
+  "scan_date": "2021-04-05",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 773458,
+  "density_in_box": 2.11,
+  "classes": {
+   "1": 293878,
+   "2": 474398,
+   "7": 231,
+   "9": 577,
+   "17": 4374
+  },
+  "train_points_class64": 703
+ },
+ "platforms": [
+  {
+   "bis_object": "1309",
+   "track": "2",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 392.0,
+   "width_m": 13.0,
+   "roof": "Skydd",
+   "track_bed_m": null,
+   "track_bed_points": 12,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "1",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "1306",
+   "track": "1b",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 504.0,
+   "width_m": 5.7,
+   "roof": "Tak",
+   "track_bed_m": 3.12,
+   "track_bed_points": 415,
+   "platform_surface_m": 3.8,
+   "platform_points": 1311,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.68,
+   "laser_estimate_above_rail_m": 0.51
+  },
+  {
+   "bis_object": "1311",
+   "track": "5",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 381.0,
+   "width_m": 10.5,
+   "roof": "Skydd",
+   "track_bed_m": 3.09,
+   "track_bed_points": 1279,
+   "platform_surface_m": 3.9,
+   "platform_points": 6799,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.81,
+   "laser_estimate_above_rail_m": 0.64
+  }
+ ],
+ "platform_surface_m": 3.85,
+ "track_bed_m": 3.1,
+ "trains_in_scan": 3,
+ "structures": {
+  "building": 3,
+  "footbridge": 0,
+  "canopy_osm": 4,
+  "canopy_laser": 0,
+  "hall_roof_laser": 1,
+  "train_in_scan": 3
+ },
+ "photos": 108,
+ "photos_station_related": 42
+}

@@ -1,0 +1,107 @@
+{
+ "levels": [
+  {
+   "osm_level": null,
+   "name": "SkyCity (street/concourse level between Terminal 4 and Terminal 5, before security)",
+   "other_names": [],
+   "_source": "https://www.swedavia.com/arlanda/train/ ('Arlanda Central station in SkyCity ... the area between the terminals 4 and 5'), read 2026-10-30"
+  },
+  {
+   "osm_level": null,
+   "name": "Platform level (underground; Arlanda C platform, one platform with two tracks)",
+   "other_names": [
+    "Arlanda C",
+    "Arlanda Central station"
+   ],
+   "_source": "https://en.wikipedia.org/wiki/Arlanda_Central_Station (Platforms: 1, Tracks: 2, underground, directly under SkyCity), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "platform",
+    "SkyCity"
+   ],
+   "where": "OSM escalators w487787886 and w487787887 (layer -1, 56 m each, the long run from the platform) and w487787890; OSM does not join them to the platform areas w487787884/5",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platform",
+    "SkyCity"
+   ],
+   "where": "OSM lift n4802014315 (no level tag). Arlandabanan Infrastructure says only that 'there are lifts and escalators at the rail stations and air terminals at Arlanda'.",
+   "confirmed_by": "owner text",
+   "_source": "OSM; https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/, read 2026-10-30"
+  },
+  {
+   "kind": "gate",
+   "between": [
+    "Arlanda C station",
+    "SkyCity"
+   ],
+   "where": "turnstile gates that check the station fee between Arlanda Central and SkyCity",
+   "confirmed_by": "owner text",
+   "_source": "https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "SkyCity (station fee gates)",
+   "street": "inside the airport, SkyCity between Terminal 4 and Terminal 5 (no public street)",
+   "where": "OSM entrance nodes n4802014304, n4802014305 (main) and n4802017830, all about 60-90 m from the nearest road; two OSM ticket validators n4802017824/5 (fee=yes) sit beside them",
+   "_source": "OSM; Swedavia train page, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "station_fee",
+   "name": "Arlanda C station fee / Arlanda Passage Fee",
+   "fee": "130 SEK per passage (Swedavia); UL: valid 120 minutes for one entry or exit, adults 18+",
+   "where": "If the ticket does not include it, pay at the station counter in SkyCity or at the security gate at Arlanda; also sold in the UL app",
+   "_source": "https://www.swedavia.com/arlanda/train/ and https://ul.se/en/travel-info/typical-destinations/arlanda, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Station counter (SkyCity)",
+   "where": "in SkyCity; sells SL/UL tickets and the station fee",
+   "_source": "https://www.swedavia.com/arlanda/train/; OSM shop=ticket n7229391081 'Arlanda centralstation', read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Kronans Apotek (SkyCity)",
+   "where": "SkyCity, before security",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:30-18:00; Su 09:30-20:00",
+   "hours_source": "website (Swedavia)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.swedavia.com/arlanda/shopping/apoteksgruppen, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (SkyCity)",
+   "where": "SkyCity, before security",
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa 07:30-20:30",
+   "hours_raw": "Swedavia lists no Sunday hours",
+   "hours_source": "website (Swedavia)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.swedavia.com/arlanda/food-beverages/espresso-house/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Arlanda C (`740000556`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly answered. The station is underground, directly under SkyCity between Terminals 4 and 5, with one platform and two tracks (Wikipedia). Passengers pass turnstile gates between the station and SkyCity, where the station fee (130 SEK) is checked (AIAB, Swedavia). OSM has the two platform areas, long escalators (w487787886/7), one lift (n4802014315) and three entrance nodes with fee validators. They are just not joined together. The owner is Arlandabanan Infrastructure AB and the station is run by A-Train AB, not Swedavia or Jernhusen.",
+   "_source": "https://en.wikipedia.org/wiki/Arlanda_Central_Station; https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/; https://www.swedavia.com/arlanda/train/; OSM, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Arlanda C is underground: platforms, lifts and levels are not visible to the laser and Jernhusen has no Arlanda C page; Swedavia/A-Train pages were not read in this pass.",
+  "No published plan of Arlanda C found (Swedavia's train page links none, its SkyCity page could not be fetched, and SL/UL publish no station map). Platform-level layout, lift position and number of escalator banks are unconfirmed beyond OSM.",
+  "Arlanda Express does not stop at Arlanda C; it uses Arlanda Södra (T2-4) and Arlanda Norra (T5). Arlanda Express information therefore does not describe this station.",
+  "Track numbers at Arlanda C: not given by any source read.",
+  "Station counter opening hours: not published on the pages read."
+ ]
+}

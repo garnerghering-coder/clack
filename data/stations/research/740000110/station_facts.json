@@ -1,0 +1,1367 @@
+{
+ "clack_id": "740000110",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Marknivå: stationshuset (vänthallen, kundservice, shops), Stationstorget, bus terminal and the footbridge over the trough",
+   "other_names": [
+    "Vänthallen (Hallandstrafiken's name for the waiting hall)"
+   ],
+   "note": "The new station opened with the Varbergstunneln on 14 July 2025 (inauguration 13 July). The station building (Jernhusen, Stationstorget 1) stands at street level about 150 m north of the old 1880 building, over the trough by the tunnel's northern mouth.",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Plattformsnivå (platforms sunk in an open trough, one floor below the station building)",
+   "note": "Trafikverket: platforms lowered in an open trough (tråg) below ground level; five tracks, four of them at platforms, one through track. The planning drawings show one island platform (mittplattform) and one side platform (sidoplattform). OSM tags platforms 1B, 2 (2A/2B), 4 (4A/4B) and 5 (5A/5B) on level -1. It is not a deep tunnel station: the platforms are in the open trough, the tunnel starts south of the station.",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n13022636685",
+   "between": [
+    "station building (marknivå)",
+    "island platform 4/5"
+   ],
+   "where": "south end (södra uppgången), from the station building next to the escalators",
+   "confirmed_by": "OSM only (Trafikverket confirms lifts at the station, not their positions)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30",
+   "position": {
+    "lon": 12.2491174,
+    "lat": 57.1113088,
+    "how": "OSM n13022636685",
+    "_source": "OpenStreetMap n13022636685 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636687",
+   "between": [
+    "station building (marknivå)",
+    "side platform 2 (1B/2)"
+   ],
+   "where": "south end (södra uppgången), from the station building next to the escalators",
+   "confirmed_by": "OSM only (Trafikverket confirms lifts at the station)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30",
+   "position": {
+    "lon": 12.2495203,
+    "lat": 57.1112846,
+    "how": "OSM n13022636687",
+    "_source": "OpenStreetMap n13022636687 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1417184724",
+    "w1463599060"
+   ],
+   "between": [
+    "station building",
+    "island platform 4/5"
+   ],
+   "where": "south end, under/beside the station building (passage w1417184720/w1463599050 to platforms 4–5)",
+   "confirmed_by": "OSM only (Trafikverket lists escalators among the structures built; the planning drawing showed two)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1417184723",
+    "w1463599061"
+   ],
+   "between": [
+    "station building",
+    "side platform 2"
+   ],
+   "where": "south end, under/beside the station building (passage w1417184719/w1463599044 to platform 2)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415607101",
+    "w1415607100"
+   ],
+   "between": [
+    "station building end",
+    "platforms 4/5 and 2"
+   ],
+   "where": "south end of the platforms near the station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1415619326",
+   "name": "Alida Svenssons gång- och cykelbro",
+   "between": [
+    "east side (Östra Hamnvägen)",
+    "west/station side"
+   ],
+   "where": "crosses the trough at the north end of the platforms (norra uppgången); pedestrians and cyclists",
+   "confirmed_by": "owner text (Trafikverket: access to the platforms from a footbridge over the trough) + OSM name",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2493002,
+    "lat": 57.1123067,
+    "how": "OSM w1415619326 (point on the way)",
+    "_source": "OpenStreetMap w1415619326 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835362",
+   "between": [
+    "footbridge (norra uppgången)",
+    "island platform 4/5"
+   ],
+   "where": "north end, from the footbridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2493002,
+    "lat": 57.1123067,
+    "how": "OSM n13008835362",
+    "_source": "OpenStreetMap n13008835362 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835364",
+   "between": [
+    "footbridge (norra uppgången)",
+    "side platform 2"
+   ],
+   "where": "north end, from the footbridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2497343,
+    "lat": 57.1122775,
+    "how": "OSM n13008835364",
+    "_source": "OpenStreetMap n13008835364 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415619328",
+    "w1415619330"
+   ],
+   "between": [
+    "footbridge",
+    "island platform 4/5"
+   ],
+   "where": "north end",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415619331",
+    "w1415619329"
+   ],
+   "between": [
+    "footbridge / ground",
+    "side platform 2 (and 1B)"
+   ],
+   "where": "north end; w1415619329 has a ramp (ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415607100",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 2B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415607100 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2496573,
+    "lat": 57.1115974,
+    "how": "OSM w1415607100 (point on the way)",
+    "_source": "OpenStreetMap w1415607100 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415607101",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415607101 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491779,
+    "lat": 57.1117015,
+    "how": "OSM w1415607101 (point on the way)",
+    "_source": "OpenStreetMap w1415607101 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1415619326",
+   "name": "Alida Svenssons gång- och cykelbro",
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 2B",
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 42.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415619326 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2493002,
+    "lat": 57.1123067,
+    "how": "OSM w1415619326 (point on the way)",
+    "_source": "OpenStreetMap w1415619326 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619328",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 25.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415619328 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2493752,
+    "lat": 57.112601,
+    "how": "OSM w1415619328 (point on the way)",
+    "_source": "OpenStreetMap w1415619328 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619329",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 1B",
+    "platform 2",
+    "platform 2B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 25.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415619329 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2498112,
+    "lat": 57.1123529,
+    "how": "OSM w1415619329 (point on the way)",
+    "_source": "OpenStreetMap w1415619329 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619330",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 25.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415619330 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2492364,
+    "lat": 57.1120184,
+    "how": "OSM w1415619330 (point on the way)",
+    "_source": "OpenStreetMap w1415619330 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1415619331",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 2B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1415619331 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2497718,
+    "lat": 57.1121972,
+    "how": "OSM w1415619331 (point on the way)",
+    "_source": "OpenStreetMap w1415619331 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1417184719",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1417184719 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2495011,
+    "lat": 57.1113225,
+    "how": "OSM w1417184719 (point on the way)",
+    "_source": "OpenStreetMap w1417184719 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1417184720",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1417184720 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491628,
+    "lat": 57.1113461,
+    "how": "OSM w1417184720 (point on the way)",
+    "_source": "OpenStreetMap w1417184720 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1417184723",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 8.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1417184723 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2494862,
+    "lat": 57.1112446,
+    "how": "OSM w1417184723 (point on the way)",
+    "_source": "OpenStreetMap w1417184723 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1417184724",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 9.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1417184724 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491628,
+    "lat": 57.1113461,
+    "how": "OSM w1417184724 (point on the way)",
+    "_source": "OpenStreetMap w1417184724 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1463599037",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1463599037 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2493002,
+    "lat": 57.1123067,
+    "how": "OSM w1463599037 (point on the way)",
+    "_source": "OpenStreetMap w1463599037 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1463599044",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 2B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1463599044 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2495393,
+    "lat": 57.1115893,
+    "how": "OSM w1463599044 (point on the way)",
+    "_source": "OpenStreetMap w1463599044 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1463599050",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1463599050 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491912,
+    "lat": 57.1114283,
+    "how": "OSM w1463599050 (point on the way)",
+    "_source": "OpenStreetMap w1463599050 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1463599060",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 5.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1463599060 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491304,
+    "lat": 57.111214,
+    "how": "OSM w1463599060 (point on the way)",
+    "_source": "OpenStreetMap w1463599060 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1463599061",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 6.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1463599061 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.249475,
+    "lat": 57.1111902,
+    "how": "OSM w1463599061 (point on the way)",
+    "_source": "OpenStreetMap w1463599061 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835362",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 4B",
+    "platform 5",
+    "platform 5B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13008835362 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2493002,
+    "lat": 57.1123067,
+    "how": "OSM n13008835362",
+    "_source": "OpenStreetMap n13008835362 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835364",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 2B"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13008835364 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2497343,
+    "lat": 57.1122775,
+    "how": "OSM n13008835364",
+    "_source": "OpenStreetMap n13008835364 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636685",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13022636685 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2491174,
+    "lat": 57.1113088,
+    "how": "OSM n13022636685",
+    "_source": "OpenStreetMap n13022636685 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636687",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13022636687 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2495203,
+    "lat": 57.1112846,
+    "how": "OSM n13022636687",
+    "_source": "OpenStreetMap n13022636687 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stationshuset, entrances on all four sides",
+   "street": "Stationstorget / Västra Vallgatan",
+   "level": "0",
+   "where": "the station building has entrances on all four sides; OSM main sliding doors n13022636700 and n13022665704 face Västra Vallgatan, n13599636704 on the west side",
+   "_source": "Varbergs kommun press release 2026-03-17 \"Varbergs stationsbyggnad får kommunens byggnadspris\", https://via.tt.se/pressmeddelande/4290989/varbergs-stationsbyggnad-far-kommunens-byggnadspris, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré till väntsalen från spårsidan",
+   "street": null,
+   "level": "0",
+   "where": "accessible entrance into the waiting room from the track side",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Södra uppgången",
+   "street": "Stationstorget (Södra stationstorget)",
+   "level": "0",
+   "where": "south end of the platforms: straight into the new station building and the bus terminal next to it",
+   "_source": "Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  },
+  {
+   "name": "Norra uppgången / norra entrén",
+   "street": "Baggens gränd → Östra Hamnvägen",
+   "level": "0",
+   "where": "north end of the platforms, at the gång- och cykelbron; near the bike and commuter parking. Finished for July 2025; Baggens gränd is extended through it to Östra Hamnvägen for pedestrians and cyclists",
+   "_source": "Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n5240151253",
+   "street": "Eskilsgatan",
+   "street_how": "nearest named street, 21.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5240151253 (already in OSM)",
+   "position": {
+    "lon": 12.249032,
+    "lat": 57.1093376,
+    "how": "OSM n5240151253",
+    "_source": "OpenStreetMap n5240151253 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5240151254",
+   "street": "Eskilsgatan",
+   "street_how": "nearest named street, 39.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5240151254 (already in OSM)",
+   "position": {
+    "lon": 12.2487385,
+    "lat": 57.1093523,
+    "how": "OSM n5240151254",
+    "_source": "OpenStreetMap n5240151254 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13022636700",
+   "street": "Västra Vallgatan",
+   "street_how": "nearest named street, 10.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n13022636700 (already in OSM)",
+   "position": {
+    "lon": 12.2495138,
+    "lat": 57.1110879,
+    "how": "OSM n13022636700",
+    "_source": "OpenStreetMap n13022636700 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13022665704",
+   "street": "Västra Vallgatan",
+   "street_how": "nearest named street, 27.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n13022665704 (already in OSM)",
+   "position": {
+    "lon": 12.2492889,
+    "lat": 57.1113472,
+    "how": "OSM n13022665704",
+    "_source": "OpenStreetMap n13022665704 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13599636704",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n13599636704 (already in OSM)",
+   "position": {
+    "lon": 12.2489786,
+    "lat": 57.1111456,
+    "how": "OSM n13599636704",
+    "_source": "OpenStreetMap n13599636704 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13599636716",
+   "street": "Västra Vallgatan",
+   "street_how": "nearest named street, 12.5 m",
+   "level": null,
+   "kind": "shop",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n13599636716 (already in OSM)",
+   "position": {
+    "lon": 12.2494653,
+    "lat": 57.1110533,
+    "how": "OSM n13599636716",
+    "_source": "OpenStreetMap n13599636716 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13599636717",
+   "street": "Västra Vallgatan",
+   "street_how": "nearest named street, 12.9 m",
+   "level": null,
+   "kind": "shop",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n13599636717 (already in OSM)",
+   "position": {
+    "lon": 12.2494427,
+    "lat": 57.1109612,
+    "how": "OSM n13599636717",
+    "_source": "OpenStreetMap n13599636717 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Vänthallen",
+   "where": "in the station building (Stationstorget 1), street level",
+   "opening_hours": "Mo-Fr 05:00-22:45; Sa,Su 06:00-22:45",
+   "hours_source": "website (Hallandstrafiken)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives the station's hours as Mo-Fr 04:30-22:45; Sa-Su 06:00-22:45 (earlier weekday start).",
+   "_source": "https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/varberg-station/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Hallandstrafiken kundservicebutik",
+   "where": "Stationstorget 1 (station building)",
+   "osm_id": "n13074151325",
+   "opening_hours": "Mo-Fr 07:00-17:00; PH off",
+   "hours_source": "website (Hallandstrafiken)",
+   "hours_checked": "2026-10-30",
+   "note": "2026 closures listed: 1 Jan, 6 Jan, 3/5/6 Apr, 1 May, 14 May, 24 May, 6 Jun, 19–20 Jun, 31 Oct, 24–26 Dec, 31 Dec; open 4 Apr 10:00-15:00.",
+   "_source": "https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/varberg-station/trafik-och-biljetter/, read 2026-10-30",
+   "position": {
+    "lon": 12.2492073,
+    "lat": 57.1113096,
+    "osm_id": "n13074151325",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.2,
+    "how": "OSM node n13074151325",
+    "_source": "OpenStreetMap n13074151325 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "Jernhusen gives Västra Vallgatan 2; OSM n13069363690 puts it inside the station building",
+   "osm_id": "n13069363690",
+   "note": "No hours: Jernhusen lists none and pressbyran.se's store page did not render.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/mat-och-butiker/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 12.2488781,
+     "lat": 57.1094289,
+     "osm_id": "n5240151252",
+     "osm_level": null,
+     "in_station_building": false,
+     "to_nearest_platform_m": 12.6,
+     "how": "OSM node n5240151252",
+     "_source": "OpenStreetMap n5240151252 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 12.2493573,
+     "lat": 57.1110543,
+     "osm_id": "n13069363690",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 41.2,
+     "how": "OSM node n13069363690",
+     "_source": "OpenStreetMap n13069363690 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled (this name appears 2 times in the list)",
+   "position": {
+    "lon": 12.2493573,
+    "lat": 57.1110543,
+    "osm_id": "n13069363690",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 41.2,
+    "how": "OSM node n13069363690",
+    "_source": "OpenStreetMap n13069363690 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card only)",
+   "where": "in the station building",
+   "osm_id": "n13074151324",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/toalett/ and tillganglighet/, read 2026-10-30",
+   "position": {
+    "lon": 12.2493811,
+    "lat": 57.1111032,
+    "osm_id": "n13074151324",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 35.6,
+    "how": "OSM node n13074151324",
+    "_source": "OpenStreetMap n13074151324 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/started hour (max 149 kr/24 h); Medium 39 kr (max 199); Large 49 kr (max 249); max 7 days; opened by scanning a QR code",
+   "osm_id": "n13790440294",
+   "note": "Usable during the station's opening hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/forvaringsboxar/, read 2026-10-30",
+   "position": {
+    "lon": 12.2493483,
+    "lat": 57.1113129,
+    "osm_id": "n13790440294",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.8,
+    "how": "OSM node n13790440294",
+    "_source": "OpenStreetMap n13790440294 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr (10-kr coins or card)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests (free)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat (2)",
+   "osm_ids": [
+    "n13075136943",
+    "n13779993917"
+   ],
+   "where": "in the station building (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 12.2494415,
+     "lat": 57.1109112,
+     "osm_id": "n13075136943",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 53.6,
+     "how": "OSM node n13075136943",
+     "_source": "OpenStreetMap n13075136943 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 12.2494395,
+     "lat": 57.1109011,
+     "osm_id": "n13779993917",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 53.1,
+     "how": "OSM node n13779993917",
+     "_source": "OpenStreetMap n13779993917 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Barber Station",
+   "osm_id": "n13074151326",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-We 10:00-19:00; Tu 10:00-21:00; Fr 10:00-19:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only; the OSM rule is odd (Tu twice, no Th); no own website found.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2493276,
+    "lat": 57.1109619,
+    "osm_id": "n13074151326",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 50.2,
+    "how": "OSM node n13074151326",
+    "_source": "OpenStreetMap n13074151326 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "clothes",
+   "name": "Studio Terra",
+   "osm_id": "n13074151327",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 10:00-16:00; Sa-Su 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.249089,
+    "lat": 57.1109781,
+    "osm_id": "n13074151327",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 40.0,
+    "how": "OSM node n13074151327",
+    "_source": "OpenStreetMap n13074151327 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_station",
+   "name": "Bussterminal",
+   "where": "east-side bus terminal at the station (finished July 2025, local buses); a regional bus square is planned on the west side once the old tracks are gone. Hallandstrafiken's map (2026-03-02) still shows 'Nuvarande hållplatslägen under byggtid' with stops along Magasinsgatan/Västra Vallgatan",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; Hallandstrafiken, \"Varberg station och bussterminal\" (Varberg_A3_20260302_K4.pdf), https://www.hallandstrafiken.se/download/18.56264a8119c47bc4b101a2e0/1776059854569/Varberg_A3_20260302_K4.pdf, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "taxi stands close to the station; OSM n13022665703 by the station building on Västra Vallgatan",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "where": "very limited at the station during works; disabled parking temporarily at the bus stop area on Kungsplan; two large car parks (~300 spaces) off Östra Hamnvägen; drop-off along Östra Hamnvägen and Magasinsgatan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/parkering/ and tillganglighet/, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering och cykelhus",
+   "where": "many spaces near the station plus a covered bike house; planned near the north stairs and lifts",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:30-22:45; Sa 06:00-22:45; Su 06:00-22:45",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Varberg station.",
+   "owner_text": "Allt om tillgängligheten på Varberg station. P-plats för rörelsehindrade Under ombyggnationen av stationsplan framför stationen finns parkeringen för rörelsehindrade vid bussangöringen på Kungsplan. Se fliken Karta över stationsområdet. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Hallands trafiken Kundservicebutik finns på stationen, se länk för information Hallandstrafiken Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se Hallandstrafiken Snälltåget För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "På grund av omfattande arbeten i centrala Varberg är det ytterst begränsat med parkering vid stationen. Vi rekommenderar att du hittar andra parkeringsplatser.",
+   "owner_text": "På grund av omfattande arbeten i centrala Varberg är det ytterst begränsat med parkering vid stationen. Vi rekommenderar att du hittar andra parkeringsplatser.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Foton för ID-handlingar som till exempel körkort och visum. Finns i svartvitt eller färg för bildstorlek 35x45 mm och 50x50 mm och kostar 149 kr. Du kan betala med 10-kronorsmynt eller med kort. Vid fel eller problem – ring Speed Services 0771-97 78 00. Speed-service Här kan du se en film hur du använder fotoautomaten",
+   "fee": "149 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/butiker/pressbyran-varberg-buss/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position_candidates": [
+    {
+     "lon": 12.2488781,
+     "lat": 57.1094289,
+     "osm_id": "n5240151252",
+     "osm_level": null,
+     "in_station_building": false,
+     "to_nearest_platform_m": 12.6,
+     "how": "OSM node n5240151252",
+     "_source": "OpenStreetMap n5240151252 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 12.2493573,
+     "lat": 57.1110543,
+     "osm_id": "n13069363690",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 41.2,
+     "how": "OSM node n13069363690",
+     "_source": "OpenStreetMap n13069363690 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled (this name appears 2 times in the list)"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n5240151251",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n5240151251 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2488855,
+    "lat": 57.1094483,
+    "osm_id": "n5240151251",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 12.8,
+    "how": "OSM node n5240151251",
+    "_source": "OpenStreetMap n5240151251 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n12156323072",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n12156323072 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2489387,
+    "lat": 57.1092913,
+    "osm_id": "n12156323072",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 18.3,
+    "how": "OSM node n12156323072",
+    "_source": "OpenStreetMap n12156323072 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n13074151324",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13074151324 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2493811,
+    "lat": 57.1111032,
+    "osm_id": "n13074151324",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 35.6,
+    "how": "OSM node n13074151324",
+    "_source": "OpenStreetMap n13074151324 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Hallandstrafiken Kundservice",
+   "osm_id": "n13074151325",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n13074151325 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2488257,
+    "lat": 57.1091933,
+    "osm_id": "n12156323070",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.3,
+    "how": "OSM node n12156323070",
+    "_source": "OpenStreetMap n12156323070 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n13790440294",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13790440294 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2493483,
+    "lat": 57.1113129,
+    "osm_id": "n13790440294",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.8,
+    "how": "OSM node n13790440294",
+    "_source": "OpenStreetMap n13790440294 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": null,
+   "osm_id": "n13793725540",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13793725540 (read 2026-10-30)",
+   "position": {
+    "lon": 12.2493248,
+    "lat": 57.1112409,
+    "osm_id": "n13793725540",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 21.6,
+    "how": "OSM node n13793725540",
+    "_source": "OpenStreetMap n13793725540 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Barber Station",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-We 10:00-19:00; Tu 10:00-21:00; Fr 10:00-19:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://barberstationvarberg.se/",
+   "position": {
+    "lon": 12.2493276,
+    "lat": 57.1109619,
+    "osm_id": "n13074151326",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 50.2,
+    "how": "OSM node n13074151326",
+    "_source": "OpenStreetMap n13074151326 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n13074151326 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Studio Terra",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-16:00; Sa-Su 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.studio-terra-varberg.com/",
+   "position": {
+    "lon": 12.249089,
+    "lat": 57.1109781,
+    "osm_id": "n13074151327",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 40.0,
+    "how": "OSM node n13074151327",
+    "_source": "OpenStreetMap n13074151327 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n13074151327 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Varberg station och bussterminal (A3 station area map, 2026-03-02, bus stops during construction)",
+   "publisher": "Hallandstrafiken",
+   "url": "https://www.hallandstrafiken.se/download/18.56264a8119c47bc4b101a2e0/1776059854569/Varberg_A3_20260302_K4.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Järnvägsplan Varberg–Hamra: station area exhibition sheets (planning stage; show mittplattform + sidoplattform, södra/norra uppgången, 3 lifts, 2 escalators)",
+   "publisher": "Trafikverket",
+   "url": "https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.hallandstrafiken.se",
+   "url": "https://www.hallandstrafiken.se/download/18.56264a8119c47bc4b101a2e0/1776059854569/Varberg_A3_20260302_K4.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/varberg-station/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Exact number and position of lifts/escalators: Trafikverket's opened-station page confirms lifts, stairs and escalators but not where or how many; the planning drawing shows 3 lifts and 2 escalators, OSM has 4 of each. No as-built plan published.",
+  "Platform numbering: OSM uses 1B, 2 (2A/2B), 4 (4A/4B), 5 (5A/5B); Hallandstrafiken's map shows numbers 1, 2, 4, 5 without explanation. Which is the side platform vs the island (OSM suggests side = 1B/2, island = 4/5) is not stated by an owner source.",
+  "OSM still has old-station features ~200 m south (Pressbyrån n5240151252, Hallandstrafiken Kundservice n12156323070, toilets n5240151251, luggage locker n12156323072, entrances on Eskilsgatan n5240151253/4, platforms w71499118, w307498378, w307498379, w541968303 with no level). Hallandstrafiken now gives the kundservice at Stationstorget 1, and Wikipedia says the 1880 building is no longer part of the railway: these OSM objects look stale.",
+  "Pressbyrån hours: not on Jernhusen; pressbyran.se store page unreadable.",
+  "Shops in the station building: OSM shows Barber Station, Studio Terra and three vacant units; Jernhusen lists only Pressbyrån. Omami's site gives a Varberg restaurant at Västra Vallgatan 4 but does not say it is in the station.",
+  "Floor heights / trough depth: no source measures them."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/varberg-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no open questions listed for Varberg in STATION_OPEN_QUESTIONS_SWEDEN.md; brief asks to describe the new station's levels, lifts and entrances)",
+   "answer": "Two levels: street/terminal level with the station building (vänthallen, kundservice) and the footbridge, and the platform level in an open trough one floor below. Access at the south end from the station building (lifts, escalators, stairs) and at the north end from Alida Svenssons gång- och cykelbro (lifts, stairs). Trafikverket confirms lifts, stairs, escalators and the footbridge; their exact positions come from OSM (4 lifts, 4 escalators).",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ]
+}

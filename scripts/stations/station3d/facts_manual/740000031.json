@@ -1,0 +1,233 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform level (no signposted name found)",
+   "other_names": [],
+   "_source": "OSM platforms 2-5 tagged level=0, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Bridge level over the tracks (entrance halls; no signposted name found)",
+   "other_names": [],
+   "_source": "OSM footbridges w40858591/w133331997 and entrances n8205882159, n8205882160, n8524123585 tagged level=1, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Passage under the tracks (OSM underpass w881957817; no name)",
+   "other_names": [],
+   "_source": "OSM w881957817, lift n8201995772 (level 0;-1), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM n8572777974, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM n8205629577, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM n8572778005",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 1"
+   ],
+   "where": "OSM n7626554391 and n7626554392 (level 0;1, not joined to a platform in OSM); Huddinge's 2020 study says the escalator house at the south entrance has only one lift",
+   "confirmed_by": "owner text",
+   "_source": "OSM; Huddinge kommun, Åtgärdsvalsstudie bytespunkt Flemingsberg (2020), p. 30, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level -1"
+   ],
+   "where": "OSM n8201995772, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM w816573050 (reversible)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM w882358455, w882358456 (reversible; pendeltåg platform)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM w816573051 (reversible)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM w923519282",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM w882358457",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM w923519277",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "platforms 6/7",
+    "street"
+   ],
+   "where": "OSM w881957817 (level -1)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "south entrance",
+    "platforms"
+   ],
+   "where": "escalator house at the south (campus-side) entrance; Huddinge's 2020 study says the north entrance lacks escalators to the regional-train platforms. Situation may have changed since 2020: OSM now has escalators to all three island platforms.",
+   "confirmed_by": "owner text",
+   "_source": "Huddinge kommun, Åtgärdsvalsstudie bytespunkt Flemingsberg (2020), pp. 16, 30, https://webb.huddinge.se/globalassets/ovriga-webbar/verksamhetswebbar/oversiktsplan/dokument-oversiktsplan/op-2050-atgardsvalsstudie-bytespunkt-flemingsberg-2020.pdf, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Södra entrén (south entrance)",
+   "street": "Huddingevägen / campus side (OSM revolving doors n8205882159 nearest Huddingevägen, n8205882160 nearest Generatorslingan, level 1)",
+   "level": "1",
+   "where": "south end; upgraded winter 2018; footbridge from here over the car park towards the district court (tingsrätten)",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) pp. 8, 31, and OSM, read 2026-10-30"
+  },
+  {
+   "name": "Norra entrén (north entrance)",
+   "street": "Regulatorbron (OSM sliding door n8524123585 wheelchair=yes, level 1; n8201995777, n8572777982)",
+   "level": "1",
+   "where": "north end, by Regulatorbron and Flemingsberg centrum",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) pp. 8, 16, 31, and OSM, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "restaurant",
+   "name": "JA Thai Wok",
+   "where": "in Flemingsberg station (Jernhusen)",
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 11:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/, read 2026-10-30 (jathai.se lists only its Hornsgatan restaurant)"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationen (station building)",
+   "opening_hours": "Mo-Th 04:45-01:00; Fr 04:45-03:30; Sa 04:30-03:30; Su 04:30-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Jernhusen also lists 'Låsning kl. 02:30' and deviating hours 25/12, 30/12, 31/12 2026 without details",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "SL toalett",
+   "fee": "yes (OSM)",
+   "level_per_plan": "0 (OSM)",
+   "where": "OSM n14273142536; another fee toilet n7626550082",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "SL",
+   "where": "OSM shop=ticket n8205959660 in the station",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Flemingsberg bus stops A-D",
+   "where": "A and B westbound on Huddingevägen; C and D eastbound on Regulatorvägen (per Huddinge 2020; may have changed)",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) p. 37, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Åtgärdsvalsstudie bytespunkt Flemingsberg (OP 2050 underlag)",
+   "publisher": "Huddinge kommun",
+   "url": "https://webb.huddinge.se/globalassets/ovriga-webbar/verksamhetswebbar/oversiktsplan/dokument-oversiktsplan/op-2050-atgardsvalsstudie-bytespunkt-flemingsberg-2020.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "2020 study, describes entrances, lifts, escalators and bus stops as they were then"
+  }
+ ],
+ "answers": [
+  {
+   "question": "restaurant Thai Wok: no opening hours",
+   "answer": "Jernhusen lists 'JA Thai Wok' at Flemingsberg station: Mo-Fr 10:00-20:00; Sa,Su 11:00-20:00. The chain's own site (jathai.se) shows only its Hornsgatan restaurant, so Jernhusen is the source.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "No current station plan found from SL, Jernhusen or Huddinge; the 2020 Huddinge study predates recent changes, and lifts/escalators per platform are confirmed only by OSM.",
+  "Signposted names of the bridge level and entrance halls: none found.",
+  "Taxi stand: OSM has a taxi node ~170 m away; no owner source gives its position."
+ ]
+}

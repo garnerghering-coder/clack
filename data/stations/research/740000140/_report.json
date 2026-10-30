@@ -1,0 +1,152 @@
+{
+ "clack_id": "740000140",
+ "slug": "nassjo_c",
+ "flags": [
+  "Platform BIS 1547 (track 1s): laser gives 0.63 m above the track bed (≈0.45 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "w185046408 Nässjö resecentrum (station building): p95 307.6 m is 6.4 m above the median 301.2 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [
+  "130560 m² of the box hold exactly 0.00 in the terrain model (no data at a tile edge); left as no-data",
+  "88862 m² of terrain-model no-data filled from the laser ground points (class 2, median per 1 m cell); 41698 m² still have no ground value",
+  "terrain model is exactly flat over large areas (a water surface, not ground): 290.23 m over 17791 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=14.687483,57.648071,14.700976,57.655709",
+ "ground": {
+  "min_m": 290.16,
+  "median_m": 293.83,
+  "max_m": 301.69,
+  "nan_cells": 41698,
+  "size_m": [
+   544,
+   603
+  ],
+  "box_sweref": [
+   481479,
+   6389695,
+   482023,
+   6390298
+  ],
+  "tiles": [
+   "638_48 (2023-10-31)",
+   "639_48 (2023-10-31)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y22c001-63875_4800_25.copc.laz",
+   "y22c001-63900_4800_25.copc.laz"
+  ],
+  "scan_date": "2022-03-20",
+  "density_pts_m2_nominal": 1.3,
+  "flight_height_m": 3200,
+  "points_in_box": 527319,
+  "density_in_box": 1.61,
+  "classes": {
+   "1": 180613,
+   "2": 330557,
+   "7": 276,
+   "9": 14786,
+   "17": 1087
+  },
+  "train_points_class64": 1936
+ },
+ "platforms": [
+  {
+   "bis_object": "235",
+   "track": "8s",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 478.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 293.6,
+   "track_bed_points": 522,
+   "platform_surface_m": 294.55,
+   "platform_points": 1398,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.95,
+   "laser_estimate_above_rail_m": 0.77
+  },
+  {
+   "bis_object": "258",
+   "track": "2s",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 499.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 293.65,
+   "track_bed_points": 534,
+   "platform_surface_m": 294.57,
+   "platform_points": 195,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.92,
+   "laser_estimate_above_rail_m": 0.74
+  },
+  {
+   "bis_object": "259",
+   "track": "10n,10s",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 310.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 293.58,
+   "track_bed_points": 716,
+   "platform_surface_m": 294.5,
+   "platform_points": 982,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.92,
+   "laser_estimate_above_rail_m": 0.75
+  },
+  {
+   "bis_object": "257",
+   "track": "1n",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 125.0,
+   "width_m": 5.0,
+   "roof": "Tak",
+   "track_bed_m": 294.05,
+   "track_bed_points": 82,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "1547",
+   "track": "1s",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 148.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 293.63,
+   "track_bed_points": 220,
+   "platform_surface_m": 294.26,
+   "platform_points": 728,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.63,
+   "laser_estimate_above_rail_m": 0.45
+  }
+ ],
+ "platform_surface_m": 294.52,
+ "track_bed_m": 293.63,
+ "trains_in_scan": 6,
+ "structures": {
+  "building": 4,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 6
+ },
+ "photos": 77,
+ "photos_station_related": 44
+}

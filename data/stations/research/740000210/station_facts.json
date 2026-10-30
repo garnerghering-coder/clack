@@ -1,0 +1,768 @@
+{
+ "clack_id": "740000210",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "-1",
+   "name": "Tunnel",
+   "other_names": [
+    "Polhems Gång (OSM name of w25162044; not on X-trafik's map, which only says 'Tunnel')"
+   ],
+   "_source": "X-trafik, Gävle Central översikt (Gavle-Central-250818.pdf), label 'Tunnel'; OSM w24788721/w25162044, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1585",
+   "track": "5",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 5 (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-04-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1585; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1978",
+   "track": "3",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 3 (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-04-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1978; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1980",
+   "track": "4",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 4 (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-04-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1980; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1800",
+   "track": null,
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track None (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-04-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1800; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1977",
+   "track": "1s",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1s (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-04-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1977; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side",
+    "platforms 4N and 5"
+   ],
+   "where": "OSM w24788721 (layer -1, 43 m); X-trafik's map labels a 'Tunnel'",
+   "confirmed_by": "plan",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "X-trafik's map legend has 'Hiss'; OSM has lifts n274285407, n1189137381 and n4911637960 (the last reaching platform 4N). The map's text layer does not say which platforms each lift serves.",
+   "confirmed_by": "plan",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "street (Centralplan)",
+    "station hall"
+   ],
+   "where": "to the right of the main entrance (the main entrance itself has steps)",
+   "confirmed_by": "owner text",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w24788721",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 42.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w24788721 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.150428,
+    "lat": 60.6764045,
+    "how": "OSM w24788721 (point on the way)",
+    "_source": "OpenStreetMap w24788721 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w25162044",
+   "name": "Polhems Gång",
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 32.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w25162044 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1515493,
+    "lat": 60.6758186,
+    "how": "OSM w25162044 (point on the way)",
+    "_source": "OpenStreetMap w25162044 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w25162077",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w25162077 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1518052,
+    "lat": 60.6758926,
+    "how": "OSM w25162077 (point on the way)",
+    "_source": "OpenStreetMap w25162077 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w44123272",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w44123272 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1518052,
+    "lat": 60.6758926,
+    "how": "OSM w44123272 (point on the way)",
+    "_source": "OpenStreetMap w44123272 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w115830078",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w115830078 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1512535,
+    "lat": 60.67652,
+    "how": "OSM w115830078 (point on the way)",
+    "_source": "OpenStreetMap w115830078 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w499992983",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w499992983 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1517452,
+    "lat": 60.6760883,
+    "how": "OSM w499992983 (point on the way)",
+    "_source": "OpenStreetMap w499992983 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n274285407",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n274285407 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.151309,
+    "lat": 60.675749,
+    "how": "OSM n274285407",
+    "_source": "OpenStreetMap n274285407 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1189137381",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n1189137381 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1515493,
+    "lat": 60.6758186,
+    "how": "OSM n1189137381",
+    "_source": "OpenStreetMap n1189137381 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4911637960",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4N"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4911637960 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.1517485,
+    "lat": 60.6758762,
+    "how": "OSM n4911637960",
+    "_source": "OpenStreetMap n4911637960 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentrén (main entrance)",
+   "street": "Centralplan",
+   "where": "street side of the station building; has steps. OSM main entrance n11510667276 (wheelchair=yes, automatic door) is nearest Centralplan.",
+   "_source": "Jernhusen tillgänglighet; OSM, read 2026-10-30"
+  },
+  {
+   "name": "Accessible entrance via ramp",
+   "street": "Centralplan",
+   "where": "to the right of the main entrance",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrances from the track side",
+   "street": "track side (spårsidan)",
+   "where": "Jernhusen: all entrances from the track side are accessible (step-free); the number of doors is not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n11510667276",
+   "street": "Centralplan",
+   "street_how": "nearest named street, 35.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "automatic",
+   "_source": "OSM n11510667276 (already in OSM)",
+   "position": {
+    "lon": 17.1513142,
+    "lat": 60.6756638,
+    "how": "OSM n11510667276",
+    "_source": "OpenStreetMap n11510667276 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsalen",
+   "opening_hours": "Mo-Su 04:15-00:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "shops_area",
+   "name": "Butiksdelen",
+   "opening_hours": "Mo-Su 04:15-21:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes; card (universal toilet card or coin), amount not stated",
+   "where": "in the station; position not given",
+   "hours_raw": "Notice on 2026-10-30: three of the station's four toilets are closed because of vandalism, including all accessible toilets",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/ and /toalett/, /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days",
+   "where": "in the station (OSM luggage_locker n9003098296)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/forvaringsboxar/ and OSM, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/uttagsautomat/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "SJ and UL ticket machines",
+   "where": "OSM vending_machine n7195742905 (SJ), n7195742906 (UL)",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Järnvägskrogen",
+   "where": "Centralplan",
+   "opening_hours": "Mo-Th 10:30-21:30; Fr 10:30-22:00; Sa 11:30-22:00; Su 12:00-21:30",
+   "hours_raw": "Caféet öppet alla dagar 09.30-16.30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 17.1504906,
+    "lat": 60.6762533,
+    "osm_id": "n220637472",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 23.6,
+    "how": "OSM node n220637472",
+    "_source": "OpenStreetMap n220637472 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa), incl. paid disabled parking",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Busshållplatser Gävle Central",
+   "where": "around the station (streets on the map: Drottninggatan, Stora Esplanadgatan, Centralgränd, N/S Strandgatan, Murénbron, Fältskärsleden). Lines: 15, 25, 26, 41, 48, 49, 91, 95, 241; express 151 Söderhamn, 173 Bollnäs-Ljusdal; rail replacement buses; Närtrafik/färdtjänst. Stop letters (A, G…) appear on the map but the text layer does not tie them to lines. City buses also stop at Hållplats Rådhuset, about 300 m away.",
+   "_source": "X-trafik, Gävle Central översikt, https://xtrafik.se/Content/132931/Gavle-Central-250818.pdf, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Butiksdelen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Su 04:15-21:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/"
+  },
+  {
+   "category": "station_hall",
+   "name": "Väntsalen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:15-00:30; Sa 04:15-00:30; Su 04:15-00:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Gävle centralstation.",
+   "owner_text": "Allt om tillgängligheten på Gävle centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Tillgänglig entré via ramp finns till höger om huvudentrén och samtliga entréer från spårsidan (huvudentrén har trappa). Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr. Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr. Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ X-trafik TIB (Tåg i Bergslagen) Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "På stationen finns uttagsautomat.",
+   "owner_text": "På stationen finns uttagsautomat.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/uttagsautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "app_poi": "osm560672611",
+   "level": "L0",
+   "level_name": "Street, station house and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+   "website": "espressohouse.com/",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "kiosk",
+   "name": "WHSmith",
+   "app_poi": "osm560670424",
+   "level": "L0",
+   "level_name": "Street, station house and platforms",
+   "where": null,
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 07:00-19:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+   "hours_unit": "Jernhusen lists this brand in several places; these are the hours for \"Centralplan\"",
+   "position": {
+    "lon": 17.1506759,
+    "lat": 60.6760243,
+    "osm_id": "n560670424",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.5,
+    "how": "OSM node n560670424",
+    "_source": "OpenStreetMap n560670424 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Järnvägskrogen",
+   "app_poi": "osm220637472",
+   "level": "L0",
+   "level_name": "Street, station house and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+   "hours_unit": "Jernhusen lists this brand in several places; these are the hours for \"Centralplan\"",
+   "website": "www.jarnvagskrogen.se/",
+   "position": {
+    "lon": 17.1504906,
+    "lat": 60.6762533,
+    "osm_id": "n220637472",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 23.6,
+    "how": "OSM node n220637472",
+    "_source": "OpenStreetMap n220637472 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Habesha Restaurang Bar",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Centralplan",
+     "opening_hours": "Tu-Su 11:00-22:00; Mo off"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.habesharestaurang.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": null,
+   "name": "Subway",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Centralplan",
+     "opening_hours": "Mo-Fr 07:00-21:00; Sa 09:00-18:00; Su 09:00-21:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.subway.com/sv-SE",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Speed Services",
+   "osm_id": "n9003098296",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9003098296 (read 2026-10-30)",
+   "position": {
+    "lon": 17.1511004,
+    "lat": 60.67566,
+    "osm_id": "n9003098296",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 40.8,
+    "how": "OSM node n9003098296",
+    "_source": "OpenStreetMap n9003098296 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Bistro Nord",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.1512691,
+    "lat": 60.6755885,
+    "osm_id": "n534827437",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 36.4,
+    "how": "OSM node n534827437",
+    "_source": "OpenStreetMap n534827437 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n534827437 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Grab & Go Stationen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.1516664,
+    "lat": 60.6761626,
+    "osm_id": "n560672609",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 6.4,
+    "how": "OSM node n560672609",
+    "_source": "OpenStreetMap n560672609 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n560672609 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Gävle Central – Översikt (busshållplatser)",
+   "publisher": "X-trafik",
+   "url": "https://xtrafik.se/Content/132931/Gavle-Central-250818.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "file name suggests 2025-08-18. The text layer gives tracks/platform labels 1, 2N, 2S, 3N, 3S, 4N, 4S, 5, a 'Tunnel', and legend items Hiss, Busshållplats, Skärmtak, Område gående, Gång/cykelbana."
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "xtrafik.se",
+   "url": "https://xtrafik.se/Content/132931/Gavle-Central-250818.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Station entrances: not in OSM and Jernhusen's Gävle page publishes no plan.",
+  "Which platforms each lift reaches: X-trafik's map legend has 'Hiss', but the text layer does not place the lifts. Someone needs to look at the drawing (facts only).",
+  "Whether 'Polhems Gång' (OSM name) is signposted as the station tunnel: no owner source mentions it.",
+  "Espresso House (Centralplan) hours: not on Jernhusen's page, and the chain's site was not readable in this pass."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L0 (Street, station house and platforms): height not measured",
+  "level L-1 (Tunnel): height not measured",
+  "no entrances mapped",
+  "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)"
+ ],
+ "answers": [
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own",
+   "answer": "Not so in OSM: the pedestrian tunnel w24788721 (layer -1) reaches platforms 4N and 5; stairs w25162077/w44123272/w115830078/w499992983 and lift n4911637960 reach platform 4N. Only in OSM, no plan seen.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "level L-1 (Tunnel): name",
+   "answer": "OSM names one tunnel \"Polhems Gång\" (w25162044, stairs w25162049).",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Still mostly open: OSM has one entrance node in the station area.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Jernhusen: the main entrance (Centralplan) has steps; there is an accessible ramp entrance to the right of it, and all entrances from the track side are accessible. OSM main entrance n11510667276 (automatic door, wheelchair=yes) is next to Centralplan.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "question": "level L-1 (Tunnel): height not measured",
+   "answer": "Still open: no open source measures it. X-trafik's map calls it just 'Tunnel'.",
+   "_source": "X-trafik Gävle Central översikt, read 2026-10-30"
+  },
+  {
+   "question": "level L0 (Street, station house and platforms): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass, 2026-10-30"
+  },
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "X-trafik's map shows a tunnel and has lifts in its legend, and OSM's tunnel w24788721 reaches 4N and 5, but no source says whether platform 5 has its own stairs or lift up from the tunnel. Not settled.",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  }
+ ]
+}

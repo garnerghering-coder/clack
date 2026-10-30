@@ -1,0 +1,324 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": "Street, station hall and platforms",
+   "other_names": [],
+   "note": "No signposted name found. Jernhusen says the toilets are 'på övre plan' (upper floor of the station building); no source says how that floor relates to the app's L0/L-1, so it is not used as a level name.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Centralpassagen",
+   "other_names": [],
+   "note": "Pedestrian and cycle passage under the station; Trafikverket calls it 'Centralpassagen' and it is the way up/down to tracks 2–7. The UL map labels it CENTRALPASSAGEN.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "Centralpassagen",
+    "all platforms"
+   ],
+   "where": "from Centralpassagen up to every track",
+   "confirmed_by": "owner text",
+   "note": "Trafikverket: 'Från Centralpassagen finns hiss till samtliga spår.' OSM maps Centralpassagen lifts only to track 1 (n12626024022), island 5/6 (n12626518111) and track 8 (w444022997); the lifts to islands 2/3 and 4/7 are missing in OSM.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Centralpassagen",
+    "platforms 2–7"
+   ],
+   "where": "from Centralpassagen up to the island platforms",
+   "confirmed_by": "owner text",
+   "note": "Trafikverket: 'Centralpassagen fungerar även som uppgång/nedgång för spår 2 till 7, som även nås via Strandbodgatan.' OSM has only one such stair (w55635971, to island 5/6).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "platform 1"
+   ],
+   "where": "south end of the station, at Strandbodgatan (under the railway bridges)",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791540",
+   "note": "Trafikverket: 'Ytterligare fyra hissar finns vid Strandbodgatan upp till spåren.' Which platform each of the four reaches is OSM only.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "island platform 2/3"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791539",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 2.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "island platform 4/7"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791538",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 7.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "platform 8"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791542",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 8.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "island platform 2/3"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791563",
+   "note": "Trafikverket confirms tracks 2–7 are reached via Strandbodgatan but does not say stairs.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "island platform 4/7"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791561",
+   "note": "Trafikverket confirms tracks 2–7 are reached via Strandbodgatan but does not say stairs.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "platform 1"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791557",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "platform 8"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791559",
+   "note": "Trafikverket's overview map (Figur 9) has a label 'Trappor till spår 8'; its position is not readable from the text.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "station hall (L0)",
+    "Centralpassagen (L-1)"
+   ],
+   "where": "in the station building by Olof Palmes plats",
+   "confirmed_by": "OSM only",
+   "osm_id": "w815720301",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station hall, west side",
+   "street": "Olof Palmes plats",
+   "where": "west front of the new station building (address Olof Palmes plats 10); OSM n2187779892, n2778217793, n2778217794, n13051653543",
+   "note": "Jernhusen: 'Samtliga entréer till stationen är tillgängliga.'",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Centralpassagen entrances",
+   "street": "Centralpassagen",
+   "level": "-1",
+   "where": "from the underpass into the station building and up to the platforms; OSM n2778217791, n4415233105, n12626024021",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Strandbodgatan (south platform access)",
+   "street": "Strandbodgatan",
+   "where": "south end of the platforms, where the four lifts and the stairs come down to Strandbodgatan; OSM n4415233083–n4415233091",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "One Hundred Restrooms (incl. universaltoalett)",
+   "fee": "yes, card payment only (amount not stated)",
+   "where": "in the station building, 'på övre plan' (upper floor)",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199), Large 49 kr/h (max 249); max 7 days",
+   "opening_hours": "Mo-Su 05:00-00:40",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours = station opening hours (Jernhusen: 'Se även stationens öppettider'). OSM puts the Speed Services lockers on level -1.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "UL Center",
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa,Su,PH off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/trafik-och-biljetter/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (UL)",
+   "where": "marked on UL's station-area map; position not readable from the map text",
+   "_source": "UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  },
+  {
+   "category": "restaurant",
+   "name": "Sushi Yama",
+   "opening_hours": "Mo-Su 10:00-20:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "where": "in Uppsala Centralstation, Olof Palmes plats 10",
+   "_source": "https://sushiyama.se/restaurants/sushi-yama-uppsala-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "opening_hours": "Mo-Fr 05:15-23:30; Sa 06:00-23:30; Su 07:00-23:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen lists Pressbyrån without hours; Pressbyrån's store page loads its hours dynamically and could not be read.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Gateau",
+   "where": "Olof Palmes plats 10 (Jernhusen lists it on the station's shop page, tel. 073-0898799)",
+   "note": "No hours: gateau.se/butiker/uppsala/ loads its content dynamically.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Uppsala Resecentrum bus stops A1–E7",
+   "where": "A1–A3, B2–B4, C1–C5, D1, E1–E7 around the resecentrum; replacement buses for Mälartåg north/west leave from C1, for SJ, Mälartåg and SL pendeltåg south from E7; E3, E4, E6 are commercial coaches",
+   "_source": "UL, https://www.ul.se/en/travel-info/travel-with-us/maps/stations-and-travel-centers/uppsala-travel-center/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkeringshuset",
+   "where": "labelled on UL's station-area map; position not readable from the map text",
+   "_source": "UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Resecentrum i Uppsala (Stationsområdet), vinter 2026",
+   "publisher": "UL (Region Uppsala)",
+   "url": "https://www.ul.se/globalassets/kartor/resecentrum/resecentrum_webb_vinter-2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen. Only its text labels could be read (streets, buildings, bus lines); it shows no lifts, stairs or platform numbers in text."
+  },
+  {
+   "title": "Resecentrum i Uppsala, höst 2026",
+   "publisher": "UL (Region Uppsala)",
+   "url": "https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Newer version linked from UL's Uppsala Resecentrum page; same labels as the winter map."
+  },
+  {
+   "title": "Fyra spår Uppsala, utformning av planförslaget (Figur 9: översikt stationsområdet)",
+   "publisher": "Trafikverket",
+   "url": "https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "level L0 (Street, station hall and platforms): height not measured",
+   "answer": "Still open: no source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L-1 (Centralpassagen): height not measured",
+   "answer": "Still open: no source measures it. Name 'Centralpassagen' confirmed by Trafikverket and UL.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "question": "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Wrong in the app: island platform 2/3 has a way up from Centralpassagen (Trafikverket: Centralpassagen is the 'uppgång/nedgång för spår 2 till 7' and has a lift to every track) and stairs + lift at the south end from Strandbodgatan (OSM w207791563, w207791539; Trafikverket confirms four lifts at Strandbodgatan). OSM is missing the Centralpassagen stair/lift for 2/3.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 3: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Same island as platform 2 (OSM stair w207791563 reaches 2 and 3): Centralpassagen stairs + lift (owner text), Strandbodgatan stairs + lift (OSM; lift count owner text).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 4: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 4/7 (OSM stair w207791561 reaches 4 and 7): Centralpassagen stairs + lift (owner text, missing in OSM); Strandbodgatan stairs w207791561 and lift w207791538 (OSM; lift count owner text).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 5/6 is reached from Centralpassagen: OSM lift n12626518111 (level 0;-1) and stairs w55635971; Trafikverket confirms stairs and a lift from Centralpassagen to tracks 2–7. No Strandbodgatan connection in OSM.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 6: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Same as platform 5 (island 5/6): Centralpassagen lift n12626518111 and stairs w55635971 (OSM), confirmed in kind by Trafikverket's text.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 7: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 4/7: Centralpassagen stairs + lift (owner text); Strandbodgatan lift w207791538 (OSM ties it to 7) and stairs w207791561.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Heights of L0 and L-1: no source measures them.",
+  "Signposted level names in the station building: Jernhusen only says the toilets are on 'övre plan'; no plan names the floors. OSM puts Caffè Nero, Sushi Yama, Espresso House and UL Center on level 1 and DOZ, Pressbyrån, Subway on level 0, which does not match the app's L0/L-1 scheme; which shop is on which floor stays unconfirmed.",
+  "Exact position of the Centralpassagen lifts/stairs to islands 2/3 and 4/7: Trafikverket says every track has a lift from Centralpassagen, but OSM maps none for these two islands and no readable plan shows them.",
+  "Toilet fee amount: Jernhusen says card only, no price (the app's 10 SEK has no source here).",
+  "Hours for Gateau and Pressbyrån from their own sites (pages load dynamically). Stationen restaurant (old station building): stationen.se blocks fetching; OSM's hours string is not valid opening_hours syntax.",
+  "UL's station-area maps could only be read as text; the positions of ticket machines, taxi and the stops are not in the text."
+ ]
+}

@@ -1,0 +1,284 @@
+{
+ "clack_id": "740000192",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w310507572",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w426149131",
+   "ref": "1",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w184555145",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 16.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    15.1402632,
+    59.1272221
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w230862080",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    15.1403747,
+    59.1268239
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w303713042",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 54.7,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    15.1406726,
+    59.1269361
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1094091164",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 7.4,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    15.140649,
+    59.1268712
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1094091165",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.7,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    15.1406472,
+    59.1269133
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10020544210",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    15.1403488,
+    59.1269145
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10020544213",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    15.140649,
+    59.1268712
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n989931681",
+   "category": "fast_food",
+   "name": "Sibylla",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 73,
+   "lonlat": [
+    15.1393883,
+    59.126774
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 64.9,
+   "brand": "Sibylla",
+   "cuisine": "burger"
+  },
+  {
+   "osm_id": "n1924803300",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 33,
+   "lonlat": [
+    15.1396875,
+    59.1264145
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 45.3
+  },
+  {
+   "osm_id": "w303580624",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 43,
+   "lonlat": [
+    15.1409143,
+    59.1265262
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 17.8
+  },
+  {
+   "osm_id": "w303580630",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 33,
+   "lonlat": [
+    15.1407456,
+    59.1260689
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 28.5
+  },
+  {
+   "osm_id": "w303713033",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 110,
+   "lonlat": [
+    15.1404041,
+    59.1275352
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.1
+  },
+  {
+   "osm_id": "w328707774",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    15.1399242,
+    59.1270242
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 36.8
+  },
+  {
+   "osm_id": "w329764262",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 144,
+   "lonlat": [
+    15.141391,
+    59.1277239
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.8
+  },
+  {
+   "osm_id": "w329764263",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 208,
+   "lonlat": [
+    15.1417141,
+    59.1285677
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.9
+  },
+  {
+   "osm_id": "w1094091153",
+   "category": "bus_station",
+   "name": "Kumla resecentrum",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 17,
+   "lonlat": [
+    15.1397439,
+    59.1258072
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.1
+  }
+ ]
+}

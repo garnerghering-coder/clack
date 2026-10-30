@@ -1,0 +1,591 @@
+{
+ "clack_id": "740001586",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w157006194",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w157006197",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w157006198",
+   "ref": "3",
+   "level": null
+  },
+  {
+   "osm_id": "w157006202",
+   "ref": "4",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w157006137",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 23.7,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.974883,
+    55.5624675
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157006144",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 21.4,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    12.9748557,
+    55.5622364
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598212",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 22.9,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    12.9762796,
+    55.5628075
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598213",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 19.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    12.9770769,
+    55.5631422
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157598214",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 23.1,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.9755129,
+    55.5627196
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598217",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 23.5,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.9760444,
+    55.562933
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w157598218",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 24.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    12.9755291,
+    55.5625034
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w157598221",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 18.5,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.9771031,
+    55.5633641
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1698439638",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": null,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    12.9759618,
+    55.5626873
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1698439660",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": null,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.9757887,
+    55.5628255
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n6283632850",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Hyllie boulevard",
+   "nearest_street_m": 22.8,
+   "lonlat": [
+    12.975576,
+    55.5628597
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n1218863346",
+   "category": "bicycle_parking",
+   "name": "Hyllie Bike & Ride",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 106,
+   "lonlat": [
+    12.9774598,
+    55.5630192
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.6,
+   "operator": "Malmö Stad"
+  },
+  {
+   "osm_id": "n1692398169",
+   "category": "restaurant",
+   "name": "Brödernas",
+   "level": "1",
+   "fee": null,
+   "opening_hours": "Mo-Tu 11:00-21:00; Sa 12:00-22:00; We-Fr 11:00-22:00; Su 12:00-21:00",
+   "wheelchair": null,
+   "distance_m": 81,
+   "lonlat": [
+    12.9765265,
+    55.5634006
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.8,
+   "brand": "Brödernas",
+   "cuisine": "burger",
+   "website": "https://www.brodernas.nu/restauranger/"
+  },
+  {
+   "osm_id": "n1692398174",
+   "category": "fast_food",
+   "name": "Subway",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-22:00; Sa,Su 10:00-22:00",
+   "wheelchair": null,
+   "distance_m": 70,
+   "lonlat": [
+    12.9764176,
+    55.5633239
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 15.9,
+   "brand": "Subway",
+   "cuisine": "sandwich",
+   "website": "https://restaurants.subway.com"
+  },
+  {
+   "osm_id": "n1692398183",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": "1",
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa 07:00-23:00; Su 07:00-22:00",
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    12.9763831,
+    55.5628562
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0,
+   "brand": "Pressbyrån",
+   "website": "http://pressbyran.se"
+  },
+  {
+   "osm_id": "n1692398193",
+   "category": "fast_food",
+   "name": "Sultan kebab",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 10:00-22:00",
+   "wheelchair": null,
+   "distance_m": 65,
+   "lonlat": [
+    12.9764172,
+    55.5632753
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.5,
+   "website": "https://sultan-kebab.se/"
+  },
+  {
+   "osm_id": "n1692398196",
+   "category": "bank",
+   "name": "Swedbank",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 57,
+   "lonlat": [
+    12.9763072,
+    55.5623532
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 36.5,
+   "brand": "Swedbank"
+  },
+  {
+   "osm_id": "n1983067322",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 104,
+   "lonlat": [
+    12.9748744,
+    55.5620245
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 17.0
+  },
+  {
+   "osm_id": "n1983067326",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 43,
+   "lonlat": [
+    12.9753273,
+    55.5625249
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.9
+  },
+  {
+   "osm_id": "n1983067328",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 39,
+   "lonlat": [
+    12.9753029,
+    55.5626098
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n1985852004",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": "Apr 29-Sep 30 06:00-22:00, Oct 1-Apr 28 06:00-21:00",
+   "wheelchair": "yes",
+   "distance_m": 62,
+   "lonlat": [
+    12.9753048,
+    55.5623167
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.4
+  },
+  {
+   "osm_id": "n1988643921",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 81,
+   "lonlat": [
+    12.9745735,
+    55.5626625
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.3
+  },
+  {
+   "osm_id": "n2396630557",
+   "category": "restaurant",
+   "name": "Kung Fu Dumplings",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 11:00-21:30",
+   "wheelchair": null,
+   "distance_m": 60,
+   "lonlat": [
+    12.976409,
+    55.5632222
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.0,
+   "cuisine": "asian;chinese",
+   "website": "https://kung-fu.se/"
+  },
+  {
+   "osm_id": "n6466666264",
+   "category": "fast_food",
+   "name": "McDonald's",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    12.9764192,
+    55.5627097
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.1,
+   "brand": "McDonald's",
+   "cuisine": "burger"
+  },
+  {
+   "osm_id": "n7756286787",
+   "category": "fountain",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 173,
+   "lonlat": [
+    12.9776728,
+    55.56394
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.4
+  },
+  {
+   "osm_id": "n9008507477",
+   "category": "post_box",
+   "name": "Postnord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    12.9753428,
+    55.5629847
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 24.4,
+   "ref": "BL 191771",
+   "operator": "Postnord"
+  },
+  {
+   "osm_id": "n9008507478",
+   "category": "post_box",
+   "name": "Postnord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    12.9753435,
+    55.5629607
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 22.2,
+   "ref": "BL 188313",
+   "operator": "Postnord"
+  },
+  {
+   "osm_id": "n9428129104",
+   "category": "bicycle_rental",
+   "name": "Hyllie Stations Torg",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 55,
+   "lonlat": [
+    12.9753728,
+    55.5623679
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.0,
+   "operator": "Clear Channel"
+  },
+  {
+   "osm_id": "n11057831932",
+   "category": "atm",
+   "name": "Bankomat",
+   "level": null,
+   "fee": null,
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 45,
+   "lonlat": [
+    12.9763619,
+    55.5630542
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0,
+   "brand": "Bankomat",
+   "ref": "338501",
+   "operator": "Bankomat AB"
+  },
+  {
+   "osm_id": "n13666962001",
+   "category": "clinic",
+   "name": "Hyllie Vårdcentral",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Su 11:00-15:00",
+   "wheelchair": null,
+   "distance_m": 49,
+   "lonlat": [
+    12.9762909,
+    55.5624358
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 28.3,
+   "website": "https://www.hyllie-vardcentral.se"
+  },
+  {
+   "osm_id": "w94780041",
+   "category": "parking",
+   "name": "P-huset Hyllie",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 92,
+   "lonlat": [
+    12.9776693,
+    55.562706
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.8,
+   "operator": "Parkering Malmö"
+  },
+  {
+   "osm_id": "w1415916664",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 138,
+   "lonlat": [
+    12.9776241,
+    55.5639424
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.3
+  }
+ ]
+}

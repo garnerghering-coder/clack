@@ -1,0 +1,205 @@
+{
+ "clack_id": "740000003",
+ "slug": "malmo_c",
+ "flags": [
+  "w81391559 station building: p95 11.9 m is 4.2 m above the median 7.6 m (a taller neighbour or a mast inside the outline?).",
+  "w81391563 station building: p95 11.8 m is 4.2 m above the median 7.6 m (a taller neighbour or a mast inside the outline?).",
+  "w330653386 Malmö centralstation (station building): p95 24.1 m is 12.2 m above the median 12.0 m (a taller neighbour or a mast inside the outline?).",
+  "w941081394 building: p95 17.1 m is 4.2 m above the median 12.9 m (a taller neighbour or a mast inside the outline?).",
+  "w941081411 building: p95 12.4 m is 3.2 m above the median 9.2 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w394896504 Petribron (cycleway, footway, service); w394897889 Skeppsbron (footway, tertiary); w554649178 Centralbron (footway, service); w1352062485 Suellsbron (tertiary)."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 0.14 m over 44527 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.993496,55.606580,13.011276,55.612291",
+ "ground": {
+  "min_m": -4.37,
+  "median_m": 2.82,
+  "max_m": 4.92,
+  "nan_cells": 0,
+  "size_m": [
+   834,
+   382
+  ],
+  "box_sweref": [
+   373752,
+   6164233,
+   374586,
+   6164615
+  ],
+  "tiles": [
+   "616_37 (2025-09-28)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y25a003-61625_3725_25.copc.laz"
+  ],
+  "scan_date": "2025-03-07",
+  "density_pts_m2_nominal": 1.8,
+  "flight_height_m": 2400,
+  "points_in_box": 548540,
+  "density_in_box": 1.72,
+  "classes": {
+   "1": 233859,
+   "2": 292879,
+   "7": 615,
+   "9": 14932,
+   "17": 6210,
+   "18": 45
+  },
+  "train_points_class64": 698
+ },
+ "platforms": [
+  {
+   "bis_object": "2093",
+   "track": "2a,2b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 330.0,
+   "width_m": 10.5,
+   "roof": "Tak",
+   "baninfo_side": "2",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  },
+  {
+   "bis_object": "2092",
+   "track": "4a,4b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 321.0,
+   "width_m": 10.5,
+   "roof": "Tak",
+   "baninfo_side": "2",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  },
+  {
+   "bis_object": "2082",
+   "track": "5",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 427.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 2.5,
+   "track_bed_points": 623,
+   "platform_surface_m": 3.2,
+   "platform_points": 2109,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.7,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "2083",
+   "track": "7",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 282.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 2.51,
+   "track_bed_points": 273,
+   "platform_surface_m": 3.22,
+   "platform_points": 1112,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "2084",
+   "track": "9",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 282.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 2.47,
+   "track_bed_points": 282,
+   "platform_surface_m": 3.2,
+   "platform_points": 1082,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.55
+  },
+  {
+   "bis_object": "2482",
+   "track": "10",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 407.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 2.5,
+   "track_bed_points": 534,
+   "platform_surface_m": 3.19,
+   "platform_points": 2341,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.69,
+   "laser_estimate_above_rail_m": 0.51
+  },
+  {
+   "bis_object": "2602",
+   "track": "11",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 275.0,
+   "width_m": 6.5,
+   "roof": "Saknas",
+   "track_bed_m": 2.46,
+   "track_bed_points": 441,
+   "platform_surface_m": 3.2,
+   "platform_points": 2026,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "2603",
+   "track": "11",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 18.0,
+   "width_m": 2.3,
+   "roof": "Tak",
+   "track_bed_m": 2.45,
+   "track_bed_points": 31,
+   "platform_surface_m": 3.18,
+   "platform_points": 38,
+   "platform_side": "right",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.55
+  }
+ ],
+ "platform_surface_m": 3.2,
+ "track_bed_m": 2.49,
+ "trains_in_scan": 5,
+ "structures": {
+  "building": 20,
+  "footbridge": 4,
+  "canopy_osm": 13,
+  "canopy_laser": 2,
+  "hall_roof_laser": 0,
+  "train_in_scan": 5
+ },
+ "photos": 143,
+ "photos_station_related": 119
+}

@@ -1,0 +1,98 @@
+{
+ "clack_id": "740000070",
+ "slug": "karlstad_c",
+ "flags": [
+  "Platform BIS 2608 (track 1a): laser gives 0.89 m above the track bed (≈0.72 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "w1327214098 bridge: p95 70.2 m is 5.6 m above the median 64.6 m (a taller neighbour or a mast inside the outline?).",
+  "w1445795994 roof: p95 66.4 m is 13.1 m above the median 53.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1459852526 roof: p95 62.6 m is 11.4 m above the median 51.2 m (a taller neighbour or a mast inside the outline?).",
+  "Laser-traced roof (407 m², top 5.1 m above the platform, 5.8 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section.",
+  "Laser-traced roof (120 m², top 5.2 m above the platform, 5.9 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=13.492598,59.375466,13.506524,59.380150",
+ "ground": {
+  "min_m": 43.55,
+  "median_m": 47.58,
+  "max_m": 50.36,
+  "nan_cells": 0,
+  "size_m": [
+   555,
+   276
+  ],
+  "box_sweref": [
+   414470,
+   6582945,
+   415025,
+   6583221
+  ],
+  "tiles": [
+   "658_41 (2023-01-22)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y19b030-65825_4125_25.copc.laz",
+   "y19b030-65825_4150_25.copc.laz"
+  ],
+  "scan_date": "2019-10-29",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 223523,
+  "density_in_box": 1.46,
+  "classes": {
+   "1": 109670,
+   "2": 113762,
+   "7": 91
+  },
+  "train_points_class64": 1644
+ },
+ "platforms": [
+  {
+   "bis_object": "2608",
+   "track": "1a",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 500.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 47.75,
+   "track_bed_points": 465,
+   "platform_surface_m": 48.64,
+   "platform_points": 969,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.89,
+   "laser_estimate_above_rail_m": 0.72
+  },
+  {
+   "bis_object": "2615",
+   "track": "4a",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 500.0,
+   "width_m": 9.0,
+   "roof": "Tak",
+   "track_bed_m": 48.0,
+   "track_bed_points": 450,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  }
+ ],
+ "platform_surface_m": 48.64,
+ "track_bed_m": 47.88,
+ "trains_in_scan": 4,
+ "structures": {
+  "building": 10,
+  "footbridge": 4,
+  "canopy_osm": 9,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 4
+ },
+ "photos": 138,
+ "photos_station_related": 42
+}

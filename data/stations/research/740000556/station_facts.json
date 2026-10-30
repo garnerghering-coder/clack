@@ -1,0 +1,885 @@
+{
+ "clack_id": "740000556",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": null,
+   "name": "SkyCity (street/concourse level between Terminal 4 and Terminal 5, before security)",
+   "other_names": [],
+   "_source": "https://www.swedavia.com/arlanda/train/ ('Arlanda Central station in SkyCity ... the area between the terminals 4 and 5'), read 2026-10-30"
+  },
+  {
+   "osm_level": null,
+   "name": "Platform level (underground; Arlanda C platform, one platform with two tracks)",
+   "other_names": [
+    "Arlanda C",
+    "Arlanda Central station"
+   ],
+   "_source": "https://en.wikipedia.org/wiki/Arlanda_Central_Station (Platforms: 1, Tracks: 2, underground, directly under SkyCity), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "platform",
+    "SkyCity"
+   ],
+   "where": "OSM escalators w487787886 and w487787887 (layer -1, 56 m each, the long run from the platform) and w487787890; OSM does not join them to the platform areas w487787884/5",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platform",
+    "SkyCity"
+   ],
+   "where": "OSM lift n4802014315 (no level tag). Arlandabanan Infrastructure says only that 'there are lifts and escalators at the rail stations and air terminals at Arlanda'.",
+   "confirmed_by": "owner text",
+   "_source": "OSM; https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/, read 2026-10-30"
+  },
+  {
+   "kind": "gate",
+   "between": [
+    "Arlanda C station",
+    "SkyCity"
+   ],
+   "where": "turnstile gates that check the station fee between Arlanda Central and SkyCity",
+   "confirmed_by": "owner text",
+   "_source": "https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w51990809",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 28.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w51990809 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9287034,
+    "lat": 59.6496812,
+    "how": "OSM w51990809 (point on the way)",
+    "_source": "OpenStreetMap w51990809 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787886",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 55.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w487787886 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9287532,
+    "lat": 59.6501827,
+    "how": "OSM w487787886 (point on the way)",
+    "_source": "OpenStreetMap w487787886 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787887",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 55.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w487787887 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9284131,
+    "lat": 59.6491044,
+    "how": "OSM w487787887 (point on the way)",
+    "_source": "OpenStreetMap w487787887 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787890",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 29.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w487787890 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9284963,
+    "lat": 59.6490963,
+    "how": "OSM w487787890 (point on the way)",
+    "_source": "OpenStreetMap w487787890 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4802014315",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4802014315 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9285083,
+    "lat": 59.6494002,
+    "how": "OSM n4802014315",
+    "_source": "OpenStreetMap n4802014315 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "SkyCity (station fee gates)",
+   "street": "inside the airport, SkyCity between Terminal 4 and Terminal 5 (no public street)",
+   "where": "OSM entrance nodes n4802014304, n4802014305 (main) and n4802017830, all about 60-90 m from the nearest road; two OSM ticket validators n4802017824/5 (fee=yes) sit beside them",
+   "_source": "OSM; Swedavia train page, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n4802014304",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4802014304 (already in OSM)",
+   "position": {
+    "lon": 17.9288106,
+    "lat": 59.6493733,
+    "how": "OSM n4802014304",
+    "_source": "OpenStreetMap n4802014304 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4802014305",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4802014305 (already in OSM)",
+   "position": {
+    "lon": 17.9286401,
+    "lat": 59.6493887,
+    "how": "OSM n4802014305",
+    "_source": "OpenStreetMap n4802014305 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4802017830",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4802017830 (already in OSM)",
+   "position": {
+    "lon": 17.9308145,
+    "lat": 59.6511025,
+    "how": "OSM n4802017830",
+    "_source": "OpenStreetMap n4802017830 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "station_fee",
+   "name": "Arlanda C station fee / Arlanda Passage Fee",
+   "fee": "130 SEK per passage (Swedavia); UL: valid 120 minutes for one entry or exit, adults 18+",
+   "where": "If the ticket does not include it, pay at the station counter in SkyCity or at the security gate at Arlanda; also sold in the UL app",
+   "_source": "https://www.swedavia.com/arlanda/train/ and https://ul.se/en/travel-info/typical-destinations/arlanda, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Station counter (SkyCity)",
+   "where": "in SkyCity; sells SL/UL tickets and the station fee",
+   "_source": "https://www.swedavia.com/arlanda/train/; OSM shop=ticket n7229391081 'Arlanda centralstation', read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Kronans Apotek (SkyCity)",
+   "where": "SkyCity, before security",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:30-18:00; Su 09:30-20:00",
+   "hours_source": "website (Swedavia)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.swedavia.com/arlanda/shopping/apoteksgruppen, read 2026-10-30",
+   "position": {
+    "lon": 17.9292234,
+    "lat": 59.649024,
+    "osm_id": "n6378430621",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 43.5,
+    "how": "OSM node n6378430621",
+    "_source": "OpenStreetMap n6378430621 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House (SkyCity)",
+   "where": "SkyCity, before security",
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa 07:30-20:30",
+   "hours_raw": "Swedavia lists no Sunday hours",
+   "hours_source": "website (Swedavia)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.swedavia.com/arlanda/food-beverages/espresso-house/, read 2026-10-30",
+   "position": {
+    "lon": 17.9287665,
+    "lat": 59.648633,
+    "osm_id": "n6378430619",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 24.9,
+    "how": "OSM node n6378430619",
+    "_source": "OpenStreetMap n6378430619 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": null,
+   "osm_id": "n4802017824",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n4802017824 (read 2026-10-30)",
+   "position": {
+    "lon": 17.9290123,
+    "lat": 59.649304,
+    "osm_id": "n4802017824",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 26.8,
+    "how": "OSM node n4802017824",
+    "_source": "OpenStreetMap n4802017824 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": null,
+   "osm_id": "n4802017825",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n4802017825 (read 2026-10-30)",
+   "position": {
+    "lon": 17.9290294,
+    "lat": 59.6494094,
+    "osm_id": "n4802017825",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 25.9,
+    "how": "OSM node n4802017825",
+    "_source": "OpenStreetMap n4802017825 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n7229187093",
+   "osm_level": "3",
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7229187093 (read 2026-10-30)",
+   "position": {
+    "lon": 17.9330928,
+    "lat": 59.6518134,
+    "osm_id": "n7229187093",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 296.4,
+    "how": "OSM node n7229187093",
+    "_source": "OpenStreetMap n7229187093 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Arlanda centralstation",
+   "osm_id": "n7229391081",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7229391081 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "cafe",
+   "name": "Sky Café",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9290975,
+    "lat": 59.6497349,
+    "osm_id": "n662932771",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 24.0,
+    "how": "OSM node n662932771",
+    "_source": "OpenStreetMap n662932771 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n662932771 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "East & West",
+   "brand": null,
+   "cuisine": "sushi",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.928924,
+    "lat": 59.64877,
+    "osm_id": "n662932777",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 31.3,
+    "how": "OSM node n662932777",
+    "_source": "OpenStreetMap n662932777 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n662932777 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.swedavia.se/arlanda/shopping/7-eleven/",
+   "position": {
+    "lon": 17.9310876,
+    "lat": 59.6514205,
+    "osm_id": "n662932787",
+    "osm_level": "2",
+    "in_station_building": false,
+    "to_nearest_platform_m": 181.7,
+    "how": "OSM node n662932787",
+    "_source": "OpenStreetMap n662932787 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n662932787 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Way Cup",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9318495,
+    "lat": 59.6518387,
+    "osm_id": "n662932790",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 245.1,
+    "how": "OSM node n662932790",
+    "_source": "OpenStreetMap n662932790 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n662932790 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "60° Bar & Brewery",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 17.9316423,
+    "lat": 59.6520386,
+    "osm_id": "n764926724",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 254.1,
+    "how": "OSM node n764926724",
+    "_source": "OpenStreetMap n764926724 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n764926724 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "brand": "Pressbyrån",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr,Su 07:00-20:00; Sa 07:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 17.9290624,
+    "lat": 59.6488858,
+    "osm_id": "n6378430620",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.0,
+    "how": "OSM node n6378430620",
+    "_source": "OpenStreetMap n6378430620 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6378430620 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Pocket Shop",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "05:10-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 17.9293119,
+    "lat": 59.6491284,
+    "osm_id": "n6378430622",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 46.6,
+    "how": "OSM node n6378430622",
+    "_source": "OpenStreetMap n6378430622 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6378430622 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "ARG Fashion & Accessories",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9294442,
+    "lat": 59.6495495,
+    "osm_id": "n6380335598",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 46.6,
+    "how": "OSM node n6380335598",
+    "_source": "OpenStreetMap n6380335598 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6380335598 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Sky Grill",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9294133,
+    "lat": 59.6496828,
+    "osm_id": "n6380335599",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.5,
+    "how": "OSM node n6380335599",
+    "_source": "OpenStreetMap n6380335599 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6380335599 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "beverages",
+   "name": "Naked Juicebar",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9293623,
+    "lat": 59.6498109,
+    "osm_id": "n6380335600",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.4,
+    "how": "OSM node n6380335600",
+    "_source": "OpenStreetMap n6380335600 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6380335600 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "gift",
+   "name": "Wasa Crystal",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.929299,
+    "lat": 59.6499293,
+    "osm_id": "n6380335601",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 31.8,
+    "how": "OSM node n6380335601",
+    "_source": "OpenStreetMap n6380335601 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n6380335601 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "toys",
+   "name": "World of Toys & Clothes",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9319323,
+    "lat": 59.6520458,
+    "osm_id": "n12593809429",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 265.2,
+    "how": "OSM node n12593809429",
+    "_source": "OpenStreetMap n12593809429 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809429 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "gift",
+   "name": "Sweshop",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9322585,
+    "lat": 59.6520458,
+    "osm_id": "n12593809430",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 277.7,
+    "how": "OSM node n12593809430",
+    "_source": "OpenStreetMap n12593809430 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809430 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Adlibris Pocket",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9326106,
+    "lat": 59.6520511,
+    "osm_id": "n12593809431",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 292.3,
+    "how": "OSM node n12593809431",
+    "_source": "OpenStreetMap n12593809431 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809431 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "American Express Lounge",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9329524,
+    "lat": 59.6520155,
+    "osm_id": "n12593809433",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 304.0,
+    "how": "OSM node n12593809433",
+    "_source": "OpenStreetMap n12593809433 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809433 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "ice_cream",
+   "name": "RC Bon Bon Glacerie",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.933709,
+    "lat": 59.6520405,
+    "osm_id": "n12593809435",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 339.4,
+    "how": "OSM node n12593809435",
+    "_source": "OpenStreetMap n12593809435 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809435 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Bun Meat Bun",
+   "brand": null,
+   "cuisine": "burger",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9348204,
+    "lat": 59.6522514,
+    "osm_id": "n12593809437",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 404.3,
+    "how": "OSM node n12593809437",
+    "_source": "OpenStreetMap n12593809437 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809437 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "La Neta",
+   "brand": null,
+   "cuisine": "mexican",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9347056,
+    "lat": 59.6522422,
+    "osm_id": "n12593809438",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 398.4,
+    "how": "OSM node n12593809438",
+    "_source": "OpenStreetMap n12593809438 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809438 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Little Italy",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9344082,
+    "lat": 59.6521473,
+    "osm_id": "n12593809439",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 378.5,
+    "how": "OSM node n12593809439",
+    "_source": "OpenStreetMap n12593809439 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809439 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Indochine",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9341707,
+    "lat": 59.6521222,
+    "osm_id": "n12593809440",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 365.9,
+    "how": "OSM node n12593809440",
+    "_source": "OpenStreetMap n12593809440 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n12593809440 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Baba Grill",
+   "brand": null,
+   "cuisine": "middle_eastern",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9345819,
+    "lat": 59.6522303,
+    "osm_id": "n13148001084",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 391.8,
+    "how": "OSM node n13148001084",
+    "_source": "OpenStreetMap n13148001084 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n13148001084 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Asia Street Cooking",
+   "brand": null,
+   "cuisine": "asian",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.9349536,
+    "lat": 59.6522172,
+    "osm_id": "n13148001085",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 408.6,
+    "how": "OSM node n13148001085",
+    "_source": "OpenStreetMap n13148001085 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n13148001085 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Pocket Bar & Bistro",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 10:30-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.nordrest.se/restaurang/pocket-arlanda/",
+   "position": {
+    "lon": 17.9295535,
+    "lat": 59.6492142,
+    "osm_id": "n13899764101",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 58.5,
+    "how": "OSM node n13899764101",
+    "_source": "OpenStreetMap n13899764101 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n13899764101 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Gateau",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 07:00-22:00; Su 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.gateau.se/butiker/arlanda-terminal-skycity/",
+   "position": {
+    "lon": 17.9287128,
+    "lat": 59.6487799,
+    "osm_id": "n13951692601",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 19.3,
+    "how": "OSM node n13951692601",
+    "_source": "OpenStreetMap n13951692601 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM (the station owner publishes no shop list)",
+   "_source": "OpenStreetMap n13951692601 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Arlanda C is underground: platforms, lifts and levels are not visible to the laser and Jernhusen has no Arlanda C page; Swedavia/A-Train pages were not read in this pass.",
+  "No published plan of Arlanda C found (Swedavia's train page links none, its SkyCity page could not be fetched, and SL/UL publish no station map). Platform-level layout, lift position and number of escalator banks are unconfirmed beyond OSM.",
+  "Arlanda Express does not stop at Arlanda C; it uses Arlanda Södra (T2-4) and Arlanda Norra (T5). Arlanda Express information therefore does not describe this station.",
+  "Track numbers at Arlanda C: not given by any source read.",
+  "Station counter opening hours: not published on the pages read."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Arlanda C (`740000556`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly answered. The station is underground, directly under SkyCity between Terminals 4 and 5, with one platform and two tracks (Wikipedia). Passengers pass turnstile gates between the station and SkyCity, where the station fee (130 SEK) is checked (AIAB, Swedavia). OSM has the two platform areas, long escalators (w487787886/7), one lift (n4802014315) and three entrance nodes with fee validators. They are just not joined together. The owner is Arlandabanan Infrastructure AB and the station is run by A-Train AB, not Swedavia or Jernhusen.",
+   "_source": "https://en.wikipedia.org/wiki/Arlanda_Central_Station; https://arlandabananinfrastructure.se/en/the-railway/about-arlandabanan/; https://www.swedavia.com/arlanda/train/; OSM, read 2026-10-30"
+  }
+ ]
+}

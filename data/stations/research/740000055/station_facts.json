@@ -1,0 +1,523 @@
+{
+ "clack_id": "740000055",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Södertälje syd övre",
+   "other_names": [
+    "upper station on the Igelsta bridge",
+    "'järnvägsbron ovan stationen' (SL)"
+   ],
+   "note": "Long-distance and regional trains (SJ, Mälartåg, Snälltåget). Wikipedia: 'The upper station is located on the 2-km-long Igelsta Bridge.' SL: 'Fjärrtåg från järnvägsbron ovan stationen'. Trafikverket names the operating points 'Södertälje syd övre' and 'Södertälje syd undre' (Söu). OSM puts the upper ends of the escalators, stairs and lifts on level 1.",
+   "_source": "Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30; SL terminal map \"Södertälje syd · Hållplatser\" (valid from 2024-12-15), https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf, read 2026-10-30; facts only; Trafikverket, \"TC Stockholm, underlag till linjebok E1\" (version 2025-10-26), p. E38–E41, https://bransch.trafikverket.se/contentassets/134348b47a304d3aa5a362ed5a3b1864/tc_stockholm_avd_e_trafikplatsinstruktioner.pdf, read 2026-10-30; OSM (osmfacts/740000055.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Waiting hall",
+   "other_names": [],
+   "note": "Wikipedia: a central waiting hall shared by both stations, with escalators and lifts up to the upper station. OSM puts the lower ends of the escalators/stairs/lifts on level 0. Whether the hall is level with the lower platforms is not stated.",
+   "_source": "Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30; OSM (osmfacts/740000055.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Södertälje syd undre",
+   "other_names": [
+    "nedre",
+    "lower station"
+   ],
+   "note": "SL pendeltåg (Stockholm–Gnesta) at ground level under the bridge: two tracks, two side platforms, entrance from the south (Wikipedia). No OSM level on these platforms. Wikipedia states the lower station is 23 m below the upper one (the only height figure found; unreferenced there).",
+   "_source": "Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30; SL terminal map \"Södertälje syd · Hållplatser\" (valid from 2024-12-15), https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf, read 2026-10-30; facts only; Trafikverket, \"TC Stockholm, underlag till linjebok E1\" (version 2025-10-26), p. E38–E41, https://bransch.trafikverket.se/contentassets/134348b47a304d3aa5a362ed5a3b1864/tc_stockholm_avd_e_trafikplatsinstruktioner.pdf, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "821",
+   "track": "6",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 6 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 821; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "820",
+   "track": "8",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 8 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 820; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "1331",
+   "track": "4",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 4 (the train stops with the platform to its south-east)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1331; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1332",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1332; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "waiting hall (0)",
+    "upper platforms (1)"
+   ],
+   "where": "four escalators, OSM conveying=reversible, about 26 m long each",
+   "confirmed_by": "OSM only",
+   "osm_id": "w1533456925, w1533456927, w1533456932, w1533456934",
+   "note": "Wikipedia confirms in words that escalators and lifts give access from the waiting hall; which platform each reaches is not in OSM or any plan.",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30; Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "waiting hall (0)",
+    "upper platforms (1)"
+   ],
+   "where": "two stairs with stroller ramps, beside the escalators",
+   "confirmed_by": "OSM only",
+   "osm_id": "w1533456926, w1533456933",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "waiting hall (0)",
+    "upper platforms (1)"
+   ],
+   "where": "two lifts (wheelchair=yes), beside the escalators",
+   "confirmed_by": "OSM only",
+   "osm_id": "n13974157804, n13974157812",
+   "note": "Wikipedia confirms lifts exist between hall and upper station.",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30; Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "east side",
+    "west side"
+   ],
+   "where": "layer -1 passage east of the station",
+   "confirmed_by": "OSM only",
+   "osm_id": "w136288009",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6498088,
+    "lat": 59.1634331,
+    "how": "OSM w136288009 (point on the way)",
+    "_source": "OpenStreetMap w136288009 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456925",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 26.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1533456925 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6446283,
+    "lat": 59.1630542,
+    "how": "OSM w1533456925 (point on the way)",
+    "_source": "OpenStreetMap w1533456925 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456927",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 26.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1533456927 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.644678,
+    "lat": 59.1630373,
+    "how": "OSM w1533456927 (point on the way)",
+    "_source": "OpenStreetMap w1533456927 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456932",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 26.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1533456932 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6448964,
+    "lat": 59.1629329,
+    "how": "OSM w1533456932 (point on the way)",
+    "_source": "OpenStreetMap w1533456932 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1533456934",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 26.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1533456934 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6451983,
+    "lat": 59.1631111,
+    "how": "OSM w1533456934 (point on the way)",
+    "_source": "OpenStreetMap w1533456934 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13974157804",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13974157804 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6445798,
+    "lat": 59.1630628,
+    "how": "OSM n13974157804",
+    "_source": "OpenStreetMap n13974157804 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13974157812",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13974157812 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6448634,
+    "lat": 59.1629435,
+    "how": "OSM n13974157812",
+    "_source": "OpenStreetMap n13974157812 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station entrance (south side)",
+   "street": "Sydgatan",
+   "where": "south side, towards Sydgatan (station address Sydgatan 1); OSM n13974157810 (railway=train_station_entrance)",
+   "note": "Jernhusen: 'Samtliga entréer till stationen är tillgängliga.' Wikipedia: the lower station has 'an entrance from the southern part'. OSM also has n2510987088 and n13974035496 (no street).",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/sodertalje-syd/tillganglighet/, read 2026-10-30; Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2510987088",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2510987088 (already in OSM)",
+   "position": {
+    "lon": 17.644956,
+    "lat": 59.1632796,
+    "how": "OSM n2510987088",
+    "_source": "OpenStreetMap n2510987088 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13974035496",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13974035496 (already in OSM)",
+   "position": {
+    "lon": 17.6452284,
+    "lat": 59.1631617,
+    "how": "OSM n13974035496",
+    "_source": "OpenStreetMap n13974035496 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13974157810",
+   "street": "Sydgatan",
+   "street_how": "nearest named street, 26.8 m",
+   "level": null,
+   "kind": "train_station_entrance",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13974157810 (already in OSM)",
+   "position": {
+    "lon": 17.6453054,
+    "lat": 59.1626754,
+    "how": "OSM n13974157810",
+    "_source": "OpenStreetMap n13974157810 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes, card only (amount not stated)",
+   "where": "in the station",
+   "opening_hours": "Mo-Su 04:15-01:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours are the station's opening hours.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/sodertalje-syd/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "fee": "yes",
+   "where": "by the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/sodertalje-syd/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/sodertalje-syd/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hållplats A",
+   "where": "buses towards Södertälje centrum: 754, 784X, 788 'Södertälje centrum via Södertälje hamn'",
+   "note": "Stop letters as read from the SL map text; layout not readable.",
+   "_source": "SL terminal map \"Södertälje syd · Hållplatser\" (valid from 2024-12-15), https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hållplats B",
+   "where": "754 Pershagen, 784X Norrvrå, 788 Järna station, 802 Trosa via Vagnhärad (Länstrafiken Sörmland)",
+   "note": "Also 777 Geneta and 789 Södertälje centrum on the map, stop letter not readable.",
+   "_source": "SL terminal map \"Södertälje syd · Hållplatser\" (valid from 2024-12-15), https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:15-01:00; Sa 04:15-01:00; Su 04:15-01:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Södertälje Syd.",
+   "owner_text": "Allt om tillgängligheten på Södertälje Syd. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Samtliga entréer till stationen är tillgängliga. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ SL Snälltåget Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Fågelsången café och kiosk",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa 08:00-16:00; Su 09:00-19:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.6457652,
+    "lat": 59.1624162,
+    "osm_id": "n11001818569",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n11001818569",
+    "_source": "OpenStreetMap n11001818569 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11001818568",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11001818568 (read 2026-10-30)",
+   "position": {
+    "lon": 17.6459078,
+    "lat": 59.1624738,
+    "osm_id": "n11001818568",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n11001818568",
+    "_source": "OpenStreetMap n11001818568 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [
+  {
+   "title": "Södertälje syd · Hållplatser (terminal map, valid from 2024-12-15)",
+   "publisher": "SL (Region Stockholm)",
+   "url": "https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen. Text shows bus stops A/B, pendeltåg towards Stockholm/Gnesta, 'Fjärrtåg från järnvägsbron ovan stationen', street Sydgatan; no lifts/escalators in the text."
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "sl.linjetidtabeller.se",
+   "url": "https://sl.linjetidtabeller.se/wp-content/uploads/2025/01/Sodertalje_syd_term.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Which track numbers are on the upper and which on the lower level: OSM has refs 5–8 and two unnumbered platforms, and no source found states the numbering per level.",
+  "Which upper platform each escalator/stair/lift reaches, and how the lower pendeltåg platforms connect to the waiting hall (stairs/lift/level): no plan or owner text.",
+  "Where Fågelsången café och kiosk and the toilets are in the building: OSM has both, but no plan places them by level.",
+  "Height: only Wikipedia's 23 m between lower and upper station; nothing for the waiting hall.",
+  "Ticket machines (SL/SJ) at the station: not in any source read."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/sodertalje-syd/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly settled. Entrance: OSM now has a railway=train_station_entrance (n13974157810) on the south side towards Sydgatan, and Wikipedia confirms the entrance is on the southern side. Platforms: OSM has 4 escalators, 2 stairs and 2 lifts between level 0 (waiting hall) and level 1 (upper platforms), but none tagged with which platform it reaches, and the lower (pendeltåg) platforms have no mapped way to the hall. Platform refs in OSM are 5, 6, 7, 8 plus two unnumbered platforms; no source found says which of these are upper and which lower.",
+   "_source": "OSM (osmfacts/740000055.json, ODbL), read 2026-10-30; Wikipedia, https://en.wikipedia.org/wiki/S%C3%B6dert%C3%A4lje_Syd_railway_station, read 2026-10-30"
+  }
+ ]
+}

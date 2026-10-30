@@ -1,0 +1,591 @@
+{
+ "clack_id": "740000090",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": "Station, bus terminal and platform (street level)",
+   "note": "No source gives a signposted name for this level. JLT's map shows the station, the bus terminal (lägen 11–22) and tracks 2a, 2b and 1 side by side at street level.",
+   "_source": "JLT terminal map Jönköping Resecentrum, https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf (valid from December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "osm_level": "1",
+   "name": "Upper floor (name not signposted in any source found)",
+   "note": "Only OSM knows it: lift n950768989 is tagged level 0;1 and a Budbee parcel locker (n12098193472) level 1. JLT says the station has a lift and an escalator but not where. No platform is on this level.",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "street level (L0)",
+    "upper floor (OSM level 1)"
+   ],
+   "where": "in or by the station building; exact position not given by any owner source",
+   "confirmed_by": "owner text",
+   "note": "JLT says 'Hiss: Ja' for Jönköping resecentrum without a position; OSM has one lift (n950768989, level 0;1) that reaches no platform.",
+   "_source": "JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street level (L0)",
+    "upper floor (unconfirmed)"
+   ],
+   "where": "not given",
+   "confirmed_by": "owner text",
+   "note": "JLT says 'Rulltrappa: Ja'; OSM maps no escalator here, only stairs w1425083737 (18 m, no level tag) and a short footbridge w903469223 (8.8 m); neither reaches a platform.",
+   "_source": "JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "unknown"
+   ],
+   "where": "not known; OSM way w1425083737 (18 m), no level tag, reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "between": [
+    "unknown"
+   ],
+   "where": "OSM way w903469223 (8.8 m), reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n950768989",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n950768989 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.162422,
+    "lat": 57.7848567,
+    "how": "OSM n950768989",
+    "_source": "OpenStreetMap n950768989 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station hall entrance (Järnvägsgatan side)",
+   "street": "Järnvägsgatan",
+   "level": "0",
+   "where": "OSM entrance nodes n2195817737 and n4035652613, both nearest to Järnvägsgatan (about 33–35 m); no owner source names them",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30; Jernhusen gives the station's address as Järnvägsgatan 12, https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/, read 2026-10-30"
+  },
+  {
+   "name": "Entrance (unnamed)",
+   "level": "0",
+   "where": "OSM entrance node n2195817729; no named street within 40 m",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2195817729",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2195817729 (already in OSM)",
+   "position": {
+    "lon": 14.1654287,
+    "lat": 57.7842444,
+    "how": "OSM n2195817729",
+    "_source": "OpenStreetMap n2195817729 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2195817737",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 33.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2195817737 (already in OSM)",
+   "position": {
+    "lon": 14.1634415,
+    "lat": 57.7843714,
+    "how": "OSM n2195817737",
+    "_source": "OpenStreetMap n2195817737 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4035652613",
+   "street": "Järnvägsgatan",
+   "street_how": "nearest named street, 34.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4035652613 (already in OSM)",
+   "position": {
+    "lon": 14.1625226,
+    "lat": 57.7845077,
+    "how": "OSM n4035652613",
+    "_source": "OpenStreetMap n4035652613 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "level_per_plan": "0",
+   "where": "in the station building (Järnvägsgatan 12); JLT puts the ticket machine opposite the café",
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (shop): Espresso House's own café data, coffeeShopId 223 'Jönköping Central'",
+   "hours_checked": "2026-10-30",
+   "_source": "https://myespressohouse.com/beproud/api/CoffeeShop/v2/223 (Espresso House), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 14.1631337,
+    "lat": 57.7843968,
+    "osm_id": "n699756397",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.3,
+    "how": "OSM node n699756397",
+    "_source": "OpenStreetMap n699756397 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "level_per_plan": "0",
+   "where": "in the station building (Järnvägsgatan 12); also a ticket agent (biljettombud) for JLT",
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 07:00-20:00; Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours (Pressbyrån's store finder loads by script and could not be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 14.1625563,
+    "lat": 57.7844647,
+    "osm_id": "n699755908",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.3,
+    "how": "OSM node n699755908",
+    "_source": "OpenStreetMap n699755908 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (JLT)",
+   "level_per_plan": "0",
+   "where": "inside the station, opposite the café (Espresso House)",
+   "_source": "JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card per Jernhusen; JLT's 2022 page says SMS or coins)",
+   "level_per_plan": "0",
+   "where": "in the station (position not stated by the owner)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/toalett/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "S 29 kr/h (max 149 kr/24 h), M 39 kr/h (max 199), L 49 kr/h (max 249); max 7 days",
+   "where": "in the station (position not stated); opened with QR code; follows the station's hours",
+   "opening_hours": "Mo-Th 04:30-23:15; Fr 04:30-00:15; Sa 06:30-23:30; Su 07:30-22:30",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr",
+   "where": "in the station (position not stated)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station hall)",
+   "level_per_plan": "0",
+   "where": "in the station building; JLT calls the meeting place 'inne i stationsbyggnad'",
+   "opening_hours": "Mo-Th 04:30-23:15; Fr 04:30-00:15; Sa 06:30-23:30; Su 07:30-22:30",
+   "hours_source": "website (Jernhusen: Järnvägsstationen's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Bussterminalen",
+   "level_per_plan": "0",
+   "where": "beside the station along the platform (lägen 11–22 on JLT's map); replacement buses leave from the bus terminal",
+   "opening_hours": "Mo-Th 04:50-01:00; Fr 04:50-02:30; Sa 05:20-02:30; Su 05:20-24:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM's opening_hours on n452978357 starts weekdays at 04:45; Jernhusen says 04:50.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/, read 2026-10-30; JLT terminal map Jönköping Resecentrum, https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf (valid from December 2025), read 2026-10-30; facts only; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Stadstrafik: Juneporten and Rådhusparken",
+   "where": "outside the station: JLT's map says the nearest city buses stop at Juneporten or Rådhusparken (about 50 m and 100 m walks)",
+   "_source": "JLT terminal map Jönköping Resecentrum, https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf (valid from December 2025), read 2026-10-30; facts only"
+  },
+  {
+   "category": "customer_service",
+   "name": "JLT Kundcenter Juneporten",
+   "where": "outside the station, Västra Storgatan 16 (Juneporten)",
+   "opening_hours": "Mo 09:00-18:00; Tu-Fr 09:00-16:00; PH off",
+   "hours_source": "website (JLT)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jlt.se/kundservice/kontakta-oss/ and JLT terminal map Juneporten https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_juneporten_2026.pdf (valid from April 2026), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Utomhusparkering",
+   "fee": "yes (JLT: avgiftsbelagd)",
+   "where": "by the station; run by Jönköpings kommun",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/parkering/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests",
+   "fee": "no",
+   "where": "station-wide",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Järnvägsstationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Th 04:30-23:15; Fr 04:30-00:15; Sa 06:30-23:30; Su 07:30-22:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/"
+  },
+  {
+   "category": "station_hall",
+   "name": "Bussterminalen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Th 04:50-01:00; Fr 04:50-02:30; Sa 05:20-02:30; Su 05:20-24:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Utomhusparkeringen vid stationen är öppen dygnet runt och drivs av Jönköpings kommun.",
+   "owner_text": "Utomhusparkeringen vid stationen är öppen dygnet runt och drivs av Jönköpings kommun.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se Jönköpings länstrafik BT Buss (Bergslagståget) Flixbus Vy bus4you För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Foton för ID-handlingar som till exempel körkort och visum. Finns i svartvitt eller färg för bildstorlek 35x45 mm och 50x50 mm och kostar 149 kr. Du kan betala med 10-kronorsmynt eller med kort. Vid fel eller problem – ring Speed Services 0771-97 78 00. Speed-service Här kan du se en film hur du använder fotoautomaten",
+   "fee": "149 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "app_poi": "osm699756397",
+   "level": "L0",
+   "level_name": "Station, bus terminal and platform",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/mat-och-butiker/",
+   "website": "www.espressohouse.se/",
+   "position": {
+    "lon": 14.1631337,
+    "lat": 57.7843968,
+    "osm_id": "n699756397",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.3,
+    "how": "OSM node n699756397",
+    "_source": "OpenStreetMap n699756397 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm699755908",
+   "level": "L0",
+   "level_name": "Station, bus terminal and platform",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/mat-och-butiker/",
+   "website": "www.pressbyran.se/",
+   "position": {
+    "lon": 14.1625563,
+    "lat": 57.7844647,
+    "osm_id": "n699755908",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.3,
+    "how": "OSM node n699755908",
+    "_source": "OpenStreetMap n699755908 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilet",
+   "name": "Toilets",
+   "app_poi": "osm14045774891",
+   "level": "L0",
+   "level_name": "Station, bus terminal and platform",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n14045774891",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n14045774891 (read 2026-10-30)",
+   "position": {
+    "lon": 14.1636243,
+    "lat": 57.7844478,
+    "osm_id": "n14045774891",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 4.6,
+    "how": "OSM node n14045774891",
+    "_source": "OpenStreetMap n14045774891 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Restaurang SOYA",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 14.1628434,
+    "lat": 57.7839002,
+    "osm_id": "n441805539",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 74.0,
+    "how": "OSM node n441805539",
+    "_source": "OpenStreetMap n441805539 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n441805539 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Graffiti Café",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 14.1625147,
+    "lat": 57.7839725,
+    "osm_id": "n699753783",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 70.3,
+    "how": "OSM node n699753783",
+    "_source": "OpenStreetMap n699753783 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n699753783 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Jönköping Resecentrum (terminalkarta)",
+   "publisher": "Jönköpings Länstrafik",
+   "url": "https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "valid from December 2025; labels tracks 2a, 2b, 1, lägen 11–22 and A–C; no lifts, stairs or shops labelled in its text"
+  },
+  {
+   "title": "Juneporten (terminalkarta)",
+   "publisher": "Jönköpings Länstrafik",
+   "url": "https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_juneporten_2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "valid from April 2026; city-bus lägen A–D near Resecentrum, Kundcenter hours"
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.jlt.se",
+   "url": "https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source measures them.",
+  "Where the lift and escalator are, and what the upper floor (OSM level 1) is called on signs: JLT confirms both exist, no source places them; OSM's footbridge w903469223 and stairs w1425083737 lead to unknown places (OSM's API could not be read with WebFetch, robots disallowed).",
+  "Toilet fee/payment: Jernhusen (2026) says card, JLT (2022) says SMS or coins; fee amount not published.",
+  "Exact positions of toilets, lockers, photo booth inside the hall: Jernhusen doesn't say; JLT's map text labels none.",
+  "Pressbyrån's hours from its own website: the store finder loads by script; OSM's hours kept.",
+  "Swedish Wikipedia's article could not be fetched (only a Wikiwand copy: station built 1983 by Carl Nyrén, four tracks, two for passenger trains, waiting hall for buses and trains added 2001); no photos checked on Commons.",
+  "A 2009 municipal survey mentions 'övergången över järnvägen till Västra Strandpromenaden' (a crossing over the railway); whether this is the OSM footbridge, and whether it has a lift, is not known."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L0 (Station, bus terminal and platform): height not measured",
+  "platform 1: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "cafe Espresso House: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "level L0 (Station, bus terminal and platform): height not measured",
+   "answer": "Still open: no open or owner source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "platform 1: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Likely correct. JLT's map shows the station, bus terminal and tracks 2a, 2b and 1 side by side at street level, and JLT says the station has no ramp. OSM's only lift (level 0;1), stairs and footbridge reach no platform; JLT's lift and escalator have no stated position. Not confirmed by a plan or photo.",
+   "_source": "JLT terminal map Jönköping Resecentrum, https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf (valid from December 2025), read 2026-10-30; facts only; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; OpenStreetMap (osmfacts/740000090.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Likely correct, as for platform 1: platform 2 (2a/2b) runs along the station building at street level; a 2009 municipal survey describes walking 'direkt från tågperrong 2A över parkeringen uppför Järnvägsgatan'. No source places a lift or stairs on it.",
+   "_source": "JLT terminal map Jönköping Resecentrum, https://www.jlt.se/globalassets/dokument-2026/terminalkartor/jlt_terminalkartor_jonkoping_rc.pdf (valid from December 2025), read 2026-10-30; facts only; Trivector for Jönköpings kommun, 'Start- och målpunktsundersökning på Jönköpings Resecentrum' (2009-01-25), https://www.jonkoping.se/download/18.74fef9ab15548f0b8003715e/1465889943061/Start-%20och%20m%C3%A5lpunktsunders%C3%B6kning%20f%C3%B6r%20J%C3%B6nk%C3%B6pings%20resecentrum.pdf, read 2026-10-30"
+  },
+  {
+   "question": "cafe Espresso House: no opening hours",
+   "answer": "Mo-Fr 06:00-19:00; Sa,Su 08:00-18:00, from Espresso House's own café data (coffeeShopId 223, 'Jönköping Central', Järnvägsgatan 12); no irregular hours listed.",
+   "_source": "https://myespressohouse.com/beproud/api/CoffeeShop/v2/223, read 2026-10-30"
+  }
+ ]
+}

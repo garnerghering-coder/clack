@@ -1,0 +1,96 @@
+{
+ "clack_id": "740000133",
+ "slug": "orebro_c",
+ "flags": [
+  "w525673338 roof: p95 38.8 m is 5.9 m above the median 32.8 m (a taller neighbour or a mast inside the outline?).",
+  "r7584983 Örebro Central (station building): p95 39.2 m is 4.8 m above the median 34.4 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=15.205219,59.274322,15.216591,59.282654",
+ "ground": {
+  "min_m": 21.95,
+  "median_m": 27.31,
+  "max_m": 34.51,
+  "nan_cells": 0,
+  "size_m": [
+   409,
+   679
+  ],
+  "box_sweref": [
+   511814,
+   6570742,
+   512223,
+   6571421
+  ],
+  "tiles": [
+   "657_51 (2024-10-02)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y23c023-65700_5100_25.copc.laz"
+  ],
+  "scan_date": "2023-07-11",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 369620,
+  "density_in_box": 1.33,
+  "classes": {
+   "1": 173369,
+   "2": 192093,
+   "7": 510,
+   "17": 3572,
+   "18": 76
+  },
+  "train_points_class64": 351
+ },
+ "platforms": [
+  {
+   "bis_object": "1217",
+   "track": null,
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 457.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 27.39,
+   "track_bed_points": 682,
+   "platform_surface_m": 28.23,
+   "platform_points": 2039,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.84,
+   "laser_estimate_above_rail_m": 0.66
+  },
+  {
+   "bis_object": "1220",
+   "track": "1a",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 393.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 27.35,
+   "track_bed_points": 402,
+   "platform_surface_m": 28.1,
+   "platform_points": 326,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  }
+ ],
+ "platform_surface_m": 28.16,
+ "track_bed_m": 27.37,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 1,
+  "footbridge": 0,
+  "canopy_osm": 4,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 119,
+ "photos_station_related": 51
+}

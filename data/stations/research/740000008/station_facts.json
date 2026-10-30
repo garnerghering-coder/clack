@@ -1,0 +1,1248 @@
+{
+ "clack_id": "740000008",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Station level (OSM level 0; signposted name not found)",
+   "note": "OSM tags the hall's shops, toilets, lockers and photo booth level 0.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "2",
+   "name": "OSM level 2 (signposted name not found)",
+   "note": "OSM's escalators and lifts run between levels 0 and 2 and are tagged as reaching platforms 1 and 2; some stairs are tagged 0;1 and 1;2, so OSM also has a level 1. No owner source names or confirms these levels.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1 (layer, no level tag)",
+   "name": "Underpass (gångtunnel; signposted name not found)",
+   "note": "OSM underpass w52143375 (layer -1, 46 m) reaches platforms 2 and 3a; a second underpass w103156302 (41 m) reaches no platform.",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "391",
+   "track": "151-152",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 151-152 (the train stops with the platform to its north-west)",
+   "_source": "laser (2022-03-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 391; read 2026-10-30"
+  },
+  {
+   "platform_bis": "392",
+   "track": "1",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1 (the train stops with the platform to its north-west)",
+   "_source": "laser (2022-03-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 392; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "level 0",
+    "level 2 / platform 1"
+   ],
+   "where": "two escalators, one each way (OSM w1458552030, w1458552032)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "level 0",
+    "level 2 / platform 2"
+   ],
+   "where": "two escalators, one each way (OSM w1458552041, w1458552043)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 2 / platform 2"
+   ],
+   "where": "OSM w1458552039",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 2"
+   ],
+   "where": "OSM w1465328969; reaches no platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "level 0",
+    "level 2"
+   ],
+   "where": "OSM w1458552025 (plus w1458552021 0;1 and w1458552015 1;2)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "street",
+    "platforms 2 and 3a"
+   ],
+   "where": "OSM w52143375 (layer -1)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "between": [
+    "unknown"
+   ],
+   "where": "OSM w56316922 (layer 1, 42 m); reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w52143375",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 45.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w52143375 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.8541209,
+    "lat": 58.3914307,
+    "how": "OSM w52143375 (point on the way)",
+    "_source": "OpenStreetMap w52143375 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1458552030",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 15.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1458552030 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.8517908,
+    "lat": 58.3893499,
+    "how": "OSM w1458552030 (point on the way)",
+    "_source": "OpenStreetMap w1458552030 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1458552032",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 15.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1458552032 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.851813,
+    "lat": 58.3893444,
+    "how": "OSM w1458552032 (point on the way)",
+    "_source": "OpenStreetMap w1458552032 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1458552039",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1458552039 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.8524406,
+    "lat": 58.3895249,
+    "how": "OSM w1458552039 (point on the way)",
+    "_source": "OpenStreetMap w1458552039 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1458552041",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 20.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1458552041 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.8523749,
+    "lat": 58.3894729,
+    "how": "OSM w1458552041 (point on the way)",
+    "_source": "OpenStreetMap w1458552041 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1458552043",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 20.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1458552043 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.852263,
+    "lat": 58.3893052,
+    "how": "OSM w1458552043 (point on the way)",
+    "_source": "OpenStreetMap w1458552043 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1465328969",
+   "name": null,
+   "osm_level": "0;2",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1465328969 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.8533695,
+    "lat": 58.3894455,
+    "how": "OSM w1465328969 (point on the way)",
+    "_source": "OpenStreetMap w1465328969 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré",
+   "street": "Stationsgatan",
+   "where": "OSM n13376527995 (entrance=main), about 40 m from Stationsgatan; station address Stationsgatan 7–9. Jernhusen: all entrances are accessible ('Samtliga entréer till stationen är tillgängliga').",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrances on Stationsgatan (several doors)",
+   "street": "Stationsgatan",
+   "level": "0",
+   "where": "OSM n7900314295, n13376527961, n13376527966, n13376527992 and others along the Stationsgatan side",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Kurortsvägen side",
+   "street": "Kurortsvägen",
+   "level": "0;2",
+   "where": "OSM n13439785260 (level 0;2) and n1039096055 (entrance=staircase, level 0), both about 17 m from Kurortsvägen",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1039096055",
+   "street": "Kurortsvägen",
+   "street_how": "nearest named street, 17.4 m",
+   "level": "0",
+   "kind": "staircase",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1039096055 (already in OSM)",
+   "position": {
+    "lon": 13.8533316,
+    "lat": 58.3894359,
+    "how": "OSM n1039096055",
+    "_source": "OpenStreetMap n1039096055 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7900314295",
+   "street": "Stationsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7900314295 (already in OSM)",
+   "position": {
+    "lon": 13.852024,
+    "lat": 58.3898379,
+    "how": "OSM n7900314295",
+    "_source": "OpenStreetMap n7900314295 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9310123185",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9310123185 (already in OSM)",
+   "position": {
+    "lon": 13.8532616,
+    "lat": 58.3910208,
+    "how": "OSM n9310123185",
+    "_source": "OpenStreetMap n9310123185 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376488800",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 33.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n13376488800 (already in OSM)",
+   "position": {
+    "lon": 13.8517128,
+    "lat": 58.3893228,
+    "how": "OSM n13376488800",
+    "_source": "OpenStreetMap n13376488800 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527901",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 27.1 m",
+   "level": null,
+   "kind": "emergency",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527901 (already in OSM)",
+   "position": {
+    "lon": 13.8515218,
+    "lat": 58.3892433,
+    "how": "OSM n13376527901",
+    "_source": "OpenStreetMap n13376527901 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527906",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 31.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n13376527906 (already in OSM)",
+   "position": {
+    "lon": 13.8516792,
+    "lat": 58.3893308,
+    "how": "OSM n13376527906",
+    "_source": "OpenStreetMap n13376527906 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527907",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 35.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n13376527907 (already in OSM)",
+   "position": {
+    "lon": 13.851746,
+    "lat": 58.3893149,
+    "how": "OSM n13376527907",
+    "_source": "OpenStreetMap n13376527907 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527961",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 26.9 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527961 (already in OSM)",
+   "position": {
+    "lon": 13.8517498,
+    "lat": 58.3895075,
+    "how": "OSM n13376527961",
+    "_source": "OpenStreetMap n13376527961 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527964",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527964 (already in OSM)",
+   "position": {
+    "lon": 13.8519867,
+    "lat": 58.3894529,
+    "how": "OSM n13376527964",
+    "_source": "OpenStreetMap n13376527964 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527966",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 31.2 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "yes",
+   "_source": "OSM n13376527966 (already in OSM)",
+   "position": {
+    "lon": 13.8520392,
+    "lat": 58.3897457,
+    "how": "OSM n13376527966",
+    "_source": "OpenStreetMap n13376527966 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527970",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527970 (already in OSM)",
+   "position": {
+    "lon": 13.8523225,
+    "lat": 58.389831,
+    "how": "OSM n13376527970",
+    "_source": "OpenStreetMap n13376527970 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527992",
+   "street": "Stationsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527992 (already in OSM)",
+   "position": {
+    "lon": 13.8515734,
+    "lat": 58.3894008,
+    "how": "OSM n13376527992",
+    "_source": "OpenStreetMap n13376527992 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527995",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 39.5 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527995 (already in OSM)",
+   "position": {
+    "lon": 13.8522952,
+    "lat": 58.3898538,
+    "how": "OSM n13376527995",
+    "_source": "OpenStreetMap n13376527995 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376527998",
+   "street": null,
+   "street_how": null,
+   "level": "0;2",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376527998 (already in OSM)",
+   "position": {
+    "lon": 13.8524317,
+    "lat": 58.3895153,
+    "how": "OSM n13376527998",
+    "_source": "OpenStreetMap n13376527998 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13376528006",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13376528006 (already in OSM)",
+   "position": {
+    "lon": 13.8522316,
+    "lat": 58.3892925,
+    "how": "OSM n13376528006",
+    "_source": "OpenStreetMap n13376528006 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348832",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348832 (already in OSM)",
+   "position": {
+    "lon": 13.853202,
+    "lat": 58.3909254,
+    "how": "OSM n13436348832",
+    "_source": "OpenStreetMap n13436348832 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348833",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348833 (already in OSM)",
+   "position": {
+    "lon": 13.8531366,
+    "lat": 58.3908542,
+    "how": "OSM n13436348833",
+    "_source": "OpenStreetMap n13436348833 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348834",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348834 (already in OSM)",
+   "position": {
+    "lon": 13.8530723,
+    "lat": 58.390781,
+    "how": "OSM n13436348834",
+    "_source": "OpenStreetMap n13436348834 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348835",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348835 (already in OSM)",
+   "position": {
+    "lon": 13.8530047,
+    "lat": 58.3907077,
+    "how": "OSM n13436348835",
+    "_source": "OpenStreetMap n13436348835 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348836",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348836 (already in OSM)",
+   "position": {
+    "lon": 13.8529435,
+    "lat": 58.3906366,
+    "how": "OSM n13436348836",
+    "_source": "OpenStreetMap n13436348836 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348837",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348837 (already in OSM)",
+   "position": {
+    "lon": 13.8528717,
+    "lat": 58.390566,
+    "how": "OSM n13436348837",
+    "_source": "OpenStreetMap n13436348837 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348838",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348838 (already in OSM)",
+   "position": {
+    "lon": 13.8528075,
+    "lat": 58.3904909,
+    "how": "OSM n13436348838",
+    "_source": "OpenStreetMap n13436348838 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348839",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348839 (already in OSM)",
+   "position": {
+    "lon": 13.8527464,
+    "lat": 58.3904172,
+    "how": "OSM n13436348839",
+    "_source": "OpenStreetMap n13436348839 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348840",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348840 (already in OSM)",
+   "position": {
+    "lon": 13.8526755,
+    "lat": 58.3903447,
+    "how": "OSM n13436348840",
+    "_source": "OpenStreetMap n13436348840 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348841",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 39.1 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348841 (already in OSM)",
+   "position": {
+    "lon": 13.8526143,
+    "lat": 58.3902831,
+    "how": "OSM n13436348841",
+    "_source": "OpenStreetMap n13436348841 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348842",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 37.9 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348842 (already in OSM)",
+   "position": {
+    "lon": 13.8525461,
+    "lat": 58.3902133,
+    "how": "OSM n13436348842",
+    "_source": "OpenStreetMap n13436348842 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348843",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 37.3 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348843 (already in OSM)",
+   "position": {
+    "lon": 13.8524836,
+    "lat": 58.390141,
+    "how": "OSM n13436348843",
+    "_source": "OpenStreetMap n13436348843 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348844",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 36.5 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348844 (already in OSM)",
+   "position": {
+    "lon": 13.8524151,
+    "lat": 58.3900673,
+    "how": "OSM n13436348844",
+    "_source": "OpenStreetMap n13436348844 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348845",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 35.8 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348845 (already in OSM)",
+   "position": {
+    "lon": 13.8523482,
+    "lat": 58.3899953,
+    "how": "OSM n13436348845",
+    "_source": "OpenStreetMap n13436348845 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13436348846",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 36.2 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13436348846 (already in OSM)",
+   "position": {
+    "lon": 13.8522914,
+    "lat": 58.3899209,
+    "how": "OSM n13436348846",
+    "_source": "OpenStreetMap n13436348846 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13439785260",
+   "street": "Kurortsvägen",
+   "street_how": "nearest named street, 17.0 m",
+   "level": "0;2",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13439785260 (already in OSM)",
+   "position": {
+    "lon": 13.8533512,
+    "lat": 58.3894547,
+    "how": "OSM n13439785260",
+    "_source": "OpenStreetMap n13439785260 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13720465051",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13720465051 (already in OSM)",
+   "position": {
+    "lon": 13.8531689,
+    "lat": 58.3907291,
+    "how": "OSM n13720465051",
+    "_source": "OpenStreetMap n13720465051 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13720465052",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13720465052 (already in OSM)",
+   "position": {
+    "lon": 13.8528429,
+    "lat": 58.3903666,
+    "how": "OSM n13720465052",
+    "_source": "OpenStreetMap n13720465052 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13720465053",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13720465053 (already in OSM)",
+   "position": {
+    "lon": 13.8525182,
+    "lat": 58.3900057,
+    "how": "OSM n13720465053",
+    "_source": "OpenStreetMap n13720465053 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "level_per_plan": "0",
+   "where": "in Skövde resecentrum (Stationsgatan 7–9); position in the building not stated",
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa 06:30-19:00; Su 07:00-20:00",
+   "hours_source": "website (shop): Espresso House café data, coffeeShopId 248 'Skövde Central SKÖ'",
+   "hours_checked": "2026-10-30",
+   "note": "Three sources disagree: Jernhusen says Mo-Fr 05:45-21:00; Sa 07:00-19:00; Su 07:00-20:00, OSM says Mo-Fr 06:00-19:00; Sa,Su 08:00-18:00. The shop's own data is given here.",
+   "_source": "https://myespressohouse.com/beproud/api/CoffeeShop/v2/248, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 13.8516676,
+    "lat": 58.389271,
+    "osm_id": "w1458552009",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1458552009",
+    "_source": "OpenStreetMap w1458552009 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM, level 0)",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa 07:30-22:00; Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours (Pressbyrån's store finder loads by script and could not be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 13.8519627,
+    "lat": 58.3895842,
+    "osm_id": "n1209368655",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.2,
+    "how": "OSM node n1209368655",
+    "_source": "OpenStreetMap n1209368655 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Resecentrumfrisörerna",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM 'Resecentrumfrisören', level 0)",
+   "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours (no own website found)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card)",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020253, level 0)",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/toalett/ and https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "S 29 kr/h (max 149 kr/24 h), M 39 kr/h (max 199), L 49 kr/h (max 249); max 7 days",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020251, level 0)",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/forvaringsboxar/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n12063020252, level 0)",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationshall",
+   "level_per_plan": "0",
+   "where": "Skövde resecentrum's hall",
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Skövde resecentrum (bus)",
+   "where": "by the station on Stationsgatan (OSM n14167707296); Västtrafik's train stop lists lägen 1, 2, 3A, 3B, X and E",
+   "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; Västtrafik stop page 'Skövde resecentrum (tåg)', https://www.vasttrafik.se/reseplanering/hallplatser/9021014035004000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa)",
+   "fee": "yes",
+   "where": "by the station; also paid parking for disabled people",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/parkering/ and https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests",
+   "fee": "no",
+   "where": "station-wide",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Skövde resecentrum.",
+   "owner_text": "Allt om tillgängligheten på Skövde resecentrum. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Samtliga entréer till stationen är tillgängliga. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "owner_text": "Jernhusens utomhusparkering är öppen dygnet runt och drivs av Apcoa.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Västtrafik VR Snabbtåg För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Espresso House",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 05:45-21:00; Sa 07:00-19:00; Su 07:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.espressohouse.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 13.8516676,
+    "lat": 58.389271,
+    "osm_id": "w1458552009",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1458552009",
+    "_source": "OpenStreetMap w1458552009 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 13.8519627,
+    "lat": 58.3895842,
+    "osm_id": "n1209368655",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.2,
+    "how": "OSM node n1209368655",
+    "_source": "OpenStreetMap n1209368655 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Resecentrumfrisörerna",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n12063020251",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n12063020251 (read 2026-10-30)",
+   "position": {
+    "lon": 13.8521799,
+    "lat": 58.3898051,
+    "osm_id": "n12063020251",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.1,
+    "how": "OSM node n12063020251",
+    "_source": "OpenStreetMap n12063020251 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n12063020253",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n12063020253 (read 2026-10-30)",
+   "position": {
+    "lon": 13.8518611,
+    "lat": 58.3896168,
+    "osm_id": "n12063020253",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 12.1,
+    "how": "OSM node n12063020253",
+    "_source": "OpenStreetMap n12063020253 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Resecentrumfrisören",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.8520213,
+    "lat": 58.3897592,
+    "osm_id": "w1458552024",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.0,
+    "how": "representative point of the OSM area w1458552024",
+    "_source": "OpenStreetMap w1458552024 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap w1458552024 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Skövde resecentrum (tåg), stop page with map",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014035004000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "interactive map only; no PDF station plan found; lists lägen 1, 2, 3A, 3B, X, E"
+  }
+ ],
+ "open": [
+  "The review queue lists no questions for Skövde; nothing to answer.",
+  "Level names as signposted and what OSM's levels 0, 1 and 2 are (hall, mezzanine, platforms?): no owner plan or text found; Jernhusen links only Västtrafik's interactive stop page; English Wikipedia says only 2 platforms, 3 tracks.",
+  "Every lift, escalator, stair and underpass here is OSM only; no owner text says Skövde has lifts or escalators (Jernhusen's accessibility page mentions only accessible entrances, toilet and parking).",
+  "Floor heights: no open source measures them.",
+  "Espresso House hours: shop data, Jernhusen and OSM disagree (shop data used).",
+  "Pressbyrån and Resecentrumfrisörerna hours only from OSM."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

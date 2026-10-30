@@ -1,0 +1,1452 @@
+{
+ "clack_id": "740000070",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "app_level": "L1",
+   "name": "Trädgårdslänken",
+   "_source": "OSM w1206809262 / w1421495689 name=Trädgårdslänken, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Vikenpassagen (pedestrian tunnel)",
+   "note": "OSM names one tunnel Vikenpassagen (w37999420); other tunnel ways are unnamed.",
+   "_source": "OSM w37999420, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2608",
+   "track": "1a",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1a (the train stops with the platform to its north)",
+   "_source": "laser (2019-10-29, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2608; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w37999420",
+   "name": "Vikenpassagen",
+   "osm_level": "-1",
+   "between": [
+    "platform 1b",
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 75.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w37999420 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4981847,
+    "lat": 59.3777554,
+    "how": "OSM w37999420 (point on the way)",
+    "_source": "OpenStreetMap w37999420 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w71552940",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a",
+    "platform 1b",
+    "platform 21"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 339.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w71552940 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982517,
+    "lat": 59.3779414,
+    "how": "OSM w71552940 (point on the way)",
+    "_source": "OpenStreetMap w71552940 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1206809262",
+   "name": "Trädgårdslänken",
+   "osm_level": null,
+   "between": [
+    "platform 1a",
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 39.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1206809262 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013966,
+    "lat": 59.3777111,
+    "how": "OSM w1206809262 (point on the way)",
+    "_source": "OpenStreetMap w1206809262 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1206809263",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1206809263 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5014066,
+    "lat": 59.3779127,
+    "how": "OSM w1206809263 (point on the way)",
+    "_source": "OpenStreetMap w1206809263 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1206809266",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1206809266 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013674,
+    "lat": 59.3777115,
+    "how": "OSM w1206809266 (point on the way)",
+    "_source": "OpenStreetMap w1206809266 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1337836807",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1b",
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 75.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1337836807 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982275,
+    "lat": 59.3777548,
+    "how": "OSM w1337836807 (point on the way)",
+    "_source": "OpenStreetMap w1337836807 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1337836810",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 3a",
+    "platform 3b",
+    "platform 4a",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 21.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1337836810 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.497966,
+    "lat": 59.3777583,
+    "how": "OSM w1337836810 (point on the way)",
+    "_source": "OpenStreetMap w1337836810 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1337836811",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 30.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1337836811 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4985146,
+    "lat": 59.377751,
+    "how": "OSM w1337836811 (point on the way)",
+    "_source": "OpenStreetMap w1337836811 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1337836812",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1337836812 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4981847,
+    "lat": 59.3777554,
+    "how": "OSM w1337836812 (point on the way)",
+    "_source": "OpenStreetMap w1337836812 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1344878980",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 6.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1344878980 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013491,
+    "lat": 59.3778966,
+    "how": "OSM w1344878980 (point on the way)",
+    "_source": "OpenStreetMap w1344878980 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1344878984",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 5.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1344878984 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013321,
+    "lat": 59.3777308,
+    "how": "OSM w1344878984 (point on the way)",
+    "_source": "OpenStreetMap w1344878984 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1390577053",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 3b",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1390577053 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.497594,
+    "lat": 59.3777633,
+    "how": "OSM w1390577053 (point on the way)",
+    "_source": "OpenStreetMap w1390577053 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1390577054",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1390577054 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4988123,
+    "lat": 59.377747,
+    "how": "OSM w1390577054 (point on the way)",
+    "_source": "OpenStreetMap w1390577054 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1412508236",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1412508236 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4996673,
+    "lat": 59.3779991,
+    "how": "OSM w1412508236 (point on the way)",
+    "_source": "OpenStreetMap w1412508236 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1412508239",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "designated",
+   "conveying": null,
+   "length_m": 15.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1412508239 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4999382,
+    "lat": 59.3779571,
+    "how": "OSM w1412508239 (point on the way)",
+    "_source": "OpenStreetMap w1412508239 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1412508240",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "designated",
+   "conveying": null,
+   "length_m": 27.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1412508240 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5016544,
+    "lat": 59.3779803,
+    "how": "OSM w1412508240 (point on the way)",
+    "_source": "OpenStreetMap w1412508240 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1412508241",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 10.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1412508241 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5014404,
+    "lat": 59.3779037,
+    "how": "OSM w1412508241 (point on the way)",
+    "_source": "OpenStreetMap w1412508241 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1412508242",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "designated",
+   "conveying": null,
+   "length_m": 11.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1412508242 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5014417,
+    "lat": 59.3779519,
+    "how": "OSM w1412508242 (point on the way)",
+    "_source": "OpenStreetMap w1412508242 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1421495689",
+   "name": "Trädgårdslänken",
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1421495689 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5014058,
+    "lat": 59.3778969,
+    "how": "OSM w1421495689 (point on the way)",
+    "_source": "OpenStreetMap w1421495689 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1425854373",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425854373 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5017025,
+    "lat": 59.3779375,
+    "how": "OSM w1425854373 (point on the way)",
+    "_source": "OpenStreetMap w1425854373 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425854374",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425854374 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5017025,
+    "lat": 59.3779375,
+    "how": "OSM w1425854374 (point on the way)",
+    "_source": "OpenStreetMap w1425854374 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1425854375",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 35.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425854375 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5017015,
+    "lat": 59.3779012,
+    "how": "OSM w1425854375 (point on the way)",
+    "_source": "OpenStreetMap w1425854375 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425859216",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425859216 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5012356,
+    "lat": 59.3779414,
+    "how": "OSM w1425859216 (point on the way)",
+    "_source": "OpenStreetMap w1425859216 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1425859217",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425859217 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5012335,
+    "lat": 59.3779062,
+    "how": "OSM w1425859217 (point on the way)",
+    "_source": "OpenStreetMap w1425859217 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1436230597",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 5.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1436230597 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4983435,
+    "lat": 59.3777533,
+    "how": "OSM w1436230597 (point on the way)",
+    "_source": "OpenStreetMap w1436230597 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1436230598",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 3.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1436230598 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982275,
+    "lat": 59.3777548,
+    "how": "OSM w1436230598 (point on the way)",
+    "_source": "OpenStreetMap w1436230598 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1459642877",
+   "name": "tillfällig gångbana",
+   "osm_level": null,
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1459642877 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4967854,
+    "lat": 59.3779956,
+    "how": "OSM w1459642877 (point on the way)",
+    "_source": "OpenStreetMap w1459642877 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1483480663",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1483480663 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982564,
+    "lat": 59.3779559,
+    "how": "OSM w1483480663 (point on the way)",
+    "_source": "OpenStreetMap w1483480663 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1483483695",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1483483695 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4984625,
+    "lat": 59.3775332,
+    "how": "OSM w1483483695 (point on the way)",
+    "_source": "OpenStreetMap w1483483695 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1483484348",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 14.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1483484348 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982091,
+    "lat": 59.3779761,
+    "how": "OSM w1483484348 (point on the way)",
+    "_source": "OpenStreetMap w1483484348 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1483484349",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1483484349 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982091,
+    "lat": 59.3779761,
+    "how": "OSM w1483484349 (point on the way)",
+    "_source": "OpenStreetMap w1483484349 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1503664187",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 6.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1503664187 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982295,
+    "lat": 59.3779591,
+    "how": "OSM w1503664187 (point on the way)",
+    "_source": "OpenStreetMap w1503664187 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1503664188",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 5.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1503664188 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982296,
+    "lat": 59.377952,
+    "how": "OSM w1503664188 (point on the way)",
+    "_source": "OpenStreetMap w1503664188 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1509302112",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1509302112 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982797,
+    "lat": 59.3777709,
+    "how": "OSM w1509302112 (point on the way)",
+    "_source": "OpenStreetMap w1509302112 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12442354255",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12442354255 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013482,
+    "lat": 59.3779222,
+    "how": "OSM n12442354255",
+    "_source": "OpenStreetMap n12442354255 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12442354267",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12442354267 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013058,
+    "lat": 59.3777307,
+    "how": "OSM n12442354267",
+    "_source": "OpenStreetMap n12442354267 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12442354272",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12442354272 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.5013216,
+    "lat": 59.3775142,
+    "how": "OSM n12442354272",
+    "_source": "OpenStreetMap n12442354272 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12976813801",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12976813801 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4984638,
+    "lat": 59.3775332,
+    "how": "OSM n12976813801",
+    "_source": "OpenStreetMap n12976813801 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13201141894",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 3a",
+    "platform 4a"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13201141894 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982845,
+    "lat": 59.3777541,
+    "how": "OSM n13201141894",
+    "_source": "OpenStreetMap n13201141894 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13761228257",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 1b"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13761228257 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.4982571,
+    "lat": 59.3779557,
+    "how": "OSM n13761228257",
+    "_source": "OpenStreetMap n13761228257 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Entrance to the waiting room from the track side (accessible)",
+   "street": null,
+   "where": "track side of the station house",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1163368447",
+   "street": "Hamngatan",
+   "street_how": "nearest named street, 17.6 m",
+   "level": "0",
+   "kind": "main",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n1163368447 (already in OSM)",
+   "position": {
+    "lon": 13.499222,
+    "lat": 59.3780691,
+    "how": "OSM n1163368447",
+    "_source": "OpenStreetMap n1163368447 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10012659906",
+   "street": "Drottninggatan",
+   "street_how": "nearest named street, 14.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10012659906 (already in OSM)",
+   "position": {
+    "lon": 13.492903,
+    "lat": 59.3792409,
+    "how": "OSM n10012659906",
+    "_source": "OpenStreetMap n10012659906 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10012659907",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10012659907 (already in OSM)",
+   "position": {
+    "lon": 13.4935545,
+    "lat": 59.3789972,
+    "how": "OSM n10012659907",
+    "_source": "OpenStreetMap n10012659907 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12029671054",
+   "street": "Hamngatan",
+   "street_how": "nearest named street, 31.4 m",
+   "level": "0",
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n12029671054 (already in OSM)",
+   "position": {
+    "lon": 13.4992177,
+    "lat": 59.3779449,
+    "how": "OSM n12029671054",
+    "_source": "OpenStreetMap n12029671054 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12417089393",
+   "street": "Hamngatan",
+   "street_how": "nearest named street, 19.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12417089393 (already in OSM)",
+   "position": {
+    "lon": 13.499848,
+    "lat": 59.3780453,
+    "how": "OSM n12417089393",
+    "_source": "OpenStreetMap n12417089393 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12509006430",
+   "street": "Stinsgatan",
+   "street_how": "nearest named street, 22.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12509006430 (already in OSM)",
+   "position": {
+    "lon": 13.4989713,
+    "lat": 59.3772135,
+    "how": "OSM n12509006430",
+    "_source": "OpenStreetMap n12509006430 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12628922451",
+   "street": "Trädgårdsgatan",
+   "street_how": "nearest named street, 14.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12628922451 (already in OSM)",
+   "position": {
+    "lon": 13.4989952,
+    "lat": 59.3773279,
+    "how": "OSM n12628922451",
+    "_source": "OpenStreetMap n12628922451 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12976813803",
+   "street": "Trädgårdsgatan, Kiss & Ride",
+   "street_how": "nearest named street, 23.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n12976813803 (already in OSM)",
+   "position": {
+    "lon": 13.5013207,
+    "lat": 59.3774995,
+    "how": "OSM n12976813803",
+    "_source": "OpenStreetMap n12976813803 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12980129268",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n12980129268 (already in OSM)",
+   "position": {
+    "lon": 13.5012764,
+    "lat": 59.3777308,
+    "how": "OSM n12980129268",
+    "_source": "OpenStreetMap n12980129268 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12980129269",
+   "street": "Hamngatan",
+   "street_how": "nearest named street, 29.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n12980129269 (already in OSM)",
+   "position": {
+    "lon": 13.5013487,
+    "lat": 59.3779359,
+    "how": "OSM n12980129269",
+    "_source": "OpenStreetMap n12980129269 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13672669021",
+   "street": "Drottninggatan",
+   "street_how": "nearest named street, 29.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13672669021 (already in OSM)",
+   "position": {
+    "lon": 13.4933805,
+    "lat": 59.379098,
+    "how": "OSM n13672669021",
+    "_source": "OpenStreetMap n13672669021 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13672669023",
+   "street": "Grevgatan",
+   "street_how": "nearest named street, 27.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13672669023 (already in OSM)",
+   "position": {
+    "lon": 13.4928949,
+    "lat": 59.3791246,
+    "how": "OSM n13672669023",
+    "_source": "OpenStreetMap n13672669023 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13672669024",
+   "street": "Grevgatan",
+   "street_how": "nearest named street, 9.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13672669024 (already in OSM)",
+   "position": {
+    "lon": 13.4925809,
+    "lat": 59.3791086,
+    "how": "OSM n13672669024",
+    "_source": "OpenStreetMap n13672669024 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "fee": "card or coins",
+   "where": "in the station building",
+   "note": "time-locked; open the same hours as the café (Jernhusen)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/tillganglighet/"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:20-22:45; Sa 06:30-22:45; Su 06:45-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Karlstad centralstation.",
+   "owner_text": "Allt om tillgängligheten på Karlstad centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort eller mynt. Toaletten är utrustad med tidlås. Den är öppen under samma tider som som caféet. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns en universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns en universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Parkeringen vid Karlstad centralstation drivs av Apcoa och innefattar korttidsparkering och långtidsparkering.",
+   "owner_text": "Parkeringen vid Karlstad centralstation drivs av Apcoa och innefattar korttidsparkering och långtidsparkering. Parkeringen är tillfälligt stängd Alla parkeringsplatser är stängda på grund av vägarbete på Hamngatan som Karlstads kommun utför. Parkeringen är stängd tills vidare.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr. Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr. Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Värmlandstrafik BT Buss (Bergslagståget) Tågab (Tågåkeriet i Bergslagen) Vy Bus4you För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Fotoautomats information",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm1331120046",
+   "level": "L0",
+   "level_name": "Street, station house and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/mat-och-butiker/",
+   "website": "www.pressbyran.se/",
+   "position": {
+    "lon": 13.4999303,
+    "lat": 59.3780124,
+    "osm_id": "w1331120046",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 4.3,
+    "how": "representative point of the OSM area w1331120046",
+    "_source": "OpenStreetMap w1331120046 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11001818433",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11001818433 (read 2026-10-30)",
+   "position": {
+    "lon": 13.4995826,
+    "lat": 59.3780147,
+    "osm_id": "n11001818433",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 8.4,
+    "how": "OSM node n11001818433",
+    "_source": "OpenStreetMap n11001818433 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_rental",
+   "name": "Avis",
+   "brand": "Avis",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.498432,
+    "lat": 59.3783973,
+    "osm_id": "n1168401583",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 48.3,
+    "how": "OSM node n1168401583",
+    "_source": "OpenStreetMap n1168401583 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n1168401583 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Styling Studio",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "http://www.stylingstudio.org/",
+   "position": {
+    "lon": 13.4990068,
+    "lat": 59.3773213,
+    "osm_id": "n2990437254",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.3,
+    "how": "OSM node n2990437254",
+    "_source": "OpenStreetMap n2990437254 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n2990437254 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hifi",
+   "name": "HiFi Klubben",
+   "brand": "HiFi Klubben",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 11:00-18:00; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.hifiklubben.se/hitta-butik/karlstad/",
+   "position": {
+    "lon": 13.4977785,
+    "lat": 59.3784062,
+    "osm_id": "n5584949638",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 48.3,
+    "how": "OSM node n5584949638",
+    "_source": "OpenStreetMap n5584949638 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5584949638 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Carlstad ölhall",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.4989978,
+    "lat": 59.3783943,
+    "osm_id": "n6564030530",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 49.7,
+    "how": "OSM node n6564030530",
+    "_source": "OpenStreetMap n6564030530 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n6564030530 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Galleria Duvan",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su 12:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://galleriaduvan.se/",
+   "position": {
+    "lon": 13.499735,
+    "lat": 59.3786939,
+    "osm_id": "w685099252",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 45.7,
+    "how": "representative point of the OSM area w685099252",
+    "_source": "OpenStreetMap w685099252 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap w685099252 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Översiktskarta Karlstad Centralstation 4 maj 2026",
+   "publisher": "Region Värmland",
+   "url": "https://regionvarmland.se/download/18.36b079f819d41833cd72517f/1777707356172/%C3%96versiktskarta%20Karlstad%20Centralstation%204%20maj%202026.pdf",
+   "licence": "not open: facts only",
+   "read": null,
+   "note": "found by search; the link returned a web page, not the PDF, on 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Region Värmland's overview map (May 2026) could not be read; it would confirm the lifts and stairs that are only in OSM."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L1 (Trädgårdslänken footbridge): height not measured",
+  "level L0 (Street, station house and platforms): height not measured",
+  "level L-1 (Pedestrian tunnel): height not measured",
+  "platform 3: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 21: no stairs, escalator or lift of its own (reached along the platform level only)"
+ ],
+ "answers": [
+  {
+   "question": "platform 3: no stairs, escalator or lift of its own",
+   "answer": "Not so in OSM: platforms 3a/4a are reached by Trädgårdslänken (stairs w1206809266, lifts n12442354267), the tunnels (escalator w1337836810, stairs w1337836811, lift n13201141894) and ramps (w1390577054, w1436230597). Only in OSM; the Region Värmland overview map of 4 May 2026 could not be downloaded (the link returns a web page).",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "platform 21: no stairs, escalator or lift of its own",
+   "answer": "In OSM platform 21 is reached by the ramp w71552940, which also serves 1a/1b (a ramp, no stairs or lift). Only in OSM.",
+   "_source": "OSM w71552940, read 2026-10-30"
+  },
+  {
+   "question": "levels L1/L0/L-1: height not measured",
+   "answer": "Still open: no open source measures them.",
+   "_source": "this pass"
+  }
+ ]
+}

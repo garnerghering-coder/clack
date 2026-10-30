@@ -1,0 +1,784 @@
+{
+ "clack_id": "740000556",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w487787884",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w487787885",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w51990803",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 16.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9297719,
+    59.6494368
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w51990809",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 28.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9287034,
+    59.6496812
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w341759165",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 50.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.931787,
+    59.6506817
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w341760219",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9345273,
+    59.651307
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787886",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 55.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9287532,
+    59.6501827
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787887",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 55.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9284131,
+    59.6491044
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w487787890",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": "yes",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 29.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9284963,
+    59.6490963
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4802014315",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    17.9285083,
+    59.6494002
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n4802014304",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 77.9,
+   "lonlat": [
+    17.9288106,
+    59.6493733
+   ]
+  },
+  {
+   "osm_id": "n4802014305",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 86.8,
+   "lonlat": [
+    17.9286401,
+    59.6493887
+   ]
+  },
+  {
+   "osm_id": "n4802017830",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 58.6,
+   "lonlat": [
+    17.9308145,
+    59.6511025
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n662932771",
+   "category": "cafe",
+   "name": "Sky Café",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    17.9290975,
+    59.6497349
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 24.0
+  },
+  {
+   "osm_id": "n662932777",
+   "category": "restaurant",
+   "name": "East & West",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 69,
+   "lonlat": [
+    17.928924,
+    59.64877
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 31.3,
+   "cuisine": "sushi"
+  },
+  {
+   "osm_id": "n662932787",
+   "category": "cafe",
+   "name": "7-Eleven",
+   "level": "2",
+   "fee": null,
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 270,
+   "lonlat": [
+    17.9310876,
+    59.6514205
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 181.7,
+   "brand": "7-Eleven",
+   "website": "https://www.swedavia.se/arlanda/shopping/7-eleven/"
+  },
+  {
+   "osm_id": "n662932790",
+   "category": "cafe",
+   "name": "Way Cup",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 332,
+   "lonlat": [
+    17.9318495,
+    59.6518387
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 245.1
+  },
+  {
+   "osm_id": "n764926724",
+   "category": "restaurant",
+   "name": "60° Bar & Brewery",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-18:00",
+   "wheelchair": null,
+   "distance_m": 345,
+   "lonlat": [
+    17.9316423,
+    59.6520386
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 254.1
+  },
+  {
+   "osm_id": "n3546606713",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 321,
+   "lonlat": [
+    17.9314304,
+    59.6518557
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 230.8
+  },
+  {
+   "osm_id": "n4802017824",
+   "category": "ticket_validator",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 26,
+   "lonlat": [
+    17.9290123,
+    59.649304
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.8
+  },
+  {
+   "osm_id": "n4802017825",
+   "category": "ticket_validator",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 26,
+   "lonlat": [
+    17.9290294,
+    59.6494094
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.9
+  },
+  {
+   "osm_id": "n6378430619",
+   "category": "cafe",
+   "name": "Espresso House",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 82,
+   "lonlat": [
+    17.9287665,
+    59.648633
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 24.9,
+   "brand": "Espresso House",
+   "cuisine": "coffee_shop"
+  },
+  {
+   "osm_id": "n6378430620",
+   "category": "shop=kiosk",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr,Su 07:00-20:00; Sa 07:00-17:00",
+   "wheelchair": null,
+   "distance_m": 60,
+   "lonlat": [
+    17.9290624,
+    59.6488858
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 37.0,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "n6378430621",
+   "category": "pharmacy",
+   "name": "Kronans Apotek",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:30-18:00; Su 09:30-20:00",
+   "wheelchair": null,
+   "distance_m": 53,
+   "lonlat": [
+    17.9292234,
+    59.649024
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 43.5,
+   "brand": "Kronans Apotek",
+   "website": "https://www.kronansapotek.se/hitta-apotek/kronans-apotek-arlanda-skycity-1941/"
+  },
+  {
+   "osm_id": "n6378430622",
+   "category": "shop=books",
+   "name": "Pocket Shop",
+   "level": null,
+   "fee": null,
+   "opening_hours": "05:10-21:00",
+   "wheelchair": null,
+   "distance_m": 49,
+   "lonlat": [
+    17.9293119,
+    59.6491284
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 46.6
+  },
+  {
+   "osm_id": "n6380335598",
+   "category": "shop=clothes",
+   "name": "ARG Fashion & Accessories",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 54,
+   "lonlat": [
+    17.9294442,
+    59.6495495
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 46.6
+  },
+  {
+   "osm_id": "n6380335599",
+   "category": "restaurant",
+   "name": "Sky Grill",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 60,
+   "lonlat": [
+    17.9294133,
+    59.6496828
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 42.5
+  },
+  {
+   "osm_id": "n6380335600",
+   "category": "shop=beverages",
+   "name": "Naked Juicebar",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 67,
+   "lonlat": [
+    17.9293623,
+    59.6498109
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 37.4
+  },
+  {
+   "osm_id": "n6380335601",
+   "category": "shop=gift",
+   "name": "Wasa Crystal",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 76,
+   "lonlat": [
+    17.929299,
+    59.6499293
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 31.8
+  },
+  {
+   "osm_id": "n7229187093",
+   "category": "toilets",
+   "name": null,
+   "level": "3",
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 374,
+   "lonlat": [
+    17.9330928,
+    59.6518134
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 296.4
+  },
+  {
+   "osm_id": "n7229391080",
+   "category": "device_charging_station",
+   "name": null,
+   "level": "3",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 46,
+   "lonlat": [
+    17.929059,
+    59.6496909
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 22.6
+  },
+  {
+   "osm_id": "n7229391081",
+   "category": "shop=ticket",
+   "name": "Arlanda centralstation",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 25,
+   "lonlat": [
+    17.9290172,
+    59.6493619
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.1
+  },
+  {
+   "osm_id": "n12593809429",
+   "category": "shop=toys",
+   "name": "World of Toys & Clothes",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 354,
+   "lonlat": [
+    17.9319323,
+    59.6520458
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 265.2
+  },
+  {
+   "osm_id": "n12593809430",
+   "category": "shop=gift",
+   "name": "Sweshop",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 364,
+   "lonlat": [
+    17.9322585,
+    59.6520458
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 277.7
+  },
+  {
+   "osm_id": "n12593809431",
+   "category": "shop=books",
+   "name": "Adlibris Pocket",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 377,
+   "lonlat": [
+    17.9326106,
+    59.6520511
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 292.3
+  },
+  {
+   "osm_id": "n12593809433",
+   "category": "bar",
+   "name": "American Express Lounge",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 385,
+   "lonlat": [
+    17.9329524,
+    59.6520155
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 304.0
+  },
+  {
+   "osm_id": "n12593809435",
+   "category": "ice_cream",
+   "name": "RC Bon Bon Glacerie",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 416,
+   "lonlat": [
+    17.933709,
+    59.6520405
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 339.4
+  },
+  {
+   "osm_id": "n12593809437",
+   "category": "fast_food",
+   "name": "Bun Meat Bun",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 477,
+   "lonlat": [
+    17.9348204,
+    59.6522514
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 404.3,
+   "cuisine": "burger"
+  },
+  {
+   "osm_id": "n12593809438",
+   "category": "fast_food",
+   "name": "La Neta",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 472,
+   "lonlat": [
+    17.9347056,
+    59.6522422
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 398.4,
+   "cuisine": "mexican"
+  },
+  {
+   "osm_id": "n12593809439",
+   "category": "restaurant",
+   "name": "Little Italy",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 453,
+   "lonlat": [
+    17.9344082,
+    59.6521473
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 378.5
+  },
+  {
+   "osm_id": "n12593809440",
+   "category": "restaurant",
+   "name": "Indochine",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 441,
+   "lonlat": [
+    17.9341707,
+    59.6521222
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 365.9
+  },
+  {
+   "osm_id": "n13148001084",
+   "category": "fast_food",
+   "name": "Baba Grill",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 466,
+   "lonlat": [
+    17.9345819,
+    59.6522303
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 391.8,
+   "cuisine": "middle_eastern"
+  },
+  {
+   "osm_id": "n13148001085",
+   "category": "fast_food",
+   "name": "Asia Street Cooking",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 480,
+   "lonlat": [
+    17.9349536,
+    59.6522172
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 408.6,
+   "cuisine": "asian"
+  },
+  {
+   "osm_id": "n13899764101",
+   "category": "restaurant",
+   "name": "Pocket Bar & Bistro",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 10:30-22:00",
+   "wheelchair": null,
+   "distance_m": 58,
+   "lonlat": [
+    17.9295535,
+    59.6492142
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 58.5,
+   "website": "https://www.nordrest.se/restaurang/pocket-arlanda/"
+  },
+  {
+   "osm_id": "n13951692601",
+   "category": "cafe",
+   "name": "Gateau",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Sa 07:00-22:00; Su 08:00-18:00",
+   "wheelchair": null,
+   "distance_m": 65,
+   "lonlat": [
+    17.9287128,
+    59.6487799
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.3,
+   "website": "https://www.gateau.se/butiker/arlanda-terminal-skycity/"
+  },
+  {
+   "osm_id": "n14017789612",
+   "category": "drinking_water",
+   "name": "arlanda airport",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 358,
+   "lonlat": [
+    17.9325257,
+    59.6518778
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 275.8,
+   "operator": "arlanda airport",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n14234986501",
+   "category": "drinking_water",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 278,
+   "lonlat": [
+    17.9310585,
+    59.6515178
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 188.5
+  },
+  {
+   "osm_id": "w4967313",
+   "category": "parking",
+   "name": "Hämta",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 316,
+   "lonlat": [
+    17.9340641,
+    59.6508064
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 276.8
+  },
+  {
+   "osm_id": "w24478464",
+   "category": "parking",
+   "name": "P51",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "distance_m": 211,
+   "lonlat": [
+    17.9325662,
+    59.6505168
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 164.6
+  }
+ ]
+}

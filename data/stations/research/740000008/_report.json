@@ -1,0 +1,100 @@
+{
+ "clack_id": "740000008",
+ "slug": "skovde_c",
+ "flags": [
+  "Platform BIS 391 (track 151-152): laser gives 0.93 m above the track bed (≈0.76 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "w1044410776 roof: p95 146.9 m is 4.6 m above the median 142.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1235549204 transportation: p95 151.2 m is 3.8 m above the median 147.4 m (a taller neighbour or a mast inside the outline?).",
+  "w1248821191 bridge: p95 142.6 m is 3.9 m above the median 138.8 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w869747977 (path, tertiary); w869749029 (no mapped ways); w1080044505 (no mapped ways)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=13.846826,58.385931,13.858055,58.393562",
+ "ground": {
+  "min_m": 126.67,
+  "median_m": 139.12,
+  "max_m": 143.87,
+  "nan_cells": 0,
+  "size_m": [
+   413,
+   598
+  ],
+  "box_sweref": [
+   432703,
+   6472376,
+   433116,
+   6472974
+  ],
+  "tiles": [
+   "647_43 (2024-04-05)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y22b020-64700_4325_25.copc.laz",
+   "y22b020-64725_4325_25.copc.laz"
+  ],
+  "scan_date": "2022-03-11",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 439298,
+  "density_in_box": 1.78,
+  "classes": {
+   "1": 210192,
+   "2": 225752,
+   "7": 315,
+   "17": 2999,
+   "18": 40
+  },
+  "train_points_class64": 582
+ },
+ "platforms": [
+  {
+   "bis_object": "391",
+   "track": "151-152",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 389.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 139.51,
+   "track_bed_points": 101,
+   "platform_surface_m": 140.44,
+   "platform_points": 350,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.93,
+   "laser_estimate_above_rail_m": 0.76
+  },
+  {
+   "bis_object": "392",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 386.0,
+   "width_m": 4.5,
+   "roof": "Tak",
+   "track_bed_m": 139.33,
+   "track_bed_points": 480,
+   "platform_surface_m": 140.06,
+   "platform_points": 1134,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.55
+  }
+ ],
+ "platform_surface_m": 140.25,
+ "track_bed_m": 139.42,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 8,
+  "footbridge": 1,
+  "canopy_osm": 10,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 100,
+ "photos_station_related": 44
+}

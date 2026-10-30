@@ -1,0 +1,52 @@
+{
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": null,
+   "level": "0",
+   "where": "track side of the station building, into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/ (\"Det finns en tillgänglig entré till väntsalen från spårsidan\"), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Järnvägscafé",
+   "where": "in the station building (Jernhusen gives the address as \"Stationsplan (Järnvägsstation) Kil\")",
+   "phone": "0554-415 55",
+   "website": "https://www.facebook.com/jarnvagscafe",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/mat-och-butik/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "where": "in the station building; accessible entrance from the track side",
+   "opening_hours": "Mo-Fr 05:30-22:45; Sa 07:15-18:30; Su 08:30-22:45",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/ and https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "wheelchair": "yes",
+   "where": "in the station (Jernhusen gives no position)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/toalett/ (\"På stationen finns universaltoalett\"), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "cafe Järnvägscafeet: no opening hours",
+   "answer": "Still open. Jernhusen lists the café (Järnvägscafé, tel. 0554-415 55, links only to its Facebook page) without hours; the Facebook page can't be read (robots). Visit Värmland's page (regional tourism body, not on the allowed source list, so not used for hours) mentions only weekday breakfast 08–09:45 and lunch 11–14, not full opening hours. Leave without hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/mat-och-butik/; https://www.facebook.com/jarnvagscafe (not readable); https://www.visitvarmland.com/kil/en/food-drinks/cafe-bakery/jarnvagscafe — all read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Järnvägscafé opening hours: no allowed source states them (only Facebook, unreadable).",
+  "Where the café is inside the building: no plan or owner text says.",
+  "How the island platforms (2 & 3, 4 & 5, 6 & 7) are reached (tunnel, level crossing, lifts): OSM maps no stairs, underpass or lift at Kil and no owner/Trafikverket/Värmlandstrafik text was found.",
+  "Entrance street: Jernhusen's address is Stationsplan 3; OSM tags no entrance node, so no entrance position.",
+  "No published plan of Kil station was found (Jernhusen links none; no Värmlandstrafik station map for Kil found).",
+  "Ticket machines, lockers: Jernhusen lists none for Kil; not confirmed either way."
+ ]
+}

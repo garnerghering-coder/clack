@@ -1,0 +1,559 @@
+{
+ "clack_id": "740000191",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w93703365",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w93703366",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w408458029",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w728727833",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w728727835",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w733018373",
+   "ref": "3",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w310276087",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.7,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    12.2991691,
+    58.287519
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w310276088",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 4.4,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    12.2989681,
+    58.2873276
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w310276089",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 18.4,
+   "reaches_platforms": [
+    "1",
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    12.299025,
+    58.2873536
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w310276090",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 53.0,
+   "reaches_platforms": [
+    "1",
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    12.2991325,
+    58.2873287
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w611980541",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.0,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    12.2990474,
+    58.2872894
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n3197271610",
+   "category": "fast_food",
+   "name": "Pizzeria Arena",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    12.2984244,
+    58.2866314
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 80.2,
+   "cuisine": "pizza"
+  },
+  {
+   "osm_id": "n3197271622",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    12.2978497,
+    58.2869708
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 80.5
+  },
+  {
+   "osm_id": "n3197271623",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 48,
+   "lonlat": [
+    12.2978835,
+    58.2869868
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 77.8
+  },
+  {
+   "osm_id": "n3197271629",
+   "category": "post_box",
+   "name": "PostNord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 39,
+   "lonlat": [
+    12.29833,
+    58.2874187
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.5,
+   "brand": "PostNord",
+   "operator": "PostNord"
+  },
+  {
+   "osm_id": "n3197271630",
+   "category": "post_box",
+   "name": "PostNord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 39,
+   "lonlat": [
+    12.2983453,
+    58.2874249
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.3,
+   "brand": "PostNord",
+   "operator": "PostNord"
+  },
+  {
+   "osm_id": "n3197271631",
+   "category": "clock",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    12.2983976,
+    58.2875572
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "n13783792711",
+   "category": "waiting_room",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 04:30-21:30; Sa 07:30-21:00; Su 08:00-21:30",
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    12.2986495,
+    58.2874909
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 7.1
+  },
+  {
+   "osm_id": "w87538226",
+   "category": "parking",
+   "name": "Resecentrum",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 142,
+   "lonlat": [
+    12.3007317,
+    58.2860208
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.1
+  },
+  {
+   "osm_id": "w310276094",
+   "category": "bus_station",
+   "name": "Trollhättan resecentrum",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 0,
+   "lonlat": [
+    12.2996814,
+    58.2866314
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 1.1
+  },
+  {
+   "osm_id": "w728727839",
+   "category": "taxi",
+   "name": "Bergslagstorget",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 9,
+   "lonlat": [
+    12.2984574,
+    58.2873918
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.0,
+   "operator": "CabLLy App Taxi"
+  },
+  {
+   "osm_id": "w1201014738",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 26,
+   "lonlat": [
+    12.2992663,
+    58.2866462
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 36.9
+  },
+  {
+   "osm_id": "w1256391260",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 42,
+   "lonlat": [
+    12.2979351,
+    58.2870868
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 67.3
+  },
+  {
+   "osm_id": "w1256391261",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 46,
+   "lonlat": [
+    12.2980008,
+    58.2873734
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 43.3
+  },
+  {
+   "osm_id": "w1263691794",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 146,
+   "lonlat": [
+    12.2972098,
+    58.2882252
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.2
+  },
+  {
+   "osm_id": "w1263691795",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 148,
+   "lonlat": [
+    12.2971006,
+    58.288215
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.6
+  },
+  {
+   "osm_id": "w1263691796",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 74,
+   "lonlat": [
+    12.2978211,
+    58.287641
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 31.1
+  },
+  {
+   "osm_id": "w1263691797",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 72,
+   "lonlat": [
+    12.2979494,
+    58.2876681
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.3
+  },
+  {
+   "osm_id": "w1263691798",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 83,
+   "lonlat": [
+    12.2978898,
+    58.287767
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.8
+  },
+  {
+   "osm_id": "w1263691799",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 86,
+   "lonlat": [
+    12.2977536,
+    58.2877445
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.6
+  },
+  {
+   "osm_id": "w1263695270",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 51,
+   "lonlat": [
+    12.2980421,
+    58.2867242
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 83.9
+  },
+  {
+   "osm_id": "w1263695271",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 35,
+   "lonlat": [
+    12.2982174,
+    58.2868867
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 68.9
+  },
+  {
+   "osm_id": "w1263695272",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 42,
+   "lonlat": [
+    12.2981309,
+    58.2868472
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 75.6
+  },
+  {
+   "osm_id": "w1263695273",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 49,
+   "lonlat": [
+    12.298003,
+    58.2868044
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 82.0
+  },
+  {
+   "osm_id": "w1263695274",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 58,
+   "lonlat": [
+    12.2978753,
+    58.2867467
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 91.9
+  },
+  {
+   "osm_id": "w1280935200",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 58,
+   "lonlat": [
+    12.2984066,
+    58.2864999
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 75.6
+  },
+  {
+   "osm_id": "w1280968101",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 20,
+   "lonlat": [
+    12.29818,
+    58.2873209
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 37.2
+  }
+ ]
+}

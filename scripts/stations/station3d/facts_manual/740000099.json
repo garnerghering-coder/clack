@@ -1,0 +1,210 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Gångbron",
+   "other_names": [],
+   "note": "Footbridge linking the station building and the platforms (Trafikverket); Jernhusen gives it its own opening hours under the heading 'Gångbron'.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/, read 2026-10-30; Trafikverket, \"Järnvägsplan, Samrådsunderlag Västerås C och uppställning för persontåg\" (2013-06-26), p. 29 and 32, https://bransch.trafikverket.se/contentassets/25a82234af99408caf42dff71a6b94b7/samradsunderlag_vasterasc_del1.pdf, read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Street, station building and platforms",
+   "other_names": [],
+   "note": "No signposted name found.",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "station building side (level 0)",
+    "Gångbron"
+   ],
+   "where": "at the station-building end of the footbridge, by platform 1",
+   "confirmed_by": "OSM only",
+   "osm_id": "w492064177",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platform 1 (1b)",
+    "Gångbron"
+   ],
+   "where": "by the station building, platform 1",
+   "confirmed_by": "OSM only",
+   "osm_id": "n10381672730",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "island platform 2/3",
+    "Gångbron"
+   ],
+   "where": "under the footbridge on the 2/3 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "n10381672737",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "island platform 4/5",
+    "Gångbron"
+   ],
+   "where": "under the footbridge on the 4/5 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "n10381672738",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "island platform 2/3",
+    "Gångbron"
+   ],
+   "where": "two ramps/flights down from the footbridge to the 2/3 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "w705031846, w1129096978",
+   "note": "OSM classes these as ramps (level 0;1); no source says whether they are sloped ramps or stairs. Trafikverket (2013) calls the footbridge connections down to the platforms cramped.",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30; Trafikverket, \"Järnvägsplan, Samrådsunderlag Västerås C och uppställning för persontåg\" (2013-06-26), p. 29 and 32, https://bransch.trafikverket.se/contentassets/25a82234af99408caf42dff71a6b94b7/samradsunderlag_vasterasc_del1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "island platform 4/5",
+    "Gångbron"
+   ],
+   "where": "two ramps/flights down from the footbridge to the 4/5 platform",
+   "confirmed_by": "OSM only",
+   "osm_id": "w705031833, w1129096979",
+   "note": "As above: OSM 'ramp', not confirmed by a plan.",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Front entrance (towards the ring road)",
+   "street": "Södra Ringvägen",
+   "where": "front of the station building; has steps, not step-free",
+   "note": "Jernhusen: 'entrén från framsidan mot ringvägen är inte tillgänglig (trappa)'. OSM entrances n9490281775/n9490281777 are on this side.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/tillganglighet/, read 2026-10-30; OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Side entrances",
+   "where": "on the sides of the station building; step-free",
+   "note": "Jernhusen: 'Entréer från stationens sidor ... är tillgängliga'. OSM n9490281776 (wheelchair=yes, sliding door).",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/tillganglighet/, read 2026-10-30; OSM (osmfacts/740000099.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Track-side entrance",
+   "where": "from the platform 1 side; step-free",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes, card (accessibility page says card or coins)",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa 05:00-22:30; Su 06:00-22:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours are the station's opening hours.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "yes (QR code or card)",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa 05:00-22:30; Su 06:00-22:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen: 'Se även stationens öppettider'.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "where": "in the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "opening_hours": "Mo-Fr 06:00-20:00; Sa 07:00-20:00; Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building (Södra Ringvägen 1)",
+   "note": "Jernhusen lists it without hours; the chain's store page could not be read.",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building (Södra Ringvägen 1)",
+   "note": "Jernhusen lists it without hours; Pressbyrån's store page loads hours dynamically.",
+   "_source": "OSM (osmfacts/740000099.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Utomhusparkering (Västerås kommun)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "where": "by the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hållplats Tågersättning (replacement buses)",
+   "where": "beside track 1B, about 100 m west of the station building",
+   "_source": "VL map \"Hållplatslägen Västerås Central\" (last updated 2026-03-06), https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Hållplats Flygbussar, turistbussar (airport and long-distance coaches)",
+   "where": "beside track 1B, about 150 m west of the station building",
+   "_source": "VL map \"Hållplatslägen Västerås Central\" (last updated 2026-03-06), https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf, read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Västerås Central city/regional bus stops A–K",
+   "where": "lägen A–K on the bus side of the station; positions not readable from the map text",
+   "_source": "VL map \"Hållplatslägen Västerås Central\" (last updated 2026-03-06), https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf, read 2026-10-30; facts only"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hållplatslägen Västerås Central (temporary map 2026, last updated 2026-03-06)",
+   "publisher": "VL (Region Västmanland)",
+   "url": "https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen. Text shows bus stops and the two temporary coach/replacement stops by track 1B; no lifts or stairs in the text."
+  }
+ ],
+ "open": [
+  "Platform layout is from Trafikverket's 2013 document (track 1 platform; islands 2/3 and 4/5); OSM splits them into 1a/1b, 2a/2b, 3a/3b, 4a/4b, 5. No newer owner text checked.",
+  "All footbridge lifts, the escalator and the ramps are OSM only: no plan or owner text lists them. Whether OSM's 'ramps' are ramps or stairs is unconfirmed.",
+  "Which floor/side of the station building Espresso House, Pressbyrån, toilets and lockers are on: no plan found.",
+  "Shop hours for Espresso House and Pressbyrån from their own websites (not readable); OSM hours used instead.",
+  "Heights of Gångbron and street level: no source measures them.",
+  "Bus terminal is under reconstruction in 2026 (temporary VL map); stop positions may change."
+ ]
+}

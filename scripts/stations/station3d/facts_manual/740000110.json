@@ -1,0 +1,323 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Marknivå: stationshuset (vänthallen, kundservice, shops), Stationstorget, bus terminal and the footbridge over the trough",
+   "other_names": [
+    "Vänthallen (Hallandstrafiken's name for the waiting hall)"
+   ],
+   "note": "The new station opened with the Varbergstunneln on 14 July 2025 (inauguration 13 July). The station building (Jernhusen, Stationstorget 1) stands at street level about 150 m north of the old 1880 building, over the trough by the tunnel's northern mouth.",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Plattformsnivå (platforms sunk in an open trough, one floor below the station building)",
+   "note": "Trafikverket: platforms lowered in an open trough (tråg) below ground level; five tracks, four of them at platforms, one through track. The planning drawings show one island platform (mittplattform) and one side platform (sidoplattform). OSM tags platforms 1B, 2 (2A/2B), 4 (4A/4B) and 5 (5A/5B) on level -1. It is not a deep tunnel station: the platforms are in the open trough, the tunnel starts south of the station.",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n13022636685",
+   "between": [
+    "station building (marknivå)",
+    "island platform 4/5"
+   ],
+   "where": "south end (södra uppgången), from the station building next to the escalators",
+   "confirmed_by": "OSM only (Trafikverket confirms lifts at the station, not their positions)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13022636687",
+   "between": [
+    "station building (marknivå)",
+    "side platform 2 (1B/2)"
+   ],
+   "where": "south end (södra uppgången), from the station building next to the escalators",
+   "confirmed_by": "OSM only (Trafikverket confirms lifts at the station)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1417184724",
+    "w1463599060"
+   ],
+   "between": [
+    "station building",
+    "island platform 4/5"
+   ],
+   "where": "south end, under/beside the station building (passage w1417184720/w1463599050 to platforms 4–5)",
+   "confirmed_by": "OSM only (Trafikverket lists escalators among the structures built; the planning drawing showed two)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1417184723",
+    "w1463599061"
+   ],
+   "between": [
+    "station building",
+    "side platform 2"
+   ],
+   "where": "south end, under/beside the station building (passage w1417184719/w1463599044 to platform 2)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415607101",
+    "w1415607100"
+   ],
+   "between": [
+    "station building end",
+    "platforms 4/5 and 2"
+   ],
+   "where": "south end of the platforms near the station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1415619326",
+   "name": "Alida Svenssons gång- och cykelbro",
+   "between": [
+    "east side (Östra Hamnvägen)",
+    "west/station side"
+   ],
+   "where": "crosses the trough at the north end of the platforms (norra uppgången); pedestrians and cyclists",
+   "confirmed_by": "owner text (Trafikverket: access to the platforms from a footbridge over the trough) + OSM name",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835362",
+   "between": [
+    "footbridge (norra uppgången)",
+    "island platform 4/5"
+   ],
+   "where": "north end, from the footbridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13008835364",
+   "between": [
+    "footbridge (norra uppgången)",
+    "side platform 2"
+   ],
+   "where": "north end, from the footbridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415619328",
+    "w1415619330"
+   ],
+   "between": [
+    "footbridge",
+    "island platform 4/5"
+   ],
+   "where": "north end",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1415619331",
+    "w1415619329"
+   ],
+   "between": [
+    "footbridge / ground",
+    "side platform 2 (and 1B)"
+   ],
+   "where": "north end; w1415619329 has a ramp (ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stationshuset, entrances on all four sides",
+   "street": "Stationstorget / Västra Vallgatan",
+   "level": "0",
+   "where": "the station building has entrances on all four sides; OSM main sliding doors n13022636700 and n13022665704 face Västra Vallgatan, n13599636704 on the west side",
+   "_source": "Varbergs kommun press release 2026-03-17 \"Varbergs stationsbyggnad får kommunens byggnadspris\", https://via.tt.se/pressmeddelande/4290989/varbergs-stationsbyggnad-far-kommunens-byggnadspris, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré till väntsalen från spårsidan",
+   "street": null,
+   "level": "0",
+   "where": "accessible entrance into the waiting room from the track side",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Södra uppgången",
+   "street": "Stationstorget (Södra stationstorget)",
+   "level": "0",
+   "where": "south end of the platforms: straight into the new station building and the bus terminal next to it",
+   "_source": "Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  },
+  {
+   "name": "Norra uppgången / norra entrén",
+   "street": "Baggens gränd → Östra Hamnvägen",
+   "level": "0",
+   "where": "north end of the platforms, at the gång- och cykelbron; near the bike and commuter parking. Finished for July 2025; Baggens gränd is extended through it to Östra Hamnvägen for pedestrians and cyclists",
+   "_source": "Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Vänthallen",
+   "where": "in the station building (Stationstorget 1), street level",
+   "opening_hours": "Mo-Fr 05:00-22:45; Sa,Su 06:00-22:45",
+   "hours_source": "website (Hallandstrafiken)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives the station's hours as Mo-Fr 04:30-22:45; Sa-Su 06:00-22:45 (earlier weekday start).",
+   "_source": "https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/varberg-station/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Hallandstrafiken kundservicebutik",
+   "where": "Stationstorget 1 (station building)",
+   "osm_id": "n13074151325",
+   "opening_hours": "Mo-Fr 07:00-17:00; PH off",
+   "hours_source": "website (Hallandstrafiken)",
+   "hours_checked": "2026-10-30",
+   "note": "2026 closures listed: 1 Jan, 6 Jan, 3/5/6 Apr, 1 May, 14 May, 24 May, 6 Jun, 19–20 Jun, 31 Oct, 24–26 Dec, 31 Dec; open 4 Apr 10:00-15:00.",
+   "_source": "https://www.hallandstrafiken.se/kundservice/kontakta-oss/kundservicebutiker, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/varberg-station/trafik-och-biljetter/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "Jernhusen gives Västra Vallgatan 2; OSM n13069363690 puts it inside the station building",
+   "osm_id": "n13069363690",
+   "note": "No hours: Jernhusen lists none and pressbyran.se's store page did not render.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/mat-och-butiker/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card only)",
+   "where": "in the station building",
+   "osm_id": "n13074151324",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/started hour (max 149 kr/24 h); Medium 39 kr (max 199); Large 49 kr (max 249); max 7 days; opened by scanning a QR code",
+   "osm_id": "n13790440294",
+   "note": "Usable during the station's opening hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr (10-kr coins or card)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests (free)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat (2)",
+   "osm_ids": [
+    "n13075136943",
+    "n13779993917"
+   ],
+   "where": "in the station building (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Barber Station",
+   "osm_id": "n13074151326",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-We 10:00-19:00; Tu 10:00-21:00; Fr 10:00-19:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only; the OSM rule is odd (Tu twice, no Th); no own website found.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Studio Terra",
+   "osm_id": "n13074151327",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 10:00-16:00; Sa-Su 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Bussterminal",
+   "where": "east-side bus terminal at the station (finished July 2025, local buses); a regional bus square is planned on the west side once the old tracks are gone. Hallandstrafiken's map (2026-03-02) still shows 'Nuvarande hållplatslägen under byggtid' with stops along Magasinsgatan/Västra Vallgatan",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; Hallandstrafiken, \"Varberg station och bussterminal\" (Varberg_A3_20260302_K4.pdf), https://www.hallandstrafiken.se/download/18.56264a8119c47bc4b101a2e0/1776059854569/Varberg_A3_20260302_K4.pdf, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "taxi stands close to the station; OSM n13022665703 by the station building on Västra Vallgatan",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "where": "very limited at the station during works; disabled parking temporarily at the bus stop area on Kungsplan; two large car parks (~300 spaces) off Östra Hamnvägen; drop-off along Östra Hamnvägen and Magasinsgatan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/varberg-station/parkering/ and tillganglighet/, read 2026-10-30; Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering och cykelhus",
+   "where": "many spaces near the station plus a covered bike house; planned near the north stairs and lifts",
+   "_source": "Varbergs kommun, \"Nya stationsområdet\", https://varberg.se/varbergvaxer/varbergstunneln/ny-station-i-centrum/nya-stationsomradet, read 2026-10-30; https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Varberg station och bussterminal (A3 station area map, 2026-03-02, bus stops during construction)",
+   "publisher": "Hallandstrafiken",
+   "url": "https://www.hallandstrafiken.se/download/18.56264a8119c47bc4b101a2e0/1776059854569/Varberg_A3_20260302_K4.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Järnvägsplan Varberg–Hamra: station area exhibition sheets (planning stage; show mittplattform + sidoplattform, södra/norra uppgången, 3 lifts, 2 escalators)",
+   "publisher": "Trafikverket",
+   "url": "https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open questions listed for Varberg in STATION_OPEN_QUESTIONS_SWEDEN.md; brief asks to describe the new station's levels, lifts and entrances)",
+   "answer": "Two levels: street/terminal level with the station building (vänthallen, kundservice) and the footbridge, and the platform level in an open trough one floor below. Access at the south end from the station building (lifts, escalators, stairs) and at the north end from Alida Svenssons gång- och cykelbro (lifts, stairs). Trafikverket confirms lifts, stairs, escalators and the footbridge; their exact positions come from OSM (4 lifts, 4 escalators).",
+   "_source": "https://www.trafikverket.se/vara-projekt/projekt-i-hallands-lan/varbergstunneln, read 2026-10-30; Trafikverket, järnvägsplan Västkustbanan Varberg–Hamra, exhibition sheets \"varberg_station.pdf\" and \"3_utstallningsplansch_stationsomradet_2\" (https://bransch.trafikverket.se/contentassets/41247010aa8d422f933d034634736c1f/arkiv/varberg_station.pdf; .../arkiv-ovriga/3_utstallningsplansch_stationsomradet_2_131mb.pdf), planning-stage drawings, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Exact number and position of lifts/escalators: Trafikverket's opened-station page confirms lifts, stairs and escalators but not where or how many; the planning drawing shows 3 lifts and 2 escalators, OSM has 4 of each. No as-built plan published.",
+  "Platform numbering: OSM uses 1B, 2 (2A/2B), 4 (4A/4B), 5 (5A/5B); Hallandstrafiken's map shows numbers 1, 2, 4, 5 without explanation. Which is the side platform vs the island (OSM suggests side = 1B/2, island = 4/5) is not stated by an owner source.",
+  "OSM still has old-station features ~200 m south (Pressbyrån n5240151252, Hallandstrafiken Kundservice n12156323070, toilets n5240151251, luggage locker n12156323072, entrances on Eskilsgatan n5240151253/4, platforms w71499118, w307498378, w307498379, w541968303 with no level). Hallandstrafiken now gives the kundservice at Stationstorget 1, and Wikipedia says the 1880 building is no longer part of the railway: these OSM objects look stale.",
+  "Pressbyrån hours: not on Jernhusen; pressbyran.se store page unreadable.",
+  "Shops in the station building: OSM shows Barber Station, Studio Terra and three vacant units; Jernhusen lists only Pressbyrån. Omami's site gives a Varberg restaurant at Västra Vallgatan 4 but does not say it is in the station.",
+  "Floor heights / trough depth: no source measures them."
+ ]
+}

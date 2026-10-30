@@ -1,0 +1,286 @@
+{
+ "clack_id": "740000173",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Footbridge over the tracks",
+   "note": "OSM only (w45583777, layer 1); no source gives a signposted name.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Street, station and platforms",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2472",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2472; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2471",
+   "track": "4",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 4 (the train stops with the platform to its south-east)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2471; read 2026-10-30"
+  },
+  {
+   "platform_bis": "920",
+   "track": "2",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 2 (the train stops with the platform to its east)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 920; read 2026-10-30"
+  },
+  {
+   "platform_bis": "918",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 918; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2029",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2029; read 2026-10-30"
+  },
+  {
+   "platform_bis": "924",
+   "track": "4",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 4 (the train stops with the platform to its south-east)",
+   "_source": "laser (2020-03-21, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 924; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w45583777",
+   "between": [
+    "Spår 1",
+    "Spår 2"
+   ],
+   "where": "across the tracks between the platforms of Spår 1 and Spår 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2740234,
+    "lat": 58.359201,
+    "how": "OSM w45583777 (point on the way)",
+    "_source": "OpenStreetMap w45583777 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583776",
+   "between": [
+    "footbridge",
+    "Spår 1"
+   ],
+   "where": "platform of Spår 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2738027,
+    "lat": 58.3593066,
+    "how": "OSM w45583776 (point on the way)",
+    "_source": "OpenStreetMap w45583776 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583778",
+   "between": [
+    "footbridge",
+    "Spår 2"
+   ],
+   "where": "platform of Spår 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.2740633,
+    "lat": 58.359271,
+    "how": "OSM w45583778 (point on the way)",
+    "_source": "OpenStreetMap w45583778 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583776",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Spår 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w45583776 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2738027,
+    "lat": 58.3593066,
+    "how": "OSM w45583776 (point on the way)",
+    "_source": "OpenStreetMap w45583776 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w45583777",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Spår 1",
+    "platform Spår 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w45583777 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2740234,
+    "lat": 58.359201,
+    "how": "OSM w45583777 (point on the way)",
+    "_source": "OpenStreetMap w45583777 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583778",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Spår 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w45583778 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.2740633,
+    "lat": 58.359271,
+    "how": "OSM w45583778 (point on the way)",
+    "_source": "OpenStreetMap w45583778 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station entrances (all accessible)",
+   "street": "Öxneredsvägen",
+   "level": "0",
+   "where": "Jernhusen says all entrances to the station are accessible; its location link is labelled 'Öxneredsvägen'. OSM maps no entrance nodes.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/tillganglighet/ and https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station (indoor waiting)",
+   "opening_hours": "Mo-Su 06:20-20:15",
+   "hours_source": "website (Jernhusen: station hours)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives only the station's opening hours; no shops, toilets or lockers are listed for Öxnered.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering för rörelsehindrade",
+   "note": "Accessible parking at the station (no fee mentioned). OSM also maps a car park w448274422 tagged fee=no.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/tillganglighet/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Öxnered station (Västtrafik)",
+   "where": "Västtrafik lists lägen A and B (bus) plus 1–4 (tracks)",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 06:20-20:15; Sa 06:20-20:15; Su 06:20-20:15",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Öxnered station.",
+   "owner_text": "Allt om tillgängligheten på Öxnered station. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Tillgänglig entré Samtliga entréer till stationen är tillgängliga. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Västtrafik Tågab (Tågåkeriet i Bergslagen) Vy bus4you För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/oxnered-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  }
+ ],
+ "plans": [
+  {
+   "title": "No station plan published: Jernhusen's 'Karta över stationsområdet' links only to Västtrafik's stop page (no PDF)",
+   "publisher": "Jernhusen / Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "open": [
+  "Spår 4 platform edge and how platforms for Spår 3 and 4 are reached (OSM joins the footbridge only to Spår 1 and 2).",
+  "Lifts: Jernhusen says all entrances are accessible, but no source states whether the footbridge has lifts or whether platforms are reached at grade.",
+  "No published station plan; sv/no Wikipedia pages could not be fetched (site error).",
+  "Floor heights: no source."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/oxnered-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "platform Spår 4: no platform edges (which side the trains stop at)"
+ ],
+ "answers": [
+  {
+   "question": "platform Spår 4: no platform edges (which side the trains stop at)",
+   "answer": "Still open. No owner, Trafikverket, Västtrafik or Wikipedia source describes which side of the Spår 4 platform trains use; Västtrafik only confirms that läge 4 exists. OSM has a platform ref 'Spår 4' (w45583759) with no stairs or footbridge joined to it, so how it is reached is also unknown.",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014080049000/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; Wikipedia en 'Öxnered' (no layout), read 2026-10-30"
+  }
+ ]
+}

@@ -1,0 +1,167 @@
+{
+ "clack_id": "740000007",
+ "slug": "norrkoping_c",
+ "flags": [
+  "Platform BIS 1849 (track None): laser gives 0.73 m above the track bed (≈0.55 m above rail after −0.15…0.2 m), register class låg = 0.35 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 1841 (track 2b): laser gives 0.66 m above the track bed (≈0.48 m above rail after −0.15…0.2 m), register class låg = 0.35 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 1843 (track 2a): laser gives 0.78 m above the track bed (≈0.61 m above rail after −0.15…0.2 m), register class låg = 0.35 m. Not decided; add to REVIEW.md.",
+  "Platform surfaces differ by 0.65 m across the station (2.88–3.53 m); the station reference above is their median — check which level the app should use."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=16.172840,58.593763,16.190702,58.599213",
+ "ground": {
+  "min_m": 0.67,
+  "median_m": 2.79,
+  "max_m": 13.2,
+  "nan_cells": 0,
+  "size_m": [
+   789,
+   367
+  ],
+  "box_sweref": [
+   568291,
+   6495544,
+   569080,
+   6495911
+  ],
+  "tiles": [
+   "649_56 (2022-10-17)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20c012-64950_5675_25.copc.laz"
+  ],
+  "scan_date": "2020-02-03",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 680234,
+  "density_in_box": 2.35,
+  "classes": {
+   "1": 216581,
+   "2": 462247,
+   "7": 72,
+   "17": 1334
+  },
+  "train_points_class64": 3002
+ },
+ "platforms": [
+  {
+   "bis_object": "1849",
+   "track": null,
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 300.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 2.54,
+   "track_bed_points": 176,
+   "platform_surface_m": 3.27,
+   "platform_points": 436,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.55
+  },
+  {
+   "bis_object": "1841",
+   "track": "2b",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 195.0,
+   "width_m": 6.0,
+   "roof": "Skydd",
+   "track_bed_m": 2.22,
+   "track_bed_points": 537,
+   "platform_surface_m": 2.88,
+   "platform_points": 1758,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.66,
+   "laser_estimate_above_rail_m": 0.48
+  },
+  {
+   "bis_object": "1850",
+   "track": null,
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 176.0,
+   "width_m": 6.0,
+   "roof": "Tak",
+   "track_bed_m": 2.62,
+   "track_bed_points": 464,
+   "platform_surface_m": 3.33,
+   "platform_points": 1088,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "1843",
+   "track": "2a",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 140.0,
+   "width_m": 6.0,
+   "roof": "Saknas",
+   "track_bed_m": 2.4,
+   "track_bed_points": 336,
+   "platform_surface_m": 3.18,
+   "platform_points": 988,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.78,
+   "laser_estimate_above_rail_m": 0.61
+  },
+  {
+   "bis_object": "1230",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 345.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 2.78,
+   "track_bed_points": 807,
+   "platform_surface_m": 3.53,
+   "platform_points": 1739,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "other_side_surface_m": 3.39,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "1846",
+   "track": "2a",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 90.0,
+   "width_m": null,
+   "roof": "Saknas",
+   "track_bed_m": 2.64,
+   "track_bed_points": 251,
+   "platform_surface_m": 3.2,
+   "platform_points": 757,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.56,
+   "laser_estimate_above_rail_m": 0.39
+  }
+ ],
+ "platform_surface_m": 3.24,
+ "track_bed_m": 2.58,
+ "trains_in_scan": 12,
+ "structures": {
+  "building": 13,
+  "footbridge": 0,
+  "canopy_osm": 3,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 12
+ },
+ "photos": 115,
+ "photos_station_related": 56
+}

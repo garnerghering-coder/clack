@@ -1,0 +1,192 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Hyllie Stationstorg (street level)",
+   "other_names": [],
+   "note": "Street level around the station; Malmö Arena gives its address as \"Hyllie Stationstorg at Malmö Hyllie Station\". No source gives a signposted level name.",
+   "_source": "https://www.malmoarena.com/en/find-us, read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": null,
+   "note": "Platform level: two island platforms serving four tracks in an open cut about 7 m deep (Wikipedia). OSM tags the lifts -1;0. No signposted name found.",
+   "_source": "https://en.wikipedia.org/wiki/Hyllie_railway_station, read 2026-10-30; https://en.wikipedia.org/wiki/City_Tunnel_(Malm%C3%B6), read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "street level (Hyllie Stationstorg)",
+    "island platform tracks 1–2"
+   ],
+   "where": "from the station entrance area off Hyllie boulevard (OSM n1698439660)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street level (Hyllie Stationstorg)",
+    "island platform tracks 3–4"
+   ],
+   "where": "from the station entrance area off Hyllie boulevard (OSM n1698439638)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street level",
+    "island platform tracks 1–2"
+   ],
+   "where": "by the main entrance (OSM w157598214)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "street level",
+    "island platform tracks 3–4"
+   ],
+   "where": "by the main entrance (OSM w157598218)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level",
+    "island platform tracks 1–2"
+   ],
+   "where": "by the main entrance (OSM w157598217)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level",
+    "island platform tracks 3–4"
+   ],
+   "where": "by the main entrance (OSM w157598212)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (west)",
+    "island platform tracks 1–2"
+   ],
+   "where": "west end of the platform (OSM w157006137)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (west)",
+    "island platform tracks 3–4"
+   ],
+   "where": "west end of the platform (OSM w157006144)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (east, towards the Bike & Ride / P-huset)",
+    "island platform tracks 1–2"
+   ],
+   "where": "east end of the platform, with ramp (OSM w157598221)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "note": "OSM ramp=yes: a ramp alongside the steps (type not tagged)."
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level (east, towards the Bike & Ride / P-huset)",
+    "island platform tracks 3–4"
+   ],
+   "where": "east end of the platform, with ramp (OSM w157598213)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30",
+   "note": "OSM ramp=yes: a ramp alongside the steps (type not tagged)."
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance",
+   "street": "Hyllie boulevard",
+   "level": "0",
+   "where": "OSM's only entrance node (n6283632850, entrance=main), between the lifts/escalators",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "fee": "no",
+   "level_per_plan": "0",
+   "where": "at street level by the west stairs/bus shelters (OSM n1985852004)",
+   "opening_hours": "Apr 29-Sep 30 06:00-22:00; Oct 01-Apr 28 06:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "level_per_plan": "0",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "where": "by the station entrance (OSM n11057831932)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Hyllie Bike & Ride (Malmö stad)",
+   "where": "east of the station (OSM n1218863346)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-huset Hyllie",
+   "fee": "yes",
+   "where": "east of the station (OSM w94780041)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Hyllie Stationstorg bus stops",
+   "note": "City bus lines 6, 9, 10 and 51 and regional lines 150, 170 and 300 serve Hyllie (Malmö Arena). OSM has bus shelters at the west end of the platforms.",
+   "_source": "https://www.malmoarena.com/en/find-us, read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "next to the station entrance (OSM n1692398183, level 1)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "where": "next to the station entrance (OSM n6466666264)",
+   "_source": "OSM (osmfacts 740001586), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Track numbering: OSM numbers the platform faces 1–4; Trafikverket's register lists them as tracks 71/72N (BIS 2090) and 73N/74 (BIS 2091), plus a separate track-75 platform (BIS 2597) about 0.9 km south-west, outside the station. Which public number (1–4) matches which register track is not stated in any source read. (Trafikverket, Järnvägsnätsbeskrivning Bilaga 2A tab 4 rows 333–335 and BanInfo BIS 2090/2091/2597 (as compiled in /home/claude/work/out/trafikverket_platforms_SE.csv), read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30)",
+  "No owner pages: Hyllie is not a Jernhusen station; Skånetrafiken's terminal map for Hyllie was not found (file names tried: 80120_hyllie, 80120/80044/80045_malmo-hyllie).",
+  "All stairs, lifts and escalators rest on OSM only; no plan or owner text confirms them.",
+  "Signposted level names and the platform depth (~7 m per Wikipedia, not measured by the owner).",
+  "Shops around the station (Pressbyrån, McDonald's, Subway, Sultan kebab, Kung Fu Dumplings, Brödernas, Swedbank) are outside the station structure per OSM; their own websites could not be read for hours, so only OSM hours exist and they are not repeated here.",
+  "Ticket machines and a ticket office: no source read lists them for Hyllie."
+ ]
+}

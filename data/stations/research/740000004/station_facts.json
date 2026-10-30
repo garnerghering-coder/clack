@@ -1,0 +1,559 @@
+{
+ "clack_id": "740000004",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "app_level": "L1",
+   "name": "Gångbron (footbridge over tracks 1–4)",
+   "note": "The map shows one footbridge over all four tracks; it gives no level name.",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": "Street, station building and platforms",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "700",
+   "track": "1a,1b",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1a,1b (the train stops with the platform to its north-west)",
+   "_source": "laser (2026-03-08, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 700; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "698",
+   "track": "2",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 2 (the train stops with the platform to its north-west)",
+   "_source": "laser (2026-03-08, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 698; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "between": [
+    "street (station building side, by bus stops A–C)",
+    "footbridge"
+   ],
+   "where": "west end of the footbridge, next to the station building",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street (station building side)",
+    "footbridge"
+   ],
+   "where": "west end of the footbridge, by the stairs",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "island platform (tracks 2–3)",
+    "footbridge"
+   ],
+   "where": "middle of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "island platform (tracks 2–3)",
+    "footbridge"
+   ],
+   "where": "middle of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Sjögatan side (east, parking)",
+    "footbridge"
+   ],
+   "where": "east end of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Sjögatan side (east, parking)",
+    "footbridge"
+   ],
+   "where": "east end of the footbridge",
+   "confirmed_by": "plan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w235987032",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3b",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 93.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w235987032 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5571385,
+    "lat": 56.8986603,
+    "how": "OSM w235987032 (point on the way)",
+    "_source": "OpenStreetMap w235987032 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w403479011",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w403479011 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5569264,
+    "lat": 56.8987136,
+    "how": "OSM w403479011 (point on the way)",
+    "_source": "OpenStreetMap w403479011 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w403479018",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3b",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 21.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w403479018 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5571385,
+    "lat": 56.8986603,
+    "how": "OSM w403479018 (point on the way)",
+    "_source": "OpenStreetMap w403479018 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134003",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 12.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1391134003 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5568326,
+    "lat": 56.8986113,
+    "how": "OSM w1391134003 (point on the way)",
+    "_source": "OpenStreetMap w1391134003 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134004",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3b",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 12.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1391134004 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5570424,
+    "lat": 56.8985581,
+    "how": "OSM w1391134004 (point on the way)",
+    "_source": "OpenStreetMap w1391134004 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134005",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1391134005 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5568089,
+    "lat": 56.8985961,
+    "how": "OSM w1391134005 (point on the way)",
+    "_source": "OpenStreetMap w1391134005 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1391134006",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3b",
+    "platform 4b"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1391134006 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 14.5571128,
+    "lat": 56.8986359,
+    "how": "OSM w1391134006 (point on the way)",
+    "_source": "OpenStreetMap w1391134006 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal",
+   "where": "in the station building west of the tracks",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett",
+   "where": "in the station building",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat",
+   "where": "at the west foot of the footbridge and on the footbridge",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "by the station building",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "where": "east of the tracks, off Sjögatan",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Lägen A–C (local and regional buses)",
+   "where": "west of the station building on Centralgatan/Lillsjögatan; läge D (replacement buses) east of the tracks",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 03:15-01:00; Sa 03:15-23:45; Su 06:30-01:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Alvesta station.",
+   "owner_text": "Allt om tillgängligheten på Alvesta station. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Hiss finns vid stationshusets högra gavel, sett framifrån stationen. Den hissen leder såväl till spåren som till väntsalen. Universaltoalett Stationen har en universaltoalett. Betalning sker med mynt. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "parking",
+   "name": "Utomhusparkeringen vid stationen är öppen dygnet runt och drivs av Alvesta kommun.",
+   "owner_text": "Utomhusparkeringen vid stationen är öppen dygnet runt och drivs av Alvesta kommun.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/parkering/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr. Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr. Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/fovaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Snälltåget Länstrafiken Kronoberg Tågab (Tågåkeriet i Bergslagen) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm13952642255",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su 08:00-21:00",
+   "hours_source": "osm",
+   "hours_checked": null,
+   "_source": "the app map (osm)",
+   "position": {
+    "lon": 14.5566868,
+    "lat": 56.8989994,
+    "osm_id": "n13952642255",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.6,
+    "how": "OSM node n13952642255",
+    "_source": "OpenStreetMap n13952642255 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "other",
+   "name": "Alvesta kommuns utställningshall",
+   "app_poi": "jh-av-utstallningshall",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_by_unit": [
+    {
+     "where": null,
+     "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
+     "hours_raw": "Ons–fre 12–18; Sön 12–16"
+    },
+    {
+     "where": "Pressbyrån",
+     "opening_hours": null,
+     "hours_raw": "0472–442 25"
+    }
+   ],
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/mat-och-butiker/"
+  },
+  {
+   "category": "shop",
+   "name": "Antikvariatet Bokpärlan",
+   "app_poi": "jh-av-bokparlan",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_by_unit": [
+    {
+     "where": null,
+     "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
+     "hours_raw": "Ons–fre 12–18; Sön 12–16"
+    },
+    {
+     "where": "Alvesta kommuns utställningshall",
+     "opening_hours": null,
+     "hours_raw": "0472–152 50"
+    }
+   ],
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/alvesta-station/mat-och-butiker/",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "ticket",
+   "name": "Ticket machine",
+   "app_poi": "lk-av-ticket-hall",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "ticket",
+   "name": "Ticket machine",
+   "app_poi": "lk-av-ticket-bridge",
+   "level": "L1",
+   "level_name": "Footbridge over tracks 1–4",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "toilet",
+   "name": "Toilets",
+   "app_poi": "lk-av-toilets",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": null,
+   "_source": null
+  },
+  {
+   "category": "waiting",
+   "name": "Waiting room",
+   "app_poi": "lk-av-waiting",
+   "level": "L0",
+   "level_name": "Street and platforms",
+   "where": null,
+   "opening_hours": "Mo-Fr 03:30-01:00; Sa 03:30-23:45; Su 06:30-01:00",
+   "hours_source": "website",
+   "hours_checked": "2026-10-22",
+   "_source": "the app map (website)"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Stationsområdet",
+   "publisher": "d1da7yrcucvk6m.cloudfront.net",
+   "url": "https://d1da7yrcucvk6m.cloudfront.net/sites/1115/media/1138178_LTK_20231210_webb_Alvesta.pdf?1709210284",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/alvesta-station/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Entrance doors of the station building (names, which street): not on the map and not in OSM.",
+  "The map is from December 2023; OSM also has escalators at the footbridge (w1391134003–6) that the map does not show."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/alvesta-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L1 (Footbridge over tracks 1–4): height not measured",
+  "level L0 (Street and platforms): height not measured",
+  "no entrances mapped"
+ ],
+ "answers": [
+  {
+   "question": "level L1 (Footbridge over tracks 1–4): height not measured",
+   "answer": "Still open: no source measures the deck; the laser gives only the footbridge roof/top (see the structures file).",
+   "_source": "this pass"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Partly: the map shows the station building on the west side (Centralgatan) and the footbridge ends on both sides as the ways in; it marks no named entrances or doors.",
+   "_source": "Länstrafiken Kronoberg, \"Avgångsplatser och service, Alvesta station\" (map PDF valid from 2023-12-10, linked from Jernhusen's Alvesta page), read 2026-10-30; facts only"
+  }
+ ]
+}

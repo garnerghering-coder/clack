@@ -1,0 +1,187 @@
+{
+ "levels": [
+  {
+   "osm_level": "-1",
+   "name": "Tunnel",
+   "other_names": [
+    "Polhems Gång (OSM name of w25162044; not on X-trafik's map, which only says 'Tunnel')"
+   ],
+   "_source": "X-trafik, Gävle Central översikt (Gavle-Central-250818.pdf), label 'Tunnel'; OSM w24788721/w25162044, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side",
+    "platforms 4N and 5"
+   ],
+   "where": "OSM w24788721 (layer -1, 43 m); X-trafik's map labels a 'Tunnel'",
+   "confirmed_by": "plan",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "X-trafik's map legend has 'Hiss'; OSM has lifts n274285407, n1189137381 and n4911637960 (the last reaching platform 4N). The map's text layer does not say which platforms each lift serves.",
+   "confirmed_by": "plan",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "street (Centralplan)",
+    "station hall"
+   ],
+   "where": "to the right of the main entrance (the main entrance itself has steps)",
+   "confirmed_by": "owner text",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentrén (main entrance)",
+   "street": "Centralplan",
+   "where": "street side of the station building; has steps. OSM main entrance n11510667276 (wheelchair=yes, automatic door) is nearest Centralplan.",
+   "_source": "Jernhusen tillgänglighet; OSM, read 2026-10-30"
+  },
+  {
+   "name": "Accessible entrance via ramp",
+   "street": "Centralplan",
+   "where": "to the right of the main entrance",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrances from the track side",
+   "street": "track side (spårsidan)",
+   "where": "Jernhusen: all entrances from the track side are accessible (step-free); the number of doors is not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsalen",
+   "opening_hours": "Mo-Su 04:15-00:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "shops_area",
+   "name": "Butiksdelen",
+   "opening_hours": "Mo-Su 04:15-21:30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes; card (universal toilet card or coin), amount not stated",
+   "where": "in the station; position not given",
+   "hours_raw": "Notice on 2026-10-30: three of the station's four toilets are closed because of vandalism, including all accessible toilets",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/ and /toalett/, /tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "lockers",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199 kr), Large 49 kr/h (max 249 kr); max 7 days",
+   "where": "in the station (OSM luggage_locker n9003098296)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/forvaringsboxar/ and OSM, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomat",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "SJ and UL ticket machines",
+   "where": "OSM vending_machine n7195742905 (SJ), n7195742906 (UL)",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Järnvägskrogen",
+   "where": "Centralplan",
+   "opening_hours": "Mo-Th 10:30-21:30; Fr 10:30-22:00; Sa 11:30-22:00; Su 12:00-21:30",
+   "hours_raw": "Caféet öppet alla dagar 09.30-16.30",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Jernhusen utomhusparkering (Apcoa), incl. paid disabled parking",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/parkering/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Busshållplatser Gävle Central",
+   "where": "around the station (streets on the map: Drottninggatan, Stora Esplanadgatan, Centralgränd, N/S Strandgatan, Murénbron, Fältskärsleden). Lines: 15, 25, 26, 41, 48, 49, 91, 95, 241; express 151 Söderhamn, 173 Bollnäs-Ljusdal; rail replacement buses; Närtrafik/färdtjänst. Stop letters (A, G…) appear on the map but the text layer does not tie them to lines. City buses also stop at Hållplats Rådhuset, about 300 m away.",
+   "_source": "X-trafik, Gävle Central översikt, https://xtrafik.se/Content/132931/Gavle-Central-250818.pdf, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Gävle Central – Översikt (busshållplatser)",
+   "publisher": "X-trafik",
+   "url": "https://xtrafik.se/Content/132931/Gavle-Central-250818.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "file name suggests 2025-08-18. The text layer gives tracks/platform labels 1, 2N, 2S, 3N, 3S, 4N, 4S, 5, a 'Tunnel', and legend items Hiss, Busshållplats, Skärmtak, Område gående, Gång/cykelbana."
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own",
+   "answer": "Not so in OSM: the pedestrian tunnel w24788721 (layer -1) reaches platforms 4N and 5; stairs w25162077/w44123272/w115830078/w499992983 and lift n4911637960 reach platform 4N. Only in OSM, no plan seen.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "level L-1 (Tunnel): name",
+   "answer": "OSM names one tunnel \"Polhems Gång\" (w25162044, stairs w25162049).",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Still mostly open: OSM has one entrance node in the station area.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "no entrances mapped",
+   "answer": "Jernhusen: the main entrance (Centralplan) has steps; there is an accessible ramp entrance to the right of it, and all entrances from the track side are accessible. OSM main entrance n11510667276 (automatic door, wheelchair=yes) is next to Centralplan.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/tillganglighet/ and OSM, read 2026-10-30"
+  },
+  {
+   "question": "level L-1 (Tunnel): height not measured",
+   "answer": "Still open: no open source measures it. X-trafik's map calls it just 'Tunnel'.",
+   "_source": "X-trafik Gävle Central översikt, read 2026-10-30"
+  },
+  {
+   "question": "level L0 (Street, station house and platforms): height not measured",
+   "answer": "Still open: no open source measures it.",
+   "_source": "this pass, 2026-10-30"
+  },
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "X-trafik's map shows a tunnel and has lifts in its legend, and OSM's tunnel w24788721 reaches 4N and 5, but no source says whether platform 5 has its own stairs or lift up from the tunnel. Not settled.",
+   "_source": "X-trafik Gävle Central översikt; OSM, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Station entrances: not in OSM and Jernhusen's Gävle page publishes no plan.",
+  "Which platforms each lift reaches: X-trafik's map legend has 'Hiss', but the text layer does not place the lifts. Someone needs to look at the drawing (facts only).",
+  "Whether 'Polhems Gång' (OSM name) is signposted as the station tunnel: no owner source mentions it.",
+  "Espresso House (Centralplan) hours: not on Jernhusen's page, and the chain's site was not readable in this pass."
+ ]
+}

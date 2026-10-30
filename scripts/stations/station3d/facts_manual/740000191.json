@@ -1,0 +1,197 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Gångbron (footbridge over the tracks)",
+   "note": "Part of the station building and open around the clock (municipal text); no signposted name found.",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30; OSM w310276090 (layer 1)"
+  },
+  {
+   "osm_level": "0",
+   "name": "Street, stationshuset (station building) and platforms",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Gångtunnel (pedestrian tunnel)",
+   "note": "The 2011 plan calls the tunnel existing and planned to extend it to a new commuter car park north of the yard; OSM has an underpass (w310276089, layer -1) reaching platforms 1–3. Whether it is still the passengers' route to the platforms is not stated by any owner source.",
+   "_source": "Trollhättans stad, planbeskrivning \"Detaljplan för del av Resecentrum m m, Tingvalla\" (antagen 2011-04-28), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/resecentrum-d22011/planbeskriv_resecentrum-antagande.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w310276090",
+   "between": [
+    "station building / south side",
+    "north side of the railway"
+   ],
+   "where": "over the tracks; part of the station building, open 24 h; OSM shows it reaching platforms 1, 2 and 3",
+   "confirmed_by": "owner text (municipality)",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w310276087",
+   "between": [
+    "footbridge or tunnel",
+    "platform 2/3 (island)"
+   ],
+   "where": "on the island platform for tracks 2–3",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w310276088",
+   "between": [
+    "footbridge or tunnel",
+    "platform 1"
+   ],
+   "where": "platform 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w611980541",
+   "between": [
+    "footbridge or tunnel",
+    "platform 1"
+   ],
+   "where": "platform 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w310276089",
+   "between": [
+    "platform 1",
+    "platforms 2–3"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only (2011 plan mentions an existing gångtunnel)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; Trollhättans stad, planbeskrivning \"Detaljplan för del av Resecentrum m m, Tingvalla\" (antagen 2011-04-28), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/resecentrum-d22011/planbeskriv_resecentrum-antagande.pdf, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré",
+   "street": "Bangårdsgatan",
+   "level": "0",
+   "where": "south side of the station building",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré, högra gaveln",
+   "street": null,
+   "level": "0",
+   "where": "on the station building's right-hand gable, towards the buses (Resecentrum bus terminal)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Tillgänglig entré, spårsidan",
+   "street": null,
+   "level": "0",
+   "where": "on the track side of the station building",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Gångbron, north side",
+   "street": null,
+   "level": "1",
+   "where": "the footbridge gives access from the north side of the railway (commuter parking); open 24 h",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Stationscaféet",
+   "where": "in/at the station building (address Bergslagstorget 1)",
+   "phone": "0520-392 38",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station building)",
+   "opening_hours": "Mo-Fr 04:30-21:30; Sa 07:30-21:00; Su 08:00-21:30",
+   "hours_source": "website (Jernhusen: station hours)",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen gives the station's hours, not a separate waiting-room time; OSM n13783792711 carries the same hours.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card only)",
+   "where": "in the station building",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr (10-kr coins or card)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests (free)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/wifi/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Trollhättan resecentrum (bus terminal)",
+   "where": "next to the station building; Västtrafik lists lägen 1–15, X, A, B, C, D and L; regional bus terminal built late 1990s",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014081800000/, read 2026-10-30; Trollhättans stad, planbeskrivning \"Detaljplan för del av Resecentrum m m, Tingvalla\" (antagen 2011-04-28), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/resecentrum-d22011/planbeskriv_resecentrum-antagande.pdf, read 2026-10-30; Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "two spaces outside the station (10-minute stops)",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Korttidsparkering",
+   "where": "in front of the entrance: 12 short-stay spaces, 2 of them accessible; Jernhusen: accessible parking with a fee",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Pendlarparkering",
+   "where": "north and south-west of the station; charged, max 14 days",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "covered bike parking at the station; locked bike garage in Bergslagsparken",
+   "_source": "Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "No station plan published: Jernhusen's 'Karta över stationsområdet' links only to Västtrafik's stop page (no PDF)",
+   "publisher": "Jernhusen / Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014081800000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open questions listed for Trollhättan C in STATION_OPEN_QUESTIONS_SWEDEN.md)",
+   "answer": "Nothing to answer; facts added for levels, footbridge, entrances and amenities.",
+   "_source": "this pass"
+  }
+ ],
+ "open": [
+  "Lifts: no source (Jernhusen, Västtrafik, municipality, OSM) mentions a lift to the footbridge or tunnel; whether the island platform 2–3 has step-free access is unknown.",
+  "Whether the gångtunnel (OSM w310276089) is still in passenger use, or only the footbridge: not stated by an owner source.",
+  "Stationscaféet opening hours: not on Jernhusen and no own website found.",
+  "Floor heights: no source.",
+  "Platform numbering beyond OSM (1, 2, 3; Wikipedia: 2 platforms, 3 tracks) not confirmed by a plan."
+ ]
+}

@@ -1,0 +1,175 @@
+{
+ "clack_id": "740000206",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w296354974",
+   "ref": "6 & 7",
+   "level": null
+  },
+  {
+   "osm_id": "w296354975",
+   "ref": "4 & 5",
+   "level": null
+  },
+  {
+   "osm_id": "w296354976",
+   "ref": "2 & 3",
+   "level": null
+  },
+  {
+   "osm_id": "w1527961976",
+   "ref": "1",
+   "level": null
+  }
+ ],
+ "connections": [],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n12125029961",
+   "category": "cafe",
+   "name": "Järnvägscafeet",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 27,
+   "lonlat": [
+    13.3164702,
+    59.5046089
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 9.2
+  },
+  {
+   "osm_id": "w296470000",
+   "category": "shop=supermarket",
+   "name": "PeKås",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+   "distance_m": 51,
+   "lonlat": [
+    13.3173624,
+    59.5042583
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 40.3
+  },
+  {
+   "osm_id": "w580849700",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 70,
+   "lonlat": [
+    13.3160418,
+    59.5041052
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 42.0
+  },
+  {
+   "osm_id": "w1356237551",
+   "category": "parking",
+   "name": "Långtidsparkering",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 85,
+   "lonlat": [
+    13.3148667,
+    59.5044523
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 9.3
+  },
+  {
+   "osm_id": "w1356237552",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 164,
+   "lonlat": [
+    13.3138209,
+    59.5043649
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.0
+  },
+  {
+   "osm_id": "w1356237556",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 78,
+   "lonlat": [
+    13.3153952,
+    59.5045471
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.8
+  },
+  {
+   "osm_id": "w1356237557",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 59,
+   "lonlat": [
+    13.3156891,
+    59.5045442
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.1
+  },
+  {
+   "osm_id": "w1356237558",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    13.3157771,
+    59.5043864
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.2
+  },
+  {
+   "osm_id": "w1356239600",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 13,
+   "lonlat": [
+    13.3169517,
+    59.5046758
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.2
+  }
+ ]
+}

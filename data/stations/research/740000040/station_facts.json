@@ -1,0 +1,578 @@
+{
+ "clack_id": "740000040",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street, station building and platforms (signposted name not found)",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Gångtunnel under the tracks (signposted name not found)",
+   "note": "OSM underpass w27796392 (layer -1, 46 m) and lift w1105572446 (level 0;-1). Trafikverket's lifts to tracks 1–3 and 4–5 (with stairs) imply a level below or above the platforms; that it is this tunnel is OSM only. Herrljunga kommun (2016) mentions a tunnel under the tracks for cycling and a 'södra uppgång' from the platforms.",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30; Herrljunga kommun, 'Trafik- och parkeringsutredning för del av centrum i Herrljunga, del 2' (v0.9, 2016-10-19), https://www.herrljunga.se/download/18.6ab010cd15f093b793712a2/1509960110666/Bil.2+Trafik-+och+P-utredn+del+2+161019.pdf, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2478",
+   "track": "7",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 7 (the train stops with the platform to its south)",
+   "_source": "laser (2022-03-04, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2478; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2477",
+   "track": "6",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 6 (the train stops with the platform to its north)",
+   "_source": "laser (2022-03-04, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2477; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1756",
+   "track": "4",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 4 (the train stops with the platform to its north)",
+   "_source": "laser (2022-03-04, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1756; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1458",
+   "track": "1",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1 (the train stops with the platform to its north)",
+   "_source": "laser (2022-03-04, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1458; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "tracks 1, 2 and 3",
+    "tunnel (OSM level -1)"
+   ],
+   "where": "'Hiss 2'; on the platform for tracks 1–3 (exact spot not given)",
+   "confirmed_by": "owner text",
+   "note": "Closed for renovation 16–22 November 2026.",
+   "_source": "Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tracks 4 and 5",
+    "tunnel (OSM level -1)"
+   ],
+   "where": "'Hiss 3'; on the platform for tracks 4–5 (exact spot not given)",
+   "confirmed_by": "owner text",
+   "note": "Closed for renovation 23–29 November 2026.",
+   "_source": "Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms",
+    "tunnel"
+   ],
+   "where": "Trafikverket says travellers who cannot use the stairs cannot reach the affected tracks while a lift is closed, so stairs serve the same platforms; positions not given",
+   "confirmed_by": "owner text",
+   "_source": "Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "unknown (Hiss 1?)",
+    "tunnel"
+   ],
+   "where": "OSM has lift way w1105572446 (level 0;-1, wheelchair=yes) and four lift nodes n5362875091–n5362875094; none tied to a platform in OSM. Trafikverket's numbering (Hiss 2, Hiss 3) suggests a Hiss 1 but does not mention it",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "station side",
+    "platforms / other side of tracks"
+   ],
+   "where": "OSM w27796392 (layer -1, 46 m) plus stairs w1329016577 and w1329017303",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1105572446",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1105572446 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0200058,
+    "lat": 58.0786584,
+    "how": "OSM w1105572446 (point on the way)",
+    "_source": "OpenStreetMap w1105572446 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5362875091",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5362875091 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0200049,
+    "lat": 58.0786572,
+    "how": "OSM n5362875091",
+    "_source": "OpenStreetMap n5362875091 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5362875092",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5362875092 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.019851,
+    "lat": 58.0787626,
+    "how": "OSM n5362875092",
+    "_source": "OpenStreetMap n5362875092 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5362875093",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5362875093 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0197616,
+    "lat": 58.0789076,
+    "how": "OSM n5362875093",
+    "_source": "OpenStreetMap n5362875093 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5362875094",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5362875094 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 13.0196646,
+    "lat": 58.0791164,
+    "how": "OSM n5362875094",
+    "_source": "OpenStreetMap n5362875094 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building, Stationsgatan side (main)",
+   "street": "Stationsgatan",
+   "where": "OSM n4802407830 and n10116922731 (entrance=main), 16–18 m from Stationsgatan. Jernhusen: all entrances are accessible.",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/herrljunga-station/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Station building, Järnvägsplatsen side",
+   "street": "Järnvägsplatsen",
+   "where": "OSM n2695288297 and n3129807505, 16–27 m from Järnvägsplatsen; Västsverige gives the station building's address as Järnvägsplatsen 1",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Södra uppgången (south access from the platforms)",
+   "where": "named by Herrljunga kommun (2016) as an increasingly important entrance; exact place and street not given; not tagged in OSM",
+   "_source": "Herrljunga kommun, 'Trafik- och parkeringsutredning för del av centrum i Herrljunga, del 2' (v0.9, 2016-10-19), https://www.herrljunga.se/download/18.6ab010cd15f093b793712a2/1509960110666/Bil.2+Trafik-+och+P-utredn+del+2+161019.pdf, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2695288297",
+   "street": "Järnvägsplatsen",
+   "street_how": "nearest named street, 15.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2695288297 (already in OSM)",
+   "position": {
+    "lon": 13.0214871,
+    "lat": 58.0788262,
+    "how": "OSM n2695288297",
+    "_source": "OpenStreetMap n2695288297 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3129807505",
+   "street": "Järnvägsplatsen",
+   "street_how": "nearest named street, 27.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3129807505 (already in OSM)",
+   "position": {
+    "lon": 13.0214106,
+    "lat": 58.0789211,
+    "how": "OSM n3129807505",
+    "_source": "OpenStreetMap n3129807505 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4802407830",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 18.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4802407830 (already in OSM)",
+   "position": {
+    "lon": 13.0204806,
+    "lat": 58.0787019,
+    "how": "OSM n4802407830",
+    "_source": "OpenStreetMap n4802407830 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10116922731",
+   "street": "Stationsgatan",
+   "street_how": "nearest named street, 16.5 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10116922731 (already in OSM)",
+   "position": {
+    "lon": 13.0206868,
+    "lat": 58.0787156,
+    "how": "OSM n10116922731",
+    "_source": "OpenStreetMap n10116922731 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n13423285790)",
+   "opening_hours": "Mo-Fr 05:30-18:30; Sa 09:00-18:30; Su 10:00-18:30",
+   "hours_source": "OSM's opening_hours (normalised from 'Mo-Fr 05:30 - 18:30, Sa 09:00 - 18:30, Su 10:00 - 18:30'; Pressbyrån's store finder loads by script and could not be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 13.0205188,
+    "lat": 58.0787192,
+    "osm_id": "n13423285790",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13423285790",
+    "_source": "OpenStreetMap n13423285790 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Pars Café",
+   "level_per_plan": "0",
+   "where": "inside the station building (OSM n5362875088); Västsverige: 'Inne på Herrljunga stationshus', Järnvägsplatsen 1",
+   "hours_raw": "open daily ('öppet dagligen'); no times published on an allowed source (its own site is a Facebook page)",
+   "hours_source": "Västsverige tourism page",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; https://www.vastsverige.com/herrljunga/produkter/pars-cafe/, read 2026-10-30",
+   "position": {
+    "lon": 13.0210922,
+    "lat": 58.0788231,
+    "osm_id": "n5362875088",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5362875088",
+    "_source": "OpenStreetMap n5362875088 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Järnvägens Grill",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n5362875089)",
+   "opening_hours": "Su-Th 11:00-21:00; Fr,Sa 11:00-22:00",
+   "hours_source": "OSM's opening_hours (no own website found)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 13.0211429,
+    "lat": 58.0787472,
+    "osm_id": "n5362875089",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5362875089",
+    "_source": "OpenStreetMap n5362875089 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "clothes",
+   "name": "Ellas garderob",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n5362875087)",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-13:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Självfallet",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n5362875090)",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes (card, per Jernhusen; OSM n5362875086 says fee=no, likely outdated)",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n5362875086)",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 07:30-22:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/toalett/, read 2026-10-30; OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationshus (väntsal)",
+   "level_per_plan": "0",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 07:30-22:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Herrljunga station (Västtrafik)",
+   "where": "in front of the station (kommun 2016); Västtrafik lists lägen 1–7, A, B and X for the stop",
+   "_source": "Västtrafik stop page 'Herrljunga station', https://www.vasttrafik.se/reseplanering/hallplatser/9021014066021000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30; Herrljunga kommun, 'Trafik- och parkeringsutredning för del av centrum i Herrljunga, del 2' (v0.9, 2016-10-19), https://www.herrljunga.se/download/18.6ab010cd15f093b793712a2/1509960110666/Bil.2+Trafik-+och+P-utredn+del+2+161019.pdf, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Station car park",
+   "where": "between Storgatan and the station building, opposite Hemköp (kommun 2016: 18 spaces, 1 for disabled people, 2-hour limit; 6 short-stay spaces on Stationsgatan) — figures from 2016, may have changed",
+   "_source": "Herrljunga kommun, 'Trafik- och parkeringsutredning för del av centrum i Herrljunga, del 2' (v0.9, 2016-10-19), https://www.herrljunga.se/download/18.6ab010cd15f093b793712a2/1509960110666/Bil.2+Trafik-+och+P-utredn+del+2+161019.pdf, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "on both sides of the tracks (kommun 2016)",
+   "_source": "Herrljunga kommun, 'Trafik- och parkeringsutredning för del av centrum i Herrljunga, del 2' (v0.9, 2016-10-19), https://www.herrljunga.se/download/18.6ab010cd15f093b793712a2/1509960110666/Bil.2+Trafik-+och+P-utredn+del+2+161019.pdf, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa 07:30-22:00; Su 07:30-22:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Herrljunga station.",
+   "owner_text": "Allt om tillgängligheten på Herrljunga station. Tillgänglig entré Samtliga entréer till stationen är tillgängliga. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Västtrafik VR Snabbtåg För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n5362875086",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n5362875086 (read 2026-10-30)",
+   "position": {
+    "lon": 13.0207967,
+    "lat": 58.078774,
+    "osm_id": "n5362875086",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5362875086",
+    "_source": "OpenStreetMap n5362875086 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "clothes",
+   "name": "Ellas garderob",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-13:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.0214384,
+    "lat": 58.0788737,
+    "osm_id": "n5362875087",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5362875087",
+    "_source": "OpenStreetMap n5362875087 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5362875087 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Självfallet",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 13.0218296,
+    "lat": 58.0789377,
+    "osm_id": "n5362875090",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5362875090",
+    "_source": "OpenStreetMap n5362875090 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n5362875090 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "House Of Eden",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-13:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 13.0202972,
+    "lat": 58.0784079,
+    "osm_id": "n10116922793",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n10116922793",
+    "_source": "OpenStreetMap n10116922793 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n10116922793 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Herrljunga station, stop page with map",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014066021000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "interactive map only; no PDF station plan found"
+  }
+ ],
+ "open": [
+  "Which OSM lift node is Hiss 2, Hiss 3 (and a possible Hiss 1); whether the lifts run to the tunnel or another level: Trafikverket gives only tracks served.",
+  "Platform numbering on the ground (Västtrafik lists lägen 1–7; Trafikverket's lifts serve tracks 1–5): which platform faces which track, from no plan.",
+  "Level names as signposted and floor heights: no source.",
+  "Pars Café, Självfallet: no hours from an allowed source. Järnvägens Grill, Ellas garderob and Pressbyrån hours only from OSM.",
+  "Toilet fee: Jernhusen says card payment, OSM says no fee; amount not published.",
+  "No lockers, ticket machines or photo booth named by Jernhusen or Västtrafik for Herrljunga."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Herrljunga C (`740000040`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly settled. Entrances: OSM now tags four (two entrance=main toward Stationsgatan, two toward Järnvägsplatsen). Platform access: Trafikverket (2026-10-14) confirms lifts with stairs: Hiss 2 to tracks 1, 2 and 3, Hiss 3 to tracks 4 and 5; OSM has a tunnel (w27796392, layer -1) with a lift (w1105572446, level 0;-1) and four lift nodes, but the extract has no platform with a ref, so the draft still can't join them. Västtrafik lists lägen 1–7. Fix needed in OSM (platform refs) or in the edits file (platform_refs, paths_by_layer).",
+   "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; Trafikverket, 'Hissar på Alingsås och Herrljunga station renoveras' (published 2026-10-14), https://www.trafikverket.se/om-oss/nyheter/lansnyheter/vastra-gotaland/2026/hissar-pa-alingsas-och-herrljunga-station-renoveras/, read 2026-10-30; Västtrafik stop page 'Herrljunga station', https://www.vasttrafik.se/reseplanering/hallplatser/9021014066021000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30"
+  }
+ ]
+}

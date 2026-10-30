@@ -1,0 +1,358 @@
+{
+ "clack_id": "740000192",
+ "compiled": "2026-10-30",
+ "levels": [],
+ "platform_sides": [
+  {
+   "platform_bis": "1146",
+   "track": "1",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 1 (the train stops with the platform to its east)",
+   "_source": "laser (2023-07-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1146; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1148",
+   "track": "2",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 2 (the train stops with the platform to its west)",
+   "_source": "laser (2023-07-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1148; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "station side (street level)",
+    "platforms 1 and 2"
+   ],
+   "where": "pedestrian tunnel under the tracks by the station (OSM w303713042, with short tunnel links w1094091164/5)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000192.json), read 2026-10-30; no owner text or plan names it"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms 1 and 2"
+   ],
+   "where": "at the tunnel's platform end (OSM n10020544213)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000192.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street/station side",
+    "tunnel"
+   ],
+   "where": "west of the tracks near the stairs (OSM n10020544210); OSM links it to no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000192.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street",
+    "tunnel"
+   ],
+   "where": "two stair flights (OSM w184555145, w230862080), not linked to a platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OSM (local osmfacts/740000192.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w303713042",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 54.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w303713042 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.1406726,
+    "lat": 59.1269361,
+    "how": "OSM w303713042 (point on the way)",
+    "_source": "OpenStreetMap w303713042 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1094091164",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1094091164 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.140649,
+    "lat": 59.1268712,
+    "how": "OSM w1094091164 (point on the way)",
+    "_source": "OpenStreetMap w1094091164 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1094091165",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1094091165 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.1406472,
+    "lat": 59.1269133,
+    "how": "OSM w1094091165 (point on the way)",
+    "_source": "OpenStreetMap w1094091165 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10020544210",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10020544210 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.1403488,
+    "lat": 59.1269145,
+    "how": "OSM n10020544210",
+    "_source": "OpenStreetMap n10020544210 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10020544213",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10020544213 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.140649,
+    "lat": 59.1268712,
+    "how": "OSM n10020544213",
+    "_source": "OpenStreetMap n10020544213 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stationshuset (station building)",
+   "street": "Stationsgatan",
+   "level": "0",
+   "where": "station building on Stationsgatan, on the west side of the railway (exact door not given)",
+   "_source": "https://www.lansstyrelsen.se/orebro/besok-och-upptack/kulturmiljoer/kumla-jarnvagsstation.html (\"Kumla stationshus ligger i centrala Kumla på Stationsgatan, västra sidan om järnvägen\"); address Stationsgatan 9 from https://www.jernhusen.se/hitta-din-station/kumla-station/; read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "restaurant",
+   "name": "Lotus",
+   "where": "in the station (Jernhusen lists it as the station's restaurant, address Stationsgatan 9, the station's own address)",
+   "opening_hours": "Mo off; Tu-Th 11:00-20:00; Fr,Sa 11:00-21:00; Su 12:00-20:00",
+   "hours_note": "lunch buffet weekdays 11:00-14:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "phone": "070-075 85 40",
+   "website": "https://www.lotuskumla.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/mat-och-butiker/ and https://www.lotuskumla.se/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "wheelchair": "yes",
+   "fee": "yes (card payment)",
+   "where": "in the station (no position given)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/toalett/ (\"På stationen finns en universaltoalett. Betalning sker med kort.\"), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationen (station building)",
+   "where": "station building, Stationsgatan",
+   "opening_hours": "Mo-Fr 04:30-21:45; Sa 06:00-21:00; Su 07:00-21:45",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Kumla resecentrum",
+   "where": "by the station; bus stops A–G per Länstrafiken's map; Länstrafiken lists train positions \"Track 1\" and \"Track 2\"",
+   "_source": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-kumla-december-2024.pdf and https://www.lanstrafiken.se/en/bus-stop/115010, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 04:30-21:45; Sa 06:00-21:00; Su 07:00-21:45",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Kumla station.",
+   "owner_text": "Allt om tillgängligheten på Kumla station. Tillgänglig entré Stationen har en tillgänglig entré. Universaltoalett Stationen har en universaltoalett. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Länstrafiken Örebro Vy TIB (Tåg i Bergslagen) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns en universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns en universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Lotus",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.lotuskumla.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/kumla-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "fast_food",
+   "name": "Sibylla",
+   "brand": "Sibylla",
+   "cuisine": "burger",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 15.1393883,
+    "lat": 59.126774,
+    "osm_id": "n989931681",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 64.9,
+    "how": "OSM node n989931681",
+    "_source": "OpenStreetMap n989931681 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n989931681 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Hitta till rätt hållplatsläge vid Kumla Resecentrum (karta – hitta din buss, Kumla, december 2024)",
+   "publisher": "Länstrafiken Örebro",
+   "url": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-kumla-december-2024.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen's 'Karta över stationsområdet'. Shows Stationshus, Tåg, P-platser, bus stops A–G and reserve stops; no lifts, stairs, tunnel or toilets. Text extraction did not allow placing the stop letters."
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.lanstrafiken.se",
+   "url": "https://www.lanstrafiken.se/globalassets/kartor/hitta-din-buss-och-linjekarta/karta---hitta-din-buss-kumla-december-2024.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/kumla-station/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Lifts, stairs and tunnel: OSM only; no plan, owner text or photo found to confirm them or say which platform each lift serves.",
+  "Entrance positions (doors) and the accessible entrance's side: no source.",
+  "Whether platform 1 is reached at street level from the station building (side platform) or only via the tunnel: no source.",
+  "Floor heights: no open source.",
+  "Trafikverket's Kumla gång- och cykeltunnel project (Fredsgatan–Grevgatan, replacing the Hagagatan level crossing, build 2028–2030) is a separate future tunnel, not the station passage. Source: https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/kumla-gang--och-cykeltunnel-under-jarnvagen/, read 2026-10-30.",
+  "Ticket machines, lockers: Jernhusen lists none; not confirmed."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/kumla-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Kumla (`740000192`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly. Station building is on Stationsgatan (west side of the railway, address Stationsgatan 9); Jernhusen says there is an accessible entrance but not where. OSM has a tunnel (w303713042) tagged as reaching platforms 1 and 2 with a lift (n10020544213) at its platform end and a second lift (n10020544210) plus two stairs on the west side, but no source other than OSM confirms them, and no entrance node position can be sourced. The map stays withheld until OSM gets an entrance and footway joins.",
+   "_source": "https://www.lansstyrelsen.se/orebro/besok-och-upptack/kulturmiljoer/kumla-jarnvagsstation.html; https://www.jernhusen.se/hitta-din-station/kumla-station/tillganglighet/; OSM; read 2026-10-30"
+  }
+ ]
+}

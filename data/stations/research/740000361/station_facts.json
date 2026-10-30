@@ -1,0 +1,157 @@
+{
+ "clack_id": "740000361",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Gångbron (the red footbridge)",
+   "other_names": [
+    "den röda gångbron"
+   ],
+   "note": "Built 2018–2019; the way between platform 1 (east) and platform 30 (west). OSM footbridge w979570484, layer 1.",
+   "_source": "Trafikverket, project page \"Örebro Södra: säkerhetshöjande åtgärder\" (updated 2026-06-01), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/, read 2026-10-30; Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; OSM (osmfacts/740000361.json, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platforms and street",
+   "other_names": [],
+   "note": "Platforms at spår 1 (east side) and spår 30 (west side).",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1219",
+   "track": "1",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 1 (the train stops with the platform to its south-east)",
+   "_source": "laser (2023-07-11, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1219; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "between": [
+    "platform 1 (east side)",
+    "platform 30 (west side)"
+   ],
+   "where": "the red footbridge over the railway",
+   "confirmed_by": "owner text",
+   "osm_id": "w979570484",
+   "note": "Trafikverket: 'Istället hänvisar vi till den röda gångbron över järnvägen för att ta sig mellan spår 1 och spår 30'. No lifts yet: Trafikverket plans lifts on the footbridge in 2027 (placement still being studied).",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; Trafikverket, project page \"Örebro Södra: säkerhetshöjande åtgärder\" (updated 2026-06-01), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/, read 2026-10-30",
+   "position": {
+    "lon": 15.2019871,
+    "lat": 59.2693807,
+    "how": "OSM w979570484 (point on the way)",
+    "_source": "OpenStreetMap w979570484 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "ground (east/west end)",
+    "Gångbron"
+   ],
+   "where": "at the footbridge ends; OSM tags both with ramp=yes (likely a bicycle/stroller channel)",
+   "confirmed_by": "OSM only",
+   "osm_id": "w979570485, w979570486",
+   "note": "Trafikverket does not describe the stairs. The station is not step-free: 'Stationen vid Örebro Södra är inte tillgänglighetsanpassad'; travellers needing step-free access are referred to Örebro Central.",
+   "_source": "OSM (osmfacts/740000361.json, ODbL), read 2026-10-30; Trafikverket, project page \"Örebro Södra: säkerhetshöjande åtgärder\" (updated 2026-06-01), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "east side",
+    "west side"
+   ],
+   "where": "Hagatunneln, near the station",
+   "confirmed_by": "owner text",
+   "note": "Named by Trafikverket as the alternative to the footbridge; not in osmfacts.",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; Trafikverket news \"Vi river mittplattformen vid Örebro Södra\" (2026-08-12), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-08/vi-river-mittplattformen-vid-orebro-sodra/, read 2026-10-30"
+  },
+  {
+   "kind": "level_crossing",
+   "between": [
+    "platform 1",
+    "former middle platform"
+   ],
+   "where": "the old at-grade crossing",
+   "confirmed_by": "owner text",
+   "note": "Closed 30 May 2026; the middle platform was taken out of use and removed during the 13–17 August 2026 closure; a fence stands between track 2 and track 30. Remove any map path over the tracks.",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; Trafikverket news \"Vi river mittplattformen vid Örebro Södra\" (2026-08-12), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-08/vi-river-mittplattformen-vid-orebro-sodra/, read 2026-10-30; Trafikverket, project page \"Örebro Södra: säkerhetshöjande åtgärder\" (updated 2026-06-01), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/, read 2026-10-30",
+   "status": "closed"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w979570484",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 30"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 35.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w979570484 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 15.2019871,
+    "lat": 59.2693807,
+    "how": "OSM w979570484 (point on the way)",
+    "_source": "OpenStreetMap w979570484 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "West access to platform 30",
+   "street": "Svartå Bangata",
+   "where": "direct to platform 30 from the west, without the footbridge",
+   "note": "Trafikverket: 'Det går att ta sig direkt till den nya plattformen vid spår 30 om man kommer västerifrån (från Svartå Bangata).'",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30"
+  },
+  {
+   "name": "East side (platform 1)",
+   "street": "Östra Bangatan",
+   "where": "platform 1 is on the east side of the railway",
+   "note": "Platform side from Trafikverket; street name from Örebro kommun's description of the east side (Östra Bangatan to be rebuilt). No source says exactly where the path onto platform 1 starts.",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; Örebro kommun, \"Örebro Södra\" (updated 2026-09-15), https://extra.orebro.se/merorebro/utvecklingssatsningar/orebrosodra.4.45e37b6318e5a7b16a2202.html, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "shelter",
+   "name": "Väderskydd, bänkar, belysning",
+   "where": "on the new platform at spår 30",
+   "note": "Trafikverket listed lighting, benches and weather shelters for the new platform (planned for June 2026).",
+   "_source": "Trafikverket news \"I höst börjar vi bygga den nya plattformen på Örebro Södra\" (2025-07), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2025-07/i-host-borjar-vi-bygga-den-nya-plattformen-pa-orebro-sodra/, read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No entrance points or station building: the station has none mapped and no source describes one; only the west access via Svartå Bangata is named.",
+  "Exact place where the footbridge stairs land on each platform: OSM only.",
+  "Footbridge lifts: planned 2027, placement still being studied (Trafikverket).",
+  "No shops, toilets or ticket machines found in any source.",
+  "Heights: no source.",
+  "No published station plan found (Länstrafiken or Trafikverket)."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Settled from Trafikverket (owner): since 30 May 2026 passenger trains stop only at spår 1 (east side) and the new spår 30 (west side); the at-grade crossing and middle platform are gone (removed August 2026). The two platforms are linked by the red footbridge (OSM w979570484, stairs both ends, no lift until a planned 2027 install) or the nearby Hagatunneln; platform 30 can also be reached directly from Svartå Bangata in the west. The station is not step-free; Trafikverket refers those needing step-free access to Örebro Central. OSM has platform 1 (w92083221) and 30 (w1491812320) and the footbridge reaching both, but still no entrance nodes.",
+   "_source": "Trafikverket news \"Den nya plattformen vid Örebro Södra är färdig\" (2026-05-30), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-05/den-nya-plattformen-vid-orebro-sodra-ar-fardig/, read 2026-10-30; Trafikverket, project page \"Örebro Södra: säkerhetshöjande åtgärder\" (updated 2026-06-01), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/, read 2026-10-30; Trafikverket news \"Vi river mittplattformen vid Örebro Södra\" (2026-08-12), https://www.trafikverket.se/vara-projekt/projekt-i-orebro-lan/orebro-sodra-sakerhetshojande-atgarder/nyheter-for-projekt-orebro-sodra-sakerhetshojande-atgarder/2026-08/vi-river-mittplattformen-vid-orebro-sodra/, read 2026-10-30; OSM (osmfacts/740000361.json, ODbL), read 2026-10-30"
+  }
+ ]
+}

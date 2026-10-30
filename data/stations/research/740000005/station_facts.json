@@ -1,0 +1,1791 @@
+{
+ "clack_id": "740000005",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "app_level": "L0",
+   "name": "Street, station hall and platforms",
+   "other_names": [],
+   "note": "No signposted name found. Jernhusen says the toilets are 'på övre plan' (upper floor of the station building); no source says how that floor relates to the app's L0/L-1, so it is not used as a level name.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Centralpassagen",
+   "other_names": [],
+   "note": "Pedestrian and cycle passage under the station; Trafikverket calls it 'Centralpassagen' and it is the way up/down to tracks 2–7. The UL map labels it CENTRALPASSAGEN.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "2100",
+   "track": "5",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 5 (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2100; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2126",
+   "track": "1a,1b",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1a,1b (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2126; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2000",
+   "track": "8a,8b",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 8a,8b (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2000; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2014",
+   "track": "7a,7b",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 7a,7b (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2014; read 2026-10-30"
+  },
+  {
+   "platform_bis": "2127",
+   "track": "2a,2b",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 2a,2b (the train stops with the platform to its north-east)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2127; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "2052",
+   "track": "3",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 3 (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-03-19, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 2052; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "Centralpassagen",
+    "all platforms"
+   ],
+   "where": "from Centralpassagen up to every track",
+   "confirmed_by": "owner text",
+   "note": "Trafikverket: 'Från Centralpassagen finns hiss till samtliga spår.' OSM maps Centralpassagen lifts only to track 1 (n12626024022), island 5/6 (n12626518111) and track 8 (w444022997); the lifts to islands 2/3 and 4/7 are missing in OSM.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Centralpassagen",
+    "platforms 2–7"
+   ],
+   "where": "from Centralpassagen up to the island platforms",
+   "confirmed_by": "owner text",
+   "note": "Trafikverket: 'Centralpassagen fungerar även som uppgång/nedgång för spår 2 till 7, som även nås via Strandbodgatan.' OSM has only one such stair (w55635971, to island 5/6).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "platform 1"
+   ],
+   "where": "south end of the station, at Strandbodgatan (under the railway bridges)",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791540",
+   "note": "Trafikverket: 'Ytterligare fyra hissar finns vid Strandbodgatan upp till spåren.' Which platform each of the four reaches is OSM only.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6520621,
+    "lat": 59.8553059,
+    "how": "OSM w207791540 (point on the way)",
+    "_source": "OpenStreetMap w207791540 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "island platform 2/3"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791539",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 2.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6522205,
+    "lat": 59.8554311,
+    "how": "OSM w207791539 (point on the way)",
+    "_source": "OpenStreetMap w207791539 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "island platform 4/7"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791538",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 7.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6524268,
+    "lat": 59.855579,
+    "how": "OSM w207791538 (point on the way)",
+    "_source": "OpenStreetMap w207791538 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Strandbodgatan",
+    "platform 8"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "owner text",
+   "osm_id": "w207791542",
+   "note": "One of the four Strandbodgatan lifts (owner text); OSM ties it to platform 8.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6525735,
+    "lat": 59.8556954,
+    "how": "OSM w207791542 (point on the way)",
+    "_source": "OpenStreetMap w207791542 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "island platform 2/3"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791563",
+   "note": "Trafikverket confirms tracks 2–7 are reached via Strandbodgatan but does not say stairs.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30",
+   "position": {
+    "lon": 17.6520673,
+    "lat": 59.8555616,
+    "how": "OSM w207791563 (point on the way)",
+    "_source": "OpenStreetMap w207791563 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "island platform 4/7"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791561",
+   "note": "Trafikverket confirms tracks 2–7 are reached via Strandbodgatan but does not say stairs.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30",
+   "position": {
+    "lon": 17.6525297,
+    "lat": 59.8554826,
+    "how": "OSM w207791561 (point on the way)",
+    "_source": "OpenStreetMap w207791561 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "platform 1"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791557",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6519751,
+    "lat": 59.8553965,
+    "how": "OSM w207791557 (point on the way)",
+    "_source": "OpenStreetMap w207791557 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "Strandbodgatan",
+    "platform 8"
+   ],
+   "where": "south end, at Strandbodgatan",
+   "confirmed_by": "OSM only",
+   "osm_id": "w207791559",
+   "note": "Trafikverket's overview map (Figur 9) has a label 'Trappor till spår 8'; its position is not readable from the text.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30",
+   "position": {
+    "lon": 17.6525325,
+    "lat": 59.8557634,
+    "how": "OSM w207791559 (point on the way)",
+    "_source": "OpenStreetMap w207791559 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "station hall (L0)",
+    "Centralpassagen (L-1)"
+   ],
+   "where": "in the station building by Olof Palmes plats",
+   "confirmed_by": "OSM only",
+   "osm_id": "w815720301",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 17.6464119,
+    "lat": 59.8582251,
+    "how": "OSM w815720301 (point on the way)",
+    "_source": "OpenStreetMap w815720301 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w55635971",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 5",
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w55635971 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6474538,
+    "lat": 59.8583154,
+    "how": "OSM w55635971 (point on the way)",
+    "_source": "OpenStreetMap w55635971 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w207791525",
+   "name": "Centralpassagen",
+   "osm_level": "-1",
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 5",
+    "platform 6",
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 59.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791525 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6475618,
+    "lat": 59.8582585,
+    "how": "OSM w207791525 (point on the way)",
+    "_source": "OpenStreetMap w207791525 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w207791538",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791538 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6524268,
+    "lat": 59.855579,
+    "how": "OSM w207791538 (point on the way)",
+    "_source": "OpenStreetMap w207791538 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w207791539",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791539 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6522205,
+    "lat": 59.8554311,
+    "how": "OSM w207791539 (point on the way)",
+    "_source": "OpenStreetMap w207791539 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w207791540",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791540 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6520621,
+    "lat": 59.8553059,
+    "how": "OSM w207791540 (point on the way)",
+    "_source": "OpenStreetMap w207791540 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w207791542",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 13.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791542 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6525735,
+    "lat": 59.8556954,
+    "how": "OSM w207791542 (point on the way)",
+    "_source": "OpenStreetMap w207791542 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w207791557",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791557 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6519751,
+    "lat": 59.8553965,
+    "how": "OSM w207791557 (point on the way)",
+    "_source": "OpenStreetMap w207791557 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w207791559",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791559 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6525325,
+    "lat": 59.8557634,
+    "how": "OSM w207791559 (point on the way)",
+    "_source": "OpenStreetMap w207791559 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w207791561",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 31.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791561 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6525297,
+    "lat": 59.8554826,
+    "how": "OSM w207791561 (point on the way)",
+    "_source": "OpenStreetMap w207791561 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w207791563",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 29.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w207791563 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6520673,
+    "lat": 59.8555616,
+    "how": "OSM w207791563 (point on the way)",
+    "_source": "OpenStreetMap w207791563 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w210282797",
+   "name": "Centralpassagen",
+   "osm_level": "-1",
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 5",
+    "platform 6",
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 170.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w210282797 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6473487,
+    "lat": 59.8582915,
+    "how": "OSM w210282797 (point on the way)",
+    "_source": "OpenStreetMap w210282797 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w210282814",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w210282814 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6506666,
+    "lat": 59.8560462,
+    "how": "OSM w210282814 (point on the way)",
+    "_source": "OpenStreetMap w210282814 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w210282823",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w210282823 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6515457,
+    "lat": 59.8555518,
+    "how": "OSM w210282823 (point on the way)",
+    "_source": "OpenStreetMap w210282823 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w390998645",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w390998645 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6474538,
+    "lat": 59.8583154,
+    "how": "OSM w390998645 (point on the way)",
+    "_source": "OpenStreetMap w390998645 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w390998657",
+   "name": "Centralpassagen",
+   "osm_level": "-1",
+   "between": [
+    "platform 1",
+    "platform 5",
+    "platform 6",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 58.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w390998657 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6474002,
+    "lat": 59.8583444,
+    "how": "OSM w390998657 (point on the way)",
+    "_source": "OpenStreetMap w390998657 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w444022997",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 8"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 15.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w444022997 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6477004,
+    "lat": 59.8585372,
+    "how": "OSM w444022997 (point on the way)",
+    "_source": "OpenStreetMap w444022997 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w815720301",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 9.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w815720301 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6464119,
+    "lat": 59.8582251,
+    "how": "OSM w815720301 (point on the way)",
+    "_source": "OpenStreetMap w815720301 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12626024022",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12626024022 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6469626,
+    "lat": 59.8581975,
+    "how": "OSM n12626024022",
+    "_source": "OpenStreetMap n12626024022 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12626518111",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12626518111 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.6473203,
+    "lat": 59.8583881,
+    "how": "OSM n12626518111",
+    "_source": "OpenStreetMap n12626518111 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station hall, west side",
+   "street": "Olof Palmes plats",
+   "where": "west front of the new station building (address Olof Palmes plats 10); OSM n2187779892, n2778217793, n2778217794, n13051653543",
+   "note": "Jernhusen: 'Samtliga entréer till stationen är tillgängliga.'",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Centralpassagen entrances",
+   "street": "Centralpassagen",
+   "level": "-1",
+   "where": "from the underpass into the station building and up to the platforms; OSM n2778217791, n4415233105, n12626024021",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Strandbodgatan (south platform access)",
+   "street": "Strandbodgatan",
+   "where": "south end of the platforms, where the four lifts and the stairs come down to Strandbodgatan; OSM n4415233083–n4415233091",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2187779892",
+   "street": "Olof Palmes plats",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2187779892 (already in OSM)",
+   "position": {
+    "lon": 17.6462286,
+    "lat": 59.8582842,
+    "how": "OSM n2187779892",
+    "_source": "OpenStreetMap n2187779892 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2778217791",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 0.0 m",
+   "level": "-1",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2778217791 (already in OSM)",
+   "position": {
+    "lon": 17.6468553,
+    "lat": 59.8581384,
+    "how": "OSM n2778217791",
+    "_source": "OpenStreetMap n2778217791 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2778217793",
+   "street": "Olof Palmes plats",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2778217793 (already in OSM)",
+   "position": {
+    "lon": 17.6461774,
+    "lat": 59.858222,
+    "how": "OSM n2778217793",
+    "_source": "OpenStreetMap n2778217793 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2778217794",
+   "street": "Olof Palmes plats",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2778217794 (already in OSM)",
+   "position": {
+    "lon": 17.646358,
+    "lat": 59.8583412,
+    "how": "OSM n2778217794",
+    "_source": "OpenStreetMap n2778217794 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3941524569",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 12.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3941524569 (already in OSM)",
+   "position": {
+    "lon": 17.647669,
+    "lat": 59.8581208,
+    "how": "OSM n3941524569",
+    "_source": "OpenStreetMap n3941524569 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3941524570",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 17.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3941524570 (already in OSM)",
+   "position": {
+    "lon": 17.6478086,
+    "lat": 59.8581335,
+    "how": "OSM n3941524570",
+    "_source": "OpenStreetMap n3941524570 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3941524592",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 12.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3941524592 (already in OSM)",
+   "position": {
+    "lon": 17.6478302,
+    "lat": 59.8582,
+    "how": "OSM n3941524592",
+    "_source": "OpenStreetMap n3941524592 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3941524608",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 8.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3941524608 (already in OSM)",
+   "position": {
+    "lon": 17.6468957,
+    "lat": 59.8582513,
+    "how": "OSM n3941524608",
+    "_source": "OpenStreetMap n3941524608 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233083",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 13.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233083 (already in OSM)",
+   "position": {
+    "lon": 17.6520878,
+    "lat": 59.8552925,
+    "how": "OSM n4415233083",
+    "_source": "OpenStreetMap n4415233083 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233084",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 17.9 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233084 (already in OSM)",
+   "position": {
+    "lon": 17.6520373,
+    "lat": 59.8553198,
+    "how": "OSM n4415233084",
+    "_source": "OpenStreetMap n4415233084 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233085",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 15.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233085 (already in OSM)",
+   "position": {
+    "lon": 17.6522451,
+    "lat": 59.8554198,
+    "how": "OSM n4415233085",
+    "_source": "OpenStreetMap n4415233085 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233086",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 19.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233086 (already in OSM)",
+   "position": {
+    "lon": 17.6521967,
+    "lat": 59.8554428,
+    "how": "OSM n4415233086",
+    "_source": "OpenStreetMap n4415233086 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233088",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 14.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233088 (already in OSM)",
+   "position": {
+    "lon": 17.6524468,
+    "lat": 59.8555661,
+    "how": "OSM n4415233088",
+    "_source": "OpenStreetMap n4415233088 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233089",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 18.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233089 (already in OSM)",
+   "position": {
+    "lon": 17.6524069,
+    "lat": 59.8555921,
+    "how": "OSM n4415233089",
+    "_source": "OpenStreetMap n4415233089 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233090",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 14.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233090 (already in OSM)",
+   "position": {
+    "lon": 17.6525958,
+    "lat": 59.855682,
+    "how": "OSM n4415233090",
+    "_source": "OpenStreetMap n4415233090 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233091",
+   "street": "Strandbodgatan",
+   "street_how": "nearest named street, 18.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233091 (already in OSM)",
+   "position": {
+    "lon": 17.6525516,
+    "lat": 59.8557089,
+    "how": "OSM n4415233091",
+    "_source": "OpenStreetMap n4415233091 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233105",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 0.0 m",
+   "level": "-1",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233105 (already in OSM)",
+   "position": {
+    "lon": 17.6477319,
+    "lat": 59.8585213,
+    "how": "OSM n4415233105",
+    "_source": "OpenStreetMap n4415233105 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4415233110",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 5.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4415233110 (already in OSM)",
+   "position": {
+    "lon": 17.64767,
+    "lat": 59.8585534,
+    "how": "OSM n4415233110",
+    "_source": "OpenStreetMap n4415233110 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7618271938",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n7618271938 (already in OSM)",
+   "position": {
+    "lon": 17.6474965,
+    "lat": 59.8576916,
+    "how": "OSM n7618271938",
+    "_source": "OpenStreetMap n7618271938 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7618271939",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 16.4 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n7618271939 (already in OSM)",
+   "position": {
+    "lon": 17.6469025,
+    "lat": 59.8577049,
+    "how": "OSM n7618271939",
+    "_source": "OpenStreetMap n7618271939 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7618271940",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 12.8 m",
+   "level": null,
+   "kind": "exit",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n7618271940 (already in OSM)",
+   "position": {
+    "lon": 17.646814,
+    "lat": 59.8577069,
+    "how": "OSM n7618271940",
+    "_source": "OpenStreetMap n7618271940 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12626024021",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 0.0 m",
+   "level": "-1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12626024021 (already in OSM)",
+   "position": {
+    "lon": 17.6469755,
+    "lat": 59.8581913,
+    "how": "OSM n12626024021",
+    "_source": "OpenStreetMap n12626024021 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12626518120",
+   "street": "Centralpassagen",
+   "street_how": "nearest named street, 0.0 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12626518120 (already in OSM)",
+   "position": {
+    "lon": 17.6469755,
+    "lat": 59.8581913,
+    "how": "OSM n12626518120",
+    "_source": "OpenStreetMap n12626518120 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13051653543",
+   "street": "Olof Palmes plats",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13051653543 (already in OSM)",
+   "position": {
+    "lon": 17.6464327,
+    "lat": 59.8580758,
+    "how": "OSM n13051653543",
+    "_source": "OpenStreetMap n13051653543 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "One Hundred Restrooms (incl. universaltoalett)",
+   "fee": "yes, card payment only (amount not stated)",
+   "where": "in the station building, 'på övre plan' (upper floor)",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/toalett/ and tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "Small 29 kr/h (max 149 kr/24 h), Medium 39 kr/h (max 199), Large 49 kr/h (max 249); max 7 days",
+   "opening_hours": "Mo-Su 05:00-00:40",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours = station opening hours (Jernhusen: 'Se även stationens öppettider'). OSM puts the Speed Services lockers on level -1.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "UL Center",
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa,Su,PH off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/trafik-och-biljetter/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Biljettautomat (UL)",
+   "where": "marked on UL's station-area map; position not readable from the map text",
+   "_source": "UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  },
+  {
+   "category": "restaurant",
+   "name": "Sushi Yama",
+   "opening_hours": "Mo-Su 10:00-20:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "where": "in Uppsala Centralstation, Olof Palmes plats 10",
+   "_source": "https://sushiyama.se/restaurants/sushi-yama-uppsala-centralstation/, read 2026-10-30",
+   "position": {
+    "lon": 17.6463933,
+    "lat": 59.8581534,
+    "osm_id": "n2775883293",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 28.4,
+    "how": "OSM node n2775883293",
+    "_source": "OpenStreetMap n2775883293 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "opening_hours": "Mo-Fr 05:15-23:30; Sa 06:00-23:30; Su 07:00-23:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Jernhusen lists Pressbyrån without hours; Pressbyrån's store page loads its hours dynamically and could not be read.",
+   "_source": "OSM (osmfacts/740000005.json, ODbL), read 2026-10-30; Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 17.6465056,
+    "lat": 59.8580942,
+    "osm_id": "n2775883292",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 27.4,
+    "how": "OSM node n2775883292",
+    "_source": "OpenStreetMap n2775883292 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bakery",
+   "name": "Gateau",
+   "where": "Olof Palmes plats 10 (Jernhusen lists it on the station's shop page, tel. 073-0898799)",
+   "note": "No hours: gateau.se/butiker/uppsala/ loads its content dynamically.",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "fee": "yes",
+   "where": "at the station",
+   "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Uppsala Resecentrum bus stops A1–E7",
+   "where": "A1–A3, B2–B4, C1–C5, D1, E1–E7 around the resecentrum; replacement buses for Mälartåg north/west leave from C1, for SJ, Mälartåg and SL pendeltåg south from E7; E3, E4, E6 are commercial coaches",
+   "_source": "UL, https://www.ul.se/en/travel-info/travel-with-us/maps/stations-and-travel-centers/uppsala-travel-center/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkeringshuset",
+   "where": "labelled on UL's station-area map; position not readable from the map text",
+   "_source": "UL map \"Resecentrum i Uppsala\" (https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf), text labels only, read 2026-10-30; facts only"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:00-00:40; Sa 05:00-00:40; Su 05:00-00:40",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Uppsala centralstation.",
+   "owner_text": "Allt om tillgängligheten på Uppsala centralstation. P-plats för rörelsehindrade Det finns parkering för rörelsehindrade vid stationen. Den är belagd med avgift. Tillgänglig entré Samtliga entréer till stationen är tillgängliga. Universaltoalett Stationen har en universaltoalett. Betalning sker med kort. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns One Hundred Restrooms som operatör, du hittar toaletterna på övre plan. Betalning sker med kort.",
+   "owner_text": "På stationen finns One Hundred Restrooms som operatör, du hittar toaletterna på övre plan. Betalning sker med kort. One Hundred Restrooms",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod.",
+   "owner_text": "På stationen finns förvaringsboxar som låses elektroniskt och öppnas med kod. Storlekar på boxarna: Small (bredd 50 cm, höjd 30 cm, djup 59 cm) Förvaring kostar 29 kr per påbörjad timme. Maxpris per 24 h 149 kr. Medium (bredd 50 cm, höjd 45 cm, djup 59 cm) Förvaring kostar 39 kr per påbörjad timme. Maxpris per 24 h 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme. Maxpris per 24 h 249 kr Förvaring i max 7 dygn. På stationen finns förvaringsboxar som öppnas och låses elektroniskt genom att skanna en QR-kod med din smartphone. Vid fel eller problem - ring Speed Box 070-886 71 23, eller mejla [email protected] Se även stationens öppettider.",
+   "fee": "29 kr per påbörjad timme; 149 kr; 39 kr per påbörjad timme; 199 kr Large (bredd 50 cm, höjd 60 cm, djup 59 cm) Förvaring kostar 49 kr per påbörjad timme",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/forvaringsboxar/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. UL Center Öppettider Måndag–fredag: 09.00-18.00 Lördag, söndag och helgdag: stängt 0771-14 14 14 ul.se Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ UL Snälltåget Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": "Måndag–fredag: 09.00-18.00; Lördag, söndag och helgdag: stängt (hours named in the text; see owner_text for what they belong to)",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "atm",
+   "name": "uttagsautomat",
+   "owner_text": "",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/uttagsautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "app_poi": "osm2775883292",
+   "level": "L0",
+   "level_name": "Street, station hall and platforms",
+   "where": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "website": "www.pressbyran.se/",
+   "position": {
+    "lon": 17.6465056,
+    "lat": 59.8580942,
+    "osm_id": "n2775883292",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 27.4,
+    "how": "OSM node n2775883292",
+    "_source": "OpenStreetMap n2775883292 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pharmacy",
+   "name": "DOZ Apotek",
+   "app_poi": "osm2775883286",
+   "level": "L0",
+   "level_name": "Street, station hall and platforms",
+   "where": null,
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa-Su 10:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "website": "dozapotek.se/",
+   "position": {
+    "lon": 17.6466422,
+    "lat": 59.8583066,
+    "osm_id": "n2775883286",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.6,
+    "how": "OSM node n2775883286",
+    "_source": "OpenStreetMap n2775883286 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Stationen",
+   "app_poi": "osm2139167543",
+   "level": "L0",
+   "level_name": "Street, station hall and platforms",
+   "where": null,
+   "opening_hours": "Su-Tu 11:30-23:00, We,Th 11:30-24:00, Fr,Sa 11:30-01:00",
+   "hours_source": "osm",
+   "hours_checked": null,
+   "_source": "the app map (osm)",
+   "position": {
+    "lon": 17.6459474,
+    "lat": 59.8586998,
+    "osm_id": "n2139167543",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 26.1,
+    "how": "OSM node n2139167543",
+    "_source": "OpenStreetMap n2139167543 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Subway",
+   "app_poi": "osm11898125106",
+   "level": "L0",
+   "level_name": "Street, station hall and platforms",
+   "where": null,
+   "opening_hours": "Mo-Su 07:00-23:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "website": "restaurants.subway.com/sv/sverige/uppsala/olof-palmes-plats-10",
+   "position": {
+    "lon": 17.6464311,
+    "lat": 59.8581382,
+    "osm_id": "n11898125106",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 27.9,
+    "how": "OSM node n11898125106",
+    "_source": "OpenStreetMap n11898125106 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Caffé Nero",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 05:00-20:00; Sa 06:00-20:00; Su 07:00-20:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "caffenero.com/se/sv/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.6462566,
+    "lat": 59.8582205,
+    "osm_id": "n2773904690",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 29.2,
+    "how": "OSM node n2773904690",
+    "_source": "OpenStreetMap n2773904690 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Espresso House",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": "Mo-Fr 06:00-20:00; Sa-Su 07:00-18:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.espressohouse.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.6469022,
+    "lat": 59.8582111,
+    "osm_id": "n9669611376",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.7,
+    "how": "OSM node n9669611376",
+    "_source": "OpenStreetMap n9669611376 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Sushi Yama",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.sushiyama.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.6463933,
+    "lat": 59.8581534,
+    "osm_id": "n2775883293",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 28.4,
+    "how": "OSM node n2775883293",
+    "_source": "OpenStreetMap n2775883293 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Upplands Lokaltrafik",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Gateau",
+     "opening_hours": null
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.ul.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "shop=ticket",
+   "name": "UL Center",
+   "osm_id": "n2773893024",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa,Su,PH off",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n2773893024 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Speed Services",
+   "osm_id": "n2776002092",
+   "osm_level": "-1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2776002092 (read 2026-10-30)",
+   "position": {
+    "lon": 17.6465535,
+    "lat": 59.858359,
+    "osm_id": "n2776002092",
+    "osm_level": "-1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.5,
+    "how": "OSM node n2776002092",
+    "_source": "OpenStreetMap n2776002092 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2778217796",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2778217796 (read 2026-10-30)",
+   "position": {
+    "lon": 17.6465149,
+    "lat": 59.8583872,
+    "osm_id": "n2778217796",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.1,
+    "how": "OSM node n2778217796",
+    "_source": "OpenStreetMap n2778217796 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n2780221045",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2780221045 (read 2026-10-30)",
+   "position": {
+    "lon": 17.6469111,
+    "lat": 59.8582073,
+    "osm_id": "n2780221045",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.6,
+    "how": "OSM node n2780221045",
+    "_source": "OpenStreetMap n2780221045 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.6465939,
+    "lat": 59.8580232,
+    "osm_id": "n2776006897",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 27.3,
+    "how": "OSM node n2776006897",
+    "_source": "OpenStreetMap n2776006897 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n2776006897 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bankomat",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.6464044,
+    "lat": 59.8583616,
+    "osm_id": "n2778217795",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 12.6,
+    "how": "OSM node n2778217795",
+    "_source": "OpenStreetMap n2778217795 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n2778217795 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Böcker&Bläck",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://bockerblack.se/",
+   "position": {
+    "lon": 17.6493753,
+    "lat": 59.8578759,
+    "osm_id": "n12040079450",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 3.2,
+    "how": "OSM node n12040079450",
+    "_source": "OpenStreetMap n12040079450 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n12040079450 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Memira",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 17.6497813,
+    "lat": 59.8579578,
+    "osm_id": "n14127303902",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 26.1,
+    "how": "OSM node n14127303902",
+    "_source": "OpenStreetMap n14127303902 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n14127303902 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Stationsgallerian",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "http://www.stationsgallerian.se/",
+   "position": {
+    "lon": 17.6491837,
+    "lat": 59.8585903,
+    "osm_id": "w207791536",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.9,
+    "how": "representative point of the OSM area w207791536",
+    "_source": "OpenStreetMap w207791536 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap w207791536 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Resecentrum i Uppsala (Stationsområdet), vinter 2026",
+   "publisher": "UL (Region Uppsala)",
+   "url": "https://www.ul.se/globalassets/kartor/resecentrum/resecentrum_webb_vinter-2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Linked from Jernhusen. Only its text labels could be read (streets, buildings, bus lines); it shows no lifts, stairs or platform numbers in text."
+  },
+  {
+   "title": "Resecentrum i Uppsala, höst 2026",
+   "publisher": "UL (Region Uppsala)",
+   "url": "https://www.ul.se/globalassets/kartor/host-2026/resecentrum_webb_host_2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Newer version linked from UL's Uppsala Resecentrum page; same labels as the winter map."
+  },
+  {
+   "title": "Fyra spår Uppsala, utformning av planförslaget (Figur 9: översikt stationsområdet)",
+   "publisher": "Trafikverket",
+   "url": "https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Stationsområdet",
+   "publisher": "www.ul.se",
+   "url": "https://www.ul.se/globalassets/kartor/resecentrum/resecentrum_webb_vinter-2026.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "linked_from": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/karta-over-stationen/"
+  }
+ ],
+ "open": [
+  "Heights of L0 and L-1: no source measures them.",
+  "Signposted level names in the station building: Jernhusen only says the toilets are on 'övre plan'; no plan names the floors. OSM puts Caffè Nero, Sushi Yama, Espresso House and UL Center on level 1 and DOZ, Pressbyrån, Subway on level 0, which does not match the app's L0/L-1 scheme; which shop is on which floor stays unconfirmed.",
+  "Exact position of the Centralpassagen lifts/stairs to islands 2/3 and 4/7: Trafikverket says every track has a lift from Centralpassagen, but OSM maps none for these two islands and no readable plan shows them.",
+  "Toilet fee amount: Jernhusen says card only, no price (the app's 10 SEK has no source here).",
+  "Hours for Gateau and Pressbyrån from their own sites (pages load dynamically). Stationen restaurant (old station building): stationen.se blocks fetching; OSM's hours string is not valid opening_hours syntax.",
+  "UL's station-area maps could only be read as text; the positions of ticket machines, taxi and the stops are not in the text."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "level L0 (Street, station hall and platforms): height not measured",
+  "level L-1 (Centralpassagen): height not measured",
+  "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 3: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 4: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 6: no stairs, escalator or lift of its own (reached along the platform level only)",
+  "platform 7: no stairs, escalator or lift of its own (reached along the platform level only)"
+ ],
+ "answers": [
+  {
+   "question": "level L0 (Street, station hall and platforms): height not measured",
+   "answer": "Still open: no source measures it.",
+   "_source": "this pass"
+  },
+  {
+   "question": "level L-1 (Centralpassagen): height not measured",
+   "answer": "Still open: no source measures it. Name 'Centralpassagen' confirmed by Trafikverket and UL.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30"
+  },
+  {
+   "question": "platform 2: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Wrong in the app: island platform 2/3 has a way up from Centralpassagen (Trafikverket: Centralpassagen is the 'uppgång/nedgång för spår 2 till 7' and has a lift to every track) and stairs + lift at the south end from Strandbodgatan (OSM w207791563, w207791539; Trafikverket confirms four lifts at Strandbodgatan). OSM is missing the Centralpassagen stair/lift for 2/3.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 3: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Same island as platform 2 (OSM stair w207791563 reaches 2 and 3): Centralpassagen stairs + lift (owner text), Strandbodgatan stairs + lift (OSM; lift count owner text).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 4: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 4/7 (OSM stair w207791561 reaches 4 and 7): Centralpassagen stairs + lift (owner text, missing in OSM); Strandbodgatan stairs w207791561 and lift w207791538 (OSM; lift count owner text).",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 5: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 5/6 is reached from Centralpassagen: OSM lift n12626518111 (level 0;-1) and stairs w55635971; Trafikverket confirms stairs and a lift from Centralpassagen to tracks 2–7. No Strandbodgatan connection in OSM.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 6: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Same as platform 5 (island 5/6): Centralpassagen lift n12626518111 and stairs w55635971 (OSM), confirmed in kind by Trafikverket's text.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 7: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Island 4/7: Centralpassagen stairs + lift (owner text); Strandbodgatan lift w207791538 (OSM ties it to 7) and stairs w207791561.",
+   "_source": "Trafikverket, \"Fyra spår Uppsala, samrådshandling, utformning av planförslaget, Söder Bergsbrunna – Uppsala Centralstation\" (document date 2023-05-04), p. 21–22, https://bransch.trafikverket.se/contentassets/cc09dfcd1a9c48e697f0fdb80cad67a6/jarnvagsplanbeskrivning-del-1.pdf, read 2026-10-30; OSM (osmfacts/740000005.json, ODbL), read 2026-10-30"
+  }
+ ]
+}

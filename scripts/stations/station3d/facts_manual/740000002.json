@@ -1,0 +1,800 @@
+{
+ "levels": [
+  {
+   "osm_level": null,
+   "app_level": "L0",
+   "name": "Centralstationen (station hall and platforms)",
+   "other_names": [
+    "Kompasshallen (part of the hall, per the ATM list)"
+   ],
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/ (opening hours list) and https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "osm_level": null,
+   "app_level": null,
+   "name": "Centralhuset",
+   "note": "Jernhusen lists Centralhuset as its own building with its own hours (Mo-Su 04:00-01:00); its level relative to the platforms is not stated.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/, read 2026-10-30"
+  },
+  {
+   "osm_level": null,
+   "app_level": null,
+   "name": "Nils Ericson-terminalen (bus terminal, indoor link north of the station)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": null,
+   "name": "Lower level under the hall (staffed toilets, showers, manual left-luggage)",
+   "note": "OSM tags the staffed toilets (n14235341851, hours equal to Jernhusen's toilet hours) and a luggage locker (n14235341852) on level -1, reached by a stair (w1569565520, level 0,-1) and a lift (n14310990380, level 0;-1) a few metres away. Jernhusen confirms the staffed toilets with shower and that manual left-luggage is at the public toilets, but does not say they are downstairs. No signposted name found.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/toalett/ and .../forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "app_level": null,
+   "name": "Nils Ericson-terminalen, upper floor (Västtrafik kundcenter per OSM)",
+   "note": "Västtrafik's 2024 pre-study says the terminal has three floors (incl. basement) and refers to 'plan 01'; OSM puts the Västtrafik ticket office (w1570945458) on level 1. Västtrafik's kundcenter page gives no floor. Not the app's L1 'Upper walkway'.",
+   "_source": "Västtrafik board papers: https://www.vasttrafik.se/globalassets/media/dokument/styrelsehandlingar-och-protokoll/moten-2025/25-september/nr-11.7-ombyggnation-sodra-entreer-nils-ericson-terminalen-genomforandebeslut.pdf and .../moten-2024/17-oktober/nr-10.5-ombyggnation-sodra-entreer-nils-ericson-terminalen-forstudie.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "level L1 (Upper walkway): height not measured",
+   "answer": "Still open. OSM has footbridges on layer 1 near the station (w44500665, w50897268, w193501912, w1013465726, w1095557558, w16121528 Fredsbron) but no source names an \"upper walkway\" level or measures it.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "several levels but no stairs, escalators or lifts between them",
+   "answer": "Partly: OSM has two stairs (w215463876, w215463879), one stair between levels 0 and -1 (w1569565520) and a lift n14310990380 (levels 0;-1); none is tagged as reaching level 1. Not confirmed by a plan: no Jernhusen plan for Göteborg C is published on its page.",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "platforms 1–16: no stairs, escalator or lift of their own",
+   "answer": "Not settled by an open source: no published plan was found. Jernhusen says all entrances are accessible (\"Samtliga entréer till stationen är tillgängliga\").",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "question": "platform 1: no stairs, escalator or lift of its own (reached along the platform level only) [applies to platforms 1–16]",
+   "answer": "Correct as mapped: Göteborg C is a terminus (säckstation) where all 16 tracks end at the station building, so every platform is reached on the level from the hall. This supersedes the earlier 'not settled' answer.",
+   "_source": "sv.wikipedia.org \"Göteborgs centralstation\" (read via wikiwand.com/sv/articles/Göteborg_C), read 2026-10-30"
+  },
+  {
+   "question": "level L1 (Upper walkway): height not measured",
+   "answer": "Update: no source shows an upper walkway in the station. The OSM layer-1 'footbridges' the L1 level came from are street bridges over the canal by Nordstan (one is Fredsbron, w16121528), ~250–400 m south-west of the hall, not station walkways. Suggest dropping L1. Real extra levels: a lower level (-1) with the staffed toilets (OSM) and an upper floor in Nils Ericson-terminalen (Västtrafik kundcenter on level 1 per OSM).",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "question": "several levels but no stairs, escalators or lifts between them",
+   "answer": "Update: between the hall (0) and the lower level (-1) OSM has a lift (n14310990380) and a stair (w1569565520) by the staffed toilets; OSM only, no plan published.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "question": "cafe Espresso House: no opening hours",
+   "answer": "Jernhusen lists two: 'Espresso House – stora' Mån–fre 05.30–21.00, Lör–sön 08.00–19.00, Sön 08.00–21.00, and 'Espresso House – lilla' Mån–fre 6–20, Lör–sön 8–18, Sön 9–19 (the Sunday lines contradict the Sat–Sun lines, so given as hours_raw). Which OSM node (n2352733320, n3189203062, w1569213567) is which unit is not stated; espressohouse.com could not be read.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "cafe Oakberry Açai: no opening hours",
+   "answer": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-20:00 (Oakberry's own site; same on Jernhusen).",
+   "_source": "https://www.oakberry.se/sv/butiker-se/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Café Bistro Niwa: no opening hours",
+   "answer": "Mo-Sa 07:00-21:00; Su 08:00-21:00 (Jernhusen, as 'Bistro NIWA Café').",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Subway: no opening hours",
+   "answer": "Two units. Subway Nils Ericson Terminalen (Nils Ericsonsplatsen 5, probably OSM w1561650286): Mo-Sa 06:00-23:00; Su 07:00-23:00 (subway.com and Jernhusen agree). Subway Göteborgs Centralstation (probably OSM w1561620389): Jernhusen says daily 10-20, subway.com says daily 07-21: conflict, left open.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; subway.com store pages, read 2026-10-30"
+  },
+  {
+   "question": "restaurant Ômani: no opening hours",
+   "answer": "It is Omami: Mo-Su 11:00-22:00 (omami.se, Drottningtorget 5).",
+   "_source": "https://www.omami.se/restauranger/centralstationen/, read 2026-10-30"
+  },
+  {
+   "question": "shop Kjell & Company: no opening hours",
+   "answer": "Mo-Fr 08:00-20:00; Sa,Su 09:00-19:00 per Jernhusen; kjell.com showed shorter hours for Fri/Sat (08-19, 09-18), so check before trusting.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Praline: no opening hours",
+   "answer": "It is Pralinhuset (in Centralhuset): Mo-Fr 10:00-18:00; Sa 10:00-17:00; Su off (Jernhusen).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "question": "shop Sefina pantbank: no opening hours",
+   "answer": "Mo-Fr 10:00-18:00; Sa 10:00-16:00; Su off (Jernhusen). sefina.se could not be read.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "shop Patcy's blommor: no opening hours",
+   "answer": "Open: not on Jernhusen's shop list and no own website found; OSM only, may no longer exist.",
+   "_source": "Jernhusen shop list and web search, read 2026-10-30"
+  },
+  {
+   "question": "shop RepairStore: no opening hours",
+   "answer": "Open: not on Jernhusen's shop list and no own website found; OSM only, may no longer exist.",
+   "_source": "Jernhusen shop list and web search, read 2026-10-30"
+  },
+  {
+   "question": "shop Solresor: no opening hours",
+   "answer": "Probably gone: not on Jernhusen's shop list, and Solresor's contact page lists only its head office (Östra Hamngatan 26) and says it has no customer reception there; no station shop mentioned. Suggest removing.",
+   "_source": "https://www.solresor.se/kontakt/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "question": "level L0 (Platforms and hall): height not measured",
+   "answer": "Still open: no open source measures floor heights.",
+   "_source": "this pass"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "Öresundståg ticket machines",
+   "where": "at the exits to tracks 12–13",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/trafik-och-biljetter/"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Västtrafik kundservice",
+   "opening_hours": "Mo-Fr 06:00-22:00; Sa-Su 08:00-22:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/trafik-och-biljetter/",
+   "note": "Superseded by the 'Västtrafik kundcenter' entry: these hours (Mo-Fr 06-22, Sa-Su 08-22) are Västtrafik's phone customer-service hours per vasttrafik.se; the counter is open Mo-Fr 06-21, Sa 08-21, Su 09-21."
+  },
+  {
+   "category": "lounge",
+   "name": "SJ Lounge",
+   "where": "in the central hall: one door under the big departures board next to Pressbyrån, one from the track side",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/lounge/"
+  },
+  {
+   "category": "atm",
+   "name": "Uttagsautomater (6)",
+   "where": "two in Kompasshallen between Pocket Shop and SJ Servicecenter; two inside the entrance from Drottningtorget next to Forex; two in Centralhuset between Stora Apoteket and Pralinhuset",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "outside the station by track 1",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/taxi-och-biluthyrning/",
+   "taxi_hosts_hours_raw": [
+    "Vardagar 08.00–12.30",
+    "Mån–tors 17.00–21.30",
+    "Fre 16.00–21.30"
+   ]
+  },
+  {
+   "category": "toilets",
+   "name": "Bemannad toalett och universaltoalett (with shower)",
+   "fee": "card or cash",
+   "opening_hours": "Mo-Sa 06:00-23:30; Su,PH 07:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "where": "not stated; unstaffed toilets also in Nils Ericson-terminalen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/toalett/"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven (Centralhallen)",
+   "where": "in Centralhallen (the main hall)",
+   "opening_hours": "Mo-Th 05:30-24:00; Fr 05:30-01:00; Sa 07:00-01:00; Su 07:00-24:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1569213565",
+   "address": "Nils Ericsonsplatsen 2",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven (butiken under trafiktavlan)",
+   "where": "in the hall, under the big departures/arrivals board (trafiktavlan)",
+   "opening_hours": "Mo-Sa 05:00-23:00; Su 06:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Apoteket Centralen",
+   "where": "in Centralhuset (Jernhusen's ATM page calls it 'Stora Apoteket', with two ATMs between it and Pralinhuset)",
+   "hours_raw": [
+    "website (Apoteket) on 2026-10-30 lists: Imorgon 06:00-22:00, Söndag 08:00-22:00, Måndag 08:00-22:00, Tisdag-Torsdag 06:00-22:00 (Friday/Saturday not shown)"
+   ],
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "address": "Nils Ericsonsplatsen 2, Centralhuset (Apoteket); Jernhusen lists Nils Ericsonsplatsen 1 and 8",
+   "note": "OSM maps two Apoteket (w1569213563, w1569565519) with different hours; Apoteket's site lists only one pharmacy here.",
+   "_source": "https://www.apoteket.se/apotek/apoteket-centralen-goteborg/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Bistro NIWA Café",
+   "opening_hours": "Mo-Sa 07:00-21:00; Su 08:00-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561650285",
+   "address": "Nils Ericsonsplatsen 5 (same address Jernhusen gives Subway Nils Ericson Terminalen)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Blanche Brasserie & Bar",
+   "where": "at Hyatt Place Göteborg Central (same address, Nils Ericsonsplatsen 4)",
+   "opening_hours": "Mo 11:30-22:00; Tu-Th 11:30-23:00; Fr,Sa 13:00-24:00; Su 16:00-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": [
+    "Kök: Mån 11.30-21.00, Tis-Fre 11.30-22.00, Lör 16.00-22.00, Sön stängt (website)",
+    "Breakfast per Jernhusen: Mon-Fri 06:30-10:00, Sat 07:00-10:30"
+   ],
+   "note": "opening_hours above are the bar's; Jernhusen's list differs (e.g. Thu 15:00-23:00).",
+   "_source": "https://blanchegbg.se/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "address": "Nils Ericsonsplatsen 3",
+   "osm_id": "w1569213569",
+   "note": "No hours on Jernhusen; burgerking.se store page did not render (no hours read).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "shop",
+   "name": "Designtorget",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 08:00-19:00; Su 10:00-19:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1567923683",
+   "shop": "interior_decoration",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House – stora",
+   "hours_raw": [
+    "Mån–fre 05.30–21.00",
+    "Lör–sön 08.00–19.00",
+    "Sön 08.00–21.00 (Jernhusen lists both; Sunday ambiguous)"
+   ],
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "address": "Nils Ericsonsplatsen 2 or 7 (Jernhusen gives both for Espresso House)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House – lilla",
+   "hours_raw": [
+    "Mån–fre 6–20",
+    "Lör–sön 8–18",
+    "Sön 9–19 (Sunday ambiguous)"
+   ],
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "where": "inside the entrance towards Drottningtorget",
+   "hours_raw": [
+    "Jernhusen: Mån–fre 7–20; Lör–sön 10–19 (även röda dagar); Julafton 10–14",
+    "forex.se store page shows only 'Öppet idag' (Fri 2026-10-30) 10:00-18:00, which contradicts Jernhusen's 07-20"
+   ],
+   "hours_source": "website (Jernhusen) / website (shop)",
+   "hours_checked": "2026-10-30",
+   "address": "Drottningtorget 1 (forex.se)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://www.forex.se/hitta-oss/goteborg/goteborgs-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Franks gatukök",
+   "where": "outside the station building, Burggrevegatan 1 (east side)",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr 11:00-02:30; Sa 13:00-02:30; Su 13:00-22:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1013465729",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "hotel",
+   "name": "Hyatt Place Göteborg Central",
+   "address": "Nils Ericsonsplatsen 4",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Kebaberia",
+   "where": "in the middle of the station ('mitt på Göteborgs Centralstation')",
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa,Su 11:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "address": "Drottningtorget 5",
+   "note": "Jernhusen lists Mon-Fri 08:00-21:00; the shop's own site says 10-21.",
+   "_source": "https://kebaberia.se/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "shop",
+   "name": "Kjell & Company",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 09:00-19:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "shop": "electronics",
+   "osm_id": "w1567923682",
+   "note": "kjell.com store page on Fri 2026-10-30 showed 'Idag 08:00-19:00, Imorgon 09:00-18:00', shorter than Jernhusen's list.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://www.kjell.com/se/butiker/, read 2026-10-30"
+  },
+  {
+   "category": "shop",
+   "name": "Lakritsroten",
+   "opening_hours": "Mo-Fr 08:00-19:00; Sa,Su 09:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "shop": "confectionery",
+   "osm_id": "w1567923680",
+   "note": "Jernhusen lists Mon-Fri 09-19, Sat-Sun 10-17.",
+   "_source": "https://lakritsroten.se/butiker/goteborgs-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Lilla London",
+   "opening_hours": "Mo-Su 11:00-19:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1569213568",
+   "address": "Nils Ericsonsplatsen 2-8",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "shop",
+   "name": "Lindex",
+   "opening_hours": "Mo-Fr 07:30-18:30; Sa 10:00-16:00; Su 11:00-16:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "shop": "clothes",
+   "osm_id": "w1569213566",
+   "address": "Nils Ericsonsplatsen 4",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "MAX",
+   "where": "between Drottningtorget, Centralhuset and the older part of the station (entrances from all three), with direct access towards Nordstan; ~250 m²",
+   "opening_hours": "Mo-Sa 07:00-01:00; Su 08:00-01:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620387",
+   "address": "Drottningtorget 5",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; Jernhusen press release 2026-03-02 https://www.placera.se/pressmeddelanden/max-oppnar-pa-goteborgs-centralstation-20260302, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Metropolitan Brew & Grill",
+   "opening_hours": "Mo-Fr 06:30-01:00; Sa 06:00-03:00; Su 08:00-03:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1567923684",
+   "address": "Nils Ericsonsplatsen 2-8",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Mr Shou",
+   "hours_raw": [
+    "Jernhusen: Mån–tors 10.30–20.00; Fre–lör 10.30–21.00; Sön 12.00–19.00"
+   ],
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "note": "mrshou.se now redirects to its Kungstorget restaurant only and lists no station location: may have closed here.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://www.mrshou.se/ (redirects to https://kungstorget.mrshou.se/), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Oakberry (Açaí)",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-20:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620392",
+   "address": "Drottningtorget 5 (Oakberry; Jernhusen writes Drottninggatan 5)",
+   "_source": "https://www.oakberry.se/sv/butiker-se/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "O'Learys",
+   "opening_hours": "Mo-Su 11:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1567923681",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Omami",
+   "where": "at an entrance of the station (its pink sign is 'vid entrén'); has a summer terrace",
+   "opening_hours": "Mo-Su 11:00-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620386",
+   "address": "Drottningtorget 5",
+   "note": "OSM spells it 'Ômani'. Opened December 2025 per Jernhusen's press release of 2025-11-04.",
+   "_source": "https://www.omami.se/restauranger/centralstationen/, read 2026-10-30; Jernhusen press release https://mb.cision.com/Main/6221/4259221/3755298.pdf, read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Pocket Shop",
+   "where": "in Kompasshallen, next to two ATMs that stand between it and SJ Servicecenter",
+   "opening_hours": "Mo-Fr 06:15-21:00; Sa 07:00-20:00; Su 08:30-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1567923678",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Porta Via",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 10:00-18:00; Su 09:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620390",
+   "address": "Nils Ericsonsplatsen 5",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Pralinhuset (Pralinehuset)",
+   "where": "in Centralhuset, with two ATMs between it and Stora Apoteket",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-17:00; Su off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n2466676071",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån vid spår 6–7",
+   "where": "by tracks 6–7 (\"vid spår 6–7\")",
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa 09:00-20:00; Su 09:00-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån vid spår 1, taxistationen",
+   "where": "by track 1, at the taxi rank",
+   "opening_hours": "Mo-Fr 05:15-23:00; Sa 07:00-23:00; Su 09:00-23:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n2145371675",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån huvudentrén",
+   "where": "at the main entrance (Drottningtorget)",
+   "opening_hours": "Mo-Th 05:00-22:00; Fr 05:00-23:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561650287",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån huvudstråket",
+   "where": "on the main walkway (huvudstråket) through the station",
+   "opening_hours": "Mo-Th 05:30-22:00; Fr 05:15-23:45; Sa 06:00-23:45; Su 08:00-22:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "pawnbroker",
+   "name": "Sefina Pantbank",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00; Su off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620391",
+   "address": "Nils Ericsonsplatsen 3",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Steinbrenner & Nyberg",
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa 09:00-16:00; Su off",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n3663448226",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway Göteborgs Centralstation",
+   "hours_raw": [
+    "Jernhusen: Alla dagar 10.00-20.00",
+    "subway.com (Nils Ericsonplatsen): Mo-Su 07:00-21:00"
+   ],
+   "hours_source": "website (Jernhusen) / website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://restaurants.subway.com/sv/sverige/goteborg/nils-ericsonplatsen, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway Nils Ericson Terminalen",
+   "where": "in Nils Ericson-terminalen",
+   "opening_hours": "Mo-Sa 06:00-23:00; Su 07:00-23:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561650286",
+   "address": "Nils Ericsonsplatsen 5",
+   "_source": "https://restaurants.subway.com/sv/sverige/goteborg/nils-ericsonplatsen-5, read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Sun Sushi",
+   "opening_hours": "Mo-Fr 11:00-20:00; Sa,Su 12:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561620388",
+   "address": "Drottningtorget 1",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Taco Bar",
+   "opening_hours": "Mo-Su 11:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561650290",
+   "note": "tacobar.se shows 'Öppettider idag 11:00–20:00' (Fri 2026-10-30), consistent.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30; https://tacobar.se/restauranger/goteborg-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Togogo",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su 08:00-21:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1561650284",
+   "address": "Nils Ericsonsplatsen 7",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Västtrafik kundcenter",
+   "where": "in Nils Ericson-terminalen (OSM puts it on level 1)",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-21:00; Su 09:00-21:00; Dec 24 08:00-16:00",
+   "hours_source": "website (Västtrafik)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1570945458",
+   "note": "Västtrafik's own page; Jernhusen's two pages give Sat 8–22 and 'Mån–fre 06–22, Lör–sön 08–22' (the latter is Västtrafik's phone service hours). Other public holidays mostly 09:00-21:00 per the page.",
+   "_source": "https://www.vasttrafik.se/kundservice/kundcenter/, read 2026-10-30"
+  },
+  {
+   "category": "service",
+   "name": "SJ Servicecenter",
+   "where": "in Kompasshallen, next to two ATMs and Pocket Shop",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "small 39 kr/started hour (max 199 kr/24 h); large 69 kr/started hour (max 299 kr/24 h); card or coins; max 7 days",
+   "note": "Opened with a code; OSM lockers n14235404861 (level 0), n12133854363, n12133858223, n14235341852 (level -1).",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "left_luggage",
+   "name": "Manuell förvaring (staffed left-luggage, bulky items and skis)",
+   "where": "at the public (staffed) toilets",
+   "fee": "yes",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/forvaringsboxar/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr (10-kr coins or card)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Sixt",
+   "osm_id": "n4811555526",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/taxi-och-biluthyrning/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering (Apcoa, Park & Go, ticketless camera)",
+   "note": "Accessible (disabled) parking at the station, with a fee.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/parkering/ and .../tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Obemannade toaletter (Nils Ericson-terminalen)",
+   "where": "in Nils Ericson-terminalen",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests (free)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/wifi/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source measures them.",
+  "How the platforms are reached (at grade from the hall or not): no published plan found.",
+  "Where in the station most shops are: Jernhusen and the shops' sites give street addresses (Nils Ericsonsplatsen 2–8, Drottningtorget 1/5) but no hall/position, except 7-Eleven (Centralhallen; under the departures board), Pocket Shop + SJ Servicecenter (Kompasshallen), Pralinhuset + Apoteket (Centralhuset), Forex (by the Drottningtorget entrance), the four Pressbyrån units, Subway NET, Kebaberia (middle of the station), MAX and Omami (at an entrance). The rest relies on OSM positions.",
+  "No published station plan (PDF) for Göteborg C or Nils Ericson-terminalen was found; lifts/stairs are OSM only.",
+  "Espresso House: which of the two units (stora/lilla) is which OSM node; Sunday hours ambiguous on Jernhusen; espressohouse.com unreadable.",
+  "Burger King hours: not on Jernhusen; burgerking.se page did not render.",
+  "Conflicting hours left unresolved: Forex (Jernhusen 07-20 vs forex.se 10-18 on Fri), Subway Göteborgs Centralstation (10-20 vs 07-21), Kjell & Company, Apoteket (website shows only partial week).",
+  "OSM-only places not confirmed by any owner source: Cristal Bar (n3183389861), Swebus ticket office (n2466676075), Patcy's blommor, RepairStore, Solresor, Mr Shou (likely closed).",
+  "Västlänken station Centralen and the Grand Central building (with Pressbyrån, 7-Eleven, Condeco) open December 2026 – after this check; the rebuilt part of Nils Ericson-terminalen links to it. Not mapped yet.",
+  "Nils Ericson-terminalen gate numbering: Västtrafik's stop page lists lägen 1–16, 21–24 and M; Wikipedia says indoor gates 21–38; not reconciled."
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n14310990380",
+   "between": [
+    "hall level (0)",
+    "lower level (-1): staffed toilets, showers, left-luggage"
+   ],
+   "where": "by the staffed toilets / showers, in the part of the hall near the SJ lounge (OSM position)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1569565520",
+   "between": [
+    "hall level (0)",
+    "lower level (-1)"
+   ],
+   "where": "next to lift n14310990380",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "at_grade",
+   "between": [
+    "station halls",
+    "platforms 1–16"
+   ],
+   "where": "Göteborg C is a terminus (säckstation): all 16 tracks end at the station building, so platforms are reached on the level from the hall along the buffer-stop end; no stairs or lifts are needed or described",
+   "confirmed_by": "owner text",
+   "_source": "sv.wikipedia.org \"Göteborgs centralstation\" (read via wikiwand.com/sv/articles/Göteborg_C), read 2026-10-30; accessibility: https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/tillganglighet/ ('Samtliga entréer till stationen är tillgängliga'), read 2026-10-30"
+  },
+  {
+   "kind": "indoor_link",
+   "between": [
+    "Centralstationen",
+    "Nils Ericson-terminalen"
+   ],
+   "where": "the bus terminal is directly north of the station with an indoor connection",
+   "confirmed_by": "owner text",
+   "_source": "https://en.wikipedia.org/wiki/Gothenburg_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "indoor_link",
+   "between": [
+    "Centralstationen (older part)",
+    "Centralhuset",
+    "Drottningtorget (square)"
+   ],
+   "where": "through the MAX restaurant premises, which have entrances from the square, from Centralhuset and from the older part of the station, with direct access towards Nordstan",
+   "confirmed_by": "owner text",
+   "_source": "Jernhusen press release 'MAX öppnar på Göteborgs Centralstation', 2026-03-02, https://www.placera.se/pressmeddelanden/max-oppnar-pa-goteborgs-centralstation-20260302 (also https://mb.cision.com/Main/6221/4314922/3958317.pdf), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré (main entrance)",
+   "street": "Drottningtorget",
+   "level": "0",
+   "where": "station building front, facing Drottningtorget; Pressbyrån 'huvudentrén' is here",
+   "_source": "sv.wikipedia.org \"Göteborgs centralstation\" (read via wikiwand.com/sv/articles/Göteborg_C), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "name": "Entrance towards Drottningtorget by Forex",
+   "street": "Drottningtorget",
+   "level": "0",
+   "where": "two ATMs stand just inside it, next to Forex",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/uttagsautomat/, read 2026-10-30"
+  },
+  {
+   "name": "Track-side entrances",
+   "street": null,
+   "level": "0",
+   "where": "from the platform side; the SJ Lounge also has its own door from the track side",
+   "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/lounge/, read 2026-10-30"
+  },
+  {
+   "name": "Nils Ericson-terminalen, sydvästra entrén (towards Nordstan)",
+   "street": "Nils Ericsonsplatsen",
+   "level": "0",
+   "where": "south-west corner of the bus terminal, at the end of a ~30 m corridor beside Centralhuset, facing the Nordstan tram/bus stop; rebuilt Q1–Q3 2026 (clear width 1.4 m → 3.6 m, sliding door); gate 21 used as a temporary entrance during the work",
+   "_source": "Västtrafik board papers: https://www.vasttrafik.se/globalassets/media/dokument/styrelsehandlingar-och-protokoll/moten-2025/25-september/nr-11.7-ombyggnation-sodra-entreer-nils-ericson-terminalen-genomforandebeslut.pdf and .../moten-2024/17-oktober/nr-10.5-ombyggnation-sodra-entreer-nils-ericson-terminalen-forstudie.pdf, read 2026-10-30"
+  },
+  {
+   "name": "Nils Ericson-terminalen, sydöstra entrén (towards the tracks)",
+   "street": null,
+   "level": "0",
+   "where": "south-east end of the bus terminal, facing track 16; rebuilt in the same project (Q1–Q3 2026)",
+   "_source": "Västtrafik board papers: https://www.vasttrafik.se/globalassets/media/dokument/styrelsehandlingar-och-protokoll/moten-2025/25-september/nr-11.7-ombyggnation-sodra-entreer-nils-ericson-terminalen-genomforandebeslut.pdf and .../moten-2024/17-oktober/nr-10.5-ombyggnation-sodra-entreer-nils-ericson-terminalen-forstudie.pdf, read 2026-10-30"
+  },
+  {
+   "name": "OSM entrances on Nils Ericsonsplatsen (bus terminal / Centralhuset side)",
+   "osm_ids": [
+    "n662658780",
+    "n2352733343",
+    "n2352733349",
+    "n2352733356",
+    "n2352733357",
+    "n5708014632",
+    "n1309380193",
+    "n1309380255",
+    "n1309380411"
+   ],
+   "street": "Nils Ericsonsplatsen",
+   "level": "0",
+   "where": "sliding doors along the west side; n1309380193/255/411 tagged wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrances on Drottningtorget",
+   "osm_ids": [
+    "n8954239985",
+    "n10039771778",
+    "n10039771779",
+    "n10039771780",
+    "n10039771782",
+    "n11152232618",
+    "n13724741004"
+   ],
+   "street": "Drottningtorget",
+   "level": "0",
+   "where": "south front; n8954239985 is entrance=main with a sliding door; n10039771778 wheelchair=yes, n10039771779/80 wheelchair=no",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrances on Burggrevegatan / Åkareplatsen (east side)",
+   "osm_ids": [
+    "n12254711334",
+    "n13724741003",
+    "n2352733345",
+    "n1785718532"
+   ],
+   "street": "Burggrevegatan; Åkareplatsen",
+   "level": "0",
+   "where": "east end of the complex (n13724741003 is a revolving door)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "No station plan published: Jernhusen's 'Karta över stationsområdet' links only to Västtrafik's stop page (https://www.vasttrafik.se/reseplanering/hallplatser/9021014008000000/), which shows an interactive map but no PDF",
+   "publisher": "Jernhusen / Västtrafik",
+   "url": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/karta-over-stationsomradet/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Ombyggnation södra entréer Nils Ericson Terminalen (förstudie 2024; genomförandebeslut 2025), board papers with plan drawings",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/globalassets/media/dokument/styrelsehandlingar-och-protokoll/moten-2025/25-september/nr-11.7-ombyggnation-sodra-entreer-nils-ericson-terminalen-genomforandebeslut.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ]
+}

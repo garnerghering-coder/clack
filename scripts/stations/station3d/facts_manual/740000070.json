@@ -1,0 +1,66 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "app_level": "L1",
+   "name": "Trädgårdslänken",
+   "_source": "OSM w1206809262 / w1421495689 name=Trädgårdslänken, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "app_level": "L-1",
+   "name": "Vikenpassagen (pedestrian tunnel)",
+   "note": "OSM names one tunnel Vikenpassagen (w37999420); other tunnel ways are unnamed.",
+   "_source": "OSM w37999420, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform 3: no stairs, escalator or lift of its own",
+   "answer": "Not so in OSM: platforms 3a/4a are reached by Trädgårdslänken (stairs w1206809266, lifts n12442354267), the tunnels (escalator w1337836810, stairs w1337836811, lift n13201141894) and ramps (w1390577054, w1436230597). Only in OSM; the Region Värmland overview map of 4 May 2026 could not be downloaded (the link returns a web page).",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "question": "platform 21: no stairs, escalator or lift of its own",
+   "answer": "In OSM platform 21 is reached by the ramp w71552940, which also serves 1a/1b (a ramp, no stairs or lift). Only in OSM.",
+   "_source": "OSM w71552940, read 2026-10-30"
+  },
+  {
+   "question": "levels L1/L0/L-1: height not measured",
+   "answer": "Still open: no open source measures them.",
+   "_source": "this pass"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Universaltoalett",
+   "fee": "card or coins",
+   "where": "in the station building",
+   "note": "time-locked; open the same hours as the café (Jernhusen)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/tillganglighet/"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Entrance to the waiting room from the track side (accessible)",
+   "street": null,
+   "where": "track side of the station house",
+   "_source": "https://www.jernhusen.se/hitta-din-station/karlstad-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Översiktskarta Karlstad Centralstation 4 maj 2026",
+   "publisher": "Region Värmland",
+   "url": "https://regionvarmland.se/download/18.36b079f819d41833cd72517f/1777707356172/%C3%96versiktskarta%20Karlstad%20Centralstation%204%20maj%202026.pdf",
+   "licence": "not open: facts only",
+   "read": null,
+   "note": "found by search; the link returned a web page, not the PDF, on 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Region Värmland's overview map (May 2026) could not be read; it would confirm the lifts and stairs that are only in OSM."
+ ]
+}

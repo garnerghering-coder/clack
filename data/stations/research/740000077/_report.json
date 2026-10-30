@@ -1,0 +1,96 @@
+{
+ "clack_id": "740000077",
+ "slug": "hallsberg",
+ "flags": [
+  "w201201715 station building: p95 65.8 m is 5.4 m above the median 60.4 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1110730278 (cycleway, secondary)."
+ ],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 47.14,
+  "median_m": 51.53,
+  "max_m": 56.82,
+  "nan_cells": 0,
+  "size_m": [
+   586,
+   348
+  ],
+  "box_sweref": [
+   505858,
+   6547292,
+   506444,
+   6547640
+  ],
+  "tiles": [
+   "654_50 (2024-05-14)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y23c016-65450_5050_25.copc.laz",
+   "y23c016-65475_5050_25.copc.laz"
+  ],
+  "scan_date": "2023-04-16",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 291312,
+  "density_in_box": 1.43,
+  "classes": {
+   "1": 110229,
+   "2": 177133,
+   "7": 339,
+   "17": 3565,
+   "18": 46
+  },
+  "train_points_class64": 1558
+ },
+ "platforms": [
+  {
+   "bis_object": "1386",
+   "track": "5a",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 593.0,
+   "width_m": 7.5,
+   "roof": "Tak",
+   "track_bed_m": 52.14,
+   "track_bed_points": 547,
+   "platform_surface_m": 52.99,
+   "platform_points": 2101,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.85,
+   "laser_estimate_above_rail_m": 0.68
+  },
+  {
+   "bis_object": "1400",
+   "track": null,
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 523.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "1",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  }
+ ],
+ "platform_surface_m": 52.99,
+ "track_bed_m": 52.14,
+ "trains_in_scan": 5,
+ "structures": {
+  "building": 2,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 5
+ },
+ "photos": 136,
+ "photos_station_related": 66
+}

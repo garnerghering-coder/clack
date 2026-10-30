@@ -1,0 +1,1081 @@
+{
+ "clack_id": "740000031",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform level (no signposted name found)",
+   "other_names": [],
+   "_source": "OSM platforms 2-5 tagged level=0, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Bridge level over the tracks (entrance halls; no signposted name found)",
+   "other_names": [],
+   "_source": "OSM footbridges w40858591/w133331997 and entrances n8205882159, n8205882160, n8524123585 tagged level=1, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Passage under the tracks (OSM underpass w881957817; no name)",
+   "other_names": [],
+   "_source": "OSM w881957817, lift n8201995772 (level 0;-1), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "1278",
+   "track": "7",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 7 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1278; read 2026-10-30"
+  },
+  {
+   "platform_bis": "1277",
+   "track": "5",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 5 (the train stops with the platform to its north-west)",
+   "_source": "laser (2020-03-31, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 1277; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM n8572777974, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM n8205629577, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM n8572778005",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level 1"
+   ],
+   "where": "OSM n7626554391 and n7626554392 (level 0;1, not joined to a platform in OSM); Huddinge's 2020 study says the escalator house at the south entrance has only one lift",
+   "confirmed_by": "owner text",
+   "_source": "OSM; Huddinge kommun, Åtgärdsvalsstudie bytespunkt Flemingsberg (2020), p. 30, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "level 0",
+    "level -1"
+   ],
+   "where": "OSM n8201995772, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM w816573050 (reversible)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM w882358455, w882358456 (reversible; pendeltåg platform)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM w816573051 (reversible)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 2/3",
+    "level 1"
+   ],
+   "where": "OSM w923519282",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 4/5",
+    "level 1"
+   ],
+   "where": "OSM w882358457",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 6/7",
+    "level 1"
+   ],
+   "where": "OSM w923519277",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "between": [
+    "platforms 6/7",
+    "street"
+   ],
+   "where": "OSM w881957817 (level -1)",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "south entrance",
+    "platforms"
+   ],
+   "where": "escalator house at the south (campus-side) entrance; Huddinge's 2020 study says the north entrance lacks escalators to the regional-train platforms. Situation may have changed since 2020: OSM now has escalators to all three island platforms.",
+   "confirmed_by": "owner text",
+   "_source": "Huddinge kommun, Åtgärdsvalsstudie bytespunkt Flemingsberg (2020), pp. 16, 30, https://webb.huddinge.se/globalassets/ovriga-webbar/verksamhetswebbar/oversiktsplan/dokument-oversiktsplan/op-2050-atgardsvalsstudie-bytespunkt-flemingsberg-2020.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w133331997",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3",
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 93.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w133331997 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.948293,
+    "lat": 59.2200432,
+    "how": "OSM w133331997 (point on the way)",
+    "_source": "OpenStreetMap w133331997 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w133332000",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 20.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w133332000 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.948295,
+    "lat": 59.2197305,
+    "how": "OSM w133332000 (point on the way)",
+    "_source": "OpenStreetMap w133332000 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w816573050",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 20.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w816573050 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9456268,
+    "lat": 59.2183062,
+    "how": "OSM w816573050 (point on the way)",
+    "_source": "OpenStreetMap w816573050 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w816573051",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 22.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w816573051 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9460396,
+    "lat": 59.2179175,
+    "how": "OSM w816573051 (point on the way)",
+    "_source": "OpenStreetMap w816573051 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w881957817",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w881957817 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9485635,
+    "lat": 59.219886,
+    "how": "OSM w881957817 (point on the way)",
+    "_source": "OpenStreetMap w881957817 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w882358455",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 30.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w882358455 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9457441,
+    "lat": 59.2180624,
+    "how": "OSM w882358455 (point on the way)",
+    "_source": "OpenStreetMap w882358455 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w882358456",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 30.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w882358456 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9459079,
+    "lat": 59.2181452,
+    "how": "OSM w882358456 (point on the way)",
+    "_source": "OpenStreetMap w882358456 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w882358457",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 30.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w882358457 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9458611,
+    "lat": 59.2181622,
+    "how": "OSM w882358457 (point on the way)",
+    "_source": "OpenStreetMap w882358457 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w923519266",
+   "name": null,
+   "osm_level": "1",
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w923519266 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9482425,
+    "lat": 59.2200561,
+    "how": "OSM w923519266 (point on the way)",
+    "_source": "OpenStreetMap w923519266 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w923519272",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "reversible",
+   "length_m": 20.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w923519272 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9482804,
+    "lat": 59.2197364,
+    "how": "OSM w923519272 (point on the way)",
+    "_source": "OpenStreetMap w923519272 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w923519277",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w923519277 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9487345,
+    "lat": 59.2197811,
+    "how": "OSM w923519277 (point on the way)",
+    "_source": "OpenStreetMap w923519277 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w923519281",
+   "name": null,
+   "osm_level": "1",
+   "between": [
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w923519281 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9487708,
+    "lat": 59.2197727,
+    "how": "OSM w923519281 (point on the way)",
+    "_source": "OpenStreetMap w923519281 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w923519282",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 23.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w923519282 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9484251,
+    "lat": 59.220149,
+    "how": "OSM w923519282 (point on the way)",
+    "_source": "OpenStreetMap w923519282 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1214651763",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1214651763 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9486995,
+    "lat": 59.2195141,
+    "how": "OSM w1214651763 (point on the way)",
+    "_source": "OpenStreetMap w1214651763 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7626554391",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7626554391 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.946255,
+    "lat": 59.2177802,
+    "how": "OSM n7626554391",
+    "_source": "OpenStreetMap n7626554391 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7626554392",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7626554392 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.946271,
+    "lat": 59.2177909,
+    "how": "OSM n7626554392",
+    "_source": "OpenStreetMap n7626554392 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n8201995772",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n8201995772 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9485445,
+    "lat": 59.2198734,
+    "how": "OSM n8201995772",
+    "_source": "OpenStreetMap n8201995772 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n8205629577",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 4",
+    "platform 5"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n8205629577 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9457225,
+    "lat": 59.218012,
+    "how": "OSM n8205629577",
+    "_source": "OpenStreetMap n8205629577 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n8572777974",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n8572777974 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9482425,
+    "lat": 59.2200561,
+    "how": "OSM n8572777974",
+    "_source": "OpenStreetMap n8572777974 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n8572778005",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 6",
+    "platform 7"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n8572778005 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 17.9487585,
+    "lat": 59.219763,
+    "how": "OSM n8572778005",
+    "_source": "OpenStreetMap n8572778005 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Södra entrén (south entrance)",
+   "street": "Huddingevägen / campus side (OSM revolving doors n8205882159 nearest Huddingevägen, n8205882160 nearest Generatorslingan, level 1)",
+   "level": "1",
+   "where": "south end; upgraded winter 2018; footbridge from here over the car park towards the district court (tingsrätten)",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) pp. 8, 31, and OSM, read 2026-10-30"
+  },
+  {
+   "name": "Norra entrén (north entrance)",
+   "street": "Regulatorbron (OSM sliding door n8524123585 wheelchair=yes, level 1; n8201995777, n8572777982)",
+   "level": "1",
+   "where": "north end, by Regulatorbron and Flemingsberg centrum",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) pp. 8, 16, 31, and OSM, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n8201995777",
+   "street": "Regulatorbron",
+   "street_how": "nearest named street, 17.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n8201995777 (already in OSM)",
+   "position": {
+    "lon": 17.9489236,
+    "lat": 59.2197548,
+    "how": "OSM n8201995777",
+    "_source": "OpenStreetMap n8201995777 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8205629565",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n8205629565 (already in OSM)",
+   "position": {
+    "lon": 17.9460622,
+    "lat": 59.2182841,
+    "how": "OSM n8205629565",
+    "_source": "OpenStreetMap n8205629565 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8205629567",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n8205629567 (already in OSM)",
+   "position": {
+    "lon": 17.9460966,
+    "lat": 59.21827,
+    "how": "OSM n8205629567",
+    "_source": "OpenStreetMap n8205629567 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8205882159",
+   "street": "Huddingevägen",
+   "street_how": "nearest named street, 18.2 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n8205882159 (already in OSM)",
+   "position": {
+    "lon": 17.9451256,
+    "lat": 59.2180226,
+    "how": "OSM n8205882159",
+    "_source": "OpenStreetMap n8205882159 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8205882160",
+   "street": "Generatorslingan",
+   "street_how": "nearest named street, 20.7 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n8205882160 (already in OSM)",
+   "position": {
+    "lon": 17.9459893,
+    "lat": 59.2176861,
+    "how": "OSM n8205882160",
+    "_source": "OpenStreetMap n8205882160 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8524123585",
+   "street": "Regulatorbron",
+   "street_how": "nearest named street, 31.3 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n8524123585 (already in OSM)",
+   "position": {
+    "lon": 17.948563,
+    "lat": 59.2199197,
+    "how": "OSM n8524123585",
+    "_source": "OpenStreetMap n8524123585 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8572777982",
+   "street": "Regulatorbron",
+   "street_how": "nearest named street, 6.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8572777982 (already in OSM)",
+   "position": {
+    "lon": 17.9479957,
+    "lat": 59.2195375,
+    "how": "OSM n8572777982",
+    "_source": "OpenStreetMap n8572777982 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "restaurant",
+   "name": "JA Thai Wok",
+   "where": "in Flemingsberg station (Jernhusen)",
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 11:00-20:00",
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/, read 2026-10-30 (jathai.se lists only its Hornsgatan restaurant)",
+   "position": {
+    "lon": 17.9454705,
+    "lat": 59.2179182,
+    "osm_id": "n11942251754",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 11.8,
+    "how": "OSM node n11942251754",
+    "_source": "OpenStreetMap n11942251754 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationen (station building)",
+   "opening_hours": "Mo-Th 04:45-01:00; Fr 04:45-03:30; Sa 04:30-03:30; Su 04:30-01:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Jernhusen also lists 'Låsning kl. 02:30' and deviating hours 25/12, 30/12, 31/12 2026 without details",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "SL toalett",
+   "fee": "yes (OSM)",
+   "level_per_plan": "0 (OSM)",
+   "where": "OSM n14273142536; another fee toilet n7626550082",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "SL",
+   "where": "OSM shop=ticket n8205959660 in the station",
+   "_source": "OSM, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Flemingsberg bus stops A-D",
+   "where": "A and B westbound on Huddingevägen; C and D eastbound on Regulatorvägen (per Huddinge 2020; may have changed)",
+   "_source": "Huddinge kommun ÅVS bytespunkt Flemingsberg (2020) p. 37, read 2026-10-30"
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Th 04:45-01:00; Fr 04:45-03:30; Sa 04:30-03:30; Su 04:30-01:00",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ SL VR Snabbtåg Mälartåg (Mälardalstrafik) För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Burger King",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Flemingsberg station",
+     "opening_hours": "Mo-Fr 06:00-20:00; Sa-Su 10:00-20:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "burgerking.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.9457597,
+    "lat": 59.2177939,
+    "osm_id": "n5822033865",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 18.0,
+    "how": "OSM node n5822033865",
+    "_source": "OpenStreetMap n5822033865 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Espresso House",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Flemingsberg station",
+     "opening_hours": "Mo-Fr 07:00-18:00; Sa 09:00-15:00; Su 10:00-15:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "espressohouse.com/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.9458104,
+    "lat": 59.2179136,
+    "osm_id": "n5822033866",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.9,
+    "how": "OSM node n5822033866",
+    "_source": "OpenStreetMap n5822033866 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "JA Thai Wok",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Flemingsberg station",
+     "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 11:00-20:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.jathai.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.9454705,
+    "lat": 59.2179182,
+    "osm_id": "n11942251754",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 11.8,
+    "how": "OSM node n11942251754",
+    "_source": "OpenStreetMap n11942251754 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Flemingsberg station",
+     "opening_hours": "Mo-Fr 06:00-21:00; Sa 09:00-21:00; Su 10:00-21:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.9454046,
+    "lat": 59.2181003,
+    "osm_id": "n5822033864",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.2,
+    "how": "OSM node n5822033864",
+    "_source": "OpenStreetMap n5822033864 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": null,
+   "name": "Subway",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": [
+    {
+     "where": "Flemingsberg station",
+     "opening_hours": "Mo-Fr 09:00-20:00; Sa-Su 09:00-20:00"
+    }
+   ],
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "restaurants.subway.com/sv/sverige/huddinge/bjornkullavagen-2",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 17.9451126,
+    "lat": 59.2180802,
+    "osm_id": "n12385341058",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 21.0,
+    "how": "OSM node n12385341058",
+    "_source": "OpenStreetMap n12385341058 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n7626550082",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7626550082 (read 2026-10-30)",
+   "position": {
+    "lon": 17.9459979,
+    "lat": 59.2177301,
+    "osm_id": "n7626550082",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 18.6,
+    "how": "OSM node n7626550082",
+    "_source": "OpenStreetMap n7626550082 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "SL",
+   "osm_id": "n8205959660",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n8205959660 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": "SL",
+   "osm_id": "n14273142536",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n14273142536 (read 2026-10-30)",
+   "position": {
+    "lon": 17.9482433,
+    "lat": 59.2196758,
+    "osm_id": "n14273142536",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 12.5,
+    "how": "OSM node n14273142536",
+    "_source": "OpenStreetMap n14273142536 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Scandinavian Hair",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 17.9460847,
+    "lat": 59.2177803,
+    "osm_id": "n11942273361",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 11.5,
+    "how": "OSM node n11942273361",
+    "_source": "OpenStreetMap n11942273361 (ODbL), read 2026-10-30"
+   },
+   "note": "OSM only: not on the station owner's list; check it still exists",
+   "_source": "OpenStreetMap n11942273361 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Åtgärdsvalsstudie bytespunkt Flemingsberg (OP 2050 underlag)",
+   "publisher": "Huddinge kommun",
+   "url": "https://webb.huddinge.se/globalassets/ovriga-webbar/verksamhetswebbar/oversiktsplan/dokument-oversiktsplan/op-2050-atgardsvalsstudie-bytespunkt-flemingsberg-2020.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "2020 study, describes entrances, lifts, escalators and bus stops as they were then"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "No current station plan found from SL, Jernhusen or Huddinge; the 2020 Huddinge study predates recent changes, and lifts/escalators per platform are confirmed only by OSM.",
+  "Signposted names of the bridge level and entrance halls: none found.",
+  "Taxi stand: OSM has a taxi node ~170 m away; no owner source gives its position.",
+  "restaurant Thai Wok: no opening hours: not on the owner's page and no other source found"
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [
+  "restaurant Thai Wok: no opening hours"
+ ],
+ "answers": [
+  {
+   "question": "restaurant Thai Wok: no opening hours",
+   "answer": "Jernhusen lists 'JA Thai Wok' at Flemingsberg station: Mo-Fr 10:00-20:00; Sa,Su 11:00-20:00. The chain's own site (jathai.se) shows only its Hornsgatan restaurant, so Jernhusen is the source.",
+   "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/, read 2026-10-30"
+  }
+ ]
+}

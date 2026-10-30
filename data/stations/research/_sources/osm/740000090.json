@@ -1,0 +1,428 @@
+{
+ "clack_id": "740000090",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w39376129",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w39376130",
+   "ref": "2b",
+   "level": null
+  },
+  {
+   "osm_id": "w39376131",
+   "ref": "2a",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w903469223",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 8.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    14.1626252,
+    57.7842473
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425083737",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 18.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    14.1627532,
+    57.7848084
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n950768989",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    14.162422,
+    57.7848567
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n2195817729",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 42.5,
+   "lonlat": [
+    14.1654287,
+    57.7842444
+   ]
+  },
+  {
+   "osm_id": "n2195817737",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Järnvägsgatan",
+   "nearest_street_m": 33.0,
+   "lonlat": [
+    14.1634415,
+    57.7843714
+   ]
+  },
+  {
+   "osm_id": "n4035652613",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Järnvägsgatan",
+   "nearest_street_m": 34.9,
+   "lonlat": [
+    14.1625226,
+    57.7845077
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n441805539",
+   "category": "restaurant",
+   "name": "Restaurang SOYA",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 88,
+   "lonlat": [
+    14.1628434,
+    57.7839002
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 74.0
+  },
+  {
+   "osm_id": "n452978357",
+   "category": "bus_station",
+   "name": "Jönköping Resecentrum",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Th 04:45-01:00; Fr 04:45-02:30; Sa 05:20-02:30; Su 05:20-24:00",
+   "wheelchair": "yes",
+   "distance_m": 13,
+   "lonlat": [
+    14.1640515,
+    57.7843971
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.7
+  },
+  {
+   "osm_id": "n699746435",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 130,
+   "lonlat": [
+    14.1619418,
+    57.7843405
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 37.7
+  },
+  {
+   "osm_id": "n699746448",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 152,
+   "lonlat": [
+    14.1616347,
+    57.784557
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 17.3
+  },
+  {
+   "osm_id": "n699753783",
+   "category": "cafe",
+   "name": "Graffiti Café",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 102,
+   "lonlat": [
+    14.1625147,
+    57.7839725
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 70.3
+  },
+  {
+   "osm_id": "n699755908",
+   "category": "shop=convenience",
+   "name": "Pressbyrån",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 07:00-20:00; Su 08:00-20:00",
+   "wheelchair": "yes",
+   "distance_m": 96,
+   "lonlat": [
+    14.1625563,
+    57.7844647
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 16.3,
+   "brand": "Pressbyrån"
+  },
+  {
+   "osm_id": "n699756397",
+   "category": "cafe",
+   "name": "Espresso House",
+   "level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    14.1631337,
+    57.7843968
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 16.3,
+   "brand": "Espresso House",
+   "cuisine": "coffee_shop"
+  },
+  {
+   "osm_id": "n699756505",
+   "category": "bus_station",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 192,
+   "lonlat": [
+    14.1673102,
+    57.78399
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.7
+  },
+  {
+   "osm_id": "n10740076776",
+   "category": "charging_station",
+   "name": "Jönköping Energi",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 142,
+   "lonlat": [
+    14.16183,
+    57.78463
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.2,
+   "operator": "Jönköping Energi"
+  },
+  {
+   "osm_id": "n11612810952",
+   "category": "bicycle_repair_station",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 26,
+   "lonlat": [
+    14.1641348,
+    57.7840541
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 40.9
+  },
+  {
+   "osm_id": "n12098193472",
+   "category": "parcel_locker",
+   "name": "Budbee",
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 95,
+   "lonlat": [
+    14.1625402,
+    57.7843398
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 30.1,
+   "brand": "Budbee",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n12609789690",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    14.1637692,
+    57.7847527
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.5
+  },
+  {
+   "osm_id": "n12609789691",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 59,
+   "lonlat": [
+    14.1637152,
+    57.7847615
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.8
+  },
+  {
+   "osm_id": "n13893330518",
+   "category": "charging_station",
+   "name": "Jönköping Energi",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 166,
+   "lonlat": [
+    14.1613921,
+    57.7845538
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.3,
+   "operator": "Jönköping Energi"
+  },
+  {
+   "osm_id": "n13893330726",
+   "category": "clock",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 102,
+   "lonlat": [
+    14.162417,
+    57.784315
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 34.3
+  },
+  {
+   "osm_id": "n14045774891",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 35,
+   "lonlat": [
+    14.1636243,
+    57.7844478
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.6
+  },
+  {
+   "osm_id": "w133653929",
+   "category": "bus_station",
+   "name": "Jönköpings bussterminal",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 6,
+   "lonlat": [
+    14.1641642,
+    57.7843562
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w973546367",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 116,
+   "lonlat": [
+    14.1618313,
+    57.7845198
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.2
+  },
+  {
+   "osm_id": "w1324181786",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 132,
+   "lonlat": [
+    14.1666664,
+    57.7839244
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 6.6
+  }
+ ]
+}

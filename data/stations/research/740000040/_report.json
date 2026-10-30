@@ -1,0 +1,129 @@
+{
+ "clack_id": "740000040",
+ "slug": "herrljunga_c",
+ "flags": [
+  "w307774929 Herrljunga (station building): p95 117.4 m is 3.1 m above the median 114.3 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=13.011696,58.075890,13.026916,58.081861",
+ "ground": {
+  "min_m": 99.76,
+  "median_m": 104.9,
+  "max_m": 111.36,
+  "nan_cells": 0,
+  "size_m": [
+   648,
+   404
+  ],
+  "box_sweref": [
+   382866,
+   6439004,
+   383514,
+   6439408
+  ],
+  "tiles": [
+   "643_38 (2024-03-30)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y22b011-64375_3825_25.copc.laz"
+  ],
+  "scan_date": "2022-03-04",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 411389,
+  "density_in_box": 1.57,
+  "classes": {
+   "1": 148946,
+   "2": 261179,
+   "7": 248,
+   "17": 1009,
+   "18": 7
+  },
+  "train_points_class64": 448
+ },
+ "platforms": [
+  {
+   "bis_object": "2478",
+   "track": "7",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 177.0,
+   "width_m": 6.8,
+   "roof": "Tak",
+   "track_bed_m": 107.61,
+   "track_bed_points": 345,
+   "platform_surface_m": 108.33,
+   "platform_points": 1309,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.72,
+   "laser_estimate_above_rail_m": 0.54
+  },
+  {
+   "bis_object": "2477",
+   "track": "6",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 250.0,
+   "width_m": 6.8,
+   "roof": "Tak",
+   "track_bed_m": 107.61,
+   "track_bed_points": 486,
+   "platform_surface_m": 108.33,
+   "platform_points": 1670,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.72,
+   "laser_estimate_above_rail_m": 0.54
+  },
+  {
+   "bis_object": "1756",
+   "track": "4",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 353.0,
+   "width_m": 5.1,
+   "roof": "Tak",
+   "track_bed_m": 107.67,
+   "track_bed_points": 711,
+   "platform_surface_m": 108.54,
+   "platform_points": 1900,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.87,
+   "laser_estimate_above_rail_m": 0.7
+  },
+  {
+   "bis_object": "1458",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 270.0,
+   "width_m": 4.9,
+   "roof": "Tak",
+   "track_bed_m": 107.6,
+   "track_bed_points": 312,
+   "platform_surface_m": 108.47,
+   "platform_points": 985,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.87,
+   "laser_estimate_above_rail_m": 0.69
+  }
+ ],
+ "platform_surface_m": 108.4,
+ "track_bed_m": 107.61,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 2,
+  "footbridge": 0,
+  "canopy_osm": 13,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 52,
+ "photos_station_related": 36
+}

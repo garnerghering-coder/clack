@@ -1,0 +1,130 @@
+{
+ "clack_id": "740000110",
+ "slug": "varberg_c",
+ "flags": [
+  "w1463599004 Alida Svenssons gång- och cykelbro (bridge): p95 6.2 m is 3.0 m above the median 3.2 m (a taller neighbour or a mast inside the outline?).",
+  "w1463602333 roof: p95 6.0 m is 3.8 m above the median 2.3 m (a taller neighbour or a mast inside the outline?).",
+  "w1463602335 roof: p95 6.2 m is 3.1 m above the median 3.1 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1463599003 Linda Hanssons Bro (service)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.244822,57.108970,12.254672,57.116764",
+ "ground": {
+  "min_m": -6.63,
+  "median_m": 2.27,
+  "max_m": 10.31,
+  "nan_cells": 0,
+  "size_m": [
+   341,
+   616
+  ],
+  "box_sweref": [
+   333290,
+   6333000,
+   333631,
+   6333616
+  ],
+  "tiles": [
+   "633_33 (2022-09-30)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20a030-63325_3325_25.copc.laz"
+  ],
+  "scan_date": "2020-01-20",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 644345,
+  "density_in_box": 3.07,
+  "classes": {
+   "1": 240749,
+   "2": 403415,
+   "7": 181
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "2613",
+   "track": "5a,5b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 350.0,
+   "width_m": 9.3,
+   "roof": "Skydd",
+   "baninfo_side": "1",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "platform of the new Varberg station in the railway tunnel (opened after the January 2020 scan): the laser shows only the ground of the old site on its line, not the platform or its track bed"
+  },
+  {
+   "bis_object": "2611",
+   "track": "2a,2b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 333.0,
+   "width_m": 6.2,
+   "roof": "Skydd",
+   "baninfo_side": "1",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "platform of the new Varberg station in the railway tunnel (opened after the January 2020 scan): the laser shows only the ground of the old site on its line, not the platform or its track bed"
+  },
+  {
+   "bis_object": "2612",
+   "track": "4a,4b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 350.0,
+   "width_m": 9.3,
+   "roof": "Skydd",
+   "baninfo_side": "2",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "platform of the new Varberg station in the railway tunnel (opened after the January 2020 scan): the laser shows only the ground of the old site on its line, not the platform or its track bed"
+  },
+  {
+   "bis_object": "2610",
+   "track": "1a,1b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 193.0,
+   "width_m": 6.2,
+   "roof": "Skydd",
+   "baninfo_side": "2",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "platform of the new Varberg station in the railway tunnel (opened after the January 2020 scan): the laser shows only the ground of the old site on its line, not the platform or its track bed"
+  }
+ ],
+ "platform_surface_m": null,
+ "track_bed_m": null,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 1,
+  "footbridge": 1,
+  "canopy_osm": 9,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 81,
+ "photos_station_related": 47
+}

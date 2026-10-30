@@ -1,0 +1,99 @@
+{
+ "clack_id": "740001586",
+ "slug": "hyllie",
+ "flags": [
+  "w332190868 Point Hyllie (hotel): p95 132.8 m is 93.0 m above the median 39.8 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.969902,55.559738,12.982939,55.566169",
+ "ground": {
+  "min_m": 14.86,
+  "median_m": 23.63,
+  "max_m": 29.09,
+  "nan_cells": 0,
+  "size_m": [
+   539,
+   459
+  ],
+  "box_sweref": [
+   372113,
+   6159069,
+   372652,
+   6159528
+  ],
+  "tiles": [
+   "615_37 (2025-09-18)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y25a003-61575_3700_25.copc.laz",
+   "y25a003-61575_3725_25.copc.laz"
+  ],
+  "scan_date": "2025-03-07",
+  "density_pts_m2_nominal": 1.8,
+  "flight_height_m": 2400,
+  "points_in_box": 632251,
+  "density_in_box": 2.56,
+  "classes": {
+   "1": 325739,
+   "2": 305363,
+   "7": 1014,
+   "18": 135
+  },
+  "train_points_class64": 340
+ },
+ "platforms": [
+  {
+   "bis_object": "2090",
+   "track": "72N",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 355.0,
+   "width_m": 10.67,
+   "roof": "Tak",
+   "track_bed_m": 16.22,
+   "track_bed_points": 734,
+   "platform_surface_m": 16.97,
+   "platform_points": 2967,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "other_side_surface_m": 16.97,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "2091",
+   "track": "74",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 355.0,
+   "width_m": 10.67,
+   "roof": "Tak",
+   "track_bed_m": 16.26,
+   "track_bed_points": 926,
+   "platform_surface_m": 16.95,
+   "platform_points": 2957,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "other_side_surface_m": 17.16,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 0.69,
+   "laser_estimate_above_rail_m": 0.51
+  }
+ ],
+ "platform_surface_m": 16.96,
+ "track_bed_m": 16.24,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 10,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 146,
+ "photos_station_related": 52
+}

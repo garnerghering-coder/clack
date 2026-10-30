@@ -1,0 +1,273 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street, station building and platforms",
+   "note": "No source gives a signposted name. JLT's map labels tracks 1a, 1b, 2a, 2b and 3–10 and bus lägen A–J and T around the station.",
+   "_source": "JLT terminal map 'Nässjö station', https://www.jlt.se/globalassets/dokument-2024/terminalkartor/jlt_terminalkartor_nassjo.pdf (valid from August 2024; linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30; facts only"
+  },
+  {
+   "osm_level": "layer 2 (no level tag)",
+   "name": "Footbridge over the tracks (name not signposted in any source found)",
+   "note": "OSM footbridge w185047096 (layer 2, 73 m) is tagged as reaching platforms 2a, 2b, 4, 5, 8, 9 and 10. JLT confirms the station has lift(s) and escalator(s), without positions.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "between": [
+    "station side",
+    "platforms 2a/2b/4, 5/8, 9/10"
+   ],
+   "where": "across the tracks (OSM w185047096, 73 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 2a/2b/4",
+    "footbridge"
+   ],
+   "where": "on the platform serving tracks 2a/2b/4 (OSM n9976358824)",
+   "confirmed_by": "OSM only",
+   "note": "JLT says 'Hiss: Ja' for Nässjö resecentrum but gives no positions.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 2a/2b/4",
+    "footbridge"
+   ],
+   "where": "on the same platform; two escalators (OSM w185047086, w185047095, one per direction)",
+   "confirmed_by": "OSM only",
+   "note": "JLT says 'Rulltrappa: Ja' without positions.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 5/8",
+    "footbridge"
+   ],
+   "where": "on the platform serving tracks 5 and 8 (OSM n9976358825)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "platforms 5/8",
+    "footbridge"
+   ],
+   "where": "on the same platform; two escalators (OSM w185047088, w185047090)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "platforms 9/10",
+    "footbridge"
+   ],
+   "where": "on the platform serving tracks 9 and 10 (OSM n9976358826)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms 9/10",
+    "footbridge"
+   ],
+   "where": "OSM w206833607 (12 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "unknown (probably station side)",
+    "footbridge"
+   ],
+   "where": "OSM n13098739044, reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "unknown"
+   ],
+   "where": "OSM w185057081 (7.8 m), reaches no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Huvudentré",
+   "street": "Järnvägsgatan",
+   "level": "0",
+   "where": "OSM n5261559378 (entrance=main), 14 m from Järnvägsgatan; station address Järnvägsgatan 9A. JLT: the replacement-bus stop is directly to the left on leaving the main entrance. Jernhusen says the station has an accessible entrance.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Entrance (unnamed)",
+   "level": "0",
+   "where": "OSM n1956290334; no named street within 40 m",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "level_per_plan": "0",
+   "where": "in the station building (Järnvägsgatan 9A); JLT: 'Café och kiosk inne i stationsbyggnad'",
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa,Su 09:30-18:00",
+   "hours_source": "OSM's opening_hours (Espresso House's own café list was cut off before this café could be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/mat-och-butiker/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "level_per_plan": "0",
+   "where": "in the station building; also JLT's ticket agent (biljettombud)",
+   "opening_hours": "Mo-Fr 05:30-21:00; Sa 08:00-21:00; Su 09:00-21:00",
+   "hours_source": "OSM's opening_hours (Pressbyrån's store finder loads by script and could not be read)",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Suld Sushi",
+   "level_per_plan": "0",
+   "where": "in the station (Järnvägsgatan 9A, per Jernhusen); not in OSM; position in the building not known",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/mat-och-butiker/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes: card (Jernhusen); JLT's 2022 page says coins or bank card",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM n13098739046, fee=yes)",
+   "opening_hours": "Mo-Su 00:00-24:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/toalett/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30; OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Förvaringsboxar (Speed Box)",
+   "fee": "S 29 kr/h (max 149 kr/24 h), M 39 kr/h (max 199), L 49 kr/h (max 249); max 7 days",
+   "where": "in the station building (OSM n13030244427 'speedbox')",
+   "opening_hours": "Mo-Su 00:00-24:00",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/forvaringsboxar/, read 2026-10-30; OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat",
+   "fee": "149 kr (10-kr coins or card)",
+   "where": "in the station (position not stated)",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Stationshall",
+   "level_per_plan": "0",
+   "where": "in the station building; JLT calls the meeting place 'inne i stationsbyggnad'",
+   "opening_hours": "Mo-Su 00:00-24:00",
+   "hours_source": "website (Jernhusen; JLT also says 'Alla dagar, dygnet runt')",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "ticket_agent",
+   "name": "Pressbyrån (biljettombud JLT)",
+   "where": "in the station building; JLT names no ticket machine at Nässjö",
+   "_source": "JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Lägen A–J (city buses 61–64 at A–D; regional buses at E–I)",
+   "where": "around the station on Järnvägsgatan/Esplanaden/Postgatan/Köpmansgatan per JLT's map (exact positions not readable from its text)",
+   "_source": "JLT terminal map 'Nässjö station', https://www.jlt.se/globalassets/dokument-2024/terminalkartor/jlt_terminalkartor_nassjo.pdf (valid from August 2024; linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30; facts only"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Ersättningstrafik, läge T",
+   "where": "directly to the left on leaving the main entrance (JLT)",
+   "_source": "JLT terminal map 'Nässjö station', https://www.jlt.se/globalassets/dokument-2024/terminalkartor/jlt_terminalkartor_nassjo.pdf (valid from August 2024; linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30; facts only; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering (Apcoa)",
+   "fee": "yes",
+   "where": "by the station; short- and long-term",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/parkering/, read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "category": "wifi",
+   "name": "All Station Guests",
+   "fee": "no",
+   "where": "station-wide",
+   "_source": "https://www.jernhusen.se/hitta-din-station/nassjo-centralstation/wifi/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Nässjö station (terminalkarta)",
+   "publisher": "Jönköpings Länstrafik",
+   "url": "https://www.jlt.se/globalassets/dokument-2024/terminalkartor/jlt_terminalkartor_nassjo.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "valid from August 2024; labels tracks 1a–10 and bus lägen; no lifts, stairs or shops labelled in its text"
+  }
+ ],
+ "answers": [
+  {
+   "question": "platform 3: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Open. OSM ties no lift, escalator or stairs to platform 3, and no owner source says how it is reached; JLT's map labels 'Spår 3' but its text shows no lifts or stairs.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT terminal map 'Nässjö station', https://www.jlt.se/globalassets/dokument-2024/terminalkartor/jlt_terminalkartor_nassjo.pdf (valid from August 2024; linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30; facts only"
+  },
+  {
+   "question": "platform 4: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Probably wrong in the app: OSM tags lift n9976358824 and escalators w185047086/w185047095 as reaching platforms 2a, 2b and 4 (one island platform, it seems), up to footbridge w185047096. JLT confirms the station has a lift and an escalator but not where. Check that the draft joins these to platform 4.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30; JLT, \"Vad finns på våra stationer?\" https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/ (page last updated 2022-07-15), read 2026-10-30"
+  },
+  {
+   "question": "platform 1a: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "Likely correct but only from OSM: 1a/1b is the platform on the station-building side; OSM ties no lift, escalator or stairs to it, and no owner source says otherwise.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "platform 1b: no stairs, escalator or lift of its own (reached along the platform level only)",
+   "answer": "As for 1a: likely correct, OSM only.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "cafe Espresso House: no opening hours",
+   "answer": "OSM now has Mo-Fr 06:30-19:00; Sa,Su 09:30-18:00 (node n13030193198). Not confirmed by Espresso House: its café list could only be read up to a different café, and Jernhusen gives no hours.",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  },
+  {
+   "question": "shop Pressbyrån: no opening hours",
+   "answer": "OSM now has Mo-Fr 05:30-21:00; Sa 08:00-21:00; Su 09:00-21:00 (node n13030233594). Not confirmed by Pressbyrån (store finder loads by script) or Jernhusen (no hours).",
+   "_source": "OpenStreetMap (osmfacts/740000140.json, ODbL), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source measures them.",
+  "Which platforms each lift, escalator and stair serves is OSM only; JLT only says a lift and an escalator exist, and JLT's map text labels none. No owner plan of the footbridge found; Swedish Wikipedia could not be fetched; no photos checked.",
+  "How platform 3 is reached.",
+  "The footbridge's signposted name, and the station-side lift n13098739044 and stairs w185057081 (where they lead).",
+  "Suld Sushi: no hours anywhere (no own website found; aggregators not used).",
+  "Espresso House and Pressbyrån hours only from OSM."
+ ]
+}

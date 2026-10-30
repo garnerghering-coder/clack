@@ -1,0 +1,162 @@
+{
+ "clack_id": "740000173",
+ "slug": "oxnered",
+ "flags": [],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 58.95 m over 22577 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.269114,58.356061,12.280918,58.362308",
+ "ground": {
+  "min_m": 58.79,
+  "median_m": 61.64,
+  "max_m": 68.75,
+  "nan_cells": 0,
+  "size_m": [
+   448,
+   444
+  ],
+  "box_sweref": [
+   340347,
+   6471710,
+   340795,
+   6472154
+  ],
+  "tiles": [
+   "647_34 (2023-02-08)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20b016-64700_3400_25.copc.laz"
+  ],
+  "scan_date": "2020-03-21",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3200,
+  "points_in_box": 469394,
+  "density_in_box": 2.36,
+  "classes": {
+   "1": 220913,
+   "2": 245120,
+   "9": 3357,
+   "18": 4
+  },
+  "train_points_class64": 648
+ },
+ "platforms": [
+  {
+   "bis_object": "2472",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 44.0,
+   "width_m": 4.0,
+   "roof": "Saknas",
+   "track_bed_m": 61.72,
+   "track_bed_points": 87,
+   "platform_surface_m": 62.46,
+   "platform_points": 178,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "2471",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 54.0,
+   "width_m": 4.0,
+   "roof": "Saknas",
+   "track_bed_m": 61.72,
+   "track_bed_points": 105,
+   "platform_surface_m": 62.46,
+   "platform_points": 194,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "920",
+   "track": "2",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 172.0,
+   "width_m": 2.4,
+   "roof": "Tak",
+   "track_bed_m": 61.69,
+   "track_bed_points": 358,
+   "platform_surface_m": 62.46,
+   "platform_points": 413,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.77,
+   "laser_estimate_above_rail_m": 0.59
+  },
+  {
+   "bis_object": "918",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 172.0,
+   "width_m": 5.6,
+   "roof": "Skydd",
+   "track_bed_m": 61.69,
+   "track_bed_points": 345,
+   "platform_surface_m": 62.44,
+   "platform_points": 1150,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "2029",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 129.0,
+   "width_m": 3.0,
+   "roof": "Skydd",
+   "track_bed_m": 61.73,
+   "track_bed_points": 220,
+   "platform_surface_m": 62.49,
+   "platform_points": 398,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.76,
+   "laser_estimate_above_rail_m": 0.58
+  },
+  {
+   "bis_object": "924",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 129.0,
+   "width_m": 3.0,
+   "roof": "Skydd",
+   "track_bed_m": 61.73,
+   "track_bed_points": 236,
+   "platform_surface_m": 62.48,
+   "platform_points": 302,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  }
+ ],
+ "platform_surface_m": 62.46,
+ "track_bed_m": 61.72,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 3,
+  "footbridge": 0,
+  "canopy_osm": 2,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 50,
+ "photos_station_related": 37
+}

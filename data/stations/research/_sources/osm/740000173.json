@@ -1,0 +1,205 @@
+{
+ "clack_id": "740000173",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w45583753",
+   "ref": "Spår 3",
+   "level": null
+  },
+  {
+   "osm_id": "w45583755",
+   "ref": "Spår 2",
+   "level": null
+  },
+  {
+   "osm_id": "w45583756",
+   "ref": "Spår 1",
+   "level": null
+  },
+  {
+   "osm_id": "w45583759",
+   "ref": "Spår 4",
+   "level": null
+  },
+  {
+   "osm_id": "w45583761",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w45583776",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.5,
+   "reaches_platforms": [
+    "Spår 1"
+   ],
+   "lonlat": [
+    12.2738027,
+    58.3593066
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w45583777",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.8,
+   "reaches_platforms": [
+    "Spår 1",
+    "Spår 2"
+   ],
+   "lonlat": [
+    12.2740234,
+    58.359201
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w45583778",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.1,
+   "reaches_platforms": [
+    "Spår 2"
+   ],
+   "lonlat": [
+    12.2740633,
+    58.359271
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n9798442346",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 4,
+   "lonlat": [
+    12.2741978,
+    58.35941
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.3
+  },
+  {
+   "osm_id": "n9798442349",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 22,
+   "lonlat": [
+    12.2737918,
+    58.3593284
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n12908955014",
+   "category": "compressed_air",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 48,
+   "lonlat": [
+    12.2749076,
+    58.3592871
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.0
+  },
+  {
+   "osm_id": "w448274422",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 121,
+   "lonlat": [
+    12.276075,
+    58.3605856
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 15.2
+  },
+  {
+   "osm_id": "w1067145821",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 50,
+   "lonlat": [
+    12.2750607,
+    58.3593556
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 6.9,
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "w1504345136",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 116,
+   "lonlat": [
+    12.2760063,
+    58.3598801
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.9
+  },
+  {
+   "osm_id": "w1504345154",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 39,
+   "lonlat": [
+    12.2748321,
+    58.3593019
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.2
+  }
+ ]
+}

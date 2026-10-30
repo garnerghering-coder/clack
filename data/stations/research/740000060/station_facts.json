@@ -1,0 +1,326 @@
+{
+ "clack_id": "740000060",
+ "compiled": "2026-10-30",
+ "levels": [],
+ "platform_sides": [
+  {
+   "platform_bis": "315",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2022-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 315; read 2026-10-30"
+  },
+  {
+   "platform_bis": "317",
+   "track": "2",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 2 (the train stops with the platform to its south-east)",
+   "_source": "laser (2022-03-07, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS 317; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "between": [
+    "street/station side",
+    "far side of the tracks"
+   ],
+   "where": "OSM way w42605016 (layer -1, 96 m) under the tracks, with stairs w42605017 and w453710170; OSM does not join it to any platform and maps no platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OSM, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Tillgänglig entré (accessible entrance to the waiting room)",
+   "street": "track side (spårsidan)",
+   "where": "from the platform side straight into the waiting room",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "name": "Station building entrances, street side",
+   "street": "Järnvägsgatan (station address Järnvägsgatan 5)",
+   "where": "OSM entrance nodes n765051038, n2645179173, n2645179180, n2645179182 tagged addr:street=Järnvägsgatan (the brief's summary says OSM 'tags no entrance' joined to the platforms)",
+   "_source": "OSM and Jernhusen address, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n765051038",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n765051038 (already in OSM)",
+   "position": {
+    "lon": 13.5526395,
+    "lat": 58.1755226,
+    "how": "OSM n765051038",
+    "_source": "OpenStreetMap n765051038 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2645179173",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2645179173 (already in OSM)",
+   "position": {
+    "lon": 13.5536704,
+    "lat": 58.1755715,
+    "how": "OSM n2645179173",
+    "_source": "OpenStreetMap n2645179173 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2645179180",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2645179180 (already in OSM)",
+   "position": {
+    "lon": 13.5541723,
+    "lat": 58.1759037,
+    "how": "OSM n2645179180",
+    "_source": "OpenStreetMap n2645179180 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2645179182",
+   "street": "Järnvägsgatan",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2645179182 (already in OSM)",
+   "position": {
+    "lon": 13.5544575,
+    "lat": 58.175802,
+    "how": "OSM n2645179182",
+    "_source": "OpenStreetMap n2645179182 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Väntsal (station)",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa 07:00-23:00; Su 07:00-23:30",
+   "hours_source": "website (Jernhusen: the station's hours)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett och universaltoalett",
+   "fee": "yes, paid by card (amount not stated)",
+   "where": "in the station; position not given",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/toalett/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomat (Speed Services)",
+   "fee": "149 kr",
+   "where": "in the station",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-plats för rörelsehindrade",
+   "where": "during the rebuild of Stationsplan in front of the station: at the bus drop-off (bussangöringen) on Kungsplan",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Falköping resecentrum (Västtrafik stop 9021014041001000)",
+   "where": "Västtrafik lists lägen F, G, H, J, K, L, M, N, O, R, T, X (bus) and 1, 1A, 1B, 2, 3, 4 (these look like the train tracks; Västtrafik does not say so)",
+   "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014041001000/ (linked from Jernhusen's 'Karta över stationsområdet'), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Pressbyrån",
+   "where": "Järnvägsgatan 5 (station building)",
+   "hours_raw": "no hours on Jernhusen's page; not looked up on pressbyran.se in this pass",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/mat-och-butiker/, read 2026-10-30",
+   "position": {
+    "lon": 13.5525122,
+    "lat": 58.1754715,
+    "osm_id": "n13135957673",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13135957673",
+    "_source": "OpenStreetMap n13135957673 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "station_hall",
+   "name": "Stationen",
+   "level": null,
+   "where": null,
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa 07:00-23:00; Su 07:00-23:30",
+   "hours_raw": null,
+   "hours_source": "website (Jernhusen)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/"
+  },
+  {
+   "category": "accessibility",
+   "name": "Allt om tillgängligheten på Falköping centralstation.",
+   "owner_text": "Allt om tillgängligheten på Falköping centralstation. P-plats för rörelsehindrade Under ombyggnationen av stationsplan framför stationen finns parkeringen för rörelsehindrade vid bussangöringen på Kungsplan. Se fliken Karta över stationsområdet. Tillgänglig entré Det finns en tillgänglig entré till väntsalen från spårsidan. Universaltoalett Stationen har en universaltoalett. Ledsagning Du som har en funktionsnedsättning kan få hjälp till och från tåget när du ska resa. Beställ ledsagning när resan bokas, men senast 24 timmar före första ledsagning. Läs mer på www.stationsledsagning.se.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "toilets",
+   "name": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "owner_text": "På stationen finns toalett och universaltoalett. Betalning sker med kort.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/toalett/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "wifi",
+   "name": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "owner_text": "Stationens wifi heter \"All Station Guests\" och är gratis. Om du får problem, kontakta Telias support på telefonnummer 0771-35 20 91. De har öppet mån–fre 8–21, helger 9–17.",
+   "fee": "free",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/wifi/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "lost_property",
+   "name": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "owner_text": "Saker som tappats bort på stationen lämnas in till Polisen. Har du tappat bort något på tåget eller bussen får du kontakta respektive trafikföretag.",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/hittegods/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Här finns information om biljettköp när du är på stationen.",
+   "owner_text": "Här finns information om biljettköp när du är på stationen. Frågor om resor och biljetter hanteras av det företag som anordnar resan. Biljetter kan även köpas hos trafikföretagens biljettombud eller via resrobot.se eller tagbokningen.se SJ Västtrafik VR Snabbtåg För trafikinformation (skyltar och utrop), perrong eller spår, kontakta Trafikverket. 0771-921 921 (dygnet runt) www.trafikverket.se",
+   "fee": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/trafik-och-biljetter/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": "photo_booth",
+   "name": "På stationen finns en fotoautomat.",
+   "owner_text": "På stationen finns en fotoautomat. Foton för ID-handlingar som till exempel körkort och visum. Finns i svartvitt eller färg för bildstorlek 35x45 mm och 50x50 mm och kostar 149 kr. Du kan betala med 10-kronorsmynt eller med kort. Vid fel eller problem – ring Speed Services 0771-97 78 00. Speed-service Här kan du se en film hur du använder fotoautomaten",
+   "fee": "149 kr",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "level": null,
+   "where": null,
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/fotoautomat/",
+   "note": "Jernhusen's own words (Swedish), kept so the place and conditions can be read; 'where' is in the text when given"
+  },
+  {
+   "category": null,
+   "name": "Pressbyrån",
+   "app_poi": null,
+   "level": null,
+   "hours_by_unit": null,
+   "level_per_plan": null,
+   "where": null,
+   "level_source": null,
+   "opening_hours": null,
+   "hours_raw": "",
+   "hours_source": "website (Jernhusen station page)",
+   "hours_checked": "2026-10-30",
+   "website": "www.pressbyran.se/",
+   "_source": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/mat-och-butiker/",
+   "note": "listed by Jernhusen, not in the app map",
+   "position": {
+    "lon": 13.5525122,
+    "lat": 58.1754715,
+    "osm_id": "n13135957673",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13135957673",
+    "_source": "OpenStreetMap n13135957673 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [
+  {
+   "title": "Falköping resecentrum stop page (map of positions)",
+   "publisher": "Västtrafik",
+   "url": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014041001000/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "interactive page, no PDF; text gives only stop position letters"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source.",
+  "Platform layout (which tracks share which platform, and how each platform is reached: underpass stairs, lifts, ramps or level crossing): no owner text or plan found. Västtrafik's page gives no PDF, Jernhusen links no plan, and the Swedish Wikipedia page could not be fetched.",
+  "Pressbyrån hours: not on Jernhusen's page.",
+  "Jernhusen's Falköping and Hallsberg accessibility pages have word-for-word the same text about disabled parking 'vid bussangöringen på Kungsplan'. Check on site which station this belongs to."
+ ],
+ "_sources": {
+  "jernhusen": {
+   "url": "https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/",
+   "read": "2026-10-30",
+   "licence": "Jernhusen website: facts only, not copied"
+  },
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Falköping C (`740000060`): withheld: OSM joins no footway to the platforms and tags no entrance",
+   "answer": "Partly answered. OSM has no platform areas here at all, so nothing can be joined. It does have a 96 m pedestrian underpass (w42605016, layer -1) with stairs, and four entrance nodes on Järnvägsgatan. Jernhusen confirms an accessible entrance from the track side directly into the waiting room. No source found says which platforms the underpass reaches or whether it has lifts or ramps.",
+   "_source": "OSM; https://www.jernhusen.se/hitta-din-station/falkoping-centralstation/tillganglighet/, read 2026-10-30"
+  }
+ ]
+}
