@@ -40,6 +40,13 @@ for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort()) {
   }
 }
 if (review) {
+  // Platform heights where the laser and Trafikverket's register disagree (the research pass): the maps use the
+  // register until a photo, a walk or the operator settles each (owner, 2026-10-30).
+  const heights = path.join(dir, 'research', 'REVIEW_platform_heights_SE.md');
+  if (fs.existsSync(heights)) {
+    const table = fs.readFileSync(heights, 'utf8').split('\n').filter((l) => l.startsWith('|'));
+    queue.push('## Platform heights: laser vs Trafikverket\'s register (Sweden)', '', 'The maps use the register\'s class height; each row needs a photo, a walk or the operator to settle. From `research/REVIEW_platform_heights_SE.md`.', '', ...table, '');
+  }
   fs.writeFileSync(path.join(dir, 'REVIEW.md'), queue.join('\n'));
   console.log(`wrote ${path.join(dir, 'REVIEW.md')}`);
 }
