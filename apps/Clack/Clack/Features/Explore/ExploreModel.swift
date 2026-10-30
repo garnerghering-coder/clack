@@ -379,8 +379,12 @@ final class ExploreModel {
     /// The view moved: at close zoom fetch the detail for it (debounced, cached by the rounded box); below, clear.
     private func viewChangedForDetail() {
         detailTask?.cancel()
+        updateTilt()
         guard zoom >= Self.detailZoom, let bbox else {
             if detailShownKey != nil {
+                detailHasStructures = false
+                if lantmateriet3D { lantmateriet3D = false }
+                updateTilt()
                 detailShownKey = nil
                 detailShownJSON = nil
                 detailTracks = []
@@ -417,9 +421,31 @@ final class ExploreModel {
         detailShownKey = key
         detailShownJSON = json
         detailTracks = tracks
+        let structures = ((json["features"] as? [[String: Any]]) ?? []).compactMap { $0["properties"] as? [String: Any] }.filter { $0["kind"] as? String == "structure" }
+        detailHasStructures = !structures.isEmpty
+        let credit = structures.contains { $0["lantmateriet"] as? Bool == true }
+        if lantmateriet3D != credit { lantmateriet3D = credit }
         controller.setStationDetail(json)
+        updateTilt()
         needsFullRender = true
         scheduleRender()
+    }
+
+    /// Close in on a station with measured structures, the map tilts into 3D (owner, 2026-10-30: "when a user zooms in
+    /// close enough to the station, it switches into the 3d view"); out again, or away from it, it flattens. In at
+    /// `model3DZoom`, out half a zoom below, so it doesn't flip at the edge.
+    static let model3DZoom = 16.0
+    static let tiltDegrees = 55.0
+    @ObservationIgnored private var detailHasStructures = false
+    @ObservationIgnored private var tilted = false
+    /// The heights on screen come from Lantmäteriet's laser data: the attribution line credits it.
+    private(set) var lantmateriet3D = false
+
+    private func updateTilt() {
+        let want = detailHasStructures && zoom >= (tilted ? Self.model3DZoom - 0.5 : Self.model3DZoom)
+        guard want != tilted else { return }
+        tilted = want
+        controller.setTilt(want ? Self.tiltDegrees : 0)
     }
 
     /// The track lines of a detail answer, for laying trains on.
@@ -443,7 +469,7 @@ final class ExploreModel {
         return cars.map { car in
             [
                 "type": "Feature",
-                "properties": ["id": train.id, "color": color, "front": car.isFront],
+                "properties": ["id": train.id, "color": color, "front": car.isFront, "h": StationScene3D.carSize(template).height],
                 "geometry": ["type": "LineString", "coordinates": [[car.back.lon, car.back.lat], [car.front.lon, car.front.lat]]],
             ]
         }

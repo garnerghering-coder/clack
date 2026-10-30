@@ -206,22 +206,50 @@ nonisolated enum MapStyle {
         ]
     }
 
-    /// From zoom 14 a train is its cars along the track (`trains-close`, built by the model from TrainKit): lines in
+    /// From zoom 14 to 15 a train is its cars along the track (from 15 they are boxes: `stationModelLayers`) (`trains-close`, built by the model from TrainKit): lines in
     /// the operator's colour whose width is metres on the ground, the front car a shade lighter.
     static func trainCarLayers(_ c: Colors) -> [[String: Any]] {
         let width: [Any] = ["interpolate", ["exponential", 2], ["zoom"], 14, 2.2, 18, 36]
         return [
             [
-                "id": "train-cars", "type": "line", "source": "trains-close", "minzoom": 14, "layout": ["line-cap": "butt", "line-join": "round"],
+                "id": "train-cars", "type": "line", "source": "trains-close", "minzoom": 14, "maxzoom": 15, "layout": ["line-cap": "butt", "line-join": "round"],
                 "paint": ["line-color": ["get", "color"], "line-width": width],
             ],
             [
-                "id": "train-cars-front", "type": "line", "source": "trains-close", "minzoom": 14, "filter": ["==", ["get", "front"], true],
+                "id": "train-cars-front", "type": "line", "source": "trains-close", "minzoom": 14, "maxzoom": 15, "filter": ["==", ["get", "front"], true],
                 "layout": ["line-cap": "butt"], "paint": ["line-color": "#ffffff", "line-opacity": 0.35, "line-width": width],
             ],
             [
-                "id": "train-cars-edge", "type": "line", "source": "trains-close", "minzoom": 14, "layout": ["line-cap": "butt"],
+                "id": "train-cars-edge", "type": "line", "source": "trains-close", "minzoom": 14, "maxzoom": 15, "layout": ["line-cap": "butt"],
                 "paint": ["line-color": c.bg, "line-opacity": 0.6, "line-width": 0.8, "line-gap-width": width],
+            ],
+        ]
+    }
+
+    /// From zoom 15 the station in 3D (DESIGN §2.7): measured platforms, buildings and roofs from the station
+    /// detail (`station-platforms-3d`, `station-structures`, heights in metres above the rails, the map's flat ground)
+    /// and every train's cars as boxes (`trains-close-3d`). Colours as the full-screen 3D view's; the camera tilts
+    /// only where a station has measured structures (`ExploreModel.model3DZoom`).
+    static func stationModelLayers(_ c: Colors, dark isDark: Bool) -> [[String: Any]] {
+        let height: [Any] = ["get", "height"], base: [Any] = ["get", "base"]
+        return [
+            [
+                "id": "model-platforms", "type": "fill-extrusion", "source": "station-platforms-3d", "minzoom": 15,
+                "paint": ["fill-extrusion-color": isDark ? "#4a4a4a" : "#d6d6d6", "fill-extrusion-height": height, "fill-extrusion-base": 0, "fill-extrusion-opacity": 0.95],
+            ],
+            [
+                "id": "model-buildings", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
+                "filter": ["==", ["get", "cls"], "building"],
+                "paint": ["fill-extrusion-color": isDark ? "#2e2e2e" : "#e6e6e6", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.85],
+            ],
+            [
+                "id": "model-roofs", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
+                "filter": ["==", ["get", "cls"], "roof"],
+                "paint": ["fill-extrusion-color": isDark ? "#3a3a3a" : "#c4c4c4", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.9],
+            ],
+            [
+                "id": "model-cars", "type": "fill-extrusion", "source": "trains-close-3d", "minzoom": 15,
+                "paint": ["fill-extrusion-color": ["get", "color"], "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 1],
             ],
         ]
     }
@@ -382,6 +410,7 @@ nonisolated enum MapStyle {
             sources["station-platforms"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["station-platform-labels"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains-close"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            for id in ["station-platforms-3d", "station-structures", "trains-close-3d"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains"] = [
                 // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).
                 "type": "geojson", "data": emptyCollection(),
@@ -390,6 +419,7 @@ nonisolated enum MapStyle {
             layers += liveStationLayers(c)
             layers += liveTrainLayers(c, dark: isDark, route: routeLayers(color: c.fallback, c, dark: isDark))
             layers += trainCarLayers(c)
+            layers += stationModelLayers(c, dark: isDark)
         }
         return ["version": 8, "glyphs": "\(origin)/api/map/fonts/{fontstack}/{range}.pbf", "sources": sources, "layers": layers]
     }

@@ -108,6 +108,15 @@ beside their platform; running ones slide along the track.
 
 ### 2.7 3D station view (demo: Jönköping C only, Debug builds, iOS 18+)
 
+**On Explore (owner, 2026-10-30):** from zoom 15 the map raises what the station detail measures: platforms with a
+measured height (at the standard they stay flat, as Explore has no panel to say so), buildings and roofs from their
+measured tops (same greys as below), and every train's cars as boxes 3 m wide in the operator's colour, the front car
+lighter (the flat car lines hand over at 15). Near a station with measured structures the camera tilts to 55° at zoom
+16 and flattens again below 15.5 or away from it; tilting by hand is allowed only then. The ground stays flat at rail
+level (MapLibre on iOS draws no terrain). The attribution line adds Lantmäteriet's credit while its heights are shown.
+
+**Full screen:**
+
 Opened from the station map's side column ("3D view"), full screen with a close button. Drawn from the station map
 alone, heights in metres above the platform surface: the ground from the map's terrain grid in the land colour (steep
 cells a shade apart), flat at rail level where the map has none; tracks as 1.5 m strips in the station-rail ink at rail

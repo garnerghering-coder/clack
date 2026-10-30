@@ -186,8 +186,10 @@ final class LiveMapController {
         guard let style = mapView?.style else { return }
         let features = (geojson["features"] as? [[String: Any]]) ?? []
         let isPolygon: ([String: Any]) -> Bool = { ((($0["geometry"] as? [String: Any])?["type"]) as? String) == "Polygon" }
+        let kind: ([String: Any]) -> String? = { ($0["properties"] as? [String: Any])?["kind"] as? String }
         let lines: [String: Any] = ["type": "FeatureCollection", "features": features.filter { !isPolygon($0) }]
-        let polygons: [String: Any] = ["type": "FeatureCollection", "features": features.filter(isPolygon)]
+        let platformFeatures = features.filter { isPolygon($0) && kind($0) == "platform" }
+        let polygons: [String: Any] = ["type": "FeatureCollection", "features": platformFeatures]
         if let source = style.source(withIdentifier: "station-detail") as? MLNShapeSource, let shape = MLNShape.fromGeoJSON(lines) {
             source.shape = shape
         }
@@ -200,14 +202,69 @@ final class LiveMapController {
             return ["type": "Feature", "properties": ["plat": ref], "geometry": ["type": "Point", "coordinates": node]]
         }
         mapView?.setShape(["type": "FeatureCollection", "features": labels], source: "station-platform-labels")
+        // The 3D (zoom 15 on): measured platforms and the buildings and roofs, as native features so their heights
+        // can drive the extrusions. Platforms at the standard height stay flat: Explore has no panel to say so.
+        let measured = platformFeatures.filter { (($0["properties"] as? [String: Any])?["measured"] as? Bool) == true }
+        setPolygons(measured, source: "station-platforms-3d")
+        setPolygons(features.filter { isPolygon($0) && kind($0) == "structure" }, source: "station-structures")
     }
 
     func clearStationDetail() {
         for id in ["station-detail", "station-platforms", "station-platform-labels"] { mapView?.setShape(["type": "FeatureCollection", "features": [Any]()], source: id) }
+        setPolygons([], source: "station-platforms-3d")
+        setPolygons([], source: "station-structures")
     }
 
+    /// The cars as lines (zoom 14–15) and, from their ends, as 3 m wide footprints for the boxes (zoom 15 on), from
+    /// just above the rails (0.4 m) to the car's height (`h`).
     func setTrainCars(_ geojson: [String: Any]) {
         mapView?.setShape(geojson, source: "trains-close")
+        let boxes: [[String: Any]] = ((geojson["features"] as? [[String: Any]]) ?? []).compactMap { f in
+            guard let props = f["properties"] as? [String: Any], let coords = (f["geometry"] as? [String: Any])?["coordinates"] as? [[Double]],
+                  coords.count == 2, coords[0].count >= 2, coords[1].count >= 2 else { return nil }
+            let ring = Self.carFootprint(back: coords[0], front: coords[1], widthM: 3.0)
+            var color = props["color"] as? String ?? "#888888"
+            if props["front"] as? Bool == true { color = MapStyle.lighten(color, 0.35) }
+            return ["type": "Feature", "properties": ["id": props["id"] ?? "", "color": color, "base": 0.4, "height": props["h"] as? Double ?? 3.8], "geometry": ["type": "Polygon", "coordinates": [ring]]]
+        }
+        setPolygons(boxes, source: "trains-close-3d")
+    }
+
+    /// A rectangle `widthM` wide around the line from `back` to `front` ([lon, lat]), closed.
+    nonisolated static func carFootprint(back: [Double], front: [Double], widthM: Double) -> [[Double]] {
+        let lat = (back[1] + front[1]) / 2
+        let my = 110_574.0, mx = 111_320 * cos(lat * .pi / 180)
+        let dx = (front[0] - back[0]) * mx, dy = (front[1] - back[1]) * my
+        let len = max(1e-9, hypot(dx, dy))
+        // Half the width to each side, perpendicular to the car, back in degrees.
+        let ox = -dy / len * widthM / 2 / mx, oy = dx / len * widthM / 2 / my
+        let a = [back[0] + ox, back[1] + oy], b = [front[0] + ox, front[1] + oy]
+        let c = [front[0] - ox, front[1] - oy], d = [back[0] - ox, back[1] - oy]
+        return [a, b, c, d, a]
+    }
+
+    /// Polygon features as native ones with their numbers and strings as attributes (what the extrusions read).
+    private func setPolygons(_ features: [[String: Any]], source id: String) {
+        guard let source = mapView?.style?.source(withIdentifier: id) as? MLNShapeSource else { return }
+        let shapes: [MLNPolygonFeature] = features.compactMap { f in
+            guard let ring = ((f["geometry"] as? [String: Any])?["coordinates"] as? [[[Double]]])?.first, ring.count >= 4 else { return nil }
+            var coords = ring.compactMap { $0.count >= 2 ? CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) : nil }
+            let polygon = MLNPolygonFeature(coordinates: &coords, count: UInt(coords.count))
+            let props = (f["properties"] as? [String: Any]) ?? [:]
+            polygon.attributes = props.filter { $0.value is String || $0.value is Double || $0.value is Int || $0.value is Bool }
+            return polygon
+        }
+        source.shape = MLNShapeCollectionFeature(shapes: shapes)
+    }
+
+    /// Tilts the camera (the station in 3D) or flattens it, keeping the centre and zoom; tilting by hand is allowed
+    /// only while tilted.
+    func setTilt(_ degrees: Double) {
+        guard let mapView else { return }
+        mapView.allowsTilting = degrees > 0
+        let camera = mapView.camera
+        camera.pitch = degrees
+        mapView.setCamera(camera, withDuration: 0.6, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut))
     }
 
     /// Straight to a place at a zoom (the Debug `-exploreAt` argument; no animation).
@@ -340,7 +397,7 @@ struct LiveMapView: UIViewRepresentable {
                 return
             }
             // Trains bunch up at stations: of the dots under the finger, take the one nearest to it.
-            let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot", "train-cars"])
+            let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot", "train-cars", "model-cars"])
             if let best = trains.min(by: { distance($0, point, map) < distance($1, point, map) }), let id = best.attribute(forKey: "id") as? String {
                 controller.onTapTrain(id)
                 return
