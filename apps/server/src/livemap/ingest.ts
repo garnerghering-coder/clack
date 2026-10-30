@@ -30,6 +30,7 @@ import type { RejseplanenClient } from '../rejseplanen/client.js';
 import { countryOfLiveId } from '../lib/countries.js';
 import type { DelayCause } from '@clack/shared';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
+import { RiderFixes } from '../live/riders.js';
 
 export interface LiveTrain {
   id: string;
@@ -74,6 +75,8 @@ export interface LiveTrain {
   progress?: number | null;
   /** When the shown position was carried forward from a GPS fix (by the delivery lag), the fix's own time; `at` is then the time the position is for. */
   fixAt?: number;
+  /** Placed by this many riders' phones (live/riders.ts) instead of an estimate; absent otherwise. */
+  riders?: number;
 }
 
 /**
@@ -192,6 +195,8 @@ export class LiveMapIngest extends EventEmitter {
   readonly placement: Placement;
   /** Delivery lag, timestamp offsets, the position check and track-side agreement (GET /api/live/quality). */
   readonly quality: LiveQuality;
+  /** Riders' reports (in memory only), which can replace an estimated position (live/riders.ts). */
+  readonly riders = new RiderFixes();
   /** When each train was last sampled for the position check. */
   private checked = new Map<string, number>();
   private changed = new Set<string>();
@@ -691,8 +696,23 @@ export class LiveMapIngest extends EventEmitter {
     for (const k of this.estimatedKeys)
       if (!seen.has(k)) {
         this.estimatedKeys.delete(k);
-        if (this.trains.get(k)?.estimated && this.trains.delete(k)) this.removed.add(k);
+        const t = this.trains.get(k);
+        if ((t?.estimated || t?.riders) && this.trains.delete(k)) this.removed.add(k);
       }
+    this.applyRiders();
+  }
+
+  /** Riders' reports onto the estimated trains they are on (live/riders.ts); after every feed's update and each report. */
+  applyRiders(only?: string) {
+    const now = this.now();
+    for (const id of only ? [only] : this.riders.trains()) {
+      const t = this.trains.get(id);
+      if (!t) continue;
+      const moved = this.riders.adjust(t, now);
+      if (moved === t) continue;
+      this.trains.set(id, moved);
+      this.changed.add(id);
+    }
   }
 
   /**
@@ -746,6 +766,7 @@ export class LiveMapIngest extends EventEmitter {
     for (const id of this.noIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
     this.noIds = seen;
     this.norwayGps = taken;
+    this.applyRiders();
   }
 
   /**
@@ -810,6 +831,7 @@ export class LiveMapIngest extends EventEmitter {
     for (const id of this.dkJourneys.keys()) if (!seen.has(id)) this.dkJourneys.delete(id);
     this.dkIds = seen;
     this.denmarkPos = taken;
+    this.applyRiders();
   }
 
   /**
@@ -854,6 +876,7 @@ export class LiveMapIngest extends EventEmitter {
     }
     for (const id of this.fiIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
     this.fiIds = seen;
+    this.applyRiders();
   }
 
   /**
@@ -927,6 +950,7 @@ export class LiveMapIngest extends EventEmitter {
     const cutoff = this.now() - POSITION_MAX_AGE_MS;
     this.fixes.prune(this.now() - 60 * 60_000);
     this.quality.prune(this.now() - 60 * 60_000);
+    this.riders.prune(this.now());
     for (const [k, at] of this.checked) if (at < cutoff) this.checked.delete(k);
     for (const [k, p] of this.positions)
       if (Date.parse(p.TimeStamp) < cutoff) {

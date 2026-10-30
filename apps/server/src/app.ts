@@ -45,7 +45,8 @@ const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f
  * fetches them itself) and operator logos.
  */
 const requireUser = /^(1|true|yes|on)$/i.test(process.env.CLACK_REQUIRE_USER ?? '');
-const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|shared\/[A-Za-z0-9_-]+$|operators\/[a-z0-9-]+\/logo$)/;
+// Riders' reports go without a user id on purpose (live/riders.ts).
+const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|shared\/[A-Za-z0-9_-]+$|operators\/[a-z0-9-]+\/logo$|live\/report$)/;
 
 
 export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions; liveMap?: IngestOptions } = {}) {

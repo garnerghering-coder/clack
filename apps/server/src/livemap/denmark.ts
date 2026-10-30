@@ -18,6 +18,8 @@ import type { Stop } from '../rejseplanen/client.js';
 import type { Product } from '../search/timetable.js';
 
 export const DENMARK_POLL_MS = 20_000;
+/** Whether Rejseplanen's estimated point places a train (true) or our run profile from its live times does (false). */
+export const USE_REJSEPLANEN_POINT = false;
 /** A train whose last position is older than this is dropped (Rejseplanen stopped listing it). */
 const MAX_AGE_MS = 2 * 60_000;
 
@@ -145,10 +147,13 @@ export class DenmarkFeed {
   }
 
   /**
-   * Rejseplanen's position put on our track between the stop it has left and the next (live/locate.ts, with its
-   * position as the "fix": snapped when within 60 m, never advanced since Rejseplanen gives no speed). Standing at
-   * a stop between its arrival and departure, at the platform when the station is mapped. Null when the stops
-   * around it aren't ours.
+   * Where the train is on our track between the stop it has left and the next (live/locate.ts). Rejseplanen's own
+   * position is worked out from the same live times (not GPS) and was used as a fix, unadvanced; the owner's trip on
+   * 2026-10-29 showed it far from the train. Our run profile from Rejseplanen's live departure and arrival times
+   * (accelerate, cruise, brake: 12–40% better than a straight share of the time in Sweden's check, POSITIONING.md)
+   * is used instead (`USE_REJSEPLANEN_POINT` false); its point is kept only for a train we can't place this way.
+   * Standing at a stop between its arrival and departure, at the platform when the station is mapped. Null when the
+   * stops around it aren't ours.
    */
   private locate(stops: Stop[], next: Stop | null, pos: { lat: number; lon: number; bearing: number | null; at: number }, now: number): Located | null {
     if (!next) return null;
@@ -168,7 +173,7 @@ export class DenmarkFeed {
         left,
         arriving: next.arrLive ?? next.depLive ?? next.arrPlanned ?? next.depPlanned,
         standingAtPrev: left !== null && left > now,
-        gps: { lat: pos.lat, lon: pos.lon, at: pos.at, bearing: pos.bearing, speedKmh: null, lastSpeedKmh: null, fresh: true, ageMs: Math.max(0, now - pos.at) },
+        gps: USE_REJSEPLANEN_POINT ? { lat: pos.lat, lon: pos.lon, at: pos.at, bearing: pos.bearing, speedKmh: null, lastSpeedKmh: null, fresh: true, ageMs: Math.max(0, now - pos.at) } : null,
         now,
         country: 'DK',
         source: 'rejseplanen',

@@ -70,6 +70,32 @@ feed). Rejseplanen's positions are dated by the answer's own reference time (`po
 our track between the stop left and the next (snapped when within 60 m; never advanced, since Rejseplanen gives
 no speed).
 
+### Denmark from our run profile (2026-10-30)
+
+Rejseplanen's position is its own estimate from the live delays (not GPS) and was used as a fix without being moved
+forward; on the owner's trip through Denmark on 2026-10-29 it was clearly far from the train. Denmark now uses the
+run profile above from Rejseplanen's live departure and arrival times (`USE_REJSEPLANEN_POINT` false in
+`livemap/denmark.ts`), the rule that beat a straight share of the time in Sweden's check; Rejseplanen's point is kept
+only for a train whose stops aren't ours. Whether this is closer is not measured yet: Denmark has no GPS to compare
+with. Riders' reports (below) are the first measurement there.
+
+### Riders' reports (2026-10-30, owner's decisions)
+
+A rider with "Help place trains for everyone" on (Settings; off by default, asked once on the first logged trip)
+sends, every 15–30 s while the app is open or the trip's Live Activity runs, a report for the train they are on:
+the live train id, the stretch (`prevId` → `nextId`), progress along our track for it (0–1, snapped on the phone to
+`/api/live/segment`), speed and the fix's time, plus a session id random per trip. No coordinates and no user id
+(`POST /api/live/report` is open without X-Clack-User and never reads it). The server keeps reports in memory only,
+3 minutes at most (`live/riders.ts`).
+
+A report replaces only an *estimated* position (an operator's GPS stays first), only while fresh (≤ 90 s) and moving
+(≥ 5 km/h; standing is left to the feeds' platform rules), and only when believable: two or more phones within 400 m
+of each other along the track, or one phone on the stretch the feed has the train on (or the next, when the feed is
+behind). Refused: malformed, older than 90 s, over 260 km/h, a train or stretch not on the map, more than one report
+per phone per train every 10 s. The train is carried forward from the report's time at its speed, never past the
+next stop, and marked `riders: n` (not estimated). The counts (accepted, refused by reason, used) are in the admin
+quality report.
+
 ## GPS lag (§A.8)
 
 Two numbers, per source, counted while the server runs (`live/quality.ts`; admin-only `GET /api/live/quality`;

@@ -10,6 +10,7 @@ import { followedTrains, legs } from '../db/schema.js';
 import { isMine, LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
 import { stations, trvLocations } from '../db/schema.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
+import { stretchFrom } from '../live/riders.js';
 import { encodePolyline } from '@clack/shared';
 import { searchByNumber, tripByKey, tripStops } from '../search/timetable.js';
 import { matchTrip } from '../livemap/match.js';
@@ -256,9 +257,35 @@ export const liveMapRoutes =
       return { from: a.id, to: b.id, polyline: encodePolyline(seg.points), lengthM: Math.round(seg.lengthM), estimated: seg.estimated };
     });
 
+    // Riders' reports (live/riders.ts, docs/POSITIONING.md): the stretch, progress along our track, speed and time
+    // for the train a phone is on, with "Help place trains for everyone" on. Open without a user id, and the user id
+    // is never read here even when sent: a report says nothing about who. Kept in memory only, minutes at most.
+    const stretches = new Map<string, ReturnType<typeof stretchFrom> | null>();
+    // (A test's stand-in ingest may have no riders.)
+    if (ingest.riders) ingest.riders.stretchOf = (from, to) => {
+      const k = `${from}>${to}`;
+      if (!stretches.has(k)) {
+        const a = pointOf(from), b = pointOf(to);
+        const seg = a && b ? segmentBetween(db, a, b) : null;
+        stretches.set(k, seg && seg.points.length > 1 && !seg.estimated ? stretchFrom(seg.points) : null);
+        if (stretches.size > 5000) stretches.delete(stretches.keys().next().value!);
+      }
+      return stretches.get(k) ?? null;
+    };
+    app.post('/live/report', async (req, reply) => {
+      const body = req.body as { train?: unknown } | undefined;
+      const now = Date.now();
+      const train = typeof body?.train === 'string' ? ingest.trains.get(body.train) : undefined;
+      if (!ingest.riders) return reply.callNotFound();
+      const refused = ingest.riders.add(body, train, now);
+      if (refused) return reply.code(refused === 'too often' ? 429 : 422).send({ error: refused });
+      ingest.applyRiders(train!.id);
+      return reply.code(204).send();
+    });
+
     // How good the positions are: delivery lag and timestamp offsets per source, the position check (old rule vs
     // new, standing placement) and track-side agreement (live/quality.ts). Counters only; admin token required.
-    app.get('/live/quality', async (req, reply) => (req.isAdmin ? ingest.quality.report() : reply.callNotFound()));
+    app.get('/live/quality', async (req, reply) => (req.isAdmin ? { ...ingest.quality.report(), riders: ingest.riders?.counts } : reply.callNotFound()));
 
     app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows, norwayAt: ingest.norwayAt, finlandAt: ingest.finlandAt, denmarkAt: ingest.denmarkAt }));
   };
