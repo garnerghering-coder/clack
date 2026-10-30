@@ -158,6 +158,20 @@
       "type": "trafikverket",
       "retrieved": "2026-10-22",
       "note": "Trafikverket TrainStation (Av) PlatformLine 1–4 with sectors, and TrackAtLocation values of 2026-10-21 (1b, 2, 3a/3b, 4a/4b), checked against OSM's platform refs and stop positions."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000004)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -165,6 +179,11 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "First map from OSM (2026-10-20 extract): the bridge's stair towers and the 4 lifts added by hand from Länstrafiken Kronoberg's station page and terminal map (6 connections); OSM's 3a/3b and 4a/4b halves joined as platforms 3 and 4; levels named; map turned so the tracks run up the screen. Waiting room, toilets, 2 ticket machines and 2 shops added from Länstrafiken's and Jernhusen's pages (Pressbyrån from OSM)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 7 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000004)."
     }
   ],
   "platform_refs": {
@@ -242,5 +261,86 @@
       "hours_source": null,
       "hours_verified": null
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 12; BanInfo BIS 698 (track 2): tracks 1a,2, class mellan = 0.58 m above rail, 414 m long; a recorded design class, not a survey; other rows for this track: 1a låg 0.35 m (139 m, Bilaga 2A tab 4 row 13)"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 12; BanInfo BIS 698 (track 2): tracks 1a,2, class mellan = 0.58 m above rail, 414 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 11; BanInfo BIS 703 (track 4b): tracks 4a,3a,4b,3b, class mellan = 0.58 m above rail, 610.1 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 11; BanInfo BIS 703 (track 4b): tracks 4a,3a,4b,3b, class mellan = 0.58 m above rail, 610.1 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000004/alvesta_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w39352040",
+      "kind": "building",
+      "name": "Alvesta järnvägsstation (station building)",
+      "top_m": 11.94,
+      "base_m": -0.49,
+      "_source": "Outline OSM w39352040 (ODbL); roof = median of 1191 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08)"
+    },
+    {
+      "from": "w309948281",
+      "kind": "building",
+      "name": "Alvesta Brevterminal (building)",
+      "top_m": 7.88,
+      "base_m": -0.83,
+      "_source": "Outline OSM w309948281 (ODbL); roof = median of 24930 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08)"
+    },
+    {
+      "from": "w940158739",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.26,
+      "base_m": -0.35,
+      "_source": "Outline OSM w940158739 (ODbL); roof = median of 337 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08)"
+    },
+    {
+      "from": "w1481453634",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.95,
+      "_source": "Outline OSM w1481453634 (ODbL); roof = median of 739 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08); underside not measured"
+    },
+    {
+      "from": "w1497350294",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 18.64,
+      "_source": "Outline OSM w1497350294 (ODbL); roof = median of 41 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08); underside not measured"
+    },
+    {
+      "from": "w1565102356",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 10.6,
+      "base_m": 5.32,
+      "_source": "Outline OSM w1565102356 (ODbL); roof = median of 956 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "#6",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.4,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08); underside not measured",
+      "simplify_m": 2.0
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000004/alvesta_ground_1m.tif",
+    "reference_m": 145.31,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000004/alvesta_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (145.31 m RH 2000, laser 2026-03-08)"
+  }
 }

@@ -106,6 +106,11 @@ Keys in `scripts/stations/<id>.edits.json`:
 - `sources`: one entry per product, `type` `lantmateriet` or `trafikverket`, with licence and the attribution line.
 - `changelog`: what changed, dated.
 
+For a pack built by `scripts/stations/station3d/` (the batch pipeline, see `data/stations/research/HANDOFF_STATION_3D.md`),
+`python3 scripts/stations/station3d/to_edits.py <id>` writes all of the above from the pack and the Trafikverket CSV
+(the longest register row per track; footbridges from the 5.9 m minimum clearance; `hall_roof_laser`, road bridges and
+trains left out for a look). A station whose map is still schema 1 needs its schema-2 redraft first (entrances!).
+
 Then `python3 scripts/stations/draft_from_osm.py <id>`, `npx tsx scripts/stations/validate.ts`, and open the station in
 the 3D view (`-open map:<id> -station3D`, Debug). Keep the pack (laser LAZ, ground GeoTIFF, GeoJSONs, station JSON, model,
 `photos.json`) in `data/stations/research/<id>/` with a README listing each file's licence. The points are ours to keep

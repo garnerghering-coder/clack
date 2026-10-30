@@ -16,12 +16,106 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000031)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 7 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000031)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "4": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 191; BanInfo BIS 1277 (track 5): tracks 4,5, class hög = 0.73 m above rail, 221 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 191; BanInfo BIS 1277 (track 5): tracks 4,5, class hög = 0.73 m above rail, 221 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000031/flemingsberg_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w102577789",
+      "kind": "building",
+      "name": "Flemingsberg (station building)",
+      "top_m": 13.9,
+      "base_m": -1.98,
+      "_source": "Outline OSM w102577789 (ODbL); roof = median of 3785 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31)"
+    },
+    {
+      "from": "w331828079",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.9,
+      "base_m": -0.97,
+      "_source": "Outline OSM w331828079 (ODbL); roof = median of 152 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31)"
+    },
+    {
+      "from": "w923519265",
+      "kind": "building",
+      "name": "building",
+      "top_m": 10.67,
+      "base_m": -0.3,
+      "_source": "Outline OSM w923519265 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31)"
+    },
+    {
+      "from": "w923519268",
+      "kind": "building",
+      "name": "building",
+      "top_m": 9.53,
+      "base_m": -1.05,
+      "_source": "Outline OSM w923519268 (ODbL); roof = median of 396 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31)"
+    },
+    {
+      "from": "w923519276",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.96,
+      "base_m": -1.05,
+      "_source": "Outline OSM w923519276 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31)"
+    },
+    {
+      "from": "#5",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.51,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31); underside not measured",
+      "simplify_m": 2.0
+    },
+    {
+      "from": "#6",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.8,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31); underside not measured",
+      "simplify_m": 2.0
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000031/flemingsberg_ground_1m.tif",
+    "reference_m": 34.4,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000031/flemingsberg_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (34.4 m RH 2000, laser 2020-03-31)"
+  }
 }

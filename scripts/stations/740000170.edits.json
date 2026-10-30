@@ -16,12 +16,163 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000170)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 16 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000170)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 160; BanInfo BIS 687 (track 1): tracks 1, class mellan = 0.58 m above rail, 326 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 161: tracks 4, class mellan = 0.58 m above rail, 142 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000170/eskilstuna_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w127582192",
+      "kind": "building",
+      "name": "Eskilstuna Central (station building)",
+      "top_m": 8.13,
+      "base_m": -0.71,
+      "_source": "Outline OSM w127582192 (ODbL); roof = median of 1424 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27)"
+    },
+    {
+      "from": "w609037662",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.52,
+      "_source": "Outline OSM w609037662 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037663",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.69,
+      "_source": "Outline OSM w609037663 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037664",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.88,
+      "_source": "Outline OSM w609037664 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037665",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.0,
+      "_source": "Outline OSM w609037665 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037666",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.11,
+      "_source": "Outline OSM w609037666 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037671",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.5,
+      "_source": "Outline OSM w609037671 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037672",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.58,
+      "_source": "Outline OSM w609037672 (ODbL); roof = median of 25 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037673",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.52,
+      "_source": "Outline OSM w609037673 (ODbL); roof = median of 25 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037674",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.47,
+      "_source": "Outline OSM w609037674 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037675",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.32,
+      "_source": "Outline OSM w609037675 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037676",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.15,
+      "_source": "Outline OSM w609037676 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037677",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.02,
+      "_source": "Outline OSM w609037677 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037678",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.9,
+      "_source": "Outline OSM w609037678 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w609037679",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.79,
+      "_source": "Outline OSM w609037679 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    },
+    {
+      "from": "w1347333691",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.87,
+      "_source": "Outline OSM w1347333691 (ODbL); roof = median of 589 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000170/eskilstuna_c_ground_1m.tif",
+    "reference_m": 18.2,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000170/eskilstuna_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (18.2 m RH 2000, laser 2020-02-27)"
+  }
 }

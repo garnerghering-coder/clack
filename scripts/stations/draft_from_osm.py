@@ -1128,14 +1128,18 @@ def main():
 def apply_structures(shapes, edits, xy, ground_level):
     """`structures` in the edits: buildings and roofs with measured heights (docs/STATION_3D_RESEARCH.md). Each names
     a feature of `structures_file` (a GeoJSON of outlines, e.g. the laser research's) by its OSM id ("w81576737",
-    "r13095414") or, for an outline traced from the laser alone, its `kind` ("hall_roof_laser"); the heights are given
+    "r13095414"), its place in the file ("#12"), or, for an outline traced from the laser alone, its `kind`; the heights are given
     in the edits, in metres above the platform surface (`top_m`, and `base_m` for the lowest ground at the outline).
     A structure whose OSM way the draft already drew as a building replaces that shape."""
     if not edits.get("structures"):
         return
     features = json.load(open(os.path.join(ROOT, edits["structures_file"])))["features"]
     for i, st in enumerate(edits["structures"]):
-        f = next((f for f in features if f["properties"].get("osm_id") == st["from"] or (f["properties"].get("osm_id") is None and f["properties"].get("kind") == st["from"])), None)
+        if st["from"].startswith("#"):
+            k = int(st["from"][1:])
+            f = features[k] if 0 <= k < len(features) else None
+        else:
+            f = next((f for f in features if f["properties"].get("osm_id") == st["from"] or (f["properties"].get("osm_id") is None and f["properties"].get("kind") == st["from"])), None)
         if f is None:
             raise SystemExit(f"structures[{i}]: no feature {st['from']} in {edits['structures_file']}")
         ring = f["geometry"]["coordinates"][0]
