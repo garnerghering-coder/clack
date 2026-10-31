@@ -652,6 +652,18 @@ export function platformSectors(p: StationPlatform): { sectors: PlatformSector[]
     const cut = crossSection(rings, at, norm([q1[0] - q0[0], q1[1] - q0[1]]) ?? dir);
     if (cut) dividers.push(cut);
   }
+  // Each sector's line reaches the divider(s) beside it, so its name runs right up to where the next begins.
+  for (const [a, b] of dividers) {
+    const mid: Pt = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    for (const sc of sectors) {
+      if (!sc.line.length) continue;
+      const dFirst = Math.hypot(sc.line[0]![0] - mid[0], sc.line[0]![1] - mid[1]);
+      const dLast = Math.hypot(sc.line.at(-1)![0] - mid[0], sc.line.at(-1)![1] - mid[1]);
+      if (Math.min(dFirst, dLast) >= 120) continue;
+      if (dFirst < dLast) sc.line.unshift(mid);
+      else sc.line.push(mid);
+    }
+  }
   return { sectors, dividers };
 }
 

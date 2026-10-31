@@ -44,7 +44,8 @@ export const stationRoutes =
 
     app.get<{ Querystring: { q?: string; limit?: string } }>('/stations/search', async (req) => {
       const limit = Math.min(Number(req.query.limit) || 8, 20);
-      return searchStations(currentIndex(), req.query.q ?? '', limit).map(({ score, ...hit }) => (void score, hit));
+      // Composed form, so "ö" sent as o + a combining mark still matches.
+      return searchStations(currentIndex(), (req.query.q ?? '').normalize('NFC'), limit).map(({ score, ...hit }) => (void score, hit));
     });
 
     // Real trains leaving in the next hour, near ?lat&lon or from the big hubs: the first screen's one-tap trips.

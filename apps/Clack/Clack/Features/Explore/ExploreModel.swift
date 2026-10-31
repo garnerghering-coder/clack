@@ -552,7 +552,8 @@ final class ExploreModel {
 
     func searchChanged() {
         searchTask?.cancel()
-        let text = query.trimmingCharacters(in: .whitespaces)
+        // Composed form: "ö" typed as o + a combining mark (some keyboards, pasted text) must match the station's name.
+        let text = query.trimmingCharacters(in: .whitespaces).precomposedStringWithCanonicalMapping
         guard ExploreLogic.searchesStations(text) else { stationHits = []; return }
         searchTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(200))

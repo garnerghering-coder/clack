@@ -22,6 +22,8 @@ describe('stations API', () => {
     const res = await app.inject({ url: '/api/stations/search?q=goteb' });
     expect(res.json()).toEqual([{ id: '740000002', name: 'Göteborg C', code: 'G', country: 'SE', county: null }]);
     expect((await app.inject({ url: '/api/stations/search?q=funasdalen' })).json()).toEqual([]);
+    // "ö" typed as o + a combining diaeresis (some keyboards, pasted text) matches too.
+    expect((await app.inject({ url: `/api/stations/search?q=${encodeURIComponent('Go\u0308teborg C')}` })).json()).toHaveLength(1);
   });
 
   it('picks up stations added by a later import', async () => {

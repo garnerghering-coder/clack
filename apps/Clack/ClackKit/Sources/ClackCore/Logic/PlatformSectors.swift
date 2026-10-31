@@ -47,7 +47,19 @@ public nonisolated enum PlatformSectors {
             let at = Pt(q0.x + (q1.x - q0.x) * f, q0.y + (q1.y - q0.y) * f)
             if let cut = crossSection(p.geometry, at: at, direction: unit(Pt(q1.x - q0.x, q1.y - q0.y)) ?? dir) { dividers.append(cut) }
         }
-        return (sectors, dividers)
+        // Each sector's line reaches the divider(s) beside it, so its name runs right up to where the next begins.
+        var out = sectors
+        for (a, b) in dividers {
+            let mid = Pt((a.x + b.x) / 2, (a.y + b.y) / 2)
+            for i in out.indices where !out[i].line.isEmpty {
+                let line = out[i].line
+                let dFirst = hypot(line[0].x - mid.x, line[0].y - mid.y), dLast = hypot(line[line.count - 1].x - mid.x, line[line.count - 1].y - mid.y)
+                // Only the sectors this divider borders: an end within half a sector's gap of it.
+                guard min(dFirst, dLast) < 120 else { continue }
+                out[i] = Sector(sector: out[i].sector, label: out[i].label, line: dFirst < dLast ? [mid] + line : line + [mid])
+            }
+        }
+        return (out, dividers)
     }
 
     /// The platform's width at `q` across `d`: where the line through `q` square to `d` crosses the outline, the stretch
@@ -91,6 +103,30 @@ public nonisolated enum PlatformSectors {
             if d < bestD, let u = unit(Pt(pts[i + 1].x - pts[i].x, pts[i + 1].y - pts[i].y)) { (best, bestD) = (u, d) }
         }
         return best ?? Pt(1, 0)
+    }
+
+    /// Points every `spacing` metres along `line`, both ways from the point on it nearest `from` (that point itself
+    /// not included), by distance along the line.
+    public static func repeats(along line: [Pt], from: Pt, every spacing: Double) -> [Pt] {
+        guard line.count >= 2, spacing > 0 else { return [] }
+        var cum = [0.0]
+        for i in 1..<line.count { cum.append(cum[i - 1] + hypot(line[i].x - line[i - 1].x, line[i].y - line[i - 1].y)) }
+        let total = cum[cum.count - 1]
+        // Where `from` falls along the line: the nearest point's distance.
+        let start = cum[line.indices.min { hypot(line[$0].x - from.x, line[$0].y - from.y) < hypot(line[$1].x - from.x, line[$1].y - from.y) } ?? 0]
+        func at(_ d: Double) -> Pt {
+            var i = 1
+            while i < line.count - 1 && cum[i] < d { i += 1 }
+            let span = cum[i] - cum[i - 1]
+            let f = span > 0 ? (d - cum[i - 1]) / span : 0
+            return Pt(line[i - 1].x + (line[i].x - line[i - 1].x) * f, line[i - 1].y + (line[i].y - line[i - 1].y) * f)
+        }
+        var out: [Pt] = []
+        var d = start + spacing
+        while d <= total { out.append(at(d)); d += spacing }
+        d = start - spacing
+        while d >= 0 { out.append(at(d)); d -= spacing }
+        return out
     }
 
     /// Points every `step` metres along a polyline, both ends included.
