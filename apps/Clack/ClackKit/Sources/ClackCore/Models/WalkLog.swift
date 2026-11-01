@@ -31,6 +31,9 @@ public nonisolated struct WalkLog: Codable, Hashable, Sendable, Identifiable {
     public var stepEvents: [StepEvent] = []
     public var activity: [Activity] = []
     public var ar: [ARPose] = []
+    /// LiDAR mode: the 3D mesh the phone built of its surroundings, one snapshot each time LiDAR mode is turned off
+    /// (or the walk ends). Nil in walks without it (and in walks from before it existed).
+    public var meshes: [ARMesh]? = nil
     /// When AR mode was switched on and off, and why tracking was limited.
     public var events: [Event] = []
 
@@ -200,6 +203,26 @@ public nonisolated struct WalkLog: Codable, Hashable, Sendable, Identifiable {
         public var mapping: String
         public init(t: Double, p: [Double], q: [Double], tracking: String, mapping: String) {
             self.t = t; self.p = p; self.q = q; self.tracking = tracking; self.mapping = mapping
+        }
+    }
+
+    /// A LiDAR mesh in the AR session's frame (`gravityAndHeading`: metres, x east, y up, z south, from where the AR
+    /// session started; the poses in `ar` are in the same frame, so the walk's positions place it). Geometry only:
+    /// no images. Stored as little-endian binary (base64 in the JSON) to stay small.
+    public struct ARMesh: Codable, Hashable, Sendable {
+        /// When the snapshot was taken.
+        public var t: Double
+        public var vertexCount: Int
+        public var faceCount: Int
+        /// Float32 x, y, z per vertex.
+        public var vertices: Data
+        /// UInt32 vertex indices, three per triangle.
+        public var faces: Data
+        /// UInt8 per triangle, ARKit's ARMeshClassification (0 none, 1 wall, 2 floor, 3 ceiling, 4 table, 5 seat,
+        /// 6 window, 7 door); nil when the phone doesn't classify.
+        public var classes: Data?
+        public init(t: Double, vertexCount: Int, faceCount: Int, vertices: Data, faces: Data, classes: Data?) {
+            self.t = t; self.vertexCount = vertexCount; self.faceCount = faceCount; self.vertices = vertices; self.faces = faces; self.classes = classes
         }
     }
 

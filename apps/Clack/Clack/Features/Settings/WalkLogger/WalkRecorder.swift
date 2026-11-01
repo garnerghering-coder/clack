@@ -11,7 +11,7 @@ import SwiftUI
 
 /// Records a station walk (owner test tool): every sensor the phone offers, timestamped, into a `WalkLog`.
 /// Location, compass, barometer (relative and absolute), device motion at 50 Hz, pedometer, motion activity, and in AR
-/// mode the camera's pose (no images). The screen stays on while recording: iOS pauses motion updates for apps in the
+/// mode the camera's pose (no images); in LiDAR mode (phones with LiDAR) also the 3D mesh of the surroundings. The screen stays on while recording: iOS pauses motion updates for apps in the
 /// background, so the walk is only complete while Clack is open.
 @MainActor
 @Observable
@@ -22,6 +22,11 @@ final class WalkRecorder: NSObject {
     private(set) var log: WalkLog?
     private(set) var currentRouteIndex: Int?
     private(set) var arOn = false
+    private(set) var lidarOn = false
+    /// Triangles in the LiDAR mesh so far (while LiDAR mode is on).
+    private(set) var lidarFaces = 0
+    /// Whether this phone can build a LiDAR mesh (iPhone Pro models, iPad Pro).
+    static let lidarSupported = ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh)
     private(set) var lastLocation: CLLocation?
     private(set) var lastRelAlt: Double?
     private(set) var lastSteps = 0
@@ -34,6 +39,8 @@ final class WalkRecorder: NSObject {
     private let pedometer = CMPedometer()
     private let activity = CMMotionActivityManager()
     private var arSession: ARSession?
+    /// The mesh pieces ARKit keeps refining, latest version of each; turned into one snapshot when LiDAR mode ends.
+    private var meshAnchors: [UUID: ARMeshAnchor] = [:]
     private var lastARSample = 0.0
     private var saveTimer: Timer?
     /// Device-motion timestamps are seconds since boot; this turns them into seconds since 1970.
@@ -131,17 +138,85 @@ final class WalkRecorder: NSObject {
             let session = ARSession()
             session.delegate = self
             session.delegateQueue = .main
-            let config = ARWorldTrackingConfiguration()
-            config.worldAlignment = .gravityAndHeading
-            session.run(config)
+            session.run(arConfiguration(lidar: false))
             arSession = session
             log?.events.append(.init(t: now, kind: "ar", detail: "on"))
         } else {
+            if lidarOn { setLiDAR(false) }
             arSession?.pause()
             arSession = nil
             log?.events.append(.init(t: now, kind: "ar", detail: "off"))
         }
         arOn = on
+    }
+
+    /// LiDAR mode: AR mode plus the mesh ARKit builds from the LiDAR scanner. Turning it off keeps the mesh so far as
+    /// one snapshot in the walk (`meshes`); turning it on again starts a new one.
+    func setLiDAR(_ on: Bool) {
+        guard log != nil, on != lidarOn else { return }
+        if on {
+            guard Self.lidarSupported else { problem = "This phone has no LiDAR scanner."; return }
+            if !arOn { setAR(true) }
+            guard let session = arSession else { return }
+            meshAnchors = [:]
+            lidarFaces = 0
+            // Same session, more work: the tracking (and the poses' frame) carries on.
+            session.run(arConfiguration(lidar: true))
+            lidarOn = true
+            log?.events.append(.init(t: now, kind: "lidar", detail: "on"))
+        } else {
+            lidarOn = false
+            arSession?.run(arConfiguration(lidar: false))
+            let mesh = Self.snapshot(Array(meshAnchors.values), t: now)
+            meshAnchors = [:]
+            if mesh.faceCount > 0 { log?.meshes = (log?.meshes ?? []) + [mesh] }
+            log?.events.append(.init(t: now, kind: "lidar", detail: "off: \(mesh.vertexCount) vertices, \(mesh.faceCount) triangles"))
+            if let log { store.save(log) }
+        }
+    }
+
+    private func arConfiguration(lidar: Bool) -> ARWorldTrackingConfiguration {
+        let config = ARWorldTrackingConfiguration()
+        config.worldAlignment = .gravityAndHeading
+        if lidar {
+            config.sceneReconstruction = ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) ? .meshWithClassification : .mesh
+        }
+        return config
+    }
+
+    /// The mesh pieces as one mesh in the session's frame (each piece's vertices moved by its transform).
+    static func snapshot(_ anchors: [ARMeshAnchor], t: Double) -> WalkLog.ARMesh {
+        var vertices = Data(), faces = Data(), classes = Data()
+        var vertexCount = 0, faceCount = 0
+        var classified = false
+        for anchor in anchors {
+            let g = anchor.geometry
+            let base = UInt32(vertexCount)
+            let v = g.vertices
+            let vp = v.buffer.contents()
+            for i in 0..<v.count {
+                let o = v.offset + v.stride * i
+                let local = SIMD4<Float>(vp.loadUnaligned(fromByteOffset: o, as: Float.self), vp.loadUnaligned(fromByteOffset: o + 4, as: Float.self), vp.loadUnaligned(fromByteOffset: o + 8, as: Float.self), 1)
+                let w = anchor.transform * local
+                for c in [w.x, w.y, w.z] { withUnsafeBytes(of: c.bitPattern.littleEndian) { vertices.append(contentsOf: $0) } }
+            }
+            let f = g.faces
+            let fp = f.buffer.contents()
+            for i in 0..<(f.count * f.indexCountPerPrimitive) {
+                let index: UInt32 = f.bytesPerIndex == 2 ? UInt32(fp.loadUnaligned(fromByteOffset: i * 2, as: UInt16.self)) : fp.loadUnaligned(fromByteOffset: i * 4, as: UInt32.self)
+                withUnsafeBytes(of: (base + index).littleEndian) { faces.append(contentsOf: $0) }
+            }
+            if let c = g.classification {
+                classified = true
+                let cp = c.buffer.contents()
+                for i in 0..<c.count { classes.append(cp.loadUnaligned(fromByteOffset: c.offset + c.stride * i, as: UInt8.self)) }
+            } else {
+                classes.append(contentsOf: [UInt8](repeating: 0, count: f.count))
+            }
+            vertexCount += v.count
+            faceCount += f.count
+        }
+        return WalkLog.ARMesh(t: t, vertexCount: vertexCount, faceCount: faceCount, vertices: vertices, faces: faces, classes: classified ? classes : nil)
     }
 
     // MARK: - Sensors
@@ -302,6 +377,20 @@ extension WalkRecorder: ARSessionDelegate {
             guard t - self.lastARSample >= 1.0 / 30 else { return }
             self.lastARSample = t
             self.log?.ar.append(pose)
+        }
+    }
+
+    nonisolated func session(_ session: ARSession, didAdd anchors: [ARAnchor]) { keepMeshes(anchors) }
+    nonisolated func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) { keepMeshes(anchors) }
+
+    /// The latest version of each mesh piece (the delegate runs on the main queue).
+    nonisolated private func keepMeshes(_ anchors: [ARAnchor]) {
+        let meshes = anchors.compactMap { $0 as? ARMeshAnchor }
+        guard !meshes.isEmpty else { return }
+        MainActor.assumeIsolated {
+            guard self.lidarOn else { return }
+            for m in meshes { self.meshAnchors[m.identifier] = m }
+            self.lidarFaces = self.meshAnchors.values.reduce(0) { $0 + $1.geometry.faces.count }
         }
     }
 

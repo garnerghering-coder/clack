@@ -132,6 +132,16 @@ private struct WalkSessionView: View {
             Card {
                 Toggle("AR mode (camera tracks movement; no pictures saved)", isOn: Binding(get: { recorder.arOn }, set: { recorder.setAR($0) }))
                     .clack(.body)
+                // LiDAR phones only (iPhone Pro, iPad Pro): the 3D shape of the station, no pictures.
+                if WalkRecorder.lidarSupported {
+                    Toggle("LiDAR mode (builds a 3D mesh of the station; no pictures saved)", isOn: Binding(get: { recorder.lidarOn }, set: { recorder.setLiDAR($0) }))
+                        .clack(.body)
+                    if recorder.lidarOn {
+                        Text("Mesh: \(recorder.lidarFaces.formatted()) triangles. Walk slowly; turning it off keeps what's scanned.").clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                } else {
+                    Text("LiDAR mode needs a phone with a LiDAR scanner (iPhone Pro).").clack(.caption).foregroundStyle(Ink.text2)
+                }
             }
             Card {
                 Text("Suggested (optional)").clack(.sectionHeader).foregroundStyle(Ink.text2)
@@ -164,7 +174,7 @@ private struct WalkSessionView: View {
             Text("Time \(Int((log?.duration() ?? 0) / 60)) min · steps \(recorder.lastSteps)")
             Text(loc.map { String(format: "Position ±%.0f m%@", $0.horizontalAccuracy, $0.floor.map { " · floor \($0.level)" } ?? "") } ?? "Position: waiting")
             Text(recorder.lastRelAlt.map { String(format: "Barometer %+.1f m", $0) } ?? "Barometer: waiting")
-            Text("Samples: \(log?.location.count ?? 0) position · \(log?.motion.count ?? 0) motion · \(log?.pressure.count ?? 0) pressure · \(log?.ar.count ?? 0) AR")
+            Text("Samples: \(log?.location.count ?? 0) position · \(log?.motion.count ?? 0) motion · \(log?.pressure.count ?? 0) pressure · \(log?.ar.count ?? 0) AR · \(log?.meshes?.count ?? 0) mesh")
         }
         .clack(.caption).foregroundStyle(Ink.text2)
     }
