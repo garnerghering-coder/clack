@@ -19,6 +19,9 @@ struct TripDetailScreen: View {
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let id: String
+    /// Shown as one train of its journey (JourneyScreen): the whole journey's bar on top and its trains and changes
+    /// below, where another train can be put in focus.
+    var journey: JourneyContext?
 
     @State private var leg: LegDetail?
     @State private var live: LiveStateRow?
@@ -299,6 +302,12 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let tz = l.origin?.tz ?? "Europe/Stockholm"
         VStack(alignment: .leading, spacing: 16) {
+            if let journey {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    JourneyBar(legs: journey.legs, now: now, selected: detail.id)
+                }
+            }
             Ticking(every: 1) { now in head(detail, now: now) }
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(l.origin?.name ?? "") → \(l.destination?.name ?? "")")
@@ -325,6 +334,14 @@ struct TripDetailScreen: View {
             ForEach(TripDetailLogic.sections(stage), id: \.self) { part in
                 section(part, detail, shown: shown, tracking: tracking, stage: stage)
             }
+            // The whole journey: every train as a card, the changes between them; a card puts that train in focus.
+            if let journey {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(l10n.t("journey.yourJourney")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                    JourneyLegs(legs: journey.legs, now: now, selected: detail.id, select: journey.select)
+                }
+                .padding(.top, 8)
+            }
         }
     }
 
@@ -338,7 +355,8 @@ struct TripDetailScreen: View {
         case .result: result(detail)
         case .times: timesRow(detail, live: shown, tracking: tracking).id("times")
         case .stops: Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
-        case .connections: JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId)
+        // Inside the journey screen its cards say this already.
+        case .connections: if journey == nil { JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId) }
         case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
         }
@@ -755,6 +773,13 @@ struct LegStopRow: View {
             openLabel: l10n.t("board.openBoard", ["station": stop.name])
         )
     }
+}
+
+/// A trip shown inside its journey: the journey's id, its trains in travel order, and how to put another in focus.
+struct JourneyContext {
+    let id: String
+    let legs: [Leg]
+    let select: (String) -> Void
 }
 
 /// On a trip's page: the change into it and out of it, when it's part of a journey (ADDITIONS_01 C3).

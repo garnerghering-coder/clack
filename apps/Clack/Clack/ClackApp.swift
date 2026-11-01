@@ -34,6 +34,9 @@ struct ClackApp: App {
                 } else if CommandLine.arguments.contains("-activityGallery") {
                     // The trip card's faces in the island's shapes; `-simulateJourney 8` runs one on the island itself.
                     NavigationStack { ActivityGalleryView() }
+                } else if let at = CommandLine.arguments.firstIndex(of: "-timelineDemo"), CommandLine.arguments.indices.contains(at + 1) {
+                    // Journey timeline styles to choose from (TimelineDemoView).
+                    TimelineDemoView(style: CommandLine.arguments[at + 1])
                 } else if CommandLine.arguments.contains("-widgetGallery") {
                     // The Home Screen widgets at their true sizes (WidgetGalleryView).
                     WidgetGalleryView()

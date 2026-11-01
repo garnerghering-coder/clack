@@ -6846,6 +6846,23 @@
         }
       }
     },
+    "journey.changeChip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min at {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min i {{station}}"
+          }
+        }
+      }
+    },
     "journey.changes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7121,6 +7138,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "{{min}} min byte i {{station}}"
+          }
+        }
+      }
+    },
+    "journey.yourJourney" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din resväg"
           }
         }
       }

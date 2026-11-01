@@ -106,7 +106,12 @@ struct FeaturedCard: View {
                 Text("\(legs.first?.origin?.name ?? "") → \(legs.last?.destination?.name ?? "")")
                     .clack(.headline).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
-                TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
+                // A journey's card times the whole of it: first departure, last arrival (its trains are listed below).
+                Group {
+                    if isJourney { TimePair(journey: legs, clock: app.settings.clock, flap: .lg, intro: true) }
+                    else { TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true) }
+                }
+                .clack(.heroTimes)
                 bottom(now: now, live: live)
             }
             .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
@@ -131,28 +136,11 @@ struct FeaturedCard: View {
     /// The whole journey under the featured train as one rail: each train with its times and platform, the change
     /// between them, the one featured above marked. Every leg opens its trip and every change its station map.
     private func journeyLegs(now: Double) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Rectangle().fill(Ink.hairline).frame(height: 1).padding(.bottom, 8)
-            JourneyTimeline(legs: legs, now: now, scheme: scheme) { member in
-                NavigationLink(value: AppRoute.trip(member.id)) {
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("\(member.origin?.name ?? "") → \(member.destination?.name ?? "")")
-                                .clack(.stopName).fontWeight(member.id == leg.id ? .semibold : .regular).foregroundStyle(Ink.text)
-                            Text([member.operator?.name, member.trainNumber, member.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) }].compactMap { $0 }.joined(separator: Format.separator))
-                                .clack(.caption).foregroundStyle(Ink.text2)
-                        }
-                        Spacer(minLength: 8)
-                        Text("\(Format.time(member.schedDep?.ms, tz: TripsLogic.tz(member), clock: app.settings.clock))–\(Format.time(member.schedArr?.ms, tz: member.destination?.tz ?? TripsLogic.tz(member), clock: app.settings.clock))")
-                            .clack(.stopName).monospacedDigit().foregroundStyle(Ink.text2)
-                    }
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-            } change: { a, b in
-                JourneyChange(a: a, b: b)
-            }
+        VStack(alignment: .leading, spacing: 10) {
+            Rectangle().fill(Ink.hairline).frame(height: 1)
+            // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
+            JourneyBar(legs: legs, now: now, selected: leg.id)
+            JourneyLegs(legs: legs, now: now, selected: leg.id)
         }
     }
 

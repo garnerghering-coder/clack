@@ -14,6 +14,15 @@ extension TimePair {
         self.init(dep: ends.dep, arr: ends.arr, clock: clock, flap: flap, intro: intro)
     }
 
+    /// A whole journey: the first train's departure and the last one's arrival (owner, 2026-11-01).
+    init(journey legs: [Leg], clock: ClockFormat, flap: FlapTime.Style? = nil, intro: Bool = false) {
+        guard let first = legs.first, let last = legs.last else {
+            self.init(dep: End(time: nil, tz: "Europe/Stockholm"), arr: End(time: nil, tz: "Europe/Stockholm"), clock: clock, flap: flap, intro: intro)
+            return
+        }
+        self.init(dep: TimePair.ends(first).dep, arr: TimePair.ends(last).arr, clock: clock, flap: flap, intro: intro)
+    }
+
     static func ends(_ leg: Leg) -> (dep: End, arr: End) {
         let x = TripsLogic.expected(leg)
         return (
@@ -308,11 +317,13 @@ struct JourneyCard: View {
                 .buttonStyle(.plain)
             }
             TimelineView(.periodic(from: .now, by: 60)) { context in
-                JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
-                    LegRow(leg: leg, flat: true)
-                } change: { a, b in
-                    JourneyChange(a: a, b: b)
+                let now = context.date.timeIntervalSince1970 * 1000
+                // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
+                VStack(alignment: .leading, spacing: 10) {
+                    JourneyBar(legs: legs, now: now)
+                    JourneyLegs(legs: legs, now: now)
                 }
+                .padding(.vertical, 6)
             }
         }
         .padding(.top, 4)
