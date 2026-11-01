@@ -118,6 +118,14 @@ describe('a train still on its way to the stop you board at (owner, 2026-10-23: 
     expect(v.nextStopId).toBe('B');
   });
 
+  it("shows a train no GPS reports (Denmark) where the live map estimates it, as an estimate and without a speed", () => {
+    const v = liveView(board(), ridden, { ...fix(13.7, '10:20'), estimated: true }, T('10:20'));
+    expect(v.status).toBe('approaching');
+    expect(v.positionSource).toBe('estimated');
+    expect(v.speedKmh).toBeNull();
+    expect(v.lon).toBeCloseTo(13.7, 3);
+  });
+
   it('is boarding when the train is at the stop, and departed once it is on the ride', () => {
     expect(liveView(board(), ridden, fix(14.1, '10:29'), T('10:29')).status).toBe('boarding');
     expect(liveView(board({ actualDep: T('10:31') }), ridden, fix(14.12, '10:34'), T('10:34')).status).toBe('en_route');

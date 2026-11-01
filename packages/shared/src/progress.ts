@@ -41,6 +41,8 @@ export interface GpsFix {
   speedKmh: number | null;
   /** When the speed was read, if earlier than the fix (a fix that came without one keeps the last reading). */
   speedAt?: number;
+  /** The live map's estimate, not a GPS reading (Denmark has no GPS feed): shown as estimated, never with a speed. */
+  estimated?: boolean;
 }
 
 export interface LiveView {
@@ -203,7 +205,7 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
     const out: LiveView = { ...base, status: approaching ? 'approaching' : inWindow ? 'boarding' : 'scheduled', eta: approaching ? (arrBoard ?? depAt) : base.eta };
     // On its way to you, and seen: show where it is.
     if (upstream)
-      return { ...out, lat: gps!.lat, lon: gps!.lon, bearing: gps!.bearing, speedKmh: shownSpeed(gps!, now), positionSource: 'gps', positionAt: gps!.at };
+      return { ...out, lat: gps!.lat, lon: gps!.lon, bearing: gps!.bearing, speedKmh: gps!.estimated ? null : shownSpeed(gps!, now), positionSource: gps!.estimated ? 'estimated' : 'gps', positionAt: gps!.at };
     return out;
   }
 
@@ -246,13 +248,13 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
       lat: gps.lat,
       lon: gps.lon,
       bearing: gps.bearing,
-      speedKmh: shownSpeed(gps, now),
-      positionSource: 'gps',
+      speedKmh: gps.estimated ? null : shownSpeed(gps, now),
+      positionSource: gps.estimated ? 'estimated' : 'gps',
       positionAt: gps.at,
     };
   }
   if (fresh)
-    return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: shownSpeed(gps, now), positionSource: 'gps', positionAt: gps.at, progress: null };
+    return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.estimated ? null : shownSpeed(gps, now), positionSource: gps.estimated ? 'estimated' : 'gps', positionAt: gps.at, progress: null };
   if (line.length < 2) return { ...out, progress: null };
   if (gps && status === 'en_route' && now - gps.at <= 30 * 60_000) {
     // Where the GPS last put it: an estimate never moves the train back behind that.

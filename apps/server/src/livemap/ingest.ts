@@ -320,6 +320,25 @@ export class LiveMapIngest extends EventEmitter {
     return this.users;
   }
 
+  /**
+   * Where the map has a train by its number and day, for a saved trip no GPS feed reports (live/tracker.ts `liveFix`).
+   * Only while the map is running and the position is under 5 minutes old (a stopped map keeps its last trains), and
+   * only when one train has that number that day (Danish line numbers are shared). Keeps the map warm meanwhile.
+   */
+  fixFor(trainNumber: string | null, serviceDate: string | null): import('@clack/shared').GpsFix | null {
+    if (!trainNumber || !serviceDate) return null;
+    this.acquire();
+    this.release();
+    if (this.mode === 'stopped') return null;
+    const now = this.now();
+    const hits = [...this.trains.values()].filter((t) => t.number === trainNumber && t.date === serviceDate);
+    if (hits.length !== 1) return null;
+    const t = hits[0]!;
+    const at = t.fixAt ?? t.at;
+    if (now - at > 5 * 60_000) return null;
+    return { lat: t.lat, lon: t.lon, at, bearing: t.bearing, speedKmh: null, estimated: t.estimated };
+  }
+
   start() {
     if (this.running) return;
     this.running = true;

@@ -149,10 +149,12 @@ final class TrainMarkerView: MLNAnnotationView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+        // Big enough to find at a glance over the route and its stop dots (owner, 2026-11-01: "the train location is
+        // little significance ... quite small"): the dot is about 18 pt across.
+        frame = CGRect(x: 0, y: 0, width: 56, height: 56)
         isUserInteractionEnabled = false
-        halo.frame = CGRect(x: 10, y: 10, width: 16, height: 16)
-        halo.cornerRadius = 8
+        halo.frame = CGRect(x: 16, y: 16, width: 24, height: 24)
+        halo.cornerRadius = 12
         layer.addSublayer(halo)
         picture.frame = bounds
         picture.contentsGravity = .resizeAspect
@@ -166,7 +168,8 @@ final class TrainMarkerView: MLNAnnotationView {
         self.color = color
         halo.backgroundColor = color.withAlphaComponent(0.5).cgColor
         picture.contents = LiveMapImages.train(color: color, heading: bearing != nil).cgImage
-        picture.opacity = estimated ? 0.7 : 1
+        // An estimate is told apart by not pulsing (and the screen's own "Estimated position"), not by fading away.
+        picture.opacity = estimated ? 0.9 : 1
         picture.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat((bearing ?? 0) * .pi / 180)))
         halo.isHidden = estimated
         if halo.animation(forKey: "pulse") == nil && !reduceMotion {

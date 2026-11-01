@@ -248,6 +248,12 @@ export interface TrackerOptions {
   fetchImpl?: typeof fetch;
   log?: (m: string) => void;
   now?: () => number;
+  /**
+   * Where the live map has the leg's train, for a train no GPS feed reports (Denmark: Rejseplanen's live times through
+   * our run model; owner, 2026-11-01: his train to Fredericia never showed on the trip's map before he boarded). Null
+   * when the map doesn't have it, or not freshly.
+   */
+  liveFix?: (leg: { trainNumber: string | null; serviceDate: string | null }) => GpsFix | null;
 }
 
 /** One tick: refresh every tracked leg. Exported for tests and for "refresh now". */
@@ -314,14 +320,15 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     const nums = isFinnishLeg(l) ? [] : numbersNow(l.ridden, l.line, now, l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : []);
     // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
     const jk = journeyOf.get(l.leg.id);
-    const candidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : []), ...(fiKeyOf.has(l.leg.id) && fiFixes.get(fiKeyOf.get(l.leg.id)!) ? [fiFixes.get(fiKeyOf.get(l.leg.id)!)!] : [])].sort(
-      (a, b) => a.at - b.at,
-    );
+    const gpsCandidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : []), ...(fiKeyOf.has(l.leg.id) && fiFixes.get(fiKeyOf.get(l.leg.id)!) ? [fiFixes.get(fiKeyOf.get(l.leg.id)!)!] : [])];
+    // No GPS feed has it: the live map's estimate, marked as such (it doesn't go through the GPS filter's history).
+    const mapFix = gpsCandidates.length ? null : (opts.liveFix?.({ trainNumber: l.leg.trainNumber, serviceDate: l.leg.serviceDate }) ?? null);
+    const candidates = gpsCandidates.sort((a, b) => a.at - b.at);
     // Oldest first through the filter: a fix the train couldn't have reached is dropped, not shown.
     const rejectedBefore = trackerFixes.stats.rejected;
     for (const f of candidates) trackerFixes.push(l.leg.id, { lat: f.lat, lon: f.lon, at: f.at, bearing: f.bearing, speedKmh: f.speedKmh });
     const rejected = trackerFixes.stats.rejected - rejectedBefore;
-    const gps = trackerFixes.current(l.leg.id);
+    const gps = mapFix ?? trackerFixes.current(l.leg.id);
     const view = liveView(l.ridden, l.line, gps, now);
     const prevRow = db.select({ reportedAt: liveState.reportedAt }).from(liveState).where(eq(liveState.legId, l.leg.id)).get();
     const reportedAt = answered.has(l.leg.id) ? now : (prevRow?.reportedAt?.getTime() ?? null);

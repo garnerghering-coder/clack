@@ -35,6 +35,10 @@ declare module 'fastify' {
   interface FastifyRequest {
     userId: string;
   }
+  interface FastifyInstance {
+    /** The live map, for the trip tracker's trains no GPS feed reports (index.ts). */
+    liveIngest: LiveMapIngest;
+  }
 }
 
 /** A device's id: a random UUID (v4 from crypto.randomUUID on the phone). */
@@ -118,6 +122,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     ...opts.liveMap,
   });
   app.addHook('onClose', async () => ingest.stop());
+  app.decorate('liveIngest', ingest);
   // Your own trains are drawn on top (ADDITIONS_01 A): legs inside their live-tracking window, as "number|date" for
   // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's and Finland's (isMine in livemap/ingest.ts).
   const myTrainKeys = (userId: string) => {

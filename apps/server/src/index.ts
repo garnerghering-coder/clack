@@ -72,7 +72,8 @@ if (process.env.JOBS !== 'off') {
     .then(() => sampleTrains(db, { log }))
     .then(ready);
   // Live tracking runs alongside the imports (it only needs saved trips).
-  startLiveTracker(db, { log });
+  // Trains no GPS feed reports (Denmark) are placed where the live map has them.
+  startLiveTracker(db, { log, liveFix: (leg) => app.liveIngest.fixFor(leg.trainNumber, leg.serviceDate) });
   // The observed record: what actually happened to every train (src/observed/).
   startObserved(db, log);
   // The planner's timetable for today and tomorrow, built in the background so the first search is quick.
