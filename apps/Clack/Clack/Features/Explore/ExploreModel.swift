@@ -314,7 +314,12 @@ final class ExploreModel {
             while let self, !Task.isCancelled, self.active {
                 let moving = self.needsFullRender || self.zoom >= Self.carsZoom ? self.render() : self.glideFrame()
                 if !moving { break }
-                try? await Task.sleep(for: .milliseconds(33))
+                // Smooth (30 a second) only while a train eases to its new fix; carrying on at its speed until the next
+                // one, 10 a second is enough, and always so in Low Power Mode (review E4).
+                let nowMs = CACurrentMediaTime() * 1000
+                let easing = self.glides.values.contains { nowMs - $0.start < ExploreLogic.glideMs }
+                let lowPower = ProcessInfo.processInfo.isLowPowerModeEnabled
+                try? await Task.sleep(for: .milliseconds(easing && !lowPower ? 33 : 100))
             }
             self?.renderTask = nil
         }

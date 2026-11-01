@@ -20,7 +20,10 @@ struct ExploreScreen: View {
     @FocusState private var searchFocused: Bool
 
     /// This tab is the one showing (the screen stays built while another is).
-    private var active: Bool { router.tab == .explore }
+    /// On screen: the Explore tab, with the app in front. In the background (a trip's Live Activity can keep the app
+    /// running) the stream, the glide loop and the clock stop, the biggest drain the review found (E1).
+    private var active: Bool { router.tab == .explore && scenePhase != .background }
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -108,8 +111,8 @@ struct ExploreScreen: View {
             // Not awaited here: clearing the request restarts this task, which would cancel the wait.
             Task { await model.focus(target) }
         }
-        .task {
-            while !Task.isCancelled {
+        .task(id: active) {
+            while active, !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(5))
                 now = Date().timeIntervalSince1970 * 1000
             }
