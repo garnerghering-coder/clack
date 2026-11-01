@@ -114,6 +114,14 @@ final class WalkStore {
         for e in entries where !e.uploaded && e.id != running { upload(e.id) }
     }
 
+    /// Delete my data: every walk on this phone (the server deletes its copies with the user).
+    func deleteAll() {
+        try? FileManager.default.removeItem(at: dir)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        uploaded = []
+        reload()
+    }
+
     private func markUploaded(_ id: String, _ done: Bool) {
         if done { uploaded.insert(id) } else { uploaded.remove(id) }
         try? JSONEncoder().encode(Array(uploaded)).write(to: dir.appending(path: "uploaded.json"))
@@ -121,17 +129,18 @@ final class WalkStore {
 
     // MARK: - Who sees the tool
 
-    /// Shows the test tools in every build while Clack is only on TestFlight (owner, 2026-10-28: the StoreKit check
-    /// below never showed them there). Set to false before the first App Store release (docs/APP_STORE.md).
-    static let alwaysShowTestTools = true
+    /// The walk tools show in debug and TestFlight builds only, never in App Store builds (owner, 2026-11-01; App
+    /// Review: the tool records precise location). Before, StoreKit alone missed TestFlight (2026-10-28), so the tools
+    /// were shown everywhere; TestFlight's sandbox receipt is checked first now.
+    static let alwaysShowTestTools = false
 
-    /// The walk tools show in debug builds and TestFlight builds (StoreKit reports TestFlight as the sandbox), never in
-    /// App Store builds.
     static func isTestBuild() async -> Bool {
         if alwaysShowTestTools { return true }
         #if DEBUG
         return true
         #else
+        // TestFlight installs carry a sandbox receipt; App Store ones a production one.
+        if Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt" { return true }
         guard let result = try? await AppTransaction.shared else { return false }
         switch result {
         case .verified(let t), .unverified(let t, _): return t.environment == .sandbox || t.environment == .xcode

@@ -59,3 +59,18 @@ export const walkLogRoutes: FastifyPluginAsync = async (app) => {
     return reply.type('application/octet-stream').send(fs.readFileSync(file));
   });
 };
+
+/** Delete my data: every walk this phone uploaded (its `<id>.owner` names it), with the owner file. */
+export function deleteWalksOf(userId: string) {
+  const user = userId.toLowerCase();
+  if (!fs.existsSync(WALKLOG_DIR)) return 0;
+  let n = 0;
+  for (const f of fs.readdirSync(WALKLOG_DIR).filter((x) => x.endsWith('.owner'))) {
+    const owner = path.join(WALKLOG_DIR, f);
+    if (fs.readFileSync(owner, 'utf8').trim() !== user) continue;
+    fs.rmSync(path.join(WALKLOG_DIR, f.replace(/\.owner$/, '.walk')), { force: true });
+    fs.rmSync(owner, { force: true });
+    n++;
+  }
+  return n;
+}

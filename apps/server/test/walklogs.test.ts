@@ -8,7 +8,7 @@ import { afterAll, describe, expect, it, vi } from 'vitest';
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'clack-walks-'));
 vi.stubEnv('WALKLOG_DIR', dir);
 vi.stubEnv('WALKLOG_USERS', 'aaaaaaaa-1111-4111-8111-111111111111');
-const { walkLogRoutes } = await import('../src/routes/walklogs.js');
+const { walkLogRoutes, deleteWalksOf } = await import('../src/routes/walklogs.js');
 
 async function server() {
   const app = Fastify();
@@ -57,5 +57,14 @@ describe('station walk uploads', () => {
   it('refuses bad ids', async () => {
     const app = await server();
     expect((await app.inject({ method: 'PUT', url: '/api/walklogs/..%2Fescape', headers: owner, payload: walk })).statusCode).toBe(400);
+  });
+
+  it("deletes a phone's walks with its data, and nobody else's", async () => {
+    const app = await server();
+    const a = { ...owner, 'x-clack-user': 'dddddddd-4444-4444-8444-444444444444' };
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0100', headers: a, payload: walk })).statusCode).toBe(204);
+    expect(deleteWalksOf('dddddddd-4444-4444-8444-444444444444')).toBe(1);
+    expect(fs.existsSync(path.join(dir, 'walk-0100.walk'))).toBe(false);
+    expect(fs.existsSync(path.join(dir, 'walk-0002.walk'))).toBe(true);
   });
 });

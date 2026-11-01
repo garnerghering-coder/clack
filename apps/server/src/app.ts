@@ -17,7 +17,7 @@ import { pushRoutes } from './routes/push.js';
 import { exportRoutes } from './routes/export.js';
 import { passportRoutes } from './routes/passport.js';
 import { usageRoutes } from './routes/usage.js';
-import { walkLogRoutes } from './routes/walklogs.js';
+import { deleteWalksOf, walkLogRoutes } from './routes/walklogs.js';
 import { boardRoutes } from './routes/boards.js';
 import { BoardHub, type BoardHubOptions } from './boards/hub.js';
 import { liveMapRoutes } from './routes/livemap.js';
@@ -50,7 +50,7 @@ const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f
  */
 const requireUser = /^(1|true|yes|on)$/i.test(process.env.CLACK_REQUIRE_USER ?? '');
 // Riders' reports go without a user id on purpose (live/riders.ts).
-const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|shared\/[A-Za-z0-9_-]+$|operators\/[a-z0-9-]+\/logo$|live\/report$)/;
+const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|shared\/[A-Za-z0-9_-]+$|operators\/[a-z0-9-]+\/logo$|live\/report$|usage$|diagnostics$)/;
 
 
 export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions; liveMap?: IngestOptions } = {}) {
@@ -81,6 +81,8 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   // Everything a user has (trips, journeys, follows, settings) goes with the user row (ON DELETE CASCADE).
   app.delete('/api/me', { logLevel: 'warn' }, async (req, reply) => {
     db.delete(users).where(eq(users.id, req.userId)).run();
+    // Station walks this phone uploaded are files, not rows: deleted here (owner, 2026-11-01).
+    deleteWalksOf(req.userId);
     known.delete(req.userId);
     if (req.userId === LOCAL_USER_ID) {
       db.insert(users).values({ id: LOCAL_USER_ID, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();

@@ -11,7 +11,7 @@ import SwiftUI
 /// How Clack is used, counted on the phone and sent to Clack's own server once a day (owner, 2026-10-25): which
 /// screens are opened and features used, which station pairs are searched, which errors show, a relaunch soon after an
 /// error, and Apple's crash and hang reports (MetricKit). Nothing about who: the server keeps daily totals with no id.
-/// Settings > Usage data turns it off; with it off nothing is counted or sent.
+/// Off until you say yes (asked once after the first trip; Settings > Usage data); off, nothing is counted or sent.
 @MainActor
 final class Usage: NSObject, MXMetricManagerSubscriber {
     static let shared = Usage()
@@ -23,12 +23,19 @@ final class Usage: NSObject, MXMetricManagerSubscriber {
     private static let lastSentKey = "clack.usage.lastSent"
     private static let lastErrorKey = "clack.usage.lastError"
     private static let reportsKey = "clack.usage.reports"
+    private static let askedKey = "clack.usage.asked"
+
+    /// Whether the one ask has been made (or a choice made in Settings).
+    var asked: Bool {
+        get { defaults.bool(forKey: Self.askedKey) }
+        set { defaults.set(newValue, forKey: Self.askedKey) }
+    }
 
     private let defaults = UserDefaults.standard
 
-    /// On unless turned off in Settings.
+    /// Off until you say yes: asked once after your first trip, or Settings > Usage data (owner, 2026-11-01).
     var enabled: Bool {
-        get { defaults.object(forKey: Self.enabledKey) as? Bool ?? true }
+        get { defaults.object(forKey: Self.enabledKey) as? Bool ?? false }
         set {
             defaults.set(newValue, forKey: Self.enabledKey)
             if !newValue { defaults.removeObject(forKey: Self.countsKey); defaults.removeObject(forKey: Self.reportsKey) }
@@ -91,7 +98,8 @@ final class Usage: NSObject, MXMetricManagerSubscriber {
             }
             guard !events.isEmpty else { continue }
             do {
-                try await client.perform("POST", ["usage"], body: UsageBatch(day: day, events: events))
+                // Without the phone's id (review P7): the server keeps daily totals and never needs to know whose.
+                try await client.anonymous("POST", ["usage"], body: UsageBatch(day: day, events: events))
                 var left = counts
                 left[day] = nil
                 counts = left
@@ -102,7 +110,7 @@ final class Usage: NSObject, MXMetricManagerSubscriber {
                 guard let kind = r["kind"] as? String, let signature = r["signature"] as? String else { return nil }
                 return DiagnosticReport(kind: kind, signature: signature, count: r["count"] as? Int ?? 1)
             }
-            if (try? await client.perform("POST", ["diagnostics"], body: DiagnosticsBatch(build: Self.build, reports: list))) != nil {
+            if (try? await client.anonymous("POST", ["diagnostics"], body: DiagnosticsBatch(build: Self.build, reports: list))) != nil {
                 defaults.removeObject(forKey: Self.reportsKey)
             }
         }
@@ -156,4 +164,21 @@ extension View {
     func countsScreen(_ name: String) -> some View { onAppear { Usage.shared.count(.screen, name) } }
     /// Counts an error when its banner appears.
     func countsError(_ name: String) -> some View { onAppear { Usage.shared.error(name) } }
+}
+
+/// The one ask for usage data (owner, 2026-11-01: off until you say yes, asked once after your first trip).
+@MainActor
+@Observable
+final class UsageAsk {
+    static let shared = UsageAsk()
+    var show = false
+
+    /// After the trips load: the first time one of them has ended, ask (once).
+    func check(_ legs: [Leg], now: Double = Date.now.timeIntervalSince1970 * 1000) {
+        guard !Usage.shared.asked else { return }
+        if legs.contains(where: { $0.actualArr != nil || $0.live?.status == .arrived || ($0.schedArr?.ms ?? .infinity) < now }) {
+            Usage.shared.asked = true
+            show = true
+        }
+    }
 }

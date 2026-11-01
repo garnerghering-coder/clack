@@ -21,6 +21,7 @@ final class TripsModel {
         failed = false
         do {
             legs = try await client.legs()
+            UsageAsk.shared.check(legs ?? [])
         } catch {
             failed = true
         }

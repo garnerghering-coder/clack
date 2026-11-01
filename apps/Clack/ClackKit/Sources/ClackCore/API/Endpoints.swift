@@ -188,6 +188,21 @@ extension APIClient {
         }
     }
 
+    /// A request with no `X-Clack-User` and no cookies (usage counts, crash summaries): nothing in it says whose.
+    public func anonymous(_ method: String, _ segments: [String], body: (any Encodable & Sendable)? = nil) async throws {
+        var request = URLRequest(url: url(segments))
+        request.httpMethod = method
+        if let body {
+            request.httpBody = try JSONEncoder().encode(body)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        request.timeoutInterval = 15
+        let (_, response) = try await Self.anonymous.data(for: request)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            throw APIError(status: (response as? HTTPURLResponse)?.statusCode ?? 0, message: "refused", duplicateOf: nil)
+        }
+    }
+
     private static let anonymous: URLSession = {
         let c = URLSessionConfiguration.ephemeral
         c.httpCookieStorage = nil

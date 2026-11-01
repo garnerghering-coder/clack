@@ -13048,13 +13048,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only when you ask for it: your dot on the Explore map and on a station map while you walk it, worked out on your phone. When you tap \"Near you\" on the first screen, a rough position (about a kilometre) is sent once to our server to find the nearest stations, and is not kept. On a train you have logged, your own map shows the train where your phone is, worked out on your phone. If you turn on \"Help place trains for everyone\" (off unless you do), while Clack is open or the trip's Live Activity runs your phone sends only which train it is, how far along its stretch, its speed and the time, with a code made up new for each trip: no coordinates and no account id. It is held only in the server's memory for a few minutes."
+            "value" : "Your dot on the Explore map and on a station map while you walk it is worked out on your phone. When you tap \"Near you\" on the first screen, a rough position (about a kilometre) is sent once to our server to find the nearest stations, and is not kept. While Clack is open and one of your logged trains is running, your phone reads its position to show the train where you are on your own map; that stays on the phone. If you turn on \"Help place trains for everyone\" (off unless you do), your phone also sends, while Clack is open or the trip's Live Activity runs, which train it is, how far along its stretch (a position along that track), its speed and the time, with a code made up new for each trip: no coordinates and no account id. It is held only in the server's memory for a few minutes. In test builds (TestFlight), the station walk tool records your precise position, motion and air pressure and, in AR or LiDAR mode, how you move and the shape of the station (never pictures); those walks are uploaded to our server, seen only by Clack's owner, and deleted with Delete my data."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bara när du ber om det: din punkt på Utforska-kartan och på en stationskarta medan du går, beräknad i telefonen. När du trycker på \"Nära dig\" på första skärmen skickas en ungefärlig position (ungefär en kilometer) en gång till vår server för att hitta närmaste stationer, och den sparas inte. På ett tåg du har loggat visar din egen karta tåget där telefonen är, beräknat i telefonen. Om du slår på \"Hjälp till att placera tågen för alla\" (av från början) skickar telefonen, medan Clack är öppen eller resans Live Activity visas, bara vilket tåg det är, hur långt längs sträckan, farten och tiden, med en kod som görs ny för varje resa: inga koordinater och inget konto-id. Det hålls bara i serverns minne i några minuter."
+            "value" : "Din punkt på Utforska-kartan och på en stationskarta medan du går beräknas i telefonen. När du trycker på \"Nära dig\" på första skärmen skickas en ungefärlig position (ungefär en kilometer) en gång till vår server för att hitta närmaste stationer, och den sparas inte. Medan Clack är öppen och ett av dina loggade tåg går läser telefonen sin position för att visa tåget där du är på din egen karta; den stannar i telefonen. Om du slår på \"Hjälp till att placera tågen för alla\" (av från början) skickar telefonen också, medan Clack är öppen eller resans Live Activity visas, vilket tåg det är, hur långt längs sträckan (en position längs spåret), farten och tiden, med en kod som görs ny för varje resa: inga koordinater och inget konto-id. Det hålls bara i serverns minne i några minuter. I testversioner (TestFlight) spelar stationsvandringsverktyget in din exakta position, rörelser och lufttryck och, i AR- eller LiDAR-läget, hur du rör dig och stationens form (aldrig bilder); de vandringarna laddas upp till vår server, ses bara av Clacks ägare och raderas med Radera mina data."
           }
         }
       }
@@ -13252,13 +13252,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unless you turn it off in Settings: anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. They go only to our own server, as totals per day with no code, device or anything that says who you are, so we can see what to improve."
+            "value" : "Only if you say yes (Clack asks once, after your first trip; Settings > Usage data changes it): anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. They go only to our own server, as totals per day with no code, device or anything that says who you are, so we can see what to improve."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Om du inte stänger av det i Inställningar: anonyma dagliga antal av vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. De går bara till vår egen server, som summor per dag utan kod, enhet eller något som säger vem du är, så att vi ser vad som behöver bli bättre."
+            "value" : "Bara om du säger ja (Clack frågar en gång, efter din första resa; Inställningar > Användningsdata ändrar det): anonyma dagliga antal av vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. De går bara till vår egen server, som summor per dag utan kod, enhet eller något som säger vem du är, så att vi ser vad som behöver bli bättre."
           }
         }
       }
@@ -13898,13 +13898,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your phone can tell Clack where along the track this train is, so everyone sees it where it really is. Not your position, not who you are: only the train, how far along, its speed and the time. You can change this in Settings."
+            "value" : "Your phone can tell Clack where along the track this train is, so everyone sees it where it really is. Only the train, how far along its stretch, its speed and the time: no coordinates and no account id. You can change this in Settings."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telefonen kan berätta för Clack var längs spåret det här tåget är, så att alla ser det där det verkligen är. Inte din position och inte vem du är: bara tåget, hur långt, farten och tiden. Du kan ändra det i Inställningar."
+            "value" : "Telefonen kan berätta för Clack var längs spåret det här tåget är, så att alla ser det där det verkligen är. Bara tåget, hur långt längs sträckan, farten och tiden: inga koordinater och inget konto-id. Du kan ändra det i Inställningar."
           }
         }
       }
@@ -13983,13 +13983,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On your logged trains, your phone tells Clack where along the track your train is. Never your position or who you are."
+            "value" : "On your logged trains, your phone tells Clack how far along the track your train is. Never your coordinates or your account id."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "På dina loggade tåg berättar telefonen för Clack var längs spåret ditt tåg är. Aldrig din position eller vem du är."
+            "value" : "På dina loggade tåg berättar telefonen för Clack hur långt längs spåret ditt tåg har kommit. Aldrig dina koordinater eller ditt konto-id."
           }
         }
       }
@@ -20277,6 +20277,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lägg till tåget du ska åka med, eller ett du redan har åkt."
+          }
+        }
+      }
+    },
+    "usage.ask.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anonymous daily counts of which screens and features you use, and Apple's crash reports, help us see what to improve. Nothing says who you are. You can change this in Settings."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anonyma dagliga antal av vilka vyer och funktioner du använder, och Apples kraschrapporter, hjälper oss se vad som behöver bli bättre. Inget säger vem du är. Du kan ändra det i Inställningar."
+          }
+        }
+      }
+    },
+    "usage.ask.no" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not now"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte nu"
+          }
+        }
+      }
+    },
+    "usage.ask.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share usage data?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela användningsdata?"
+          }
+        }
+      }
+    },
+    "usage.ask.yes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela"
           }
         }
       }

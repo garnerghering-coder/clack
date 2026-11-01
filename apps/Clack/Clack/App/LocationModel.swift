@@ -48,6 +48,15 @@ final class LocationModel: NSObject, CLLocationManagerDelegate {
         if authorization == .notDetermined { manager.requestWhenInUseAuthorization() }
     }
 
+    /// On a train (RiderReporter): a fix every ~30 m at about 10 m accuracy is plenty for a report every 20 s, and
+    /// costs far less than best accuracy every second (review E3); iOS mustn't pause it during a long stop (review B4).
+    /// Off again: best accuracy for the maps and walks.
+    func riding(_ on: Bool) {
+        manager.desiredAccuracy = on ? kCLLocationAccuracyNearestTenMeters : kCLLocationAccuracyBest
+        manager.distanceFilter = on ? 30 : kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = !on
+    }
+
     func stop() {
         users = max(0, users - 1)
         if users == 0 { manager.stopUpdatingLocation() }

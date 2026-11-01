@@ -179,6 +179,8 @@ private struct RiderSharingCard: View {
             SettingsToggle(label: l10n.t("riders.setting"), isOn: on, last: true) { value in
                 on = value
                 RiderReporter.shared.sharing = value
+                // A choice made here is the answer: the first-trip ask doesn't come and undo it (review P14).
+                UserDefaults.standard.set(true, forKey: "riders.asked")
             }
             InfoNote(l10n.t("riders.settingNote"), more: l10n.t("riders.settingNoteMore"))
         }
@@ -307,6 +309,7 @@ private struct UsageCard: View {
             SettingsToggle(label: l10n.t("settings.usage.share"), isOn: on, last: true) { value in
                 on = value
                 Usage.shared.enabled = value
+                Usage.shared.asked = true
             }
             Text(l10n.t("settings.usage.note")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
         }

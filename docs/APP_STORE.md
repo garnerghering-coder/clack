@@ -22,7 +22,7 @@ Each item says who does it and where:
 | 8 | **EU trader status.** To be listed in the EU (Sweden), ASC asks whether you're a "trader" under the Digital Services Act. A free app from a private person is usually "non-trader"; a trader's address and phone number are shown publicly. | DSA, in ASC | You + ASC | Decide before submitting; ASC asks in its Business section, and the app can't be listed in the EU until it's answered. |
 | 9 | **Data source terms for a public app.** Confirm that Trafikverket's API, Trafiklab's GTFS feeds, Entur's data, Digitraffic (Fintraffic, Finland) and Rejseplanen (Denmark; its live data comes from its app's backend, not a granted API: see DENMARK_DATA_FINDINGS.md) allow use in a free public app, and give the attribution each requires (the About page lists all sources). Digitraffic is licensed CC BY 4.0 and asks for the credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY`, which the About page (`about.sources.digitraffic`) carries word for word. | 5.2.2 | You | OpenStreetMap (ODbL) attribution is on every map. The terms differ per source; read each source's terms page. |
 | 10 | **Station plans you supplied** (e.g. Jernhusen's Stockholm C plan, Jan 2026 PDF) were used to draw station maps. Those plans are someone else's copyrighted material. | 5.2.1 | You | Either get permission from the plan owners, or ship only the OpenStreetMap-based maps. The README already notes these plans are not ODbL. |
-| 11 | **Hide the test tools.** Settings shows "Station walks (test tool)" in every build while Clack is only on TestFlight (`WalkStore.alwaysShowTestTools = true`, owner 2026-10-28). It records precise location and motion and is for the owner only. | 2.3.1, 5.1.1 | Code | Set it to `false` before submitting; the StoreKit check then shows them only in debug and TestFlight builds. Since build 55 any tester's walks upload (so a borrowed LiDAR phone works; the walk screen says they go to the server with precise positions), but only `WALKLOG_USERS` can list or read them, and a walk can't be replaced by another phone. Hiding the tools before submitting also stops these uploads. |
+| 11 | **Hide the test tools.** Done in build 56 (owner, 2026-11-01): the walk tools show in Debug and TestFlight builds only (`WalkStore.alwaysShowTestTools = false`; TestFlight is told by its sandbox receipt, then StoreKit's environment). The privacy text says what the tool records and that walks go with Delete my data (phone and server, `deleteWalksOf`). Check on a TestFlight build that the tool still shows, and on the App Store build that it doesn't. | 2.3.1, 5.1.1 | Code | Done; verify per build. |
 
 ## Done in this round
 
@@ -74,3 +74,15 @@ Each item says who does it and where:
 
 - iPad layout (2.4.1 encourages it, doesn't require it).
 - Accessibility Nutrition Labels in ASC (optional): check VoiceOver labels and Dynamic Type first.
+
+## Build 56 privacy fixes (from docs/review/APP_REVIEW_2026-11-01.md)
+
+- P2/P9: the riders' ask and note, the privacy page and the location purpose string no longer say "never your position";
+  they say what is sent (how far along the track, no coordinates, no account id) and that location runs during your
+  logged trips while Clack is open.
+- P3/P4: `PrivacyInfo.xcprivacy` declares Precise Location (not linked, App Functionality), UserDefaults with CA92.1 and
+  1C8F.1 (the App Group), and System Boot Time 35F9.1 (the walk tool); the widget extension has its own manifest.
+- E2: background location only with "Help place trains for everyone" on and a trip's Live Activity running.
+- P6/P7: usage data off until the user says yes (asked once after the first trip), sent with no user id
+  (`/api/usage` and `/api/diagnostics` are open without one).
+- P14: a choice in Settings stops the first-trip ask from undoing it. Delete my data clears the riders' choices too.

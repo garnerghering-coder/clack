@@ -54,6 +54,7 @@ final class RiderReporter {
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var following = false
     @ObservationIgnored private var background: CLBackgroundActivitySession?
+    @ObservationIgnored private var lastRunning: (trains: [LiveTrain], at: Date)?
 
     /// Starts the loop if it isn't running (the app came to the front). It ends by itself when there is nothing to do.
     func resume(client: APIClient) {
@@ -83,15 +84,27 @@ final class RiderReporter {
         defer { stopFollowing() }
         while !Task.isCancelled {
             let foreground = UIApplication.shared.applicationState == .active
-            guard foreground || liveActivityRunning else { return }
-            let running = ((try? await client.liveMine()) ?? []).filter { $0.state == "running" && $0.prevId != nil && $0.nextId != nil }
+            // In the background only to help place trains (sharing on, a trip's Live Activity running): your own map
+            // isn't on screen then, so there is nothing else to read location for (App Review 2.5.4; review E2).
+            guard foreground || (sharing && liveActivityRunning) else { return }
+            // No answer (a tunnel, no signal): carry on with the trains of the last answer for up to five minutes,
+            // rather than stop and lose the background session for the rest of the trip (review B4).
+            let running: [LiveTrain]
+            if let mine = try? await client.liveMine() {
+                running = mine.filter { $0.state == "running" && $0.prevId != nil && $0.nextId != nil }
+                lastRunning = (running, Date())
+            } else if let last = lastRunning, Date().timeIntervalSince(last.at) < 300 {
+                running = last.trains
+            } else {
+                running = []
+            }
             if running.isEmpty || !location.allowed {
                 stopFollowing()
                 // Nothing of yours running: look again in a minute while the app stays open.
                 try? await Task.sleep(for: .seconds(60))
                 continue
             }
-            startFollowing(keepInBackground: liveActivityRunning)
+            startFollowing(keepInBackground: sharing && liveActivityRunning)
             if let fix = location.location, -fix.timestamp.timeIntervalSinceNow < 30 {
                 for train in running { await place(train, fix: fix, client: client) }
             }
@@ -128,6 +141,7 @@ final class RiderReporter {
     private func startFollowing(keepInBackground: Bool) {
         if !following {
             following = true
+            LocationModel.shared.riding(true)
             LocationModel.shared.start()
         }
         // Only while a trip's Live Activity runs, and only started from the front (iOS's rule).
@@ -145,6 +159,7 @@ final class RiderReporter {
         if following {
             following = false
             LocationModel.shared.stop()
+            LocationModel.shared.riding(false)
         }
         own = [:]
         sessions = [:]

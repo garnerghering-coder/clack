@@ -118,6 +118,12 @@ struct RootView: View {
         .onChange(of: app.notifications.openRequest) { _, _ in openAlert() }
         // Your train placed by your phone, and (when you've said yes) helping place it for everyone (RiderReporter).
         .onChange(of: scenePhase, initial: true) { _, phase in if phase == .active { RiderReporter.shared.resume(client: app.client) } }
+        .alert(app.l10n.t("usage.ask.title"), isPresented: Binding(get: { UsageAsk.shared.show && !RiderReporter.shared.showAsk }, set: { UsageAsk.shared.show = $0 })) {
+            Button(app.l10n.t("usage.ask.yes")) { Usage.shared.enabled = true }
+            Button(app.l10n.t("usage.ask.no"), role: .cancel) { Usage.shared.enabled = false }
+        } message: {
+            Text(app.l10n.t("usage.ask.body"))
+        }
         .alert(app.l10n.t("riders.ask.title"), isPresented: Binding(get: { RiderReporter.shared.showAsk }, set: { RiderReporter.shared.showAsk = $0 })) {
             Button(app.l10n.t("riders.ask.yes")) { RiderReporter.shared.sharing = true }
             Button(app.l10n.t("riders.ask.no"), role: .cancel) { RiderReporter.shared.sharing = false }

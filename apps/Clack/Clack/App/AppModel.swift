@@ -138,9 +138,29 @@ final class AppModel {
             if let region = Self.homeCountry(forRegion: Locale.current.region?.identifier), loaded.0.homeCountry == nil {
                 await update(SettingsPatch(homeCountry: region))
             }
+            // The first time: the phone's language when Clack has it (owner, 2026-11-01: Swedish phone, Swedish app),
+            // not always English. Once only, so a choice made in Settings stands.
+            if !UserDefaults.standard.bool(forKey: Self.languageChosenKey) {
+                UserDefaults.standard.set(true, forKey: Self.languageChosenKey)
+                if let phone = Self.appLanguage(forPreferred: Locale.preferredLanguages), phone != loaded.0.language {
+                    await update(SettingsPatch(language: phone))
+                }
+            }
         } catch {
             state = .failed
         }
+    }
+
+    private static let languageChosenKey = "clack.language.chosen"
+
+    /// The app language for the phone's preferred languages: the first one Clack has (English or Swedish), else nil.
+    nonisolated static func appLanguage(forPreferred preferred: [String]) -> Language? {
+        for code in preferred {
+            let base = code.lowercased().split(separator: "-").first.map(String.init) ?? code
+            if base == "sv" { return .sv }
+            if base == "en" { return .en }
+        }
+        return nil
     }
 
     /// The home country a phone's region gives: Sweden, Norway, Finland or Denmark. Any other region gives none, and the server
@@ -183,7 +203,9 @@ final class AppModel {
             return false
         }
         await offlineCache.clear()
-        for key in UserDefaults.standard.dictionaryRepresentation().keys where key.hasPrefix("clack.") {
+        // Station walks recorded on this phone go too (owner, 2026-11-01); so do the riders' choices.
+        WalkStore.shared.deleteAll()
+        for key in UserDefaults.standard.dictionaryRepresentation().keys where key.hasPrefix("clack.") || key.hasPrefix("riders.") {
             UserDefaults.standard.removeObject(forKey: key)
         }
         Identity.delete()
