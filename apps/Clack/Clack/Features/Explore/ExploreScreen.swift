@@ -455,7 +455,11 @@ struct ExploreScreen: View {
         } content: {
             StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
-            if detail.trip == nil { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
+            if detail.trip == nil {
+                // With the feed's own stops it can still be added, as a trip from live data.
+                if case .list = model.stops { Text(l10n.t("board.fromLiveData")).clack(.caption).foregroundStyle(Ink.text2) }
+                else { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
+            }
         } actions: {
             HStack(spacing: 12) {
                 followButton(following: followed) {
@@ -466,7 +470,15 @@ struct ExploreScreen: View {
                         )
                     }
                 }
-                planButton(legId: detail.legId, trip: detail.trip)
+                if detail.legId == nil, detail.trip == nil, case .list(let list) = model.stops {
+                    // Not in any timetable of ours: added from the live feed's own stops (owner, 2026-11-01).
+                    LiveAddButton(
+                        trainId: train.id, title: [op?.name, train.number].compactMap { $0 }.joined(separator: " "), stops: list,
+                        tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country })
+                    )
+                } else {
+                    planButton(legId: detail.legId, trip: detail.trip)
+                }
             }
         }
     }

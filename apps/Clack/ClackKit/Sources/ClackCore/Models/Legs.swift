@@ -23,9 +23,11 @@ public nonisolated enum LegStatus: OpenEnum {
 
 public nonisolated enum DataQuality: OpenEnum {
     case full, partial, scheduledOnly, manual
+    /// From a live feed's own stop list: a train no timetable of ours has (POST /live/trains/:id/add).
+    case live
     case unknown(String)
 
-    public static let knownCases: [DataQuality] = [.full, .partial, .scheduledOnly, .manual]
+    public static let knownCases: [DataQuality] = [.full, .partial, .scheduledOnly, .manual, .live]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
@@ -33,6 +35,7 @@ public nonisolated enum DataQuality: OpenEnum {
         case .partial: "partial"
         case .scheduledOnly: "scheduled_only"
         case .manual: "manual"
+        case .live: "live"
         case .unknown(let raw): raw
         }
     }

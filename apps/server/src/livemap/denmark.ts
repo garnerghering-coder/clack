@@ -186,7 +186,7 @@ export class DenmarkFeed {
     const now = this.now();
     const out: DenmarkTrain[] = [];
     for (const j of this.journeys) {
-      const matched = this.matcher.match(j.date, j.ends);
+      const matched = this.matcher.match(j.date, j.ends, j.number);
       rememberJourney(j, matched?.tripKey ?? null);
       const number = j.number ?? matched?.trainNumber ?? null;
       if (!number || !j.pos) continue;

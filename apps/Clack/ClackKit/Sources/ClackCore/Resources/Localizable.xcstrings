@@ -1987,6 +1987,23 @@
         }
       }
     },
+    "board.fromLiveData" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not in the timetables Clack has: it's added from the live feed's own stops."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finns inte i Clacks tidtabeller: det läggs till från liveflödets egna stopp."
+          }
+        }
+      }
+    },
     "board.loading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5673,6 +5690,23 @@
         }
       }
     },
+    "detail.quality.live" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From live data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från livedata"
+          }
+        }
+      }
+    },
     "detail.quality.manual" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7512,6 +7546,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uppdaterad {{ago}}"
+          }
+        }
+      }
+    },
+    "liveAdd.back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tillbaka"
+          }
+        }
+      }
+    },
+    "liveAdd.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't add the train. Try again in a moment."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte lägga till tåget. Försök igen om en stund."
+          }
+        }
+      }
+    },
+    "liveAdd.note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This train isn't in the timetables Clack has, so the trip is saved from the live feed's own stops and times."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåget finns inte i de tidtabeller Clack har, så resan sparas från liveflödets egna stopp och tider."
+          }
+        }
+      }
+    },
+    "liveAdd.pickAlight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where did you get off?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Var gick du av?"
+          }
+        }
+      }
+    },
+    "liveAdd.pickBoard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where did you get on?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Var gick du på?"
           }
         }
       }

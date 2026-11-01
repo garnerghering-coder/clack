@@ -43,14 +43,26 @@ export class TripMatcher {
   constructor(private readonly db: Db) {}
 
   /** The Danish timetable trip a journey is, on its date; null when the timetable doesn't have it. */
-  match(date: string, ends: JourneyEnds | null): MatchedTrip | null {
+  match(date: string, ends: JourneyEnds | null, number?: string | null): MatchedTrip | null {
     if (!ends) return null;
-    return this.day(date).get(keyOf(ends)) ?? null;
+    const exact = this.day(date).get(keyOf(ends));
+    if (exact) return exact;
+    // Rejseplanen runs some trains longer or shorter than the timetable has them (Vores Tog 5974 live from Aarhus H,
+    // timetabled from Struer; owner, 2026-11-01). Then the one trip with that number that day, when one end agrees to
+    // the minute; a number on its own is not enough (Danish line numbers are shared).
+    if (!number) return null;
+    const same = (this.byNumber.get(date)?.get(number) ?? []).filter(
+      (t) => (t.a === ends.firstUic && t.depMin === ends.firstMin) || (t.b === ends.lastUic && t.arrMin === ends.lastMin),
+    );
+    return same.length === 1 ? same[0]!.trip : null;
   }
+
+  private byNumber = new Map<string, Map<string, { a: string; depMin: number; b: string; arrMin: number; trip: MatchedTrip }[]>>();
 
   private day(date: string): Map<string, MatchedTrip> {
     const hit = this.days.get(date);
     if (hit) return hit;
+    const numbered = new Map<string, { a: string; depMin: number; b: string; arrMin: number; trip: MatchedTrip }[]>();
     const rows = this.db.all<{ key: string; train_number: string | null; operator_id: string | null; fs: string; dep: number | null; ls: string; arr: number | null }>(sql`
       select t.key, t.train_number, t.operator_id, f.station_id as fs, f.dep_sec as dep, l.station_id as ls, l.arr_sec as arr
       from timetable_trip_dates d
@@ -67,11 +79,18 @@ export class TripMatcher {
       const k = `${a}|${Math.floor(r.dep / 60)}|${b}|${Math.floor(r.arr / 60)}`;
       // Two trips with the same ends and times can't be told apart: match neither rather than guess.
       if (map.has(k)) clash.add(k);
-      map.set(k, { tripKey: r.key, trainNumber: r.train_number, operatorId: r.operator_id });
+      const trip = { tripKey: r.key, trainNumber: r.train_number, operatorId: r.operator_id };
+      map.set(k, trip);
+      if (r.train_number) {
+        const list = numbered.get(r.train_number) ?? [];
+        list.push({ a, depMin: Math.floor(r.dep / 60), b, arrMin: Math.floor(r.arr / 60), trip });
+        numbered.set(r.train_number, list);
+      }
     }
     for (const k of clash) map.delete(k);
     this.days.set(date, map);
-    for (const d of this.days.keys()) if (this.days.size > 3 && d !== date) this.days.delete(d);
+    this.byNumber.set(date, numbered);
+    for (const d of this.days.keys()) if (this.days.size > 3 && d !== date) { this.days.delete(d); this.byNumber.delete(d); }
     return map;
   }
 }

@@ -119,6 +119,10 @@ extension APIClient {
     public func createLeg(_ body: CreateLegBody) async throws -> LegDetail { try await send("POST", ["legs"], body: body) }
 
     public func createManualLeg(_ body: ManualLegBody) async throws -> LegDetail { try await send("POST", ["legs", "manual"], body: body) }
+    /// Adds a live train no timetable of ours has, from the live feed's own stops (POST /live/trains/:id/add).
+    public func addLiveTrain(_ id: String, from: String, to: String) async throws -> LegDetail {
+        try await send("POST", ["live", "trains", id, "add"], body: LiveAddBody(fromStationId: from, toStationId: to))
+    }
 
     /// The Passport for a year (nil = all time). Commuter trains and the CO2 comparison are asked for explicitly.
     public func passport(year: Int?, commuter: Bool, comparison: Co2Comparison) async throws -> Passport {
@@ -261,4 +265,9 @@ extension APIClient {
 
 private nonisolated struct LiveMineAnswer: Decodable, Sendable {
     let trains: [LiveTrain]
+}
+
+private nonisolated struct LiveAddBody: Encodable, Sendable {
+    let fromStationId: String
+    let toStationId: String
 }

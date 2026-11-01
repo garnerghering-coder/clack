@@ -233,6 +233,81 @@ export function createManualLeg(db: Db, userId: string, input: ManualLegInput, n
   return id;
 }
 
+/** One stop of a live train's own list (livemap/trainStops.ts `TrainStopView`), as a trip from live data needs it. */
+export interface LiveStop {
+  stationId: string;
+  arr: number | null;
+  dep: number | null;
+  platform: string | null;
+}
+
+/**
+ * A trip from a live train that no timetable of ours has (owner, 2026-11-01: Snälltåget 306, ECE 396, Vores Tog), built
+ * from the live feed's own stop list and times between where you got on and off. Kept as `live` data (not a
+ * timetable's), the whole run stored so the stop list and the route show, and tracked by number and day like any other.
+ */
+export function createLiveLeg(
+  db: Db,
+  userId: string,
+  train: { number: string; date: string; operatorId: string | null; product: string | null },
+  stops: LiveStop[],
+  fromStationId: string,
+  toStationId: string,
+  now = Date.now(),
+): string {
+  const fromIdx = stops.findIndex((s) => s.stationId === fromStationId);
+  const toIdx = stops.findIndex((s, i) => i > fromIdx && s.stationId === toStationId);
+  if (fromIdx < 0 || toIdx < 0) throw new LegError('Choose where you got on and off from the train\'s stops', 400);
+  const board = stops[fromIdx]!, alight = stops[toIdx]!;
+  const dep = board.dep ?? board.arr, arr = alight.arr ?? alight.dep;
+  if (dep === null || arr === null || arr <= dep) throw new LegError('The live feed has no times for those stops', 422);
+  const st = (id: string) => db.select().from(stations).where(eq(stations.id, id)).get();
+  const from = st(board.stationId), to = st(alight.stationId);
+  if (!from || !to) throw new LegError('Choose both stations', 400);
+  const category = train.product && CATEGORIES.has(train.product) ? train.product : 'regional';
+  const operatorId = train.operatorId && db.select({ id: operators.id }).from(operators).where(eq(operators.id, train.operatorId)).get() ? train.operatorId : null;
+  const id = crypto.randomUUID();
+  db.transaction((tx) => {
+    tx.insert(legs)
+      .values({
+        id,
+        userId,
+        status: arr < now ? 'completed' : 'planned',
+        dataQuality: 'live',
+        countryCodes: [...new Set(stops.slice(fromIdx, toIdx + 1).map((s) => st(s.stationId)?.country).filter((c): c is string => !!c))],
+        operatorId,
+        trainNumber: train.number,
+        category,
+        timetableTripKey: null,
+        serviceDate: train.date,
+        originStationId: from.id,
+        destStationId: to.id,
+        schedDep: new Date(dep),
+        schedArr: new Date(arr),
+        depPlatform: board.platform,
+        arrPlatform: alight.platform,
+        distanceM: straightLineDistanceM([from, to]),
+        isEstimatedGeometry: true,
+        trainType: typicalTrainType(operatorId, category, train.number),
+        trainTypeSource: 'typical',
+        createdAt: new Date(now),
+      })
+      .run();
+    // The whole run, so the trip shows its route and the stops before and after yours.
+    stops.forEach((s, i) => {
+      if (!st(s.stationId)) return;
+      const role = i < fromIdx ? 'before' : i === fromIdx ? 'board' : i < toIdx ? 'through' : i === toIdx ? 'alight' : 'after';
+      tx.insert(legStops)
+        .values({ legId: id, seq: i + 1, stationId: s.stationId, schedArr: s.arr === null ? null : new Date(s.arr), schedDep: s.dep === null ? null : new Date(s.dep), platform: s.platform, passedThrough: role === 'through', role })
+        .run();
+    });
+  });
+  updateRides(db, { legId: id, now });
+  attachLegGeometry(db, id);
+  regroupJourneys(db, userId);
+  return id;
+}
+
 const legColumns = {
   id: legs.id,
   status: legs.status,

@@ -11,6 +11,7 @@ import { isMine, LiveMapIngest, type LiveDelta, type LiveTrain } from '../livema
 import { stations, trvLocations } from '../db/schema.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import { stretchFrom } from '../live/riders.js';
+import { createLiveLeg, getLeg, LegError } from '../legs/legs.js';
 import { encodePolyline } from '@clack/shared';
 import { searchByNumber, tripByKey, tripStops } from '../search/timetable.js';
 import { matchTrip } from '../livemap/match.js';
@@ -41,7 +42,7 @@ const moved = (t: LiveTrain): MovedTuple => [t.id, r5(t.lat), r5(t.lon), t.beari
 const MINE_REFRESH_MS = 10_000;
 
 export const liveMapRoutes =
-  (db: Db, ingest: LiveMapIngest, myTrainKeys: (userId: string) => Set<string> = () => new Set()): FastifyPluginAsync =>
+  (db: Db, ingest: LiveMapIngest, myTrainKeys: (userId: string) => Set<string> = () => new Set(), afterLegCreated?: (legId: string) => void): FastifyPluginAsync =>
   async (app) => {
     // The shared ingest doesn't know who's looking: "mine" is set here, per user.
     const forUser = (keys: Set<string>) => (t: LiveTrain): LiveTrain => (isMine(t, keys) === t.mine ? t : { ...t, mine: !t.mine });
@@ -146,18 +147,45 @@ export const liveMapRoutes =
     });
 
     // Its whole route, stop by stop, with actual and expected times (the train sheet's list).
+    // A train's whole run: its timetable trip's stops, else (not in any timetable of ours) Rejseplanen's own list for a
+    // Danish train. `retry`: Rejseplanen knows it but couldn't answer just now.
+    const stopsOf = async (t: LiveTrain) => {
+      const trip = tripOf(t);
+      let stops = trip ? await trainStops(db, trip, t.number) : null;
+      const jid = !stops ? ingest.denmarkJourney(t.id) : undefined;
+      if (jid) stops = await journeyStopsView(db, jid).catch(() => null);
+      return { trip, stops, retry: !stops && !!jid };
+    };
+
     app.get<{ Params: { id: string } }>('/live/trains/:id/stops', async (req, reply) => {
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
-      const trip = tripOf(t);
-      let stops = trip ? await trainStops(db, trip, t.number) : null;
-      // Not in any timetable of ours: Rejseplanen's own list for a Danish train.
-      const jid = !stops ? ingest.denmarkJourney(t.id) : undefined;
-      if (jid) stops = await journeyStopsView(db, jid).catch(() => null);
+      const { stops, retry } = await stopsOf(t);
       // Rejseplanen knows the train but couldn't answer just now: ask again (the app retries), not "not in the timetable".
-      if (!stops && jid) return reply.code(503).send({ error: 'stops not available just now', retry: true });
+      if (retry) return reply.code(503).send({ error: 'stops not available just now', retry: true });
       if (!stops) return reply.code(404).send({ error: 'train not in the timetable' });
       return { stops };
+    });
+
+    // Add a train no timetable of ours has, from the live feed's own stop list (owner, 2026-11-01): where you got on
+    // and off, the times and platforms between, kept as live data. A train with a timetable trip goes through POST /legs.
+    app.post<{ Params: { id: string }; Body: { fromStationId?: string; toStationId?: string } }>('/live/trains/:id/add', async (req, reply) => {
+      const t = ingest.trains.get(req.params.id);
+      if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
+      const { fromStationId, toStationId } = req.body ?? {};
+      if (typeof fromStationId !== 'string' || typeof toStationId !== 'string') return reply.code(400).send({ error: 'fromStationId and toStationId are required' });
+      const { trip, stops, retry } = await stopsOf(t);
+      if (trip) return reply.code(409).send({ error: 'this train is in the timetable: add it from its trip' });
+      if (retry) return reply.code(503).send({ error: 'stops not available just now', retry: true });
+      if (!stops?.length) return reply.code(404).send({ error: 'no stop list for this train' });
+      try {
+        const id = createLiveLeg(db, req.userId, { number: t.number, date: t.date, operatorId: t.operatorId, product: t.product }, stops.map((s) => ({ stationId: s.stationId, arr: s.arr, dep: s.dep, platform: s.platform })), fromStationId, toStationId);
+        afterLegCreated?.(id);
+        return reply.code(201).send(getLeg(db, req.userId, id));
+      } catch (e) {
+        if (e instanceof LegError) return reply.code(e.status).send({ error: e.message, ...e.body });
+        throw e;
+      }
     });
 
     // Any train by number and day, on the map or not (a board row, a followed train that hasn't left yet): its

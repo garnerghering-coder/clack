@@ -150,6 +150,6 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
       ]),
     );
   };
-  app.register(liveMapRoutes(db, ingest, myTrainKeys), api);
+  app.register(liveMapRoutes(db, ingest, myTrainKeys, opts.afterLegCreated), api);
   return app;
 }
