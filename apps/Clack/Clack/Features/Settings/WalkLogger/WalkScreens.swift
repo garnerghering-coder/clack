@@ -7,7 +7,7 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// Settings > Station walks (owner test tool, TestFlight and debug builds): record walks through stations with every
+/// Settings > Station walks (test tool, TestFlight and debug builds; any tester's walks upload, the owner reads them): record walks through stations with every
 /// sensor, add your own routes, marks and notes, edit them afterwards, export them, and upload them for the station
 /// work. Plain English: this is a tool for the owner, not a user-facing screen.
 struct WalkLoggerScreen: View {
@@ -33,6 +33,8 @@ struct WalkLoggerScreen: View {
                         }
                         .buttonStyle(.clack(wide: true))
                         Text("Keep Clack open while you walk: iOS pauses the motion sensors when an app is in the background. The screen stays on by itself.")
+                            .clack(.caption).foregroundStyle(Ink.text2)
+                        Text("Walks are uploaded to Clack's server for the station maps, with their precise positions. Only Clack's owner can see them.")
                             .clack(.caption).foregroundStyle(Ink.text2)
                     }
                 }

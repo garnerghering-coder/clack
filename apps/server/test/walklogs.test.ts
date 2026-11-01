@@ -35,11 +35,27 @@ describe('station walk uploads', () => {
     expect(JSON.parse(zlib.inflateRawSync(back.rawPayload).toString()).title).toBe('Jönköping C');
   });
 
-  it('is invisible to anyone not listed, and refuses bad ids', async () => {
+  it('takes walks from any phone, which only the listed users can read, and never lets one phone replace another\'s', async () => {
     const app = await server();
-    const stranger = { ...owner, 'x-clack-user': 'bbbbbbbb-2222-4222-8222-222222222222' };
-    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0002', headers: stranger, payload: walk })).statusCode).toBe(404);
-    expect((await app.inject({ url: '/api/walklogs', headers: stranger })).statusCode).toBe(404);
+    const borrowed = { ...owner, 'x-clack-user': 'bbbbbbbb-2222-4222-8222-222222222222' };
+    const other = { ...owner, 'x-clack-user': 'cccccccc-3333-4333-8333-333333333333' };
+    // A borrowed phone uploads (and re-uploads after an edit) its own walk.
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0002', headers: borrowed, payload: walk })).statusCode).toBe(204);
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0002', headers: borrowed, payload: walk })).statusCode).toBe(204);
+    // Another phone can't overwrite it, nor the owner's walk from before owners were kept.
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0002', headers: other, payload: walk })).statusCode).toBe(409);
+    fs.rmSync(path.join(dir, 'walk-0001.owner'), { force: true });
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0001', headers: other, payload: walk })).statusCode).toBe(409);
+    // Only the listed users see walks; the owner sees the borrowed phone's.
+    expect((await app.inject({ url: '/api/walklogs', headers: borrowed })).statusCode).toBe(404);
+    expect((await app.inject({ url: '/api/walklogs/walk-0002', headers: borrowed })).statusCode).toBe(404);
+    expect((await app.inject({ url: '/api/walklogs', headers: owner })).json().map((w: { id: string }) => w.id).sort()).toEqual(['walk-0001', 'walk-0002']);
+    // Without a phone id, nothing.
+    expect((await app.inject({ method: 'PUT', url: '/api/walklogs/walk-0003', headers: { 'content-type': 'application/octet-stream' }, payload: walk })).statusCode).toBe(404);
+  });
+
+  it('refuses bad ids', async () => {
+    const app = await server();
     expect((await app.inject({ method: 'PUT', url: '/api/walklogs/..%2Fescape', headers: owner, payload: walk })).statusCode).toBe(400);
   });
 });
