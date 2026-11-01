@@ -101,6 +101,8 @@ export interface ActivityState {
   /** Where the owner sits on the leg shown ("4", "23"); null when not given. */
   coach: string | null;
   seat: string | null;
+  /** The operator colour of the train shown now (`#rrggbb`), so the card follows the journey's trains. */
+  color?: string | null;
 }
 
 /** The newest platform change on a leg: when, and what it said. */
@@ -224,8 +226,10 @@ export class Notifier {
         expArr: ms(row.actualArr) ?? ms(live?.arrivalEta) ?? (arr === null ? null : arr + (row.arrDelayMin ?? 0) * MIN),
         depPlatform: row.depPlatform,
         arrPlatform: row.arrPlatform,
-        departed: row.actualDep !== null,
-        arrived: row.actualArr !== null,
+        // A reported time, else the live state's own verdict (Denmark seldom reports actual times; owner, 2026-11-01:
+        // the trip card must move on at a change on every journey).
+        departed: row.actualDep !== null || ['en_route', 'at_stop', 'arrived'].includes(live?.status ?? ''),
+        arrived: row.actualArr !== null || live?.status === 'arrived',
         canceled: row.canceled,
         delayMin: live?.arrivalDelayMin ?? row.arrDelayMin,
         lastInJourney: !siblings.some((s) => s.id !== row.id && (ms(s.schedDep) ?? 0) > (dep ?? 0)),
@@ -534,6 +538,8 @@ export class Notifier {
       toTz: f.toTz,
       coach: f.coach ?? null,
       seat: f.seat ?? null,
+      // The colour of the train shown now: one card follows the whole journey, its attributes name the first train.
+      color: L.operatorColor ?? null,
     };
   }
 

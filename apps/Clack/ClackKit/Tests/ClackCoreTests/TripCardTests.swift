@@ -281,3 +281,30 @@ struct PushBodyTests {
         #expect(SharedSettings.language(nil) == .en)
     }
 }
+
+@Suite("Trip card: a journey with no reported times (Denmark)")
+struct TripCardNoReportsTests {
+    // A → B (arrived 2 min ago by the live state only), then B → C in 18 min, as at Fredericia.
+    @Test func changesAndMovesOnWithoutAnActualArrival() throws {
+        let first = try leg("a", dep: -60, arr: -2, from: "A", to: "B", journey: "j", live: live("arrived"))
+        let second = try leg("b", dep: 18, arr: 140, from: "B", to: "C", journey: "j", depPlatform: "4")
+        let legs = [first, second]
+        let m = TripCard.moment(first, next: second, now: now)
+        #expect(m.phase == "changing")
+        #expect(m.changePlatform == "4")
+        // The card stays on the arriving train during the change, and the journey isn't over.
+        let card = TripCard.Running(legId: "a", journeyId: "j")
+        #expect(TripCard.currentLeg(card, legs: legs, now: now)?.id == "a")
+        #expect(!TripCard.isFinished(card, legs: legs))
+        #expect(TripCard.state(for: first, legs: legs, now: now)?.status == "arrived")
+    }
+
+    @Test func movesToTheNextTrainOnceItLeavesAndEndsAtTheLastArrival() throws {
+        let first = try leg("a", dep: -60, arr: -30, from: "A", to: "B", journey: "j", live: live("arrived"))
+        let second = try leg("b", dep: -10, arr: 60, from: "B", to: "C", journey: "j", live: live("en_route"))
+        let card = TripCard.Running(legId: "a", journeyId: "j")
+        #expect(TripCard.currentLeg(card, legs: [first, second], now: now)?.id == "b")
+        let done = try leg("b", dep: -100, arr: -5, from: "B", to: "C", journey: "j", live: live("arrived"))
+        #expect(TripCard.isFinished(card, legs: [first, done]))
+    }
+}

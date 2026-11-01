@@ -71,7 +71,7 @@ public struct TripCardFace {
     /// "Car 4 · Seat 23" until the leg is over, when the trip has it.
     var seat: String? { ["arrived", "cancelled"].contains(phase) ? nil : Seat.label(l10n, coach: state.coach, seat: state.seat) }
     /// The operator's colour; the signal yellow when it isn't known (the island is always dark).
-    public var line: Color { operatorColor(start.color, scheme: .dark) }
+    public var line: Color { operatorColor(state.color ?? start.color, scheme: .dark) }
     public var url: URL? { URL(string: "clack://trip/\(legId)") }
 
     /// A platform change in the last ten minutes, before the train leaves.

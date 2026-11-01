@@ -44,13 +44,15 @@ public nonisolated struct TripCardState: Codable, Hashable, Sendable {
     /// Where you sit on this leg ("4", "23"), when the trip has it.
     public var coach: String? = nil
     public var seat: String? = nil
+    /// The operator colour of the leg shown now (`#rrggbb`); nil from an older server: the attributes' colour.
+    public var color: String? = nil
 
     public init(
         status: String, delayMin: Int? = nil, nextStop: String? = nil, nextStopAt: Double? = nil, platform: String? = nil,
         platformFor: String, progress: Double? = nil, departAt: Double? = nil, arriveAt: Double? = nil, canceled: Bool,
         phase: String? = nil, note: String? = nil, changePlatform: String? = nil, changeAt: Double? = nil,
         legId: String? = nil, train: String? = nil, from: String? = nil, to: String? = nil, fromTz: String? = nil,
-        toTz: String? = nil, coach: String? = nil, seat: String? = nil
+        toTz: String? = nil, coach: String? = nil, seat: String? = nil, color: String? = nil
     ) {
         self.status = status
         self.delayMin = delayMin
@@ -74,6 +76,7 @@ public nonisolated struct TripCardState: Codable, Hashable, Sendable {
         self.toTz = toTz
         self.coach = coach
         self.seat = seat
+        self.color = color
     }
 
     /// The moment: the server's word for it, or (from an older server) worked out from the status.

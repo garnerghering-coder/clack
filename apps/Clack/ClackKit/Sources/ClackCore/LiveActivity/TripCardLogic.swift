@@ -41,9 +41,18 @@ public nonisolated enum TripCard {
 
     public static func journeyKey(_ leg: Leg) -> String { journeyKey(legId: leg.id, journeyId: leg.journeyId) }
 
+    /// Arrived: a reported arrival, else the live state's own verdict (as the server's notifier). Denmark seldom reports
+    /// actual times, so without this a Danish journey's card never reached its change or its end (owner, 2026-11-01).
+    public static func hasArrived(_ leg: Leg) -> Bool { leg.actualArr != nil || leg.live?.status == .arrived }
+
+    /// Left: a reported departure, else the live state says it is under way or arrived.
+    public static func hasDeparted(_ leg: Leg) -> Bool {
+        leg.actualDep != nil || [.enRoute, .atStop, .arrived].contains(leg.live?.status)
+    }
+
     /// Running, or leaving within 30 minutes; not cancelled and not arrived.
     public static func isDue(_ leg: Leg, now: Double) -> Bool {
-        guard !leg.canceled, leg.actualArr == nil, leg.origin != nil, leg.destination != nil else { return false }
+        guard !leg.canceled, !hasArrived(leg), leg.origin != nil, leg.destination != nil else { return false }
         let times = TripsLogic.expected(leg)
         guard let dep = times.dep, let arr = times.arr else { return false }
         return dep - now <= leadMs && arr > now
@@ -83,8 +92,8 @@ public nonisolated enum TripCard {
         let journey = journeyLegs(card, legs: legs)
         guard let last = journey.last else { return true }
         if let current = legs.first(where: { $0.id == card.legId }), current.canceled { return true }
-        if last.actualArr != nil { return true }
-        return journey.allSatisfy { $0.actualArr != nil || $0.canceled }
+        if hasArrived(last) { return true }
+        return journey.allSatisfy { hasArrived($0) || $0.canceled }
     }
 
     /// The leg after this one in its journey (wherever it leaves from).
@@ -100,8 +109,8 @@ public nonisolated enum TripCard {
     /// phone doesn't know when a platform changed).
     public static func moment(_ leg: Leg, next: Leg?, now: Double) -> (phase: String, changePlatform: String?, changeAt: Double?) {
         if leg.canceled { return ("cancelled", nil, nil) }
-        if leg.actualArr != nil {
-            if let next, !next.canceled, next.actualDep == nil, let dep = TripsLogic.expected(next).dep, dep > now, dep - now <= changeWindowMs {
+        if hasArrived(leg) {
+            if let next, !next.canceled, !hasDeparted(next), let dep = TripsLogic.expected(next).dep, dep > now, dep - now <= changeWindowMs {
                 return ("changing", next.depPlatform, dep)
             }
             return ("arrived", nil, nil)
@@ -138,7 +147,7 @@ public nonisolated enum TripCard {
         guard let origin = leg.origin, let destination = leg.destination else { return nil }
         let times = TripsLogic.expected(leg)
         let m = moment(leg, next: TripsLogic.nextInJourney(legs, after: leg), now: now)
-        let departed = leg.actualDep != nil
+        let departed = hasDeparted(leg)
         let live = leg.live
         let nextStop: String? = switch live?.nextStopId {
         case leg.destStationId?: destination.name
@@ -146,7 +155,7 @@ public nonisolated enum TripCard {
         default: nil
         }
         return TripCardState(
-            status: leg.canceled ? "cancelled" : leg.actualArr != nil ? "arrived" : (live?.status.rawValue ?? "scheduled"),
+            status: leg.canceled ? "cancelled" : hasArrived(leg) ? "arrived" : (live?.status.rawValue ?? "scheduled"),
             delayMin: live?.arrivalDelayMin ?? leg.arrDelayMin,
             nextStop: nextStop,
             nextStopAt: live?.eta?.ms,
@@ -167,7 +176,8 @@ public nonisolated enum TripCard {
             fromTz: origin.tz,
             toTz: destination.tz,
             coach: leg.coach,
-            seat: leg.seat
+            seat: leg.seat,
+            color: leg.operator?.brandColor
         )
     }
 }
