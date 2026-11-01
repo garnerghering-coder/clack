@@ -11,6 +11,13 @@
       "name": "Forhal / street level, Banegårdspladsen",
       "order": 0,
       "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Underpass to platforms 2 and 3",
+      "order": -1,
+      "name_source": "Owner's station walk 2026-11-01 (walk 502FDF6B, iPhone 17 Pro Max): marks 'Down to underpass stairs', 'Top of stairs to underpass', 'Stairs to 2 and 3'; barometer 2.3 to 3.3 m below the platform level at the underpass marks. OSM: footways and steps tagged tunnel=yes, layer=-1."
     }
   ],
   "sources": [
@@ -38,6 +45,11 @@
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
     },
     {
+      "date": "2026-11-02",
+      "who": "the owner's assistant",
+      "what": "Platforms 2 and 3 (OSM multipolygon r11605681, ref 2;3) and the underpass level (OSM layer -1) added, both confirmed by the owner's walk of 2026-11-01: underpass about 3 m below the platforms (barometer), stairs down from platform 1 and from the bike parking side, stairs up to platforms 2 and 3. Walk marks are a few steps from what they name, so OSM's geometry is kept and the marks only confirm."
+    },
+    {
       "date": "2026-10-30",
       "who": "the owner's assistant",
       "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 11 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000083)."
@@ -48,6 +60,10 @@
     "1": {
       "height_m": 0.5,
       "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 26: tracks 1, class 50 cm = 0.5 m above rail, 301 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 26: tracks 2,3, class 50 cm = 0.5 m above rail, 250 m long; a recorded design class, not a survey"
     }
   },
   "structures_file": "data/stations/research/860000083/kolding_structures_heights.geojson",
@@ -252,5 +268,6 @@
       "hours_verified": null,
       "_source": "OpenStreetMap n10825526371 (ODbL), read 2026-10-30; placed OSM node n10825526371 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
     }
-  ]
+  ],
+  "multipolygons": true
 }
