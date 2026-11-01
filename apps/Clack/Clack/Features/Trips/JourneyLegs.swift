@@ -49,7 +49,7 @@ struct JourneyBar: View {
         let first = legs.first, last = legs.last
         let dep = first.flatMap { TripsLogic.expected($0).dep }
         let arr = last.flatMap { TripsLogic.expected($0).arr }
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             GeometryReader { g in
                 // The changes get at least a few points, so a short one still shows as a gap.
                 let gaps = Double(parts.filter { $0.train == nil }.count) * 6
@@ -130,7 +130,7 @@ struct JourneyTrainCard: View {
             return min(1, max(0, (now - d) / (a - d)))
         }()
         let ends = TimePair.ends(leg)
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
                 ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, category: leg.category) {
                     if let live = leg.live, LiveRules.isFresh(live, now: now), !TripsLogic.reached(leg, now: now).arrived {
@@ -152,7 +152,7 @@ struct JourneyTrainCard: View {
             }
             ProgressBar(value: travelled, color: tint)
         }
-        .padding(14)
+        .padding(16)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
@@ -198,13 +198,13 @@ struct JourneyChangeChip: View {
                 case .risky?: Ink.veryLateInk
                 default: switch result.status { case .tight: Ink.slightInk; case .miss, .broken: Ink.veryLateInk; default: Ink.text2 }
                 }
-                let chip = HStack(spacing: 6) {
+                let chip = HStack(spacing: 8) {
                     LucideIcon(name: "arrow-down", size: 13)
                     Text(text).fixedSize(horizontal: false, vertical: true)
                     if model.map != nil { LucideIcon(name: "map", size: 13) }
                 }
                 .clack(.chip).foregroundStyle(ink)
-                .padding(.horizontal, 10).padding(.vertical, 6)
+                .padding(.horizontal, 12).padding(.vertical, 8)
                 .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                 if model.map != nil, let stationId = a.destination?.id {
                     NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) { chip }
@@ -218,7 +218,7 @@ struct JourneyChangeChip: View {
                 TransferChip(prev: a, next: b, plain: true)
             }
         }
-        .padding(.leading, 14)
+        .padding(.leading, 16)
         .task { await model.load(stationId: a.destination?.id, using: app.stations) }
     }
 }
@@ -232,7 +232,7 @@ struct JourneyLegs: View {
     var select: ((String) -> Void)?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             ForEach(Array(legs.enumerated()), id: \.element.id) { i, leg in
                 if i > 0 { JourneyChangeChip(a: legs[i - 1], b: leg) }
                 if let select {

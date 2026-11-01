@@ -303,7 +303,7 @@ struct TripDetailScreen: View {
         let tz = l.origin?.tz ?? "Europe/Stockholm"
         VStack(alignment: .leading, spacing: 16) {
             if let journey {
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
                     JourneyBar(legs: journey.legs, now: now, selected: detail.id)
                 }
@@ -336,7 +336,7 @@ struct TripDetailScreen: View {
             }
             // The whole journey: every train as a card, the changes between them; a card puts that train in focus.
             if let journey {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 12) {
                     Text(l10n.t("journey.yourJourney")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     JourneyLegs(legs: journey.legs, now: now, selected: detail.id, select: journey.select)
                 }

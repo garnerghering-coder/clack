@@ -319,11 +319,11 @@ struct JourneyCard: View {
             TimelineView(.periodic(from: .now, by: 60)) { context in
                 let now = context.date.timeIntervalSince1970 * 1000
                 // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 12) {
                     JourneyBar(legs: legs, now: now)
                     JourneyLegs(legs: legs, now: now)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, 8)
             }
         }
         .padding(.top, 4)

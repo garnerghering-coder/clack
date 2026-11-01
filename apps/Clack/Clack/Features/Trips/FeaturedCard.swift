@@ -136,7 +136,7 @@ struct FeaturedCard: View {
     /// The whole journey under the featured train as one rail: each train with its times and platform, the change
     /// between them, the one featured above marked. Every leg opens its trip and every change its station map.
     private func journeyLegs(now: Double) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             Rectangle().fill(Ink.hairline).frame(height: 1)
             // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
             JourneyBar(legs: legs, now: now, selected: leg.id)
