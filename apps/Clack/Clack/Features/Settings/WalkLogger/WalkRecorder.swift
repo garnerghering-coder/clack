@@ -41,6 +41,9 @@ final class WalkRecorder: NSObject {
     private var arSession: ARSession?
     /// The mesh pieces ARKit keeps refining, latest version of each; turned into one snapshot when LiDAR mode ends.
     private var meshAnchors: [UUID: ARMeshAnchor] = [:]
+    /// This LiDAR stretch's snapshot in `log.meshes`, once one is kept; and when.
+    private var liveMeshIndex: Int?
+    private var lastMeshSave = 0.0
     private var lastARSample = 0.0
     private var saveTimer: Timer?
     /// Device-motion timestamps are seconds since boot; this turns them into seconds since 1970.
@@ -90,8 +93,24 @@ final class WalkRecorder: NSObject {
     }
 
     private func save() {
+        // While LiDAR mode is on, the mesh so far goes into the walk every two minutes too, so a walk that is never
+        // stopped (the app closed, the phone handed back) still keeps its scan (owner's Kolding walk, 2026-11-01, had
+        // LiDAR on but no mesh: it was never turned off or stopped).
+        if lidarOn, now - lastMeshSave >= 120, !meshAnchors.isEmpty {
+            lastMeshSave = now
+            keepMesh()
+        }
         guard let log else { return }
         store.save(log)
+    }
+
+    /// The mesh so far into the walk: replaces this LiDAR stretch's earlier snapshot, so each stretch is one mesh.
+    private func keepMesh() {
+        let mesh = Self.snapshot(Array(meshAnchors.values), t: now)
+        guard mesh.faceCount > 0 else { return }
+        var meshes = log?.meshes ?? []
+        if let i = liveMeshIndex, meshes.indices.contains(i) { meshes[i] = mesh } else { meshes.append(mesh); liveMeshIndex = meshes.count - 1 }
+        log?.meshes = meshes
     }
 
     // MARK: - Routes and marks
@@ -160,6 +179,8 @@ final class WalkRecorder: NSObject {
             guard let session = arSession else { return }
             meshAnchors = [:]
             lidarFaces = 0
+            liveMeshIndex = nil
+            lastMeshSave = now
             // Same session, more work: the tracking (and the poses' frame) carries on.
             session.run(arConfiguration(lidar: true))
             lidarOn = true
@@ -167,10 +188,11 @@ final class WalkRecorder: NSObject {
         } else {
             lidarOn = false
             arSession?.run(arConfiguration(lidar: false))
-            let mesh = Self.snapshot(Array(meshAnchors.values), t: now)
+            keepMesh()
+            let mesh = liveMeshIndex.flatMap { i in log?.meshes?.indices.contains(i) == true ? log?.meshes?[i] : nil }
             meshAnchors = [:]
-            if mesh.faceCount > 0 { log?.meshes = (log?.meshes ?? []) + [mesh] }
-            log?.events.append(.init(t: now, kind: "lidar", detail: "off: \(mesh.vertexCount) vertices, \(mesh.faceCount) triangles"))
+            liveMeshIndex = nil
+            log?.events.append(.init(t: now, kind: "lidar", detail: "off: \(mesh?.vertexCount ?? 0) vertices, \(mesh?.faceCount ?? 0) triangles"))
             if let log { store.save(log) }
         }
     }
