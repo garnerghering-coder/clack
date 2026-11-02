@@ -76,6 +76,11 @@ struct TicketReaderNordicTests {
         #expect(trains.allSatisfy { $0.date == "2026-10-18" && $0.issuer == .db })
     }
 
+    @Test func dsbAndDBTicketsAreOnTheirFirstPage() {
+        #expect(TicketReader.located(fromPages: dsbChange).map(\.page) == [0, 0])
+        #expect(TicketReader.located(fromPages: db2023).allSatisfy { $0.page == 0 })
+    }
+
     @Test func stationSuffixesAreDropped() {
         #expect(TicketReader.stationName("Kolding St.") == "Kolding")
         #expect(TicketReader.stationName("Vejle st") == "Vejle")

@@ -50,6 +50,7 @@ anyone: it has to be looked at.
 | `TRAFIKLAB_GTFS_SWEDEN3_KEY` | GTFS Sweden 3 (timetables; 50 downloads a month) |
 | `TRAFIKLAB_GTFS_SVERIGE2_KEY` | GTFS Sverige 2 (history) |
 | `CLACK_REQUIRE_USER=1` | Refuse `/api` requests that don't say which phone they come from, so nobody can read the local user's trips |
+| `WALLET_PASS_TYPE_ID`, `WALLET_TEAM_ID`, `WALLET_CERT_PATH`, `WALLET_KEY_PATH`, `WALLET_WWDR_PATH` (and `WALLET_KEY_PASSPHRASE` if the key has one) | Apple Wallet passes from tickets kept in the app (a test tool): the Pass Type ID, the team id, and the paths to the pass certificate, its key and Apple's WWDR certificate, as PEM files kept outside git. Without them `POST /api/wallet/pass` answers 404. The route stores nothing and never logs the body (the ticket's code holds the passenger's name). How to make the files: below the table |
 | `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_KEY_PATH`, `APNS_TOPIC` | Apple Push: the key id, the team id, the path to the `.p8` key file (kept like a password, outside git) and the app's bundle id `com.garnerghering.Clack`. Without all four, alerts and Live Activity updates stay off (the server logs `push: alerts off`) |
 
 Optional for sharing: `CLACK_APP_DOWNLOAD_URL` (where the page's "Get Clack" button goes: the TestFlight public link now,
@@ -59,6 +60,22 @@ links when the server can't tell it from the request).
 Optional: `PORT` (3001), `HOST` (127.0.0.1), `DATABASE_PATH` (`data/app.db`), `ENTUR_CLIENT_NAME`, and the polling
 settings in the README. `CLACK_ALLOWED_ORIGINS` was for the old web wrapper and is no longer read; delete it from the
 server's `.env` if it is there.
+
+### The Wallet pass certificate
+
+Wallet only adds passes signed with a Pass Type ID certificate from the Apple Developer account (no extra cost). Once:
+
+1. developer.apple.com > Certificates, Identifiers & Profiles > Identifiers > + > Pass Type IDs, for example
+   `pass.com.garnerghering.Clack.ticket`. That is `WALLET_PASS_TYPE_ID`; the team id (`WALLET_TEAM_ID`) is the one
+   APNs uses.
+2. On the Mac, make a key and a signing request:
+   `openssl req -new -newkey rsa:2048 -nodes -keyout wallet-key.pem -out wallet.csr -subj "/CN=Clack Wallet"`.
+3. In the Pass Type ID, Create Certificate, upload `wallet.csr`, download `pass.cer`, then
+   `openssl x509 -inform der -in pass.cer -out wallet-cert.pem`.
+4. Apple's intermediate: download "Worldwide Developer Relations - G4" from https://www.apple.com/certificateauthority/
+   and `openssl x509 -inform der -in AppleWWDRCAG4.cer -out wwdr.pem`.
+5. Copy the three `.pem` files to the VM outside the repository (for example `/home/clack/secrets/`, `chmod 600`), set
+   the five `WALLET_*` names to them, and restart.
 
 ## Caddy
 

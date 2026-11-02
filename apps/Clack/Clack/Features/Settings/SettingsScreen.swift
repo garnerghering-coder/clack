@@ -554,16 +554,19 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-10-30"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-11-02"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
         .screenTitle(l10n.t("privacy.title"))
     }
 }
 
-/// Settings > Station walks: only in debug and TestFlight builds (owner test tools), never in App Store builds.
+/// Settings > Station walks and the Wallet pass switch: only in debug and TestFlight builds (owner test tools), never
+/// in App Store builds.
 private struct TestToolsRow: View {
+    @Environment(L10n.self) private var l10n
     @State private var shown = WalkStore.alwaysShowTestTools
+    @AppStorage(WalletPassButton.settingKey) private var walletPasses = false
 
     var body: some View {
         // A VStack, not a Group: a Group with nothing in it is no view at all, so its .task never ran and the row
@@ -572,6 +575,10 @@ private struct TestToolsRow: View {
             if shown {
                 NavigationLink("Station walks (test tool)", value: AppRoute.walkLogger)
                     .buttonStyle(.clack(wide: true))
+                Card {
+                    SettingsToggle(label: l10n.t("settings.test.walletPasses"), isOn: walletPasses, last: true) { walletPasses = $0 }
+                }
+                .padding(.top, 12)
             }
         }
         .task { if !shown { shown = await WalkStore.isTestBuild() } }

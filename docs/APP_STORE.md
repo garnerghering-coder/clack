@@ -74,6 +74,7 @@ Each item says who does it and where:
 
 - iPad layout (2.4.1 encourages it, doesn't require it).
 - Accessibility Nutrition Labels in ASC (optional): check VoiceOver labels and Dynamic Type first.
+- Wallet passes from tickets stay a test tool (test builds only, off by default): DB's and DSB's terms rule out such a copy (docs/TICKET_WALLET_FINDINGS.md). If they were ever offered, the privacy text would first have to say the ticket's code, which holds the passenger's name, passes through the server for a moment and is not kept. Kept tickets themselves stay on the phone (privacy text updated 2026-11-02).
 
 ## Build 56 privacy fixes (from docs/review/APP_REVIEW_2026-11-01.md)
 

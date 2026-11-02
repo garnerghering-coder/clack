@@ -214,7 +214,7 @@ Loading skeletons for results; offline/API-down banner "Timetable search needs a
 ## 6. Screen: Trip detail — P0
 
 ### 6.1 Layout (mobile)
-- **Top ~55%:** full-bleed map with the route (§2.4). Floating controls on the map: back button (top-left), a layers button (top-right; toggles **Rail network** and **Follow train**), and a re-center button (bottom-right). Tapping a stop dot flies to it and highlights its row in the timeline.
+- **Top ~55%:** full-bleed map with the route (§2.4). Floating controls on the map: back button (top-left); the … menu and share (top-right), with the trip's ticket under share when one is kept; and one re-center button (bottom-right) that, while the train is live, switches **Follow train** on (shown pressed) and, tapped again, shows the whole ride. Tapping a stop dot flies to it and highlights its row in the timeline.
 - **Bottom sheet** with three snap points (peek showing header + times; half; full-height scroll). Content, in order:
   1. **Header row:** operator badge, "SJ 523", category chip, status chip (**Upcoming / Boarding / Live / Arrived / Cancelled**).
   2. **Route + date:** "Stockholm C → Göteborg C", "Friday 17 October 2026".
@@ -305,7 +305,7 @@ Each event is stored with a type, timestamp and payload; the push alerts are sen
 ### 9.5 UI details
 - Hero card and trip detail show a **LIVE** chip with a pulsing dot while tracked and fresh. If data is older than 2 minutes, the chip turns grey "Stale · updated 3 min ago".
 - A **freshness label** is always visible on live modules ("Updated 12 s ago").
-- A **Follow train** toggle keeps the map centered on the train marker; dragging the map turns it off.
+- **Follow train** (the re-center button, while the train is live) keeps the map centered on the train marker; dragging the map or tapping the button again turns it off.
 - When the train position is unknown: "Position not available for this train" and the marker is hidden (the progress bar still works from stop times).
 - Honest data: never present an estimate as GPS.
 

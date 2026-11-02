@@ -141,6 +141,11 @@ struct JourneyTrainCard: View {
                     }
                 }
                 Spacer(minLength: 8)
+                // A ticket is kept with this train (open it from the train's page).
+                if TicketStore.shared.entry(for: leg.id) != nil {
+                    LucideIcon(name: "ticket", size: 16).foregroundStyle(Ink.text2)
+                        .accessibilityLabel(l10n.t("ticket.kept"))
+                }
                 if let d = x.dep, let a = x.arr, a > d {
                     Text(Format.duration((a - d) / 60_000)).clack(.caption).foregroundStyle(Ink.text2)
                 }

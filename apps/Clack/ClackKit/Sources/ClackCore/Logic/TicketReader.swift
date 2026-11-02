@@ -26,7 +26,7 @@ public nonisolated struct TicketTrain: Hashable, Sendable, Identifiable {
     /// Who issued the ticket: a DB ticket's legs inside Germany have no timetable here (the import says so).
     public var issuer: Issuer = .sj
 
-    public enum Issuer: String, Hashable, Sendable { case sj, dsb, db }
+    public enum Issuer: String, Hashable, Sendable, Codable { case sj, dsb, db }
 
     public var id: String { "\(date)|\(dep)|\(from)|\(to)" }
 
@@ -89,18 +89,24 @@ public nonisolated enum TicketReader {
     // MARK: Text
 
     public static func trains(fromPages pages: [String]) -> [TicketTrain] {
+        located(fromPages: pages).map(\.train)
+    }
+
+    /// The trains with the page (0-based) that holds each one's ticket: the page to open, and the one whose barcode
+    /// a conductor scans. An SJ ticket has a page per train; DSB's and DB's code is on the first page.
+    public static func located(fromPages pages: [String]) -> [(train: TicketTrain, page: Int)] {
         let all = pages.joined(separator: "\n")
-        var out: [TicketTrain]
+        var out: [(train: TicketTrain, page: Int)]
         if all.contains("Print Selv-billet") {
-            out = dsb(pages)
+            out = dsb(pages).map { ($0, 0) }
         } else if all.contains("Online-Ticket"), all.contains("Halt Datum Zeit Gleis Produkte") {
-            out = db(all)
+            out = db(all).map { ($0, 0) }
         } else {
-            out = pages.compactMap(ticketPage)
-            if out.isEmpty { out = receipt(all) }
+            out = pages.enumerated().compactMap { i, page in ticketPage(page).map { ($0, i) } }
+            if out.isEmpty { out = receipt(all).map { ($0, 0) } }
         }
         var seen = Set<String>()
-        return out.filter { seen.insert($0.id).inserted }
+        return out.filter { seen.insert($0.train.id).inserted }
     }
 
     private static let months: [String: Int] = [

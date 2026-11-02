@@ -13116,13 +13116,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "That random code, a copy of your trips and the maps you’ve opened so Clack works without a connection, and small preferences like your theme and last tab."
+            "value" : "That random code, a copy of your trips and the maps you’ve opened so Clack works without a connection, the tickets you share to Clack (kept with their trips, removed with the trip or when you delete your data, and never uploaded), and small preferences like your theme and last tab."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Slumpkoden, en kopia av dina resor och kartorna du har öppnat så att Clack fungerar utan uppkoppling, och små val som tema och senaste flik."
+            "value" : "Slumpkoden, en kopia av dina resor och kartorna du har öppnat så att Clack fungerar utan uppkoppling, biljetterna du delar till Clack (sparade med sina resor, borttagna med resan eller när du raderar dina data, och aldrig uppladdade), och små val som tema och senaste flik."
           }
         }
       }
@@ -15527,6 +15527,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bara vägar utan trappor"
+          }
+        }
+      }
+    },
+    "settings.test.walletPasses" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wallet passes from tickets (test)"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wallet-kort från biljetter (test)"
           }
         }
       }
@@ -18574,6 +18591,125 @@
         }
       }
     },
+    "ticket.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete ticket"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera biljetten"
+          }
+        }
+      }
+    },
+    "ticket.deleteConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete this ticket from the phone? The trip stays."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera biljetten från telefonen? Resan finns kvar."
+          }
+        }
+      }
+    },
+    "ticket.kept" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket kept"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biljett sparad"
+          }
+        }
+      }
+    },
+    "ticket.missing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The ticket isn't on this phone any more. Share it to Clack again to keep it with the trip."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biljetten finns inte längre på telefonen. Dela den till Clack igen för att spara den med resan."
+          }
+        }
+      }
+    },
+    "ticket.show" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show ticket"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa biljett"
+          }
+        }
+      }
+    },
+    "ticket.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ticket"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biljett"
+          }
+        }
+      }
+    },
+    "ticket.walletFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't make a Wallet pass just now."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det gick inte att skapa ett Wallet-kort just nu."
+          }
+        }
+      }
+    },
     "ticketImport.add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18713,6 +18849,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hittat i tidtabellen"
+          }
+        }
+      }
+    },
+    "ticketImport.keep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep ticket with these trips"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara biljetten med resorna"
           }
         }
       }
@@ -20345,6 +20498,159 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dela"
+          }
+        }
+      }
+    },
+    "wallet.pass.coach" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coach"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vagn"
+          }
+        }
+      }
+    },
+    "wallet.pass.departs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Departs"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgår"
+          }
+        }
+      }
+    },
+    "wallet.pass.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Train ticket"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tågbiljett"
+          }
+        }
+      }
+    },
+    "wallet.pass.from" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från"
+          }
+        }
+      }
+    },
+    "wallet.pass.note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A copy of the code on the ticket you shared to Clack. Keep the original ticket too: the conductor may ask for it, and for ID if the ticket says so."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En kopia av koden på biljetten du delade till Clack. Ha kvar originalbiljetten också: konduktören kan be om den, och om legitimation om biljetten kräver det."
+          }
+        }
+      }
+    },
+    "wallet.pass.noteLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About this pass"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om kortet"
+          }
+        }
+      }
+    },
+    "wallet.pass.seat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seat"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plats"
+          }
+        }
+      }
+    },
+    "wallet.pass.to" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Till"
+          }
+        }
+      }
+    },
+    "wallet.pass.train" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåg"
           }
         }
       }

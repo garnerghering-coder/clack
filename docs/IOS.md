@@ -57,15 +57,33 @@ push permission (4.5.4); no marketing pushes without opt-in.
 Clack is listed in the iOS share sheet for PDF files and emails (`CFBundleDocumentTypes` in `apps/Clack/Clack/Info.plist`,
 rank Alternate). Tapping it opens Clack, which copies the file, reads it on the phone and shows "From your ticket": each
 train found, ticked by default, and "Add N trains" saves them (`Logic/TicketReader.swift`,
-`Features/Add/TicketImportSheet.swift`). The file is never sent anywhere or kept; only the trips you choose are saved.
+`Features/Add/TicketImportSheet.swift`). When every train is saved already, the button keeps the ticket with them.
 
 - Read so far, from real documents: SJ ticket PDFs (Swedish and English, one train per page) and SJ receipts (no train
-  number), also as an .eml with the PDF attached. Anything else says it couldn't read it and offers Add a train.
-  Not yet seen, so not read: Wallet passes and other operators' tickets.
+  number), also as an .eml with the PDF attached; DSB "Print Selv-billet" (2023 to 2026 layouts, with the seat); DB
+  Online-Tickets (every leg, the German ones said to be outside Clack's timetables). Anything else says it couldn't
+  read it and offers Add a train. Not yet seen, so not read: Wallet passes and other operators' tickets.
 - A train is found in the timetable by its two stations, the date and the exact departure minute. The train number is
   only a tie-break: SJ's printed number can differ from the timetable's for regional trains (a ticket's 7225 was the
   timetable's 7205).
+- **The ticket is kept on the phone** with the trips it covers (`ClackCore/Logic/TicketStore.swift`): the PDF (taken out
+  of the email) in Application Support/Tickets, named by its SHA-256 so a ticket shared twice is kept once, and an index
+  from each trip to the page with its train. It is in the phone's backup, can't be read while the phone is locked, and is
+  never uploaded. Deleting the trip, "Delete ticket" or "Delete my data" removes it (the file goes when no trip uses it).
+- The trip's page has a ticket button over the map, under the share button (journey cards show a small ticket mark): PDFKit's viewer opens at that train's page,
+  at full screen brightness while it's open, so a scanner reads the code.
+- The code on the ticket page is read at import (`Logic/TicketBarcode.swift`): the page is drawn at about 2400 px, Vision
+  finds the Aztec code, and its codewords are turned back into the message bytes (Vision gives the bit-stuffed
+  codewords, not the message; the file says how). DSB and DB codes are UIC 918.3 (`#UT01`/`#UT02`, company codes 1186
+  and 1080); SJ's is a 12-character ticket reference. Only Aztec is read for now.
+- **Wallet passes (test tool, off by default):** Settings > "Wallet passes from tickets (test)" (test builds only) shows
+  "Add to Apple Wallet" in the ticket viewer. The server signs a train boarding pass carrying the same code bytes
+  (`apps/server/src/routes/wallet.ts`, docs/SERVER.md for the certificate), keeping nothing. Whether operators accept
+  such a copy, and so whether it can ever be offered to everyone: docs/TICKET_WALLET_FINDINGS.md.
 - Limit: iOS lists Clack for files, not for plain text, so share the PDF attachment, not the email's text.
+- Adding a layout: `TICKET_DUMP="<paths>" swift test --filter TicketReaderDumpTests` in `apps/Clack/ClackKit` prints
+  each page's text, what is read from it and the codes found; cut the text down, replace every name and number, and add
+  it as a fixture. The files themselves are never committed.
 - Debug: `-ticket <path>` opens a file as if it had been shared.
 
 ## Working offline

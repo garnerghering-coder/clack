@@ -41,6 +41,8 @@ struct TripDetailScreen: View {
     @State private var typedPlatform = ""
     /// The route as the maps and the stop rail use it, decoded when the trip changes (not on every tick).
     @State private var geo: RouteGeo?
+    /// The ticket kept with this trip, open full screen.
+    @State private var showTicket = false
 
     var body: some View {
         GeometryReader { proxy in
@@ -83,6 +85,9 @@ struct TripDetailScreen: View {
             }
         }
         .task(id: id) { await load() }
+        .fullScreenCover(isPresented: $showTicket) {
+            if let l = leg?.leg { TicketViewer(leg: l) }
+        }
         .task(id: leg?.leg.journeyId ?? leg?.id) {
             if let l = leg?.leg { await sharing.refresh(app, journeyId: l.journeyId, legId: l.id) }
         }
@@ -180,6 +185,7 @@ struct TripDetailScreen: View {
 
     private func remove() async {
         if (try? await app.client.deleteLeg(id)) != nil {
+            TicketStore.shared.detach(legId: id)
             UINotificationFeedbackGenerator().notificationOccurred(.warning)
             app.tripsChanged()
             dismiss()
@@ -260,6 +266,14 @@ struct TripDetailScreen: View {
                 )
             }
             .padding(.horizontal, 16).padding(.top, top + 12)
+            // The ticket shared to Clack for this train, kept on the phone: one tap to show it. Under the share
+            // button, where the map's own buttons start (`RouteMapView` keeps its re-center button at the bottom).
+            if TicketStore.shared.entry(for: detail.id) != nil {
+                MapButton(icon: "ticket", label: l10n.t("ticket.show")) { showTicket = true }
+                    .accessibilityIdentifier("trip.ticket")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.horizontal, 16).padding(.top, top + 64)
+            }
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)

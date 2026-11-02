@@ -94,21 +94,18 @@ struct RouteMapView: View {
             }
             if controls && interactive {
                 VStack {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: 8) {
-                            if train != nil {
-                                MapButton(icon: "navigation", label: l10n.t("live.follow"), pressed: follow) { follow.toggle() }
-                            }
-                        }
-                    }
-                    .padding(.top, 12 + topInset)
                     Spacer()
                     HStack {
                         Spacer()
-                        MapButton(icon: "locate-fixed", label: l10n.t("map.recenter")) {
-                            follow = false
-                            handle.recenter()
+                        // One button for both (owner, 2026-11-02): with a live train it switches Follow train on
+                        // (yellow); tapped again, or with no train, it shows the whole ride.
+                        MapButton(icon: "locate-fixed", label: l10n.t(train != nil ? "live.follow" : "map.recenter"), pressed: follow) {
+                            if train != nil && !follow {
+                                follow = true
+                            } else {
+                                follow = false
+                                handle.recenter()
+                            }
                         }
                     }
                     .padding(.bottom, 16 + bottomInset)

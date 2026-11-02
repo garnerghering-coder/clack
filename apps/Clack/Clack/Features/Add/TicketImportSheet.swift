@@ -15,8 +15,9 @@ struct TicketFile: Identifiable, Hashable {
     let name: String
 }
 
-/// The trains on a ticket, each looked up in the timetable. Only the trips you choose are saved; the file itself is
-/// read on the phone and never sent anywhere.
+/// The trains on a ticket, each looked up in the timetable. Only the trips you choose are saved. The ticket is kept on
+/// the phone with those trips (and with any it already had), to open from the trip (`TicketStore`); it is never sent
+/// anywhere.
 @MainActor
 @Observable
 final class TicketImportModel {
@@ -39,8 +40,14 @@ final class TicketImportModel {
 
     private(set) var phase = Phase.reading
     private(set) var rows: [Row] = []
+    /// The ticket's PDF (out of the mail, for an .eml), the page each train is on, and the codes on its pages.
+    private var pdf: Data?
+    private var pages: [String: Int] = [:]
+    private var barcodes: Task<[TicketBarcode], Never>?
 
     var chosen: Int { rows.filter { $0.selected && $0.choosable }.count }
+    /// Nothing new to add, but trains already saved: the button keeps the ticket with them.
+    var keepOnly: Bool { chosen == 0 && rows.contains { $0.state == .already } }
     /// Only seats to add, no new trains: the button says so.
     var onlySeats: Bool { !rows.contains { $0.selected && $0.state == .found } }
 
@@ -52,13 +59,18 @@ final class TicketImportModel {
     func load(_ file: TicketFile, _ client: APIClient) async {
         let data = try? Data(contentsOf: file.url)
         try? FileManager.default.removeItem(at: file.url)
-        let trains = data.map { TicketReader.trains(inFile: $0, name: file.name) } ?? []
-        guard !trains.isEmpty else {
+        pdf = data.flatMap { file.name.lowercased().hasSuffix(".eml") ? TicketReader.pdf(fromEmail: $0) : $0 }
+        let located = pdf.map { TicketReader.located(fromPages: TicketReader.pdfPages($0)) } ?? []
+        let trains = located.map(\.train)
+        guard !trains.isEmpty, let pdf else {
             phase = .unreadable
             return
         }
+        pages = Dictionary(located.map { ($0.train.id, $0.page) }, uniquingKeysWith: { a, _ in a })
         rows = trains.map { Row(train: $0) }
         phase = .ready
+        // Drawing the pages to find the codes takes a moment; it happens while the trains are matched.
+        barcodes = Task.detached(priority: .userInitiated) { TicketBarcode.find(inPDF: pdf) }
         let have = (try? await client.legs()) ?? []
         await withTaskGroup(of: (String, TripResult?, State?).self) { group in
             for train in trains {
@@ -125,6 +137,12 @@ final class TicketImportModel {
 
     func save(_ client: APIClient) async {
         phase = .saving
+        /// Train id → the trip it was saved as (or already was), to keep the ticket with.
+        var legs: [String: String] = [:]
+        for row in rows where row.state == .already {
+            if let saved = row.saved { legs[row.id] = saved.id }
+        }
+        var refetch: [Int] = []
         for i in rows.indices where rows[i].selected && rows[i].choosable {
             guard let m = rows[i].match else { continue }
             let train = rows[i].train
@@ -135,22 +153,46 @@ final class TicketImportModel {
                         _ = try await client.updateLeg(saved.id, patch)
                     }
                     rows[i].state = .seatAdded
+                    legs[rows[i].id] = saved.id
                 } else {
-                    _ = try await client.createLeg(CreateLegBody(
+                    let detail = try await client.createLeg(CreateLegBody(
                         tripKey: m.key, serviceDate: m.serviceDate, fromSeq: m.from.seq, toSeq: m.to.seq,
                         coach: Seat.clean(train.coach), seat: Seat.clean(train.seat)
                     ))
                     rows[i].state = .added
+                    legs[rows[i].id] = detail.id
                 }
             } catch let error as APIError where error.status == 409 {
                 rows[i].state = .already
+                refetch.append(i)
             } catch {
                 rows[i].state = .failed
             }
             rows[i].selected = false
         }
+        // Saved already (a 409): find that trip, as `load` does.
+        if !refetch.isEmpty, let have = try? await client.legs() {
+            for i in refetch {
+                guard let m = rows[i].match, let saved = have.first(where: { $0.timetableTripKey == m.key && $0.serviceDate == m.serviceDate }) else { continue }
+                legs[rows[i].id] = saved.id
+            }
+        }
+        await keepTicket(legs)
         phase = .done
         Usage.shared.count(.feature, "ticket.import")
+    }
+
+    /// Keeps the PDF on the phone and ties it to each trip, with the page and code for that train.
+    private func keepTicket(_ legs: [String: String]) async {
+        guard !legs.isEmpty, let pdf, let file = try? TicketStore.shared.keep(pdf: pdf) else { return }
+        let barcodes = await barcodes?.value ?? []
+        for row in rows {
+            guard let legId = legs[row.id] else { continue }
+            let page = pages[row.id] ?? 0
+            TicketStore.shared.attach(legId: legId, entry: .init(
+                file: file, page: page, issuer: row.train.issuer, barcode: barcodes.first { $0.page == page }
+            ))
+        }
     }
 }
 
@@ -264,11 +306,11 @@ struct TicketImportSheet: View {
     @ViewBuilder
     private var actions: some View {
         if model.phase != .done {
-            Button(model.chosen > 0 && model.onlySeats ? l10n.t("seat.save") : l10n.t("ticketImport.add", count: model.chosen)) {
+            Button(model.keepOnly ? l10n.t("ticketImport.keep") : model.chosen > 0 && model.onlySeats ? l10n.t("seat.save") : l10n.t("ticketImport.add", count: model.chosen)) {
                 Task { await model.save(app.client) }
             }
             .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))
-            .disabled(model.chosen == 0 || model.phase == .saving)
+            .disabled((model.chosen == 0 && !model.keepOnly) || model.phase == .saving)
             if model.rows.contains(where: { $0.state == .notFound }) {
                 Button(l10n.t("ticketImport.addByHand")) {
                     router.ticketFile = nil

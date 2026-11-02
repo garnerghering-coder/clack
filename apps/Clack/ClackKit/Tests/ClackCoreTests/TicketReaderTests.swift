@@ -24,6 +24,11 @@ private let receipt = [
 ]
 
 struct TicketReaderTests {
+    @Test func eachSJTrainIsOnItsOwnPage() {
+        #expect(TicketReader.located(fromPages: swedishTicket).map(\.page) == [0, 1])
+        #expect(TicketReader.located(fromPages: receipt).allSatisfy { $0.page == 0 })
+    }
+
     @Test func readsASwedishTicketOneTrainPerPage() {
         let trains = TicketReader.trains(fromPages: swedishTicket)
         #expect(trains == [

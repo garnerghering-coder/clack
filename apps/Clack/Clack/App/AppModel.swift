@@ -205,6 +205,8 @@ final class AppModel {
         await offlineCache.clear()
         // Station walks recorded on this phone go too (owner, 2026-11-01); so do the riders' choices.
         WalkStore.shared.deleteAll()
+        // And the tickets kept with the trips.
+        TicketStore.shared.deleteAll()
         for key in UserDefaults.standard.dictionaryRepresentation().keys where key.hasPrefix("clack.") || key.hasPrefix("riders.") {
             UserDefaults.standard.removeObject(forKey: key)
         }
