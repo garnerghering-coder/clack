@@ -203,13 +203,15 @@ struct JourneyChangeChip: View {
                 case .risky?: Ink.veryLateInk
                 default: switch result.status { case .tight: Ink.slightInk; case .miss, .broken: Ink.veryLateInk; default: Ink.text2 }
                 }
+                // Every change chip the same width, centred between the train cards (owner, 2026-11-02).
                 let chip = HStack(spacing: 8) {
                     LucideIcon(name: "arrow-down", size: 13)
-                    Text(text).fixedSize(horizontal: false, vertical: true)
+                    Text(text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                     if model.map != nil { LucideIcon(name: "map", size: 13) }
                 }
                 .clack(.chip).foregroundStyle(ink)
                 .padding(.horizontal, 12).padding(.vertical, 8)
+                .frame(maxWidth: .infinity)
                 .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                 if model.map != nil, let stationId = a.destination?.id {
                     NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) { chip }
@@ -223,7 +225,8 @@ struct JourneyChangeChip: View {
                 TransferChip(prev: a, next: b, plain: true)
             }
         }
-        .padding(.leading, 16)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
         .task { await model.load(stationId: a.destination?.id, using: app.stations) }
     }
 }
