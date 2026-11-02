@@ -803,11 +803,19 @@ export class LiveMapIngest extends EventEmitter {
       const id = `dk:${d.number}@${d.ref}|${d.date}`;
       if (d.jid) this.dkJourneys.set(id, d.jid);
       let crossBorder = false;
+      // A Swedish train's own day, when the Danish one stands in for it (Trafikverket's calendar day; see below).
+      let date = d.date;
       if (!d.inDanishTimetable) {
         // Trafikverket may carry an Öresundståg with a leading 2 (21378 for Rejseplanen's 1378).
-        const sk = [trainKey(d.number, d.date), trainKey(`2${d.number}`, d.date)].find((k) => this.trains.has(k) || this.ann.info(...(k.split('|') as [string, string])));
+        // Rejseplanen dates a train by its service day, Trafikverket by the calendar day: Öresundståg 1180 from Østerport
+        // after midnight was Rejseplanen's 1 November and Trafikverket's 2 November, and showed twice (owner,
+        // 2026-11-02). Rejseplanen lists only trains running now, so the same number dated the next day is this train.
+        const next = new Date(Date.parse(`${d.date}T12:00:00Z`) + 86_400_000).toISOString().slice(0, 10);
+        const keys = [d.date, next].flatMap((day) => [trainKey(d.number, day), trainKey(`2${d.number}`, day)]);
+        const sk = keys.find((k) => this.trains.has(k) || this.ann.info(...(k.split('|') as [string, string])));
         if (sk) {
           crossBorder = true;
+          date = sk.split('|')[1]!;
           const swe = this.trains.get(sk);
           const info = this.ann.info(...(sk.split('|') as [string, string]));
           if (swe && !swe.estimated) continue;
@@ -820,7 +828,7 @@ export class LiveMapIngest extends EventEmitter {
       const t: LiveTrain = {
         id,
         number: d.number,
-        date: d.date,
+        date,
         lat: d.lat,
         lon: d.lon,
         bearing: d.bearing,

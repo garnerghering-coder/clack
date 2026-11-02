@@ -42,6 +42,19 @@ describe('Danish trains on the map', () => {
     expect([...guess.ingest.trains.values()].find((t) => t.id.startsWith('dk:1127@'))?.crossBorder).toBe(true);
   });
 
+  it("finds the Swedish train dated the next day, for a train Rejseplanen dates by its service day (after midnight)", async () => {
+    // Rejseplanen's 1127 is on 2026-10-27; Trafikverket has it as the 28th (it left after midnight).
+    const base = { number: '1127', date: '2026-10-28', lat: 55.6, lon: 13.0, bearing: null, speedKmh: null, at: NOW, operatorId: null, productName: null, product: 'regional', trainType: null, origin: null, destination: null, next: null, nextEta: null, delayMin: null, mine: false } as const;
+    const guess = ingestWith({ ...base, id: '1127|2026-10-28', estimated: true });
+    await guess.dk.poll();
+    guess.ingest.applyDenmark();
+    // Drawn once, and with the Swedish day, so a trip saved on Trafikverket's train is the one on the map.
+    expect(guess.ingest.trains.has('1127|2026-10-28')).toBe(false);
+    const dk = [...guess.ingest.trains.values()].find((t) => t.id.startsWith('dk:1127@'));
+    expect(dk?.crossBorder).toBe(true);
+    expect(dk?.date).toBe('2026-10-28');
+  });
+
   it('works out a heading', () => {
     expect(bearingOf({ lat: 55, lon: 12 }, { lat: 56, lon: 12 })).toBe(0);
     expect(bearingOf({ lat: 55, lon: 12 }, { lat: 55, lon: 13 })).toBe(90);
