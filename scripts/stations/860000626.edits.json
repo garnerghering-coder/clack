@@ -10,20 +10,23 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Hall and train platforms",
-      "order": 0
+      "name": "Station hall (street level)",
+      "order": 0,
+      "name_source": "Owner's station walk 2026-11-02 (walk D4ADF69B, iPhone, AR on): every platform mark (1–2, 3–4, 5–6, 26) at the same height by the barometer (±0.8 m), the hall about 6 m above them (+5.2 to +6.3 m at the stair tops and the hall doors), a corridor about 3.4 m below them with stairs and a lift up to each platform and doors out to the Metro. OSM: platforms tagged level=-1, the passage level=-2."
     },
     {
       "osm": "-1",
       "id": "L-1",
-      "name": "Metro passage",
-      "order": -1
+      "name": "Train platforms",
+      "order": -1,
+      "name_source": "Owner's station walk 2026-11-02 (walk D4ADF69B, iPhone, AR on): every platform mark (1–2, 3–4, 5–6, 26) at the same height by the barometer (±0.8 m), the hall about 6 m above them (+5.2 to +6.3 m at the stair tops and the hall doors), a corridor about 3.4 m below them with stairs and a lift up to each platform and doors out to the Metro. OSM: platforms tagged level=-1, the passage level=-2."
     },
     {
       "osm": "-2",
       "id": "L-2",
-      "name": "Metro platforms",
-      "order": -2
+      "name": "Passage under the tracks (to the Metro)",
+      "order": -2,
+      "name_source": "Owner's station walk 2026-11-02 (walk D4ADF69B, iPhone, AR on): every platform mark (1–2, 3–4, 5–6, 26) at the same height by the barometer (±0.8 m), the hall about 6 m above them (+5.2 to +6.3 m at the stair tops and the hall doors), a corridor about 3.4 m below them with stairs and a lift up to each platform and doors out to the Metro. OSM: platforms tagged level=-1, the passage level=-2."
     }
   ],
   "sources": [
@@ -51,6 +54,11 @@
       "date": "2026-10-30",
       "who": "the owner's assistant",
       "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 95 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000626)."
+    },
+    {
+      "date": "2026-11-02",
+      "who": "the owner's assistant",
+      "what": "Levels named from the owner's walk (hall above, platforms, the passage below to the Metro); a level-less duplicate outline of platform 3;4 (osm:way/373813304) dropped, which had put 3–4 on the hall level; the hall's closed hours (02:00–04:30) as the owner found them."
     }
   ],
   "poi_hours": {},
@@ -1180,6 +1188,24 @@
       "hours_source": null,
       "hours_verified": null,
       "_source": "OpenStreetMap n13476696702 (ODbL), read 2026-10-30; placed OSM node n13476696702 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "walk-kh-hall",
+      "category": "waiting",
+      "name": "Station hall",
+      "level": "0",
+      "x": -4.0,
+      "y": 44.0,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:30-02:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-11-02",
+      "approximate": true,
+      "where": "Centralhallen",
+      "_source": "Owner's station walk 2026-11-02 (walk D4ADF69B): at the hall doors, found shut, 'station is closed from 2-4:30'. Placed at that mark (a few steps from the doors), so approximate."
     }
+  ],
+  "drop_platform_ways": [
+    "373813304"
   ]
 }
