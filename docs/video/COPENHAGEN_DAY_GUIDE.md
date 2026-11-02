@@ -1,8 +1,9 @@
 # København H, one weekday: video guide
 
 A guide for making a short looping Instagram video: a whole weekday of trains at København H (Copenhagen Central),
-drawn the way the Clack app's Explore map draws them. Everything you need is in the kit folder
-(`~/Downloads/clack_video_kit/`, made by `apps/server/src/tools/videoDay.ts`). You don't need the Clack server or the
+drawn the way the Clack app's Explore map draws them. Everything you need is in **`clack_video_kit.zip`** (made by `apps/server/src/tools/videoDay.ts`). Unzip it first
+(`unzip clack_video_kit.zip`); it makes a folder `clack_video_kit/` with the files below, and all paths in this guide
+are inside that folder. You don't need the Clack server or the
 app, and you need no internet once the kit is local.
 
 Read this whole guide before starting. Where it gives a number, use that number. Where something isn't covered, keep
