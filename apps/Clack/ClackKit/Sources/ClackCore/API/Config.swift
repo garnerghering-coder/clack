@@ -7,14 +7,16 @@ import Foundation
 
 public nonisolated enum Config {
     /// Where the Clack server is: the hosted one, on the internet, for every build on a phone. Only a debug build in the
-    /// simulator uses the server running on this Mac (`npm run dev`), because that is where it is being worked on.
+    /// simulator uses the server running on this Mac (`npm run dev`), because that is where it is being worked on, and
+    /// only when it answers; otherwise it uses the hosted one, so the app still opens without the Mac's server.
     /// `-apiBase https://...` as a launch argument points a debug build anywhere else.
     public static let apiBase: URL = {
         let hosted = URL(string: "https://getclack.app")!
         #if DEBUG
         if let override = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: override) { return url }
         #if targetEnvironment(simulator)
-        return URL(string: "http://localhost:3001")!
+        let local = URL(string: "http://localhost:3001")!
+        return answers(local) ? local : hosted
         #else
         return hosted
         #endif
@@ -22,6 +24,23 @@ public nonisolated enum Config {
         return hosted
         #endif
     }()
+
+    #if DEBUG && targetEnvironment(simulator)
+    /// Whether a server answers `/api/health` at `base`, waiting at most a second. Asked once, when `apiBase` is first
+    /// read; a server that isn't running refuses at once, so this rarely waits at all.
+    private static func answers(_ base: URL) -> Bool {
+        var request = URLRequest(url: base.appendingPathComponent("api/health"))
+        request.timeoutInterval = 1
+        let done = DispatchSemaphore(value: 0)
+        nonisolated(unsafe) var ok = false
+        URLSession(configuration: .ephemeral).dataTask(with: request) { _, response, _ in
+            ok = (response as? HTTPURLResponse)?.statusCode == 200
+            done.signal()
+        }.resume()
+        _ = done.wait(timeout: .now() + 1.5)
+        return ok
+    }
+    #endif
     /// "Buy ticket with Omio" opens Omio's home page through Clack's own affiliate link (Impact), made once in the Impact
     /// dashboard (owner, 2026-10-26). It does not fill in a journey; that can come later.
     public static let omioURL = URL(string: "https://omio.sjv.io/DWG092")!
