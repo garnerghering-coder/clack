@@ -596,7 +596,7 @@ come from server pushes at most once a minute; widgets use timer text and diff b
   commuter as "earliest". A service-day boundary around 03:00 would fix both.
 - Severity: minor. Confidence: high.
 
-**A29. Norwegian GPS trains and estimated trains elsewhere: smaller gaps**
+**A29. Smaller position gaps in Sweden and Denmark**
 - Swedish: SJ 525 (171 km/h) was 2059 m from its Trafikverket fix once (07:36:37), not repeated 13 s later
   (positioning.ts `advanceM`). Severity minor, confidence low.
 - Swedish: six trains with Trafikverket GPS were not on the map (7714, 7716, 7817, 7917, 7517, 2915; probably short
