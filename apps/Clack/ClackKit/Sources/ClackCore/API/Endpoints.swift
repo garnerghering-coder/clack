@@ -82,6 +82,9 @@ extension APIClient {
     /// journeys instead of the whole service day, for paging earlier and later (the window may run into the next day).
     public func search(_ text: String, date: String, changes: Int? = nil, after: Double? = nil, hours: Int? = nil) async throws -> SearchResponse {
         var query = ["q": text, "date": date]
+        // The phone's region, for reading a bare train number when the settings have no home country yet (the server
+        // only uses SE, NO, FI or DK).
+        if let region = Locale.current.region?.identifier { query["region"] = region }
         if let changes { query["changes"] = String(changes) }
         if let after { query["after"] = String(Int64(after)) }
         if let hours { query["hours"] = String(hours) }

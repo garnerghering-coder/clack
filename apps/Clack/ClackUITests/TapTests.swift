@@ -57,7 +57,8 @@ final class TapTests: XCTestCase {
         let row = app.staticTexts["SJ 439"].firstMatch
         XCTAssertTrue(row.waitForExistence(timeout: 10))
         row.tap()
-        let back = app.buttons["trip.back"]
+        // The system's back button since build 59 (the trip page has the navigation bar again).
+        let back = app.navigationBars.buttons.element(boundBy: 0)
         XCTAssertTrue(back.waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["trip.more"].exists)
         back.tap()

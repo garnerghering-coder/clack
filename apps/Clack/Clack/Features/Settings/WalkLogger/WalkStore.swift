@@ -130,21 +130,50 @@ final class WalkStore {
     // MARK: - Who sees the tool
 
     /// The walk tools show in debug and TestFlight builds only, never in App Store builds (owner, 2026-11-01; App
-    /// Review: the tool records precise location). Before, StoreKit alone missed TestFlight (2026-10-28), so the tools
-    /// were shown everywhere; TestFlight's sandbox receipt is checked first now.
-    static let alwaysShowTestTools = false
+    /// Review: the tool records precise location). The same rule as every other test tool: `BuildChannel`.
+    static func isTestBuild() async -> Bool { await BuildChannel.current().showsTestTools }
+}
 
-    static func isTestBuild() async -> Bool {
-        if alwaysShowTestTools { return true }
+extension BuildChannel {
+    /// This copy's channel, asked of StoreKit once and remembered for the run (`BuildChannel.decide` in ClackCore has
+    /// the rule and its tests). Before, StoreKit alone missed TestFlight (2026-10-28); TestFlight's sandbox receipt is
+    /// checked first.
+    static func current() async -> BuildChannel {
+        if let known = ChannelCache.value { return known }
+        let value = await resolve()
+        ChannelCache.value = value
+        return value
+    }
+
+    /// The channel once `current()` has answered (nil before).
+    static var known: BuildChannel? { ChannelCache.value }
+
+    private static func resolve() async -> BuildChannel {
         #if DEBUG
-        return true
+        let isDebug = true
         #else
-        // TestFlight installs carry a sandbox receipt; App Store ones a production one.
-        if Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt" { return true }
-        guard let result = try? await AppTransaction.shared else { return false }
-        switch result {
-        case .verified(let t), .unverified(let t, _): return t.environment == .sandbox || t.environment == .xcode
-        }
+        let isDebug = false
         #endif
+        let override = launchOverride()
+        let receipt = Bundle.main.appStoreReceiptURL?.lastPathComponent
+        // Only ask StoreKit when nothing cheaper has decided.
+        if override != nil || isDebug || receipt == "sandboxReceipt" {
+            return decide(override: override, isDebug: isDebug, receiptName: receipt, environment: .unknown)
+        }
+        var environment = StoreEnvironment.unknown
+        if let result = try? await AppTransaction.shared {
+            switch result {
+            case .verified(let t), .unverified(let t, _):
+                switch t.environment {
+                case .sandbox: environment = .sandbox
+                case .xcode: environment = .xcode
+                case .production: environment = .production
+                default: environment = .unknown
+                }
+            }
+        }
+        return decide(override: override, isDebug: isDebug, receiptName: receipt, environment: environment)
     }
 }
+
+@MainActor private enum ChannelCache { static var value: BuildChannel? }

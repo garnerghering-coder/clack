@@ -22,12 +22,10 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
-    /// Settings > Station walks (owner test tool; debug and TestFlight builds).
+    /// Settings > Station walks (owner test tool; Xcode and TestFlight builds, `BuildChannel`).
     case walkLogger
-    #if DEBUG
-    /// Settings > Test alerts (debug builds only).
+    /// Settings > Test alerts (Xcode and TestFlight builds, `BuildChannel`).
     case testAlerts
-    #endif
 }
 
 /// Which tab is showing and what each tab has pushed. The last tab is remembered for the next launch
@@ -271,9 +269,7 @@ extension AppRoute {
         case .stationMap: .stationMap
         case .stations: .other
         case .walkLogger: .other
-        #if DEBUG
         case .testAlerts: .other
-        #endif
         }
     }
 }

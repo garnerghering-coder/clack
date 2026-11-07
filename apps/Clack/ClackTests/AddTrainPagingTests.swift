@@ -20,6 +20,14 @@ final class PagingStub: URLProtocol, @unchecked Sendable {
 
     override func startLoading() {
         let url = request.url!
+        // The station suggestions asked for while typing are not searches: answered empty and not recorded, so the
+        // first recorded request is always the search (it raced the search before).
+        if url.path.hasSuffix("/stations/search") {
+            client?.urlProtocol(self, didReceive: HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: Data("[]".utf8))
+            client?.urlProtocolDidFinishLoading(self)
+            return
+        }
         let q = Dictionary((URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []).map { ($0.name, $0.value ?? "") }, uniquingKeysWith: { a, _ in a })
         PagingStub.requests.append(q)
         let day = PagingStub.dayStart
@@ -91,8 +99,9 @@ struct AddTrainPagingTests {
         let list = model.journeys ?? []
         #expect(list.map(\.legs.first?.key) == ["t1", "t2"])
         #expect(model.laterEmpty == false)
-        // 20:00 on the day searched: no line; 01:00 the next day: its date.
-        #expect(model.daySeparator(before: list[0], previous: nil, language: .en) == nil)
+        // The list now runs past the searched day, so its first journey carries its day too (build 59, user test
+        // 2026-11-07: "the date you pick isn't the date you get"); 01:00 the next day: its date.
+        #expect(model.daySeparator(before: list[0], previous: nil, language: .en) == "Thu 5 Nov")
         #expect(model.daySeparator(before: list[1], previous: list[0], language: .en) == "Fri 6 Nov")
     }
 

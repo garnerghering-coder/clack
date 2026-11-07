@@ -601,10 +601,8 @@ private struct ConfirmStep: View {
             }
         }
         if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
-        Button(l10n.t("add.addToClack")) { Task { await save(force: false) } }
-            .buttonStyle(.clack(.primary, wide: true))
-            .disabled(trip == nil || saving || duplicate)
-            .padding(.top, 8)
+        Color.clear.frame(height: 0)
+            .sheetAction(l10n.t("add.addToClack"), enabled: !(trip == nil || saving || duplicate)) { Task { await save(force: false) } }
             .task(id: result.id) { await load() }
     }
 
@@ -933,15 +931,13 @@ private struct ManualTripStep: View {
                     .focused($numberFocused)
                     .onChange(of: trainNumber) { _, new in if new.count > 10 { trainNumber = String(new.prefix(10)) } }
                     .frame(maxWidth: 140)
-                    // The number pad has no key of its own to close it (user test 2026-11-07: it hid the Save button).
-                    .toolbar {
-                        ToolbarItemGroup(placement: .keyboard) {
-                            if numberFocused {
-                                Spacer()
-                                Button(l10n.t("common.done")) { numberFocused = false }
-                            }
-                        }
-                    }
+                // The number pad has no key of its own to close it (user test 2026-11-07: it hid the Save button). Done
+                // sits in the row, beside the field: a bar above the keyboard is unreliable in this sheet and, on iOS 26,
+                // floats over the form (run 2).
+                if numberFocused {
+                    Button(l10n.t("common.done")) { numberFocused = false }
+                        .buttonStyle(LinkButtonStyle())
+                }
             }
         }
         FlowLayout(spacing: 8, lineSpacing: 8) {

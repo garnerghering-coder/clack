@@ -39,6 +39,11 @@ struct RootView: View {
                     .tag(PrimaryTab.passport)
             }
             .tint(Ink.accentInk)
+            // The binding above misses a tap on the tab already showing on iOS 26; the tab bar itself is asked.
+            .background(TabReselectHook { index in
+                guard PrimaryTab.allCases.indices.contains(index) else { return }
+                router.setPath([], for: PrimaryTab.allCases[index])
+            })
 
             if app.isOffline {
                 OfflineBanner().transition(.opacity)

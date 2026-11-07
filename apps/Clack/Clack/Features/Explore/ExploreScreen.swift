@@ -85,6 +85,9 @@ struct ExploreScreen: View {
         }
         .onChange(of: active) {
             model.active = active
+            // Away from the tab: the legend closes (it stayed open and took the next tap, run 2), and your dot goes
+            // off, so location and the map's redraws stop while another screen shows; back, it comes back.
+            if active { model.showMyDot() } else { model.legend = false; model.controller.hideUserDot() }
             // Back on the tab without a basemap (the first ask failed): ask again.
             if active, basemap != true { Task { basemap = await app.mapHasBasemap() } }
             // Follows change elsewhere (a followed journey stopped on Trips): the rings follow the real list.
@@ -95,12 +98,24 @@ struct ExploreScreen: View {
         .task(id: model.ready) { if model.ready { model.showMyDot() } }
         // Just allowed: the map comes to you (user test 2026-11-07: "it didn't zoom to me even though I just said yes").
         .onChange(of: LocationModel.shared.allowed) { was, allowed in
-            guard !was, allowed, active else { return }
+            guard !was, allowed else { return }
+            model.showMyDot()
+            guard active else { return }
             Task {
                 if let here = await LocationModel.shared.current() {
                     model.controller.ease(to: here.coordinate, minZoom: 9, offset: 0)
                 }
             }
+        }
+        // The locate button with location switched off: say so, with the way to switch it on (run 2: it jumped
+        // straight to iOS Settings with no word).
+        .alert(l10n.t("liveMap.locationOffTitle"), isPresented: $model.locationOff) {
+            Button(l10n.t("settings.alerts.openSettings")) {
+                if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
+            }
+            Button(l10n.t("common.cancel"), role: .cancel) {}
+        } message: {
+            Text(l10n.t("liveMap.locationOffBody"))
         }
         // "Stations" from elsewhere (old links): the search, open, with your stations under it.
         .task(id: router.stationSearchRequest) {

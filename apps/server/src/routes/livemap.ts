@@ -3,7 +3,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import { countryOfLiveId } from '../lib/countries.js';
 import { journeyStopsView } from '../rejseplanen/stops.js';
 import { mapHealth } from '../livemap/denmark.js';
-import { networkStatus, type NetworkStatus } from '../livemap/network.js';
+import { cancelledGroups, networkStatus, type NetworkStatus } from '../livemap/network.js';
 import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
@@ -41,6 +41,29 @@ const moved = (t: LiveTrain): MovedTuple => [t.id, r5(t.lat), r5(t.lon), t.beari
 /** How often a live-map stream re-reads which trains are the viewer's (adding a trip shows up within this). */
 const MINE_REFRESH_MS = 10_000;
 
+/**
+ * How often a stream writes, by how much it covers. A view of a city or a line gets every 2-second update; a view of a
+ * whole country or more (the app's "far" zoom, where it redraws every 10 s anyway) gets them gathered every 10 s, and
+ * nothing at all is written for an update with no change but a heartbeat at most every 10 s, inside the app's 15 s
+ * stall watch (user test 2026-11-07, run 2: ~600 KB a minute zoomed out).
+ */
+export function streamIntervalMs(b: Bbox | null): number {
+  if (!b) return WIDE_MS;
+  return b[2] - b[0] > WIDE_LON_DEG || b[3] - b[1] > WIDE_LAT_DEG ? WIDE_MS : NARROW_MS;
+}
+const NARROW_MS = 2_000;
+const WIDE_MS = 10_000;
+/** About the app's zoom 7 on a phone, after the 20% padding: wider than this is "far". */
+const WIDE_LON_DEG = 6;
+const WIDE_LAT_DEG = 4;
+const HEARTBEAT_MS = 10_000;
+/** In a wide view, a train's new position is sent once it has moved this far (about 1 km), or its state changed: at
+ * country zoom a dot is several kilometres across, and the app doesn't glide trains there. */
+export const WIDE_MIN_MOVE_DEG = 0.01;
+export function movedEnough(from: { lat: number; lon: number; state?: string | null }, to: LiveTrain): boolean {
+  return (from.state ?? null) !== (to.state ?? null) || Math.abs(from.lat - to.lat) >= WIDE_MIN_MOVE_DEG || Math.abs(from.lon - to.lon) >= WIDE_MIN_MOVE_DEG * 2;
+}
+
 export const liveMapRoutes =
   (db: Db, ingest: LiveMapIngest, myTrainKeys: (userId: string) => Set<string> = () => new Set(), afterLegCreated?: (legId: string) => void): FastifyPluginAsync =>
   async (app) => {
@@ -70,9 +93,34 @@ export const liveMapRoutes =
       const snapshot = [...ingest.trains.values()].filter((t) => inside(t, b)).map(mine);
       for (const t of snapshot) sent.set(t.id, infoOf(t));
       res.write(`event: snapshot\ndata: ${JSON.stringify({ trains: snapshot, total: ingest.trains.size, upstreamAt: ingest.upstreamAt, mode: ingest.mode })}\n\n`);
+      // What is waiting to be written: the latest of each train, gathered until the next write.
+      const pendingChanged = new Map<string, LiveTrain>();
+      const pendingMoved = new Map<string, LiveTrain>();
+      const pendingRemoved = new Set<string>();
+      let last = { total: ingest.trains.size, upstreamAt: ingest.upstreamAt };
+      let wroteAt = Date.now();
+      const write = () => {
+        const nothing = pendingChanged.size === 0 && pendingMoved.size === 0 && pendingRemoved.size === 0;
+        if (nothing && Date.now() - wroteAt < HEARTBEAT_MS) return;
+        const changed = [...pendingChanged.values()];
+        const move = [...pendingMoved.values()].map(moved);
+        const removed = [...pendingRemoved];
+        pendingChanged.clear();
+        pendingMoved.clear();
+        pendingRemoved.clear();
+        wroteAt = Date.now();
+        res.write(`event: delta\ndata: ${JSON.stringify({ changed, moved: move, removed, total: last.total, upstreamAt: last.upstreamAt, mode: ingest.mode })}\n\n`);
+      };
+      const interval = streamIntervalMs(b);
+      const wide = interval > NARROW_MS;
+      // Where each train was last sent at, for the wide view's 1 km rule.
+      const sentAt = new Map<string, { lat: number; lon: number; state?: string | null }>();
+      for (const t of snapshot) sentAt.set(t.id, { lat: t.lat, lon: t.lon, state: t.state });
+      // Wide: written on this clock. Narrow: written with each update, and the clock only keeps the heartbeat.
+      const timer = setInterval(write, interval > NARROW_MS ? interval : HEARTBEAT_MS);
       const onDelta = (d: LiveDelta) => {
         const changed: LiveTrain[] = [];
-        const move: MovedTuple[] = [];
+        const move: LiveTrain[] = [];
         const removed: string[] = d.removed.filter((id) => sent.delete(id));
         let changes = d.changed;
         if (Date.now() - mineAt >= MINE_REFRESH_MS) {
@@ -86,15 +134,38 @@ export const liveMapRoutes =
           const t = mine(raw);
           if (inside(t, b)) {
             const info = infoOf(t);
-            if (sent.get(t.id) === info) move.push(moved(t));
+            if (sent.get(t.id) === info) move.push(t);
             else changed.push(t);
             sent.set(t.id, info);
           } else if (sent.delete(t.id)) removed.push(t.id);
         }
-        res.write(`event: delta\ndata: ${JSON.stringify({ changed, moved: move, removed, total: d.total, upstreamAt: d.upstreamAt, mode: ingest.mode })}\n\n`);
+        for (const id of removed) {
+          pendingChanged.delete(id);
+          pendingMoved.delete(id);
+          pendingRemoved.add(id);
+        }
+        for (const t of changed) {
+          pendingMoved.delete(t.id);
+          pendingRemoved.delete(t.id);
+          pendingChanged.set(t.id, t);
+        }
+        for (const t of changed) sentAt.set(t.id, { lat: t.lat, lon: t.lon, state: t.state });
+        for (const id of removed) sentAt.delete(id);
+        for (const t of move) {
+          const was = sentAt.get(t.id);
+          if (wide && was && !pendingChanged.has(t.id) && !movedEnough(was, t)) continue;
+          sentAt.set(t.id, { lat: t.lat, lon: t.lon, state: t.state });
+          pendingRemoved.delete(t.id);
+          // Still to be sent whole: keep it whole, with the newer position.
+          if (pendingChanged.has(t.id)) pendingChanged.set(t.id, t);
+          else pendingMoved.set(t.id, t);
+        }
+        last = { total: d.total, upstreamAt: d.upstreamAt };
+        if (interval <= NARROW_MS) write();
       };
       ingest.on('delta', onDelta);
       req.raw.on('close', () => {
+        clearInterval(timer);
         ingest.off('delta', onDelta);
         ingest.release();
       });
@@ -263,6 +334,10 @@ export const liveMapRoutes =
           const a = pointOf(aId), b = pointOf(bId);
           return a && b ? encodePolyline(segmentBetween(db, a, b).points) : null;
         });
+        // Cancelled trains never run, so the map can't see them: from the announcements instead.
+        const cancelled = ingest.cancelledTrains();
+        body.cancelled = cancelledGroups(cancelled);
+        body.cancelledTrains = cancelled.length;
         // Not kept while the map is still filling (no trains yet): the next ask works it out again.
         if (ingest.trains.size === 0) return body;
         network = { at: now, body };

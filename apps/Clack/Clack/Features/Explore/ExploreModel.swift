@@ -71,26 +71,38 @@ final class ExploreModel {
                 controller.repaint()
                 needsFullRender = true
                 scheduleRender()
+            } else {
+                // Away from the tab: nothing glides, and the tracks fetched for gliding are let go once there are many
+                // (they are asked for again as trains run on them), so the memory doesn't only grow (run 2: 152 to
+                // 163 MB in three idle minutes, none of it given back after leaving Explore).
+                glides.removeAll()
+                if segments.count > Self.keptSegments {
+                    segments.removeAll()
+                    segmentsAsked.removeAll()
+                }
             }
         }
     }
 
-    /// Your dot is on the map by default once iOS allows it; asked the first time the map is up (Settings > Clack >
-    /// Location only appears once iOS has been asked).
+    /// How many fetched tracks are kept when leaving the tab.
+    nonisolated static let keptSegments = 300
+
+    /// Your dot is on the map by default once iOS allows it. iOS is asked only when you ask for your position (the
+    /// locate button, or "Help place trains" in Settings), not when Explore opens (user test 2026-11-07, run 2).
     func showMyDot() {
-        LocationModel.shared.askIfNeeded()
         controller.showUserDot()
     }
 
-    /// The locate button: centre on you. Where location is switched off, it opens Settings, where you can switch it on.
+    /// Location is switched off for Clack: the screen says so, with a way to Settings.
+    var locationOff = false
+
+    /// The locate button: centre on you. Not asked yet: iOS asks, and the map comes to you once allowed (the screen
+    /// watches for it). Switched off: a word about it first, instead of jumping to Settings.
     func centreOnMe() {
         Usage.shared.count(.feature, "explore.myLocation")
         let location = LocationModel.shared
-        location.askIfNeeded()
-        if location.denied, let url = URL(string: UIApplication.openSettingsURLString) {
-            UIApplication.shared.open(url)
-            return
-        }
+        if location.denied { locationOff = true; return }
+        if !location.allowed { location.askIfNeeded(); return }
         controller.centreOnUser()
     }
 
@@ -314,12 +326,15 @@ final class ExploreModel {
             while let self, !Task.isCancelled, self.active {
                 let moving = self.needsFullRender || self.zoom >= Self.carsZoom ? self.render() : self.glideFrame()
                 if !moving { break }
-                // Smooth (30 a second) only while a train eases to its new fix; carrying on at its speed until the next
+                // Smoother only while a train eases to its new fix; carrying on at its speed until the next
                 // one, 10 a second is enough, and always so in Low Power Mode (review E4).
                 let nowMs = CACurrentMediaTime() * 1000
+                // 20 a second while easing (was 30: the map idled at ~17 % CPU zoomed in, run 2), and at the cars'
+                // zoom, where every frame redraws the whole picture, 10 a second throughout.
                 let easing = self.glides.values.contains { nowMs - $0.start < ExploreLogic.glideMs }
                 let lowPower = ProcessInfo.processInfo.isLowPowerModeEnabled
-                try? await Task.sleep(for: .milliseconds(easing && !lowPower ? 33 : 100))
+                let smooth = easing && !lowPower && self.zoom < Self.carsZoom
+                try? await Task.sleep(for: .milliseconds(smooth ? 50 : 100))
             }
             self?.renderTask = nil
         }

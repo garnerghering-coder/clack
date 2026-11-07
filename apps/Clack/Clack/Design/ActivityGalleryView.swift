@@ -3,12 +3,11 @@
 //  Clack
 //
 
-#if DEBUG
 import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// Debug only: every face of the trip card (ClackDesign `TripCard.swift`) for every moment, drawn inside the island's
+/// Test builds only (Xcode and TestFlight, `BuildChannel`): every face of the trip card (ClackDesign `TripCard.swift`) for every moment, drawn inside the island's
 /// shapes at Apple's sizes (Human Interface Guidelines, Live Activities, iOS dimensions: compact 52.33 x 36.67 per side,
 /// minimal 36.67, expanded 371 x up to 160, the narrow island's 28 pt circle), so anything that would be cut off shows.
 /// The black shapes clip like the island does; the outline inside each is the content margin the card asks for. The
@@ -172,4 +171,3 @@ struct ActivityGalleryView: View {
             .environment(\.colorScheme, .dark)
     }
 }
-#endif

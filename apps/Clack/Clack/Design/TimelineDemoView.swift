@@ -3,12 +3,11 @@
 //  Clack
 //
 
-#if DEBUG
 import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// Debug only: four ways to weigh trains against changes in a journey's timeline, on one sample journey, for the owner
+/// Test builds only (Xcode and TestFlight, `BuildChannel`): four ways to weigh trains against changes in a journey's timeline, on one sample journey, for the owner
 /// to pick from (2026-11-01). `-timelineDemo A|B|C|D` opens one. Sample data, not a real journey.
 struct TimelineDemoView: View {
     let style: String
@@ -237,4 +236,3 @@ private struct Line: Shape {
         return p
     }
 }
-#endif

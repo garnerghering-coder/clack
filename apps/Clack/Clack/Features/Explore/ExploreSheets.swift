@@ -420,7 +420,10 @@ struct LiveStationSheet: View {
                                     .init(
                                         time: row.estimated ?? row.advertised, sched: row.advertised, tz: info?.tz ?? Format.zone(stationId: id),
                                         destination: row.endpoints.joined(separator: ", "), platform: row.platform,
-                                        delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil
+                                        delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil,
+                                        // Cancelled trains read as running here before (2026-11-07).
+                                        canceled: row.canceled,
+                                        replacedByBus: row.canceled && row.allCauses.contains(where: \.isBusReplacement)
                                     ),
                                     clock: app.settings.clock, compact: true
                                 ) {

@@ -37,6 +37,8 @@ struct FormatTests {
     @Test func formatsDays() {
         #expect(Format.day(t, tz: "Europe/Stockholm", now: t) == "Tue 20 Oct")
         #expect(Format.day(t, tz: "Europe/Stockholm", now: ms("2027-03-01T00:00:00Z")) == "Tue 20 Oct 2026")
+        // No abbreviation stops in Swedish, so a sentence ending in a day has one full stop.
+        #expect(!Format.day(t, tz: "Europe/Stockholm", now: t, language: .sv).contains("."))
     }
 
     @Test func formatsDurationsDistancesAndDelays() {

@@ -75,6 +75,55 @@ const track = (r: AnnRow | null) => (r?.TrackAtLocation && r.TrackAtLocation !==
 
 export const trainKey = (number: string, date: string) => `${number}|${date}`;
 
+/** The part of a train that is cancelled from now on (Sweden), for the network's "cancelled and replaced" list. */
+export interface CancelledTrain {
+  number: string;
+  date: string;
+  productName: string | null;
+  operatorText: string | null;
+  /** The first and last cancelled stop (Trafikverket signatures): the whole run when the whole train is cancelled. */
+  fromSig: string;
+  toSig: string;
+  /** The first cancelled stop's advertised time. */
+  firstAt: number;
+  /** Trafikverket says a bus runs instead (ANA007 "Buss ersätter"). */
+  bus: boolean;
+  /** The other reasons given at the cancelled stops ("Banarbete"), without the bus note. */
+  causes: DelayCause[];
+}
+
+const isBusNote = (c: DelayCause) => c.code?.toUpperCase() === 'ANA007' || /^buss ersätter/i.test(c.text ?? '');
+
+/** One train's stops cancelled between a few minutes ago and `aheadMs` from now; null when none. Pure, for tests. */
+export function cancelledPart(rows: AnnRow[], now: number, aheadMs: number): CancelledTrain | null {
+  if (!rows.length || !rows.every(isTrain)) return null;
+  const sorted = [...rows].sort((a, b) => Date.parse(a.AdvertisedTimeAtLocation) - Date.parse(b.AdvertisedTimeAtLocation) || (a.ActivityType === 'Ankomst' ? -1 : 1));
+  // A train counts when a stop of it is cancelled from a few minutes ago to `aheadMs` ahead; its stretch is all of its
+  // cancelled stops, so a train already on its way still names the same line as the next one ("Nässjö C – Skövde C").
+  const soon = sorted.filter((r) => {
+    const t = Date.parse(r.AdvertisedTimeAtLocation);
+    return r.Canceled && t >= now - 5 * 60_000 && t <= now + aheadMs;
+  });
+  if (!soon.length) return null;
+  const cancelled = sorted.filter((r) => r.Canceled);
+  const first = sorted[0]!;
+  const all = new Map<string, DelayCause>();
+  for (const r of cancelled) for (const c of trvCauses(r.Deviation)) all.set(c.code ?? c.text ?? '', c);
+  const causes = [...all.values()];
+  return {
+    number: first.AdvertisedTrainIdent,
+    date: (first.ScheduledDepartureDateTime ?? first.AdvertisedTimeAtLocation).slice(0, 10),
+    productName: first.ProductInformation?.[0]?.Description ?? null,
+    operatorText: first.Operator ?? null,
+    fromSig: cancelled[0]!.LocationSignature,
+    toSig: cancelled.at(-1)!.LocationSignature,
+    firstAt: Date.parse(soon[0]!.AdvertisedTimeAtLocation),
+    bus: causes.some(isBusNote),
+    // "Inställt" only says it is cancelled, which the list already does.
+    causes: causes.filter((c) => !isBusNote(c) && !/^inställt$/i.test(c.text ?? '')),
+  };
+}
+
 /** What one train's announcements say about it now. Pure, for tests. */
 export function summarizeTrain(rows: AnnRow[], now: number): TrainInfo | null {
   if (!rows.length) return null;
@@ -215,6 +264,17 @@ export class AnnouncementCache {
       if (s) this.summaries.set(k, s);
     }
     return s ?? null;
+  }
+
+  /** Every train with stops cancelled from a few minutes ago to `aheadMs` ahead. */
+  cancelled(aheadMs: number): CancelledTrain[] {
+    const now = this.now();
+    const out: CancelledTrain[] = [];
+    for (const ids of this.byTrain.values()) {
+      const part = cancelledPart([...ids].map((id) => this.rows.get(id)!).filter(Boolean), now, aheadMs);
+      if (part) out.push(part);
+    }
+    return out;
   }
 
   /** Every train in the window, as [number, date]. */

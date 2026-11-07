@@ -82,6 +82,85 @@ export interface NetworkStatus {
   corridors: Corridor[];
   /** The most late of the rest, most late first (at most LATE_LIST). */
   late: LateTrain[];
+  /** Cancelled trains in the next two hours, by stretch, most first (Sweden only for now: Trafikverket's
+   * announcements). Not on the map, since they don't run. */
+  cancelled?: CancelledGroup[];
+  /** How many cancelled trains that is in all, before the list is cut. */
+  cancelledTrains?: number;
+}
+
+/** One cancelled train, as the ingest gives it. */
+export interface CancelledRun {
+  number: string;
+  date: string;
+  from: string;
+  to: string;
+  operatorId: string | null;
+  firstAt: number;
+  bus: boolean;
+  causes: DelayCause[];
+}
+
+/** Cancelled trains on one stretch (either direction): "Jönköping C – Skövde C · 4 trains · a bus replaces 4". */
+export interface CancelledGroup {
+  /** The stretch's two ends (one when only a single stop is cancelled). */
+  stations: string[];
+  country: string;
+  trains: number;
+  /** How many of them have a bus instead, as the source says. */
+  bus: number;
+  operatorIds: string[];
+  /** The other reasons given, most-given first. */
+  causes: NetworkCause[];
+  /** The first cancelled departure's time. */
+  firstAt: number;
+  numbers: string[];
+}
+
+export const CANCELLED_LIST = 8;
+
+/** Cancelled runs grouped by stretch, both directions together, most trains first. Pure. */
+export function cancelledGroups(runs: CancelledRun[], country = 'SE'): CancelledGroup[] {
+  const groups = new Map<string, CancelledGroup & { causeCount: Map<string, NetworkCause> }>();
+  for (const r of runs) {
+    const ends = r.from === r.to ? [r.from] : [r.from, r.to];
+    const key = [...ends].sort().join('|');
+    const g = groups.get(key) ?? { stations: ends, country, trains: 0, bus: 0, operatorIds: [] as string[], causes: [] as NetworkCause[], firstAt: r.firstAt, numbers: [] as string[], causeCount: new Map<string, NetworkCause>() };
+    g.trains += 1;
+    if (r.bus) g.bus += 1;
+    if (r.operatorId && !g.operatorIds.includes(r.operatorId)) g.operatorIds.push(r.operatorId);
+    if (!g.numbers.includes(r.number)) g.numbers.push(r.number);
+    g.firstAt = Math.min(g.firstAt, r.firstAt);
+    for (const c of r.causes) {
+      const k = c.code ?? c.text ?? '';
+      const had = g.causeCount.get(k);
+      g.causeCount.set(k, had ? { ...had, trains: had.trains + 1 } : { ...c, trains: 1 });
+    }
+    groups.set(key, g);
+  }
+  // One company's stretches that share a station are one disruption ("Nässjö C – Skövde C" and "Sandhem – Nässjö C"
+  // for trains already on their way): joined under the stretch with the most trains.
+  const list = [...groups.values()].sort((a, b) => b.trains - a.trains || a.firstAt - b.firstAt);
+  const joined: typeof list = [];
+  for (const g of list) {
+    const into = joined.find((j) => j.operatorIds.join() === g.operatorIds.join() && j.stations.some((s) => g.stations.includes(s)));
+    if (!into) {
+      joined.push(g);
+      continue;
+    }
+    into.trains += g.trains;
+    into.bus += g.bus;
+    into.firstAt = Math.min(into.firstAt, g.firstAt);
+    for (const n of g.numbers) if (!into.numbers.includes(n)) into.numbers.push(n);
+    for (const [k, c] of g.causeCount) {
+      const had = into.causeCount.get(k);
+      into.causeCount.set(k, had ? { ...had, trains: had.trains + c.trains } : c);
+    }
+  }
+  return joined
+    .map(({ causeCount, ...g }) => ({ ...g, causes: [...causeCount.values()].sort((a, b) => b.trains - a.trains) }))
+    .sort((a, b) => b.trains - a.trains || a.firstAt - b.firstAt)
+    .slice(0, CANCELLED_LIST);
 }
 
 export const LATE_LIST = 12;

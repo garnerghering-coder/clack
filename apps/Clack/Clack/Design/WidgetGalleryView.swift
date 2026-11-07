@@ -3,12 +3,11 @@
 //  Clack
 //
 
-#if DEBUG
 import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// Debug only: the Home Screen widgets drawn at their true sizes on an iPhone 17 Pro (small 170 x 170, medium 364 x 170,
+/// Test builds only (Xcode and TestFlight, `BuildChannel`): the Home Screen widgets drawn at their true sizes on an iPhone 17 Pro (small 170 x 170, medium 364 x 170,
 /// large 364 x 382), with the widgets' own inset rule and an outline of the rounded corner, to check that nothing is
 /// cut and nothing crowds an edge. Launch with `-widgetGallery` (`-page 0` to `-page 6`, `-light` for the light theme).
 /// The samples are made-up shapes for checking the layout (long train numbers and station names, platforms like "12b",
@@ -214,4 +213,3 @@ struct WidgetGalleryView: View {
         [[year(passport(.en))], [year(passport(.sv, stale: true))]],
     ]
 }
-#endif

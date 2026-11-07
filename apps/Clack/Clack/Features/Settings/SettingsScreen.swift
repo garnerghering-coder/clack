@@ -157,12 +157,6 @@ struct SettingsScreen: View {
             }
             VersionFooter()
             TestToolsRow()
-            #if DEBUG
-            NavigationLink("Test alerts", value: AppRoute.testAlerts)
-                .buttonStyle(.clack(wide: true))
-            NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
-                .buttonStyle(.clack(wide: true))
-            #endif
         }
         .screenTitle(l10n.t("settings.title")).countsScreen("settings")
     }
@@ -192,10 +186,21 @@ private struct RiderSharingCard: View {
 private struct OfflineMapsCard: View {
     @Environment(L10n.self) private var l10n
     @State private var count = OfflineMaps.savedCount
+    @State private var when = OfflineMaps.when
 
     var body: some View {
         Card {
             Text(l10n.t("settings.offlineMaps")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            SettingsRow(label: l10n.t("settings.offlineMapsWhen")) {
+                ChoiceMenu(
+                    label: l10n.t("settings.offlineMapsWhen"),
+                    options: OfflineMaps.When.allCases.map { ($0, l10n.t("settings.offlineMapsWhens.\($0.rawValue)")) },
+                    selection: when
+                ) { value in
+                    when = value
+                    OfflineMaps.when = value
+                }
+            }
             Text(l10n.t("settings.offlineMapsCount", count: count, ["count": String(count)])).clack(.body).foregroundStyle(Ink.text)
             InfoNote(l10n.t("settings.offlineMapsNote"), more: l10n.t("settings.offlineMapsNoteMore"))
             if count > 0 {
@@ -266,6 +271,7 @@ private struct VersionFooter: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @State private var server: String?
+    @State private var channel: BuildChannel?
 
     private var version: String {
         l10n.t("settings.version", [
@@ -276,13 +282,28 @@ private struct VersionFooter: View {
 
     var body: some View {
         VStack(spacing: 2) {
-            Text(version).clack(.caption).foregroundStyle(Ink.text3)
+            // In test builds the line names the build ("· TestFlight"), so a tester can see which one is installed
+            // and that its test tools should be below (owner, 2026-11-07). App Store builds show the version alone.
+            Text(channelLabel.map { "\(version) · \($0)" } ?? version).clack(.caption).foregroundStyle(Ink.text3)
             if let server { Text(l10n.t("settings.serverVersion", ["version": server])).clack(.caption).foregroundStyle(Ink.text3) }
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 4)
         // The server's commit is for the owner and testers (user test 2026-11-07: "I don't need to know your git hash").
-        .task { if await WalkStore.isTestBuild() { server = try? await app.client.serverVersion() } }
+        .task {
+            let current = await BuildChannel.current()
+            channel = current
+            if current.showsTestTools { server = try? await app.client.serverVersion() }
+        }
+    }
+
+    /// Not translated: it is for the owner and testers only.
+    private var channelLabel: String? {
+        switch channel {
+        case .xcode: "Xcode"
+        case .testFlight: "TestFlight"
+        case .appStore, nil: nil
+        }
     }
 }
 
@@ -572,18 +593,19 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-11-02"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-11-07"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
         .screenTitle(l10n.t("privacy.title"))
     }
 }
 
-/// Settings > Station walks and the Wallet pass switch: only in debug and TestFlight builds (owner test tools), never
-/// in App Store builds.
+/// The owner's test tools (station walks, the Wallet pass switch, test alerts, the design gallery): in Xcode and
+/// TestFlight builds, never in App Store builds, all by the one rule in `BuildChannel` (none of them is `#if DEBUG`,
+/// which left them out of TestFlight).
 private struct TestToolsRow: View {
     @Environment(L10n.self) private var l10n
-    @State private var shown = WalkStore.alwaysShowTestTools
+    @State private var shown = BuildChannel.known?.showsTestTools ?? false
     @AppStorage(WalletPassButton.settingKey) private var walletPasses = false
 
     var body: some View {
@@ -597,8 +619,14 @@ private struct TestToolsRow: View {
                     SettingsToggle(label: l10n.t("settings.test.walletPasses"), isOn: walletPasses, last: true) { walletPasses = $0 }
                 }
                 .padding(.top, 12)
+                NavigationLink("Test alerts", value: AppRoute.testAlerts)
+                    .buttonStyle(.clack(wide: true))
+                    .padding(.top, 12)
+                NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
+                    .buttonStyle(.clack(wide: true))
+                    .padding(.top, 12)
             }
         }
-        .task { if !shown { shown = await WalkStore.isTestBuild() } }
+        .task { if !shown { shown = await BuildChannel.current().showsTestTools } }
     }
 }

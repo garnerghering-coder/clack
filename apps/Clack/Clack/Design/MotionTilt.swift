@@ -26,7 +26,9 @@ final class MotionTilt {
     func start() {
         guard manager.isDeviceMotionAvailable, !manager.isDeviceMotionActive else { return }
         reference = nil
-        manager.deviceMotionUpdateInterval = 1.0 / 30
+        // 20 a second, and a still phone writes nothing (run 2: ~100 wake-ups a second on Passport with the phone
+        // lying still, each one redrawing the card's shine).
+        manager.deviceMotionUpdateInterval = 1.0 / 20
         manager.startDeviceMotionUpdates(to: .main) { [weak self] motion, _ in
             guard let motion else { return }
             MainActor.assumeIsolated { self?.update(roll: motion.attitude.roll, pitch: motion.attitude.pitch) }
@@ -46,10 +48,14 @@ final class MotionTilt {
         let targetYaw = ((roll - base.roll) * rad * 0.55).clamped(-14, 14)
         let targetPitch = ((p - base.pitch) * rad * 0.45).clamped(-10, 10)
         let targetShine = (0.5 + (roll - base.roll) * rad / 30).clamped(0, 1)
-        // Low-pass: move a fraction of the way each time.
-        yaw += (targetYaw - yaw) * 0.22
-        pitch += (targetPitch - pitch) * 0.22
-        shine += (targetShine - shine) * 0.22
+        // Low-pass: move a fraction of the way each time (a larger one at 20 a second than at 30, for the same feel).
+        let k = 0.3
+        let next = (yaw + (targetYaw - yaw) * k, pitch + (targetPitch - pitch) * k, shine + (targetShine - shine) * k)
+        // Too small to see: left alone, so the card isn't redrawn.
+        guard abs(next.0 - yaw) > 0.02 || abs(next.1 - pitch) > 0.02 || abs(next.2 - shine) > 0.001 else { return }
+        yaw = next.0
+        pitch = next.1
+        shine = next.2
     }
 }
 

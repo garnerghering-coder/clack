@@ -133,18 +133,50 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         }
     }
 
+    /// Cancelled trains on one stretch in the next two hours (both directions): they never run, so the map can't show
+    /// them (owner, 2026-11-07: Jönköping C full of cancelled Västtågen, with buses instead, and nothing here).
+    public nonisolated struct CancelledGroup: Codable, Hashable, Sendable, Identifiable {
+        public let stations: [String]
+        public let country: String
+        public let trains: Int
+        /// How many have a bus instead, as the source says.
+        public let bus: Int
+        public let operatorIds: [String]
+        public let causes: [Cause]
+        public let firstAt: Double
+        public let numbers: [String]
+
+        public var id: String { stations.joined(separator: "|") + operatorIds.joined() }
+
+        public init(stations: [String], country: String, trains: Int, bus: Int, operatorIds: [String], causes: [Cause], firstAt: Double, numbers: [String]) {
+            self.stations = stations
+            self.country = country
+            self.trains = trains
+            self.bus = bus
+            self.operatorIds = operatorIds
+            self.causes = causes
+            self.firstAt = firstAt
+            self.numbers = numbers
+        }
+    }
+
     public let at: Double
     /// Minutes late that counts as late (10).
     public let lateMin: Int
     public let countries: [String: Country]
     public let corridors: [Corridor]
     public let late: [LateTrain]
+    /// Sweden only for now (Trafikverket's announcements); nil from an older server.
+    public let cancelled: [CancelledGroup]?
+    public let cancelledTrains: Int?
 
-    public init(at: Double, lateMin: Int, countries: [String: Country], corridors: [Corridor], late: [LateTrain]) {
+    public init(at: Double, lateMin: Int, countries: [String: Country], corridors: [Corridor], late: [LateTrain], cancelled: [CancelledGroup]? = nil, cancelledTrains: Int? = nil) {
         self.at = at
         self.lateMin = lateMin
         self.countries = countries
         self.corridors = corridors
         self.late = late
+        self.cancelled = cancelled
+        self.cancelledTrains = cancelledTrains
     }
 }

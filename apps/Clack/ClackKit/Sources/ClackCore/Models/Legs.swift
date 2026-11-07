@@ -457,6 +457,14 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
         }
 
         public var isFacility: Bool { facility ?? false }
+
+        /// The source says a bus runs instead of the train: Trafikverket's ANA007 "Buss ersätter", or the same words
+        /// from a feed that sends text only. Nothing else counts: a cancelled train with no such note stays cancelled.
+        public var isBusReplacement: Bool {
+            if code?.uppercased() == "ANA007" { return true }
+            let t = text?.lowercased() ?? ""
+            return t.hasPrefix("buss ersätter") || t.hasPrefix("buss for tog") || t.hasPrefix("bus replaces")
+        }
     }
 
     /// The causes to show: the structured ones, else the plain texts of an older server.

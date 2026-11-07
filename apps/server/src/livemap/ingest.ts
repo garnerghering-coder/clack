@@ -11,6 +11,7 @@ import { brandMatcher } from '../boards/board.js';
 import { loadBrands } from '../dataFiles.js';
 import { brandOnLine, trainTypeFor } from '../legs/trainTypes.js';
 import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js';
+import type { CancelledRun } from './network.js';
 import { segmentBetween, segmentCached, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
@@ -607,6 +608,17 @@ export class LiveMapIngest extends EventEmitter {
       },
     );
     return fix ? { fix } : null;
+  }
+
+  /** Swedish trains cancelled (all or part of the way) from now to `aheadMs` ahead, with station names and the brand:
+   * they never run, so the map and its network status never see them (owner, 2026-11-07, Jönköping C). */
+  cancelledTrains(aheadMs = 2 * 3600_000): CancelledRun[] {
+    return this.ann.cancelled(aheadMs).map((c) => {
+      const from = this.name(c.fromSig) ?? c.fromSig;
+      const to = this.name(c.toSig) ?? c.toSig;
+      const operatorId = brandOnLine((c.productName && this.matchBrand(c.productName)) || (c.operatorText && this.matchBrand(c.operatorText)) || null, [from, to]);
+      return { number: c.number, date: c.date, from, to, operatorId, firstAt: c.firstAt, bus: c.bus, causes: c.causes };
+    });
   }
 
   /** Train k at this position, with what the announcements say about it; or off the map if it shouldn't show. */

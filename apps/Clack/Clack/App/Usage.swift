@@ -173,9 +173,22 @@ final class UsageAsk {
     static let shared = UsageAsk()
     var show = false
 
-    /// After the trips load: the first time one of them has ended, ask (once).
+    /// When this phone first opened Clack; set on the first check of the first run.
+    static let firstOpenedKey = "clack.usage.firstOpened"
+    /// Whether Clack had been opened before this run started: read once per run, before the first check stores it.
+    private let openedBefore: Bool = {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: UsageAsk.firstOpenedKey) != nil { return true }
+        defaults.set(Date.now.timeIntervalSince1970, forKey: UsageAsk.firstOpenedKey)
+        return false
+    }()
+
+    /// After the trips load: on a later start than the first, once one of the trips has ended, ask (once). Never on
+    /// the first run, even when trips come back with it (a reinstall keeps them) or a past trip was just added (user
+    /// test 2026-11-07, run 2: it was the first thing a new phone saw); the privacy page says the same
+    /// (`privacy.usageBody`).
     func check(_ legs: [Leg], now: Double = Date.now.timeIntervalSince1970 * 1000) {
-        guard !Usage.shared.asked else { return }
+        guard !Usage.shared.asked, openedBefore else { return }
         if legs.contains(where: { $0.actualArr != nil || $0.live?.status == .arrived || ($0.schedArr?.ms ?? .infinity) < now }) {
             Usage.shared.asked = true
             show = true

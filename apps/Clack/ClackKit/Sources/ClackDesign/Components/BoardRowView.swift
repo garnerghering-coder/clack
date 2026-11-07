@@ -28,6 +28,8 @@ public struct BoardRowView<Badge: View>: View {
         public var platformFrom: String?
         public var delay: Int?
         public var canceled: Bool
+        /// Cancelled with a bus instead, as the source says ("Replaced by bus" rather than "Cancelled").
+        public var replacedByBus: Bool
         /// "Departed" or "Arrived" once the train has gone.
         public var done: String?
         /// Gone a while ago: faded.
@@ -36,7 +38,7 @@ public struct BoardRowView<Badge: View>: View {
         public init(
             time: Double, sched: Double, tz: String, destination: String, via: String? = nil, service: String? = nil,
             notes: String? = nil, platform: String? = nil, platformFrom: String? = nil, delay: Int? = nil,
-            canceled: Bool = false, done: String? = nil, past: Bool = false
+            canceled: Bool = false, replacedByBus: Bool = false, done: String? = nil, past: Bool = false
         ) {
             self.time = time
             self.sched = sched
@@ -49,6 +51,7 @@ public struct BoardRowView<Badge: View>: View {
             self.platformFrom = platformFrom
             self.delay = delay
             self.canceled = canceled
+            self.replacedByBus = replacedByBus
             self.done = done
             self.past = past
         }
@@ -139,7 +142,7 @@ public struct BoardRowView<Badge: View>: View {
     @ViewBuilder
     private var delay: some View {
         if line.canceled {
-            DelayText(delay: nil, canceled: true)
+            DelayText(delay: nil, canceled: true, replacedByBus: line.replacedByBus)
         } else if let delay = line.delay {
             DelayText(delay: delay)
         }

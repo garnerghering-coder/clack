@@ -48,6 +48,7 @@ struct NetworkPanel: View {
             if let status {
                 countries(status)
                 corridors(status)
+                if let groups = status.cancelled, !groups.isEmpty { cancelled(groups, total: status.cancelledTrains ?? groups.count, tz: TimeZone.current.identifier) }
                 if !status.late.isEmpty { lateTrains(status) }
                 Text(l10n.t("network.explain", ["min": String(status.lateMin)])).clack(.micro).foregroundStyle(Ink.text3)
             } else if failed {
@@ -106,6 +107,34 @@ struct NetworkPanel: View {
         }
     }
 
+    // MARK: cancelled trains
+
+    /// Cancelled in the next two hours, by stretch: whether a bus runs instead is written, never left to guess.
+    @ViewBuilder
+    private func cancelled(_ groups: [NetworkStatus.CancelledGroup], total: Int, tz: String) -> some View {
+        Text(l10n.t("network.cancelled")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        ForEach(groups) { g in
+            HStack(alignment: .top, spacing: 12) {
+                OperatorBadge(op: g.operatorIds.first.flatMap { app.operatorsById[$0] }, size: .small)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(g.stations.joined(separator: " – ")).clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
+                    Text(NetworkWording.cancelledLine(g, l10n: l10n, tz: tz, clock: app.settings.clock))
+                        .clack(.caption).monospacedDigit().foregroundStyle(g.bus == g.trains ? Ink.lateInk : Ink.veryLateInk)
+                    if !g.causes.isEmpty {
+                        Text(NetworkWording.reasons(g.causes, l10n: l10n, counted: false)).clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                }
+                Spacer(minLength: 0)
+            }
+            .frame(minHeight: 44)
+            .accessibilityElement(children: .combine)
+        }
+        if total > groups.reduce(0, { $0 + $1.trains }) {
+            Text(l10n.t("network.cancelledMore", ["count": String(total)])).clack(.micro).foregroundStyle(Ink.text3)
+        }
+        Text(l10n.t("network.cancelledSource")).clack(.micro).foregroundStyle(Ink.text3)
+    }
+
     // MARK: late trains
 
     @ViewBuilder
@@ -141,6 +170,13 @@ struct NetworkPanel: View {
 
 /// The panel's wording, kept apart from the view so it can be read and tested on its own.
 enum NetworkWording {
+    /// "3 trains cancelled from 18:19 · a bus replaces all", or "… · a bus replaces 1", or "… · no bus given".
+    static func cancelledLine(_ g: NetworkStatus.CancelledGroup, l10n: L10n, tz: String, clock: ClockFormat) -> String {
+        let head = l10n.t("network.cancelledTrains", count: g.trains, ["count": String(g.trains), "time": Format.time(g.firstAt, tz: tz, clock: clock)])
+        let bus = g.bus == 0 ? l10n.t("network.noBus") : g.bus == g.trains ? l10n.t("network.busAll") : l10n.t("network.busSome", ["count": String(g.bus)])
+        return "\(head) · \(bus)"
+    }
+
     /// A country's line is the late ink when one train in ten or more is late, otherwise plain.
     static func countryInk(_ c: NetworkStatus.Country) -> Color {
         c.trains > 0 && c.late * 10 >= c.trains ? Ink.lateInk : Ink.text2

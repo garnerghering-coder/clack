@@ -1517,13 +1517,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap the stop where you got on."
+            "value" : "Tap the stop where you get on."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tryck på stationen där du klev på."
+            "value" : "Tryck på stationen där du kliver på."
           }
         }
       }
@@ -1534,13 +1534,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap the stop where you got off."
+            "value" : "Tap the stop where you get off."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tryck på stationen där du klev av."
+            "value" : "Tryck på stationen där du kliver av."
           }
         }
       }
@@ -9073,13 +9073,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arrived"
+            "value" : "Arrives"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ankom"
+            "value" : "Ankommer"
           }
         }
       }
@@ -9124,13 +9124,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Departed"
+            "value" : "Departs"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avgick"
+            "value" : "Avgår"
           }
         }
       }
@@ -9141,13 +9141,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Got on at"
+            "value" : "From"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klev på i"
+            "value" : "Från"
           }
         }
       }
@@ -9396,13 +9396,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Got off at"
+            "value" : "To"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Klev av i"
+            "value" : "Till"
           }
         }
       }
@@ -13252,13 +13252,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only if you say yes (Clack asks once, after your first trip; Settings > Usage data changes it): anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. They go only to our own server, as totals per day with no code, device or anything that says who you are, so we can see what to improve."
+            "value" : "Only if you say yes (Clack asks once, on a later start after one of your trips has ended, never the first time you open it; Settings > Usage data changes it): anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. They go only to our own server, as totals per day with no code, device or anything that says who you are, so we can see what to improve."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bara om du säger ja (Clack frågar en gång, efter din första resa; Inställningar > Användningsdata ändrar det): anonyma dagliga antal av vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. De går bara till vår egen server, som summor per dag utan kod, enhet eller något som säger vem du är, så att vi ser vad som behöver bli bättre."
+            "value" : "Bara om du säger ja (Clack frågar en gång, vid en senare start efter att en av dina resor är slut, aldrig första gången du öppnar appen; Inställningar > Användningsdata ändrar det): anonyma dagliga antal av vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. De går bara till vår egen server, som summor per dag utan kod, enhet eller något som säger vem du är, så att vi ser vad som behöver bli bättre."
           }
         }
       }
@@ -13983,13 +13983,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On your logged trains, your phone tells Clack how far along the track your train is. Never your coordinates or your account id."
+            "value" : "Never your coordinates or account id: only how far along the track your logged train is."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "På dina loggade tåg berättar telefonen för Clack hur långt längs spåret ditt tåg har kommit. Aldrig dina koordinater eller ditt konto-id."
+            "value" : "Aldrig dina koordinater eller ditt konto-id: bara hur långt längs spåret ditt loggade tåg har kommit."
           }
         }
       }
@@ -22919,6 +22919,285 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Den hamnar bland dina resor och i ditt pass."
+          }
+        }
+      }
+    },
+    "liveMap.locationOffTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location is off for Clack"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platstjänster är av för Clack"
+          }
+        }
+      }
+    },
+    "liveMap.locationOffBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn it on in Settings to see where you are on the map."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slå på det i Inställningar för att se var du är på kartan."
+          }
+        }
+      }
+    },
+    "delay.busReplaced" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replaced by bus"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ersatt av buss"
+          }
+        }
+      }
+    },
+    "detail.addedByHand" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added by hand: the times are the ones you entered."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tillagd för hand: tiderna är de du skrev in."
+          }
+        }
+      }
+    },
+    "settings.offlineMapsWhen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save maps for coming trips"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara kartor för kommande resor"
+          }
+        }
+      }
+    },
+    "settings.offlineMapsWhens.wifi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On Wi‑Fi"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "På wifi"
+          }
+        }
+      }
+    },
+    "settings.offlineMapsWhens.always" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Always"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alltid"
+          }
+        }
+      }
+    },
+    "settings.offlineMapsWhens.never" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aldrig"
+          }
+        }
+      }
+    },
+    "network.cancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelled, next two hours"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställda, de närmaste två timmarna"
+          }
+        }
+      }
+    },
+    "network.noBus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no bus given"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ingen buss angiven"
+          }
+        }
+      }
+    },
+    "network.busAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a bus replaces them"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "buss ersätter"
+          }
+        }
+      }
+    },
+    "network.busSome" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a bus replaces {{count}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "buss ersätter {{count}}"
+          }
+        }
+      }
+    },
+    "network.cancelledMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} cancelled trains in all"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} inställda tåg totalt"
+          }
+        }
+      }
+    },
+    "network.cancelledSource" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sweden only for now, from Trafikverket. Cancelled trains don't run, so they aren't on the map."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara Sverige än så länge, från Trafikverket. Inställda tåg går inte, så de syns inte på kartan."
+          }
+        }
+      }
+    },
+    "network.cancelledTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld train cancelled from {{time}}"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld trains cancelled from {{time}}"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tåg inställt från {{time}}"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tåg inställda från {{time}}"
+                }
+              }
+            }
           }
         }
       }

@@ -15,9 +15,22 @@ struct SeatEditor: View {
     let leg: Leg
     /// The trip as the server has it after the change.
     let onSaved: (LegDetail) -> Void
+    /// A field got the keyboard: the page scrolls the fields above it.
+    var onFocus: () -> Void = {}
 
-    @State private var coach = ""
-    @State private var seat = ""
+    // Filled from the trip when the editor is made, and again only when the saved values change while neither field
+    // is being typed in: not on every appear, which wiped what was typed when the page rebuilt (user test 2026-11-07,
+    // run 2: "23" gone after the keyboard closed).
+    @State private var coach: String
+    @State private var seat: String
+
+    init(leg: Leg, onSaved: @escaping (LegDetail) -> Void, onFocus: @escaping () -> Void = {}) {
+        self.leg = leg
+        self.onSaved = onSaved
+        self.onFocus = onFocus
+        _coach = State(initialValue: leg.coach ?? "")
+        _seat = State(initialValue: leg.seat ?? "")
+    }
     @State private var saving = false
     @State private var failed = false
     @FocusState private var focus: Field?
@@ -42,11 +55,14 @@ struct SeatEditor: View {
             // Said once it is saved (and shown on the trip's header from then on).
             if savedNote, patch == nil, !failed { Text(l10n.t("seat.savedNote")).clack(.caption).foregroundStyle(Ink.onTimeInk) }
         }
-        .onAppear(perform: reset)
+        .onChange(of: leg.id) { _, _ in reset() }
         .onChange(of: leg.coach) { _, _ in if focus == nil { reset() } }
         .onChange(of: leg.seat) { _, _ in if focus == nil { reset() } }
         // Leaving the fields saves what was typed, so nothing depends on reaching a button.
-        .onChange(of: focus) { was, now in if was != nil, now == nil, patch != nil { Task { await save() } } }
+        .onChange(of: focus) { was, now in
+            if was == nil, now != nil { onFocus() }
+            if was != nil, now == nil, patch != nil { Task { await save() } }
+        }
     }
 
     private func field(_ label: String, text: Binding<String>, field: Field) -> some View {
@@ -56,19 +72,13 @@ struct SeatEditor: View {
                 .focused($focus, equals: field)
                 .textInputAutocapitalization(.characters)
                 .autocorrectionDisabled()
-                // Digits first (a car is "5", a seat "23"; letters are a tap away for "12A"), and Done to put the
-                // keyboard away (user test 2026-11-07: full QWERTY with caps, no Done, Save hidden under the keyboard).
+                // Digits first (a car is "5", a seat "23"; letters are a tap away for "12A"), with the keyboard's own
+                // Done key, which saves (user test 2026-11-07: full QWERTY with caps, no Done). No bar above the
+                // keyboard: on iOS 26 it floats as a glass pill over the seat field (run 2); the page scrolls the
+                // fields and the Save button above the keyboard instead.
                 .keyboardType(.numbersAndPunctuation)
                 .submitLabel(.done)
-                .onSubmit { Task { await save() } }
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        if focus == field {
-                            Spacer()
-                            Button(patch == nil ? l10n.t("common.done") : l10n.t("seat.save")) { Task { await save(); focus = nil } }
-                        }
-                    }
-                }
+                .onSubmit { Task { await save(); focus = nil } }
                 .clack(.body).monospacedDigit().foregroundStyle(Ink.text)
                 .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(minHeight: 44)

@@ -24,6 +24,9 @@ final class HistoryStub: URLProtocol, @unchecked Sendable {
         if url.path.hasSuffix("/history/prepare") {
             HistoryStub.prepared.append(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "date" }?.value ?? "")
             body = #"{"sweden":"loading"}"#
+        } else if url.path.hasSuffix("/stations/search") {
+            // The station suggestions asked for while typing (since they came in): not a search.
+            body = "[]"
         } else {
             HistoryStub.searches += 1
             let loading = HistoryStub.searches <= HistoryStub.loadingFor

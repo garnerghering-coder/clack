@@ -3,14 +3,13 @@
 //  Clack
 //
 
-#if DEBUG
 import ActivityKit
 import ClackCore
 import ClackDesign
 import SwiftUI
 import UserNotifications
 
-/// Debug only: fire each alert the server sends, and run the trip card (Lock Screen and Dynamic Island) through its
+/// Test builds only (Xcode and TestFlight, `BuildChannel`): fire each alert the server sends, and run the trip card (Lock Screen and Dynamic Island) through its
 /// states, from the phone itself. No Apple push or server needed: these are local notifications and a local Live
 /// Activity, with the same wording the server uses (apps/server/src/push/text.ts; keep the two in step).
 @MainActor
@@ -288,7 +287,7 @@ struct TestAlertsScreen: View {
 
     var body: some View {
         Page {
-            Text("Debug builds only. Alerts here are local to this phone, with the wording the server uses. Set a delay, press one, then lock the phone.")
+            Text("Test builds only (Xcode and TestFlight). Alerts here are local to this phone, with the wording the server uses. Set a delay, press one, then lock the phone.")
                 .clack(.caption).foregroundStyle(Ink.text2)
             if let message = model.message { Banner(kind: .neutral) { Text(message) } }
 
@@ -349,4 +348,3 @@ struct TestAlertsScreen: View {
         .sheet(isPresented: $gallery) { NavigationStack { ActivityGalleryView() } }
     }
 }
-#endif

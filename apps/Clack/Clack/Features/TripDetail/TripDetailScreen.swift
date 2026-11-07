@@ -48,6 +48,8 @@ struct TripDetailScreen: View {
     @State private var scrollTarget: String?
     /// Editing a hand-added trip's times, operator and number.
     @State private var editingManual = false
+    /// A field that got the keyboard, to be scrolled into the middle of what the keyboard leaves visible.
+    @State private var focusTarget: String?
 
     var body: some View {
         GeometryReader { proxy in
@@ -234,7 +236,12 @@ struct TripDetailScreen: View {
         let shown = m.shown
         let tracking = m.tracking
         let stage = m.stage
-        let mapHeight = min(proxy.size.height * 0.55 + proxy.safeAreaInsets.top, 520)
+        // From the whole height, keyboard included (`safeAreaInsets.bottom` grows by what the keyboard takes), so the
+        // map keeps its size while typing: it shrank under the keyboard and grew back after, moving the fields about
+        // 130 pt under the finger (user test 2026-11-07, run 2). Before departure a little less map, so the alerts
+        // question and its button sit above the tab bar on the first screen.
+        let fullHeight = proxy.size.height + proxy.safeAreaInsets.bottom
+        let mapHeight = min(fullHeight * (stage == .before ? 0.42 : 0.5) + proxy.safeAreaInsets.top, 520)
         ScrollViewReader { scroller in
         ScrollView {
             VStack(spacing: 0) {
@@ -250,6 +257,9 @@ struct TripDetailScreen: View {
             }
         }
         .ignoresSafeArea(edges: .top)
+        // The system's edge effect under the bar's buttons, asked for by name: with the page running under the bar
+        // the automatic one didn't show, so scrolled text ran into the back button (user test 2026-11-07, run 2).
+        .modifier(SoftTopEdge())
         .scrollBounceBehavior(.always)
         // Pull to refresh asks the sources for fresh times (a saved trip just reloads).
         .refreshable { await (detail.leg.status == .snapshotted ? load() : refresh()) }
@@ -257,6 +267,15 @@ struct TripDetailScreen: View {
             guard let target else { return }
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.3)) { scroller.scrollTo(target, anchor: .top) }
             scrollTarget = nil
+        }
+        .onChange(of: focusTarget) { _, target in
+            guard let target else { return }
+            Task {
+                // After the keyboard has come up, so "visible" means above it.
+                try? await Task.sleep(for: .milliseconds(350))
+                withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { scroller.scrollTo(target, anchor: .center) }
+                focusTarget = nil
+            }
         }
         #if DEBUG
         // `-scrollTo stops` (or times, about, train, onboard, activity, details) scrolls there on launch, to check a
@@ -658,7 +677,10 @@ struct TripDetailScreen: View {
 
     private func detailsCard(_ detail: LegDetail) -> some View {
         let l = detail.leg
-        let beyond = TripDetailLogic.beyondCountries(detail.stops)
+        // A trip added by hand has no feed behind it at all: it says that, not that a country has no live data
+        // (run 2: "No live data in Sweden" on a hand-added SJ 421).
+        let manual = l.dataQuality == .manual
+        let beyond = manual ? [] : TripDetailLogic.beyondCountries(detail.stops)
         let dep = l.actualDep?.ms ?? l.schedDep?.ms
         let arr = l.actualArr?.ms ?? l.schedArr?.ms
         return Card(spacing: 12) {
@@ -670,8 +692,11 @@ struct TripDetailScreen: View {
                 )
                 Tile(label: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000) : Format.unknown)
             }
-            SeatEditor(leg: l) { leg = $0 }
-            if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
+            SeatEditor(leg: l, onSaved: { leg = $0 }, onFocus: { focusTarget = "seat" })
+                .id("seat")
+            if manual {
+                Text(l10n.t("detail.addedByHand")).clack(.caption).foregroundStyle(Ink.text2)
+            } else if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
                 Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))
             }
             if !beyond.isEmpty {
@@ -782,11 +807,18 @@ struct TimeBlock: View {
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
         VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .top, spacing: 8) {
-                // Two lines when it must ("DEPARTURE" at the largest text sizes), never cut mid-word.
-                Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(2).fixedSize(horizontal: false, vertical: true)
-                Spacer(minLength: 0)
-                platformTag
+            // The label beside the platform when both fit on one line, else the platform under it: one word can't
+            // wrap without being cut ("DEPARTU / RE" on a Pro Max at the default size, build 59).
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .top, spacing: 8) {
+                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).fixedSize()
+                    Spacer(minLength: 0)
+                    platformTag
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).minimumScaleFactor(0.7)
+                    platformTag
+                }
             }
             .frame(minHeight: 26)
             // The planned time, struck, with the delay beside it on the same line (owner, 2026-10-29); blank when nothing changed.
@@ -925,5 +957,16 @@ struct StatusCard<Second: View>: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// The system's soft edge effect at the top (iOS 26 and later; earlier systems have their own bar background).
+private struct SoftTopEdge: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.scrollEdgeEffectStyle(.soft, for: .top)
+        } else {
+            content
+        }
     }
 }

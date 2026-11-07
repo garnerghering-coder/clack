@@ -6,6 +6,7 @@
 import ClackCore
 import Foundation
 import MapLibre
+import Network
 
 /// Maps with no connection (owner, 2026-10-24): the tiles of maps you have looked at stay on the phone (a big cache), and the
 /// map around each trip about to be ridden is downloaded while online, so routes and the train show underground or out of range.
@@ -14,6 +15,38 @@ import MapLibre
 enum OfflineMaps {
     static let ambientBytes: UInt = 250 * 1024 * 1024
     private static let key = "clackLeg"
+
+    /// When the maps for coming trips are downloaded (Settings > Maps without signal), kept on this phone. On Wi-Fi by
+    /// default: a trip's map is a few megabytes, and it came down over mobile data unasked (user test 2026-11-07, run 2).
+    enum When: String, CaseIterable {
+        case wifi, always, never
+    }
+    static let whenKey = "clack.offlineMaps.when"
+    static var when: When {
+        get { UserDefaults.standard.string(forKey: whenKey).flatMap(When.init) ?? .wifi }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: whenKey) }
+    }
+
+    /// Whether downloads may run now: never; always; or on a connection that isn't metered or in Low Data Mode.
+    static func mayDownload() async -> Bool {
+        switch when {
+        case .never: return false
+        case .always: return true
+        case .wifi:
+            let monitor = NWPathMonitor()
+            let path = await withCheckedContinuation { (c: CheckedContinuation<NWPath, Never>) in
+                var done = false
+                monitor.pathUpdateHandler = { path in
+                    guard !done else { return }
+                    done = true
+                    c.resume(returning: path)
+                }
+                monitor.start(queue: .global(qos: .utility))
+            }
+            monitor.cancel()
+            return path.status == .satisfied && !path.isExpensive && !path.isConstrained
+        }
+    }
 
     static func configure() {
         MLNOfflineStorage.shared.setMaximumAmbientCacheSize(ambientBytes) { _ in }
@@ -44,6 +77,7 @@ enum OfflineMaps {
         for pack in storage.packs ?? [] where legId(pack).map({ !wanted.contains($0) }) == true {
             await withCheckedContinuation { (c: CheckedContinuation<Void, Never>) in storage.removePack(pack) { _ in c.resume() } }
         }
+        guard await mayDownload() else { return }
         guard let styleURL = try? MapStyle.write(MapStyle.style(base: Config.apiBase, withBasemap: true, dark: true, railNetwork: true, kind: .route(color: "#F8D64A"))) else { return }
         for detail in details where !have.contains(detail.leg.id) {
             guard let box = bounds(of: detail.mapRoute().route) else { continue }

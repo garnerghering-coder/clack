@@ -3,12 +3,11 @@
 //  Clack
 //
 
-#if DEBUG
 import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// Debug only: every design token and component, in either theme (docs/SWIFT_PORT.md step 4, DESIGN §2.5). Reach it from
+/// Test builds only (Xcode and TestFlight, `BuildChannel`): every design token and component, in either theme (docs/SWIFT_PORT.md step 4, DESIGN §2.5). Reach it from
 /// Settings > Design, or launch with the argument `-design` (and `-light` to start in the light theme; `-section
 /// StopTimeline` scrolls to a section). The samples are made-up shapes for checking the look, never shown as data.
 struct DesignGalleryView: View {
@@ -401,4 +400,3 @@ struct DesignGalleryView: View {
         .id(title)
     }
 }
-#endif

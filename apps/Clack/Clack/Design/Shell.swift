@@ -118,6 +118,8 @@ struct SheetFrame<Content: View>: View {
     let title: String
     var onClose: () -> Void
     @ViewBuilder var content: Content
+    /// The step's main button, pinned under the list (`.sheetAction`).
+    @State private var action = SheetAction()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -140,9 +142,61 @@ struct SheetFrame<Content: View>: View {
             }
             // A scroll puts the keyboard away: the list is what you're reading now (user test 2026-11-07).
             .scrollDismissesKeyboard(.immediately)
+            // The step's main button stays in reach at the bottom while the stops scroll (user test 2026-11-07, run
+            // 2: "Add to trips" was cut in half by the bottom edge, then scrolled away).
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if let title = action.title {
+                    Button(title) { action.run?() }
+                        .buttonStyle(.clack(.primary, wide: true))
+                        .disabled(!action.enabled)
+                        .padding(.horizontal, 16).padding(.top, 8).padding(.bottom, 8)
+                        .background(Ink.surface)
+                }
+            }
         }
+        .environment(action)
         .background(Ink.surface)
         .presentationCornerRadius(Radius.sheet)
         .presentationBackground(Ink.surface)
+    }
+}
+
+/// A sheet step's main button, shown pinned by `SheetFrame`.
+@MainActor
+@Observable
+final class SheetAction {
+    var title: String?
+    var enabled = true
+    @ObservationIgnored var run: (() -> Void)?
+}
+
+extension View {
+    /// Pins this step's main button at the bottom of the sheet while the step shows.
+    func sheetAction(_ title: String, enabled: Bool, perform: @escaping () -> Void) -> some View {
+        modifier(SheetActionModifier(title: title, enabled: enabled, perform: perform))
+    }
+}
+
+private struct SheetActionModifier: ViewModifier {
+    @Environment(SheetAction.self) private var action: SheetAction?
+    let title: String
+    let enabled: Bool
+    let perform: () -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear { apply() }
+            .onChange(of: "\(title)|\(enabled)") { apply() }
+            .onDisappear {
+                guard let action, action.title == title else { return }
+                action.title = nil
+                action.run = nil
+            }
+    }
+
+    private func apply() {
+        action?.title = title
+        action?.enabled = enabled
+        action?.run = perform
     }
 }

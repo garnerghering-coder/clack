@@ -67,8 +67,11 @@ public nonisolated enum Format {
     public static func day(_ ms: Double, tz: String, now: Double = Date.now.timeIntervalSince1970 * 1000, language: Language = .en) -> String {
         let calendar = calendar(tz)
         let sameYear = calendar.component(.year, from: date(ms)) == calendar.component(.year, from: date(now))
+        // No full stops: Swedish abbreviates "nov." and "sön.", which doubled the stop where a day ends a sentence
+        // ("Inget tåg SJ 421 sön 8 nov..", user test 2026-11-07, run 2).
         return formatted(ms, tz: tz, language: language, template: sameYear ? "EEEdMMM" : "EEEdMMMy")
             .replacingOccurrences(of: ",", with: "")
+            .replacingOccurrences(of: ".", with: "")
     }
 
     /// "Friday 17 October 2026".

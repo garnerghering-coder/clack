@@ -74,9 +74,16 @@ final class LiveMapController {
     var display = MapDisplay.load() { didSet { applyDisplay() } }
 
     /// Your position on the map: MapLibre's own dot, there once iOS has allowed it unless switched off in the Map
-    /// settings, and the camera is left where it is.
+    /// settings, and the camera is left where it is. Never before iOS has said yes: switching the dot on makes MapLibre
+    /// ask, and the question came the moment Explore opened (user test 2026-11-07, run 2).
     func showUserDot() {
-        mapView?.showsUserLocation = display.myLocation
+        mapView?.showsUserLocation = display.myLocation && LocationModel.shared.allowed
+    }
+
+    /// Off while Explore isn't showing: the dot keeps location updates and the map's redraws going (run 2: ~200
+    /// wake-ups a second on other screens once the map had been shown).
+    func hideUserDot() {
+        mapView?.showsUserLocation = false
     }
 
     /// Shows or hides the layers the Map settings name: trains, train labels, station dots, station names, your dot.

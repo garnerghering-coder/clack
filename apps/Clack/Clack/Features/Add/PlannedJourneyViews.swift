@@ -121,6 +121,8 @@ struct PlannedJourneyStep: View {
     @State private var saving = false
     @State private var followed = false
     @State private var dupes: [Int] = []
+    /// The trains saved by the first try when some were already there, for "Keep what I have".
+    @State private var savedSoFar: LegDetail?
     @State private var error: String?
 
     /// The trains as unsaved trips, with the planner's tier and country so the change cards agree with it.
@@ -168,13 +170,24 @@ struct PlannedJourneyStep: View {
         } change: { a, b in
             ConnectionCard(a: a, b: b, compact: true)
         }
-        if !dupes.isEmpty { Banner(kind: .warn) { Text(l10n.t("add.duplicate")) } }
+        // Already there: the choice is made here, as on the one-train step, not by tapping the same button again (run
+        // 2: it stayed yellow after the notice and a second tap quietly added a copy).
+        if !dupes.isEmpty {
+            Banner(kind: .warn) {
+                Text(l10n.t("add.duplicate"))
+                HStack(spacing: 8) {
+                    Button(l10n.t("add.addAnyway")) { Task { await save(force: true) } }.buttonStyle(.clack(.primary, small: true)).disabled(saving)
+                    Button(l10n.t("add.cancel")) {
+                        if let savedSoFar { onSaved(savedSoFar) } else { dupes = [] }
+                    }
+                    .buttonStyle(.clack(small: true))
+                }
+            }
+        }
         if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
         let ahead = journey.arr > Date.now.timeIntervalSince1970 * 1000
-        Button(l10n.t("journey.addToTrips")) { Task { await save(force: !dupes.isEmpty) } }
-            .buttonStyle(.clack(.primary, wide: true))
-            .disabled(saving)
-            .padding(.top, 8)
+        Color.clear.frame(height: 0)
+            .sheetAction(l10n.t("journey.addToTrips"), enabled: !saving && dupes.isEmpty) { Task { await save(force: false) } }
         // Following is for a train still to run; and the two are told apart in a line (user test 2026-11-07: six
         // testers asked what the difference was, and Follow was offered on a train from 2023).
         if ahead {
@@ -222,6 +235,7 @@ struct PlannedJourneyStep: View {
             }
             if !already.isEmpty && !force {
                 dupes = already
+                savedSoFar = last
             } else if let last {
                 onSaved(last)
             }

@@ -232,7 +232,9 @@ private struct StationBoardRow: View {
         let op = row.operatorId.flatMap { app.operatorsById[$0] }
         let type = row.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let changed = BoardLogic.platformChanged(row, now: now)
-        let notes = l10n.shownNotes(row.allCauses)
+        // A bus instead is said in the status ("Replaced by bus"), so its note isn't repeated under the name.
+        let replacedByBus = row.canceled && row.allCauses.contains(where: \.isBusReplacement)
+        let notes = l10n.shownNotes(replacedByBus ? row.allCauses.filter { !$0.isBusReplacement } : row.allCauses)
         let line = BoardRowView<OperatorBadge>.Line(
             time: row.shown, sched: row.advertised, tz: tz, destination: row.endpoints.joined(separator: ", "),
             via: row.via.isEmpty ? nil : l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")]),
@@ -240,7 +242,7 @@ private struct StationBoardRow: View {
             notes: notes.isEmpty ? nil : Format.join(Array(notes.prefix(2))),
             platform: row.platform, platformFrom: changed ? (row.platformChange?.from ?? "") : nil,
             delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil, canceled: row.canceled,
-            done: row.done ? l10n.t(arrivals ? "board.arrived" : "board.departed") : nil, past: BoardLogic.isPast(row, now: now)
+            replacedByBus: replacedByBus, done: row.done ? l10n.t(arrivals ? "board.arrived" : "board.departed") : nil, past: BoardLogic.isPast(row, now: now)
         )
         Button(action: action) {
             BoardRowView(line, clock: app.settings.clock) { OperatorBadge(op: op, size: .small) }
