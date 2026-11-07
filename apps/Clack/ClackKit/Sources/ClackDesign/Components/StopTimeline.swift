@@ -186,26 +186,51 @@ public struct StopRow: View {
     /// The platform column: wide enough for "17b" and a changed mark, growing with the text size.
     @ScaledMetric(relativeTo: .footnote) private var platformWidth: CGFloat = 44
 
+    @Environment(\.dynamicTypeSize) private var typeSize
+
     public var body: some View {
-        HStack(spacing: 12) {
+        if typeSize.isAccessibilitySize {
+            // At accessibility sizes the time and platform go under the name, which then has the row's width
+            // (user test 2026-11-07, xxxLarge: "Stockholm C" broke into "Sto / ckh / olm / C" beside the time).
             HStack(spacing: 12) {
                 rail
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 4) {
                     nameView
                     ForEach(notes, id: \.self) { note in
                         Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
                     }
                     if let dwell { dwellLine(dwell) }
+                    HStack(spacing: 12) {
+                        timeView
+                        platformView
+                        Spacer(minLength: 0)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, compact ? 4 : 8)
-                timeView
             }
-            .accessibilityElement(children: .combine)
-            // Its own element: the dash that asks for the platform is a button of its own.
-            platformView
+            .frame(minHeight: compact ? 44 : 48)
+        } else {
+            HStack(spacing: 12) {
+                HStack(spacing: 12) {
+                    rail
+                    VStack(alignment: .leading, spacing: 0) {
+                        nameView
+                        ForEach(notes, id: \.self) { note in
+                            Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
+                        }
+                        if let dwell { dwellLine(dwell) }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, compact ? 4 : 8)
+                    timeView
+                }
+                .accessibilityElement(children: .combine)
+                // Its own element: the dash that asks for the platform is a button of its own.
+                platformView
+            }
+            .frame(minHeight: compact ? 44 : 48)
         }
-        .frame(minHeight: compact ? 44 : 48)
     }
 
     private func ink(_ tone: Note.Tone) -> Color {
@@ -226,7 +251,9 @@ public struct StopRow: View {
             .opacity(canceled ? 0.6 : 1)
             .multilineTextAlignment(.leading)
         if let onOpen {
-            Button(action: onOpen) { text }
+            // Selection off on the label: with it on (the app's default), a tap went to selecting the name and the
+            // board never opened (user test 2026-11-07: "the one screen I actually want, I never reached").
+            Button(action: onOpen) { text.textSelection(.disabled) }
                 .buttonStyle(.plain)
                 .accessibilityLabel(openLabel ?? name)
         } else {

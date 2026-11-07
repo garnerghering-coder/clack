@@ -435,8 +435,9 @@ struct LiveMapView: UIViewRepresentable {
         @objc func tapped(_ gesture: UITapGestureRecognizer) {
             guard let map = gesture.view as? MLNMapView else { return }
             let point = gesture.location(in: map)
-            // A fingertip is wider than the dot: 32 pt square, and the nearest dot to the finger wins.
-            let box = CGRect(x: point.x - 16, y: point.y - 16, width: 32, height: 32)
+            // A fingertip is wider than the dot: 44 pt square (the system's hit size; user test 2026-11-07: dots
+            // "too small to hit" at country zoom), and the nearest dot to the finger wins.
+            let box = CGRect(x: point.x - 22, y: point.y - 22, width: 44, height: 44)
             // Clusters zoom in two levels at the tap.
             if !map.visibleFeatures(at: point, styleLayerIdentifiers: ["clusters"]).isEmpty {
                 let at = map.convert(point, toCoordinateFrom: map)

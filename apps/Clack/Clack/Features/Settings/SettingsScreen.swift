@@ -181,6 +181,8 @@ private struct RiderSharingCard: View {
                 RiderReporter.shared.sharing = value
                 // A choice made here is the answer: the first-trip ask doesn't come and undo it (review P14).
                 UserDefaults.standard.set(true, forKey: "riders.asked")
+                // Switched on: iOS asks for location now, here, not minutes later on another tab (user test 2026-11-07).
+                if value { LocationModel.shared.askIfNeeded() }
             }
             InfoNote(l10n.t("riders.settingNote"), more: l10n.t("riders.settingNoteMore"))
         }
@@ -279,7 +281,8 @@ private struct VersionFooter: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 4)
-        .task { server = try? await app.client.serverVersion() }
+        // The server's commit is for the owner and testers (user test 2026-11-07: "I don't need to know your git hash").
+        .task { if await WalkStore.isTestBuild() { server = try? await app.client.serverVersion() } }
     }
 }
 
@@ -321,10 +324,12 @@ private struct UsageCard: View {
 private struct ReportBugRow: View {
     @Environment(L10n.self) private var l10n
     @Environment(\.openURL) private var openURL
+    @State private var noMail = false
 
     var body: some View {
         Button {
-            if let url = Self.mail(l10n) { openURL(url) }
+            // No mail app set up (user test 2026-11-07: the row "did nothing"): the address, to copy.
+            if let url = Self.mail(l10n) { openURL(url) { accepted in if !accepted { noMail = true } } } else { noMail = true }
         } label: {
             SettingsRow(label: l10n.t("settings.reportBug"), last: true) {
                 LucideIcon(name: "external-link", size: 18).foregroundStyle(Ink.text3)
@@ -332,6 +337,14 @@ private struct ReportBugRow: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .alert(l10n.t("settings.reportBug"), isPresented: $noMail) {
+            if let email = Config.supportEmail {
+                Button(l10n.t("settings.copyAddress")) { UIPasteboard.general.string = email }
+            }
+            Button(l10n.t("common.close"), role: .cancel) {}
+        } message: {
+            Text(l10n.t("settings.reportBugNoMail", ["email": Config.supportEmail ?? ""]))
+        }
     }
 
     static func mail(_ l10n: L10n) -> URL? {
@@ -458,10 +471,13 @@ private struct DeleteMyDataRow: View {
             if phase == .done {
                 Text(l10n.t("settings.deleted")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                Button(l10n.t("settings.deleteData")) { confirming = true }
-                    .buttonStyle(.clack(.danger))
-                    .disabled(phase == .busy)
-                    .padding(.vertical, 8)
+                VStack(alignment: .leading, spacing: 4) {
+                    Button(l10n.t("settings.deleteData")) { confirming = true }
+                        .buttonStyle(.clack(.danger))
+                        .disabled(phase == .busy)
+                    Text(l10n.t("settings.deleteDataNote")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.vertical, 8)
             }
         }
         .sensoryFeedback(.warning, trigger: phase == .done)
@@ -488,9 +504,10 @@ private struct StartOverRow: View {
             Button(l10n.t("settings.startOver")) { confirming = true }
                 .buttonStyle(.clack(.danger))
                 .disabled(busy)
-                .padding(.vertical, 8)
+            Text(l10n.t("settings.startOverNote")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
             if failed { Text(l10n.t("settings.startOverFailed")).clack(.caption).foregroundStyle(Ink.text2) }
         }
+        .padding(.vertical, 8)
         .sensoryFeedback(.warning, trigger: busy)
         .confirmationDialog(l10n.t("settings.startOverConfirm"), isPresented: $confirming, titleVisibility: .visible) {
             Button(l10n.t("settings.startOver"), role: .destructive) {
@@ -516,6 +533,7 @@ struct AboutScreen: View {
         Page {
             Card(spacing: 12) {
                 Text(l10n.t("about.intro")).clack(.body).foregroundStyle(Ink.text)
+                Text(l10n.t("about.maker")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.sourcesTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 VStack(alignment: .leading, spacing: 8) {
                     ForEach(Self.sources, id: \.self) { source in

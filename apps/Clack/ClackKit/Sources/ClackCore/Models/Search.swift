@@ -85,6 +85,10 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public let history: String?
     /// With `norway` or `finland`: the first day that country's trains are on record (YYYY-MM-DD).
     public let historyFrom: String?
+    /// A train number with nothing on the date: nearby days (YYYY-MM-DD) it does run on, so the list can say so.
+    public var otherDays: [String]? = nil
+    /// With results only from abroad: the country (`SE`…) whose days `otherDays` are.
+    public var otherDaysCountry: String? = nil
 
     public init(date: String, interpretation: Interpretation, suggestions: [StationHit], results: [TripResult]?, connections: [TimetableConnection]?, outsideTimetable: Bool, history: String?, historyFrom: String? = nil, journeys: [PlannedJourney]? = nil) {
         self.journeys = journeys

@@ -111,6 +111,13 @@ public nonisolated enum Format {
         return Int((noon / 86_400_000).rounded(.down))
     }
 
+    /// Minutes for a sentence: "14 min", "1 h 44 min" (user test 2026-11-07: "104 min" made someone stop and count).
+    public static func minutesWords(_ minutes: Int) -> String {
+        guard minutes >= 60 else { return "\(minutes) min" }
+        let m = minutes % 60
+        return m == 0 ? "\(minutes / 60) h" : "\(minutes / 60) h \(m) min"
+    }
+
     /// `2h 48m`, `45m`, `1d 3h`.
     public static func duration(_ minutes: Double) -> String {
         let h = Int((minutes / 60).rounded(.down))

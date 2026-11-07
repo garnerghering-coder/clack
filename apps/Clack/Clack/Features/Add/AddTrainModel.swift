@@ -75,6 +75,8 @@ final class AddTrainModel {
     var openedWithTrip = false
     /// A leg to mark "not taken" once something is saved (replacing a cancelled or missed train).
     var replaceLegId: String?
+    /// Delete the replaced trip instead (another train chosen for a trip still ahead).
+    var deleteReplaced = false
 
     /// Changes whenever the search should run again.
     var searchKey: String { "\(query)|\(date)|\(retry)" }
@@ -86,8 +88,18 @@ final class AddTrainModel {
         date == Format.todayIso() && result.from.time < Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000
     }
 
+    /// The filtered results; today's trains that already left are hidden unless asked for, except when they are all
+    /// there is: the one train you searched for is never hidden behind "Show earlier" (user test 2026-11-07).
     var results: [TripResult]? {
-        response?.results?.filter { AddTrainLogic.includes($0, filter) && (showEarlier || !isEarlier($0)) }
+        guard let all = response?.results?.filter({ AddTrainLogic.includes($0, filter) }) else { return nil }
+        let ahead = all.filter { !isEarlier($0) }
+        return showEarlier || ahead.isEmpty ? all : ahead
+    }
+
+    /// Every result shown has already left today (the list says so instead of hiding them).
+    var showingOnlyDeparted: Bool {
+        guard !showEarlier, let all = results, !all.isEmpty else { return false }
+        return all.allSatisfy { isEarlier($0) }
     }
 
     /// The planner's journeys for two stations, every page so far, by departure, within the change filter. Today's
@@ -104,13 +116,48 @@ final class AddTrainModel {
             .filter { seen.insert($0.id).inserted }
     }
 
-    /// A line to write above `journey` when it leaves on a different day than the one before it (or than the day
-    /// searched, for the first): "Fri 31 Oct". Nil when it's the same day.
+    /// A line to write above `journey` when it leaves on a different day than the one before it: "Fri 31 Oct". The
+    /// first journey always carries its day once the list spans more than the day searched (after Show earlier or
+    /// later), or when it isn't on that day; nil otherwise (user test 2026-11-07: Saturday's trains stood under a
+    /// chip that said Sunday with nothing between).
     func daySeparator(before journey: PlannedJourney, previous: PlannedJourney?, language: Language) -> String? {
         let tz = journey.legs.first?.from.tz ?? "Europe/Stockholm"
         let day = Format.localDate(journey.dep, tz: tz)
-        let before = previous.map { Format.localDate($0.dep, tz: $0.legs.first?.from.tz ?? tz) } ?? date
+        guard let previous else {
+            return day != date || !pagedJourneys.isEmpty ? Format.day(journey.dep, tz: tz, language: language) : nil
+        }
+        let before = Format.localDate(previous.dep, tz: previous.legs.first?.from.tz ?? tz)
         return day == before ? nil : Format.day(journey.dep, tz: tz, language: language)
+    }
+
+    /// The day the next "Show earlier" reaches into, when it isn't the day the list starts on (the button then names
+    /// it: "Show earlier · Sat 7 Nov"). Nil while paging stays within one day.
+    func earlierDay(language: Language) -> String? {
+        guard let w = window else { return nil }
+        let tz = response?.interpretation.from.flatMap { Format.zone(country: $0.country) } ?? Format.defaultZone
+        let reached = w.start - Self.pageMs
+        return Format.localDate(reached, tz: tz) == Format.localDate(w.start, tz: tz) ? nil : Format.day(reached, tz: tz, language: language)
+    }
+
+    /// The day the next "Show later" reaches into, when it crosses midnight; nil otherwise.
+    func laterDay(language: Language) -> String? {
+        guard let w = window else { return nil }
+        let tz = response?.interpretation.from.flatMap { Format.zone(country: $0.country) } ?? Format.defaultZone
+        return Format.localDate(w.end, tz: tz) == Format.localDate(w.end - 1, tz: tz) ? nil : Format.day(w.end, tz: tz, language: language)
+    }
+
+    /// For a day searched whole (not today): the first journey of that day when it leaves late in the morning or
+    /// later, or nil. The list then says "Nothing before 13:44 on Sun 8 Nov in the timetable", so a reduced weekend
+    /// timetable reads as what it is, not as a list anchored to the wrong hour (user test 2026-11-07, København H →
+    /// Malmö C on Sun 8 Nov: works, first train 13:44, and two testers pressed Show earlier into Saturday).
+    func lateFirstJourney(now: Date = .now) -> PlannedJourney? {
+        guard date != Format.todayIso(), let first = response?.journeys?.filter({ passes($0) }).sorted(by: { $0.dep < $1.dep }).first else { return nil }
+        let tz = first.legs.first?.from.tz ?? "Europe/Stockholm"
+        guard Format.localDate(first.dep, tz: tz) == date else { return nil }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: tz) ?? .current
+        let hour = calendar.component(.hour, from: Date(timeIntervalSince1970: first.dep / 1000))
+        return hour >= 9 ? first : nil
     }
 
     private func passes(_ j: PlannedJourney) -> Bool {
@@ -295,7 +342,10 @@ final class AddTrainModel {
     /// choosing this one; it stays in your trips and can be undone there.
     func didSave(_ leg: LegDetail, _ client: APIClient) {
         if let replace = replaceLegId, replace != leg.id {
-            Task { _ = try? await client.answerRide(replace, .no) }
+            let delete = deleteReplaced
+            Task {
+                if delete { try? await client.deleteLeg(replace) } else { _ = try? await client.answerRide(replace, .no) }
+            }
         }
         saved = leg
         Usage.shared.count(.feature, "trips.add")

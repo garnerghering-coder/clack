@@ -191,12 +191,17 @@ struct JourneyChangeChip: View {
                 let result = model.result(a, b, profile: app.walkProfile)
                 let wait = result.gapMin ?? result.layoverSeconds.map { Int((Double($0) / 60).rounded()) }
                 let walk = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
+                // The change rule's verdict in a word at the end (user test 2026-11-07: "do the sums for me and tell me
+                // if that's alright; you did it for strangers in the search list"), and long waits in hours.
+                let verdict: String? = result.comfort.map { l10n.t("comfort.\($0.rawValue)") }
+                    ?? (result.status == .tight ? l10n.t("comfort.tight") : result.status == .miss || result.status == .broken ? l10n.t("comfort.risky") : nil)
                 let text = [
-                    wait.map { l10n.t("journey.changeChip", ["min": String($0), "station": a.destination?.name ?? ""]) }
+                    wait.map { l10n.t("journey.changeChip", ["min": Format.minutesWords($0), "station": a.destination?.name ?? ""]) }
                         ?? l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]),
                     (a.arrPlatform != nil || b.depPlatform != nil)
                         ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil,
                     walk.map { l10n.t("connection.walk", ["min": String($0)]) },
+                    verdict,
                 ].compactMap { $0 }.joined(separator: Format.separator)
                 let ink: Color = switch result.comfort {
                 case .tight?: Ink.slightInk

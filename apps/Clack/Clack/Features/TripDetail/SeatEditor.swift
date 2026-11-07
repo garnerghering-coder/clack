@@ -39,10 +39,14 @@ struct SeatEditor: View {
                     .disabled(saving)
             }
             if failed { Text(l10n.t("seat.failed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
+            // Said once it is saved (and shown on the trip's header from then on).
+            if savedNote, patch == nil, !failed { Text(l10n.t("seat.savedNote")).clack(.caption).foregroundStyle(Ink.onTimeInk) }
         }
         .onAppear(perform: reset)
         .onChange(of: leg.coach) { _, _ in if focus == nil { reset() } }
         .onChange(of: leg.seat) { _, _ in if focus == nil { reset() } }
+        // Leaving the fields saves what was typed, so nothing depends on reaching a button.
+        .onChange(of: focus) { was, now in if was != nil, now == nil, patch != nil { Task { await save() } } }
     }
 
     private func field(_ label: String, text: Binding<String>, field: Field) -> some View {
@@ -52,8 +56,19 @@ struct SeatEditor: View {
                 .focused($focus, equals: field)
                 .textInputAutocapitalization(.characters)
                 .autocorrectionDisabled()
+                // Digits first (a car is "5", a seat "23"; letters are a tap away for "12A"), and Done to put the
+                // keyboard away (user test 2026-11-07: full QWERTY with caps, no Done, Save hidden under the keyboard).
+                .keyboardType(.numbersAndPunctuation)
                 .submitLabel(.done)
                 .onSubmit { Task { await save() } }
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        if focus == field {
+                            Spacer()
+                            Button(patch == nil ? l10n.t("common.done") : l10n.t("seat.save")) { Task { await save(); focus = nil } }
+                        }
+                    }
+                }
                 .clack(.body).monospacedDigit().foregroundStyle(Ink.text)
                 .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(minHeight: 44)
@@ -72,6 +87,8 @@ struct SeatEditor: View {
         seat = leg.seat ?? ""
     }
 
+    @State private var savedNote = false
+
     private func save() async {
         guard let patch, !saving else { return }
         saving = true
@@ -80,6 +97,7 @@ struct SeatEditor: View {
             let updated = try await app.client.updateLeg(leg.id, patch)
             focus = nil
             onSaved(updated)
+            savedNote = true
             AccessibilityNotification.Announcement(l10n.t("seat.saved")).post()
         } catch {
             failed = true

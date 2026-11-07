@@ -170,13 +170,20 @@ struct PlannedJourneyStep: View {
         }
         if !dupes.isEmpty { Banner(kind: .warn) { Text(l10n.t("add.duplicate")) } }
         if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
+        let ahead = journey.arr > Date.now.timeIntervalSince1970 * 1000
         Button(l10n.t("journey.addToTrips")) { Task { await save(force: !dupes.isEmpty) } }
             .buttonStyle(.clack(.primary, wide: true))
             .disabled(saving)
             .padding(.top, 8)
-        Button(followed ? l10n.t("journey.following") : l10n.t("journey.follow")) { Task { await follow() } }
-            .buttonStyle(.clack(wide: true))
-            .disabled(followed)
+        // Following is for a train still to run; and the two are told apart in a line (user test 2026-11-07: six
+        // testers asked what the difference was, and Follow was offered on a train from 2023).
+        if ahead {
+            Button(followed ? l10n.t("journey.following") : l10n.t("journey.follow")) { Task { await follow() } }
+                .buttonStyle(.clack(wide: true))
+                .disabled(followed)
+        }
+        Text(l10n.t(ahead ? "journey.addOrFollowNote" : "journey.addNote")).clack(.caption).foregroundStyle(Ink.text2)
+            .fixedSize(horizontal: false, vertical: true)
             .task { await loadRoutes() }
     }
 

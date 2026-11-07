@@ -109,7 +109,9 @@ public nonisolated enum TripDetailLogic {
 
     public static func sections(_ stage: Stage) -> [Section] {
         switch stage {
-        case .before: [.countdown, .risk, .times, .alertsPrompt, .stops, .connections, .about]
+        // The alerts question right under the status, where it is seen on the first screen (user test 2026-11-07:
+        // under the tiles it sat behind the tab bar, "half-hidden on first use").
+        case .before: [.countdown, .risk, .alertsPrompt, .times, .stops, .connections, .about]
         case .during: [.live, .times, .stops, .connections, .about]
         case .after: [.result, .stops, .about]
         }

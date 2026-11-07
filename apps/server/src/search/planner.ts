@@ -356,13 +356,21 @@ export function withHistory(db: Db, journeys: PlannedJourney[]): PlannedJourney[
     .filter((j) => !j.changes.some((c) => c.comfort === 'risky'));
 }
 
-const night = (j: PlannedJourney) => j.legs.some((l) => l.product === 'night');
+/** A night journey: the bed is most of it (a one-hour hop on a passing night train isn't one, and shouldn't be spared
+ *  the detour rules: the 01:12 Uppsala → Gävle → Stockholm rode a night train for its last hour). */
+const night = (j: PlannedJourney) => {
+  const span = Math.max(1, j.arr - j.dep);
+  const inBed = j.legs.filter((l) => l.product === 'night').reduce((sum, l) => sum + Math.max(0, l.to.time - l.from.time), 0);
+  return inBed * 2 >= span;
+};
 
 /**
  * The journeys worth showing, by departure, from everything the search found (also from two days' searches merged):
  * - dominance: a journey is dropped when another leaves no earlier, arrives no later and has no more changes;
  * - detours: dropped when longer than 1.5 × the fastest, or 3 h longer than it (a 22-hour route when a 14-hour one
  *   exists), and when it has more changes than a near-equal (within 30 min at both ends) with fewer;
+ * - patience: dropped when a later journey with no more changes arrives within an hour of it in half the time (the
+ *   01:12 via Gävle for a 37-minute commute);
  * - night journeys are judged against night journeys only: the bed is the point, so a later daytime train arriving
  *   sooner doesn't replace one (owner, 2026-10-28).
  * The same train in two feeds is already one journey (`plan` dedupes by id). Pure.
@@ -386,6 +394,10 @@ export function rank(found: PlannedJourney[]): PlannedJourney[] {
     if (!peers.length) return true;
     const fastest = Math.min(c.durationMin, ...peers.filter((j) => Math.abs(j.dep - c.dep) <= around).map((j) => j.durationMin));
     if (c.durationMin > Math.max(fastest * 1.5, fastest + 180)) return false;
+    // Patience: a journey nobody would take because waiting for a later one gets you there within an hour in half the
+    // time with no more changes (user test 2026-11-07: a 01:12 Uppsala → Gävle → Stockholm, 5 h with a 117-minute
+    // change, listed second for a 37-minute commute; 02:20 via Lund, 7 h 35, ahead of the 07:23 with one change).
+    if (peers.some((d) => d.dep >= c.dep && d.arr <= c.arr + 2 * half && d.changes.length <= c.changes.length && d.durationMin * 2 <= c.durationMin)) return false;
     return !peers.some((d) => d.changes.length < c.changes.length && Math.abs(d.dep - c.dep) <= half && d.arr <= c.arr + half);
   });
   kept.sort((a, b) => a.dep - b.dep || a.arr - b.arr);

@@ -382,7 +382,9 @@ struct StationMapScreen: View {
                 if planningOrSet {
                     if layover {
                         HStack(spacing: 12) {
-                            Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? "—").clack(.walkBig).monospacedDigit().foregroundStyle(Ink.text)
+                            // No route (the other platform isn't drawn yet): said, not a dash (user test 2026-11-07).
+                            Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? l10n.t("stationMap.noWalk")).clack(walkMin == nil ? .body : .walkBig).monospacedDigit().foregroundStyle(Ink.text)
+                                .fixedSize(horizontal: false, vertical: true)
                             // Walking time only: the change's rating is the change rule's (the gauge), shown on the trip.
                             Spacer(minLength: 0)
                             IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: clearRoute)

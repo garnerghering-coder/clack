@@ -98,17 +98,24 @@ final class AppModel {
         self.live = LiveHub(client: client)
         self.stations = StationDirectory(client: client)
         // The theme paints before the server answers: the last one is kept on the phone (SPEC: no flash).
-        if let raw = UserDefaults.standard.string(forKey: Self.themeKey) { settings.theme = ThemeSetting.knownCases.first { $0.rawValue == raw } ?? .dark }
+        if let raw = UserDefaults.standard.string(forKey: Self.themeKey) { settings.theme = ThemeSetting.knownCases.first { $0.rawValue == raw } ?? .system }
+        // So does the language, the first time: the phone's, from the first frame (user test 2026-11-07: English
+        // for forty seconds on a Swedish phone, then Swedish by itself). `load` makes it the saved setting.
+        if !UserDefaults.standard.bool(forKey: Self.languageChosenKey), let phone = Self.appLanguage(forPreferred: Locale.preferredLanguages) {
+            settings.language = phone
+            self.l10n.language = phone
+        }
     }
 
     private static let themeKey = "clack.theme"
 
-    /// The colour scheme the `theme` setting asks for: `system` follows the phone, the default is dark.
+    /// The colour scheme the `theme` setting asks for: `system` follows the phone, and is the default (user test
+    /// 2026-11-07: five of seven testers on light phones got a dark app and read it as ignoring their setting).
     var colorScheme: ColorScheme? {
         switch settings.theme {
-        case .system: nil
+        case .system, .unknown: nil
         case .light: .light
-        case .dark, .unknown: .dark
+        case .dark: .dark
         }
     }
 

@@ -6,8 +6,8 @@
 import ClackCore
 import SwiftUI
 
-/// A quiet one-line note (caption, text-2). When there is more to say, an (i) at its end opens the longer text under
-/// it, and closes it again: a footnote never takes more than one line until it is asked for.
+/// A quiet short note (caption, text-2). When there is more to say, an (i) at its end opens the longer text under
+/// it, and closes it again: a footnote never takes more than two lines until it is asked for.
 public struct InfoNote: View {
     @Environment(L10n.self) private var l10n
     public let text: String
@@ -26,7 +26,8 @@ public struct InfoNote: View {
                     open.toggle()
                 } label: {
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
-                        Text(text).lineLimit(open ? nil : 1).multilineTextAlignment(.leading)
+                        // Two lines closed (user test 2026-11-07: at large text sizes one line cut every footnote mid-word).
+                        Text(text).lineLimit(open ? nil : 2).multilineTextAlignment(.leading)
                         LucideIcon(name: "info", size: 14).foregroundStyle(open ? Ink.accentInk : Ink.text3)
                             .alignmentGuide(.firstTextBaseline) { $0[VerticalAlignment.center] + 4 }
                         Spacer(minLength: 0)

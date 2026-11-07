@@ -6,12 +6,12 @@ import { createSmartSearch } from '../search/smartSearch.js';
 import { ensureHistory } from '../import/history.js';
 import { ensureRecordedDay, recordFrom } from '../observed/timetable.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
-import { productOf, searchByRoute, searchConnections, tripStops } from '../search/timetable.js';
+import { daysWithNumber, productOf, searchByRoute, searchConnections, tripStops } from '../search/timetable.js';
 import { typicalTrainType } from '../legs/trainTypes.js';
 import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
 import { eq } from 'drizzle-orm';
-import { stations } from '../db/schema.js';
+import { stations, users } from '../db/schema.js';
 import { COUNTRIES, tzOf } from '../lib/countries.js';
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -23,10 +23,33 @@ export const searchRoutes =
     const record = { ensure: (c: 'NO' | 'FI', date: string) => ensureRecordedDay(db, c, date, { log }), from: (c: 'NO' | 'FI') => recordFrom(db, c) };
     const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log }), record);
 
+    /** The home country in this person's settings ("SE", "NO", "FI", "DK"), or nothing. */
+    const homeCountryOf = (userId: string): string | null => {
+      const row = db.select({ settings: users.settings }).from(users).where(eq(users.id, userId)).get();
+      const home = (row?.settings as { homeCountry?: string } | null)?.homeCountry;
+      return home ? home.toUpperCase() : null;
+    };
+    const countryOfResult = (r: { from: { country?: string } }) => r.from.country;
+
     app.get<{ Querystring: { q?: string; date?: string; changes?: string; after?: string; hours?: string } }>('/search', async (req, reply) => {
       const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
       const out = search(req.query.q ?? '', date);
+      // A bare number matches trains in every country: the ones in this person's home country first (user test
+      // 2026-11-07: "421" gave a Danish IC 421 above SJ's). Stable, so exact numbers still come before variants.
+      if (out.interpretation.trainNumber && out.results && out.results.length > 0 && !out.interpretation.operator) {
+        const home = homeCountryOf(req.userId);
+        if (home && out.results.length > 1) out.results = out.results.map((r, i) => ({ r, i })).sort((a, b) => Number(countryOfResult(b.r) === home) - Number(countryOfResult(a.r) === home) || a.i - b.i).map((x) => x.r);
+        // Only trains abroad on this day: the days the number runs at home, so a Swede's "421" on a Sunday reads
+        // "no SJ 421 today, it runs Monday" and not "your train is Danish".
+        if (home && !out.results.some((r) => countryOfResult(r) === home)) {
+          const days = daysWithNumber(db, out.interpretation.trainNumber, date, { country: home });
+          if (days.length) {
+            out.otherDays = days;
+            out.otherDaysCountry = home;
+          }
+        }
+      }
       // Two stations: the planner's journeys (direct and with changes) for the whole service day. The app hides the
       // ones that left earlier today unless asked, as it does for direct trains.
       const { from, to } = out.interpretation;

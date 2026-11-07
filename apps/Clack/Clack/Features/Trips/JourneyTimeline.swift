@@ -201,7 +201,7 @@ struct JourneyChange: View {
             let caption = [
                 tracks,
                 walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },
-                result.layoverSeconds.map { l10n.t("connection.layover", ["min": String(Int((Double($0) / 60).rounded()))]) },
+                result.layoverSeconds.map { l10n.t("connection.layover", ["min": Format.minutesWords(Int((Double($0) / 60).rounded()))]) },
             ].compactMap { $0 }.joined(separator: " · ")
             let content = VStack(alignment: .leading, spacing: 2) {
                 Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)

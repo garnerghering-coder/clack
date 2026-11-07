@@ -24,6 +24,12 @@ struct AddTrainSheet: View {
         .task { await model.loadPopular(app.client) }
         .task {
             if let link = request.link { await model.prefill(link, app.client) }
+            if let query = request.query {
+                if let date = request.date { model.date = date }
+                model.query = query
+                model.replaceLegId = request.replaceLegId
+                model.deleteReplaced = request.deleteReplaced
+            }
         }
         .task(id: model.searchKey) {
             await model.runSearch(app.client)
@@ -63,7 +69,7 @@ struct AddTrainSheet: View {
                 onBack: { model.openedWithTrip ? router.closeAdd() : (model.picked = nil) }, onSaved: { model.didSave($0, app.client); app.tripsChanged() }
             )
         } else {
-            SearchStep()
+            ScrollViewReader { proxy in SearchStep(scroller: proxy) }
         }
     }
 }
@@ -76,6 +82,8 @@ private struct SearchStep: View {
     @Environment(AddTrainModel.self) private var model
     @FocusState private var focused: Bool
     @State private var showJourneyFilters = false
+    /// The sheet's scroll view, to keep the list in place when rows are added above it.
+    var scroller: ScrollViewProxy?
 
     var body: some View {
         @Bindable var model = model
@@ -87,6 +95,9 @@ private struct SearchStep: View {
                 focused = false
                 model.searchAgain()
             }
+            // So do the results themselves, once the search is whole (both stations, or a train number): the list gets
+            // the screen and a tap on a card can't land on a key (user test 2026-11-07, five of seven testers).
+            .onChange(of: model.response.map(Self.isWholeSearch) ?? false) { _, whole in if whole { focused = false } }
 
         if model.query.isEmpty {
             FlowLayout(spacing: 8, lineSpacing: 8) {
@@ -114,6 +125,11 @@ private struct SearchStep: View {
                 Skeleton(height: 120)
             }
         }
+    }
+
+    /// A search that has all it needs: two stations with the planner's answer in, or a train number with its results.
+    private static func isWholeSearch(_ r: SearchResponse) -> Bool {
+        (r.interpretation.from != nil && r.interpretation.to != nil && r.journeys != nil) || (r.interpretation.trainNumber != nil && r.results != nil)
     }
 
     private func pick(_ station: StationHit) {
@@ -179,8 +195,25 @@ private struct SearchStep: View {
             stationList(model.suggestionsShown)
         }
         journeyFilterBar(count: model.journeys?.count ?? 0)
-        // Paging: six hours earlier or later per press; a day line where the list crosses midnight.
-        if model.window != nil { pagingButton("board.showEarlier", busy: model.pagingEarlier) { await model.showEarlierJourneys(app.client) } }
+        // A whole day whose first train leaves late: said in words, so a reduced timetable (works, a Sunday) isn't
+        // mistaken for a list anchored to the wrong hour, and nobody pages into the day before looking for the morning.
+        if model.pagedJourneys.isEmpty, let late = model.lateFirstJourney() {
+            let tz = late.legs.first?.from.tz ?? Format.defaultZone
+            Banner {
+                Text(l10n.t("add.noEarlierThatDay", ["time": Format.time(late.dep, tz: tz, clock: app.settings.clock), "day": Format.day(late.dep, tz: tz, language: app.settings.language)]))
+            }
+        }
+        // Paging: six hours earlier or later per press. The button names the day it reaches into when that is another
+        // day, and every day's first journey carries a day line (user test 2026-11-07: "the date chip lied to me").
+        if model.window != nil {
+            pagingButton(model.earlierDay(language: app.settings.language).map { l10n.t("add.showEarlierDay", ["day": $0]) } ?? l10n.t("board.showEarlier"), busy: model.pagingEarlier) {
+                let first = model.journeys?.first?.id
+                await model.showEarlierJourneys(app.client)
+                // The new rows go in above: keep what was at the top where it was, so nothing jumps and a drag at the
+                // top can't pull the sheet down by surprise.
+                if let first { scroller?.scrollTo(first, anchor: .top) }
+            }
+        }
         if let list = model.journeys, !list.isEmpty {
             VStack(spacing: 16) {
                 ForEach(Array(list.enumerated()), id: \.element.id) { i, journey in
@@ -188,7 +221,7 @@ private struct SearchStep: View {
                         Text(day).clack(.captionUpper).foregroundStyle(Ink.text2).frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, i > 0 ? 8 : 0)
                     }
-                    JourneyResultCard(journey: journey) { model.pickedJourney = journey }
+                    JourneyResultCard(journey: journey) { model.pickedJourney = journey }.id(journey.id)
                 }
                 // Some journeys are hidden by the change filter (owner, 2026-10-30: a 4-change night via
                 // København was found but never shown): offer them under the list too, not only when none pass.
@@ -207,12 +240,14 @@ private struct SearchStep: View {
                 model.minComfort = 0
             }
             .buttonStyle(.clack(wide: true))
+        } else if model.date != Format.todayIso(), let noon = Format.isoToNoonMs(model.date) {
+            Text(l10n.t("add.noJourneyThatDay", ["day": Format.day(noon, tz: "UTC", language: app.settings.language)])).clack(.body).foregroundStyle(Ink.text2)
         } else {
             Text(l10n.t("add.noJourney")).clack(.body).foregroundStyle(Ink.text2)
         }
         if model.window != nil {
             if model.laterEmpty { Text(l10n.t("add.noLaterJourneys")).clack(.caption).foregroundStyle(Ink.text2) }
-            pagingButton("board.showLater", busy: model.pagingLater) { await model.showLaterJourneys(app.client) }
+            pagingButton(model.laterDay(language: app.settings.language).map { l10n.t("add.showLaterDay", ["day": $0]) } ?? l10n.t("board.showLater"), busy: model.pagingLater) { await model.showLaterJourneys(app.client) }
         }
         Button(l10n.t("manual.cta")) { model.manual = true }
             .buttonStyle(LinkButtonStyle())
@@ -221,13 +256,13 @@ private struct SearchStep: View {
     }
 
     /// Show earlier / Show later as a plain system link, replaced by a spinner and "Looking for more…" while it runs.
-    private func pagingButton(_ key: String, busy: Bool, action: @escaping () async -> Void) -> some View {
+    private func pagingButton(_ label: String, busy: Bool, action: @escaping () async -> Void) -> some View {
         HStack(spacing: 8) {
             if busy {
                 ProgressView().controlSize(.small)
                 Text(l10n.t("add.searchingMore")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                Button(l10n.t(key)) { Task { await action() } }.buttonStyle(LinkButtonStyle())
+                Button(label) { Task { await action() } }.buttonStyle(LinkButtonStyle())
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -244,7 +279,10 @@ private struct SearchStep: View {
         }
         if response.outsideTimetable {
             Banner {
-                Text(historyMessage(response))
+                HStack(spacing: 8) {
+                    if response.history == "loading" { ProgressView().controlSize(.small) }
+                    Text(historyMessage(response))
+                }
             }
         }
         if let list = response.results, !list.isEmpty {
@@ -256,6 +294,15 @@ private struct SearchStep: View {
             if model.hasHiddenEarlier {
                 Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
             }
+            if model.showingOnlyDeparted {
+                Text(l10n.t("add.departedToday")).clack(.caption).foregroundStyle(Ink.text2)
+            }
+            // Only trains abroad carry this number today: say so, and when it runs at home (user test 2026-11-07:
+            // "421" on a Sunday gave a Danish IC 421 and nothing about SJ's).
+            if let number = interpretation.trainNumber, let days = response.otherDays, !days.isEmpty, let country = response.otherDaysCountry {
+                let day = Format.isoToNoonMs(model.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? model.date
+                otherDaysNote(l10n.t("add.noTrainAtHome", ["number": number, "country": l10n.t("countries.\(country)"), "day": day]), days: days)
+            }
             VStack(spacing: 16) {
                 ForEach(model.results ?? []) { result in
                     ResultCard(result: result) { model.pick(result) }
@@ -263,9 +310,19 @@ private struct SearchStep: View {
             }
         }
         if let list = response.results, list.isEmpty, !response.outsideTimetable {
-            Text(interpretation.trainNumber.map { l10n.t("add.noTrain", ["number": $0]) }
-                ?? ((response.connections ?? []).isEmpty ? l10n.t("add.noDirect") : l10n.t("add.noDirectChange")))
-                .clack(.body).foregroundStyle(Ink.text2)
+            if let number = interpretation.trainNumber {
+                // Not on this day: say which day it is, and the days the train does run (a chip moves the search
+                // there), so a ticket and the app can be told apart (user test 2026-11-07, six of seven testers).
+                let day = Format.isoToNoonMs(model.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? model.date
+                let name = [interpretation.operator?.text, number].compactMap { $0 }.joined(separator: " ")
+                VStack(alignment: .leading, spacing: 8) {
+                    otherDaysNote(l10n.t("add.noTrainOnDay", ["train": name, "day": day]), days: response.otherDays ?? [])
+                    Text(l10n.t("add.noTrainHint")).clack(.caption).foregroundStyle(Ink.text2)
+                }
+            } else {
+                Text((response.connections ?? []).isEmpty ? l10n.t("add.noDirect") : l10n.t("add.noDirectChange"))
+                    .clack(.body).foregroundStyle(Ink.text2)
+            }
         }
         if let list = response.results, list.isEmpty, let connections = response.connections, !connections.isEmpty {
             Text(l10n.t("add.withChange")).clack(.sectionHeader).foregroundStyle(Ink.text2)
@@ -278,6 +335,20 @@ private struct SearchStep: View {
                 .buttonStyle(LinkButtonStyle())
                 .frame(maxWidth: .infinity)
                 .padding(.top, 8)
+        }
+    }
+
+    /// A line and the days a train does run, each a chip that moves the search to that day.
+    @ViewBuilder
+    private func otherDaysNote(_ line: String, days: [String]) -> some View {
+        Text(line).clack(.body).foregroundStyle(Ink.text)
+        if !days.isEmpty {
+            Text(l10n.t("add.runsOn")).clack(.caption).foregroundStyle(Ink.text2)
+            FlowLayout(spacing: 8, lineSpacing: 8) {
+                ForEach(days, id: \.self) { iso in
+                    ChipButton(text: Format.isoToNoonMs(iso).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? iso) { model.date = iso }
+                }
+            }
         }
     }
 
@@ -372,10 +443,14 @@ private struct ResultCard: View {
                 if let type {
                     HStack(spacing: 12) {
                         TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
-                        Text(type.name).clack(.caption).foregroundStyle(Ink.text2)
+                        // A typical type for the line, not a fact about this run (user test 2026-11-07: "X2000" here,
+                        // the planned "SJ 3000 (X55)" on the trip, read as the app not knowing what it was).
+                        Text(l10n.t("add.usuallyType", ["type": type.name])).clack(.caption).foregroundStyle(Ink.text2)
                     }
                 }
-                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
+                // Without the operator's mark the route's name stands in, unless it is only the number again
+                // (user test 2026-11-07: "427 427 ?").
+                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil && result.routeName != result.trainNumber ? result.routeName : nil)
                 Text(Format.join([
                     result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
                     result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
@@ -702,30 +777,70 @@ private struct DoneStep: View {
     let leg: LegDetail
     let onAnother: () -> Void
     @State private var drawn = false
+    /// The journey the saved train belongs to (its other trains, saved now or before), when it has one.
+    @State private var journey: Journey?
+    @State private var alertsBusy = false
+    @State private var alertsJustOn = false
 
     var body: some View {
         let l = leg.leg
+        let legs = (journey?.legs.map(\.leg)).flatMap { $0.count > 1 ? $0 : nil }
+        let first = legs?.first ?? l, last = legs?.last ?? l
+        let ahead = (l.schedDep?.ms ?? 0) > Date.now.timeIntervalSince1970 * 1000
         VStack(spacing: 12) {
             ZStack {
                 Circle().stroke(Ink.onTime.opacity(0.35), lineWidth: 3)
                 CheckShape().trim(from: 0, to: drawn || reduceMotion ? 1 : 0)
                     .stroke(Ink.onTime, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                    .animation(reduceMotion ? nil : .easeOut(duration: 0.35).delay(0.1), value: drawn)
+                    .animation(reduceMotion ? nil : .easeOut(duration: 0.35), value: drawn)
             }
             .frame(width: 72, height: 72)
-            .onAppear { drawn = true }
+            // Drawn once the view is on screen (user test 2026-11-07: "it never drew a tick, just a ring").
+            .task {
+                try? await Task.sleep(for: .milliseconds(150))
+                drawn = true
+            }
             Text(l10n.t("add.added")).clack(.sheetTitle).foregroundStyle(Ink.text)
-            Text("\(l.origin?.name ?? "") → \(l.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text)
-            Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2)
+            // A journey is named whole (user test 2026-11-07: "Added" named only the last of two trains).
+            Text("\(first.origin?.name ?? "") → \(last.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text)
+            if let legs {
+                Text(l10n.t("journey.label", count: legs.count) + Format.separator + legs.map { [$0.operator?.name, $0.trainNumber].compactMap { $0 }.joined(separator: " ") }.joined(separator: ", "))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+            } else {
+                Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2)
+            }
             // A trip that already happened: what it did for your Passport.
             if (l.actualArr?.ms ?? l.schedArr?.ms ?? .infinity) <= Date.now.timeIntervalSince1970 * 1000 {
                 TripProgressView(legId: l.id)
             }
+            // A trip ahead: the offer of alerts here, the moment it matters (user test 2026-11-07: "Flighty asks
+            // straight away"; the switch was two screens deep in Settings).
+            if ahead, !app.notifications.denied {
+                if app.settings.notify {
+                    HStack(spacing: 8) {
+                        LucideIcon(name: "bell", size: 16).foregroundStyle(Ink.accentInk)
+                        Text(l10n.t(alertsJustOn ? "alertsPrompt.nowOn" : "alertsPrompt.on")).clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                    .padding(.top, 4)
+                } else {
+                    VStack(spacing: 8) {
+                        Button {
+                            Task { await turnOnAlerts() }
+                        } label: {
+                            Label { Text(l10n.t("alertsPrompt.turnOn")) } icon: { LucideIcon(name: "bell", size: 16) }
+                        }
+                        .buttonStyle(.clack(small: true))
+                        .disabled(alertsBusy)
+                        Text(l10n.t("alertsPrompt.body")).clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                    .padding(.top, 4)
+                }
+            }
             HStack(spacing: 12) {
-                Button(l10n.t("add.viewTrip")) {
+                Button(l10n.t(legs != nil ? "add.viewJourney" : "add.viewTrip")) {
                     router.closeAdd()
                     router.tab = .trips
-                    router.tripsPath = [.trip(l.id)]
+                    if let legs, let id = legs.first?.journeyId { router.tripsPath = [.journey(id)] } else { router.tripsPath = [.trip(l.id)] }
                 }
                 .buttonStyle(.clack(.primary))
                 Button(l10n.t("add.addAnother"), action: onAnother).buttonStyle(.clack())
@@ -735,6 +850,21 @@ private struct DoneStep: View {
         .frame(maxWidth: .infinity)
         .padding(.top, 40)
         .multilineTextAlignment(.center)
+        .task(id: l.journeyId) {
+            guard let id = l.journeyId else { return }
+            journey = try? await app.client.journey(id)
+        }
+    }
+
+    private func turnOnAlerts() async {
+        alertsBusy = true
+        if await app.notifications.requestPermission() {
+            await app.update(SettingsPatch(notify: true))
+            Usage.shared.count(.feature, "alerts.on")
+            alertsJustOn = true
+        }
+        UserDefaults.standard.set(true, forKey: FirstRun.alertsAskedKey)
+        alertsBusy = false
     }
 }
 
@@ -765,8 +895,9 @@ private struct ManualTripStep: View {
 
     @State private var fromStation: StationHit?
     @State private var toStation: StationHit?
-    @State private var dep = Date(timeIntervalSince1970: 0)
-    @State private var arr = Date(timeIntervalSince1970: 0)
+    // The wheels start at a travelling hour, not midnight (user test 2026-11-07: "~40 wheel rows for two times").
+    @State private var dep = Date(timeIntervalSince1970: 8 * 3600)
+    @State private var arr = Date(timeIntervalSince1970: 9 * 3600)
     @State private var depSet = false
     @State private var arrSet = false
     @State private var operatorId = ""
@@ -774,6 +905,7 @@ private struct ManualTripStep: View {
     @State private var category = "intercity"
     @State private var error: String?
     @State private var saving = false
+    @FocusState private var numberFocused: Bool
 
     private static let categories = ["intercity", "regional", "commuter", "night", "heritage"]
 
@@ -782,6 +914,10 @@ private struct ManualTripStep: View {
     var body: some View {
         Button(l10n.t("common.back"), action: onBack).buttonStyle(LinkButtonStyle())
         Text(l10n.t("manual.title")).clack(.headline).foregroundStyle(Ink.text)
+        // The day it is for, so nobody has to trust that it was remembered (user test 2026-11-07).
+        if let noon = Format.isoToNoonMs(date) {
+            Text(Format.longDate(noon, tz: "UTC", language: app.settings.language)).clack(.body).foregroundStyle(Ink.text2)
+        }
         InfoNote(l10n.t("manual.intro"), more: l10n.t("manual.introMore"))
         Card(spacing: 0) {
             ManualStationField(label: l10n.t("manual.from"), value: $fromStation)
@@ -789,17 +925,23 @@ private struct ManualTripStep: View {
             timeRow(l10n.t("manual.dep"), value: $dep, set: $depSet)
             timeRow(l10n.t("manual.arr"), value: $arr, set: $arrSet)
             row(l10n.t("manual.operator")) {
-                Picker("", selection: $operatorId) {
-                    Text(l10n.t("manual.unknown")).tag("")
-                    ForEach(app.operators.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }) { Text($0.name).tag($0.id) }
-                }
-                .tint(Ink.text)
+                OperatorPickerButton(selection: $operatorId)
             }
             row(l10n.t("manual.number"), last: true) {
                 TextField("", text: $trainNumber)
                     .keyboardType(.numberPad).multilineTextAlignment(.trailing).foregroundStyle(Ink.text)
+                    .focused($numberFocused)
                     .onChange(of: trainNumber) { _, new in if new.count > 10 { trainNumber = String(new.prefix(10)) } }
                     .frame(maxWidth: 140)
+                    // The number pad has no key of its own to close it (user test 2026-11-07: it hid the Save button).
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            if numberFocused {
+                                Spacer()
+                                Button(l10n.t("common.done")) { numberFocused = false }
+                            }
+                        }
+                    }
             }
         }
         FlowLayout(spacing: 8, lineSpacing: 8) {
@@ -828,7 +970,12 @@ private struct ManualTripStep: View {
 
     private func timeRow(_ label: String, value: Binding<Date>, set: Binding<Bool>) -> some View {
         row(label) {
-            DatePicker("", selection: Binding(get: { value.wrappedValue }, set: { value.wrappedValue = $0; set.wrappedValue = true }), displayedComponents: .hourAndMinute)
+            DatePicker("", selection: Binding(get: { value.wrappedValue }, set: { new in
+                value.wrappedValue = new
+                set.wrappedValue = true
+                // The arrival follows the departure (an hour on) until it is set itself: one wheel less to spin.
+                if !arrSet, label == l10n.t("manual.dep") { arr = new.addingTimeInterval(3600) }
+            }), displayedComponents: .hourAndMinute)
                 .labelsHidden()
                 .opacity(set.wrappedValue ? 1 : 0.5)
                 .environment(\.timeZone, TimeZone(identifier: "UTC") ?? .gmt)
@@ -853,6 +1000,94 @@ private struct ManualTripStep: View {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
         }
         saving = false
+    }
+}
+
+/// Who ran the train: a button with the choice, opening a sheet that lists every operator with its mark, searchable,
+/// the home country's first (user test 2026-11-07: a plain menu of 25 names closed at every scroll, and Vy was below
+/// the fold).
+struct OperatorPickerButton: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Binding var selection: String
+    @State private var open = false
+
+    var body: some View {
+        Button {
+            open = true
+        } label: {
+            HStack(spacing: 8) {
+                if let op = app.operatorsById[selection] {
+                    OperatorBadge(op: op, size: .small)
+                    Text(op.name)
+                } else {
+                    Text(l10n.t("manual.unknown"))
+                }
+                LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
+            }
+            .clack(.body).foregroundStyle(Ink.text)
+            .padding(.vertical, 8).padding(.horizontal, 12)
+            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+            .hairlineBorder(radius: Radius.controlSm)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(l10n.t("manual.operator"))
+        .sheet(isPresented: $open) {
+            OperatorPickerSheet(selection: $selection) { open = false }
+                .environment(app)
+                .environment(l10n)
+                .preferredColorScheme(app.colorScheme)
+        }
+    }
+}
+
+struct OperatorPickerSheet: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Binding var selection: String
+    let onDone: () -> Void
+    @State private var query = ""
+
+    private var operators: [Operator] {
+        let home = app.settings.homeCountry?.rawValue.uppercased()
+        let q = query.trimmingCharacters(in: .whitespaces)
+        return app.operators
+            .filter { q.isEmpty || $0.name.localizedCaseInsensitiveContains(q) || $0.shortName.localizedCaseInsensitiveContains(q) || ($0.company?.localizedCaseInsensitiveContains(q) ?? false) }
+            .sorted { a, b in
+                let ha = a.country == home, hb = b.country == home
+                return ha != hb ? ha : a.name.localizedCompare(b.name) == .orderedAscending
+            }
+    }
+
+    private func subtitle(_ op: Operator) -> String {
+        let country = l10n.t("countries.\(op.country)")
+        return [op.company, country].compactMap { $0 }.joined(separator: " · ")
+    }
+
+    var body: some View {
+        NavigationStack {
+            // The system's selection list (DESIGN §2.3, native controls): a tap picks and closes. The list wants an
+            // optional; "" (not sure) is a row of its own, so nil never comes back from it.
+            List(selection: Binding<String?>(get: { selection }, set: { selection = $0 ?? "" })) {
+                Text(l10n.t("manual.unknown")).tag("")
+                ForEach(operators) { op in
+                    HStack(spacing: 12) {
+                        OperatorBadge(op: op, size: .small)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(op.name)
+                            // "NT" alone said nothing (user test 2026-11-07): the company and country under the mark.
+                            Text(subtitle(op)).font(.footnote).foregroundStyle(.secondary)
+                        }
+                    }
+                    .tag(op.id)
+                }
+            }
+            .onChange(of: selection) { onDone() }
+            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: l10n.t("manual.operatorSearch"))
+            .navigationTitle(l10n.t("manual.operator"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement: .cancellationAction) { Button(l10n.t("common.close"), action: onDone) } }
+        }
     }
 }
 

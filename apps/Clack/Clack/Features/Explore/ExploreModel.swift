@@ -555,15 +555,35 @@ final class ExploreModel {
         stationHits = []
     }
 
+    /// A station search is out (the list says "Searching…" rather than "nothing matches" meanwhile).
+    private(set) var stationSearchPending = false
+    /// The last station search didn't get an answer (said as such, not as no match).
+    private(set) var stationSearchFailed = false
+
     func searchChanged() {
         searchTask?.cancel()
+        stationSearchFailed = false
         // Composed form: "ö" typed as o + a combining mark (some keyboards, pasted text) must match the station's name.
         let text = query.trimmingCharacters(in: .whitespaces).precomposedStringWithCanonicalMapping
-        guard ExploreLogic.searchesStations(text) else { stationHits = []; return }
+        guard ExploreLogic.searchesStations(text) else {
+            stationHits = []
+            stationSearchPending = false
+            return
+        }
+        stationSearchPending = true
         searchTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(200))
             guard !Task.isCancelled, let self, let client = self.app?.client else { return }
-            if let hits = try? await client.searchStations(text) { self.stationHits = Array(hits.prefix(5)) }
+            // Asked twice: a dropped request on the first try is not "no match" (user test 2026-11-07: "Uppsala",
+            // which the planner knew, got "Inget matchar" here).
+            var hits: [StationHit]?
+            for _ in 0..<2 {
+                hits = try? await client.searchStations(text)
+                if hits != nil || Task.isCancelled { break }
+            }
+            guard !Task.isCancelled else { return }
+            if let hits { self.stationHits = Array(hits.prefix(5)) } else { self.stationSearchFailed = true }
+            self.stationSearchPending = false
         }
     }
 

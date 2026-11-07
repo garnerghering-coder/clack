@@ -164,6 +164,8 @@ enum NetworkWording {
     /// "Between Växjö and Alvesta", or "Towards Alvesta" when the last stop isn't known.
     static func between(_ t: NetworkStatus.LateTrain, l10n: L10n) -> String? {
         switch (t.prev, t.next) {
+        // Standing at a stop: the feed gives the same name twice ("between Hässleholm and Hässleholm").
+        case let (a?, b?) where a == b: l10n.t("network.at", ["a": a])
         case let (a?, b?): l10n.t("network.between", ["a": a, "b": b])
         case let (nil, b?): l10n.t("network.towards", ["b": b])
         default: t.destination.map { l10n.t("network.towards", ["b": $0]) }

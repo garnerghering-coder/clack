@@ -35,14 +35,14 @@ struct ExploreFilterSheet: View {
                 }
                 Section(l10n.t("liveMap.countries")) {
                     ForEach(["SE", "NO", "DK", "FI"], id: \.self) { code in
-                        Toggle(isOn: member($model.filters.countries, code)) {
+                        Toggle(isOn: shown($model.filters.countries, code, all: ["SE", "NO", "DK", "FI"])) {
                             Label { Text(l10n.t("countries.\(code)")) } icon: { Flag(country: code, size: 24, decorative: true) }
                         }
                     }
                 }
                 Section(l10n.t("liveMap.kinds")) {
                     ForEach(ExploreLogic.products, id: \.self) { p in
-                        Toggle(isOn: member($model.filters.products, p)) {
+                        Toggle(isOn: shown($model.filters.products, p, all: ExploreLogic.products)) {
                             countedLabel(l10n.t("products.\(p)"), count: counts.products[p] ?? 0) {
                                 Circle().fill(operatorColor(ExploreLogic.productColors[p] ?? ExploreLogic.otherColor, scheme: scheme)).frame(width: 12, height: 12)
                             }
@@ -61,7 +61,7 @@ struct ExploreFilterSheet: View {
                     let shown = model.operatorsShown
                     if shown.isEmpty { Text(l10n.t("liveMap.noOperatorsInView")).foregroundStyle(.secondary) }
                     ForEach(shown, id: \.self) { id in
-                        Toggle(isOn: member($model.filters.operators, id)) {
+                        Toggle(isOn: self.shown($model.filters.operators, id, all: shown)) {
                             countedLabel(app.operatorsById[id]?.name ?? id, count: counts.operators[id] ?? 0) {
                                 OperatorBadge(op: app.operatorsById[id], size: .small)
                             }
@@ -132,9 +132,18 @@ struct ExploreFilterSheet: View {
         model.colorByChanged()
     }
 
-    /// A toggle over membership in a set of filters.
-    private func member(_ set: Binding<Set<String>>, _ value: String) -> Binding<Bool> {
-        Binding(get: { set.wrappedValue.contains(value) }, set: { on in if on { set.wrappedValue.insert(value) } else { set.wrappedValue.remove(value) } })
+    /// A switch that reads as what the map shows: an empty filter set means everything, so every switch is on; turning
+    /// one off keeps the others (user test 2026-11-07: "four switches off, four countries shown"). When all are on
+    /// again the filter goes back to empty.
+    private func shown(_ set: Binding<Set<String>>, _ value: String, all: [String]) -> Binding<Bool> {
+        Binding(
+            get: { set.wrappedValue.isEmpty || set.wrappedValue.contains(value) },
+            set: { on in
+                var next = set.wrappedValue.isEmpty ? Set(all) : set.wrappedValue
+                if on { next.insert(value) } else { next.remove(value) }
+                set.wrappedValue = next.isSuperset(of: all) ? [] : next
+            }
+        )
     }
 
     private func displayToggle(_ key: String, _ path: WritableKeyPath<MapDisplay, Bool>) -> some View {

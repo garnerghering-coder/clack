@@ -166,6 +166,31 @@ export function searchByNumber(db: Db, number: string, date: string, opts: { ope
   return dedupe(results).sort((a, b) => Number(b.trainNumber === number) - Number(a.trainNumber === number));
 }
 
+/**
+ * The other days around `date` (the day before to seven days after, as service dates) on which a train with this number
+ * runs, so the app can say "No train 421 on Sun 8 Nov; it runs Mon 9 Nov…" instead of an empty list (user test
+ * 2026-11-07: six of seven testers met a train that wasn't there and nothing said why). Same matching as
+ * `searchByNumber`, without the stops check.
+ */
+export function daysWithNumber(db: Db, number: string, date: string, opts: { operatorId?: string; country?: string } = {}): string[] {
+  const variant =
+    number.length <= 4
+      ? sql`or (length(t.train_number) = 5 and cast(substr(t.train_number, 2) as integer) = ${Number(number)})`
+      : number.length === 5
+        ? sql`or t.train_number = ${String(Number(number.slice(1)))}`
+        : sql``;
+  const op = opts.operatorId ? sql`and t.operator_id = ${opts.operatorId}` : sql``;
+  // A country: the operator's (a Swedish number in Denmark's feed is still Sweden's train when SJ runs it).
+  const country = opts.country ? sql`and exists (select 1 from operators o where o.id = t.operator_id and o.country = ${opts.country})` : sql``;
+  const rows = db.all<{ d: string }>(sql`
+    select distinct d.service_date d
+    from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key
+    where d.service_date between ${addDays(date, -1)} and ${addDays(date, 7)} and d.service_date != ${date}
+      and (t.train_number = ${number} ${variant}) ${op} ${country}
+    order by d.service_date`);
+  return rows.map((r) => r.d);
+}
+
 /** Direct trains calling at `fromId` and later at `toId`, departing on local date `date`. */
 export function searchByRoute(db: Db, fromId: string, toId: string, date: string, opts: { operatorId?: string } = {}): TripResult[] {
   if (fromId === toId) return [];

@@ -20,7 +20,7 @@ Clack is a Flighty-style app for trains: calm, dark, precise, a little playful. 
 
 ### 2.1 Colors (owner, 2026-10-21: monochrome with signal yellow, dark and light)
 
-Black, white and greys carry the interface; **signal yellow** is the one accent. Yellow is a *fill* (primary buttons, the selected segment or chip, the Passport hero card, the "k" tile) with black type on it. Where the accent has to be text or an icon, use `accent-ink`: yellow on dark, black on light (yellow text on white is unreadable). Both themes are tokens in `styles.css`; the user picks System / Dark / Light in Settings (default Dark).
+Black, white and greys carry the interface; **signal yellow** is the one accent. Yellow is a *fill* (primary buttons, the selected segment or chip, the Passport hero card, the "k" tile) with black type on it. Where the accent has to be text or an icon, use `accent-ink`: yellow on dark, black on light (yellow text on white is unreadable). Both themes are tokens in `styles.css`; the user picks System / Dark / Light in Settings (default System, following the phone: the user test of 2026-11-07 had five of seven testers on light phones read a dark app as ignoring their setting; Dark is still the designed-first theme).
 
 | Token | Dark | Light | Use |
 |---|---|---|---|

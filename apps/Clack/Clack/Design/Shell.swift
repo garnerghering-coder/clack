@@ -138,6 +138,8 @@ struct SheetFrame<Content: View>: View {
                 .padding(.bottom, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            // A scroll puts the keyboard away: the list is what you're reading now (user test 2026-11-07).
+            .scrollDismissesKeyboard(.immediately)
         }
         .background(Ink.surface)
         .presentationCornerRadius(Radius.sheet)

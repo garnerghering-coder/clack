@@ -92,15 +92,27 @@ struct FeaturedCard: View {
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 8) {
-                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, seat: state == .arrived ? nil : Seat.label(l10n, coach: leg.coach, seat: leg.seat)) {
-                    switch state {
-                    case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
-                    case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))
-                    case .active: if let live { LiveStatus(live: live, now: now) }
-                    }
-                }
+                // A journey is headed by what it is ("Journey · 4 trains") and its status; its trains are the cards
+                // below (user test 2026-11-07: headed by "Krösatåg 27604", it read as one train). One train is
+                // headed by its service, as before.
                 if isJourney {
-                    Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    HStack(spacing: 12) {
+                        Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                        Spacer(minLength: 0)
+                        switch state {
+                        case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
+                        case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))
+                        case .active: if let live { LiveStatus(live: live, now: now) }
+                        }
+                    }
+                } else {
+                    ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, seat: state == .arrived ? nil : Seat.label(l10n, coach: leg.coach, seat: leg.seat)) {
+                        switch state {
+                        case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
+                        case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))
+                        case .active: if let live { LiveStatus(live: live, now: now) }
+                        }
+                    }
                 }
                 // A journey reads end to end; its trains are listed under the times of the one featured.
                 Text("\(legs.first?.origin?.name ?? "") → \(legs.last?.destination?.name ?? "")")

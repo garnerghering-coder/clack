@@ -233,6 +233,84 @@ export function createManualLeg(db: Db, userId: string, input: ManualLegInput, n
   return id;
 }
 
+export interface ManualLegEdit {
+  /** Local date where you got on, YYYY-MM-DD. */
+  date?: string;
+  /** Local times, HH:MM; an arrival before the departure is the next day. Both or neither with a new date. */
+  dep?: string;
+  arr?: string;
+  operatorId?: string | null;
+  trainNumber?: string | null;
+  category?: string | null;
+}
+
+/**
+ * Edits a trip added by hand (user test 2026-11-07: "a log you can't correct is not a log"): its day and times, who
+ * ran it, its number and kind. The stations stay (a different route is a different trip). Only for manual trips;
+ * false when the trip isn't this person's, 'not_manual' when it came from a timetable or a live feed.
+ */
+export function editManualLeg(db: Db, userId: string, id: string, edit: ManualLegEdit, now = Date.now()): boolean | 'not_manual' {
+  const row = db.select().from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
+  if (!row) return false;
+  if (row.dataQuality !== 'manual' || row.timetableTripKey) return 'not_manual';
+  const st = (sid: string) => db.select().from(stations).where(eq(stations.id, sid)).get();
+  const from = st(row.originStationId);
+  const to = st(row.destStationId);
+  if (!from || !to) return false;
+  const set: Partial<typeof legs.$inferInsert> = {};
+  if (edit.date !== undefined || edit.dep !== undefined || edit.arr !== undefined) {
+    const date = edit.date ?? row.serviceDate ?? '';
+    const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+    const depText = edit.dep ?? (row.schedDep ? localHHMM(row.schedDep.getTime(), from.tz) : '');
+    const arrText = edit.arr ?? (row.schedArr ? localHHMM(row.schedArr.getTime(), to.tz) : '');
+    const dm = HHMM.exec(depText);
+    const am = HHMM.exec(arrText);
+    if (!d || !dm || !am) throw new LegError('Date must be YYYY-MM-DD and times HH:MM', 400);
+    const [y, mo, day] = [Number(d[1]), Number(d[2]), Number(d[3])];
+    const dep = zonedToUtc(y, mo, day, Number(dm[1]), Number(dm[2]), 0, from.tz);
+    let arr = zonedToUtc(y, mo, day, Number(am[1]), Number(am[2]), 0, to.tz);
+    while (arr <= dep) arr += 86400_000;
+    if (arr - dep > 48 * 3600_000) throw new LegError('That trip is longer than two days', 400);
+    set.serviceDate = date;
+    set.schedDep = new Date(dep);
+    set.schedArr = new Date(arr);
+    set.status = arr < now ? 'completed' : 'planned';
+  }
+  if (edit.operatorId !== undefined) {
+    if (edit.operatorId && !db.select({ id: operators.id }).from(operators).where(eq(operators.id, edit.operatorId)).get()) throw new LegError('Unknown operator', 400);
+    set.operatorId = edit.operatorId || null;
+  }
+  if (edit.trainNumber !== undefined) {
+    const trainNumber = edit.trainNumber?.trim() || null;
+    if (trainNumber && !/^[\w-]{1,10}$/.test(trainNumber)) throw new LegError('Train numbers are letters and digits only', 400);
+    set.trainNumber = trainNumber;
+  }
+  if (edit.category !== undefined) set.category = edit.category && CATEGORIES.has(edit.category) ? edit.category : 'regional';
+  if (!Object.keys(set).length) return true;
+  // The typical type follows the operator and kind, unless the owner chose one.
+  if ((set.operatorId !== undefined || set.category !== undefined || set.trainNumber !== undefined) && row.trainTypeSource !== 'user') {
+    set.trainType = typicalTrainType((set.operatorId !== undefined ? set.operatorId : row.operatorId) ?? null, set.category ?? row.category ?? 'regional', set.trainNumber !== undefined ? set.trainNumber : row.trainNumber);
+    set.trainTypeSource = 'typical';
+  }
+  db.transaction((tx) => {
+    tx.update(legs).set(set).where(eq(legs.id, id)).run();
+    if (set.schedDep) {
+      tx.update(legStops).set({ schedDep: set.schedDep }).where(and(eq(legStops.legId, id), eq(legStops.role, 'board'))).run();
+      tx.update(legStops).set({ schedArr: set.schedArr }).where(and(eq(legStops.legId, id), eq(legStops.role, 'alight'))).run();
+    }
+  });
+  updateRides(db, { legId: id, now });
+  regroupJourneys(db, userId);
+  return true;
+}
+
+/** "HH:MM" of an instant in a zone. */
+function localHHMM(ms: number, tz: string): string {
+  const parts = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date(ms));
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? '00';
+  return `${get('hour')}:${get('minute')}`;
+}
+
 /** One stop of a live train's own list (livemap/trainStops.ts `TrainStopView`), as a trip from live data needs it. */
 export interface LiveStop {
   stationId: string;

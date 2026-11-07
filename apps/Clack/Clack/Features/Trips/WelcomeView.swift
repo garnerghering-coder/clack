@@ -17,6 +17,8 @@ struct WelcomeView: View {
     @Environment(Router.self) private var router
     let onDone: () -> Void
     @State private var trains: [SoonTrain]?
+    /// The departures couldn't be fetched (said as such, not as "no trains").
+    @State private var failed = false
     @State private var near = false
     @State private var adding: String?
 
@@ -25,7 +27,8 @@ struct WelcomeView: View {
             VStack(alignment: .leading, spacing: 20) {
                 Wordmark(fontSize: 40).padding(.top, 24)
                 Text(l10n.t("firstRun.log")).clack(.body).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
-                soon
+                // The search first, where the thumb goes (user test 2026-11-07: the brightest things were five Add
+                // buttons for trains nobody was taking; the welcome moved under a finger as the list loaded).
                 VStack(spacing: 12) {
                     Button {
                         onDone()
@@ -36,7 +39,7 @@ struct WelcomeView: View {
                     .buttonStyle(.clack(.primary, wide: true))
                     Button(l10n.t("firstRun.skip")) { onDone() }.buttonStyle(LinkButtonStyle())
                 }
-                .padding(.top, 8)
+                soon
             }
             // Room under "Not now" for the floating tab bar.
             .padding(.horizontal, 16).padding(.bottom, 120)
@@ -64,7 +67,7 @@ struct WelcomeView: View {
             }
             if let trains {
                 if trains.isEmpty {
-                    Text(l10n.t("firstRun.soonEmpty")).clack(.caption).foregroundStyle(Ink.text2)
+                    Text(l10n.t(failed ? "firstRun.soonFailed" : "firstRun.soonEmpty")).clack(.caption).foregroundStyle(Ink.text2)
                 }
                 ForEach(trains) { train in row(train) }
             } else {
@@ -92,7 +95,8 @@ struct WelcomeView: View {
             } label: {
                 if adding == t.id { ProgressView() } else { Text(l10n.t("firstRun.add")) }
             }
-            .buttonStyle(.clack(.primary, small: true))
+            // Secondary: these are offers, not the way in.
+            .buttonStyle(.clack(small: true))
             .disabled(adding != nil)
             .accessibilityLabel(l10n.t("firstRun.addLabel", ["from": t.from.name, "to": t.to.name]))
         }
@@ -105,10 +109,14 @@ struct WelcomeView: View {
         // Already allowed: near you straight away, without asking anything.
         if LocationModel.shared.allowed, let here = await LocationModel.shared.current() {
             near = true
-            trains = (try? await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)) ?? []
+            let found = try? await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)
+            failed = found == nil
+            trains = found ?? []
             return
         }
-        trains = (try? await app.client.trainsSoon()) ?? []
+        let found = try? await app.client.trainsSoon()
+        failed = found == nil
+        trains = found ?? []
     }
 
     private func loadNear() async {

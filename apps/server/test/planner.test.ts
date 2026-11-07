@@ -86,6 +86,27 @@ describe('the journey planner', () => {
     expect(kept.find((x) => x.fastest)?.legs[0]!.trainNumber).toBe(String(base));
   });
 
+  it('drops a journey when waiting for a later one arrives within an hour in half the time', () => {
+    const j = (dep: number, arr: number, changes: number, night = false): PlannedJourney => ({
+      legs: [{ key: `k${dep}`, trainNumber: String(dep), product: night ? 'night' : 'regional', from: { time: dep }, to: { time: arr } } as never],
+      legCountries: [null], changes: Array.from({ length: changes }, (_, i) => ({ stationId: `s${i}`, name: `S${i}`, gapMin: 20, minMin: 7, comfort: 'relaxed' as const, tier: 'default' as const })),
+      dep, arr, durationMin: (arr - dep) / 60_000,
+    });
+    const H = 3600_000, M = 60_000;
+    const base = 1_000_000_000_000; // 00:00
+    // Uppsala → Stockholm: 01:12 via Gävle (5 h 08, one change) arrives 06:20; the 06:00 direct arrives 06:37.
+    const viaGavle = j(base + 72 * M, base + 380 * M, 1);
+    const direct = j(base + 6 * H, base + 6 * H + 37 * M, 0);
+    // 02:20 via Lund (7 h 35, two changes) arrives 09:55; 07:23 with one change arrives 10:30.
+    const viaLund = j(base + 140 * M, base + 595 * M, 2);
+    const sensible = j(base + 443 * M, base + 630 * M, 1);
+    // A night train is a bed: a day train arriving an hour after it doesn't replace it.
+    const sleeper = j(base + 23 * H, base + 31 * H, 0, true);
+    const morning = j(base + 29 * H, base + 32 * H, 0);
+    const kept = rank([viaGavle, direct, viaLund, sensible, sleeper, morning]).map((x) => x.legs[0]!.trainNumber);
+    expect(kept).toEqual([direct, sensible, sleeper, morning].map((x) => x.legs[0]!.trainNumber));
+  });
+
   it('judges a detour against journeys leaving about then, not the fastest of the day', () => {
     const j = (dep: number, arr: number, changes: number): PlannedJourney => ({
       legs: [{ key: `k${dep}`, trainNumber: String(dep), product: 'regional', from: { time: dep }, to: { time: arr } } as never],

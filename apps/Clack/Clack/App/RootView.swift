@@ -23,7 +23,11 @@ struct RootView: View {
             Ink.bg.ignoresSafeArea()
             // The system's tab bar (Liquid Glass on iOS 26). Each tab keeps its screen and stack while you're on another,
             // so Explore's map and trains are there the moment you come back.
-            TabView(selection: $router.tab) {
+            // Tapping the tab you're on goes back to its first screen, as the system's apps do (user test
+            // 2026-11-07: three testers tapped Trips to leave a trip and stayed on it).
+            TabView(selection: Binding(get: { router.tab }, set: { tab in
+                if tab == router.tab { router.setPath([], for: tab) } else { router.tab = tab }
+            })) {
                 stack(.trips) { TripsScreen() }
                     .tabItem { tabLabel(.trips, icon: "train-front") }
                     .tag(PrimaryTab.trips)

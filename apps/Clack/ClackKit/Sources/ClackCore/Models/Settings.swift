@@ -159,7 +159,7 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
         co2Comparison: .car1,
         includeCommuter: true,
         showRailNetwork: true,
-        theme: .dark,
+        theme: .system,
         walkPace: .normal,
         stepFree: false,
         heavyLuggage: false,

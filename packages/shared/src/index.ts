@@ -84,7 +84,7 @@ export const DEFAULT_SETTINGS: Settings = {
   includeCommuter: true,
   // Owner's choice (2026-10-21): all rail lines dimmed under your route, as in a transit map.
   showRailNetwork: true,
-  theme: 'dark',
+  theme: 'system',
   walkPace: 'normal',
   stepFree: false,
   heavyLuggage: false,

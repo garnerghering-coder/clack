@@ -83,6 +83,8 @@ struct PassportScreen: View {
         Group {
             if !data.review.isEmpty {
                 Button {
+                    // The Past list itself, not whatever trip was left open on the Trips tab (user test 2026-11-07).
+                    router.tripsPath = []
                     router.tripsTab = .past
                     router.tab = .trips
                 } label: {
@@ -106,7 +108,7 @@ struct PassportScreen: View {
                 HStack(alignment: .top, spacing: 8) {
                     ForEach(Array(data.milestones.next.prefix(3).enumerated()), id: \.offset) { _, milestone in
                         let label = l10n.milestoneLabel(milestone, language: settings.language, home: data.home)
-                        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded(.down))), "target": String(Int(milestone.target))])
+                        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded())), "target": String(Int(milestone.target))])
                         VStack(spacing: 4) {
                             Medal(m: milestone, locked: true, size: 80)
                             Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
@@ -254,8 +256,10 @@ struct PassportScreen: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12, alignment: .top)], spacing: 12) {
                     RecordTile(label: l10n.t("passport.timeLost"), value: Format.duration(d.totalLateMin), sub: nil, legId: nil)
                     RecordTile(label: l10n.t("passport.averageDelay"), value: l10n.t("passport.minutesShort", ["n": d.averageMin.map { String(format: "%g", $0) } ?? "—"]), sub: nil, legId: nil)
-                    if let worst = d.worst {
-                        RecordTile(label: l10n.t("passport.worstDelay"), value: l10n.t("passport.minutesLate", count: worst.delayMin ?? 0), sub: "\(worst.from) → \(worst.to)", legId: worst.legId)
+                    // Only when something was late: an early or on-time "worst" is no record (user test 2026-11-07:
+                    // "Worst delay: −1 min late").
+                    if let worst = d.worst, let delay = worst.delayMin, delay > 0 {
+                        RecordTile(label: l10n.t("passport.worstDelay"), value: l10n.t("passport.minutesLate", count: delay), sub: "\(worst.from) → \(worst.to)", legId: worst.legId)
                     }
                     RecordTile(label: l10n.t("passport.cancellations"), value: String(d.cancellations), sub: nil, legId: nil)
                 }
@@ -384,7 +388,8 @@ private struct MilestonesCard: View {
                 Text(l10n.t("passport.nextMilestones")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(Array(next.enumerated()), id: \.offset) { _, milestone in
-                        let value = Int((milestone.value ?? 0).rounded(.down))
+                        // Rounded as the card's km are (user test 2026-11-07: "345 km" on the card, "344 of 500" here).
+                        let value = Int((milestone.value ?? 0).rounded())
                         let formatter = NumberFormatter()
                         VStack(spacing: 2) {
                             Medal(m: milestone, locked: true)

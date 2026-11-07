@@ -551,13 +551,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add to Clack"
+            "value" : "Add to trips"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till i Clack"
+            "value" : "Lägg till i resor"
           }
         }
       }
@@ -806,13 +806,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Where did you get on and off?"
+            "value" : "Where you get on and off"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Var klev du på och av?"
+            "value" : "Var du kliver på och av"
           }
         }
       }
@@ -1568,13 +1568,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plan a journey"
+            "value" : "Find your train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Planera en resa"
+            "value" : "Hitta ditt tåg"
           }
         }
       }
@@ -4696,13 +4696,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min to change"
+            "value" : "{{min}} to change"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min bytestid"
+            "value" : "{{min}} bytestid"
           }
         }
       }
@@ -6682,13 +6682,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Log the trains you ride, today’s or ones from years ago."
+            "value" : "Put in the train you’re taking: Clack tells you if it’s late, which platform, and where it is. Every train you ride goes into your Passport."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Logga tågen du åker, i dag eller för flera år sedan."
+            "value" : "Lägg in tåget du ska åka: Clack säger om det är sent, vilket spår, och var det är. Varje tåg du åker hamnar i ditt pass."
           }
         }
       }
@@ -6886,13 +6886,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min at {{station}}"
+            "value" : "{{min}} at {{station}}"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min i {{station}}"
+            "value" : "{{min}} i {{station}}"
           }
         }
       }
@@ -6937,13 +6937,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Door to door"
+            "value" : "Total time"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dörr till dörr"
+            "value" : "Restid"
           }
         }
       }
@@ -19216,13 +19216,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Was it a different train? Change it"
+            "value" : "Different train? Change it"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Var det ett annat tåg? Ändra"
+            "value" : "Ett annat tåg? Ändra"
           }
         }
       }
@@ -19896,13 +19896,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add the train you took today, or one from years ago."
+            "value" : "Add the train you’re taking, or one you rode years ago."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till tåget du åkte i dag, eller ett från flera år sedan."
+            "value" : "Lägg till tåget du ska åka, eller ett du åkte för flera år sedan."
           }
         }
       }
@@ -22086,6 +22086,839 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plattformshöjd: Banedanmark"
+          }
+        }
+      }
+    },
+    "add.showEarlierDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show earlier · {{day}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa tidigare · {{day}}"
+          }
+        }
+      }
+    },
+    "add.showLaterDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show later · {{day}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa senare · {{day}}"
+          }
+        }
+      }
+    },
+    "add.noEarlierThatDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing before {{time}} on {{day}} in the timetable. That can mean works or a reduced timetable: check with the operator before you travel."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inget före {{time}} {{day}} i tidtabellen. Det kan betyda banarbete eller en reducerad tidtabell: kontrollera med tågbolaget innan du reser."
+          }
+        }
+      }
+    },
+    "add.noJourneyThatDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No trains between these stations on {{day}} in the timetable."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inga tåg mellan de här stationerna {{day}} i tidtabellen."
+          }
+        }
+      }
+    },
+    "add.departedToday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These have already left today."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De här har redan gått i dag."
+          }
+        }
+      }
+    },
+    "add.noTrainOnDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No train {{train}} on {{day}}."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inget tåg {{train}} {{day}}."
+          }
+        }
+      }
+    },
+    "add.runsOn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It runs on"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det går"
+          }
+        }
+      }
+    },
+    "add.noTrainHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the date on your ticket, or search the route (from and to) instead."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontrollera datumet på biljetten, eller sök på sträckan (från och till) i stället."
+          }
+        }
+      }
+    },
+    "detail.deleteTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete this train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta bort det här tåget"
+          }
+        }
+      }
+    },
+    "detail.deleteTrainConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete {{route}} from this journey?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta bort {{route}} från resan?"
+          }
+        }
+      }
+    },
+    "detail.deleteRouteConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete {{route}}?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta bort {{route}}?"
+          }
+        }
+      }
+    },
+    "detail.deleteTrainBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The other trains of the journey stay."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resans övriga tåg blir kvar."
+          }
+        }
+      }
+    },
+    "detail.menuSeat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seat and car"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plats och vagn"
+          }
+        }
+      }
+    },
+    "detail.menuEdit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit trip"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ändra resan"
+          }
+        }
+      }
+    },
+    "detail.menuSameTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Same train, another day"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samma tåg en annan dag"
+          }
+        }
+      }
+    },
+    "detail.menuChangeTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another train instead"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ett annat tåg i stället"
+          }
+        }
+      }
+    },
+    "share.textArrives" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} → {{to}}, {{day}}. Arrives {{time}} ({{train}}). Follow my train live:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} → {{to}}, {{day}}. Framme {{time}} ({{train}}). Följ mitt tåg live:"
+          }
+        }
+      }
+    },
+    "share.textArrivesNoTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} → {{to}}, {{day}}. Arrives {{time}}. Follow my train live:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} → {{to}}, {{day}}. Framme {{time}}. Följ mitt tåg live:"
+          }
+        }
+      }
+    },
+    "share.textPlain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow my train live:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följ mitt tåg live:"
+          }
+        }
+      }
+    },
+    "share.stoppedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sharing stopped"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delningen är avslutad"
+          }
+        }
+      }
+    },
+    "share.stoppedBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The link no longer works. Nobody can follow this journey until you share it again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länken fungerar inte längre. Ingen kan följa resan förrän du delar den igen."
+          }
+        }
+      }
+    },
+    "share.explainTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share a live link?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela en livelänk?"
+          }
+        }
+      }
+    },
+    "share.explainBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anyone with the link sees where your train is, how late it is and when it arrives, until the journey is over. You can stop sharing any time from this button."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla med länken ser var ditt tåg är, hur sent det är och när det kommer fram, tills resan är över. Du kan sluta dela när som helst från den här knappen."
+          }
+        }
+      }
+    },
+    "share.explainGo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share link"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela länk"
+          }
+        }
+      }
+    },
+    "share.sharingNow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sharing a live link to this journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delar en livelänk till resan"
+          }
+        }
+      }
+    },
+    "alertsPrompt.on" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alerts are on for this train: a reminder, the platform, delays and changes."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviseringar är på för det här tåget: en påminnelse, spåret, förseningar och byten."
+          }
+        }
+      }
+    },
+    "alertsPrompt.nowOn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done: alerts are on for this train and every train you add."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klart: aviseringar är på för det här tåget och alla tåg du lägger till."
+          }
+        }
+      }
+    },
+    "add.viewJourney" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa resan"
+          }
+        }
+      }
+    },
+    "add.usuallyType" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usually {{type}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oftast {{type}}"
+          }
+        }
+      }
+    },
+    "manual.operatorSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search operators"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sök tågbolag"
+          }
+        }
+      }
+    },
+    "edit.stationsStay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The stations stay as they are. A different route is a new trip."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationerna ändras inte. En annan sträcka är en ny resa."
+          }
+        }
+      }
+    },
+    "edit.when" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "När"
+          }
+        }
+      }
+    },
+    "edit.day" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dag"
+          }
+        }
+      }
+    },
+    "edit.train" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåg"
+          }
+        }
+      }
+    },
+    "edit.kind" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kind"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slag"
+          }
+        }
+      }
+    },
+    "seat.savedNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved. It shows at the top of the trip."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sparat. Det visas överst på resan."
+          }
+        }
+      }
+    },
+    "liveMap.searching" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching…"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Söker…"
+          }
+        }
+      }
+    },
+    "liveMap.searchFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t search right now. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte söka just nu. Kontrollera uppkopplingen och försök igen."
+          }
+        }
+      }
+    },
+    "firstRun.soonFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t fetch departures right now."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta avgångar just nu."
+          }
+        }
+      }
+    },
+    "settings.deleteDataNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removes your trips, settings and alerts from Clack’s server and this phone. The app stays installed."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar bort dina resor, inställningar och aviseringar från Clacks server och den här telefonen. Appen finns kvar."
+          }
+        }
+      }
+    },
+    "settings.startOverNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The same, and the app then opens as on the first day."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detsamma, och appen öppnas sedan som första dagen."
+          }
+        }
+      }
+    },
+    "settings.copyAddress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy address"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiera adressen"
+          }
+        }
+      }
+    },
+    "settings.reportBugNoMail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No mail app is set up on this phone. Write to {{email}}."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen e-postapp är inställd på den här telefonen. Skriv till {{email}}."
+          }
+        }
+      }
+    },
+    "about.maker" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clack is made by one person, Garner, in Sweden. Corrections and questions are welcome at the address on the Privacy page."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clack görs av en person, Garner, i Sverige. Rättelser och frågor är välkomna på adressen på sidan Integritet."
+          }
+        }
+      }
+    },
+    "network.at" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At {{a}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vid {{a}}"
+          }
+        }
+      }
+    },
+    "stationMap.noWalk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk not known yet: the other platform isn’t on this map."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gångvägen är inte känd än: det andra spåret finns inte på kartan."
+          }
+        }
+      }
+    },
+    "add.noTrainAtHome" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No train {{number}} in {{country}} on {{day}}; the one below is abroad."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inget tåg {{number}} i {{country}} {{day}}; det nedan går utomlands."
+          }
+        }
+      }
+    },
+    "journey.addOrFollowNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to trips makes it yours: live times, alerts and your Passport. Follow only watches it, without adding it."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lägg till i resor gör den till din: realtid, aviseringar och ditt pass. Följ bara bevakar den, utan att lägga till."
+          }
+        }
+      }
+    },
+    "journey.addNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It goes into your trips and your Passport."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Den hamnar bland dina resor och i ditt pass."
           }
         }
       }

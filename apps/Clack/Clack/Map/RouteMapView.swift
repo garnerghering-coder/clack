@@ -55,6 +55,7 @@ struct RouteMapView: View {
     /// The rail network follows the setting; there is no button for it on the map.
     private var showRail: Bool { railNetwork }
     @State private var follow = false
+    @State private var moved = false
     @State private var basemap: Bool?
 
     init(
@@ -86,13 +87,17 @@ struct RouteMapView: View {
             if let basemap {
                 RouteMapRepresentable(
                     handle: handle, base: Config.apiBase, color: color, route: route, context: context, stops: stops,
-                    animate: animate, interactive: interactive, controls: controls, showRail: showRail, follow: $follow,
+                    animate: animate, interactive: interactive, controls: controls, showRail: showRail, follow: $follow, moved: $moved,
                     train: train, fitTrain: fitTrain, progress: progress, withBasemap: basemap, dark: scheme == .dark
                 )
                 // Re-created when the theme changes: the basemap and every layer take their colours from it.
                 .id("\(scheme == .dark)-\(basemap)")
+                // A preview (a card's strip, the confirm step) is a picture: a drag on it scrolls the page.
+                .allowsHitTesting(interactive)
             }
-            if controls && interactive {
+            // The button shows once there is something for it to do: a live train to follow, or a map that was moved
+            // off its framing (user test 2026-11-07: tapped before departure it did nothing, "dead button").
+            if controls && interactive && (train != nil || moved) {
                 VStack {
                     Spacer()
                     HStack {
@@ -104,6 +109,7 @@ struct RouteMapView: View {
                                 follow = true
                             } else {
                                 follow = false
+                                moved = false
                                 handle.recenter()
                             }
                         }
@@ -117,6 +123,9 @@ struct RouteMapView: View {
                 HStack {
                     Text("© OpenStreetMap contributors · Protomaps")
                         .clack(.mapAttribution).foregroundStyle(Ink.text3)
+                        // A credit line, not reading matter: it stays small at accessibility sizes (user test
+                        // 2026-11-07, xxxLarge: it covered a third of the map).
+                        .dynamicTypeSize(...DynamicTypeSize.xLarge)
                         .padding(.leading, 8).padding(.bottom, 6 + bottomInset)
                         .allowsHitTesting(false)
                     Spacer()
@@ -144,6 +153,8 @@ private struct RouteMapRepresentable: UIViewRepresentable {
     let controls: Bool
     let showRail: Bool
     @Binding var follow: Bool
+    /// The person panned or zoomed away from the framing (the re-centre button appears).
+    @Binding var moved: Bool
     let train: MapTrain?
     let fitTrain: Bool
     let progress: Double?
@@ -224,7 +235,10 @@ private struct RouteMapRepresentable: UIViewRepresentable {
             // Dragging the map means you want to look around: stop following the train.
             if reason.contains(.gesturePan) || reason.contains(.gesturePinch) {
                 (mapView as? ClackMapView)?.markMoved()
-                DispatchQueue.main.async { self.parent.follow = false }
+                DispatchQueue.main.async {
+                    self.parent.follow = false
+                    self.parent.moved = true
+                }
             }
         }
 

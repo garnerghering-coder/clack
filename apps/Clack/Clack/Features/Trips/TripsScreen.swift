@@ -20,8 +20,11 @@ final class TripsModel {
     func load(_ client: APIClient) async {
         failed = false
         do {
+            let first = legs == nil
             legs = try await client.legs()
-            UsageAsk.shared.check(legs ?? [])
+            // Asked on a launch where a trip has already ended, not the moment one is added (user test 2026-11-07:
+            // the dialog came up on top of adding a past trip, and once mid long-press after Settings).
+            if first { UsageAsk.shared.check(legs ?? []) }
         } catch {
             failed = true
         }
@@ -58,6 +61,14 @@ final class TripsModel {
         }
     }
 
+    /// Deletes a trip from the list (the hold menu on a card); the list is read again by the caller.
+    func delete(_ leg: Leg, _ client: APIClient) async -> Bool {
+        guard (try? await client.deleteLeg(leg.id)) != nil else { return false }
+        TicketStore.shared.detach(legId: leg.id)
+        legs = legs?.filter { $0.id != leg.id }
+        return true
+    }
+
     func answer(_ leg: Leg, _ answer: RideAnswer, _ client: APIClient) async {
         guard let detail = try? await client.answerRide(leg.id, answer), var all = legs,
               let index = all.firstIndex(where: { $0.id == leg.id }) else { return }
@@ -82,6 +93,8 @@ struct TripsScreen: View {
     @State private var model = TripsModel()
     /// The welcome has been shown (`FirstRun`).
     @AppStorage(FirstRun.welcomeSeenKey) private var welcomeSeen = false
+    /// A trip held in the list, about to be deleted (the alert asks first).
+    @State private var deleting: Leg?
 
     var body: some View {
         // The partition depends on the clock; once a minute is as often as anything on this screen changes class.
@@ -91,7 +104,9 @@ struct TripsScreen: View {
         .toolbar(.hidden, for: .navigationBar)
         // The first time, over the empty list: what Clack does and how to start.
         .overlay {
-            if FirstRun.showsWelcome(seen: welcomeSeen, legs: model.legs?.count) {
+            // Also when the list couldn't be fetched yet on a new phone: the welcome, not a red "Couldn't load" as
+            // the first screen (user test 2026-11-07: two testers' first screen, with the dev server restarting).
+            if FirstRun.showsWelcome(seen: welcomeSeen, legs: model.legs?.count) || (!welcomeSeen && model.failed && model.legs == nil) {
                 WelcomeView { welcomeSeen = true }
                     .onDisappear { welcomeSeen = true }
                     .transition(.opacity)
@@ -100,6 +115,19 @@ struct TripsScreen: View {
         // Trips already there (an update, or a new phone with the same id): no welcome, now or later.
         .onChange(of: model.legs?.isEmpty) { _, empty in if empty == false { welcomeSeen = true } }
         .task(id: app.tripsVersion) { await model.load(app.client) }
+        .alert(l10n.t("detail.deleteRouteConfirm", ["route": "\(deleting?.origin?.name ?? "") → \(deleting?.destination?.name ?? "")"]), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } })) {
+            Button(l10n.t("detail.delete"), role: .destructive) {
+                if let leg = deleting {
+                    Task {
+                        if await model.delete(leg, app.client) {
+                            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                            app.tripsChanged()
+                        }
+                    }
+                }
+            }
+            Button(l10n.t("common.cancel"), role: .cancel) {}
+        }
         .task(id: app.isOffline) { await model.loadDetails(app.client, now: Date.now.timeIntervalSince1970 * 1000) }
         .task { await model.loadFollows(app.client) }
         .task { await model.listen(app.live) }
@@ -202,10 +230,18 @@ struct TripsScreen: View {
                 // A layover line between separate trips that still meet at a station.
                 let before = index == 0 ? heroJourney.last : items[index - 1].last
                 if item.count == 1, let before, TripsLogic.meets(before, item[0]) { Layover(a: before, b: item[0]) }
-                if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0], upcoming: true) }
+                if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0], upcoming: true).contextMenu { holdMenu(item[0]) } }
             }
         }
         FollowingSection(follows: unshared(model.follows))
+    }
+
+    /// Holding a trip in the list (user test 2026-11-07: "deleting a trip is open → … → Delete"; "no context menu
+    /// anywhere"): open it, or delete it.
+    @ViewBuilder
+    private func holdMenu(_ leg: Leg) -> some View {
+        Button { router.push(.trip(leg.id)) } label: { Label(l10n.t("add.viewTrip"), systemImage: "arrow.up.right") }
+        Button(role: .destructive) { deleting = leg } label: { Label(l10n.t("detail.delete"), systemImage: "trash") }
     }
 
     @ViewBuilder
@@ -218,7 +254,7 @@ struct TripsScreen: View {
             Section {
                 VStack(spacing: 8) {
                     ForEach(month.items, id: \.first?.id) { item in
-                        if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0]) }
+                        if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0]).contextMenu { holdMenu(item[0]) } }
                     }
                 }
             } header: {

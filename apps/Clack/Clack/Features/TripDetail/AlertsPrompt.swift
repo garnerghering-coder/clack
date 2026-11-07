@@ -16,6 +16,9 @@ struct AlertsPrompt: View {
     let leg: Leg
     @AppStorage(FirstRun.alertsAskedKey) private var asked = false
     @State private var busy = false
+    /// Just switched on from here: the card gives way to the word that it took (user test 2026-11-07: "I pressed
+    /// Allow and the thing I pressed disappeared. Did it take?").
+    @State private var justOn = false
 
     private static let dismissKey = "firstRun.alerts"
 
@@ -35,6 +38,21 @@ struct AlertsPrompt: View {
                 .buttonStyle(.clack(.primary, small: true))
                 .disabled(busy)
             }
+        } else if app.settings.notify, !leg.canceled {
+            // Alerts are on for this train (and every other ahead): one line, and the way to what you get.
+            NavigationLink(value: AppRoute.settings) {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "bell", size: 16).foregroundStyle(Ink.accentInk)
+                    Text(l10n.t(justOn ? "alertsPrompt.nowOn" : "alertsPrompt.on")).clack(.caption).foregroundStyle(Ink.text2)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: 8)
+                    LucideIcon(name: "chevron-right", size: 14).foregroundStyle(Ink.text3)
+                }
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint(l10n.t("settings.title"))
         }
     }
 
@@ -44,6 +62,7 @@ struct AlertsPrompt: View {
         if await app.notifications.requestPermission() {
             await app.update(SettingsPatch(notify: true))
             Usage.shared.count(.feature, "alerts.on")
+            justOn = true
         }
         asked = true
         busy = false

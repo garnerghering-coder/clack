@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { cleanPlatform, cleanSeatField, createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, setUserPlatforms, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
+import { cleanPlatform, cleanSeatField, createLeg, createManualLeg, deleteLeg, editManualLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, setUserPlatforms, type CreateLegInput, type ManualLegEdit, type ManualLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
@@ -64,9 +64,22 @@ export const legRoutes =
     // off when no source has one (409 when one does). Absent fields stay as they are; each accepts null to clear.
     app.patch<{
       Params: { id: string };
-      Body: { trainType?: string | null; coach?: string | null; seat?: string | null; depPlatform?: string | null; arrPlatform?: string | null };
+      Body: { trainType?: string | null; coach?: string | null; seat?: string | null; depPlatform?: string | null; arrPlatform?: string | null } & ManualLegEdit;
     }>('/legs/:id', async (req, reply) => {
       const body = req.body ?? {};
+      // A hand-added trip's day, times, operator, number and kind (editManualLeg says what it allows).
+      const manual: ManualLegEdit = {};
+      for (const k of ['date', 'dep', 'arr', 'operatorId', 'trainNumber', 'category'] as const) if (body[k] !== undefined) (manual as Record<string, unknown>)[k] = body[k];
+      if (Object.keys(manual).length) {
+        try {
+          const edited = editManualLeg(db, req.userId, req.params.id, manual);
+          if (edited === false) return reply.code(404).send({ error: 'not found' });
+          if (edited === 'not_manual') return reply.code(409).send({ error: 'only trips added by hand can be edited this way' });
+        } catch (e) {
+          if (e instanceof LegError) return reply.code(e.status).send({ error: e.message });
+          throw e;
+        }
+      }
       const t = body.trainType;
       let coach: string | null | undefined;
       let seat: string | null | undefined;
@@ -81,7 +94,7 @@ export const legRoutes =
         if (e instanceof LegError) return reply.code(e.status).send({ error: e.message });
         throw e;
       }
-      if (t === undefined && coach === undefined && seat === undefined && dep === undefined && arr === undefined) return reply.code(400).send({ error: 'nothing to change' });
+      if (t === undefined && coach === undefined && seat === undefined && dep === undefined && arr === undefined && !Object.keys(manual).length) return reply.code(400).send({ error: 'nothing to change' });
       if (t !== undefined && t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
       if (dep !== undefined || arr !== undefined) {
         const saved = setUserPlatforms(db, req.userId, req.params.id, { dep, arr });

@@ -8,7 +8,7 @@ import { addDays, todayIn } from '../lib/time.js';
 import { COUNTRIES, tzOf } from '../lib/countries.js';
 import { buildOperatorMatcher, parseQuery } from './parse.js';
 import { searchStations, type StationHit, type StationIndex } from './stations.js';
-import { searchByNumber, searchByRoute, searchConnections, type Connection, type TripResult } from './timetable.js';
+import { daysWithNumber, searchByNumber, searchByRoute, searchConnections, type Connection, type TripResult } from './timetable.js';
 
 /** A station text resolves to its best match only above this score (60 = every word is a prefix of the name). */
 const RESOLVE = 60;
@@ -39,6 +39,10 @@ export interface SmartSearchResult {
   history?: HistoryState['state'] | 'norway' | 'finland';
   /** With `norway` or `finland`: the first day that country's record has (YYYY-MM-DD), for the message. */
   historyFrom?: string;
+  /** A train number with nothing on `date`: the nearby days (service dates) it does run, for the message. */
+  otherDays?: string[];
+  /** With results only from abroad: `otherDays` are the days the number runs in this country (the home country). */
+  otherDaysCountry?: string;
 }
 
 /** Older Norwegian and Finnish days, from the observed record (observed/timetable.ts). */
@@ -139,7 +143,10 @@ export function createSmartSearch(
         return out;
       }
     }
-    if (q.trainNumber) out.results = searchByNumber(db, q.trainNumber, date, { operatorId: q.operatorId, fromId: from?.id, toId: to?.id });
+    if (q.trainNumber) {
+      out.results = searchByNumber(db, q.trainNumber, date, { operatorId: q.operatorId, fromId: from?.id, toId: to?.id });
+      if (!out.results.length) out.otherDays = daysWithNumber(db, q.trainNumber, date, { operatorId: q.operatorId });
+    }
     else if (from && to) {
       out.results = searchByRoute(db, from.id, to.id, date, { operatorId: q.operatorId });
       // Nothing between those two stations: try the town's other stations ("Stockholm" for a commuter train means

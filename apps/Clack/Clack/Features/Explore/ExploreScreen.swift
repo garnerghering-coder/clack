@@ -93,6 +93,15 @@ struct ExploreScreen: View {
         .task(id: app.followed.journeys.map(\.token)) { await model.refreshFollows() }
         // Your dot, from the moment the map is up (and again when the map is made again for the other theme).
         .task(id: model.ready) { if model.ready { model.showMyDot() } }
+        // Just allowed: the map comes to you (user test 2026-11-07: "it didn't zoom to me even though I just said yes").
+        .onChange(of: LocationModel.shared.allowed) { was, allowed in
+            guard !was, allowed, active else { return }
+            Task {
+                if let here = await LocationModel.shared.current() {
+                    model.controller.ease(to: here.coordinate, minZoom: 9, offset: 0)
+                }
+            }
+        }
         // "Stations" from elsewhere (old links): the search, open, with your stations under it.
         .task(id: router.stationSearchRequest) {
             guard router.stationSearchRequest != nil else { return }
@@ -227,7 +236,11 @@ struct ExploreScreen: View {
             .accessibilityAddTraits(model.showFilters ? .isSelected : [])
             // Network status, beside the filters (owner, 2026-10-28); the search field gives up the room.
             Button {
-                if !model.showNetwork { model.searching = false }
+                if !model.showNetwork {
+                    model.searching = false
+                    // One overlay at a time: the station's card goes (user test 2026-11-07: the two overlapped).
+                    model.stationSheet = nil
+                }
                 model.showFilters = false
                 model.showNetwork.toggle()
             } label: {
@@ -273,10 +286,21 @@ struct ExploreScreen: View {
                     }
                 }
                 if trainHits.isEmpty && model.stationHits.isEmpty {
-                    Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
-                        .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
+                    if model.stationSearchPending {
+                        HStack(spacing: 8) {
+                            ProgressView().controlSize(.small)
+                            Text(l10n.t("liveMap.searching")).clack(.caption).foregroundStyle(Ink.text2)
+                        }
+                        .padding(.vertical, 8)
+                    } else if model.stationSearchFailed {
+                        Text(l10n.t("liveMap.searchFailed")).clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
+                    } else {
+                        Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
+                            .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
+                    }
                 }
-                Button(l10n.t("common.close")) { model.searching = false }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
+                // Closing is done with the search: the text goes too (user test 2026-11-07: "the box still says 421").
+                Button(l10n.t("common.close")) { model.endSearch() }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
             }
         }
     }

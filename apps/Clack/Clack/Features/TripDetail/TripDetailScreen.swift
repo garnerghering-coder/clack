@@ -18,6 +18,7 @@ struct TripDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var typeSize
     let id: String
     /// Shown as one train of its journey (JourneyScreen): the whole journey's bar on top and its trains and changes
     /// below, where another train can be put in focus.
@@ -43,6 +44,10 @@ struct TripDetailScreen: View {
     @State private var geo: RouteGeo?
     /// The ticket kept with this trip, open full screen.
     @State private var showTicket = false
+    /// A section the … menu asked to scroll to ("Seat and car" opens About this train at the seat fields).
+    @State private var scrollTarget: String?
+    /// Editing a hand-added trip's times, operator and number.
+    @State private var editingManual = false
 
     var body: some View {
         GeometryReader { proxy in
@@ -110,12 +115,41 @@ struct TripDetailScreen: View {
         } message: {
             Text(l10n.t(platformEnd == .arr ? "platform.messageArrival" : "platform.message"))
         }
-        .confirmationDialog(l10n.t("detail.deleteConfirm"), isPresented: $confirmDelete, titleVisibility: .visible) {
-            Button(l10n.t("detail.delete"), role: .destructive) { Task { await remove() } }
-            Button(l10n.t("common.close"), role: .cancel) {}
+        // The system's alert, with Cancel, and it says what goes: this train, and that the rest of a journey stays
+        // (user test 2026-11-07: a popover with no Cancel, "trip" when the page said "journey").
+        .alert(deleteTitle, isPresented: $confirmDelete) {
+            Button(l10n.t(inJourney ? "detail.deleteTrain" : "detail.delete"), role: .destructive) { Task { await remove() } }
+            Button(l10n.t("common.cancel"), role: .cancel) {}
+        } message: {
+            if inJourney { Text(l10n.t("detail.deleteTrainBody")) }
         }
-        // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
-        .toolbar(.hidden, for: .navigationBar)
+        // The system's navigation bar, transparent over the full-bleed map: its back button stays while the page
+        // scrolls and the edge swipe goes back, as on every pushed screen (user test 2026-11-07: with the bar hidden
+        // the back arrow scrolled away with the map and the swipe was dead). The menu and sharing sit in it.
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                if let leg {
+                    if TicketStore.shared.entry(for: leg.id) != nil {
+                        Button { showTicket = true } label: { LucideIcon(name: "ticket", size: 18) }
+                            .accessibilityLabel(l10n.t("ticket.show"))
+                            .accessibilityIdentifier("trip.ticket")
+                    }
+                    moreMenu(leg.leg)
+                    ShareControl(share: sharing, journeyId: leg.leg.journeyId, legId: leg.leg.id, legs: journey?.legs ?? [leg.leg])
+                }
+            }
+        }
+    }
+
+    /// Part of a journey with other trains (the delete words say so).
+    private var inJourney: Bool { (journey?.legs.count ?? 1) > 1 }
+
+    private var deleteTitle: String {
+        guard let l = leg?.leg else { return l10n.t("detail.deleteConfirm") }
+        let route = "\(l.origin?.name ?? "") → \(l.destination?.name ?? "")"
+        return l10n.t(inJourney ? "detail.deleteTrainConfirm" : "detail.deleteRouteConfirm", ["route": route])
     }
 
     // MARK: loading
@@ -219,6 +253,11 @@ struct TripDetailScreen: View {
         .scrollBounceBehavior(.always)
         // Pull to refresh asks the sources for fresh times (a saved trip just reloads).
         .refreshable { await (detail.leg.status == .snapshotted ? load() : refresh()) }
+        .onChange(of: scrollTarget) { _, target in
+            guard let target else { return }
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.3)) { scroller.scrollTo(target, anchor: .top) }
+            scrollTarget = nil
+        }
         #if DEBUG
         // `-scrollTo stops` (or times, about, train, onboard, activity, details) scrolls there on launch, to check a
         // section; the last four open "About this train" first.
@@ -254,26 +293,7 @@ struct TripDetailScreen: View {
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
-            // Back, the menu and sharing in one row, so none lies over another.
-            HStack {
-                MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
-                    .accessibilityIdentifier("trip.back")
-                Spacer(minLength: 0)
-                moreMenu(detail.leg)
-                ShareControl(
-                    share: sharing, journeyId: detail.leg.journeyId, legId: detail.leg.id,
-                    from: detail.leg.origin?.name ?? "", to: detail.leg.destination?.name ?? "", overMap: true
-                )
-            }
-            .padding(.horizontal, 16).padding(.top, top + 12)
-            // The ticket shared to Clack for this train, kept on the phone: one tap to show it. Under the share
-            // button, where the map's own buttons start (`RouteMapView` keeps its re-center button at the bottom).
-            if TicketStore.shared.entry(for: detail.id) != nil {
-                MapButton(icon: "ticket", label: l10n.t("ticket.show")) { showTicket = true }
-                    .accessibilityIdentifier("trip.ticket")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.horizontal, 16).padding(.top, top + 64)
-            }
+            // Under the navigation bar's buttons (back, the menu, sharing).
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
@@ -281,8 +301,8 @@ struct TripDetailScreen: View {
                     .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm)
                     .frame(maxWidth: .infinity)
-                    .padding(.top, top + 18)
-                    // A label only: taps go through to the buttons beside it.
+                    .padding(.top, top + 60)
+                    // A label only: taps go through to the map.
                     .allowsHitTesting(false)
             }
         }
@@ -338,6 +358,9 @@ struct TripDetailScreen: View {
                 }
                 .accessibilityElement(children: .combine)
             }
+            // A live link is out for this journey: said here, with the way to stop it, so sharing never runs on
+            // unseen (user test 2026-11-07: "Stop sharing" in red for sharing nobody knew had started).
+            if sharing.isShared { SharingRow(share: sharing) }
             // Something wrong with this train or the change after it, at every stage: what happened, what to do, what
             // you're owed. Nothing when all is well.
             DisruptionCard(leg: detail)
@@ -538,7 +561,10 @@ struct TripDetailScreen: View {
         let schedDep = l.schedDep?.ms
         let schedArr = l.schedArr?.ms
         let extraDays = (schedDep != nil && schedArr != nil) ? Format.dayOffset(from: schedDep!, fromTz: tz, to: schedArr!, toTz: dtz) : 0
-        return HStack(alignment: .top, spacing: 12) {
+        // Side by side, or one under the other at accessibility text sizes, where two don't fit (user test
+        // 2026-11-07, xxxLarge: "DEPARTU…" and the flap digits cut).
+        let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        return layout {
             TimeBlock(
                 label: l10n.t("detail.departure"), sched: schedDep, actual: l.actualDep?.ms ?? (tracking ? board?.estimatedDep?.ms : nil),
                 tz: tz, platform: l.depPlatform,
@@ -660,26 +686,59 @@ struct TripDetailScreen: View {
         }
     }
 
-    /// The trip's less common actions, in the system's menu over the map: fresh times, "I didn't take this train"
-    /// and deleting the trip.
+    /// The trip's less common actions, in the system's menu in the bar: fresh times, the seat, the same train another
+    /// day, another train instead of this one, "I didn't take this train", editing a hand-added trip, and deleting.
     private func moreMenu(_ l: Leg) -> some View {
-        Menu {
+        let ahead = (l.schedDep?.ms ?? 0) > Date.now.timeIntervalSince1970 * 1000 && !l.canceled
+        let service = [l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")
+        let route = "\(l.origin?.name ?? "") \(l.destination?.name ?? "")"
+        return Menu {
             if l.status != .snapshotted {
                 Button { Task { await refresh() } } label: { Label(l10n.t("detail.refresh"), systemImage: "arrow.clockwise") }
                     .disabled(busy)
+            }
+            if l.actualArr == nil {
+                Button {
+                    aboutOpen = true
+                    scrollTarget = "details"
+                } label: { Label(l10n.t("detail.menuSeat"), systemImage: "carseat.left") }
+            }
+            if l.dataQuality == .manual {
+                Button { editingManual = true } label: { Label(l10n.t("detail.menuEdit"), systemImage: "pencil") }
+            }
+            // The commute (user test 2026-11-07): the same train on another day, the search filled in.
+            if !service.isEmpty, l.trainNumber != nil, let date = l.serviceDate {
+                Button {
+                    router.openAdd(query: service, date: Format.addDaysIso(max(date, Format.todayIso()), days: 1) ?? date)
+                } label: { Label(l10n.t("detail.menuSameTrain"), systemImage: "calendar.badge.plus") }
+            }
+            // Another train instead of this one: a search for the route on the same day; saving one replaces this.
+            if l.dataQuality != .manual, let date = l.serviceDate {
+                Button {
+                    router.openAdd(query: route, date: date, replaceLegId: l.id, deleteReplaced: ahead)
+                } label: { Label(l10n.t("detail.menuChangeTrain"), systemImage: "arrow.triangle.2.circlepath") }
             }
             if l.ride == .auto || l.ride == .confirmed {
                 Button { Task { await answer(.no) } } label: { Label(l10n.t("record.correctNo"), systemImage: "xmark.circle") }
             }
             Divider()
-            Button(role: .destructive) { confirmDelete = true } label: { Label(l10n.t("detail.delete"), systemImage: "trash") }
+            Button(role: .destructive) { confirmDelete = true } label: { Label(l10n.t(inJourney ? "detail.deleteTrain" : "detail.delete"), systemImage: "trash") }
         } label: {
-            MapButtonFace(icon: "", symbol: "ellipsis")
+            LucideIcon(name: "system:ellipsis", size: 18)
         }
-        .buttonStyle(.plain)
-        .tint(Ink.text)
         .accessibilityLabel(l10n.t("detail.more"))
         .accessibilityIdentifier("trip.more")
+        .sheet(isPresented: $editingManual) {
+            if let detail = leg {
+                EditManualTripSheet(leg: detail) { updated in
+                    leg = updated
+                    app.tripsChanged()
+                }
+                .environment(app)
+                .environment(app.l10n)
+                .preferredColorScheme(app.colorScheme)
+            }
+        }
     }
 }
 
@@ -723,8 +782,9 @@ struct TimeBlock: View {
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
         VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 8) {
-                Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
+            HStack(alignment: .top, spacing: 8) {
+                // Two lines when it must ("DEPARTURE" at the largest text sizes), never cut mid-word.
+                Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(2).fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
                 platformTag
             }

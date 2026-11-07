@@ -44,17 +44,34 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
     /// The platform where you got on / off, typed where no source has one (the server refuses it otherwise).
     public var depPlatform: String??
     public var arrPlatform: String??
+    /// A trip added by hand: its day (YYYY-MM-DD), times (HH:MM, local to each station), operator, number and kind.
+    public var date: String?
+    public var dep: String?
+    public var arr: String?
+    public var operatorId: String??
+    public var trainNumber: String??
+    public var category: String?
 
-    public init(trainType: String?? = nil, coach: String?? = nil, seat: String?? = nil, depPlatform: String?? = nil, arrPlatform: String?? = nil) {
+    public init(trainType: String?? = nil, coach: String?? = nil, seat: String?? = nil, depPlatform: String?? = nil, arrPlatform: String?? = nil,
+                date: String? = nil, dep: String? = nil, arr: String? = nil, operatorId: String?? = nil, trainNumber: String?? = nil, category: String? = nil) {
         self.trainType = trainType
         self.coach = coach
         self.seat = seat
         self.depPlatform = depPlatform
         self.arrPlatform = arrPlatform
+        self.date = date
+        self.dep = dep
+        self.arr = arr
+        self.operatorId = operatorId
+        self.trainNumber = trainNumber
+        self.category = category
     }
 
     /// The server refuses an empty patch ("nothing to change").
-    public var isEmpty: Bool { trainType == nil && coach == nil && seat == nil && depPlatform == nil && arrPlatform == nil }
+    public var isEmpty: Bool {
+        trainType == nil && coach == nil && seat == nil && depPlatform == nil && arrPlatform == nil
+            && date == nil && dep == nil && arr == nil && operatorId == nil && trainNumber == nil && category == nil
+    }
 
     public func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
@@ -64,7 +81,13 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
         if let seat { try c.encode(seat, forKey: .seat) }
         if let depPlatform { try c.encode(depPlatform, forKey: .depPlatform) }
         if let arrPlatform { try c.encode(arrPlatform, forKey: .arrPlatform) }
+        if let date { try c.encode(date, forKey: .date) }
+        if let dep { try c.encode(dep, forKey: .dep) }
+        if let arr { try c.encode(arr, forKey: .arr) }
+        if let operatorId { try c.encode(operatorId, forKey: .operatorId) }
+        if let trainNumber { try c.encode(trainNumber, forKey: .trainNumber) }
+        if let category { try c.encode(category, forKey: .category) }
     }
 
-    private enum CodingKeys: String, CodingKey { case trainType, coach, seat, depPlatform, arrPlatform }
+    private enum CodingKeys: String, CodingKey { case trainType, coach, seat, depPlatform, arrPlatform, date, dep, arr, operatorId, trainNumber, category }
 }

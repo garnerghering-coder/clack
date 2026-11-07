@@ -124,10 +124,21 @@ final class Router {
     struct AddRequest: Identifiable, Hashable {
         let id = UUID()
         var link: AddTrainLink?
+        /// The search typed in and the day chosen, for "the same train another day" and "another train instead".
+        var query: String?
+        var date: String?
+        /// A trip the one saved replaces: deleted (`deleteReplaced`, a trip still ahead) or marked not taken.
+        var replaceLegId: String?
+        var deleteReplaced = false
     }
 
     func openAdd(_ link: AddTrainLink? = nil) {
         addRequest = AddRequest(link: link)
+    }
+
+    /// The Add sheet with the search filled in: a service ("Mälartåg 915") or a route ("Uppsala C Stockholm C") on a day.
+    func openAdd(query: String, date: String, replaceLegId: String? = nil, deleteReplaced: Bool = false) {
+        addRequest = AddRequest(link: nil, query: query, date: date, replaceLegId: replaceLegId, deleteReplaced: deleteReplaced)
     }
 
     func closeAdd() {

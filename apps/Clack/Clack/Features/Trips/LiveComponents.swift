@@ -232,10 +232,12 @@ struct ConnectionCard: View {
         let walkMin = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
         let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
             ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
+        // The chip already says the wait when it has the verdict; the caption then keeps to tracks and the walk.
+        let chipSaysWait = result.comfort != nil && result.gapMin != nil
         let caption = [
             tracks,
             walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },
-            result.layoverSeconds.map { l10n.t("connection.layover", ["min": String(Int((Double($0) / 60).rounded()))]) },
+            chipSaysWait ? nil : result.layoverSeconds.map { l10n.t("connection.layover", ["min": Format.minutesWords(Int((Double($0) / 60).rounded()))]) },
         ].compactMap { $0 }.joined(separator: " · ")
         let content = VStack(alignment: .leading, spacing: 8) {
             // The verdict beside the station when both fit, else under it (a long name and "Relaxed · 48 min to change").
