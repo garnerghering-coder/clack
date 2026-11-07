@@ -6,6 +6,7 @@ import { COUNTRIES } from '../lib/countries.js';
 import { refreshTrvStations, runDenmarkImport, runFinlandImport, runGtfsImport, runNorwayImport } from '../import/run.js';
 import { refreshDueLegs } from '../legs/actuals.js';
 import { runAudit } from '../audit/audit.js';
+import { runCrossSource } from '../audit/crossSource.js';
 import { sampleTrains, SAMPLE_PER_HOUR } from '../audit/sample.js';
 
 export function startScheduler(db: Db, log: (m: string) => void) {
@@ -33,9 +34,12 @@ export function startScheduler(db: Db, log: (m: string) => void) {
   const audit = cron.schedule('20 * * * *', wrap('accuracy audit', () => runAudit(db, { log })), { timezone: 'Europe/Stockholm' });
   // Its sample: a couple of real trains every hour from 05 to 22, followed by a hidden user (AUDIT_SAMPLE_PER_HOUR).
   const sample = SAMPLE_PER_HOUR > 0 ? cron.schedule('5 5-22 * * *', wrap('audit sample', async () => sampleTrains(db, { log })), { timezone: 'Europe/Stockholm' }) : null;
+  // The cross-source check (owner, 2026-11-07): the day before yesterday, once every feed's night fetch for it is in.
+  const crossSource = cron.schedule('30 3 * * *', wrap('cross-source check', () => runCrossSource(db, { log })), { timezone: 'Europe/Stockholm' });
   return () => {
     void audit.stop();
     void sample?.stop();
+    void crossSource.stop();
     void daily.stop();
     void norway.stop();
     void finland?.stop();

@@ -24,7 +24,7 @@ struct ExploreFilterSheet: View {
         NavigationStack {
             Form {
                 Section {
-                    SegmentedControl(
+                    FormSegmentedControl(
                         selection: Binding(get: { model.controller.display.colorBy }, set: { setColorBy($0) }),
                         options: ExploreLogic.ColorBy.allCases.map { ($0, l10n.t("liveMap.colorBy.\($0.rawValue)")) }
                     )
@@ -50,7 +50,7 @@ struct ExploreFilterSheet: View {
                     }
                 }
                 Section(l10n.t("liveMap.delayTitle")) {
-                    SegmentedControl(selection: $model.filters.delay, options: ExploreLogic.Delay.allCases.map { ($0, l10n.t("liveMap.delayShort.\($0.rawValue)")) })
+                    FormSegmentedControl(selection: $model.filters.delay, options: ExploreLogic.Delay.allCases.map { ($0, l10n.t("liveMap.delayShort.\($0.rawValue)")) })
                         .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 }
                 Section(l10n.t("liveMap.yourTrains")) {

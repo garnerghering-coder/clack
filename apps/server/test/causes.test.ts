@@ -61,10 +61,13 @@ describe('Digitraffic causes', () => {
     expect(causeText({ src: 'digitraffic', code: 'P105' }, 'sv')).toBe('Anläggningsfel');
     expect(causeText({ src: 'digitraffic', code: 'H1' }, 'en')).toBe('Staff-related');
   });
-  it('keeps the Finnish name for every code and marks our translations unverified', () => {
-    for (const e of Object.values(table.dt) as { fi: string; key: string | null; verified?: boolean }[]) {
+  it('keeps the Finnish name for every code and records what each translation was checked against', () => {
+    for (const e of Object.values(table.dt) as { fi: string; key: string | null; verified?: boolean; _official?: string }[]) {
       expect(e.fi).toBeTruthy();
-      if (e.key) expect(e.verified).toBe(false);
+      if (e.key) {
+        expect(e.verified).toBe(true);
+        expect(e._official).toBe(e.fi);
+      }
     }
     expect(Object.keys(table.dt).length).toBe(15 + 47 + 112);
   });

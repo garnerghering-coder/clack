@@ -10,7 +10,7 @@ import Testing
 
 struct NotificationsTests {
     private let oldSettings = """
-    {"displayName":"","language":"en","distanceUnit":"km","clock":"24h","co2Comparison":"car_1","includeCommuter":true,
+    {"language":"en","distanceUnit":"km","clock":"24h","co2Comparison":"car_1","includeCommuter":true,
     "showRailNetwork":true,"theme":"dark","walkPace":"normal","stepFree":false,"heavyLuggage":false}
     """
 

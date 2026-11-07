@@ -242,10 +242,12 @@ public nonisolated enum StationSceneLogic {
         }
     }
 
-    /// Pins that would overlap at this zoom: one per 26 px cell, toilets and open places first; names only when zoomed
-    /// in, and only where one fits (one per 96 × 30 px cell, below its pin). The route's own pins and the marked
-    /// platforms come first: an amenity under one of them is left out.
-    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool, pins: [PlacePin] = [], marks: [PlatformMark] = []) -> (shown: Set<String>, named: Set<String>) {
+    /// Pins that would overlap at this zoom: one per 26 px cell, toilets and open places first, and `counts` says how
+    /// many more sit under each shown pin (designer, 2026-11-07: pins stacked on top of each other with no sign of it;
+    /// the pin now carries the number and a tap zooms in). Names only when zoomed in, and only where one fits (one per
+    /// 96 × 30 px cell, below its pin). The route's own pins and the marked platforms come first: an amenity under one
+    /// of them is left out.
+    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool, pins: [PlacePin] = [], marks: [PlatformMark] = []) -> (shown: Set<String>, named: Set<String>, counts: [String: Int]) {
         let rot = map.view?.rotation ?? 0
         let markedPlatforms = map.platforms.filter { p in p.level == level && marks.contains { $0.platformId == p.id } }
         let markPoints = markedPlatforms.compactMap { p in map.nodes.first { $0.id == p.node } }
@@ -265,13 +267,17 @@ public nonisolated enum StationSceneLogic {
             list.enumerated().sorted { (rank($0.element), $0.offset) < (rank($1.element), $1.offset) }.map(\.element)
         }
         let onLevel = map.pois.filter { $0.level == level && !underRoute($0) }
-        var taken = Set<String>()
+        var taken = [String: String]()
         var shown = Set<String>()
+        var counts = [String: Int]()
         for p in ordered(onLevel) {
             let r = rotate(p.x, p.y, degrees: rot)
             let cell = "\(Int((r.x * k / 26).rounded())),\(Int((r.y * k / 26).rounded()))"
-            if taken.contains(cell) { continue }
-            taken.insert(cell)
+            if let winner = taken[cell] {
+                counts[winner, default: 0] += 1
+                continue
+            }
+            taken[cell] = p.id
             shown.insert(p.id)
         }
         var named = Set<String>()
@@ -285,7 +291,7 @@ public nonisolated enum StationSceneLogic {
                 named.insert(p.id)
             }
         }
-        return (shown, named)
+        return (shown, named, counts)
     }
 
     // MARK: the page

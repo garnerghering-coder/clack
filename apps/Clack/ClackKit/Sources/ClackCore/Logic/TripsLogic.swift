@@ -196,6 +196,47 @@ public nonisolated enum TripsLogic {
         return Transfer(planned: planned, actual: actual, missed: missed, tight: !missed && (actual ?? planned) < 10, station: prev.destination?.name ?? "")
     }
 
+    /// The whole journey in numbers (owner, 2026-11-07: a past journey's page is about the journey, not its first
+    /// train): first departure to last arrival door to door, the distance when every train has one, the delay at the
+    /// final arrival, the changes and how many of them were missed. Real times where known, the timetable otherwise.
+    public struct JourneySummary: Equatable, Sendable {
+        public let dep: Double?
+        public let arr: Double?
+        /// Door to door, in minutes.
+        public let minutes: Double?
+        /// nil when any train's distance is not known: a partial sum would read as the whole.
+        public let distanceM: Double?
+        public let arrivalDelayMin: Int?
+        public let changes: Int
+        public let missedChanges: Int
+        public let canceled: Bool
+
+        public init(dep: Double?, arr: Double?, minutes: Double?, distanceM: Double?, arrivalDelayMin: Int?, changes: Int, missedChanges: Int, canceled: Bool) {
+            self.dep = dep
+            self.arr = arr
+            self.minutes = minutes
+            self.distanceM = distanceM
+            self.arrivalDelayMin = arrivalDelayMin
+            self.changes = changes
+            self.missedChanges = missedChanges
+            self.canceled = canceled
+        }
+    }
+
+    public static func journeySummary(_ legs: [Leg]) -> JourneySummary? {
+        guard let first = legs.first, let last = legs.last else { return nil }
+        let dep = first.actualDep?.ms ?? first.schedDep?.ms
+        let arr = last.actualArr?.ms ?? last.schedArr?.ms
+        let minutes = dep.flatMap { d in arr.map { ($0 - d) / 60_000 } }
+        let distances = legs.map(\.distanceM)
+        let distanceM = distances.allSatisfy { $0 != nil } ? distances.reduce(0) { $0 + ($1 ?? 0) } : nil
+        let missed = legs.indices.dropFirst().filter { transfer(from: legs[$0 - 1], to: legs[$0]).missed }.count
+        return JourneySummary(
+            dep: dep, arr: arr, minutes: minutes.map { max(0, $0) }, distanceM: distanceM, arrivalDelayMin: last.arrDelayMin,
+            changes: legs.count - 1, missedChanges: missed, canceled: legs.contains(where: \.canceled)
+        )
+    }
+
     /// Best current estimate of when leg A arrives and leg B leaves, and whether both come from real-time data.
     public static func connectionTimes(_ a: Leg, _ b: Leg) -> (arrival: Double?, departure: Double?, live: Bool) {
         let liveArr = a.actualArr?.ms ?? a.live?.arrivalEta?.ms

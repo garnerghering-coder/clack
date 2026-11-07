@@ -122,7 +122,6 @@ public nonisolated enum HomeCountry: OpenEnum {
 
 /// `GET /api/settings` (docs/swift-port/API.md §2.2). The server fills missing keys with its defaults.
 public nonisolated struct Settings: Codable, Hashable, Sendable {
-    public var displayName: String
     public var language: Language
     public var distanceUnit: DistanceUnit
     public var clock: ClockFormat
@@ -152,7 +151,6 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
 
     /// The server's defaults (`DEFAULT_SETTINGS`), used until the real settings have loaded.
     public static let defaults = Settings(
-        displayName: "",
         language: .en,
         distanceUnit: .km,
         clock: .h24,
@@ -174,8 +172,7 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
         homeCountry: nil
     )
 
-    public init(displayName: String, language: Language, distanceUnit: DistanceUnit, clock: ClockFormat, co2Comparison: Co2Comparison, includeCommuter: Bool, showRailNetwork: Bool, theme: ThemeSetting, walkPace: WalkPace, stepFree: Bool, heavyLuggage: Bool, notify: Bool, notifyLeadMin: Int, notifyPlatform: Bool, notifyDelay: Bool, notifyCancel: Bool, notifyChange: Bool, notifyGetOff: Bool, notifyArrival: Bool, homeCountry: HomeCountry? = nil) {
-        self.displayName = displayName
+    public init(language: Language, distanceUnit: DistanceUnit, clock: ClockFormat, co2Comparison: Co2Comparison, includeCommuter: Bool, showRailNetwork: Bool, theme: ThemeSetting, walkPace: WalkPace, stepFree: Bool, heavyLuggage: Bool, notify: Bool, notifyLeadMin: Int, notifyPlatform: Bool, notifyDelay: Bool, notifyCancel: Bool, notifyChange: Bool, notifyGetOff: Bool, notifyArrival: Bool, homeCountry: HomeCountry? = nil) {
         self.language = language
         self.distanceUnit = distanceUnit
         self.clock = clock
@@ -200,7 +197,7 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
 
 nonisolated extension Settings {
     private enum Keys: String, CodingKey {
-        case displayName, language, distanceUnit, clock, co2Comparison, includeCommuter, showRailNetwork, theme, walkPace
+        case language, distanceUnit, clock, co2Comparison, includeCommuter, showRailNetwork, theme, walkPace
         case stepFree, heavyLuggage, notify, notifyLeadMin, notifyPlatform, notifyDelay, notifyCancel, notifyChange
         case notifyGetOff, notifyArrival, homeCountry
     }
@@ -209,7 +206,6 @@ nonisolated extension Settings {
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: Keys.self)
         let d = Settings.defaults
-        displayName = try c.decode(String.self, forKey: .displayName)
         language = try c.decode(Language.self, forKey: .language)
         distanceUnit = try c.decode(DistanceUnit.self, forKey: .distanceUnit)
         clock = try c.decode(ClockFormat.self, forKey: .clock)
@@ -235,7 +231,6 @@ nonisolated extension Settings {
 /// A change to the settings: only the fields that are set are sent (`PATCH /api/settings`). The server validates the
 /// same way (`mergeSettings`); this checks what the app can know before sending.
 public nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
-    public var displayName: String?
     public var language: Language?
     public var distanceUnit: DistanceUnit?
     public var clock: ClockFormat?
@@ -256,8 +251,7 @@ public nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
     public var notifyArrival: Bool?
     public var homeCountry: HomeCountry?
 
-    public init(displayName: String? = nil, language: Language? = nil, distanceUnit: DistanceUnit? = nil, clock: ClockFormat? = nil, co2Comparison: Co2Comparison? = nil, includeCommuter: Bool? = nil, showRailNetwork: Bool? = nil, theme: ThemeSetting? = nil, walkPace: WalkPace? = nil, stepFree: Bool? = nil, heavyLuggage: Bool? = nil, notify: Bool? = nil, notifyLeadMin: Int? = nil, notifyPlatform: Bool? = nil, notifyDelay: Bool? = nil, notifyCancel: Bool? = nil, notifyChange: Bool? = nil, notifyGetOff: Bool? = nil, notifyArrival: Bool? = nil, homeCountry: HomeCountry? = nil) {
-        self.displayName = displayName
+    public init(language: Language? = nil, distanceUnit: DistanceUnit? = nil, clock: ClockFormat? = nil, co2Comparison: Co2Comparison? = nil, includeCommuter: Bool? = nil, showRailNetwork: Bool? = nil, theme: ThemeSetting? = nil, walkPace: WalkPace? = nil, stepFree: Bool? = nil, heavyLuggage: Bool? = nil, notify: Bool? = nil, notifyLeadMin: Int? = nil, notifyPlatform: Bool? = nil, notifyDelay: Bool? = nil, notifyCancel: Bool? = nil, notifyChange: Bool? = nil, notifyGetOff: Bool? = nil, notifyArrival: Bool? = nil, homeCountry: HomeCountry? = nil) {
         self.language = language
         self.distanceUnit = distanceUnit
         self.clock = clock
@@ -281,21 +275,13 @@ public nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
 }
 
 nonisolated extension Settings {
-    /// The longest `displayName` the server accepts.
-    public static let displayNameMaxLength = 60
-
     /// What the app offers for the CO₂ comparison (owner, 2026-10-21: flying or a petrol car); the rest stay valid
     /// for old settings.
     public static let co2Choices: [Co2Comparison] = [.flight, .car1]
 
-    /// These settings with `patch` applied, as the server will merge it. A name is trimmed, and one over 60
-    /// characters is refused (nil) like the server does.
+    /// These settings with `patch` applied, as the server will merge it (nil if the server would refuse it).
     public func applying(_ patch: SettingsPatch) -> Settings? {
         var next = self
-        if let name = patch.displayName {
-            guard name.count <= Self.displayNameMaxLength else { return nil }
-            next.displayName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
         if let value = patch.language { next.language = value }
         if let value = patch.distanceUnit { next.distanceUnit = value }
         if let value = patch.clock { next.clock = value }

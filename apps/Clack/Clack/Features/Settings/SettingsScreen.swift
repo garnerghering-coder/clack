@@ -53,6 +53,9 @@ private struct ChoiceMenu<Value: Hashable>: View {
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
             .clack(.body).foregroundStyle(Ink.text)
+            // One value column (designer, 2026-11-07): every value box starts at the same left edge, however short
+            // its word; a long one grows.
+            .frame(minWidth: 104, alignment: .trailing)
             .padding(.vertical, 8).padding(.horizontal, 12)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
@@ -61,7 +64,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
     }
 }
 
-/// Settings (SettingsPage.tsx): appearance, your name, language, units and the rest, all saved to the server as they change.
+/// Settings (SettingsPage.tsx): appearance, language, units and the rest, all saved to the server as they change.
 struct SettingsScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -91,7 +94,6 @@ struct SettingsScreen: View {
                 .frame(minHeight: 52)
             }
             Card {
-                NameRow()
                 SettingsRow(label: l10n.t("settings.language")) {
                     ChoiceMenu(label: l10n.t("settings.language"), options: Language.knownCases.map { ($0, l10n.t("settings.languages.\($0.rawValue)")) }, selection: s.language) { value in
                         change(SettingsPatch(language: value))
@@ -117,12 +119,13 @@ struct SettingsScreen: View {
                         change(SettingsPatch(clock: value))
                     }
                 }
+                // The same switch as on the Passport; an older setting that is no longer offered reads as a petrol car.
                 SettingsRow(label: l10n.t("settings.co2Comparison"), last: true) {
-                    // What the app offers; an older setting still shows as itself.
-                    let choices = Settings.co2Choices.contains(s.co2Comparison) ? Settings.co2Choices : [s.co2Comparison] + Settings.co2Choices
-                    ChoiceMenu(label: l10n.t("settings.co2Comparison"), options: choices.map { ($0, l10n.t("settings.co2.\($0.rawValue)")) }, selection: s.co2Comparison) { value in
-                        change(SettingsPatch(co2Comparison: value))
-                    }
+                    SegmentedControl(
+                        selection: Binding(get: { Settings.co2Choices.contains(s.co2Comparison) ? s.co2Comparison : .car1 }, set: { value in change(SettingsPatch(co2Comparison: value)) }),
+                        options: Settings.co2Choices.map { ($0, l10n.t("settings.co2.\($0.rawValue)")) }, small: true
+                    )
+                    .frame(maxWidth: 200)
                 }
             }
             Card {
@@ -202,7 +205,7 @@ private struct OfflineMapsCard: View {
                 }
             }
             Text(l10n.t("settings.offlineMapsCount", count: count, ["count": String(count)])).clack(.body).foregroundStyle(Ink.text)
-            InfoNote(l10n.t("settings.offlineMapsNote"), more: l10n.t("settings.offlineMapsNoteMore"))
+            InfoNote(l10n.t("settings.offlineMapsNoteMore"))
             if count > 0 {
                 Button(l10n.t("settings.offlineMapsClear")) {
                     Task {
@@ -253,7 +256,7 @@ private struct AlertsCard: View {
                 SettingsToggle(label: l10n.t("settings.alerts.getOff"), isOn: s.notifyGetOff) { change(SettingsPatch(notifyGetOff: $0)) }
                 SettingsToggle(label: l10n.t("settings.alerts.arrival"), isOn: s.notifyArrival, last: true) { change(SettingsPatch(notifyArrival: $0)) }
             }
-            InfoNote(l10n.t("settings.alerts.note"), more: l10n.t("settings.alerts.noteMore"))
+            InfoNote(l10n.t("settings.alerts.noteMore"))
             if manager.denied {
                 Text(l10n.t("settings.alerts.denied")).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("settings.alerts.openSettings")) {
@@ -396,34 +399,6 @@ private struct LinkRow: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-    }
-}
-
-/// Your name, saved when you finish typing.
-private struct NameRow: View {
-    @Environment(AppModel.self) private var app
-    @Environment(L10n.self) private var l10n
-    @State private var value = ""
-    @FocusState private var focused: Bool
-
-    var body: some View {
-        SettingsRow(label: l10n.t("settings.displayName")) {
-            TextField("", text: $value, prompt: Text(l10n.t("settings.displayNamePlaceholder")).foregroundStyle(Ink.text3))
-                .focused($focused)
-                .multilineTextAlignment(.trailing)
-                .clack(.body).foregroundStyle(Ink.text)
-                .padding(.vertical, 8).padding(.horizontal, 12)
-                .frame(maxWidth: 200)
-                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                .hairlineBorder(radius: Radius.controlSm)
-                .onChange(of: value) { _, new in if new.count > Settings.displayNameMaxLength { value = String(new.prefix(Settings.displayNameMaxLength)) } }
-                .onChange(of: focused) { _, isFocused in
-                    if !isFocused, value != app.settings.displayName { Task { await app.update(SettingsPatch(displayName: value)) } }
-                }
-                .accessibilityLabel(l10n.t("settings.displayName"))
-        }
-        .onAppear { value = app.settings.displayName }
-        .onChange(of: app.settings.displayName) { _, new in if !focused { value = new } }
     }
 }
 
@@ -576,7 +551,7 @@ struct AboutScreen: View {
 struct PrivacyScreen: View {
     @Environment(L10n.self) private var l10n
 
-    private static let parts = ["stored", "phone", "alerts", "location", "notCollected", "sharing", "deletion", "usage"]
+    private static let parts = ["stored", "reports", "phone", "alerts", "location", "notCollected", "sharing", "deletion", "usage"]
 
     var body: some View {
         Page {
@@ -593,7 +568,7 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-11-07"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-11-08"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
         .screenTitle(l10n.t("privacy.title"))

@@ -154,7 +154,7 @@ struct TripsScreen: View {
                     SettingsLink()
                 }
             }
-            TripsSegmentedControl(
+            SegmentedControl(
                 selection: $router.tripsTab,
                 options: [(TripsTab.upcoming, l10n.t("trips.upcoming")), (TripsTab.past, l10n.t("trips.past"))]
             )

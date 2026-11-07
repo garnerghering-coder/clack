@@ -22,6 +22,10 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
+    /// Passport > the cover: every total, collection and record (owner, 2026-11-07).
+    case passportBreakdown
+    /// Passport > every milestone, earned and still to earn.
+    case passportMilestones
     /// Settings > Station walks (owner test tool; Xcode and TestFlight builds, `BuildChannel`).
     case walkLogger
     /// Settings > Test alerts (Xcode and TestFlight builds, `BuildChannel`).
@@ -85,6 +89,9 @@ final class Router {
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
             if raw == "walks" { tripsPath = [.settings, .walkLogger] }
             if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
+            // The Passport's pushed screens, for screenshots.
+            if raw == "breakdown" { tab = .passport; passportPath = [.passportBreakdown] }
+            if raw == "milestones" { tab = .passport; passportPath = [.passportMilestones] }
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
@@ -268,6 +275,7 @@ extension AppRoute {
         case .board: .board
         case .stationMap: .stationMap
         case .stations: .other
+        case .passportBreakdown, .passportMilestones: .passport
         case .walkLogger: .other
         case .testAlerts: .other
         }

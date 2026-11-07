@@ -9,9 +9,18 @@
 // train number and operator, and fills observed_runs / observed_calls. A time counts as actual only where the feed
 // reported it (delay_source 'feed'); carried-over delays stay in `extra`. The token (.env, TRAIN_ARCHIVE_TOKEN) goes in
 // the X-Api-Key header and is never logged.
+//
+// Trains also in Sweden's feed (Öresundståg, SJ and Snälltåget to Copenhagen) are not in gtfs_dk (import/gtfs-dk.ts
+// leaves them to Sweden's feed), so their trip id matches nothing and the run had no train number: a Swedish trip's
+// Danish stops could never find it in the record (observed/lookup.ts looks up by number and day). Since 2026-11-07 such
+// a run is matched a second way, by its Danish calls: the gtfs_se3 trip that calls at the same Danish stations at the
+// same scheduled minutes (±1 min, at least 2 calls, one candidate only) gives the number and operator, and
+// `info.matchedBy` says which way a run was matched ('gtfs_dk' or 'se-stop-times'). Its Swedish calls, whose
+// Rejseplanen stop ids are not our station ids, then get their station from the same trip's stop at that minute.
 import zlib from 'node:zlib';
 import type { Db } from '../db/client.js';
-import { addDays, todayIn, zonedToUtc } from '../lib/time.js';
+import { COUNTRIES } from '../lib/countries.js';
+import { addDays, serviceTimeToUtc, todayIn, zonedToUtc } from '../lib/time.js';
 import { danishStationId, uicOf } from '../import/gtfs-dk.js';
 import { writeRaw, rawFiles, readRaw } from './archive.js';
 import { cancelLevel, fetchOf, recordFetch, saveRuns, type ObservedCall, type ObservedRun } from './store.js';
@@ -66,8 +75,44 @@ export function stationOfStop(stopId: string, known: Set<string>): string | null
   return known.has(id) ? id : null;
 }
 
+/** A Swedish-feed trip's identity and its stops, for matching a Danish run without a Danish timetable trip. */
+export interface SwedishTrip {
+  key: string;
+  number: string | null;
+  operator: string | null;
+  /** Each stop's station and its scheduled arrival and departure as epoch ms (null where the feed has none). */
+  stops: { stationId: string; arr: number | null; dep: number | null }[];
+}
+
+const minuteOf = (ms: number | null) => (ms === null ? null : Math.floor(ms / 60_000));
+/** Two scheduled times within a minute of each other (the archive and the feed may round differently). */
+const sameMinute = (a: number | null, b: number | null) => a !== null && b !== null && Math.abs(minuteOf(a)! - minuteOf(b)!) <= 1;
+
+/** A call and a stop are the same event: same station, and the arrival or the departure at the same minute. */
+const callMatches = (c: Pick<ObservedCall, 'stationId' | 'schedArr' | 'schedDep'>, s: SwedishTrip['stops'][number]) =>
+  c.stationId === s.stationId && (sameMinute(c.schedArr, s.arr) || sameMinute(c.schedDep, s.dep));
+
+/**
+ * The one Swedish trip whose stops agree with a run's Danish calls (at least `MIN_CALLS`), or null when none or more
+ * than one does. Only the Danish calls (our `86…` stations) are used: the archive's stop ids for Swedish stations are
+ * Rejseplanen's own and are not ours. Pure.
+ */
+export const MIN_CALLS = 2;
+export function matchSwedish(calls: ObservedCall[], swedish: SwedishTrip[]): { trip: SwedishTrip; calls: number } | null {
+  const danish = calls.filter((c) => c.stationId?.startsWith('86'));
+  if (danish.length < MIN_CALLS) return null;
+  let best: { trip: SwedishTrip; calls: number }[] = [];
+  for (const t of swedish) {
+    const n = danish.filter((c) => t.stops.some((s) => callMatches(c, s))).length;
+    if (n < MIN_CALLS || (best[0] && n < best[0].calls)) continue;
+    if (best[0] && n === best[0].calls) best.push({ trip: t, calls: n });
+    else best = [{ trip: t, calls: n }];
+  }
+  return best.length === 1 ? best[0]! : null;
+}
+
 /** One day's rows as runs. Pure given the lookups. */
-export function project(date: string, rows: ArchiveRow[], trips: Map<string, { number: string | null; operator: string | null }>, known: Set<string>, final: boolean): ObservedRun[] {
+export function project(date: string, rows: ArchiveRow[], trips: Map<string, { number: string | null; operator: string | null }>, known: Set<string>, final: boolean, swedish: SwedishTrip[] = []): ObservedRun[] {
   const byTrip = new Map<string, ArchiveRow[]>();
   for (const r of rows) (byTrip.get(r.trip_id!) ?? byTrip.set(r.trip_id!, []).get(r.trip_id!)!).push(r);
   const runs: ObservedRun[] = [];
@@ -96,7 +141,25 @@ export function project(date: string, rows: ArchiveRow[], trips: Map<string, { n
         extra: { name: r.stop_name, delaySource: r.delay_source || null, arrDelayMin: r.arrival_delay_min || null, depDelayMin: r.departure_delay_min || null, observedAt: r.observed_at || null },
       };
     });
-    const t = trips.get(tripId);
+    let t = trips.get(tripId);
+    const info: Record<string, unknown> = { routeId: list[0]!.route_id, timetableVersion: list[0]!.timetable_version, tripStatus: list[0]!.trip_status };
+    if (t) info.matchedBy = 'gtfs_dk';
+    else {
+      const m = matchSwedish(calls, swedish);
+      if (m) {
+        t = { number: m.trip.number, operator: m.trip.operator };
+        Object.assign(info, { matchedBy: 'se-stop-times', timetableTripKey: m.trip.key, matchedCalls: m.calls });
+        // The Swedish calls' stations, from the trip's stop at the same minute (one stop only, else left unknown).
+        for (const c of calls) {
+          if (c.stationId) continue;
+          const hits = m.trip.stops.filter((s) => sameMinute(c.schedArr, s.arr) || sameMinute(c.schedDep, s.dep));
+          if (hits.length === 1 && new Set(hits.map((h) => h.stationId)).size === 1) {
+            c.stationId = hits[0]!.stationId;
+            c.extra.stationFrom = 'se-stop-times';
+          }
+        }
+      }
+    }
     runs.push({
       country: 'DK',
       serviceDate: date,
@@ -106,7 +169,7 @@ export function project(date: string, rows: ArchiveRow[], trips: Map<string, { n
       operator: t?.operator ?? null,
       product: list[0]!.route!.trim() || null,
       canceled: cancelLevel(calls, cancelledTrip),
-      info: { routeId: list[0]!.route_id, timetableVersion: list[0]!.timetable_version, tripStatus: list[0]!.trip_status },
+      info,
       passages: [],
       calls,
       final,
@@ -115,7 +178,32 @@ export function project(date: string, rows: ArchiveRow[], trips: Map<string, { n
   return runs;
 }
 
-function lookups(db: Db, tripIds: string[]) {
+/**
+ * The Swedish feed's trips with a Danish stop that run on `date` or the day before (a train that left Sweden before
+ * midnight is on the earlier Swedish service day), their stops as epoch ms. A day has ~150 of them (2026-10-26).
+ */
+export function swedishTripsWithDanishStops(db: Db, date: string): SwedishTrip[] {
+  const tz = COUNTRIES.SE.tz;
+  const rows = db.$client
+    .prepare(
+      `select t.key, t.train_number, t.gtfs_operator, d.service_date, s.seq, s.station_id, s.arr_sec, s.dep_sec
+       from timetable_trips t
+       join timetable_trip_dates d on d.trip_key = t.key and d.service_date in (?, ?)
+       join timetable_stop_times s on s.trip_key = t.key
+       where t.source = ? and exists (select 1 from timetable_stop_times x where x.trip_key = t.key and x.station_id like '86%')
+       order by t.key, d.service_date, s.seq`,
+    )
+    .all(date, addDays(date, -1), COUNTRIES.SE.timetableSource) as { key: string; train_number: string | null; gtfs_operator: string | null; service_date: string; seq: number; station_id: string; arr_sec: number | null; dep_sec: number | null }[];
+  const out = new Map<string, SwedishTrip>();
+  for (const r of rows) {
+    const k = `${r.key}|${r.service_date}`;
+    const t = out.get(k) ?? out.set(k, { key: r.key, number: r.train_number, operator: r.gtfs_operator, stops: [] }).get(k)!;
+    t.stops.push({ stationId: r.station_id, arr: r.arr_sec === null ? null : serviceTimeToUtc(r.service_date, r.arr_sec, tz), dep: r.dep_sec === null ? null : serviceTimeToUtc(r.service_date, r.dep_sec, tz) });
+  }
+  return [...out.values()];
+}
+
+function lookups(db: Db, date: string, tripIds: string[]) {
   const trips = new Map<string, { number: string | null; operator: string | null }>();
   const q = db.$client.prepare(`select train_number, gtfs_operator from timetable_trips where source = 'gtfs_dk' and trip_id = ? limit 1`);
   for (const id of tripIds) {
@@ -123,7 +211,7 @@ function lookups(db: Db, tripIds: string[]) {
     if (r) trips.set(id, { number: r.train_number, operator: r.gtfs_operator });
   }
   const known = new Set((db.$client.prepare(`select id from stations where id like '8600%' or id like 'uic:%'`).all() as { id: string }[]).map((r) => r.id));
-  return { trips, known };
+  return { trips, known, swedish: swedishTripsWithDanishStops(db, date) };
 }
 
 /** Download one day's CSV (the archive redirects to its storage bucket). Null when the day isn't ready. */
@@ -160,11 +248,12 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
     return 0;
   }
   const file = await writeRaw(SOURCE, date, 'tripupdate', rows, { now });
-  const { trips, known } = lookups(db, [...new Set(rows.map((r) => r.trip_id!))]);
-  const runs = project(date, rows, trips, known, true);
+  const { trips, known, swedish } = lookups(db, date, [...new Set(rows.map((r) => r.trip_id!))]);
+  const runs = project(date, rows, trips, known, true, swedish);
   const written = await saveInChunks(db, runs, now);
   recordFetch(db, { source: SOURCE, kind: 'tripupdate', date, records: rows.length, runs: written, file, final: true }, now);
-  opts.log?.(`observed DK ${date}: ${rows.length} rows, ${runs.length} runs`);
+  const bySe = runs.filter((r) => r.info.matchedBy === 'se-stop-times').length;
+  opts.log?.(`observed DK ${date}: ${rows.length} rows, ${runs.length} runs (${bySe} matched to Sweden's feed by stop times)`);
   return runs.length;
 }
 
@@ -173,8 +262,26 @@ export function projectFromRaw(db: Db, date: string): number {
   const f = rawFiles(SOURCE, date, 'tripupdate').at(-1);
   if (!f) return 0;
   const rows = readRaw<ArchiveRow>(f);
-  const { trips, known } = lookups(db, [...new Set(rows.map((r) => r.trip_id!))]);
-  return saveRuns(db, project(date, rows, trips, known, true));
+  const { trips, known, swedish } = lookups(db, date, [...new Set(rows.map((r) => r.trip_id!))]);
+  return saveRuns(db, project(date, rows, trips, known, true, swedish));
+}
+
+/**
+ * Project every raw day in a range again (after a change to how days are read, such as the Swedish match of
+ * 2026-11-07), oldest first: `npm run import -- denmark-archive --reproject [--from= --to=]`. Returns the days done, so
+ * the caller can refresh the trips saved for them (legs/actuals.ts refreshLegsOnDay).
+ */
+export function reprojectRange(db: Db, opts: { from?: string; to?: string; log?: (m: string) => void } = {}): string[] {
+  const log = opts.log ?? console.log;
+  const to = opts.to ?? addDays(todayIn(TZ), -1);
+  const done: string[] = [];
+  for (let d = opts.from ?? HISTORY_START; d <= to; d = addDays(d, 1)) {
+    const n = projectFromRaw(db, d);
+    if (!n) continue;
+    done.push(d);
+    log(`observed DK ${d}: ${n} runs projected again`);
+  }
+  return done;
 }
 
 /** Every finished day from the archive's first to yesterday that isn't in yet (npm run import -- observed-backfill --country=DK). */

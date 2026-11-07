@@ -32,6 +32,8 @@ private struct DestinationView: View {
         case .stations: StationsRedirect()
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
         case .stationMap(let link): StationMapScreen(link: link)
+        case .passportBreakdown: PassportBreakdownScreen()
+        case .passportMilestones: MilestonesScreen()
         case .walkLogger: WalkLoggerScreen()
         case .testAlerts: TestAlertsScreen()
         }

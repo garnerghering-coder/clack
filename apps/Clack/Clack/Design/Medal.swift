@@ -69,22 +69,9 @@ nonisolated enum MedalStyle {
     /// Bronze, silver, gold, platinum: light, dark.
     static let metals: [(String, String)] = [("#f0b27a", "#9c5a25"), ("#f4f4f4", "#8e8e8e"), ("#ffe9a0", "#c48a1c"), ("#e9f7ff", "#7fa7c2")]
 
-    /// The thresholds per family, to know which level a target is (mirrors MILESTONES on the server).
-    static func levels(_ family: MilestoneFamily) -> [Double] {
-        switch family {
-        case .journeys: [1, 10, 25, 50, 100, 250]
-        case .distanceKm: [100, 500, 1000, 2500, 5000, 10_000, 40_075]
-        case .stations: [10, 25, 50, 100, 200]
-        case .operators: [3, 5, 10]
-        case .countries: [2, 3, 5]
-        case .borderCrossings, .nightTrains: [1, 5, 10, 25]
-        case .longestTrainKm: [300, 500, 1000]
-        case .hoursOnBoard: [10, 50, 100, 250]
-        case .trainTypes: [5, 10, 20]
-        case .kindsOfTrain: [5]
-        case .arcticCircle, .homeLength, .europeLength, .unknown: [1]
-        }
-    }
+    /// The thresholds per family, to know which level a target is (`PassportLogic.milestoneLevels`, one list for the
+    /// medals and the Milestones screen).
+    static func levels(_ family: MilestoneFamily) -> [Double] { PassportLogic.milestoneLevels(family) }
 
     static func metal(_ m: Milestone) -> (String, String) {
         let levels = levels(m.family)
@@ -112,6 +99,8 @@ struct Medal: View {
     var size: CGFloat = 92
     var bare = false
     var foil: Double?
+    /// The grey track and the yellow progress on a locked medal; off on share cards, where the foil carries the face.
+    var track = true
 
     var body: some View {
         let (f0, f1) = MedalStyle.face(m.family)
@@ -182,13 +171,20 @@ struct Medal: View {
             .saturation(locked ? 0 : 1)
             .opacity(locked ? 0.38 : 1)
 
-            // An upcoming medal fills its own rim as you get closer (drawn over the greyed body, in colour).
-            if let progress, progress > 0 {
+            // An upcoming medal fills its own rim as you get closer (drawn over the greyed body, in colour). The track
+            // is always there and the yellow never quite nothing (designer, 2026-11-07: at zero a grey medal read as
+            // locked content; a hairline of progress reads as a starting line).
+            if locked, track {
+                let progress = progress ?? 0
                 Canvas { context, _ in
                     var ctx = context
                     ctx.scaleBy(x: scale, y: scale)
+                    let centre = CGPoint(x: 60, y: 96)
+                    var ring = Path()
+                    ring.addArc(center: centre, radius: 38.5, startAngle: .degrees(0), endAngle: .degrees(360), clockwise: false)
+                    ctx.stroke(ring, with: .color(Ink.text3.opacity(0.35)), style: StrokeStyle(lineWidth: 8.5))
                     var arc = Path()
-                    arc.addArc(center: CGPoint(x: 60, y: 96), radius: 38.5, startAngle: .degrees(-90), endAngle: .degrees(-90 + 360 * progress), clockwise: false)
+                    arc.addArc(center: centre, radius: 38.5, startAngle: .degrees(-90), endAngle: .degrees(-90 + max(4, 360 * progress)), clockwise: false)
                     ctx.stroke(arc, with: .color(Ink.accent), style: StrokeStyle(lineWidth: 8.5, lineCap: .round))
                 }
             }

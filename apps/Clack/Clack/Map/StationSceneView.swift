@@ -80,7 +80,7 @@ struct StationSceneView: View {
                 platformChip(chip).position(screen(chip.x, chip.y)).allowsHitTesting(false)
             }
             ForEach(map.pois.filter { $0.level == level && shown.shown.contains($0.id) }) { poi in
-                poiPin(poi, named: shown.named.contains(poi.id)).position(screen(poi.x, poi.y))
+                poiPin(poi, named: shown.named.contains(poi.id), more: shown.counts[poi.id] ?? 0).position(screen(poi.x, poi.y))
             }
             ForEach(Array(pins.filter { $0.level == level }.enumerated()), id: \.offset) { _, pin in
                 placePin(pin).position(screen(pin.x, pin.y)).allowsHitTesting(false)
@@ -215,25 +215,34 @@ struct StationSceneView: View {
             .overlay(RoundedRectangle(cornerRadius: 11, style: .continuous).strokeBorder(marked ? Color.white : Ink.hairline, lineWidth: marked ? 1.5 : 1))
     }
 
-    private func poiPin(_ poi: StationPoi, named: Bool) -> some View {
+    /// A place's pin. `more` is how many places sit under it at this zoom: then it wears the number and a tap zooms
+    /// in on it instead of opening the place (designer, 2026-11-07). Hours not known: no state dot at all (the "?"
+    /// badge nobody could read is gone; the place's sheet says it in words).
+    private func poiPin(_ poi: StationPoi, named: Bool, more: Int) -> some View {
         let state = poiState(poi)
-        let dim = dimPoi(poi) || state == .closed
+        let dim = (dimPoi(poi) || state == .closed) && more == 0
         return Button {
-            onPoi(poi)
+            if more > 0 {
+                let at = screen(poi.x, poi.y)
+                withAnimation(reduceMotion ? nil : .snappy) { view = StationSceneLogic.zoom(view, by: 2.2, aroundX: at.x, y: at.y) }
+            } else {
+                onPoi(poi)
+            }
         } label: {
             ZStack {
                 Circle().fill(Ink.surfaceRaised).overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1)).frame(width: 24, height: 24)
                 LucideIcon(name: StationSceneLogic.icon(poi.category), size: 15).foregroundStyle(Ink.text)
-                Group {
-                    if state == .unknown {
-                        Text("?").font(ClackFont.inter(11, .heavy)).foregroundStyle(Ink.text2).offset(x: 12, y: -10)
-                    } else {
-                        Circle().fill(state == .open ? Ink.onTime : state == .closingSoon ? Ink.late : Ink.unknown)
-                            .overlay(Circle().strokeBorder(Ink.surfaceRaised, lineWidth: 1.5))
-                            .frame(width: 7.2, height: 7.2).offset(x: 9, y: -9)
-                    }
+                if more > 0 {
+                    Text("+\(more)").font(ClackFont.inter(10, .heavy)).monospacedDigit().foregroundStyle(Ink.onAccent)
+                        .padding(.horizontal, 4).frame(minWidth: 16, minHeight: 16)
+                        .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+                        .offset(x: 13, y: -11)
+                } else if state != .unknown {
+                    Circle().fill(state == .open ? Ink.onTime : state == .closingSoon ? Ink.late : Ink.unknown)
+                        .overlay(Circle().strokeBorder(Ink.surfaceRaised, lineWidth: 1.5))
+                        .frame(width: 7.2, height: 7.2).offset(x: 9, y: -9)
                 }
-                if named {
+                if named, more == 0 {
                     Text(poi.name.count > 18 ? "\(poi.name.prefix(17))…" : poi.name)
                         .font(ClackFont.inter(10, .semibold)).foregroundStyle(Ink.text2)
                         .shadow(color: Ink.mapBg, radius: 0.1).shadow(color: Ink.mapBg, radius: 1.5)
@@ -246,6 +255,7 @@ struct StationSceneView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(poi.name.isEmpty ? poi.category.rawValue : poi.name)
+        .accessibilityHint(more > 0 ? app.l10n.t("stationMap.clusterHint", ["n": String(more)]) : "")
     }
 
     private func placePin(_ pin: Pin) -> some View {
@@ -315,7 +325,7 @@ struct SceneGestureLayer: UIViewRepresentable {
 final class SceneLayoutCache {
     struct Layout {
         var chips: [StationSceneLogic.PlatformChip]
-        var pois: (shown: Set<String>, named: Set<String>)
+        var pois: (shown: Set<String>, named: Set<String>, counts: [String: Int])
     }
 
     private var key: Key?

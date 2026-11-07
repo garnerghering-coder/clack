@@ -47,7 +47,7 @@ Maps follow the theme (dark: `#151515` land on `#0A0A0A` water; light: `#F7F7F7`
 | Cancelled | — | red outline + strikethrough times | "Cancelled" |
 | Unknown / no data | — | grey `#8E8E8E` dark, `#8A8A8A` light (monochrome theme) | "—" |
 
-Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on-time % stat** in the Passport uses a separate constant `ON_TIME_MAX_DELAY_MIN = 5` (a common rail punctuality convention; configurable), and the Passport also shows the four-color distribution so strictness is visible.
+Bands are constants in one file (`delayBands.ts`) so they can be tuned. On a departure board (and the station sheet) "On time" and the cause line are plain text-2: colour there marks trouble only, so a row speaks at most two colours (designer, 2026-11-07). The **on-time % stat** in the Passport uses a separate constant `ON_TIME_MAX_DELAY_MIN = 5` (a common rail punctuality convention; configurable), and the Passport also shows the four-color distribution so strictness is visible.
 
 **Operator colors.** Each operator has one brand color used for the route line, the badge and timeline accents. Do not guess exact brand hex values. Use this approach: ship a curated palette of 12 luminous colors that read well on dark, assign by operator id (stable), and add explicit overrides for the biggest operators (SJ, SL, Skånetrafiken, Öresundståg, Snälltåget, MTR Express, Vy, Mälartåg, Norrtåg, Västtrafik/Västtågen) after checking each operator's public brand page. Always check contrast of the color against `surface`. Operator colors never replace delay colors.
 
@@ -61,8 +61,8 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 - 4px spacing grid; 16px screen gutters.
 - Radii, one scale (owner, 2026-10-23): tags (platform) 6, small controls (34 px buttons, filter chips, date field) 10, buttons/inputs/segmented controls 12, cards 16, sheets 24 (top corners), operator badge 10. Circles only for icon buttons, the FAB and dots. Nothing is a full pill.
 - Status is written, not boxed (owner, 2026-10-23: "tiny pill box with a bit of text"): delay, Live, GPS/estimated, speed, Planned/Arrived, category, notices are coloured or grey text in a line, with a dot or icon where it helps. Delay colours have darker "ink" versions for light mode. Only over a map does a status get a backing (a glass label, radius 10).
-- **Apple's own controls wherever one exists** (owner, 2026-10-28: "iOS native, no hand-made buttons"): `Button` in the system styles below, `Picker(.segmented)` for a few choices and `Menu` for more, `Toggle` for on/off, `Stepper`, `Slider`, `Form`/`List` sections for settings and filter sheets, system sheets with detents, the system toolbar. The app's wrappers (`SegmentedControl`, `ChipButton`, `LinkButtonStyle`, `MapButtonFace`) only set Clack's tint, type and radius on the system control inside them; none draws its own control. One deliberate exception (owner, 2026-10-29): the Trips Upcoming/Past toggle (`TripsSegmentedControl`) keeps build 50's look, plain 44 pt buttons on a glass track under a sliding yellow glass thumb, and is used nowhere else. Clack's own are the colours, type and radii.
-- Buttons are Liquid Glass (iOS 26; the bordered styles before). Primary is yellow glass (`glassProminent`) with black type, secondary is clear glass, destructive is clear glass with a red label; system control sizes. Paired or stacked actions are the same width, with one exception (owner, 2026-10-25): on a train's card, Follow is only as wide as its word (glass) and Plan a journey / In your trips (yellow glass) takes the rest, so the longer label stays on one line; both with icons. Rare actions (refresh, delete, "I didn't take this train") go in the system's `…` menu, not in a row of buttons. Floating controls over a map and the header's round icon buttons are glass too. The segmented control is a glass switch (one glass track, a yellow glass thumb that slides to the chosen segment, 44 pt high, each segment a button); the tab bar is the system's. Tab roots (Trips, Passport) draw their own header: the large title and the glass icon buttons level on one row; pushed screens keep the system bar.
+- **Apple's own controls wherever one exists** (owner, 2026-10-28: "iOS native, no hand-made buttons"): `Button` in the system styles below, `Menu` for a long list of choices, `Toggle` for on/off, `Stepper`, `Slider`, `Form`/`List` sections for settings and filter sheets, system sheets with detents, the system toolbar. The app's wrappers (`ChipButton`, `LinkButtonStyle`, `MapButtonFace`) only set Clack's tint, type and radius on the system control inside them. **Pick-one controls, three kinds and no more** (owner, 2026-11-07, after the designer counted five): a few fixed choices (two to four: Upcoming/Past, departures/arrivals, flying/car, theme, floors) are the glass switch `SegmentedControl` (plain 44 pt buttons on one glass track under a sliding yellow glass thumb, build 50's Trips look, now everywhere); an open scrolling set (years, station-map categories, dates) is a row of `ChipButton`s; a long list (language, country, units, lead time) is a `Menu`. The system's segmented `Picker` (`FormSegmentedControl`) appears only inside a system `Form` (the Explore filter sheet), where the system's own control belongs. Clack's own are the colours, type and radii.
+- Buttons are Liquid Glass (iOS 26; the bordered styles before). Primary is yellow glass (`glassProminent`) with black type, secondary is clear glass, destructive is clear glass with a red label; system control sizes. Paired or stacked actions are the same width, with one exception (owner, 2026-10-25): on a train's card, Follow is only as wide as its word (glass) and Plan a journey / In your trips (yellow glass) takes the rest, so the longer label stays on one line; both with icons. Rare actions (refresh, delete, "I didn't take this train") go in the system's `…` menu, not in a row of buttons. Floating controls over a map and the header's round icon buttons are glass too. The tab bar is the system's. Tab roots (Trips, Passport) draw their own header: the large title and the glass icon buttons level on one row; pushed screens keep the system bar.
 - Depth is mostly color and hairlines, not shadows. Floating elements (FAB, sheet) get a soft shadow (`0 8px 24px` at 45% black on dark, 12% on light).
 - Icons: Lucide, 20px, 1.75 stroke.
 
@@ -242,19 +242,30 @@ A journey is an ordered group of legs. Opening one shows a header card (total do
 
 ## 8. Screen: Passport — P0
 
-Scrollable page. Sticky top controls: **year chips** (All time, 2026, 2025, …) and a **"Include commuter trains"** switch. All content below respects both.
+Scrollable page. Top: **year chips** (All time, 2026, 2025, …) that scroll away with the page; the commuter switch is in
+Settings. A few cards, each opening into more (owner, 2026-11-07, after Flighty's Passport: a few core boxes you scroll,
+each opening a fuller view):
 
-1. **Hero:** total distance as huge split-flap digits (count-up on first view) with unit toggle; under it a rotating flavor line (§8.1).
-2. **2×2 stat tiles:** Trains (legs), Journeys, Time on trains (e.g. "5d 3h"), Stations.
-3. **Map card:** every ridden route drawn together using additive blending so lines **glow brighter where you've ridden them more often**. Station dots scale with visit count. Tap to open full screen with year filter and the Rail network toggle.
-4. **Stamps** (P2): horizontal carousel. Country stamps (large) and station stamps (small), ink-stamp style SVG (slight rotation, textured edge) with name and first-visit date. A "New stamp!" animation plays after a leg adds a new station or country.
-5. **Records:** Longest trip (distance and duration), Biggest delay (links to the trip), Most-ridden route, Busiest station, Earliest departure, Latest arrival.
-6. **Operators:** horizontal bars in operator colors with count and km; tap an operator to filter the log.
-7. **Train types:** bars for High-speed, InterCity, Regional, Commuter, Night, Heritage.
-8. **Delays** (only legs with full data; note "Based on N trains"): big **On time %** (≤5 min), total time lost, average delay, worst delay, cancellations; a **distribution bar** with the four delay colors (green/yellow/amber/red) so the strict view is visible.
-9. **Borders & countries:** list with border crossings counted (e.g. Öresund bridge once Denmark exists).
-10. **CO₂:** big "kg saved vs flying" with the comparison switcher chip row (**Flying · Car (solo) · Car (2) · Car (3) · Electric car · Coach**), plus "Train: X kg / Flying would have been: Y kg". Link "How we calculate this".
-11. **Train log:** every completed leg, newest first, with search and operator/type filters; same row anatomy as Trips.
+1. **Cover** (`PassportCard`, the yellow holo cover, §8.3): the distance, a rotating flavor line (§8.1), 2×2 tiles (Trains,
+   Journeys, Time on trains, Stations), the code line. **Tap: the Breakdown** (pushed, system bar): every total, then the
+   collections in full (operators as bars with badges, countries with border crossings, stations as a flow of names with
+   their visits, kinds of train, train types with their drawings), and the records (longest trip, longest time, biggest
+   delay, most-ridden route, busiest station, earliest departure, latest arrival; each opens its trip).
+2. **Up next** (1–4 journeys only): the nearest medal and how far to go.
+3. **Map card:** every ridden stretch in **one ink** (the theme's strong colour: yellow on dark, black on light), drawn
+   wider and brighter the more often it was ridden (one line per stretch with a weight, `PassportLogic.routeWeights`;
+   operator colours stacking had made muddy mixes, owner 2026-11-07). Station dots scale with visit count. **Tap: full
+   screen**, pan and zoom, the year chips on top. Journey, planned-journey and arrival maps keep operator colours.
+4. **Milestones card:** the newest six medals, then the three next to go for, greyed with a track ring and the progress in
+   yellow (never quite nothing: a hair of yellow at zero reads as a starting line, not locked content). **Tap "All
+   milestones · N of M": every family as a row of its levels**, earned ones with their month and trip, locked ones with
+   "value of target". The empty Passport shows the nearest medal large as the hero and two smaller beside it.
+5. **Delays** (only legs with full data; note "Based on N trains"): big **On time %** (≤5 min), the distribution bar with
+   the four delay colours, time lost, average delay, worst delay, cancellations.
+6. **CO₂:** "kg saved" with the Flying / Car switch (the glass segmented control, the same setting as in Settings), the
+   comparison sentence and "How we calculate this".
+7. **Stamps** (P2): country and station stamps, ink-stamp style, with first-visit dates. Not built.
+8. **Train log** (P2): every completed leg, newest first, with search and filters. Not built.
 
 ### 8.1 Flavor lines (secondary, small, rotate on tap or daily)
 Derived only from the user's own data; never invented. Constants live in one file and must be verified by Claude Code before use.

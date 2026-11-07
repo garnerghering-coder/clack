@@ -18,10 +18,14 @@ describe('the cause table', () => {
     const used = new Set(keys());
     for (const k of appKeys('cause.')) expect(used.has(k), `unused ${k}`).toBe(true);
   });
-  it("keeps Trafikverket's own Swedish text and marks our wording unverified", () => {
+  it("keeps Trafikverket's own Swedish text and records what each wording was checked against", () => {
     expect(table.trv.ANA015.sv).toBe('Elfel');
     expect(table.trv.ANA050.sv).toBe('Signalfel');
-    for (const e of Object.values(table.trv)) expect(e.verified).toBe(false);
+    for (const e of Object.values(table.trv) as { sv: string; verified: boolean; _source?: string; _official?: string }[]) {
+      expect(e.verified).toBe(true);
+      expect(e._source).toContain('ReasonCode');
+      expect(e._official).toBe(e.sv);
+    }
   });
 });
 

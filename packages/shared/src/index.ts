@@ -35,8 +35,6 @@ export const THEMES = ['system', 'dark', 'light'] as const;
 export type Theme = (typeof THEMES)[number];
 
 export interface Settings {
-  /** Shown as initials in the avatar (Flighty-style). Empty = no initials. */
-  displayName: string;
   language: Language;
   distanceUnit: 'km' | 'mi';
   clock: '24h' | '12h';
@@ -76,7 +74,6 @@ export const LEAD_CHOICES = [0, 30, 60, 120, 180] as const;
 export const DELAY_ALERT_MIN = 5;
 
 export const DEFAULT_SETTINGS: Settings = {
-  displayName: '',
   language: 'en',
   distanceUnit: 'km',
   clock: '24h',
@@ -105,10 +102,6 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
   const next: Settings = { ...current };
   for (const [key, value] of Object.entries(p)) {
     switch (key) {
-      case 'displayName':
-        if (typeof value !== 'string' || value.length > 60) throw new Error('displayName must be a string of at most 60 characters');
-        next.displayName = value.trim();
-        break;
       case 'walkPace':
         if (value !== 'relaxed' && value !== 'normal' && value !== 'brisk') throw new Error(`invalid walkPace: ${String(value)}`);
         next.walkPace = value;

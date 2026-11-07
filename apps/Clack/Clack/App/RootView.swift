@@ -11,6 +11,8 @@ import SwiftUI
 struct RootView: View {
     @Environment(AppModel.self) private var app
     @State private var router = Router()
+    /// The Passport the tab loaded, for the screens pushed from it (they don't fetch it again).
+    @State private var passport = PassportStore()
     @State private var splashMinDone = false
     @State private var splashGone = false
     @Environment(\.scenePhase) private var scenePhase
@@ -45,9 +47,6 @@ struct RootView: View {
                 router.setPath([], for: PrimaryTab.allCases[index])
             })
 
-            if app.isOffline {
-                OfflineBanner().transition(.opacity)
-            }
             VStack {
                 Spacer()
                 TicketReturnPrompt().padding(.bottom, 64)
@@ -62,6 +61,7 @@ struct RootView: View {
         }
         .environment(app.l10n)
         .environment(router)
+        .environment(passport)
         // Text can be held and selected, as anywhere on iOS (the controls turn it off for themselves).
         .textSelection(.enabled)
         .sheet(item: $router.addRequest) { request in
@@ -225,6 +225,12 @@ struct RootView: View {
             root()
                 .appDestinations()
         }
+        // Offline: a strip in the safe area, so every screen moves down under it instead of being covered (designer,
+        // 2026-11-07: the toast landed on Explore's search field).
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if app.isOffline { OfflineBanner().transition(.move(edge: .top).combined(with: .opacity)) }
+        }
+        .animation(.easeInOut(duration: 0.2), value: app.isOffline)
         .modifier(NoBottomEdgeEffect())
     }
 

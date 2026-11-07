@@ -40,6 +40,26 @@ last one failed and the failures counted by Apple's reason (`BadDeviceToken` is 
 or `lastOkAt` falling far behind while people have trips, means look at the log lines starting `push:`). Nothing pages
 anyone: it has to be looked at.
 
+## Checks that run by themselves
+
+- **Cross-source consistency** (`apps/server/src/audit/crossSource.ts`, 03:30 Stockholm): where two feeds recorded the
+  same train, do they agree? The day checked is the day before yesterday (the archives for a day arrive the next morning,
+  after this job). Pairs: Trafikverket against train-archive.eu's Danish record for the trains Sweden's feed carries over
+  the bridge (compared at Hyllie, CPH Airport and København H; in practice Hyllie, the only one Trafikverket announces),
+  and our same-day Entur record against Entur's BigQuery archive (read again from the raw day file; the archive never
+  overwrites a live run). Arrival and departure minutes agree within a minute, else disagree; a time one side lacks is
+  missing; cancellation is compared per call and per run. Results go to the `diagnostics` table, kind `cross_source`,
+  `build` = the pair (`trafikverket~train_archive_dk`, `entur~entur-bigquery`), `day` = the service day: one row
+  `summary {"runs":{"both","onlyA","onlyB"},"agree","disagree","missing"[,"note"]}` per pair and day, and one row per
+  difference (`{"train","station","field":"arr"|"dep"|"canceled","verdict","a","b","sources"}`, at most 500 a day;
+  `count` is how many times the same difference occurred). A rerun replaces the day's rows. By hand:
+  `npm run import -- cross-source --date=2026-11-06`. On a local copy of 2026-11-06, the Norway pair gave 394 runs in
+  both, 8,401 minutes agreeing, 21 disagreeing and 2,273 missing, nearly all BigQuery rows still marked `estimated`
+  where our same-day fetch had the actual time; on 2026-10-26 the Öresund pair gave 124 runs, 185 / 49 / 8.
+- **Trip reports** (`POST /api/legs/:id/report`, "This is wrong" on a trip page): kept in `leg_reports` with what the
+  phone showed and what the server held at that moment. Read them with `npm run import -- leg-reports [--days=N]` (or
+  `npx tsx apps/server/src/tools/legReports.ts`). A report changes nothing on the trip.
+
 ## `.env`
 
 `/home/clack/clack/.env` is read at start-up (not in git; never paste the values anywhere). The names:

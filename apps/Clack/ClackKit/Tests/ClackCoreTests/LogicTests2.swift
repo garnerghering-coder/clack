@@ -43,12 +43,6 @@ struct SettingsTests {
         #expect(next == expected)
     }
 
-    @Test func trimsTheNameAndRefusesOneOverSixtyCharacters() {
-        #expect(Settings.defaults.applying(SettingsPatch(displayName: "  Garner  "))?.displayName == "Garner")
-        #expect(Settings.defaults.applying(SettingsPatch(displayName: String(repeating: "a", count: 60))) != nil)
-        #expect(Settings.defaults.applying(SettingsPatch(displayName: String(repeating: "a", count: 61))) == nil)
-    }
-
     @Test func doesNotMutateTheOriginal() {
         let before = Settings.defaults
         _ = Settings.defaults.applying(SettingsPatch(clock: .h12))

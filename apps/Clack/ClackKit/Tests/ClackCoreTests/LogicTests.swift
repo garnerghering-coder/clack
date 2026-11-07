@@ -217,6 +217,19 @@ struct JourneyNowTests {
         return try JSONDecoder().decode(Leg.self, from: Data(json.utf8))
     }
 
+    @Test func sumsAJourneyDoorToDoorAndCountsMissedChanges() throws {
+        // Two trains: 09:00–10:00 and 10:20–12:00; the first arrived at 10:30, so the change was missed.
+        let a = try leg("a", dep: -180, arr: -120, actualArr: -90)
+        let b = try leg("b", dep: -100, arr: 0)
+        let s = try #require(TripsLogic.journeySummary([a, b]))
+        #expect(s.changes == 1)
+        #expect(s.missedChanges == 1)
+        #expect(s.minutes == 180)
+        // No train carries a distance: no sum, rather than a part read as the whole.
+        #expect(s.distanceM == nil)
+        #expect(TripsLogic.journeySummary([]) == nil)
+    }
+
     @Test func picksTheRunningLegThenTheNextOneAndNothingOutsideTheWindow() throws {
         let legs = [try leg("a", dep: -30, arr: 20), try leg("b", dep: 30, arr: 90)]
         #expect(TripsLogic.nowLegIndex(legs, now: now) == 0)

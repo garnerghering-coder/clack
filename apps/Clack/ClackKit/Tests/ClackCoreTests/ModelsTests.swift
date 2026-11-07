@@ -65,7 +65,7 @@ struct ModelsTests {
     }
 
     @Test func decodesSettings() throws {
-        let json = #"{"displayName":"","language":"en","distanceUnit":"km","clock":"24h","co2Comparison":"car_1","includeCommuter":true,"showRailNetwork":true,"theme":"system","walkPace":"normal","stepFree":false,"heavyLuggage":false}"#
+        let json = #"{"language":"en","distanceUnit":"km","clock":"24h","co2Comparison":"car_1","includeCommuter":true,"showRailNetwork":true,"theme":"system","walkPace":"normal","stepFree":false,"heavyLuggage":false}"#
         let settings = try JSONDecoder().decode(Settings.self, from: Data(json.utf8))
         #expect(settings == Settings.defaults)
         #expect(settings.co2Comparison.rawValue == "car_1")

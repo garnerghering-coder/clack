@@ -187,7 +187,17 @@ struct JourneyChangeChip: View {
 
     var body: some View {
         Group {
-            if a.destination?.id == b.origin?.id {
+            if a.destination?.id == b.origin?.id, a.actualArr != nil, b.actualDep != nil || b.canceled {
+                // Both trains have run: the change is judged on what happened (owner, 2026-11-07: the verdict in the
+                // journey, not hidden in each train's page), the same words as the Trips list.
+                let t = TripsLogic.transfer(from: a, to: b)
+                let text = [
+                    l10n.t("journey.transfer", ["min": String(t.planned), "station": t.station]),
+                    t.actual.flatMap { $0 != t.planned && !t.missed ? l10n.t("journey.actually", ["min": String($0)]) : nil },
+                    t.missed ? l10n.t("journey.missed") : t.tight ? l10n.t("journey.tight") : nil,
+                ].compactMap { $0 }.joined(separator: Format.separator)
+                changeChip(text, ink: t.missed ? Ink.veryLateInk : t.tight ? Ink.slightInk : Ink.text2, stationId: a.destination?.id)
+            } else if a.destination?.id == b.origin?.id {
                 let result = model.result(a, b, profile: app.walkProfile)
                 let wait = result.gapMin ?? result.layoverSeconds.map { Int((Double($0) / 60).rounded()) }
                 let walk = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
@@ -208,24 +218,7 @@ struct JourneyChangeChip: View {
                 case .risky?: Ink.veryLateInk
                 default: switch result.status { case .tight: Ink.slightInk; case .miss, .broken: Ink.veryLateInk; default: Ink.text2 }
                 }
-                // Every change chip the same width, centred between the train cards (owner, 2026-11-02).
-                let chip = HStack(spacing: 8) {
-                    LucideIcon(name: "arrow-down", size: 13)
-                    Text(text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
-                    if model.map != nil { LucideIcon(name: "map", size: 13) }
-                }
-                .clack(.chip).foregroundStyle(ink)
-                .padding(.horizontal, 12).padding(.vertical, 8)
-                .frame(maxWidth: .infinity)
-                .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
-                if model.map != nil, let stationId = a.destination?.id {
-                    NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) { chip }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(text)
-                        .accessibilityHint(l10n.t("trips.layoverOpen", ["station": a.destination?.name ?? ""]))
-                } else {
-                    chip.accessibilityElement(children: .combine)
-                }
+                changeChip(text, ink: ink, stationId: a.destination?.id)
             } else {
                 TransferChip(prev: a, next: b, plain: true)
             }
@@ -233,6 +226,29 @@ struct JourneyChangeChip: View {
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 16)
         .task { await model.load(stationId: a.destination?.id, using: app.stations) }
+    }
+
+    /// Every change chip the same width, centred between the train cards (owner, 2026-11-02); with a station map it
+    /// opens the walk between the platforms.
+    @ViewBuilder
+    private func changeChip(_ text: String, ink: Color, stationId: String?) -> some View {
+        let chip = HStack(spacing: 8) {
+            LucideIcon(name: "arrow-down", size: 13)
+            Text(text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+            if model.map != nil { LucideIcon(name: "map", size: 13) }
+        }
+        .clack(.chip).foregroundStyle(ink)
+        .padding(.horizontal, 12).padding(.vertical, 8)
+        .frame(maxWidth: .infinity)
+        .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+        if model.map != nil, let stationId {
+            NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) { chip }
+                .buttonStyle(.plain)
+                .accessibilityLabel(text)
+                .accessibilityHint(l10n.t("trips.layoverOpen", ["station": a.destination?.name ?? ""]))
+        } else {
+            chip.accessibilityElement(children: .combine)
+        }
     }
 }
 
@@ -243,6 +259,8 @@ struct JourneyLegs: View {
     let now: Double
     var selected: String?
     var select: ((String) -> Void)?
+    /// Where a card goes when it is not a selection: its train, or (the Trips list, owner 2026-11-07) the journey.
+    var route: (Leg) -> AppRoute = { .trip($0.id) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -253,7 +271,7 @@ struct JourneyLegs: View {
                         .buttonStyle(.plain)
                         .accessibilityAddTraits(selected == leg.id ? .isSelected : [])
                 } else {
-                    NavigationLink(value: AppRoute.trip(leg.id)) { JourneyTrainCard(leg: leg, now: now, selected: selected == leg.id) }
+                    NavigationLink(value: route(leg)) { JourneyTrainCard(leg: leg, now: now, selected: selected == leg.id) }
                         .buttonStyle(.plain)
                 }
             }

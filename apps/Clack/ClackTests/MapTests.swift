@@ -130,7 +130,7 @@ struct MapStyleTests {
     }
 
     @Test func theLightAndDarkThemesUseTheirOwnColours() {
-        let light = MapStyle.style(base: base, withBasemap: true, dark: false, railNetwork: false, kind: .multiRoute)
+        let light = MapStyle.style(base: base, withBasemap: true, dark: false, railNetwork: false, kind: .multiRoute(heat: false))
         let earth = (light["layers"] as? [[String: Any]])?.first { $0["id"] as? String == "earth" }
         #expect((earth?["paint"] as? [String: Any])?["fill-color"] as? String == "#f7f7f7")
         #expect(layerIds(light).suffix(3) == ["routes-glow", "routes-body", "stations"])

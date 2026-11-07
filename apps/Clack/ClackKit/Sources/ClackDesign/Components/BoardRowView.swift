@@ -104,7 +104,8 @@ public struct BoardRowView<Badge: View>: View {
                         if let service = line.service { Text(service).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
                     }
                 }
-                if let notes = line.notes { Text(notes).clack(.caption).foregroundStyle(Ink.accentInk) }
+                // The cause in plain text (designer, 2026-11-07: two colours in a row, not four); the status carries the colour.
+                if let notes = line.notes { Text(notes).clack(.caption).foregroundStyle(Ink.text2) }
             }
             Spacer(minLength: 0)
             VStack(alignment: .trailing, spacing: 4) {
@@ -144,7 +145,7 @@ public struct BoardRowView<Badge: View>: View {
         if line.canceled {
             DelayText(delay: nil, canceled: true, replacedByBus: line.replacedByBus)
         } else if let delay = line.delay {
-            DelayText(delay: delay)
+            DelayText(delay: delay, mutedOnTime: true)
         }
     }
 }

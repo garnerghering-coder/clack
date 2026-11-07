@@ -39,6 +39,9 @@ public struct DelayText: View {
     /// red, since there is still a way to get there (owner, 2026-11-07: "are they cancelled, or buses, because that's a
     /// difference?").
     public var replacedByBus = false
+    /// "On time" in plain text-2 instead of green, where colour should only mark trouble (a departure board: the
+    /// designer counted four colours in one column, 2026-11-07). Delays and cancellations keep their band ink.
+    public var mutedOnTime = false
 
     public var body: some View {
         let band = DelayBand(delayMin: delay, canceled: canceled)
@@ -46,7 +49,7 @@ public struct DelayText: View {
             .clack(.delay)
             .fontWeight(band == .unknown ? .semibold : .bold)
             .monospacedDigit()
-            .foregroundStyle(canceled && replacedByBus ? Ink.late : band.ink)
+            .foregroundStyle(canceled && replacedByBus ? Ink.late : (mutedOnTime && band == .onTime ? Ink.text2 : band.ink))
             .lineLimit(1)
             .fixedSize()
     }
@@ -59,9 +62,10 @@ public struct DelayText: View {
         }
     }
 
-    public init(delay: Int?, canceled: Bool = false, replacedByBus: Bool = false) {
+    public init(delay: Int?, canceled: Bool = false, replacedByBus: Bool = false, mutedOnTime: Bool = false) {
         self.delay = delay
         self.canceled = canceled
         self.replacedByBus = replacedByBus
+        self.mutedOnTime = mutedOnTime
     }
 }

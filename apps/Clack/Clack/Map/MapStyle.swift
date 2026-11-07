@@ -148,17 +148,24 @@ nonisolated enum MapStyle {
         ]
     }
 
-    /// Every ridden route on one map (Passport, journey): each line in its operator colour with a soft glow so lines
-    /// ridden many times build up brighter, and station dots that grow with the number of visits.
-    static func multiRouteLayers(_ c: Colors) -> [[String: Any]] {
-        [
+    /// Every ridden route on one map. A journey: each line in its operator colour with a soft glow. The Passport
+    /// (`heat`, owner 2026-11-07): one ink, the theme's strong colour, and a line grows wider and brighter with how
+    /// often that stretch was ridden (`weight`, from `PassportLogic.routeWeights`), like a heat map; operator colours
+    /// stacking over each other had made muddy mixes. Station dots grow with the number of visits either way.
+    static func multiRouteLayers(_ c: Colors, heat: Bool = false) -> [[String: Any]] {
+        let color: Any = heat ? c.fallback : ["get", "color"]
+        let glowWidth: Any = heat ? ["interpolate", ["linear"], ["get", "weight"], 1, 8, 10, 18] : 10
+        let glowOpacity: Any = heat ? ["interpolate", ["linear"], ["get", "weight"], 1, 0.16, 10, 0.4] : 0.22
+        let bodyWidth: Any = heat ? ["interpolate", ["linear"], ["get", "weight"], 1, 2, 5, 3.5, 10, 5] : 2.5
+        let bodyOpacity: Any = heat ? ["interpolate", ["linear"], ["get", "weight"], 1, 0.5, 10, 0.95] : 0.75
+        return [
             [
                 "id": "routes-glow", "type": "line", "source": "routes", "layout": round,
-                "paint": ["line-color": ["get", "color"], "line-opacity": 0.22, "line-width": 10, "line-blur": 5],
+                "paint": ["line-color": color, "line-opacity": glowOpacity, "line-width": glowWidth, "line-blur": 5],
             ],
             [
                 "id": "routes-body", "type": "line", "source": "routes", "layout": round,
-                "paint": ["line-color": ["get", "color"], "line-opacity": 0.75, "line-width": 2.5],
+                "paint": ["line-color": color, "line-opacity": bodyOpacity, "line-width": bodyWidth],
             ],
             [
                 "id": "stations", "type": "circle", "source": "stations",
@@ -398,8 +405,8 @@ nonisolated enum MapStyle {
     enum Kind: Sendable {
         /// One route with its stops, an optional faint rest-of-route and the live split.
         case route(color: String)
-        /// Many routes and the stations they pass.
-        case multiRoute
+        /// Many routes and the stations they pass; `heat`: one ink, heavier where ridden more (the Passport).
+        case multiRoute(heat: Bool)
         /// Explore: every running train, stations, and the selected train's route.
         case live
     }
@@ -428,9 +435,9 @@ nonisolated enum MapStyle {
         case .route(let color):
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             layers += routeLayers(color: color, c, dark: isDark)
-        case .multiRoute:
+        case .multiRoute(let heat):
             for id in ["routes", "stations"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
-            layers += multiRouteLayers(c)
+            layers += multiRouteLayers(c, heat: heat)
         case .live:
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains-pinned"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]

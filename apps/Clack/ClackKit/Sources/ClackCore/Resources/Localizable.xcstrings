@@ -2503,7 +2503,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Café offer"
+            "value" : "Café selection"
           }
         },
         "sv" : {
@@ -2520,7 +2520,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Canceled"
+            "value" : "Cancelled"
           }
         },
         "sv" : {
@@ -2979,7 +2979,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Passenger taken ill"
+            "value" : "Someone taken ill"
           }
         },
         "sv" : {
@@ -4639,6 +4639,23 @@
         }
       }
     },
+    "common.send" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skicka"
+          }
+        }
+      }
+    },
     "connection.brokenBanner" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5588,6 +5605,23 @@
         }
       }
     },
+    "detail.menuReport" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report wrong data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmäl fel uppgift"
+          }
+        }
+      }
+    },
     "detail.more" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5771,6 +5805,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uppdatera tider"
+          }
+        }
+      }
+    },
+    "detail.reportBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Say what the screen got wrong. The times and platforms as shown go with the report."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skriv vad som blev fel. Tiderna och spåren som de visades följer med anmälan."
+          }
+        }
+      }
+    },
+    "detail.reportFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't send the report. Try again later."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte skicka anmälan. Försök igen senare."
+          }
+        }
+      }
+    },
+    "detail.reportPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valfritt"
+          }
+        }
+      }
+    },
+    "detail.reportSent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thanks. The report is kept with this trip."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tack. Anmälan ligger hos den här resan."
+          }
+        }
+      }
+    },
+    "detail.reportTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's wrong?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vad stämmer inte?"
           }
         }
       }
@@ -6931,6 +7050,23 @@
         }
       }
     },
+    "journey.distance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sträcka"
+          }
+        }
+      }
+    },
     "journey.doorToDoor" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6961,6 +7097,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Snabbast"
+          }
+        }
+      }
+    },
+    "journey.finalArrival" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Final arrival"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slutankomst"
           }
         }
       }
@@ -7070,6 +7223,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Missat byte"
+          }
+        }
+      }
+    },
+    "journey.missedChanges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} missed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} missade"
           }
         }
       }
@@ -10604,6 +10774,23 @@
         }
       }
     },
+    "passport.allMilestones" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All milestones"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla milstolpar"
+          }
+        }
+      }
+    },
     "passport.allTime" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10818,6 +11005,40 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "passport.breakdown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breakdown"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Översikt"
+          }
+        }
+      }
+    },
+    "passport.breakdownHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the breakdown of your trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar översikten över dina tåg"
           }
         }
       }
@@ -11145,6 +11366,23 @@
         }
       }
     },
+    "passport.earnedOf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{earned}} of {{total}} earned"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{earned}} av {{total}} tagna"
+          }
+        }
+      }
+    },
     "passport.empty" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11192,6 +11430,244 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ditt pass börjar här"
+          }
+        }
+      }
+    },
+    "passport.family.arcticCircle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arctic Circle"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Polcirkeln"
+          }
+        }
+      }
+    },
+    "passport.family.borderCrossings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Border crossings"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gränspassager"
+          }
+        }
+      }
+    },
+    "passport.family.countries" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Countries"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länder"
+          }
+        }
+      }
+    },
+    "passport.family.distanceKm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sträcka"
+          }
+        }
+      }
+    },
+    "passport.family.europeLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Across Europe"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tvärs över Europa"
+          }
+        }
+      }
+    },
+    "passport.family.homeLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The length of your country"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ditt lands längd"
+          }
+        }
+      }
+    },
+    "passport.family.hoursOnBoard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hours on board"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timmar ombord"
+          }
+        }
+      }
+    },
+    "passport.family.journeys" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journeys"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resor"
+          }
+        }
+      }
+    },
+    "passport.family.kindsOfTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kinds of train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorters tåg"
+          }
+        }
+      }
+    },
+    "passport.family.longestTrainKm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longest train ride"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Längsta tågresa"
+          }
+        }
+      }
+    },
+    "passport.family.nightTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Night trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nattåg"
+          }
+        }
+      }
+    },
+    "passport.family.operators" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operators"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operatörer"
+          }
+        }
+      }
+    },
+    "passport.family.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationer"
+          }
+        }
+      }
+    },
+    "passport.family.trainTypes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Train types"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tågtyper"
           }
         }
       }
@@ -11546,6 +12022,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Karta över alla {{count}} tåg du har åkt"
+          }
+        }
+      }
+    },
+    "passport.mapOpenHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the map full screen"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar kartan i helskärm"
           }
         }
       }
@@ -12368,6 +12861,23 @@
         }
       }
     },
+    "passport.scopeLine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your trains, {{scope}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dina tåg, {{scope}}"
+          }
+        }
+      }
+    },
     "passport.showAllMilestones" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12616,6 +13126,23 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "passport.totals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totals"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totalt"
           }
         }
       }
@@ -13140,6 +13667,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det som stannar i telefonen"
+          }
+        }
+      }
+    },
+    "privacy.reportsBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you tap “Report wrong data” on a trip, we keep that report with the trip: what you wrote, what the screen showed and what our server had for the train at that moment, so the error can be found. It is deleted with the trip or with your data."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om du trycker på ”Anmäl fel uppgift” på en resa sparar vi den anmälan med resan: det du skrev, det skärmen visade och det vår server hade om tåget just då, så att felet kan hittas. Den raderas med resan eller med dina data."
+          }
+        }
+      }
+    },
+    "privacy.reportsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reports of wrong data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmälningar om fel uppgifter"
           }
         }
       }
@@ -14589,23 +15150,6 @@
         }
       }
     },
-    "settings.alerts.note" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reminders, platforms, delays and changes, even when Clack is closed."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påminnelser, spår, förseningar och byten, även när Clack är stängd."
-          }
-        }
-      }
-    },
     "settings.alerts.noteMore" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -14963,40 +15507,6 @@
         }
       }
     },
-    "settings.displayName" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your name"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ditt namn"
-          }
-        }
-      }
-    },
-    "settings.displayNamePlaceholder" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Optional"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valfritt"
-          }
-        }
-      }
-    },
     "settings.distanceUnit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -15255,23 +15765,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "settings.offlineMapsNote" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maps along your next trips work with no signal."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kartor längs dina nästa resor fungerar utan täckning."
           }
         }
       }
@@ -17010,6 +17503,23 @@
         }
       }
     },
+    "stationMap.clusterHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} more here. Zooms in."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} till här. Zoomar in."
+          }
+        }
+      }
+    },
     "stationMap.compass.e" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -17499,6 +18009,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Öppettider enligt uppgift; kan avvika på helgdagar"
+          }
+        }
+      }
+    },
+    "stationMap.hoursUnknown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opening hours not known"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppettider okända"
           }
         }
       }
@@ -18230,6 +18757,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Byt håll"
+          }
+        }
+      }
+    },
+    "stationMap.timeHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open now, or at the time you pick"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppet nu, eller vid tiden du väljer"
           }
         }
       }

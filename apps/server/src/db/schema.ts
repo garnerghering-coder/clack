@@ -474,6 +474,32 @@ export const legAudits = sqliteTable('leg_audits', {
   result: text('result', { mode: 'json' }).$type<Record<string, unknown>>().notNull(),
 });
 
+/**
+ * "This is wrong" from a trip page (owner, 2026-11-07): the traveller says what the trip showed was not what happened.
+ * Kept with what the app showed (`shown`, as the phone sent it) and what the server held for the leg at that moment
+ * (`serverState`: the stored times and platforms, and the last value shown per stop and field from shown_values), so
+ * the report can be checked against the record later. Gone with the leg or the user.
+ */
+export const legReports = sqliteTable(
+  'leg_reports',
+  {
+    id: text('id').primaryKey(),
+    legId: text('leg_id')
+      .notNull()
+      .references(() => legs.id, { onDelete: 'cascade' }),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+    /** What the traveller wrote, at most 500 characters; null when nothing. */
+    note: text('note'),
+    /** The values the app showed, as the phone sent them (any JSON object). */
+    shown: text('shown', { mode: 'json' }).$type<Record<string, unknown>>(),
+    serverState: text('server_state', { mode: 'json' }).$type<Record<string, unknown>>(),
+  },
+  (t) => [index('leg_reports_leg').on(t.legId, t.createdAt)],
+);
+
 // ---------- Usage (owner, 2026-10-25) ----------
 
 /**

@@ -77,7 +77,7 @@ public struct DeparturesWidgetView: View {
                 HStack(spacing: 8) {
                     SplitFlap(
                         value: Format.time(row.leaves, tz: tz, clock: clock), size: .sm,
-                        colour: row.canceled ? DelayBand.cancelled.ink : (row.delayMin ?? 0) >= 1 ? DelayBand(delayMin: row.delayMin, canceled: false).ink : nil
+                        colour: row.canceled ? (row.replacedByBus ? Ink.late : DelayBand.cancelled.ink) : (row.delayMin ?? 0) >= 1 ? DelayBand(delayMin: row.delayMin, canceled: false).ink : nil
                     )
                     Text(row.to).clack(Self.boardFace).foregroundStyle(row.canceled ? Ink.text3 : Ink.text)
                         .strikethrough(row.canceled).lineLimit(1)
@@ -85,12 +85,13 @@ public struct DeparturesWidgetView: View {
                         .truncationMode(.tail)
                     Spacer(minLength: 4)
                     if row.canceled {
-                        DelayText(delay: nil, canceled: true)
+                        // A bus instead is said as that, not as "Cancelled" (owner, 2026-11-07).
+                        DelayText(delay: nil, canceled: true, replacedByBus: row.replacedByBus)
                     } else if let d = row.delayMin, d != 0 {
                         DelayText(delay: d)
                     }
                     Group {
-                        if let p = row.platform { PlatformTag(platform: p) } else { UnknownPlatformTag() }
+                        if let p = row.platform { PlatformTag(platform: p, changedFrom: row.platformFrom) } else { UnknownPlatformTag() }
                     }
                     .frame(minWidth: 36, alignment: .trailing)
                 }

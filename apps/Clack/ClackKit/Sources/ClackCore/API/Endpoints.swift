@@ -59,6 +59,16 @@ extension APIClient {
     public func refreshLeg(_ id: String) async throws -> LegDetail { try await send("POST", ["legs", id, "refresh"]) }
     public func deleteLeg(_ id: String) async throws { try await perform("DELETE", ["legs", id]) }
 
+    /// "Report wrong data" on a trip (owner, 2026-11-07): a note and what the screen showed, kept with the trip on the
+    /// server (`POST /api/legs/:id/report`), so a wrong time or platform can be traced to its source.
+    public func reportLeg(_ id: String, note: String?, shown: [String: String]) async throws {
+        struct Body: Encodable, Sendable {
+            let note: String?
+            let shown: [String: String]
+        }
+        try await perform("POST", ["legs", id, "report"], body: Body(note: note, shown: shown))
+    }
+
     /// Changes a saved trip: its train type, coach or seat (`LegPatch`: what's left out stays as it is).
     public func updateLeg(_ legId: String, _ patch: LegPatch) async throws -> LegDetail {
         try await send("PATCH", ["legs", legId], body: patch)
@@ -106,8 +116,12 @@ extension APIClient {
         return try await get(["trains", "soon"], query: query)
     }
 
+    /// A search someone is waiting on: 6 s, not the usual 15 (designer, 2026-11-07: the spinner ran for half a minute
+    /// with the server unreachable).
+    public static let searchTimeout: TimeInterval = 6
+
     public func searchStations(_ text: String, limit: Int = 12) async throws -> [StationHit] {
-        try await get(["stations", "search"], query: ["q": text, "limit": String(limit)])
+        try await get(["stations", "search"], query: ["q": text, "limit": String(limit)], timeout: Self.searchTimeout)
     }
 
     public func timetableTrip(_ key: String, date: String) async throws -> TimetableTrip {

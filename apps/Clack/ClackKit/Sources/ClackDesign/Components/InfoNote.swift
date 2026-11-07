@@ -7,7 +7,8 @@ import ClackCore
 import SwiftUI
 
 /// A quiet short note (caption, text-2). When there is more to say, an (i) at its end opens the longer text under
-/// it, and closes it again: a footnote never takes more than two lines until it is asked for.
+/// it, and closes it again. A note never restates the switch above it (designer, 2026-11-07): it says what the switch
+/// does not.
 public struct InfoNote: View {
     @Environment(L10n.self) private var l10n
     public let text: String
@@ -26,8 +27,9 @@ public struct InfoNote: View {
                     open.toggle()
                 } label: {
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
-                        // Two lines closed (user test 2026-11-07: at large text sizes one line cut every footnote mid-word).
-                        Text(text).lineLimit(open ? nil : 2).multilineTextAlignment(.leading)
+                        // The whole note, always (designer, 2026-11-07: cut to two lines it ended in an ellipsis on the
+                        // largest phone); only the longer text waits behind the (i).
+                        Text(text).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
                         LucideIcon(name: "info", size: 14).foregroundStyle(open ? Ink.accentInk : Ink.text3)
                             .alignmentGuide(.firstTextBaseline) { $0[VerticalAlignment.center] + 4 }
                         Spacer(minLength: 0)

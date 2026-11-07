@@ -321,7 +321,8 @@ struct JourneyCard: View {
                 // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
                 VStack(alignment: .leading, spacing: 12) {
                     JourneyBar(legs: legs, now: now)
-                    JourneyLegs(legs: legs, now: now)
+                    // The whole card is the journey: a train's card opens the journey too, not the train alone.
+                    JourneyLegs(legs: legs, now: now, route: { leg in first.journeyId.map { .journey($0) } ?? .trip(leg.id) })
                 }
                 .padding(.vertical, 8)
             }

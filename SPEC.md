@@ -233,7 +233,11 @@ Use UTC timestamps everywhere; store each station's IANA time zone and render in
 
 - Each train is a **leg**. Legs are auto-grouped into a **journey** when the next leg departs from the same station (or same stop area) as the previous leg arrived, on the same day, within **4 hours**.
 - Users can manually split or merge journeys.
-- Journey view shows legs in order with transfer times between them.
+- Journey view shows legs in order with transfer times between them. Under way it is the current train's page with the
+  whole journey's bar on top (owner, 2026-11-01). Before and after the trip (owner, 2026-11-07) it is the whole journey:
+  every train on one map, the journey's numbers (door to door, distance when every train has one, the delay at the final
+  arrival, changes and missed changes), then each train as a card that opens its own page; the change between two trains
+  that have run is judged on what happened (missed, tight), an upcoming one by the change rule.
 
 ## 14. Passport (stats)
 
@@ -245,7 +249,10 @@ All stats are plain SQL aggregations over the user's legs, filterable by **year 
 - Longest leg (distance and duration), most-ridden route, most-used station
 - Delay stats (only legs with `full` data): total minutes delayed, on-time % (on time = arriving ≤ 5 min late by default; constant `ON_TIME_MAX_DELAY_MIN`; delay color bands are defined in `DESIGN.md` §2.1: green ≤0, yellow 1–15, amber 16–30, red 31+), average delay, worst delay, cancellations
 - CO₂ (see §15)
-- Map of all legs ever ridden
+- Map of all legs ever ridden: one ink, a stretch drawn heavier and brighter the more often it was ridden (the same track
+  either way round counts as one stretch), station dots growing with visits; full screen on tap (owner, 2026-11-07).
+- The Passport page is a few cards (owner, 2026-11-07): the cover (tap: the breakdown with every total, collection and
+  record), the map (tap: full screen), the milestones (tap: every family and level, earned and to earn), delays, CO₂.
 - **Milestones** (medals; all time, from counted trips only, ignoring the year and commuter filters). Each family has levels, and the label says what earns it: journeys 1/10/25/50/100/250; distance 100/500/1,000/2,500/5,000/10,000 km and once round the Earth; stations 10/25/50/100/200; operators 3/5/10; countries 2/3/5; border crossings 1/5/10/25; night trains 1/5/10/25; longest single train ride 300/500/1,000 km (a maximum, not a sum); hours on board 10/50/100/250; train types 5/10/20 (distinct, known types only); every kind of train (high-speed, InterCity, night, regional and commuter; heritage not counted); crossed the Arctic Circle (consecutive ridden stops on either side of 66°33′51.1″N); once the length of your home country; once the length of Europe.
 - **Home country:** Sweden, Norway or Finland. Set on first launch from the phone's region when it is one of those; otherwise the country of the first counted trip's boarding stop, else Sweden. Changeable in Settings. Lengths (north to south, each sourced in `stats/passport.ts`): Sweden 1,572 km; Norway 1,699 km (Lindesnes to Nordkapp, straight line, Store norske leksikon); Finland 1,157 km (Hanko to Utsjoki, Statistics Finland, *Suomi lukuina 2026*, from Maanmittauslaitos); Europe about 4,358 km (great-circle distance, Cape Nordkinn to Punta de Tarifa; no standard figure exists).
 

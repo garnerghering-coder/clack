@@ -1,4 +1,4 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit|position-check> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit|cross-source|leg-reports|position-check> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import fs from 'node:fs';
 import path from 'node:path';
 import { config, REPO_ROOT } from './env.js';
@@ -8,7 +8,8 @@ import { extractBasemap } from './import/basemap.js';
 import { refreshLogos } from './import/logos.js';
 import { AUDIT_DIR, runAudit } from './audit/audit.js';
 import { backfillSweden } from './import/backfill.js';
-import { backfillRange as backfillDenmarkArchive } from './observed/dk-archive.js';
+import { backfillRange as backfillDenmarkArchive, reprojectRange as reprojectDenmarkArchive } from './observed/dk-archive.js';
+import { refreshLegsOnDay } from './legs/actuals.js';
 import { importDenmarkHistory } from './import/gtfs-dk-history.js';
 
 const [cmd = 'bootstrap', ...flags] = process.argv.slice(2);
@@ -27,8 +28,12 @@ if (cmd === 'gtfs') {
 } else if (cmd === 'denmark') {
   await runDenmarkImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport'), zip });
 } else if (cmd === 'denmark-archive') {
-  // train-archive.eu's finished Danish days (from 2026-09-30): [--from=YYYY-MM-DD] [--to=YYYY-MM-DD].
-  await backfillDenmarkArchive(db, { from: flags.find((f) => f.startsWith('--from='))?.slice(7), to: flags.find((f) => f.startsWith('--to='))?.slice(5) });
+  // train-archive.eu's finished Danish days (from 2026-09-30): [--from=YYYY-MM-DD] [--to=YYYY-MM-DD]. With --reproject,
+  // the raw days already here are read again (after a change to the projection, e.g. the Swedish stop-times match of
+  // 2026-11-07) and the trips saved for them refreshed; trips already frozen (snapshotted) are left as they are.
+  const range = { from: flags.find((f) => f.startsWith('--from='))?.slice(7), to: flags.find((f) => f.startsWith('--to='))?.slice(5) };
+  if (flag('reproject')) for (const day of reprojectDenmarkArchive(db, range)) await refreshLegsOnDay(db, day, console.log);
+  else await backfillDenmarkArchive(db, range);
 } else if (cmd === 'denmark-history') {
   // Old Danish timetables from the Mobility Database: [--limit=N] copies this run.
   const limit = flags.find((f) => f.startsWith('--limit='))?.slice(8);
@@ -89,7 +94,17 @@ if (cmd === 'gtfs') {
 } else if (cmd === 'audit') {
   const r = await runAudit(db, { log: console.log });
   console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
+} else if (cmd === 'cross-source') {
+  // The cross-source consistency check (audit/crossSource.ts) for one service day: --date=YYYY-MM-DD (default: the
+  // day the nightly job would check now).
+  const { runCrossSource } = await import('./audit/crossSource.js');
+  const date = flags.find((f) => f.startsWith('--date='))?.slice(7);
+  for (const s of await runCrossSource(db, { date, log: console.log })) console.log(JSON.stringify(s));
+} else if (cmd === 'leg-reports') {
+  // "This is wrong" reports from trip pages (tools/legReports.ts): [--days=N], default 30.
+  const { legReportsText } = await import('./tools/legReports.js');
+  console.log(legReportsText(db, { days: Number(flags.find((f) => f.startsWith('--days='))?.slice(7)) || undefined }));
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | denmark | denmark-history | denmark-archive | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
+  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | denmark | denmark-history | denmark-archive | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit | cross-source | leg-reports`);
   process.exitCode = 1;
 }

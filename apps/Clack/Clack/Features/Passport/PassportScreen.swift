@@ -14,8 +14,9 @@ struct PassportScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(Router.self) private var router
+    @Environment(PassportStore.self) private var store
     @State private var year: Int?
-    @State private var comparison: Co2Comparison?
+    @State private var mapOpen = false
     @State private var data: Passport?
     @State private var failed = false
     @State private var flavorIndex = 0
@@ -30,7 +31,7 @@ struct PassportScreen: View {
 
     private var settings: Settings { app.settings }
     /// Old settings may hold a comparison no longer offered; it shows as a petrol car.
-    private var activeComparison: Co2Comparison { comparison ?? (Settings.co2Choices.contains(settings.co2Comparison) ? settings.co2Comparison : .car1) }
+    private var activeComparison: Co2Comparison { Settings.co2Choices.contains(settings.co2Comparison) ? settings.co2Comparison : .car1 }
 
     var body: some View {
         Page {
@@ -61,6 +62,8 @@ struct PassportScreen: View {
     private func load() async {
         do {
             data = try await app.client.passport(year: year, commuter: settings.includeCommuter, comparison: activeComparison)
+            store.data = data
+            store.year = year
             failed = false
         } catch {
             if data == nil { failed = true }
@@ -72,14 +75,7 @@ struct PassportScreen: View {
     @ViewBuilder
     private func content(_ data: Passport) -> some View {
         // The year chips scroll away with the page (owner, 2026-10-25: no bar following you down).
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ChipButton(text: l10n.t("passport.allTime"), active: year == nil) { year = nil }
-                ForEach(data.years, id: \.self) { y in ChipButton(text: String(y), active: year == y) { year = y } }
-            }
-            .padding(.horizontal, 16)
-        }
-        .padding(.horizontal, -16)
+        YearChips(years: data.years, year: $year).padding(.horizontal, -16)
         Group {
             if !data.review.isEmpty {
                 Button {
@@ -104,19 +100,14 @@ struct PassportScreen: View {
     private func welcoming(_ data: Passport) -> some View {
         VStack(spacing: 16) {
             Text(l10n.t("passport.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
-            if !data.milestones.next.isEmpty {
-                HStack(alignment: .top, spacing: 8) {
-                    ForEach(Array(data.milestones.next.prefix(3).enumerated()), id: \.offset) { _, milestone in
-                        let label = l10n.milestoneLabel(milestone, language: settings.language, home: data.home)
-                        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded())), "target": String(Int(milestone.target))])
-                        VStack(spacing: 4) {
-                            Medal(m: milestone, locked: true, size: 80)
-                            Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
-                            Text(progress).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .top)
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(label): \(progress)")
+            // The nearest medal is the hero, with its track and a first hair of yellow; the other two sit smaller
+            // (designer, 2026-11-07: three grey medals read as locked content, not a starting line).
+            if let hero = data.milestones.next.first {
+                goal(hero, data, size: 112, titleRole: .rowTitle)
+                let others = Array(data.milestones.next.dropFirst().prefix(2))
+                if !others.isEmpty {
+                    HStack(alignment: .top, spacing: 8) {
+                        ForEach(Array(others.enumerated()), id: \.offset) { _, milestone in goal(milestone, data, size: 72, titleRole: .caption) }
                     }
                 }
             }
@@ -128,6 +119,20 @@ struct PassportScreen: View {
             .frame(maxWidth: 320)
         }
         .frame(maxWidth: .infinity).padding(.top, 32)
+    }
+
+    /// A medal still to earn, with its name and how far along it is.
+    private func goal(_ milestone: Milestone, _ data: Passport, size: CGFloat, titleRole: TextRole) -> some View {
+        let label = l10n.milestoneLabel(milestone, language: settings.language, home: data.home)
+        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded())), "target": String(Int(milestone.target))])
+        return VStack(spacing: 4) {
+            Medal(m: milestone, locked: true, size: size)
+            Text(label).clack(titleRole).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+            Text(progress).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+        }
+        .frame(maxWidth: .infinity, alignment: .top)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(label): \(progress)")
     }
 
     /// While there are only a few journeys: the nearest medal and how far there is to go.
@@ -153,43 +158,44 @@ struct PassportScreen: View {
         }
     }
 
+    /// The page as a few cards (owner, 2026-11-07, Flighty's way): the cover opens the breakdown, the map opens full
+    /// screen, the milestones open every level; delays and CO₂ stay as they are. Collections and records live in the
+    /// breakdown.
     @ViewBuilder
     private func full(_ data: Passport) -> some View {
-        let ops = data.refs.operators
         VStack(alignment: .leading, spacing: 16) {
-            PassportCard(data: data, year: year, flavorIndex: $flavorIndex)
+            NavigationLink(value: AppRoute.passportBreakdown) {
+                PassportCard(data: data, year: year, flavorIndex: $flavorIndex)
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint(l10n.t("passport.breakdownHint"))
             if PassportLogic.stage(journeys: data.totals.journeys) == .starting { upNext(data) }
-            MultiRouteMapView(
-                routes: data.map.map { m in
-                    MultiRoute(
-                        color: MapStyle.opColor(m.operatorId.flatMap { ops[$0]?.brandColor }, dark: app.colorScheme != .light),
-                        geometry: m.geometry, stops: m.stops.compactMap { $0.count == 2 ? LatLon($0[0], $0[1]) : nil }
-                    )
-                },
-                stations: data.stations.map { MultiStation(lat: $0.lat, lon: $0.lon, name: $0.name, count: $0.count) },
-                railNetwork: settings.showRailNetwork, label: l10n.t("passport.mapLabel", count: data.totals.trains)
-            )
-            .frame(height: 280)
-            .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-            .hairlineBorder(radius: Radius.card)
+            Button { mapOpen = true } label: {
+                MultiRouteMapView(
+                    routes: PassportMap.routes(data, dark: app.colorScheme != .light), stations: PassportMap.stations(data),
+                    railNetwork: settings.showRailNetwork, label: l10n.t("passport.mapLabel", count: data.totals.trains), heat: true
+                )
+                .frame(height: 280)
+                .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                .hairlineBorder(radius: Radius.card)
+                .overlay(alignment: .topTrailing) {
+                    MapButtonFace(icon: "maximize-2").padding(8).allowsHitTesting(false)
+                }
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(l10n.t("passport.mapLabel", count: data.totals.trains))
+            .accessibilityHint(l10n.t("passport.mapOpenHint"))
 
             MilestonesCard(data: data)
-
-            groupTitle(l10n.t("passport.collections"))
-            CollectionsCard(data: data)
-
-            groupTitle(l10n.t("passport.records"))
-            if PassportLogic.showsRecords(journeys: data.totals.journeys) {
-                Card {
-                    records(data)
-                }
-            } else {
-                Text(l10n.t("passport.recordsSoon")).clack(.body).foregroundStyle(Ink.text2)
-            }
 
             groupTitle(l10n.t("passport.moreStats"))
             delaysCard(data)
             co2Card(data)
+        }
+        .fullScreenCover(isPresented: $mapOpen) {
+            PassportMapScreen(year: $year)
+                .environment(app).environment(app.l10n).environment(store)
+                .preferredColorScheme(app.colorScheme)
         }
     }
 
@@ -198,35 +204,6 @@ struct PassportScreen: View {
     }
 
     // MARK: records and statistics
-
-    private func records(_ data: Passport) -> some View {
-        let r = data.records
-        let unit = settings.distanceUnit
-        let lang = settings.language
-        return LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12, alignment: .top)], spacing: 12) {
-            if let leg = r.longestDistance {
-                RecordTile(label: l10n.t("passport.longestTrip"), value: Format.distance(leg.distanceM, unit: unit, language: lang), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
-            }
-            if let leg = r.longestDuration {
-                RecordTile(label: l10n.t("passport.longestTime"), value: Format.duration(leg.minutes), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
-            }
-            if let leg = r.biggestDelay {
-                RecordTile(label: l10n.t("passport.biggestDelay"), value: l10n.t("passport.minutesLate", count: leg.delayMin ?? 0), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
-            }
-            if let route = r.mostRiddenRoute {
-                RecordTile(label: l10n.t("passport.mostRidden"), value: route.route, sub: l10n.t("passport.timesCount", count: route.count), legId: nil)
-            }
-            if let station = r.busiestStation {
-                RecordTile(label: l10n.t("passport.busiestStation"), value: station.name, sub: l10n.t("passport.visitsCount", count: station.count), legId: nil)
-            }
-            if let leg = r.earliestDeparture {
-                RecordTile(label: l10n.t("passport.earliest"), value: Format.time(leg.dep.ms, tz: Format.zone(leg.depTz), clock: settings.clock), sub: leg.from, legId: leg.legId)
-            }
-            if let leg = r.latestArrival {
-                RecordTile(label: l10n.t("passport.latest"), value: Format.time(leg.arr.ms, tz: Format.zone(leg.arrTz), clock: settings.clock), sub: leg.to, legId: leg.legId)
-            }
-        }
-    }
 
     private func delaysCard(_ data: Passport) -> some View {
         let d = data.delays
@@ -281,9 +258,9 @@ struct PassportScreen: View {
             Text(l10n.t("passport.co2")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             (Text(grouped(c.savedKg)) + Text(" kg").font(TextRole.bigUnit.font).foregroundStyle(Ink.text2)).clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
             Text(l10n.t("passport.co2Saved", ["mode": mode])).clack(.caption).foregroundStyle(Ink.text2)
-            // Flying or a petrol car (owner feedback 2026-10-21).
+            // Flying or a petrol car (owner feedback 2026-10-21); the same setting as in Settings, saved (2026-11-07).
             SegmentedControl(
-                selection: Binding(get: { activeComparison }, set: { comparison = $0 }),
+                selection: Binding(get: { activeComparison }, set: { value in Task { await app.update(SettingsPatch(co2Comparison: value)) } }),
                 options: Settings.co2Choices.map { ($0, $0 == .flight ? l10n.t("passport.co2Flying") : l10n.t("passport.co2Car")) }, small: true
             )
             (Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? String(format: "%.1f", c.trainKg) : String(Int(c.trainKg.rounded())), "other": grouped(c.comparisonKg), "mode": mode]) + " ")
@@ -298,19 +275,6 @@ struct PassportScreen: View {
 }
 
 // MARK: pieces
-
-private struct RecordTile: View {
-    @Environment(L10n.self) private var l10n
-    let label: String
-    let value: String
-    let sub: String?
-    let legId: String?
-
-    var body: some View {
-        let body = Tile(label: label, value: value, sub: sub)
-        if let legId { NavigationLink(value: AppRoute.trip(legId)) { body }.buttonStyle(.plain) } else { body }
-    }
-}
 
 /// Horizontal bars: a label with its count and distance, and a track filled in proportion to the largest row.
 struct Bars<Lead: View>: View {
@@ -346,14 +310,13 @@ struct Bars<Lead: View>: View {
     }
 }
 
-/// Milestones: achieved medals (the newest six, or all), and the next ones to go for, greyed with a ring showing how far
-/// along you are.
+/// Milestones: the newest six medals and the next ones to go for, greyed with a ring showing how far along you are;
+/// every level, earned and not, is on its own screen (owner, 2026-11-07).
 private struct MilestonesCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let data: Passport
-    @State private var all = false
     @State private var shown = false
     /// Room for a two-line title under every medal (two caption lines, 18 pt each), so a medal whose title wraps sits
     /// at the same height as its neighbours (owner, 2026-10-24).
@@ -368,7 +331,7 @@ private struct MilestonesCard: View {
             Text(l10n.t("passport.milestones")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if !achieved.isEmpty {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(Array(achieved.prefix(all ? achieved.count : 6).enumerated()), id: \.offset) { index, milestone in
+                    ForEach(Array(achieved.prefix(6).enumerated()), id: \.offset) { index, milestone in
                         let label = l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home)
                         let tile = VStack(spacing: 2) {
                             Medal(m: milestone)
@@ -381,9 +344,11 @@ private struct MilestonesCard: View {
                     }
                 }
             }
-            if achieved.count > 6 {
-                Button(all ? l10n.t("passport.showFewer") : l10n.t("passport.showAllMilestones", count: achieved.count)) { all.toggle() }.buttonStyle(LinkButtonStyle())
+            let total = PassportLogic.ladder(data.milestones).reduce(0) { $0 + $1.rungs.count }
+            NavigationLink(value: AppRoute.passportMilestones) {
+                Text("\(l10n.t("passport.allMilestones")) · \(l10n.t("passport.earnedOf", ["earned": String(achieved.count), "total": String(total)]))")
             }
+            .buttonStyle(LinkButtonStyle())
             if !next.isEmpty {
                 Text(l10n.t("passport.nextMilestones")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 LazyVGrid(columns: columns, spacing: 16) {

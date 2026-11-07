@@ -219,13 +219,17 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
         public var to: String
         public var train: String
         public var canceled: Bool
+        /// Cancelled, with a bus instead (owner, 2026-11-07: the widget hid cancelled and replaced trains).
+        public var replacedByBus: Bool
+        /// The platform it was first announced on, when it has changed.
+        public var platformFrom: String?
 
         /// When it leaves as best known: the expected time, else the timetable.
         public var leaves: Double { expected ?? time }
 
         public init(
             id: String, time: Double, expected: Double? = nil, delayMin: Int? = nil, platform: String? = nil, to: String, train: String,
-            canceled: Bool
+            canceled: Bool, replacedByBus: Bool = false, platformFrom: String? = nil
         ) {
             self.id = id
             self.time = time
@@ -235,6 +239,25 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
             self.to = to
             self.train = train
             self.canceled = canceled
+            self.replacedByBus = replacedByBus
+            self.platformFrom = platformFrom
+        }
+
+        private enum Keys: String, CodingKey { case id, time, expected, delayMin, platform, to, train, canceled, replacedByBus, platformFrom }
+
+        /// A snapshot saved before the bus and platform-change fields existed still loads.
+        public init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: Keys.self)
+            id = try c.decode(String.self, forKey: .id)
+            time = try c.decode(Double.self, forKey: .time)
+            expected = try c.decodeIfPresent(Double.self, forKey: .expected)
+            delayMin = try c.decodeIfPresent(Int.self, forKey: .delayMin)
+            platform = try c.decodeIfPresent(String.self, forKey: .platform)
+            to = try c.decode(String.self, forKey: .to)
+            train = try c.decode(String.self, forKey: .train)
+            canceled = try c.decode(Bool.self, forKey: .canceled)
+            replacedByBus = try c.decodeIfPresent(Bool.self, forKey: .replacedByBus) ?? false
+            platformFrom = try c.decodeIfPresent(String.self, forKey: .platformFrom)
         }
     }
 

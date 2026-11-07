@@ -1,9 +1,9 @@
 {
-  "_comment": "The one table behind delay causes in the app and the server (task: causes in the selected language). trv: Trafikverket announcement codes (TrainAnnouncement.Deviation[].Code) -> locale key cause.<slug>; trvText: Trafikverket texts that have no code in the list; dt: Digitraffic cause codes (category A, detailed A1, third A101) -> key, null when no honest short translation exists (the resolver then uses the parent code, then shows the Finnish name). kind: cause (says why a train is late) or notice (carriage, platform or service note, not a reason). verified: false = the en/sv wording in packages/shared/locales is ours and not yet reviewed; Trafikverket's own Swedish text (sv) is theirs. Read by packages/shared/src/delayCauses.ts and ClackCore/Logic/DelayCauses.swift (copied by scripts/ios/sync_assets.py).",
+  "_comment": "The one table behind delay causes in the app and the server (task: causes in the selected language). trv: Trafikverket announcement codes (TrainAnnouncement.Deviation[].Code) -> locale key cause.<slug>; trvText: Trafikverket texts that have no code in the list; dt: Digitraffic cause codes (category A, detailed A1, third A101) -> key, null when no honest short translation exists (the resolver then uses the parent code, then shows the Finnish name). kind: cause (says why a train is late) or notice (carriage, platform or service note, not a reason). verified: true = the en/sv wording in the String Catalog was checked against the official text (_official, from _source) on 2026-11-07; false = no official text exists (_note). Trafikverket's own Swedish text (sv) is theirs. Read by packages/shared/src/delayCauses.ts and ClackCore/Logic/DelayCauses.swift (copied by scripts/ios/sync_assets.py).",
   "_source": {
-    "trv": "Trafikverket Open API, object type ReasonCode (group Annonseringstexter, non-deleted ANA001-ANA155), Level3Description is the announced Swedish text; fetched 2026-10-24. ANA066 (Test) and ANA099 ({Fritext}) are left out; ANA200 and up are bus-stop and gate names, not causes. The \"Orsaker nya principer\" group (IBT01, JVA01 ...) is the planners' internal cause tree and is never announced, so it is not mapped.",
+    "trv": "Trafikverket Open API, object type ReasonCode (group Annonseringstexter, non-deleted ANA001-ANA155), Level3Description is the announced Swedish text; fetched 2026-10-24. ANA066 (Test) and ANA099 ({Fritext}) are left out; ANA200 and up are bus-stop and gate names, not causes. The \"Orsaker nya principer\" group (IBT01, JVA01 ...) is the planners' internal cause tree and is never announced, so it is not mapped. Re-fetched 2026-11-07: the 81 codes and texts are unchanged.",
     "trvText": "The earlier hard-coded table in the app: texts without a code in the ReasonCode list.",
-    "dt": "Digitraffic metadata cause-category-codes, detailed-cause-category-codes and third-cause-category-codes (https://rata.digitraffic.fi/api/v1/metadata/...); the Finnish names (fi) are theirs, only in Finnish. All en/sv wording is a translation by Clack and is unverified."
+    "dt": "Digitraffic metadata cause-category-codes, detailed-cause-category-codes and third-cause-category-codes (https://rata.digitraffic.fi/api/v1/metadata/...); the Finnish names (fi) are theirs, only in Finnish: the metadata carries no passengerTerm or other sv/en text (checked 2026-11-07). The en/sv wording is Clack's translation of the Finnish name, reviewed against it on 2026-11-07 (verified)."
   },
   "skippedTrv": {
     "ANA066": "Test",
@@ -14,519 +14,691 @@
       "key": "cause.routeChanged",
       "kind": "notice",
       "sv": "Ändrad väg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA001 Level3Description, fetched 2026-11-07",
+      "_official": "Ändrad väg"
     },
     "ANA002": {
       "key": "cause.rearTrain",
       "kind": "notice",
       "sv": "Bakre tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA002 Level3Description, fetched 2026-11-07",
+      "_official": "Bakre tåg"
     },
     "ANA003": {
       "key": "cause.engineeringWork",
       "kind": "cause",
       "sv": "Banarbete",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA003 Level3Description, fetched 2026-11-07",
+      "_official": "Banarbete"
     },
     "ANA004": {
       "key": "cause.bridgeFault",
       "kind": "cause",
       "sv": "Brofel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA004 Level3Description, fetched 2026-11-07",
+      "_official": "Brofel"
     },
     "ANA005": {
       "key": "cause.bridgeOpening",
       "kind": "cause",
       "sv": "Broöppning",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA005 Level3Description, fetched 2026-11-07",
+      "_official": "Broöppning"
     },
     "ANA006": {
       "key": "cause.bus",
       "kind": "notice",
       "sv": "Buss",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA006 Level3Description, fetched 2026-11-07",
+      "_official": "Buss"
     },
     "ANA007": {
       "key": "cause.busReplaces",
       "kind": "notice",
       "sv": "Buss ersätter",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA007 Level3Description, fetched 2026-11-07",
+      "_official": "Buss ersätter"
     },
     "ANA008": {
       "key": "cause.earliestDeparture",
       "kind": "notice",
       "sv": "Avg. tidigast",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA008 Level3Description, fetched 2026-11-07",
+      "_official": "Avg. tidigast"
     },
     "ANA010": {
       "key": "cause.directTrain",
       "kind": "notice",
       "sv": "Direkttåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA010 Level3Description, fetched 2026-11-07",
+      "_official": "Direkttåg"
     },
     "ANA011": {
       "key": "cause.animalsOnTrack",
       "kind": "cause",
       "sv": "Djur i spår",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA011 Level3Description, fetched 2026-11-07",
+      "_official": "Djur i spår"
     },
     "ANA012": {
       "key": "cause.doors2to13",
       "kind": "notice",
       "sv": "Dörr 2-13",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA012 Level3Description, fetched 2026-11-07",
+      "_official": "Dörr 2-13"
     },
     "ANA013": {
       "key": "cause.doors16to27",
       "kind": "notice",
       "sv": "Dörr 16-27",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA013 Level3Description, fetched 2026-11-07",
+      "_official": "Dörr 16-27"
     },
     "ANA015": {
       "key": "cause.powerFault",
       "kind": "cause",
       "sv": "Elfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA015 Level3Description, fetched 2026-11-07",
+      "_official": "Elfel"
     },
     "ANA016": {
       "key": "cause.doubleTrain",
       "kind": "notice",
       "sv": "Dubbeltåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA016 Level3Description, fetched 2026-11-07",
+      "_official": "Dubbeltåg"
     },
     "ANA017": {
       "key": "cause.extraStop",
       "kind": "cause",
       "sv": "Extra uppeh.",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA017 Level3Description, fetched 2026-11-07",
+      "_official": "Extra uppeh."
     },
     "ANA018": {
       "key": "cause.extraBus",
       "kind": "notice",
       "sv": "Extrabuss",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA018 Level3Description, fetched 2026-11-07",
+      "_official": "Extrabuss"
     },
     "ANA019": {
       "key": "cause.extraTrain",
       "kind": "notice",
       "sv": "Extratåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA019 Level3Description, fetched 2026-11-07",
+      "_official": "Extratåg"
     },
     "ANA020": {
       "key": "cause.direct",
       "kind": "notice",
       "sv": "Direkt",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA020 Level3Description, fetched 2026-11-07",
+      "_official": "Direkt"
     },
     "ANA021": {
       "key": "cause.illPassenger",
       "kind": "cause",
       "sv": "Sjukdomsfall",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA021 Level3Description, fetched 2026-11-07",
+      "_official": "Sjukdomsfall"
     },
     "ANA022": {
       "key": "cause.frontTrain",
       "kind": "notice",
       "sv": "Främre tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA022 Level3Description, fetched 2026-11-07",
+      "_official": "Främre tåg"
     },
     "ANA023": {
       "key": "cause.crossingFault",
       "kind": "cause",
       "sv": "Bomfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA023 Level3Description, fetched 2026-11-07",
+      "_official": "Bomfel"
     },
     "ANA026": {
       "key": "cause.innerTrain",
       "kind": "notice",
       "sv": "Inre tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA026 Level3Description, fetched 2026-11-07",
+      "_official": "Inre tåg"
     },
     "ANA027": {
       "key": "cause.canceled",
       "kind": "notice",
       "sv": "Inställt",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA027 Level3Description, fetched 2026-11-07",
+      "_official": "Inställt"
     },
     "ANA028": {
       "key": "cause.waitingForBus",
       "kind": "notice",
       "sv": "Inväntad buss",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA028 Level3Description, fetched 2026-11-07",
+      "_official": "Inväntad buss"
     },
     "ANA029": {
       "key": "cause.waitingForFerry",
       "kind": "notice",
       "sv": "Invänt. färja",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA029 Level3Description, fetched 2026-11-07",
+      "_official": "Invänt. färja"
     },
     "ANA030": {
       "key": "cause.waitingForTrain",
       "kind": "cause",
       "sv": "Inväntat tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA030 Level3Description, fetched 2026-11-07",
+      "_official": "Inväntat tåg"
     },
     "ANA031": {
       "key": "cause.shortTrain",
       "kind": "notice",
       "sv": "Kort tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA031 Level3Description, fetched 2026-11-07",
+      "_official": "Kort tåg"
     },
     "ANA032": {
       "key": "cause.incident",
       "kind": "cause",
       "sv": "Incident",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA032 Level3Description, fetched 2026-11-07",
+      "_official": "Incident"
     },
     "ANA033": {
       "key": "cause.vandalism",
       "kind": "cause",
       "sv": "Vandalism",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA033 Level3Description, fetched 2026-11-07",
+      "_official": "Vandalism"
     },
     "ANA034": {
       "key": "cause.vehicleFault",
       "kind": "cause",
       "sv": "Fordonsfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA034 Level3Description, fetched 2026-11-07",
+      "_official": "Fordonsfel"
     },
     "ANA035": {
       "key": "cause.changedTrainType",
       "kind": "notice",
       "sv": "Ändrad tågtyp",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA035 Level3Description, fetched 2026-11-07",
+      "_official": "Ändrad tågtyp"
     },
     "ANA036": {
       "key": "cause.waitingForTaxi",
       "kind": "notice",
       "sv": "Inväntad taxi",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA036 Level3Description, fetched 2026-11-07",
+      "_official": "Inväntad taxi"
     },
     "ANA037": {
       "key": "cause.weather",
       "kind": "cause",
       "sv": "Oväder",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA037 Level3Description, fetched 2026-11-07",
+      "_official": "Oväder"
     },
     "ANA039": {
       "key": "cause.nextDeparture",
       "kind": "notice",
       "sv": "Nästa avgång",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA039 Level3Description, fetched 2026-11-07",
+      "_official": "Nästa avgång"
     },
     "ANA040": {
       "key": "cause.peopleOnTrack",
       "kind": "cause",
       "sv": "Obeh. i spår",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA040 Level3Description, fetched 2026-11-07",
+      "_official": "Obeh. i spår"
     },
     "ANA041": {
       "key": "cause.accident",
       "kind": "cause",
       "sv": "Olycka",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA041 Level3Description, fetched 2026-11-07",
+      "_official": "Olycka"
     },
     "ANA043": {
       "key": "cause.borderControl",
       "kind": "cause",
       "sv": "Passkontroll",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA043 Level3Description, fetched 2026-11-07",
+      "_official": "Passkontroll"
     },
     "ANA044": {
       "key": "cause.crewChange",
       "kind": "cause",
       "sv": "Personalbyte",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA044 Level3Description, fetched 2026-11-07",
+      "_official": "Personalbyte"
     },
     "ANA046": {
       "key": "cause.provisionalTime",
       "kind": "notice",
       "sv": "Prel. tid",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA046 Level3Description, fetched 2026-11-07",
+      "_official": "Prel. tid"
     },
     "ANA047": {
       "key": "cause.sabotage",
       "kind": "cause",
       "sv": "Sabotage",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA047 Level3Description, fetched 2026-11-07",
+      "_official": "Sabotage"
     },
     "ANA048": {
       "key": "cause.seeInfo",
       "kind": "notice",
       "sv": "Se info!",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA048 Level3Description, fetched 2026-11-07",
+      "_official": "Se info!"
     },
     "ANA050": {
       "key": "cause.signalFault",
       "kind": "cause",
       "sv": "Signalfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA050 Level3Description, fetched 2026-11-07",
+      "_official": "Signalfel"
     },
     "ANA051": {
       "key": "cause.snowIce",
       "kind": "cause",
       "sv": "Snö/Is",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA051 Level3Description, fetched 2026-11-07",
+      "_official": "Snö/Is"
     },
     "ANA052": {
       "key": "cause.summerTime",
       "kind": "notice",
       "sv": "Sommartid",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA052 Level3Description, fetched 2026-11-07",
+      "_official": "Sommartid"
     },
     "ANA053": {
       "key": "cause.trackFault",
       "kind": "cause",
       "sv": "Spårfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA053 Level3Description, fetched 2026-11-07",
+      "_official": "Spårfel"
     },
     "ANA054": {
       "key": "cause.slipperyRails",
       "kind": "cause",
       "sv": "Spårhalka",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA054 Level3Description, fetched 2026-11-07",
+      "_official": "Spårhalka"
     },
     "ANA055": {
       "key": "cause.platformChanged",
       "kind": "notice",
       "sv": "Spårändrat",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA055 Level3Description, fetched 2026-11-07",
+      "_official": "Spårändrat"
     },
     "ANA056": {
       "key": "cause.slTrainReplaces",
       "kind": "notice",
       "sv": "SL-tåg ers",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA056 Level3Description, fetched 2026-11-07",
+      "_official": "SL-tåg ers"
     },
     "ANA057": {
       "key": "cause.taxi",
       "kind": "notice",
       "sv": "Taxi",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA057 Level3Description, fetched 2026-11-07",
+      "_official": "Taxi"
     },
     "ANA058": {
       "key": "cause.taxiReplaces",
       "kind": "notice",
       "sv": "Taxi ersätter",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA058 Level3Description, fetched 2026-11-07",
+      "_official": "Taxi ersätter"
     },
     "ANA059": {
       "key": "cause.technicalFault",
       "kind": "cause",
       "sv": "Tekniskt fel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA059 Level3Description, fetched 2026-11-07",
+      "_official": "Tekniskt fel"
     },
     "ANA060": {
       "key": "cause.earlyArrival",
       "kind": "notice",
       "sv": "Tidig ankomst",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA060 Level3Description, fetched 2026-11-07",
+      "_official": "Tidig ankomst"
     },
     "ANA061": {
       "key": "cause.safetyIncident",
       "kind": "cause",
       "sv": "Tillbud",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA061 Level3Description, fetched 2026-11-07",
+      "_official": "Tillbud"
     },
     "ANA063": {
       "key": "cause.trainQueue",
       "kind": "cause",
       "sv": "Tågkö",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA063 Level3Description, fetched 2026-11-07",
+      "_official": "Tågkö"
     },
     "ANA064": {
       "key": "cause.trainMeeting",
       "kind": "cause",
       "sv": "Tågmöte",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA064 Level3Description, fetched 2026-11-07",
+      "_official": "Tågmöte"
     },
     "ANA065": {
       "key": "cause.lateTurnaround",
       "kind": "cause",
       "sv": "Sen tågvänd.",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA065 Level3Description, fetched 2026-11-07",
+      "_official": "Sen tågvänd."
     },
     "ANA068": {
       "key": "cause.vehicleShortage",
       "kind": "cause",
       "sv": "Vagnbrist",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA068 Level3Description, fetched 2026-11-07",
+      "_official": "Vagnbrist"
     },
     "ANA070": {
       "key": "cause.winterTime",
       "kind": "notice",
       "sv": "Vintertid",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA070 Level3Description, fetched 2026-11-07",
+      "_official": "Vintertid"
     },
     "ANA071": {
       "key": "cause.pointsFault",
       "kind": "cause",
       "sv": "Växelfel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA071 Level3Description, fetched 2026-11-07",
+      "_official": "Växelfel"
     },
     "ANA073": {
       "key": "cause.outerTrain",
       "kind": "notice",
       "sv": "Yttre tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA073 Level3Description, fetched 2026-11-07",
+      "_official": "Yttre tåg"
     },
     "ANA074": {
       "key": "cause.alsoBus",
       "kind": "notice",
       "sv": "Även buss",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA074 Level3Description, fetched 2026-11-07",
+      "_official": "Även buss"
     },
     "ANA075": {
       "key": "cause.awaitInfo",
       "kind": "notice",
       "sv": "Invänta info",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA075 Level3Description, fetched 2026-11-07",
+      "_official": "Invänta info"
     },
     "ANA076": {
       "key": "cause.localBus",
       "kind": "notice",
       "sv": "Lokalbuss",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA076 Level3Description, fetched 2026-11-07",
+      "_official": "Lokalbuss"
     },
     "ANA077": {
       "key": "cause.localTransport",
       "kind": "notice",
       "sv": "Lokaltrafiken",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA077 Level3Description, fetched 2026-11-07",
+      "_official": "Lokaltrafiken"
     },
     "ANA078": {
       "key": "cause.backInService",
       "kind": "notice",
       "sv": "Åter i trafik",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA078 Level3Description, fetched 2026-11-07",
+      "_official": "Åter i trafik"
     },
     "ANA079": {
       "key": "cause.noBicycles",
       "kind": "notice",
       "sv": "Ej cykel",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA079 Level3Description, fetched 2026-11-07",
+      "_official": "Ej cykel"
     },
     "ANA080": {
       "key": "cause.fire",
       "kind": "cause",
       "sv": "Brand",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA080 Level3Description, fetched 2026-11-07",
+      "_official": "Brand"
     },
     "ANA081": {
       "key": "cause.testTrain",
       "kind": "notice",
       "sv": "Provtåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA081 Level3Description, fetched 2026-11-07",
+      "_official": "Provtåg"
     },
     "ANA082": {
       "key": "cause.wildlifeAccident",
       "kind": "cause",
       "sv": "Viltolycka",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA082 Level3Description, fetched 2026-11-07",
+      "_official": "Viltolycka"
     },
     "ANA083": {
       "key": "cause.noCatering",
       "kind": "notice",
       "sv": "Ej servering",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA083 Level3Description, fetched 2026-11-07",
+      "_official": "Ej servering"
     },
     "ANA084": {
       "key": "cause.policeOperation",
       "kind": "cause",
       "sv": "Polisinsats",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA084 Level3Description, fetched 2026-11-07",
+      "_official": "Polisinsats"
     },
     "ANA085": {
       "key": "cause.cafeOffer",
       "kind": "notice",
       "sv": "Kaféutbud",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA085 Level3Description, fetched 2026-11-07",
+      "_official": "Kaféutbud"
     },
     "ANA086": {
       "key": "cause.awaitPlatform",
       "kind": "notice",
       "sv": "Invänta spår",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA086 Level3Description, fetched 2026-11-07",
+      "_official": "Invänta spår"
     },
     "ANA087": {
       "key": "cause.shortTrain",
       "kind": "notice",
       "sv": "Kort tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA087 Level3Description, fetched 2026-11-07",
+      "_official": "Kort tåg"
     },
     "ANA088": {
       "key": "cause.awaitTime",
       "kind": "notice",
       "sv": "Invänta tid",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA088 Level3Description, fetched 2026-11-07",
+      "_official": "Invänta tid"
     },
     "ANA089": {
       "key": "cause.tram",
       "kind": "notice",
       "sv": "Spårvagn",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA089 Level3Description, fetched 2026-11-07",
+      "_official": "Spårvagn"
     },
     "ANA090": {
       "key": "cause.fullTrain",
       "kind": "notice",
       "sv": "Fullsatt tåg",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA090 Level3Description, fetched 2026-11-07",
+      "_official": "Fullsatt tåg"
     },
     "ANA091": {
       "key": "cause.crowdingRisk",
       "kind": "notice",
       "sv": "Trängselrisk",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA091 Level3Description, fetched 2026-11-07",
+      "_official": "Trängselrisk"
     },
     "ANA092": {
       "key": "cause.busOrTaxi",
       "kind": "notice",
       "sv": "Buss/Taxi",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA092 Level3Description, fetched 2026-11-07",
+      "_official": "Buss/Taxi"
     },
     "ANA093": {
       "key": "cause.noToilet",
       "kind": "notice",
       "sv": "Ej toalett",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA093 Level3Description, fetched 2026-11-07",
+      "_official": "Ej toalett"
     },
     "ANA155": {
       "key": "cause.platformChange",
       "kind": "notice",
       "sv": "Plattformsbyte",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA155 Level3Description, fetched 2026-11-07",
+      "_official": "Plattformsbyte"
     }
   },
   "trvText": {
     "Kontaktledningsfel": {
       "key": "cause.overheadLineFault",
       "kind": "cause",
-      "verified": false
+      "verified": false,
+      "_note": "no official text: not in the ReasonCode announcement texts (Annonseringstexter), checked 2026-11-07"
     },
     "Spårfel": {
       "key": "cause.trackFault",
       "kind": "cause",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA053 Level3Description, fetched 2026-11-07",
+      "_official": "Spårfel"
     },
     "Obeh. i spår": {
       "key": "cause.peopleOnTrack",
       "kind": "cause",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA040 Level3Description, fetched 2026-11-07",
+      "_official": "Obeh. i spår"
     },
     "Sen tågvänd.": {
       "key": "cause.lateTurnaround",
       "kind": "cause",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA065 Level3Description, fetched 2026-11-07",
+      "_official": "Sen tågvänd."
     },
     "Personalbrist": {
       "key": "cause.staffShortage",
       "kind": "cause",
-      "verified": false
+      "verified": false,
+      "_note": "no official text: not in the ReasonCode announcement texts (Annonseringstexter), checked 2026-11-07; \"Akut personalbrist\" exists only in the planners' internal tree (DPS02-DPS05), which is never announced"
     },
     "Spårhalka": {
       "key": "cause.slipperyRails",
       "kind": "cause",
-      "verified": false
+      "verified": true,
+      "_source": "https://api.trafikinfo.trafikverket.se/v2/data.json ReasonCode ANA054 Level3Description, fetched 2026-11-07",
+      "_official": "Spårhalka"
     }
   },
   "dt": {
@@ -535,69 +707,95 @@
       "key": null
     },
     "E": {
-      "fi": "Etuajassakulku",
       "key": "cause.ranEarly",
-      "verified": false
+      "fi": "Etuajassakulku",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes E, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Etuajassakulku"
     },
     "H": {
-      "fi": "Henkilökunta",
       "key": "cause.staffIssue",
-      "verified": false
+      "fi": "Henkilökunta",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes H, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Henkilökunta"
     },
     "I": {
-      "fi": "Muut syyt",
       "key": "cause.otherReason",
-      "verified": false
+      "fi": "Muut syyt",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes I, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Muut syyt"
     },
     "J": {
-      "fi": "Junan muodostamisen viivästyminen",
       "key": "cause.trainFormation",
-      "verified": false
+      "fi": "Junan muodostamisen viivästyminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes J, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junan muodostamisen viivästyminen"
     },
     "K": {
-      "fi": "Kalusto, moottorijunat ja vaunut",
       "key": "cause.vehicleIssue",
-      "verified": false
+      "fi": "Kalusto, moottorijunat ja vaunut",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes K, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Kalusto, moottorijunat ja vaunut"
     },
     "L": {
-      "fi": "Liikenteenhoito",
       "key": "cause.trafficControl",
-      "verified": false
+      "fi": "Liikenteenhoito",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes L, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenteenhoito"
     },
     "M": {
-      "fi": "Matkustajapalvelu",
       "key": "cause.passengerService",
-      "verified": false
+      "fi": "Matkustajapalvelu",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes M, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajapalvelu"
     },
     "O": {
-      "fi": "Onnettomuus",
       "key": "cause.accident",
-      "verified": false
+      "fi": "Onnettomuus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes O, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Onnettomuus"
     },
     "P": {
-      "fi": "Liikenteenhoitojärjestelmät",
       "key": "cause.systemFault",
-      "verified": false
+      "fi": "Liikenteenhoitojärjestelmät",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes P, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenteenhoitojärjestelmät"
     },
     "R": {
-      "fi": "Ratatyö",
       "key": "cause.engineeringWork",
-      "verified": false
+      "fi": "Ratatyö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes R, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ratatyö"
     },
     "S": {
-      "fi": "Sähkörata",
       "key": "cause.powerFault",
-      "verified": false
+      "fi": "Sähkörata",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes S, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Sähkörata"
     },
     "T": {
-      "fi": "Rata (ratarakenne)",
       "key": "cause.trackFault",
-      "verified": false
+      "fi": "Rata (ratarakenne)",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes T, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Rata (ratarakenne)"
     },
     "V": {
-      "fi": "Vetokalusto",
       "key": "cause.locomotiveIssue",
-      "verified": false
+      "fi": "Vetokalusto",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/cause-category-codes V, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Vetokalusto"
     },
     "X": {
       "fi": "Rataliikennekeskukselle ilmoitettavat syyt",
@@ -608,57 +806,75 @@
       "key": null
     },
     "A2": {
-      "fi": "Aikataulutekninen syy",
       "key": "cause.timetableReason",
-      "verified": false
+      "fi": "Aikataulutekninen syy",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes A2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Aikataulutekninen syy"
     },
     "A3": {
-      "fi": "Junaa ei ole ajettu",
       "key": "cause.notRun",
-      "verified": false
+      "fi": "Junaa ei ole ajettu",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes A3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junaa ei ole ajettu"
     },
     "E1": {
-      "fi": "Etuajassa lähtö",
       "key": "cause.earlyDeparture",
-      "verified": false
+      "fi": "Etuajassa lähtö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes E1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Etuajassa lähtö"
     },
     "E2": {
       "fi": "Ajo- tai pysähtymisajan alitus",
       "key": null
     },
     "I1": {
-      "fi": "Poikkeukselliset sääolosuhteet",
       "key": "cause.weather",
-      "verified": false
+      "fi": "Poikkeukselliset sääolosuhteet",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes I1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Poikkeukselliset sääolosuhteet"
     },
     "I2": {
-      "fi": "Lehtikeli tai muu liukkaus",
       "key": "cause.slipperyRails",
-      "verified": false
+      "fi": "Lehtikeli tai muu liukkaus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes I2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Lehtikeli tai muu liukkaus"
     },
     "I3": {
-      "fi": "Ilkivalta, asiaton radalla liikkuminen",
       "key": "cause.vandalismOrTrespass",
-      "verified": false
+      "fi": "Ilkivalta, asiaton radalla liikkuminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes I3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ilkivalta, asiaton radalla liikkuminen"
     },
     "I4": {
-      "fi": "Muu syy",
       "key": "cause.otherReason",
-      "verified": false
+      "fi": "Muu syy",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes I4, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Muu syy"
     },
     "J1": {
       "fi": "Junan muodostamisen viivästyminen (kaikki liikenne)",
       "key": null
     },
     "K1": {
-      "fi": "Kalustopula",
       "key": "cause.vehicleShortage",
-      "verified": false
+      "fi": "Kalustopula",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes K1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Kalustopula"
     },
     "K2": {
-      "fi": "Kalustovika",
       "key": "cause.vehicleFault",
-      "verified": false
+      "fi": "Kalustovika",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes K2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Kalustovika"
     },
     "K3": {
       "fi": "Kalustosta johtuva nopeuden alennus",
@@ -677,148 +893,204 @@
       "key": null
     },
     "L1": {
-      "fi": "Yhteysliikenteen odotus (jatkoyhteydet)",
       "key": "cause.waitingForConnection",
-      "verified": false
+      "fi": "Yhteysliikenteen odotus (jatkoyhteydet)",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Yhteysliikenteen odotus (jatkoyhteydet)"
     },
     "L2": {
-      "fi": "Junakohtaus, edellä kulkeva juna tai ohitus",
       "key": "cause.otherTrains",
-      "verified": false
+      "fi": "Junakohtaus, edellä kulkeva juna tai ohitus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junakohtaus, edellä kulkeva juna tai ohitus"
     },
     "L3": {
-      "fi": "Konflikti kapasiteetissa",
       "key": "cause.capacityConflict",
-      "verified": false
+      "fi": "Konflikti kapasiteetissa",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Konflikti kapasiteetissa"
     },
     "L4": {
-      "fi": "Myöhästyminen ulkomailta",
       "key": "cause.lateFromAbroad",
-      "verified": false
+      "fi": "Myöhästyminen ulkomailta",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L4, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Myöhästyminen ulkomailta"
     },
     "L5": {
-      "fi": "Edessä oleva kalusto tukkii radan",
       "key": "cause.trainBlocking",
-      "verified": false
+      "fi": "Edessä oleva kalusto tukkii radan",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L5, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Edessä oleva kalusto tukkii radan"
     },
     "L6": {
-      "fi": "Junan lähtöön liittyvä odotus",
       "key": "cause.waitingToDepart",
-      "verified": false
+      "fi": "Junan lähtöön liittyvä odotus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L6, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junan lähtöön liittyvä odotus"
     },
     "L7": {
-      "fi": "Liikenteenhoidosta johtuva",
       "key": "cause.trafficControl",
-      "verified": false
+      "fi": "Liikenteenhoidosta johtuva",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L7, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenteenhoidosta johtuva"
     },
     "L8": {
-      "fi": "Liikenteelliset päätökset",
       "key": "cause.trafficDecision",
-      "verified": false
+      "fi": "Liikenteelliset päätökset",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes L8, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenteelliset päätökset"
     },
     "M1": {
-      "fi": "Matkustajajunan pysähtymisajan ylitys",
       "key": "cause.longerStop",
-      "verified": false
+      "fi": "Matkustajajunan pysähtymisajan ylitys",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes M1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajajunan pysähtymisajan ylitys"
     },
     "M2": {
-      "fi": "Ylimääräinen pysähdys",
       "key": "cause.extraStop",
-      "verified": false
+      "fi": "Ylimääräinen pysähdys",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes M2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ylimääräinen pysähdys"
     },
     "O1": {
-      "fi": "Henkilövahinko",
       "key": "cause.personInjury",
-      "verified": false
+      "fi": "Henkilövahinko",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes O1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Henkilövahinko"
     },
     "O2": {
-      "fi": "Eläinvahinko",
       "key": "cause.animalAccident",
-      "verified": false
+      "fi": "Eläinvahinko",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes O2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Eläinvahinko"
     },
     "O3": {
-      "fi": "Tasoristeysonnettomuus",
       "key": "cause.crossingAccident",
-      "verified": false
+      "fi": "Tasoristeysonnettomuus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes O3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tasoristeysonnettomuus"
     },
     "O4": {
-      "fi": "Muut onnettomuudet ja vauriot",
       "key": "cause.accident",
-      "verified": false
+      "fi": "Muut onnettomuudet ja vauriot",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes O4, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Muut onnettomuudet ja vauriot"
     },
     "P1": {
-      "fi": "Ratainfran laiteviat",
       "key": "cause.infrastructureFault",
-      "verified": false
+      "fi": "Ratainfran laiteviat",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes P1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ratainfran laiteviat"
     },
     "P2": {
-      "fi": "Tietojärjestelmä- ja päätelaiteviat",
       "key": "cause.itFault",
-      "verified": false
+      "fi": "Tietojärjestelmä- ja päätelaiteviat",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes P2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tietojärjestelmä- ja päätelaiteviat"
     },
     "P3": {
-      "fi": "Liikkuvan kaluston valvontalaitevika tai -häiriö",
       "key": "cause.monitoringFault",
-      "verified": false
+      "fi": "Liikkuvan kaluston valvontalaitevika tai -häiriö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes P3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikkuvan kaluston valvontalaitevika tai -häiriö"
     },
     "P4": {
-      "fi": "Viestintälaite /-yhteysviat",
       "key": "cause.commsFault",
-      "verified": false
+      "fi": "Viestintälaite /-yhteysviat",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes P4, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Viestintälaite /-yhteysviat"
     },
     "R1": {
-      "fi": "Ratatyöt (ennakoidut työt nopeusrajoituksineen)",
       "key": "cause.engineeringWork",
-      "verified": false
+      "fi": "Ratatyöt (ennakoidut työt nopeusrajoituksineen)",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes R1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ratatyöt (ennakoidut työt nopeusrajoituksineen)"
     },
     "R2": {
-      "fi": "Ratatyön sovitun ajan ylitys",
       "key": "cause.workOverran",
-      "verified": false
+      "fi": "Ratatyön sovitun ajan ylitys",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes R2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ratatyön sovitun ajan ylitys"
     },
     "R3": {
-      "fi": "Liikennerajoite ratatyön jälkeen",
       "key": "cause.workRestrictions",
-      "verified": false
+      "fi": "Liikennerajoite ratatyön jälkeen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes R3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikennerajoite ratatyön jälkeen"
     },
     "R4": {
       "fi": "Ratatyön toteutus poikkeaa suunnitellusta",
       "key": null
     },
     "S1": {
-      "fi": "Sähkönjakeluhäiriö",
       "key": "cause.powerFault",
-      "verified": false
+      "fi": "Sähkönjakeluhäiriö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes S1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Sähkönjakeluhäiriö"
     },
     "S2": {
-      "fi": "Sähköratavika",
       "key": "cause.overheadLineFault",
-      "verified": false
+      "fi": "Sähköratavika",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes S2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Sähköratavika"
     },
     "T1": {
-      "fi": "Tilapäiset nopeusrajoitukset",
       "key": "cause.speedRestriction",
-      "verified": false
+      "fi": "Tilapäiset nopeusrajoitukset",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes T1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tilapäiset nopeusrajoitukset"
     },
     "T2": {
-      "fi": "Liikenteenohjauksen asettamat nopeusrajoitukset (ratarakenne)",
       "key": "cause.speedRestriction",
-      "verified": false
+      "fi": "Liikenteenohjauksen asettamat nopeusrajoitukset (ratarakenne)",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes T2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenteenohjauksen asettamat nopeusrajoitukset (ratarakenne)"
     },
     "T3": {
-      "fi": "Ratarikko / este radalla",
       "key": "cause.trackFault",
-      "verified": false
+      "fi": "Ratarikko / este radalla",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes T3, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ratarikko / este radalla"
     },
     "V1": {
-      "fi": "Veturipula",
       "key": "cause.locomotiveShortage",
-      "verified": false
+      "fi": "Veturipula",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes V1, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Veturipula"
     },
     "V2": {
-      "fi": "Veturivika",
       "key": "cause.locomotiveFault",
-      "verified": false
+      "fi": "Veturivika",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/detailed-cause-category-codes V2, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Veturivika"
     },
     "V3": {
       "fi": "Vetovoimasta johtuva nopeuden alennus / tehon puute",
@@ -845,62 +1117,82 @@
       "key": null
     },
     "I301": {
-      "fi": "Ilkivalta, ratainfra",
       "key": "cause.vandalism",
-      "verified": false
+      "fi": "Ilkivalta, ratainfra",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes I301, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ilkivalta, ratainfra"
     },
     "I302": {
-      "fi": "Asiaton radalla liikkuminen",
       "key": "cause.peopleOnTrack",
-      "verified": false
+      "fi": "Asiaton radalla liikkuminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes I302, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Asiaton radalla liikkuminen"
     },
     "I303": {
-      "fi": "Eläin radalla",
       "key": "cause.animalsOnTrack",
-      "verified": false
+      "fi": "Eläin radalla",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes I303, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Eläin radalla"
     },
     "I304": {
-      "fi": "Viranomaistoiminta",
       "key": "cause.authorityAction",
-      "verified": false
+      "fi": "Viranomaistoiminta",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes I304, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Viranomaistoiminta"
     },
     "I305": {
-      "fi": "Ilkivalta, junakalusto",
       "key": "cause.vandalism",
-      "verified": false
+      "fi": "Ilkivalta, junakalusto",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes I305, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ilkivalta, junakalusto"
     },
     "L101": {
-      "fi": "Yhteysjunan odotus",
       "key": "cause.waitingForTrain",
-      "verified": false
+      "fi": "Yhteysjunan odotus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L101, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Yhteysjunan odotus"
     },
     "L102": {
       "fi": "Muu yhteysliikenteen odotus",
       "key": null
     },
     "L201": {
-      "fi": "Junakohtaus",
       "key": "cause.trainMeeting",
-      "verified": false
+      "fi": "Junakohtaus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L201, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junakohtaus"
     },
     "L202": {
-      "fi": "Toisen junan edelle päästäminen",
       "key": "cause.letOtherTrainPass",
-      "verified": false
+      "fi": "Toisen junan edelle päästäminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L202, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Toisen junan edelle päästäminen"
     },
     "L203": {
       "fi": "Edellä kulkevan junan ohitus",
       "key": null
     },
     "L204": {
-      "fi": "Edellä kulkeva juna",
       "key": "cause.trainAhead",
-      "verified": false
+      "fi": "Edellä kulkeva juna",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L204, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Edellä kulkeva juna"
     },
     "L301": {
-      "fi": "Tuloraide varattu",
       "key": "cause.trackOccupied",
-      "verified": false
+      "fi": "Tuloraide varattu",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L301, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tuloraide varattu"
     },
     "L302": {
       "fi": "Risteävät kulkutiet",
@@ -935,9 +1227,11 @@
       "key": null
     },
     "L601": {
-      "fi": "Odotetaan koko junaa sen edelliseltä matkalta",
       "key": "cause.lateTurnaround",
-      "verified": false
+      "fi": "Odotetaan koko junaa sen edelliseltä matkalta",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L601, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Odotetaan koko junaa sen edelliseltä matkalta"
     },
     "L602": {
       "fi": "Odotetaan yhdistettävää runkoa",
@@ -976,9 +1270,11 @@
       "key": null
     },
     "L703": {
-      "fi": "Liikenneohjaajan virhe",
       "key": "cause.trafficControl",
-      "verified": false
+      "fi": "Liikenneohjaajan virhe",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes L703, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Liikenneohjaajan virhe"
     },
     "L704": {
       "fi": "Määrittelyvirhe automatiikassa",
@@ -1001,43 +1297,57 @@
       "key": null
     },
     "M101": {
-      "fi": "Matkustajaruuhka",
       "key": "cause.crowding",
-      "verified": false
+      "fi": "Matkustajaruuhka",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M101, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajaruuhka"
     },
     "M102": {
-      "fi": "Matkustajan aiheuttama häiriö",
       "key": "cause.passengerDisturbance",
-      "verified": false
+      "fi": "Matkustajan aiheuttama häiriö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M102, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajan aiheuttama häiriö"
     },
     "M103": {
-      "fi": "Matkustajan loukkaantuminen tai sairaskohtaus",
       "key": "cause.passengerInjuredOrIll",
-      "verified": false
+      "fi": "Matkustajan loukkaantuminen tai sairaskohtaus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M103, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajan loukkaantuminen tai sairaskohtaus"
     },
     "M104": {
-      "fi": "Passi- ja tullitarkastus",
       "key": "cause.borderControl",
-      "verified": false
+      "fi": "Passi- ja tullitarkastus",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M104, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Passi- ja tullitarkastus"
     },
     "M105": {
       "fi": "Vankien kuormaus ja purku",
       "key": null
     },
     "M106": {
-      "fi": "Matkustajan avustaminen",
       "key": "cause.assistingPassenger",
-      "verified": false
+      "fi": "Matkustajan avustaminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M106, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajan avustaminen"
     },
     "M107": {
-      "fi": "Ovien sulkeminen",
       "key": "cause.closingDoors",
-      "verified": false
+      "fi": "Ovien sulkeminen",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M107, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Ovien sulkeminen"
     },
     "M108": {
-      "fi": "Matkustajien odotus raidemuutoksen vuoksi",
       "key": "cause.waitingPlatformChange",
-      "verified": false
+      "fi": "Matkustajien odotus raidemuutoksen vuoksi",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes M108, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Matkustajien odotus raidemuutoksen vuoksi"
     },
     "M109": {
       "fi": "Matkustajien odotus kalustomuutoksen vuoksi",
@@ -1052,24 +1362,32 @@
       "key": null
     },
     "O401": {
-      "fi": "Suistuminen ratapihalla",
       "key": "cause.derailment",
-      "verified": false
+      "fi": "Suistuminen ratapihalla",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes O401, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Suistuminen ratapihalla"
     },
     "O402": {
-      "fi": "Suistuminen linjalla",
       "key": "cause.derailment",
-      "verified": false
+      "fi": "Suistuminen linjalla",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes O402, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Suistuminen linjalla"
     },
     "O403": {
-      "fi": "Tulipalot, metsäpalot",
       "key": "cause.fire",
-      "verified": false
+      "fi": "Tulipalot, metsäpalot",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes O403, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tulipalot, metsäpalot"
     },
     "O404": {
-      "fi": "Junan törmäys muuhun kalustoon",
       "key": "cause.collision",
-      "verified": false
+      "fi": "Junan törmäys muuhun kalustoon",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes O404, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Junan törmäys muuhun kalustoon"
     },
     "O405": {
       "fi": "Muu onnettomuus",
@@ -1104,33 +1422,43 @@
       "key": null
     },
     "P108": {
-      "fi": "Opastin",
       "key": "cause.signalFault",
-      "verified": false
+      "fi": "Opastin",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes P108, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Opastin"
     },
     "P109": {
-      "fi": "Vaihde",
       "key": "cause.pointsFault",
-      "verified": false
+      "fi": "Vaihde",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes P109, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Vaihde"
     },
     "P110": {
-      "fi": "Tasoristeyslaitos",
       "key": "cause.crossingFault",
-      "verified": false
+      "fi": "Tasoristeyslaitos",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes P110, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Tasoristeyslaitos"
     },
     "P111": {
-      "fi": "Avattava silta",
       "key": "cause.bridgeFault",
-      "verified": false
+      "fi": "Avattava silta",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes P111, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Avattava silta"
     },
     "P112": {
       "fi": "Tiedonsiirto",
       "key": null
     },
     "P113": {
-      "fi": "Virransyöttö",
       "key": "cause.powerFault",
-      "verified": false
+      "fi": "Virransyöttö",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes P113, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Virransyöttö"
     },
     "P114": {
       "fi": "Laskumäkilaitteisto",
@@ -1293,19 +1621,25 @@
       "key": null
     },
     "T301": {
-      "fi": "Kiskoviat",
       "key": "cause.trackFault",
-      "verified": false
+      "fi": "Kiskoviat",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes T301, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Kiskoviat"
     },
     "T302": {
-      "fi": "Vika ratarakenteessa",
       "key": "cause.trackFault",
-      "verified": false
+      "fi": "Vika ratarakenteessa",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes T302, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Vika ratarakenteessa"
     },
     "T303": {
-      "fi": "Muu este (puu, lumieste tms. radalla)",
       "key": "cause.trackObstruction",
-      "verified": false
+      "fi": "Muu este (puu, lumieste tms. radalla)",
+      "verified": true,
+      "_source": "https://rata.digitraffic.fi/api/v1/metadata/third-cause-category-codes T303, fetched 2026-11-07 (no passengerTerm in the metadata)",
+      "_official": "Muu este (puu, lumieste tms. radalla)"
     }
   },
   "_rjComment": "rj: Rejseplanen's Danish notices, matched on their heading by regular expression (first match wins), to a locale key; named groups fill the key's {{placeholders}}. Meanings from Den Danske Ordbog (ordnet.dk): elevator = lift, ude af drift = out of order, spor = platform track, vogne = coaches, aflyst = cancelled, sporarbejde = track work, signalfejl = signal fault, togbus = rail replacement bus, forsinket = delayed. Seen in DSB's messages on 2026-10-28 (DENMARK_DATA_FINDINGS.md).",

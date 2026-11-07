@@ -35,6 +35,10 @@ struct TripDetailScreen: View {
     @State private var busy = false
     @State private var toast: String?
     @State private var confirmDelete = false
+    /// "Report wrong data": the note being typed, and the answer once sent.
+    @State private var reporting = false
+    @State private var reportNote = ""
+    @State private var reportResult: String?
     @State private var sharing = JourneyShare()
     /// Typing the platform where you got on (`.dep`) or off (`.arr`), where no source has one.
     @State private var platformEnd: PlatformEnd = .dep
@@ -124,6 +128,16 @@ struct TripDetailScreen: View {
             Button(l10n.t("common.cancel"), role: .cancel) {}
         } message: {
             if inJourney { Text(l10n.t("detail.deleteTrainBody")) }
+        }
+        .alert(l10n.t("detail.reportTitle"), isPresented: $reporting) {
+            TextField(l10n.t("detail.reportPlaceholder"), text: $reportNote)
+            Button(l10n.t("common.send")) { Task { await sendReport() } }
+            Button(l10n.t("common.cancel"), role: .cancel) {}
+        } message: {
+            Text(l10n.t("detail.reportBody"))
+        }
+        .alert(reportResult ?? "", isPresented: Binding(get: { reportResult != nil }, set: { if !$0 { reportResult = nil } })) {
+            Button(l10n.t("common.done"), role: .cancel) {}
         }
         // The system's navigation bar, transparent over the full-bleed map: its back button stays while the page
         // scrolls and the edge swipe goes back, as on every pushed screen (user test 2026-11-07: with the bar hidden
@@ -217,6 +231,36 @@ struct TripDetailScreen: View {
         busy = true
         if let updated = try? await app.client.refreshLeg(id) { leg = updated }
         busy = false
+    }
+
+    /// Sends the report with the trip's times and platforms as this screen shows them (the server adds its own view).
+    private func sendReport() async {
+        guard let detail = leg else { return }
+        let l = detail.leg
+        let shownLive = TripDetailLogic.shown(detail, live: live, now: Date.now.timeIntervalSince1970 * 1000, offline: app.isOffline)
+        func t(_ ms: Double?) -> String { ms.map { Format.time($0, tz: l.origin?.tz ?? "Europe/Stockholm", clock: app.settings.clock) } ?? "" }
+        var shown: [String: String] = [
+            "train": [l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " "),
+            "serviceDate": l.serviceDate ?? "", "from": l.origin?.name ?? "", "to": l.destination?.name ?? "",
+            "schedDep": t(l.schedDep?.ms), "schedArr": t(l.schedArr?.ms), "actualDep": t(l.actualDep?.ms), "actualArr": t(l.actualArr?.ms),
+            "depDelayMin": l.depDelayMin.map(String.init) ?? "", "arrDelayMin": l.arrDelayMin.map(String.init) ?? "",
+            "depPlatform": l.depPlatform ?? "", "arrPlatform": l.arrPlatform ?? "", "canceled": l.canceled ? "yes" : "no",
+            "status": l.status.rawValue, "dataQuality": l.dataQuality.rawValue,
+            "build": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "",
+        ]
+        if let s = shownLive {
+            shown["liveStatus"] = s.status.rawValue
+            shown["liveArrivalDelayMin"] = s.arrivalDelayMin.map(String.init) ?? ""
+            shown["liveNextStop"] = s.nextStopId ?? ""
+        }
+        let note = reportNote.trimmingCharacters(in: .whitespacesAndNewlines)
+        do {
+            try await app.client.reportLeg(l.id, note: note.isEmpty ? nil : note, shown: shown)
+            reportResult = l10n.t("detail.reportSent")
+            Usage.shared.count(.feature, "trip.report")
+        } catch {
+            reportResult = l10n.t("detail.reportFailed")
+        }
     }
 
     private func remove() async {
@@ -746,6 +790,8 @@ struct TripDetailScreen: View {
             if l.ride == .auto || l.ride == .confirmed {
                 Button { Task { await answer(.no) } } label: { Label(l10n.t("record.correctNo"), systemImage: "xmark.circle") }
             }
+            // Wrong times, platform or train (owner, 2026-11-07): a report with what the screen showed goes to the server.
+            Button { reportNote = ""; reporting = true } label: { Label(l10n.t("detail.menuReport"), systemImage: "exclamationmark.bubble") }
             Divider()
             Button(role: .destructive) { confirmDelete = true } label: { Label(l10n.t(inJourney ? "detail.deleteTrain" : "detail.delete"), systemImage: "trash") }
         } label: {

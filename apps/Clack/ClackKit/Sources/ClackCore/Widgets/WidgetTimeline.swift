@@ -161,9 +161,10 @@ public nonisolated enum WidgetTimeline {
 
     public static let departuresReloadMs: Double = 15 * minute
 
-    /// The rows still to leave at `now`, soonest first: a train is shown through the minute it leaves.
+    /// The rows still to leave at `now`, soonest first: a train is shown through the minute it leaves; a cancelled one
+    /// for `WidgetData.cancelledShownMs` past its time.
     public static func departures(_ rows: [WidgetSnapshot.Departure], at now: Double, limit: Int) -> [WidgetSnapshot.Departure] {
-        Array(rows.filter { $0.leaves + minute > now }.sorted { $0.time < $1.time }.prefix(limit))
+        Array(rows.filter { ($0.canceled ? $0.time + WidgetData.cancelledShownMs : $0.leaves + minute) > now }.sorted { $0.time < $1.time }.prefix(limit))
     }
 
     // MARK: all

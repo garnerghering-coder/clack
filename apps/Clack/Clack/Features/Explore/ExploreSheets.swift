@@ -454,7 +454,7 @@ struct LiveStationSheet: View {
             favorite = station.favorite
             guard station.hasBoard else { rows = []; return }
             if let board = try? await app.client.board(id, arrivals: false) {
-                rows = Array(board.rows.filter { !$0.done && !$0.canceled }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))
+                rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))
             } else {
                 rows = []
             }

@@ -7,6 +7,7 @@ import { answerRide } from '../legs/recording.js';
 import { withLogo } from '../import/brands.js';
 import { loadBrands } from '../dataFiles.js';
 import { legRisk } from '../legs/risk.js';
+import { fileReport, ReportError } from '../legs/reports.js';
 import { CONTENT_TYPES, logoFile } from '../import/logos.js';
 import fs from 'node:fs';
 
@@ -116,6 +117,19 @@ export const legRoutes =
 
     // Ticket links (owner, 2026-10-22): always the operator's own site, never an agent or affiliate.
     const brands = new Map(loadBrands().map((b) => [b.id, b]));
+    // "This is wrong" (owner, 2026-11-07): the traveller says the trip page showed something that didn't happen. Kept
+    // with what the phone showed and what the server held, for checking against the record (legs/reports.ts).
+    app.post<{ Params: { id: string }; Body: { note?: unknown; shown?: unknown } }>('/legs/:id/report', async (req, reply) => {
+      if (!getLeg(db, req.userId, req.params.id)) return reply.code(404).send({ error: 'not found' });
+      try {
+        const r = fileReport(db, req.userId, req.params.id, req.body ?? {});
+        return reply.code(201).send(r);
+      } catch (e) {
+        if (e instanceof ReportError) return reply.code(e.status).send({ error: e.message });
+        throw e;
+      }
+    });
+
     // Journey risk: warnings from the last hour along the route and this train's own past (legs/risk.ts).
     app.get<{ Params: { id: string } }>('/legs/:id/risk', async (req, reply) => (await legRisk(db, req.userId, req.params.id)) ?? reply.code(404).send({ error: 'not found' }));
 

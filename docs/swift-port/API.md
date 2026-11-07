@@ -115,7 +115,6 @@ Each block: method + path, params, body, response, status codes, TS type, and th
 #### `GET /api/settings`
 - Response: `Settings` (`packages/shared/src/index.ts:35`), filled with `DEFAULT_SETTINGS` for missing keys
   (`routes/settings.ts:10-16`):
-  - `displayName: string` (0 to 60 chars, trimmed; empty means no initials)
   - `language: "en" | "sv"`
   - `distanceUnit: "km" | "mi"`
   - `clock: "24h" | "12h"`
@@ -129,7 +128,7 @@ Each block: method + path, params, body, response, status codes, TS type, and th
   - `heavyLuggage: boolean`
   - `homeCountry?: "SE" | "NO" | "FI"` (absent until set: the app sets it on first launch from the phone's region when it is
     one of these; the server then falls back to the first counted trip's boarding country, else `SE`)
-- Defaults (`index.ts:53`): `displayName ""`, `language "en"`, `distanceUnit "km"`, `clock "24h"`,
+- Defaults (`index.ts:53`): `language "en"`, `distanceUnit "km"`, `clock "24h"`,
   `co2Comparison "car_1"`, `includeCommuter true`, `showRailNetwork true`, `theme "dark"`, `walkPace "normal"`,
   `stepFree false`, `heavyLuggage false`.
 - 200. Web: `api.getSettings()` (`api.ts:440`), `settings.tsx` provider on app start. Offline-cached.
@@ -138,7 +137,7 @@ Each block: method + path, params, body, response, status codes, TS type, and th
 - Body: any subset of `Settings` (JSON object). Unknown keys or invalid values reject the whole patch
   (`mergeSettings`, `index.ts:69-118`).
 - 200: the full merged `Settings`. 400: `{ error }`, e.g. `"unknown setting: foo"`, `"invalid theme: x"`,
-  `"displayName must be a string of at most 60 characters"`, `"settings must be an object"`.
+  `"settings must be an object"`.
 - Web: `api.updateSettings(patch)` (`api.ts:443`), `settings.tsx:42`.
 
 ### 2.3 Stations
@@ -491,6 +490,13 @@ plus:
   `rideReason: "you"`), undo sets `"pending"` and lets the evidence decide again (`legs/recording.ts:90-98`).
 - 200 `LegDetail`. 400 `{ error: "answer must be yes, no or undo" }`. 404 `{ error: "not found" }`.
 - Web: `api.answerRide(id, answer)` (`api.ts:481`): Trips page review card, Trip detail, Add trip "Done" step.
+
+#### `POST /api/legs/:id/report`
+- "This is wrong" on a trip page (owner, 2026-11-07). Body `{ note?: string /*≤ 500 chars, trimmed*/, shown?: object
+  /*the values the screen showed, any shape, ≤ 8 KB*/ }`; both optional. The server keeps them with its own state of
+  the leg at that moment (`leg_reports`; `legs/reports.ts`). Nothing on the trip changes.
+- 201 `{ id: string, createdAt: number /*ms*/ }`. 400 `{ error }` for a bad note or `shown`. 404 `{ error: "not found" }`
+  (not the caller's trip). 429 `{ error: "already reported a few minutes ago" }`: one report per trip per phone per 10 min.
 
 #### `GET /api/legs/:id/risk`
 - Response `LegRisk` (`api.ts:232`; server `legs/risk.ts:156`), cached 2 min per leg on the server:

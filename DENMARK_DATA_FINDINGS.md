@@ -15,7 +15,7 @@ results and other developers' notes, not the pages themselves.
 | Platforms | API `rtTrack` (key). Planned `platform_code` in GTFS: the column exists, mostly empty. | Planned platforms kept where given. |
 | Boards | API `departureBoard`/`arrivalBoard` (key), one station per call. | Not yet. |
 | Disruptions | API `himSearch` (key), free Danish text, no cause codes; no SIRI-SX in Denmark. | Not yet. |
-| Archive | No official per-train archive (Banedanmark publishes monthly punctuality only). train-archive.eu has daily files since 2026-09-28; licence not stated. | None; would start when real-time is recorded. |
+| Archive | No official per-train archive (Banedanmark publishes monthly punctuality only). train-archive.eu has daily files since 2026-09-30; permission given by phone 2026-10-27. | Each finished day projected into the observed record (`observed/dk-archive.ts`, source `train_archive_dk`); Swedish cross-border trains named from Sweden's feed by stop times since 2026-11-07 (below). |
 
 ## The timetable (Rejseplanen GTFS, 2026-10-27)
 - **Rail routes:** route_type 2 and 109. In the file:
@@ -78,8 +78,22 @@ timetable import leaves out: also in Sweden's feed, or not rail).
 projects it into `observed_runs`/`observed_calls` (country `DK`). A time counts as actual only where delay_source is
 feed. The platform is not in the file.
 
-**Not done yet:** the app endpoint (mgate) client, Clack's own recorder, live Danish legs and boards, and searching
-Danish observed runs from the app (country `DK` is not in `lib/countries.ts`, so the lookup code does not see it yet).
+**Trains in Sweden's feed (added 2026-11-07).** The 125 trips a day the Danish timetable import leaves out (Öresundståg,
+SJ, Snälltåget: in Sweden's feed) had no train number in the record, so a saved Swedish trip's Danish stops could not find
+them (`observed/lookup.ts` looks up by number and day) and stayed timetable-only once Rejseplanen's 6-hour live window had
+passed. Such a run is now matched to the `gtfs_se3` trip that calls at the same Danish stations at the same scheduled
+minutes (±1 min, at least 2 calls, exactly one candidate; `matchSwedish`), on the day or the day before (a train that left
+Sweden before midnight). The run takes that trip's number and operator; `info.matchedBy` is `se-stop-times` (`gtfs_dk`
+for the trip-id match), with the trip key and how many calls agreed. The run's Swedish calls, whose stop ids are
+Rejseplanen's own (Hyllie is `000007401585`, not our `740001586`), get their station from the same trip's stop at that
+minute (`extra.stationFrom`). On 2026-10-26 (local copy): 124 of the 125 named, 816 Swedish calls given a station; the one
+left is a run with a single Danish call. Days projected before the change are redone with
+`npm run import -- denmark-archive --reproject [--from= --to=]`, which also refreshes the trips saved for those days (trips
+already frozen as timetable-only are left as they are). Each night `audit/crossSource.ts` compares these runs' times at
+Hyllie with Trafikverket's (docs/SERVER.md).
+
+**Not done yet (as of 2026-10-27; the mgate client, live Danish legs and boards followed the same week, below):** Clack's own
+recorder of Rejseplanen's live data, and searching Danish observed runs from the app.
 
 ## Live data from Rejseplanen's app backend (2026-10-27)
 

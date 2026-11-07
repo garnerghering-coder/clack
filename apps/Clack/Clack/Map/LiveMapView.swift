@@ -312,10 +312,13 @@ final class LiveMapController {
     /// the middle.
     /// Centres on a point `offset` points above the middle (the free space over a sheet). The offset is a content
     /// inset at the bottom, so it holds whatever the tilt and rotation, and later re-centring (`keepInView`) uses it.
-    func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat) {
+    /// `topClearance` keeps the top of the view (the status bar and the search field) free: with the map under the
+    /// status bar, a tilted station plan drew its platform numbers under the clock (designer, 2026-11-07).
+    func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat, topClearance: CGFloat = 0) {
         guard let map = mapView else { return }
         (map as? ClackMapView)?.markMoved()
-        map.setContentInset(UIEdgeInsets(top: 0, left: 0, bottom: offset * 2, right: 0), animated: false, completionHandler: nil)
+        let top = topClearance > 0 ? map.safeAreaInsets.top + topClearance : 0
+        map.setContentInset(UIEdgeInsets(top: top, left: 0, bottom: max(0, offset * 2 - top), right: 0), animated: false, completionHandler: nil)
         map.setCenter(c, zoomLevel: max(map.zoomLevel, minZoom), animated: !reduceMotion)
     }
 

@@ -149,6 +149,32 @@ struct WidgetBoardTests {
         #expect(rows[0].to == "Malmö C")
     }
 
+    @Test func keepsACancelledTrainAWhileAndSaysBusAndPlatformChange() {
+        func trouble(_ id: String, advertised: Double, canceled: Bool, bus: Bool = false, from: String? = nil) -> BoardRow {
+            BoardRow(
+                id: id, trainNumber: id, advertised: at(advertised), estimated: nil, actual: nil, done: false, delayMin: nil, platform: "4",
+                platformChange: from.map { BoardRow.PlatformChange(from: $0, at: nil) }, canceled: canceled, deviations: [],
+                causes: bus ? [LegStop.Cause(src: "trv", text: "Buss ersätter")] : [], endpoints: ["Lund C"], via: [], operatorId: nil,
+                productName: nil, product: "regional", trainType: nil, trip: nil
+            )
+        }
+        let board = Board(stationId: "s", type: "departures", from: 0, to: 0, updatedAt: now, rows: [
+            trouble("cancelled", advertised: -10, canceled: true),
+            trouble("long-gone", advertised: -20, canceled: true),
+            trouble("bus", advertised: 5, canceled: true, bus: true),
+            trouble("moved", advertised: 8, canceled: false, from: "7"),
+        ])
+        let rows = WidgetData.departures(board, now: now)
+        // A cancelled train stays 15 minutes past its time, so it is seen as cancelled rather than gone.
+        #expect(rows.map(\.id) == ["cancelled", "bus", "moved"])
+        #expect(rows[1].canceled && rows[1].replacedByBus)
+        #expect(!rows[0].replacedByBus)
+        #expect(rows[2].platformFrom == "7")
+        // The timeline keeps the same rule.
+        #expect(WidgetTimeline.departures(rows, at: now + 4 * 60_000, limit: 8).map(\.id) == ["cancelled", "bus", "moved"])
+        #expect(WidgetTimeline.departures(rows, at: now + 6 * 60_000, limit: 8).map(\.id) == ["bus", "moved"])
+    }
+
     @Test func keepsAtMostEnoughRowsForHalfAnHour() {
         let board = Board(stationId: "s", type: "departures", from: 0, to: 0, updatedAt: now, rows: (0..<60).map { row("r\($0)", advertised: Double($0)) })
         #expect(WidgetData.departures(board, now: now).count == WidgetData.boardRows)

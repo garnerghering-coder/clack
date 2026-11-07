@@ -70,11 +70,11 @@ public nonisolated struct APIClient: Sendable {
 
     /// Sends a request and returns the body (empty for 204). `Content-Type` is set only when there is a body:
     /// Fastify rejects an empty body labelled JSON.
-    public func request(_ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil) async throws -> Data {
+    public func request(_ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil, timeout: TimeInterval? = nil) async throws -> Data {
         var request = URLRequest(url: url(segments, query: query))
         request.httpMethod = method
         request.setValue(userID, forHTTPHeaderField: "X-Clack-User")
-        if method == "GET" { request.timeoutInterval = Self.getTimeout }
+        if method == "GET" { request.timeoutInterval = timeout ?? Self.getTimeout }
         if let body {
             request.httpBody = try JSONEncoder().encode(body)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -110,11 +110,11 @@ public nonisolated struct APIClient: Sendable {
     public func pin(_ paths: Set<String>) async { await cache?.setPinned(paths) }
 
     /// A GET, decoded. When the server can't be reached, the kept copy of the same path is used if there is one.
-    public func get<T: Decodable & Sendable>(_ segments: [String], query: [String: String] = [:]) async throws -> T {
+    public func get<T: Decodable & Sendable>(_ segments: [String], query: [String: String] = [:], timeout: TimeInterval? = nil) async throws -> T {
         let path = "/" + segments.joined(separator: "/")
         let data: Data
         do {
-            data = try await request("GET", segments, query: query)
+            data = try await request("GET", segments, query: query, timeout: timeout)
         } catch let error as URLError where error.code != .cancelled {
             // Any HTTP answer, even an error, is not served from the cache; only a failure to reach the server is.
             guard let cache, let kept = await cache.read(Self.cacheKey(path, query)) else { throw error }

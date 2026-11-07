@@ -16,23 +16,23 @@ describe('per-device identity', () => {
   const B = '9a8b7c6d-5e4f-4a3b-9c2d-1e0f2a3b4c5d';
 
   it('keeps settings apart per id, and falls back to the local user without one', async () => {
-    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': A }, payload: { displayName: 'Garner' } });
+    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': A }, payload: { clock: '12h' } });
     const a = (await app.inject({ url: '/api/settings', headers: { 'x-clack-user': A } })).json();
     const b = (await app.inject({ url: `/api/settings?u=${B}` })).json();
     const local = (await app.inject({ url: '/api/settings' })).json();
-    expect(a.displayName).toBe('Garner');
-    expect(b.displayName).not.toBe('Garner');
-    expect(local.displayName).not.toBe('Garner');
+    expect(a.clock).toBe('12h');
+    expect(b.clock).not.toBe('12h');
+    expect(local.clock).not.toBe('12h');
     // Not a UUID: treated as no id at all.
-    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': 'local' } })).json().displayName).toBe(local.displayName);
+    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': 'local' } })).json().clock).toBe(local.clock);
   });
 
   it('deletes everything of one user and nothing of anyone else', async () => {
-    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': A }, payload: { displayName: 'A' } });
-    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': B }, payload: { displayName: 'B' } });
+    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': A }, payload: { clock: '12h' } });
+    await app.inject({ method: 'PATCH', url: '/api/settings', headers: { 'x-clack-user': B }, payload: { distanceUnit: 'mi' } });
     expect((await app.inject({ method: 'DELETE', url: '/api/me', headers: { 'x-clack-user': A } })).statusCode).toBe(204);
-    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': A } })).json().displayName).not.toBe('A');
-    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': B } })).json().displayName).toBe('B');
+    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': A } })).json().clock).not.toBe('12h');
+    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': B } })).json().distanceUnit).toBe('mi');
   });
 
   it('refuses requests without a phone id when the server is shared (CLACK_REQUIRE_USER)', async () => {

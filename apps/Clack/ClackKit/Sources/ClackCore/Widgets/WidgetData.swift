@@ -207,13 +207,22 @@ public nonisolated enum WidgetData {
         )
     }
 
-    /// The rows still to leave, in board order, at most `boardRows`.
+    /// How long a cancelled train stays on the widget after its time: long enough to be seen as cancelled, not gone.
+    public static let cancelledShownMs: Double = 15 * 60_000
+
+    /// The rows still to leave, in board order, at most `boardRows`. A cancelled train (or one replaced by a bus) is
+    /// kept for a while past its time (owner, 2026-11-07: the widget showed none of the trouble the board showed).
     public static func departures(_ board: Board, now: Double) -> [WidgetSnapshot.Departure] {
-        let rows = board.rows.filter { !$0.done && ($0.estimated ?? $0.advertised) > now - 60_000 }.sorted { $0.advertised < $1.advertised }
+        let rows = board.rows.filter { row in
+            guard !row.done else { return false }
+            let until = row.canceled ? row.advertised + cancelledShownMs : (row.estimated ?? row.advertised) + 60_000
+            return until > now
+        }.sorted { $0.advertised < $1.advertised }
         return rows.prefix(boardRows).map { row in
             WidgetSnapshot.Departure(
                 id: row.id, time: row.advertised, expected: row.estimated, delayMin: row.delayMin, platform: row.platform,
-                to: row.endpoints.last ?? row.via.last ?? "", train: row.trainNumber, canceled: row.canceled
+                to: row.endpoints.last ?? row.via.last ?? "", train: row.trainNumber, canceled: row.canceled,
+                replacedByBus: row.canceled && row.allCauses.contains(where: \.isBusReplacement), platformFrom: row.platformChange?.from
             )
         }
     }

@@ -123,9 +123,10 @@ struct WidgetGalleryView: View {
 
     private static func board(_ language: Language, stale: Bool) -> WidgetSnapshot.StationBoard {
         let rows: [WidgetSnapshot.Departure] = [
-            .init(id: "1", time: t + 3 * m, expected: t + 9 * m, delayMin: 6, platform: "12b", to: "Göteborg Sävenäs", train: "529", canceled: false),
+            .init(id: "1", time: t + 3 * m, expected: t + 9 * m, delayMin: 6, platform: "12b", to: "Göteborg Sävenäs", train: "529", canceled: false, platformFrom: "11"),
             .init(id: "2", time: t + 6 * m, delayMin: 0, platform: "4", to: "Uppsala Central", train: "40", canceled: false),
             .init(id: "3", time: t + 9 * m, platform: "16a", to: "Katrineholm Central", train: "10592", canceled: true),
+            .init(id: "3b", time: t + 10 * m, platform: "16b", to: "Eskilstuna Central", train: "10540", canceled: true, replacedByBus: true),
             .init(id: "4", time: t + 12 * m, expected: t + 34 * m, delayMin: 22, platform: "1", to: "Sundsvall Central", train: "10181", canceled: false),
             .init(id: "5", time: t + 15 * m, platform: nil, to: "Märsta", train: "2234", canceled: false),
             .init(id: "6", time: t + 18 * m, delayMin: 1, platform: "13", to: "Stockholm Arlanda Central", train: "7", canceled: false),

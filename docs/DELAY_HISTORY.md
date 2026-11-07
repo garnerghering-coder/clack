@@ -56,6 +56,11 @@ Hand check of one raw row: IC 27 at Tampere on 2026-10-09, scheduled arrival 179
 
 ## Limits, said plainly
 
+- The record's sources are checked against each other every night where they overlap (Trafikverket against the Danish
+  archive at Hyllie, our same-day Entur record against Entur's archive), with daily counts of minutes agreeing,
+  disagreeing and missing per pair in the `diagnostics` table (docs/SERVER.md, "Checks that run by themselves"). A day
+  with many disagreements is a day whose history here should be read with that in mind.
+
 - Sweden's projection into `observed_runs` only starts 2026-10-23 on the hosted server (6 days on 2026-10-29), so
   Swedish legs get no history line and no history-aware verdict until the record is a week old (7 days for the
   verdict, 4 for the line); the risk card falls back to the board record meanwhile. Finland's record runs from

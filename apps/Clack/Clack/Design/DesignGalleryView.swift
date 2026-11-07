@@ -207,6 +207,10 @@ struct DesignGalleryView: View {
                 FlapTime(time: nil, tz: tz, clock: .h24)
             }
         }
+        section("Offline") {
+            // The strip every screen gets in its safe area while the server can't be reached.
+            OfflineBanner()
+        }
         section("Surfaces") {
             Card { Text("Card").clack(.rowTitle).foregroundStyle(Ink.text); Text("A flat card: most of the app.").clack(.caption).foregroundStyle(Ink.text2) }
             Card(lit: true) { Text("Lit card").clack(.rowTitle).foregroundStyle(Ink.text); Text("Only hero and featured surfaces glow.").clack(.caption).foregroundStyle(Ink.text2) }

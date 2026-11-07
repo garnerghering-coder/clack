@@ -29,7 +29,7 @@ enum ShareMapSnapshotter {
         let accent = dark ? signal : UIColor(Ink.accentInk).resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
         let all = lines.filter { $0.count > 1 }.flatMap { $0 }
         guard all.count >= 2, let box = MapGeometry.bounds(all) else { return nil }
-        let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: true, kind: .multiRoute)
+        let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: true, kind: .multiRoute(heat: false))
         guard let url = try? MapStyle.write(style) else { return nil }
         // MapLibre stamps its logo on the bottom of a snapshot, so the picture is taken with a band top and bottom that is
         // cropped off again (the card carries no logo; the attribution is on the web's cards too).

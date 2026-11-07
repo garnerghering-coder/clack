@@ -1295,7 +1295,7 @@ splash stays up).
 | Key | Values (default) | UI | Effect |
 | --- | --- | --- | --- |
 | `theme` | `system` · `dark` · `light` (**dark**) | 3-way segmented, `settings.themes.*` | Applies colours; also copied to `localStorage['clack.theme']` so the next launch paints the right theme before settings load (`theme.ts:27-40`, `index.html`). `system` follows the phone. Maps re-create. Status bar style. |
-| `displayName` | string ≤ 60, trimmed (`''`) | text field, saved on blur | **[unclear]** stored but not shown anywhere in the web UI (type comment says "initials in the avatar"). |
+| `displayName` | removed 2026-11-07 (nothing ever read it) | | |
 | `language` | `en` · `sv` (**en**) | menu `settings.languages.*` | UI language and date/number locale. |
 | `distanceUnit` | `km` · `mi` (**km**) | menu `settings.units.*` | All distances. |
 | `clock` | `24h` · `12h` (**24h**) | menu `settings.clocks.*` | All times. |

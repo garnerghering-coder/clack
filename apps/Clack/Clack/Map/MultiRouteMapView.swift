@@ -14,6 +14,8 @@ nonisolated struct MultiRoute: Hashable, Sendable {
     var geometry: String?
     /// Fallback when there's no routed geometry: just the end stations.
     var stops: [LatLon]
+    /// How often this stretch was ridden (the Passport's one-ink map draws it heavier).
+    var weight = 1
 
     /// A cheap stand-in for "is this the same route": colour and the size of the geometry (O(1) for a native string),
     /// so the map's identity doesn't cost a pass over every polyline on each render.
@@ -22,6 +24,7 @@ nonisolated struct MultiRoute: Hashable, Sendable {
         h.combine(color)
         h.combine(geometry?.utf8.count ?? -1)
         h.combine(stops.count)
+        h.combine(weight)
         return h.finalize()
     }
 }
@@ -55,6 +58,10 @@ struct MultiRouteMapView: View {
     let stations: [MultiStation]
     var railNetwork = false
     var label: String?
+    /// Pan and zoom (the full-screen map); off in a card inside a scrolling page, so the page scrolls.
+    var interactive = false
+    /// One ink, heavier where ridden more (the Passport); else each route in its own colour.
+    var heat = false
     @State private var basemap: Bool?
 
     var body: some View {
@@ -62,7 +69,8 @@ struct MultiRouteMapView: View {
             Ink.mapBg
             if let basemap, hasShape {
                 MultiRouteRepresentable(
-                    routes: routes, stations: stations, railNetwork: railNetwork, withBasemap: basemap, dark: scheme == .dark
+                    routes: routes, stations: stations, railNetwork: railNetwork, withBasemap: basemap, dark: scheme == .dark,
+                    interactive: interactive, heat: heat
                 )
                 // Rebuilt when the set of routes changes (year and commuter filters) or the theme does.
                 .id(MultiRoute.mapIdentity(routes, stations: stations, dark: scheme == .dark, basemap: basemap, railNetwork: railNetwork))
@@ -93,14 +101,17 @@ private struct MultiRouteRepresentable: UIViewRepresentable {
     let railNetwork: Bool
     let withBasemap: Bool
     let dark: Bool
+    let interactive: Bool
+    let heat: Bool
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
     func makeUIView(context: Context) -> MLNMapView {
-        let style = MapStyle.style(base: Config.apiBase, withBasemap: withBasemap, dark: dark, railNetwork: railNetwork, kind: .multiRoute)
+        let style = MapStyle.style(base: Config.apiBase, withBasemap: withBasemap, dark: dark, railNetwork: railNetwork, kind: .multiRoute(heat: heat))
         let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
         let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
+        map.isUserInteractionEnabled = interactive
         map.delegate = context.coordinator
         map.setCenter(CLLocationCoordinate2D(latitude: 62, longitude: 15), zoomLevel: 4, animated: false)
         return map
@@ -121,7 +132,7 @@ private struct MultiRouteRepresentable: UIViewRepresentable {
                 let points = route.geometry.map(Polyline.decode) ?? route.stops
                 all += points
                 return [
-                    "type": "Feature", "properties": ["color": route.color],
+                    "type": "Feature", "properties": ["color": route.color, "weight": route.weight],
                     "geometry": ["type": "LineString", "coordinates": points.map { [$0.lon, $0.lat] }],
                 ]
             }
@@ -134,6 +145,13 @@ private struct MultiRouteRepresentable: UIViewRepresentable {
             }
             mapView.setShape(["type": "FeatureCollection", "features": stationFeatures], source: "stations")
             mapView.fit(all, padding: UIEdgeInsets(top: 36, left: 36, bottom: 36, right: 36), maxZoom: 10, animated: false)
+        }
+
+        /// Once you have moved the map yourself, a layout pass (a rotation) must not fit it back.
+        func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
+            if reason.contains(.gesturePan) || reason.contains(.gesturePinch) || reason.contains(.gestureZoomIn) || reason.contains(.gestureZoomOut) {
+                (mapView as? ClackMapView)?.markMoved()
+            }
         }
     }
 }

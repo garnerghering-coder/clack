@@ -91,7 +91,9 @@ struct Page<Content: View>: View {
     }
 }
 
-/// The offline strip at the top of every screen while the server can't be reached (`.offline-banner`).
+/// The offline strip at the top of every screen while the server can't be reached (`.offline-banner`): a written line
+/// in the safe area, so the page moves down under it and nothing is covered (designer, 2026-11-07: it landed on
+/// Explore's search field).
 struct OfflineBanner: View {
     @Environment(L10n.self) private var l10n
 
@@ -102,12 +104,11 @@ struct OfflineBanner: View {
         }
         .clack(.init(size: 12, lineHeight: 16, weight: .semibold, style: .caption))
         .foregroundStyle(Ink.text2)
-        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 6)
         .padding(.horizontal, 12)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-        .hairlineBorder(radius: Radius.controlSm)
-        .shadow(color: .black.opacity(0.25), radius: 7, y: 4)
-        .padding(.top, 6)
+        .background(Ink.surfaceRaised)
+        .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
         .accessibilityElement(children: .combine)
     }
 }

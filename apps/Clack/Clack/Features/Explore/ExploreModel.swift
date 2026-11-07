@@ -585,6 +585,13 @@ final class ExploreModel {
             stationSearchPending = false
             return
         }
+        // Offline is known: say so at once rather than wait for a request to fail (designer, 2026-11-07).
+        if app?.isOffline == true {
+            stationHits = []
+            stationSearchPending = false
+            stationSearchFailed = true
+            return
+        }
         stationSearchPending = true
         searchTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(200))
@@ -608,7 +615,7 @@ final class ExploreModel {
         // Close in on it (owner, 2026-10-30): a mapped station to its 3D (the tilt follows at that zoom), others to
         // its tracks, in the space above the station's sheet.
         if let info = await app?.stations.info(hit.id) {
-            controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: info.hasMap ? Self.model3DZoom + 0.5 : 15, offset: min(260, controller.height * 0.29))
+            controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: info.hasMap ? Self.model3DZoom + 0.5 : 15, offset: min(260, controller.height * 0.29), topClearance: 72)
         }
         stationSheet = StationSheetTarget(id: hit.id, name: hit.name)
     }

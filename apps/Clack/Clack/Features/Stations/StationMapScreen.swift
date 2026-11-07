@@ -30,6 +30,8 @@ struct StationMapScreen: View {
     /// The 3D view (one-station demo, Debug builds on iOS 18 and later).
     @State private var show3D = false
     @State private var poi: StationPoi?
+    /// The open place's sheet content height, so the sheet fits it.
+    @State private var poiHeight: CGFloat = 200
     @State private var picked: Date?
     @State private var planning = false
     @State private var picking: Picking?
@@ -271,10 +273,6 @@ struct StationMapScreen: View {
             header(map)
             filters
             side(map, level: level)
-            Text(levelName(map, level)).clack(.caption).foregroundStyle(Ink.text2)
-                .padding(.vertical, 2).padding(.horizontal, 8)
-                .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                .padding(.leading, 16).padding(.top, 120).allowsHitTesting(false)
             VStack {
                 Spacer()
                 bottom(map, level: level, fromE: fromE, toE: toE, route: route, steps: steps, stepLevels: stepLevels, layover: layover, planningOrSet: planningOrSet)
@@ -289,11 +287,12 @@ struct StationMapScreen: View {
                 .presentationDetents([.fraction(0.8), .large])
         }
         .sheet(item: $poi) { p in
-            PoiSheet(map: map, poi: p, state: OpeningHours.openState(p.openingHours, from: window().0, to: window().1), detour: detours?[p.node]) { end in
+            PoiSheet(map: map, poi: p, state: OpeningHours.openState(p.openingHours, from: window().0, to: window().1), detour: detours?[p.node], onHeight: { poiHeight = $0 }) { end in
                 poi = nil
                 pickAs(end, "p:\(p.id)")
             }
-            .presentationDetents([.medium, .large])
+            // As tall as what it says (designer, 2026-11-07: "two buttons floating above 300 pt of nothing").
+            .presentationDetents([.height(min(max(poiHeight + 128, 220), 700)), .large])
         }
     }
 
@@ -321,25 +320,28 @@ struct StationMapScreen: View {
             }
             .padding(.horizontal, 12)
         }
+        // The row runs on past the edge: a fade says so (designer, 2026-11-07: the chips looked cut off).
+        .mask(
+            // A mask reads alpha only: any opaque ink does.
+            HStack(spacing: 0) {
+                Ink.bg
+                LinearGradient(colors: [Ink.bg, Ink.bg.opacity(0)], startPoint: .leading, endPoint: .trailing).frame(width: 28)
+            }
+        )
         .padding(.top, 64)
     }
 
     private func side(_ map: StationMap, level: String) -> some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .trailing, spacing: 8) {
             if map.levels.count > 1 && !listView {
-                ForEach(map.levels.sorted { $0.order > $1.order }) { l in
-                    let active = l.id == level
-                    Button { self.level = l.id } label: {
-                        Text(StationSceneLogic.levelLabel(l)).clack(.chip).monospacedDigit()
-                            .foregroundStyle(active ? Ink.onAccent : Ink.text2)
-                            .frame(minWidth: 40, minHeight: 34)
-                            .background(active ? Ink.accent : Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                            .hairlineBorder(radius: Radius.controlSm, color: active ? Ink.accent : Ink.hairline)
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(l.name)
-                    .accessibilityAddTraits(active ? .isSelected : [])
-                }
+                // The floors as the app's one pick-one control (owner, 2026-11-07); the chosen segment is the floor's
+                // name, so the separate label that sat under it is gone.
+                let levels = map.levels.sorted { $0.order < $1.order }
+                SegmentedControl(
+                    selection: Binding(get: { level }, set: { self.level = $0 }),
+                    options: levels.map { ($0.id, StationSceneLogic.levelLabel($0)) }, small: true
+                )
+                .frame(width: min(260, CGFloat(levels.count) * 64 + 8))
             }
             MapButton(icon: listView ? "map" : "list", label: l10n.t(listView ? "stationMap.map" : "stationMap.list")) { listView.toggle() }
             #if DEBUG
@@ -436,17 +438,18 @@ struct StationMapScreen: View {
                         }
                     }
                 } else {
+                    // Directions as the system button every other action uses (designer, 2026-11-07: "yet another
+                    // button style"); the time as the system's own picker, with a line saying what it changes.
                     HStack(spacing: 8) {
                         Button { planning = true } label: {
                             HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.directions")) }
-                                .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 16).frame(minHeight: 34)
-                                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                                .hairlineBorder(radius: Radius.controlSm)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.clack(.primary, small: true))
+                        Spacer(minLength: 0)
                         timeChip
                         if picked != nil { ChipButton(text: l10n.t("stationMap.now")) { picked = nil } }
                     }
+                    Text(l10n.t("stationMap.timeHint")).clack(.caption).foregroundStyle(Ink.text2)
                 }
                 Text("\(l10n.t("stationMap.hoursNote")) · © OpenStreetMap contributors").clack(.mapAttribution).foregroundStyle(Ink.text3)
             }
@@ -485,18 +488,14 @@ struct StationMapScreen: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    /// A time to look at opening hours for: the hours picker sits invisibly over the chip, as the web's time input does.
+    /// The time to look at opening hours for: the system's own time picker, in sight (designer, 2026-11-07: the
+    /// picker hidden under a chip meant "Now" did nothing anyone could see).
     private var timeChip: some View {
         HStack(spacing: 8) {
-            LucideIcon(name: "clock", size: 14)
-            Text(picked.map { Format.time($0.timeIntervalSince1970 * 1000, tz: tz, clock: clock) } ?? l10n.t("stationMap.now"))
-        }
-        .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 16).frame(minHeight: 34)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-        .hairlineBorder(radius: Radius.controlSm)
-        .overlay {
+            LucideIcon(name: "clock", size: 14).foregroundStyle(Ink.text2)
             DatePicker("", selection: Binding(get: { picked ?? Date() }, set: { picked = $0 }), displayedComponents: .hourAndMinute)
-                .labelsHidden().blendMode(.destinationOver).opacity(0.02)
+                .labelsHidden()
+                .tint(Ink.accentInk)
                 .accessibilityLabel(l10n.t("stationMap.pickTime"))
         }
     }
@@ -757,12 +756,21 @@ private struct PoiSheet: View {
     let poi: StationPoi
     let state: (state: OpenState, closesAt: Double?)
     let detour: Double?
+    /// How tall the content is, so the sheet can be just that.
+    var onHeight: (CGFloat) -> Void = { _ in }
     let onRoute: (_ end: StationMapEnd) -> Void
 
     var body: some View {
         let name = poi.name.isEmpty ? l10n.t("stationMap.cat.\(poi.category.rawValue)") : poi.name
         let level = map.levels.first { $0.id == poi.level }?.name ?? poi.level
         SheetFrame(title: name, onClose: { dismiss() }) {
+            VStack(alignment: .leading, spacing: 12) { content(level: level) }
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { onHeight($0) }
+        }
+    }
+
+    @ViewBuilder
+    private func content(level: String) -> some View {
             FlowLayout(spacing: 12, lineSpacing: 8) {
                 Chip(text: stateLabel, tint: state.state == .open ? Ink.onTimeInk : state.state == .closingSoon ? Ink.lateInk : Ink.text2)
                 Chip(text: l10n.t("stationMap.cat.\(poi.category.rawValue)"))
@@ -784,6 +792,9 @@ private struct PoiSheet: View {
                 } else {
                     Text(l10n.t("stationMap.hoursNote")).clack(.caption).foregroundStyle(Ink.text2)
                 }
+            } else {
+                // Said in words here; the pin no longer wears a "?" for it (designer, 2026-11-07).
+                Text(l10n.t("stationMap.hoursUnknown")).clack(.caption).foregroundStyle(Ink.text2)
             }
             if poi.approximate == true {
                 // Placed from a description, not located (owner, 2026-10-30): say so, and what the description is.
@@ -798,7 +809,6 @@ private struct PoiSheet: View {
                     .buttonStyle(.clack(.primary, small: true))
                 ChipButton(text: l10n.t("stationMap.startHere")) { onRoute(.from) }
             }
-        }
     }
 
     private var stateLabel: String {

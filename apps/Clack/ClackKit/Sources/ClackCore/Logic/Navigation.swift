@@ -22,7 +22,7 @@ public nonisolated enum Navigation {
 
     /// The kinds of screen a tab's stack can hold, for naming the back button after the one underneath.
     public enum Screen: Equatable, Sendable {
-        case trip, journey, settings, about, privacy, board, stationMap, other
+        case trip, journey, settings, about, privacy, board, stationMap, passport, other
     }
 
     /// The back button's words: the screen it goes back to, or the tab's own name when it goes back to the tab's first
@@ -41,6 +41,7 @@ public nonisolated enum Navigation {
         case .settings: return "settings.title"
         case .about: return "about.title"
         case .board: return "board.departures"
+        case .passport: return "nav.passport"
         case .privacy, .stationMap, .other: return "common.back"
         }
     }
