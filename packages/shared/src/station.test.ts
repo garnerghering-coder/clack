@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { connectionStatus, instructions, nearestNode, resolveEndpoint, routeBetween, routeTracks, toLocal, validateStationMap, type StationMap } from './station';
+import { connectionStatus, handCuratedProblems, instructions, nearestNode, resolveEndpoint, routeBetween, routeTracks, stationCoverage, toLocal, validateStationMap, type StationMap } from './station';
 
 // A tiny two-platform station: a tunnel below with stairs and a slower lift up to each platform.
 const map = (): StationMap => ({
   station_id: 't',
   name: 'Test C',
   updated: '2026-10-21',
-  quality: 'hand_curated',
+  quality: 'osm_draft',
   sources: [],
   changelog: [],
   coord_system: 'local_m',
@@ -45,6 +45,41 @@ describe('station map validation', () => {
     const m2 = map();
     m2.edges[2]!.seconds = 0;
     expect(validateStationMap(m2)[0]).toMatch(/no seconds/);
+  });
+
+  it('keeps an unconnected platform: drawn, valid, never routed to, and counted in the coverage', () => {
+    const m = map();
+    m.edges = m.edges.filter((e) => e.to !== 'p2');
+    m.platforms[1]!.unconnected = true;
+    expect(validateStationMap(m)).toEqual([]);
+    expect(routeTracks(m, '1', '2')).toBeNull();
+    expect(routeTracks(m, '2', '2')).not.toBeNull();
+    expect(stationCoverage(m).platforms).toBe(0.5);
+    // The first platform being the unconnected one must not make the rest unreachable.
+    const first = map();
+    first.edges = first.edges.filter((e) => e.from !== 'p1');
+    first.platforms[0]!.unconnected = true;
+    expect(validateStationMap(first)).toEqual([]);
+    const all = map();
+    all.platforms.forEach((p) => (p.unconnected = true));
+    expect(validateStationMap(all)).toContain('every platform is unconnected');
+  });
+
+  it('holds hand_curated maps to their criteria', () => {
+    const m = map();
+    m.quality = 'hand_curated';
+    expect(validateStationMap(m).some((e) => e.startsWith('hand_curated, but platform 1: sides without tracks'))).toBe(true);
+    m.levels = m.levels.map((l, i) => ({ ...l, height_m: i ? -5 : 0 }));
+    m.platforms = m.platforms.map((p) => ({ ...p, edges: [{ track: p.tracks[0]!, points: [[0, 0], [0, 100]], _source: 'trafikverket:baninfo' }] }));
+    m.edges = m.edges.map((e) => ({ ...e, _source: e.kind === 'walk' ? 'osm:way/1' : 'plan:test' }));
+    expect(handCuratedProblems(m)).toEqual([]);
+    m.edges = m.edges.map((e) => ({ ...e, _source: 'osm:way/1' }));
+    expect(handCuratedProblems(m)).toContain('level L0: no change of level from a source other than OpenStreetMap');
+  });
+
+  it('scores coverage', () => {
+    const c = stationCoverage(map());
+    expect(c).toEqual({ platforms: 1, vertical: 1, entrances: 0, hours: 1, sides: 0 });
   });
 });
 

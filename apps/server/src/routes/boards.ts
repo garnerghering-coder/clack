@@ -6,7 +6,7 @@ import type { Db } from '../db/client.js';
 import { stationFavorites, stationRecent, stations, trvLocations } from '../db/schema.js';
 import { BoardHub } from '../boards/hub.js';
 import type { BoardType } from '../boards/board.js';
-import { hasStationMap, stationMap, stationSize } from '../stations/maps.js';
+import { hasStationMap, stationMap, stationMapVersion, stationSize } from '../stations/maps.js';
 
 const TYPES = new Set(['departures', 'arrivals']);
 const MAX_SPAN_MS = 24 * 3600_000;
@@ -59,7 +59,18 @@ export const boardRoutes =
     );
 
     // The station map (ADDITIONS_01 C1): data, validated; the app draws and routes it.
-    app.get<{ Params: { id: string } }>('/stations/:id/map', async (req, reply) => stationMap(req.params.id, (m) => app.log.warn(m)) ?? reply.code(404).send({ error: 'no map for this station' }));
+    // Conditional: the phone keeps a copy for offline use and asks with its ETag; an unchanged map is a 304.
+    app.get<{ Params: { id: string } }>('/stations/:id/map', async (req, reply) => {
+      const map = stationMap(req.params.id, (m) => app.log.warn(m));
+      const version = map ? stationMapVersion(req.params.id) : null;
+      if (!map) return reply.code(404).send({ error: 'no map for this station' });
+      if (version) {
+        reply.header('ETag', version.etag).header('Last-Modified', version.modified.toUTCString()).header('Cache-Control', 'public, max-age=3600');
+        const asked = req.headers['if-none-match'];
+        if (asked && asked.split(',').some((t) => t.trim().replace(/^W\//, '') === version.etag)) return reply.code(304).send();
+      }
+      return map;
+    });
 
     app.get<{ Params: { id: string }; Querystring: { type?: string; from?: string; to?: string } }>('/stations/:id/board', async (req, reply) => {
       const type = (req.query.type ?? 'departures') as BoardType;

@@ -2,7 +2,7 @@
 // Listens to the tracker, and every minute looks at the trips about to leave or running. What is due and what it says
 // are in rules.ts; this loads the facts, sends once per alert (push_log), and forgets phones Apple says are gone.
 import { and, asc, desc, eq, gt, inArray, lt, ne, sql } from 'drizzle-orm';
-import { DEFAULT_SETTINGS, delayBand, routeTracks, SIZE_WALK_SECONDS, type Language, type Settings } from '@clack/shared';
+import { DEFAULT_SETTINGS, delayBand, routeTracks, SIZE_WALK_SECONDS, type Language, type Settings, type WalkProfile } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, trvLocations, users } from '../db/schema.js';
 import { stationMap, stationSize } from '../stations/maps.js';
@@ -117,6 +117,8 @@ export interface Loaded {
   userId: string;
   lang: Language;
   prefs: Prefs;
+  /** The person's walking profile (pace, step-free, luggage): the change alert's walk is theirs, as in the app. */
+  walk: WalkProfile;
   facts: TripFacts;
   /** The leg that follows in the same journey, from where this one ends. */
   next: TripFacts | null;
@@ -253,6 +255,7 @@ export class Notifier {
         userId: row.userId,
         lang: settings.language,
         prefs: settings,
+        walk: { pace: settings.walkPace, stepFree: settings.stepFree, luggage: settings.heavyLuggage },
         facts,
         next: nextRow ? factsOf(nextRow, siblings) : null,
         afterId: later[0]?.id ?? null,
@@ -324,9 +327,9 @@ export class Notifier {
   }
 
   /** The walk between the platforms the two trains use at the change station: from its map, else its size class, else unknown. */
-  private walkBetween(a: TripFacts, b: TripFacts): Walk | null {
+  private walkBetween(a: TripFacts, b: TripFacts, profile?: WalkProfile): Walk | null {
     const map = stationMap(a.toStationId, (m) => this.opts.log?.(m));
-    const mapped = map && a.arrPlatform && b.depPlatform ? routeTracks(map, a.arrPlatform, b.depPlatform) : null;
+    const mapped = map && a.arrPlatform && b.depPlatform ? routeTracks(map, a.arrPlatform, b.depPlatform, profile) : null;
     if (mapped) return { seconds: mapped.seconds, estimated: false };
     const row = this.db
       .select({ n: trvLocations.baseTracks })
@@ -348,7 +351,7 @@ export class Notifier {
       if (g) await this.deliver(L, g);
     }
     if (L.next) {
-      const c = change(L.facts, L.next, L.prefs, now, L.lang, this.walkBetween(L.facts, L.next), L.live);
+      const c = change(L.facts, L.next, L.prefs, now, L.lang, this.walkBetween(L.facts, L.next, L.walk), L.live);
       if (c) await this.deliver(L, c);
     }
   }

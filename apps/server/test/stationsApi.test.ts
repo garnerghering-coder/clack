@@ -33,6 +33,19 @@ describe('stations API', () => {
     expect((await app.inject({ url: '/api/stations/search?q=malmo' })).json()[0].name).toBe('Malmö C');
   });
 
+  it('serves a station map with an ETag and answers 304 when the phone has it', async () => {
+    const first = await app.inject({ url: '/api/stations/740000002/map' });
+    expect(first.statusCode).toBe(200);
+    const etag = first.headers.etag as string;
+    expect(etag).toMatch(/^"[0-9a-z]+-[0-9a-z]+"$/);
+    expect(first.headers['cache-control']).toBe('public, max-age=3600');
+    const again = await app.inject({ url: '/api/stations/740000002/map', headers: { 'if-none-match': etag } });
+    expect(again.statusCode).toBe(304);
+    expect(again.body).toBe('');
+    expect((await app.inject({ url: '/api/stations/740000002/map', headers: { 'if-none-match': '"old"' } })).statusCode).toBe(200);
+    expect((await app.inject({ url: '/api/stations/740000491/map' })).statusCode).toBe(404);
+  });
+
   it('reports import status and quota', async () => {
     process.env.CLACK_ADMIN_TOKEN = 'test-admin-token';
     const body = (await app.inject({ url: '/api/import/status', headers: { 'x-clack-admin': 'test-admin-token' } })).json();

@@ -27,6 +27,17 @@ export function stationMap(stationId: string, log: (m: string) => void = console
   return errors.length ? null : map;
 }
 
+/** The map file's version for conditional GETs: an ETag from its mtime and size, and its mtime. Null without a file. */
+export function stationMapVersion(stationId: string): { etag: string; modified: Date } | null {
+  if (!/^[\w:-]+$/.test(stationId)) return null;
+  try {
+    const st = fs.statSync(path.join(DIR, `${stationId.replace(/:/g, '_')}.json`));
+    return { etag: `"${Math.floor(st.mtimeMs).toString(36)}-${st.size.toString(36)}"`, modified: st.mtime };
+  } catch {
+    return null;
+  }
+}
+
 export const hasStationMap = (stationId: string) => stationMap(stationId) !== null;
 
 /** Size class for walk estimates without a map, from Trafikverket's track list. */

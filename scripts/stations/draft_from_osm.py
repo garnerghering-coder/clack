@@ -47,6 +47,18 @@ def parse_levels(v):
 OSM_KEYS = ["railway", "public_transport", "highway", "indoor", "amenity", "shop", "building", "entrance", "level", "conveying", "tourism", "vending", "room", "office", "healthcare", "wheelchair", "ref", "name", "step_count", "incline", "layer", "tunnel", "bridge", "covered", "location", "ele", "height", "min_height", "building:levels", "handrail", "escalator", "lit"]
 
 
+def open_db():
+    """data/app.db read-only. A WAL database with no -shm file beside it (the server isn't running) can't be opened
+    with mode=ro, so that case opens it as immutable (nothing writes to it while a script reads)."""
+    path = os.path.join(ROOT, "data/app.db")
+    try:
+        db = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        db.execute("select 1 from stations limit 1")
+        return db
+    except sqlite3.OperationalError:
+        return sqlite3.connect(f"file:{path}?immutable=1", uri=True)
+
+
 OVERPASS_ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://lz4.overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
 
 
@@ -335,7 +347,7 @@ def main():
     # Finnish ids carry a colon ("fi:HKI"); files are named with an underscore (fi_HKI.edits.json, fi_HKI.json).
     safe = sid.replace(":", "_")
     edits = json.load(open(os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")))
-    db = sqlite3.connect(f"file:{os.path.join(ROOT, 'data/app.db')}?mode=ro", uri=True)
+    db = open_db()
     name, lat0, lon0 = db.execute("select name, lat, lon from stations where id=?", (sid,)).fetchone()
     if "origin" in edits:
         lat0, lon0 = edits["origin"]["lat"], edits["origin"]["lon"]
@@ -869,10 +881,14 @@ def main():
     if not out_platforms:
         sys.exit(f"{name}: no numbered platforms in OSM; name them in the edits file's platform_refs (way id -> number)")
     main_start = max(out_platforms, key=lambda p: sum(1 for k in comp if comp[k] == comp.get(p["node"])))["node"]
-    main = {k for k, c in comp.items() if c == comp[main_start]}
+    core = {k for k, c in comp.items() if c == comp[main_start]}
+    # A platform the paths don't reach is still a platform: it is drawn with its own piece of the graph and marked
+    # `unconnected` (never routed to), not dropped (Oslo S lost tracks 5–8, 11 and 12 that way).
+    main = set(comp)
     for p in out_platforms:
-        if p["node"] not in main:
-            log.append(f"platform {p['ref']}: not connected to the main walking graph")
+        if p["node"] not in core:
+            p["unconnected"] = True
+            log.append(f"platform {p['ref']}: not connected to the main walking graph (kept, marked unconnected)")
 
     # ---- Collapse plain pass-through vertices into edge geometry ----
     keep_types = {"platform", "platform_access", "entrance"}

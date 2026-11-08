@@ -220,6 +220,53 @@ public nonisolated struct PlatformEdge: Codable, Hashable, Sendable {
     }
 }
 
+/// One lettered stopping sector ("A", "B") of a platform: where its sign stands, and the stretch when the source has it.
+public nonisolated struct SectorMark: Codable, Hashable, Sendable {
+    public let ref: String
+    public let point: Pt
+    public let from: Pt?
+    public let to: Pt?
+    public let source: String
+
+    public enum CodingKeys: String, CodingKey {
+        case ref, point, from, to
+        case source = "_source"
+    }
+
+    public init(ref: String, point: Pt, from: Pt? = nil, to: Pt? = nil, source: String) {
+        self.ref = ref
+        self.point = point
+        self.from = from
+        self.to = to
+        self.source = source
+    }
+}
+
+/// How much of what a walk needs a map has, 0 to 1 each (`stationCoverage` in packages/shared/src/station.ts).
+public nonisolated struct StationCoverage: Codable, Hashable, Sendable {
+    /// Platforms that can be walked to.
+    public let platforms: Double
+    /// Platform levels a stair, escalator, lift or ramp reaches (1 for a one-level map).
+    public let vertical: Double
+    /// Platforms that reach an entrance.
+    public let entrances: Double
+    /// Shops and cafés with opening hours.
+    public let hours: Double
+    /// Platforms whose sides name their tracks.
+    public let sides: Double
+    /// Platforms with stopping sectors; nil where no source has any.
+    public let sectors: Double?
+
+    public init(platforms: Double, vertical: Double, entrances: Double, hours: Double, sides: Double, sectors: Double? = nil) {
+        self.platforms = platforms
+        self.vertical = vertical
+        self.entrances = entrances
+        self.hours = hours
+        self.sides = sides
+        self.sectors = sectors
+    }
+}
+
 public nonisolated struct StationPlatform: Codable, Hashable, Sendable, Identifiable {
     public let id: String
     /// Platform number as signed ("14", "15–16").
@@ -235,15 +282,21 @@ public nonisolated struct StationPlatform: Codable, Hashable, Sendable, Identifi
     public let heightM: Double?
     /// Schema 2: the platform's edges along the tracks.
     public let edges: [PlatformEdge]?
+    /// Lettered stopping sectors from a register (Entur's boarding positions), when it has them.
+    public let sectors: [SectorMark]?
+    /// Drawn, but no walk to it is known: the sources don't connect it. Never routed to.
+    public let unconnected: Bool?
     public let source: String?
 
     public enum CodingKeys: String, CodingKey {
-        case id, ref, tracks, level, geometry, node, edges
+        case id, ref, tracks, level, geometry, node, edges, sectors, unconnected
         case heightM = "height_m"
         case source = "_source"
     }
 
-    public init(id: String, ref: String, tracks: [String], level: String, geometry: [[Pt]], node: String, heightM: Double? = nil, edges: [PlatformEdge]? = nil, source: String? = nil) {
+    public init(id: String, ref: String, tracks: [String], level: String, geometry: [[Pt]], node: String, heightM: Double? = nil, edges: [PlatformEdge]? = nil, source: String? = nil, sectors: [SectorMark]? = nil, unconnected: Bool? = nil) {
+        self.sectors = sectors
+        self.unconnected = unconnected
         self.id = id
         self.ref = ref
         self.tracks = tracks
@@ -487,6 +540,10 @@ public nonisolated struct StationMap: Codable, Hashable, Sendable {
     public var pois: [StationPoi]
     /// The ground as a grid, when a source gives it (the 3D view).
     public let terrain: Terrain?
+    /// What the map covers; nil in files written before build 63.
+    public let coverage: StationCoverage?
+    /// When the opening hours were last re-read from their sources (YYYY-MM-DD).
+    public let hoursChecked: String?
 
     /// Ground heights in metres above the platform surface at (x0 + i·step, y0 + j·step): `heights[j][i]`, nil where
     /// the source has no value.
@@ -534,11 +591,14 @@ public nonisolated struct StationMap: Codable, Hashable, Sendable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case schema, name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois, terrain
+        case schema, name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois, terrain, coverage
         case stationId = "station_id"
+        case hoursChecked = "hours_checked"
     }
 
-    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi], schema: Int? = nil, terrain: Terrain? = nil) {
+    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi], schema: Int? = nil, terrain: Terrain? = nil, coverage: StationCoverage? = nil, hoursChecked: String? = nil) {
+        self.coverage = coverage
+        self.hoursChecked = hoursChecked
         self.schema = schema
         self.terrain = terrain
         self.stationId = stationId

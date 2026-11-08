@@ -16,7 +16,13 @@ struct StationMapFilesTests {
         #expect(files.count > 50)
         var failed: [String] = []
         for f in files {
-            do { _ = try JSONDecoder().decode(StationMap.self, from: Data(contentsOf: f)) } catch { failed.append("\(f.lastPathComponent): \(error)".prefix(240).description) }
+            do {
+                let map = try JSONDecoder().decode(StationMap.self, from: Data(contentsOf: f))
+                // The app's validator agrees with the server's (an unconnected platform is fine in both).
+                let errors = StationRouting.validate(map)
+                if !errors.isEmpty { failed.append("\(f.lastPathComponent): \(errors.prefix(2).joined(separator: "; "))") }
+                if map.coverage == nil { failed.append("\(f.lastPathComponent): no coverage") }
+            } catch { failed.append("\(f.lastPathComponent): \(error)".prefix(240).description) }
         }
         #expect(failed.isEmpty, "\(failed.count) maps don't decode: \(failed.prefix(5).joined(separator: " | "))")
     }

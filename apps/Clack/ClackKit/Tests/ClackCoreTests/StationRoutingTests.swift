@@ -12,7 +12,7 @@ import Testing
 /// A tiny two-platform station: a tunnel below with stairs and a slower lift up to each platform.
 private func testMap() throws -> StationMap {
     let json = """
-    {"station_id":"t","name":"Test C","updated":"2026-10-21","quality":"hand_curated","sources":[],"changelog":[],
+    {"station_id":"t","name":"Test C","updated":"2026-10-21","quality":"osm_draft","sources":[],"changelog":[],
      "coord_system":"local_m","origin":{"lat":59,"lon":18},
      "levels":[{"id":"L0","name":"Platforms","order":0},{"id":"L-1","name":"Tunnel","order":-1}],"shapes":[],
      "platforms":[
@@ -53,6 +53,17 @@ struct StationMapValidationTests {
             from: broken.from, to: broken.to, seconds: 0, stepFree: broken.stepFree, kind: broken.kind, meters: nil, geometry: nil, source: nil
         )
         #expect(StationRouting.validate(m2).first?.contains("no seconds") == true)
+    }
+
+    @Test func keepsAnUnconnectedPlatformButNeverRoutesToIt() throws {
+        var m = try testMap()
+        m.edges = m.edges.filter { $0.to != "p2" }
+        let p2 = m.platforms[1]
+        m.platforms[1] = StationPlatform(id: p2.id, ref: p2.ref, tracks: p2.tracks, level: p2.level, geometry: p2.geometry, node: p2.node, unconnected: true)
+        #expect(StationRouting.validate(m).isEmpty)
+        #expect(StationRouting.routeTracks(m, from: "1", to: "2") == nil)
+        #expect(StationRouting.routeTracks(m, from: "2", to: "2") != nil)
+        #expect(StationSceneLogic.coverageNote(m) == "stationMap.coverage.unconnected")
     }
 
     @Test func decodesAndValidatesTheRealStockholmCentralMap() throws {

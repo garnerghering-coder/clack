@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { routeTracks, validateStationMap, type StationMap } from '@clack/shared';
+import { routeTracks, stationCoverage, validateStationMap, type StationMap } from '@clack/shared';
 import { REPO_ROOT } from '../src/env.js';
 
 // Every committed station map must pass the validator (ADDITIONS_01 C: "the validator fails the build").
@@ -14,6 +14,8 @@ describe('station maps in data/stations', () => {
     it(`${f} is valid`, () => {
       const m = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')) as StationMap;
       expect(validateStationMap(m)).toEqual([]);
+      // The coverage in the file is the map's own (re-run `npm run stations:validate -- --coverage` after a redraft).
+      expect(m.coverage, 'coverage out of date').toEqual(stationCoverage(m));
     });
   }
 

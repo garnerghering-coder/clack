@@ -203,21 +203,26 @@ public nonisolated enum StationRouting {
             if !(edge.seconds > 0 && edge.seconds.isFinite) { errors.append("edge \(edge.from)→\(edge.to): no seconds") }
         }
         let adj = adjacency(map)
-        // Everything must be reachable from the first platform (one connected walking graph).
-        var seen = Set<String>()
-        if let start = map.platforms.first?.node {
-            var stack = [start]
+        // Everything must be reachable from the first connected platform (one walking graph), apart from platforms
+        // marked unconnected and what hangs off them.
+        func reachable(_ starts: [String]) -> Set<String> {
+            var seen = Set<String>()
+            var stack = starts
             while let n = stack.popLast() {
                 if seen.contains(n) { continue }
                 seen.insert(n)
                 for (to, _) in adj[n] ?? [] { stack.append(to) }
             }
+            return seen
         }
+        let seen = reachable(Array(map.platforms.filter { $0.unconnected != true }.map(\.node).prefix(1)))
+        let islands = reachable(map.platforms.filter { $0.unconnected == true }.map(\.node))
+        if !map.platforms.isEmpty && map.platforms.allSatisfy({ $0.unconnected == true }) { errors.append("every platform is unconnected") }
         for platform in map.platforms {
             if !levels.contains(platform.level) { errors.append("platform \(platform.ref): unknown level \(platform.level)") }
             if nodes[platform.node] == nil {
                 errors.append("platform \(platform.ref): unknown node \(platform.node)")
-            } else if !seen.contains(platform.node) {
+            } else if platform.unconnected != true && !seen.contains(platform.node) {
                 errors.append("platform \(platform.ref): unreachable")
             }
             if platform.tracks.isEmpty { errors.append("platform \(platform.ref): no tracks") }
@@ -225,7 +230,7 @@ public nonisolated enum StationRouting {
         for poi in map.pois {
             if nodes[poi.node] == nil {
                 errors.append("poi \(poi.id): unknown node \(poi.node)")
-            } else if !seen.contains(poi.node) {
+            } else if !seen.contains(poi.node) && !islands.contains(poi.node) {
                 errors.append("poi \(poi.id): unreachable")
             }
             if !levels.contains(poi.level) { errors.append("poi \(poi.id): unknown level \(poi.level)") }
@@ -376,6 +381,8 @@ public nonisolated enum StationRouting {
         if (a.platform != nil && a.platform?.id == b.platform?.id) || a.node.id == b.node.id {
             return StationRoute(nodes: [a.node], steps: [], seconds: a.platform != nil ? 30 : 0, meters: 0, levels: [a.node.level])
         }
+        // A platform the sources don't connect: no route is known, and none is made up.
+        if a.platform?.unconnected == true || b.platform?.unconnected == true { return nil }
         return route(map, from: a.node.id, to: b.node.id, profile: profile)
     }
 

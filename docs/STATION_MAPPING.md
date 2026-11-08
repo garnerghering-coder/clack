@@ -98,3 +98,21 @@ no source gives.
   drafter; change them only with a measured reason (`data/walking_model.json` when it exists).
 - The map says "Draft from OpenStreetMap" in the app until a walk or a plan has confirmed it (the `osm_draft` status in
   the review).
+- A platform the paths in the sources don't reach is kept and marked `unconnected` (drawn, never routed to; the app
+  says "No route to this platform is known yet"), not dropped. A map is withheld only when it has no platform at all.
+- `coverage` in each map (0–1 per fact: platforms that can be walked to, platform levels a stair, escalator, lift or
+  ramp reaches, platforms that reach an exit, shops with hours, platforms whose sides name their tracks, sectors) comes
+  from `stationCoverage` in `packages/shared/src/station.ts`. `npm run stations:validate -- --coverage` writes it into
+  the files and `data/stations/COVERAGE.md`; the tests fail when a file's coverage is out of date.
+
+## When a map may say `hand_curated`
+
+The validator refuses `quality: "hand_curated"` unless all of these hold (`handCuratedProblems`):
+
+1. Every platform has sides (`edges`), each naming its track, and not from OpenStreetMap alone (a register:
+   Trafikverket BanInfo, Väylä, Entur NSR, Banedanmark; or a plan).
+2. Every level with platforms has a stair, escalator, lift or ramp whose source is not OpenStreetMap alone (a plan, a
+   photo, a video, a walk).
+3. No entrance stands in from a footway end.
+4. Every level has a measured `height_m` (or the map has one level).
+5. No platform is `unconnected`.

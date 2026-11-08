@@ -74,7 +74,35 @@ export interface StationPlatform {
   height_m?: number;
   /** The platform's edges along the tracks (schema 2). */
   edges?: PlatformEdge[];
+  /** Lettered stopping sectors along the platform from a register (Entur's boarding positions): a point each, and the
+   *  stretch it covers when the source draws one. */
+  sectors?: SectorMark[];
+  /** Drawn, but no walk to it is known: the sources don't connect it to the rest of the station. Never routed to. */
+  unconnected?: boolean;
   _source?: SourceRef;
+}
+/** One lettered stopping sector ("A", "B") of a platform: where its sign stands, and the stretch when known. */
+export interface SectorMark {
+  ref: string;
+  point: Pt;
+  from?: Pt;
+  to?: Pt;
+  _source: SourceRef;
+}
+/** How much of what a walk needs the map has, 0–1 each (scripts/stations/validate.ts writes it). */
+export interface StationCoverage {
+  /** Platforms that can be routed to. */
+  platforms: number;
+  /** Levels with platforms that a change of level (stairs, escalator, lift, ramp) reaches; 1 for a one-level map. */
+  vertical: number;
+  /** Platforms that reach an entrance. */
+  entrances: number;
+  /** Shops, cafés and the like with opening hours. */
+  hours: number;
+  /** Platforms whose edges say which track is which side. */
+  sides: number;
+  /** Platforms with stopping sectors (absent where no source has them). */
+  sectors?: number;
 }
 export interface StationNode {
   id: string;
@@ -150,6 +178,10 @@ export interface StationMap {
   nodes: StationNode[];
   edges: StationEdge[];
   pois: StationPoi[];
+  /** What the map covers, 0–1 each; absent in files written before build 63. */
+  coverage?: StationCoverage;
+  /** When the opening hours were last re-read from their sources (scripts/stations/hours_recheck.ts), YYYY-MM-DD. */
+  hours_checked?: string;
   /** The ground as a grid in the map's frame: heights in metres above the platform surface at x0 + i·step,
    *  y0 + j·step (heights[j][i]); null where the source has no value. */
   terrain?: { x0: number; y0: number; step: number; cols: number; rows: number; heights: (number | null)[][]; _source: SourceRef };
@@ -167,30 +199,24 @@ export function validateStationMap(m: StationMap): string[] {
     if (!(typeof e.seconds === 'number' && e.seconds > 0 && Number.isFinite(e.seconds))) errors.push(`edge ${e.from}→${e.to}: no seconds`);
   }
   const adj = adjacency(m);
-  // Everything must be reachable from the first platform (one connected walking graph).
-  const start = m.platforms[0]?.node;
-  const seen = new Set<string>();
-  if (start) {
-    const stack = [start];
-    while (stack.length) {
-      const n = stack.pop()!;
-      if (seen.has(n)) continue;
-      seen.add(n);
-      for (const [to] of adj.get(n) ?? []) stack.push(to);
-    }
-  }
+  // Everything must be reachable from the first connected platform (one walking graph), apart from platforms marked
+  // `unconnected` and what hangs off them (their own piece of the graph).
+  const seen = reachable(adj, m.platforms.filter((p) => !p.unconnected).map((p) => p.node).slice(0, 1));
+  const islands = reachable(adj, m.platforms.filter((p) => p.unconnected).map((p) => p.node));
+  if (m.platforms.length && m.platforms.every((p) => p.unconnected)) errors.push('every platform is unconnected');
   for (const p of m.platforms) {
     if (!levels.has(p.level)) errors.push(`platform ${p.ref}: unknown level ${p.level}`);
     if (!nodes.has(p.node)) errors.push(`platform ${p.ref}: unknown node ${p.node}`);
-    else if (!seen.has(p.node)) errors.push(`platform ${p.ref}: unreachable`);
+    else if (!p.unconnected && !seen.has(p.node)) errors.push(`platform ${p.ref}: unreachable`);
     if (!p.tracks.length) errors.push(`platform ${p.ref}: no tracks`);
   }
   for (const p of m.pois) {
     if (!nodes.has(p.node)) errors.push(`poi ${p.id}: unknown node ${p.node}`);
-    else if (!seen.has(p.node)) errors.push(`poi ${p.id}: unreachable`);
+    else if (!seen.has(p.node) && !islands.has(p.node)) errors.push(`poi ${p.id}: unreachable`);
     if (!levels.has(p.level)) errors.push(`poi ${p.id}: unknown level ${p.level}`);
   }
   if ((m.schema ?? 1) >= 2) errors.push(...validateSchema2(m, nodes, adj));
+  if (m.quality === 'hand_curated') errors.push(...handCuratedProblems(m).map((p) => `hand_curated, but ${p}`));
   return errors;
 }
 
@@ -236,7 +262,7 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
   const entrances = new Set(m.nodes.filter((n) => n.type === 'entrance').map((n) => n.id));
   if (!entrances.size) errors.push('no entrance nodes: platforms cannot reach an exit');
   else
-    for (const p of m.platforms) {
+    for (const p of m.platforms.filter((p) => !p.unconnected)) {
       const seen = new Set<string>();
       const stack = [p.node];
       let found = false;
@@ -262,6 +288,7 @@ export function stationReview(m: StationMap, knownTracks?: string[] | null): str
   const mapped = new Set(m.platforms.flatMap((p) => p.tracks.map(base)));
   for (const t of new Set((knownTracks ?? []).map(base))) if (t && !mapped.has(t)) out.push(`track ${t} is used in the timetable or boards but no platform in the map serves it`);
   for (const p of m.platforms) {
+    if (p.unconnected) out.push(`platform ${p.ref}: drawn but not connected (no path, stairs or lift to it in the sources)`);
     if ((m.schema ?? 1) >= 2 && !p.edges?.length) out.push(`platform ${p.ref}: no platform edges (which side the trains stop at)`);
     for (const e of p.edges ?? []) if (e.track === null) out.push(`platform ${p.ref}: an edge whose track is not known (${e.note ?? 'island platform: which side is which track'})`);
     if (p.height_m === undefined && (m.schema ?? 1) >= 2) out.push(`platform ${p.ref}: height above rail not known`);
@@ -276,6 +303,70 @@ export function stationReview(m: StationMap, knownTracks?: string[] | null): str
       out.push(`platform ${p.ref}: no stairs, escalator or lift of its own (reached along the platform level only)`);
   for (const poi of m.pois) if (!poi.opening_hours && ['cafe', 'restaurant', 'kiosk', 'shop', 'pharmacy', 'waiting'].includes(poi.category)) out.push(`${poi.category} ${poi.name || poi.id}: no opening hours`);
   return out;
+}
+
+/** Every node reachable from `starts`. */
+/** Categories whose opening hours a traveller needs (the review queue asks for them). */
+const HOURS_CATEGORIES: PoiCategory[] = ['cafe', 'restaurant', 'kiosk', 'shop', 'pharmacy', 'waiting'];
+
+/** What the map covers, 0–1 each, rounded to two places: the numbers behind data/stations/COVERAGE.md and the
+ *  sentence under a draft map's name. */
+export function stationCoverage(m: StationMap): StationCoverage {
+  const r = (n: number, d: number) => (d ? Math.round((n / d) * 100) / 100 : 1);
+  const adj = adjacency(m);
+  const ps = m.platforms;
+  const connected = ps.filter((p) => !p.unconnected);
+  const byId = new Map(m.nodes.map((n) => [n.id, n]));
+  const platformLevels = [...new Set(ps.map((p) => p.level))];
+  const verticalLevels = new Set(m.edges.filter((e) => e.kind !== 'walk').flatMap((e) => [byId.get(e.from)?.level, byId.get(e.to)?.level]));
+  const entrances = new Set(m.nodes.filter((n) => n.type === 'entrance').map((n) => n.id));
+  const reachesExit = connected.filter((p) => [...reachable(adj, [p.node])].some((n) => entrances.has(n))).length;
+  const hoursPois = m.pois.filter((p) => HOURS_CATEGORIES.includes(p.category));
+  const sided = ps.filter((p) => p.edges?.length && p.edges.every((e) => e.track !== null)).length;
+  const hasSectors = (p: StationPlatform) => !!p.sectors?.length || (p.edges ?? []).some((e) => !!e.track && /^\d+[a-z]$/.test(e.track));
+  const out: StationCoverage = {
+    platforms: r(connected.length, ps.length),
+    vertical: m.levels.length <= 1 ? 1 : r(platformLevels.filter((l) => verticalLevels.has(l)).length, platformLevels.length),
+    entrances: r(reachesExit, ps.length),
+    hours: r(hoursPois.filter((p) => !!p.opening_hours).length, hoursPois.length),
+    sides: r(sided, ps.length),
+  };
+  if (ps.some(hasSectors)) out.sectors = r(ps.filter(hasSectors).length, ps.length);
+  return out;
+}
+
+/**
+ * Why a map may not (yet) say `hand_curated` (docs/STATION_MAPPING.md): every platform's sides name their tracks from
+ * a register; every level with platforms has a change of level whose source is not OpenStreetMap alone; no entrance
+ * stands in from a footway end; every level has a measured height (or there is one level); no unconnected platform.
+ */
+export function handCuratedProblems(m: StationMap): string[] {
+  const out: string[] = [];
+  const byId = new Map(m.nodes.map((n) => [n.id, n]));
+  for (const p of m.platforms) {
+    if (p.unconnected) out.push(`platform ${p.ref}: unconnected`);
+    if (!p.edges?.length || p.edges.some((e) => e.track === null)) out.push(`platform ${p.ref}: sides without tracks`);
+    else if (p.edges.every((e) => /^osm:/.test(e._source.trim()))) out.push(`platform ${p.ref}: sides from OpenStreetMap only, not a register`);
+  }
+  const osmOnly = (src: string | undefined) => !src || src.split(',').every((x) => /^\s*osm:/.test(x));
+  for (const l of new Set(m.platforms.map((p) => p.level)))
+    if (m.levels.length > 1 && !m.edges.some((e) => e.kind !== 'walk' && !osmOnly(e._source) && (byId.get(e.from)?.level === l || byId.get(e.to)?.level === l)))
+      out.push(`level ${l}: no change of level from a source other than OpenStreetMap`);
+  for (const n of m.nodes) if (n.type === 'entrance' && (/^derived:/.test(n._source ?? '') || /footway end/.test(n._source ?? ''))) out.push(`entrance ${n.id}: stands in from a footway end`);
+  if (m.levels.length > 1) for (const l of m.levels) if (l.height_m === undefined) out.push(`level ${l.id}: no measured height`);
+  return out;
+}
+
+function reachable(adj: Map<string, [string, StationEdge][]>, starts: string[]): Set<string> {
+  const seen = new Set<string>();
+  const stack = [...starts];
+  while (stack.length) {
+    const n = stack.pop()!;
+    if (seen.has(n)) continue;
+    seen.add(n);
+    for (const [to] of adj.get(n) ?? []) stack.push(to);
+  }
+  return seen;
 }
 
 function adjacency(m: StationMap): Map<string, [string, StationEdge][]> {
@@ -448,6 +539,8 @@ export function routeBetween(m: StationMap, a: Endpoint | null, b: Endpoint | nu
   // The same platform (or the same spot): no walk to speak of.
   if ((a.platform && a.platform.id === b.platform?.id) || a.node.id === b.node.id)
     return { nodes: [a.node], steps: [], seconds: a.platform ? 30 : 0, meters: 0, levels: [a.node.level] };
+  // A platform the sources don't connect: no route is known, and none is made up.
+  if (a.platform?.unconnected || b.platform?.unconnected) return null;
   return routeNodes(m, a.node.id, b.node.id, p);
 }
 

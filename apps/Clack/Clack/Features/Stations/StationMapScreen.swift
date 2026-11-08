@@ -299,7 +299,14 @@ struct StationMapScreen: View {
     private func header(_ map: StationMap) -> some View {
         HStack(spacing: 8) {
             MapButton(icon: "arrow-left", label: l10n.t("common.back")) { dismiss() }
-            Text(map.name).clack(.headline).foregroundStyle(Ink.text).lineLimit(1)
+            // A draft says so, and what it is missing, under the name (not a badge).
+            VStack(alignment: .leading, spacing: 0) {
+                Text(map.name).clack(.headline).foregroundStyle(Ink.text).lineLimit(1)
+                if map.quality != .handCurated {
+                    Text([l10n.t("stationMap.draftOsm"), StationSceneLogic.coverageNote(map).map { l10n.t($0) }].compactMap { $0 }.joined(separator: " · "))
+                        .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
+                }
+            }
                 .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
@@ -385,7 +392,7 @@ struct StationMapScreen: View {
                     if layover {
                         HStack(spacing: 12) {
                             // No route (the other platform isn't drawn yet): said, not a dash (user test 2026-11-07).
-                            Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? l10n.t("stationMap.noWalk")).clack(walkMin == nil ? .body : .walkBig).monospacedDigit().foregroundStyle(Ink.text)
+                            Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? l10n.t(fromE?.platform?.unconnected == true || toE?.platform?.unconnected == true ? "stationMap.noRouteToPlatform" : "stationMap.noWalk")).clack(walkMin == nil ? .body : .walkBig).monospacedDigit().foregroundStyle(Ink.text)
                                 .fixedSize(horizontal: false, vertical: true)
                             // Walking time only: the change's rating is the change rule's (the gauge), shown on the trip.
                             Spacer(minLength: 0)
@@ -409,7 +416,8 @@ struct StationMapScreen: View {
                             .clack(.walkBig).monospacedDigit().foregroundStyle(Ink.text)
                     }
                     if fromE != nil, toE != nil, route == nil {
-                        Text(l10n.t(app.settings.stepFree ? "stationMap.noStepFree" : "stationMap.noRoute")).clack(.caption).foregroundStyle(Ink.text2)
+                        let unconnected = fromE?.platform?.unconnected == true || toE?.platform?.unconnected == true
+                        Text(l10n.t(unconnected ? "stationMap.noRouteToPlatform" : app.settings.stepFree ? "stationMap.noStepFree" : "stationMap.noRoute")).clack(.caption).foregroundStyle(Ink.text2)
                     }
                     if let me = [fromE, toE].compactMap({ $0 }).first(where: { $0.kind == .me }) {
                         Text(l10n.t("stationMap.locationNote", ["level": levelName(map, me.node.level)])).clack(.caption).foregroundStyle(Ink.text2)

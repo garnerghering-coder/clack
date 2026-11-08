@@ -330,4 +330,15 @@ public nonisolated enum StationSceneLogic {
     public static func levelLabel(_ level: StationLevel) -> String {
         level.order > 0 ? "+\(level.order)" : String(level.order)
     }
+    /// The one sentence under a draft map's name saying what it doesn't have yet (an L10n key), most important gap
+    /// first; nil for a hand-curated map, or one with no gap worth saying.
+    public static func coverageNote(_ map: StationMap) -> String? {
+        guard map.quality != .handCurated else { return nil }
+        if map.platforms.contains(where: { $0.unconnected == true }) { return "stationMap.coverage.unconnected" }
+        guard let c = map.coverage else { return nil }
+        if map.levels.count > 1 && c.vertical < 1 { return "stationMap.coverage.noLevels" }
+        if c.entrances < 1 { return "stationMap.coverage.exits" }
+        if c.sides < 1 { return "stationMap.coverage.sides" }
+        return nil
+    }
 }

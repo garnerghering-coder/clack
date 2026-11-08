@@ -17656,6 +17656,74 @@
         }
       }
     },
+    "stationMap.coverage.exits" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not every platform has a known way out."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla plattformar har inte en känd väg ut."
+          }
+        }
+      }
+    },
+    "stationMap.coverage.noLevels" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platforms and shops only; no routes between levels yet."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara plattformar och butiker; inga vägar mellan våningarna än."
+          }
+        }
+      }
+    },
+    "stationMap.coverage.sides" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Which side each train stops at isn’t known."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vilken sida varje tåg stannar vid är inte känt."
+          }
+        }
+      }
+    },
+    "stationMap.coverage.unconnected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some platforms have no known route yet."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Till några plattformar finns ingen känd väg än."
+          }
+        }
+      }
+    },
     "stationMap.departChip" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -17720,6 +17788,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vägbeskrivning"
+          }
+        }
+      }
+    },
+    "stationMap.draftOsm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draft from OpenStreetMap"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utkast från OpenStreetMap"
           }
         }
       }
@@ -18213,6 +18298,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ingen väg mellan punkterna på kartan."
+          }
+        }
+      }
+    },
+    "stationMap.noRouteToPlatform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No route to this platform is known yet: the map’s sources don’t connect it."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen väg till den här plattformen är känd än: kartans källor binder inte ihop den."
           }
         }
       }
