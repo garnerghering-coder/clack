@@ -1,0 +1,34 @@
+# Weekly: re-read the station maps' opening hours from OpenStreetMap (scripts/stations/hours_recheck.py) and open a
+# pull request with what changed, for the owner to look over. Free: GitHub's own runners, no paid service.
+name: Station hours re-check
+on:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/stations/hours_recheck.py
+      - run: npm run stations:validate -- --coverage
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: hours-recheck
+          title: Station opening hours re-read from OpenStreetMap
+          commit-message: Station opening hours re-read from OpenStreetMap
+          body: |
+            The weekly re-check (scripts/stations/hours_recheck.py): opening hours of the station maps' places, re-read
+            from OpenStreetMap, one request per station, 10 s apart. Hours a person checked are left alone.
+          add-paths: |
+            data/stations/*.json
+            data/stations/COVERAGE.md

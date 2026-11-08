@@ -1196,6 +1196,15 @@ def main():
     if "terrain" in edits:
         out["terrain"] = terrain_grid(edits["terrain"], lat0, lon0, K, out)
     path = os.path.join(ROOT, f"data/stations/{safe}.json")
+    # Hours re-read from OSM since this extract (scripts/stations/hours_recheck.py) are newer than the extract's: kept.
+    old = json.load(open(path)) if os.path.exists(path) else {}
+    if old.get("hours_checked") and old["hours_checked"] > (osm.get("retrieved") or ""):
+        before = {q["id"]: q for q in old.get("pois", []) if q.get("hours_source") in (None, "osm")}
+        for poi in out["pois"]:
+            if poi.get("hours_source") in (None, "osm") and poi["id"] in before:
+                poi["opening_hours"] = before[poi["id"]].get("opening_hours")
+                poi["hours_source"] = "osm" if poi["opening_hours"] else None
+        out["hours_checked"] = old["hours_checked"]
     os.makedirs(os.path.dirname(path), exist_ok=True)
     json.dump(out, open(path, "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{name}: {len(out['platforms'])} platforms, {len(out_nodes)} nodes, {len(out_edges)} edges, {len(pois)} amenities, {os.path.getsize(path) // 1024} KB")

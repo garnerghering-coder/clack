@@ -496,7 +496,10 @@ struct TripDetailScreen: View {
         let board = detail.stops.first { $0.role == .board }
         let derived = l.depDelayMin ?? (tracking ? Delay.minutes(advertised: l.schedDep?.ms, actual: board?.estimatedDep?.ms) : nil)
         let status = TripsLogic.countdownStatus(l10n, l, now: now)
-        let platform = l.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) } ?? l10n.t("detail.platformLater")
+        // Finland's feed says where along the platform the train stops ("sector B4"): said with the platform, as given.
+        let platform = l.depPlatform.map { p in
+            board?.stopSector.map { l10n.t("trips.platformSector", ["platform": p, "sector": $0]) } ?? l10n.t("trips.platform", ["platform": p])
+        } ?? l10n.t("detail.platformLater")
         VStack(alignment: .leading, spacing: 8) {
             // One status card: the status word big in its ink, then the platform and the delay, under a rule in the same ink.
             StatusCard(kind: status.kind, text: status.text) {

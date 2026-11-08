@@ -54,6 +54,8 @@ export interface BoardRow {
   done: boolean;
   delayMin: number | null;
   platform: string | null;
+  /** Finland: where along the platform the train stops ("B4", Digitraffic's stopSector); absent elsewhere. */
+  stopSector?: string | null;
   /** Set when the platform changed: the old one if we saw it, null if only Trafikverket's "Spårändrat" told us. */
   platformChange: { from: string | null; at: number | null } | null;
   canceled: boolean;

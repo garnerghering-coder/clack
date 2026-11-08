@@ -100,6 +100,8 @@ export interface StopActuals {
   estimatedArr: number | null;
   estimatedDep: number | null;
   platform: string | null;
+  /** Finland's stop sector for the train at this stop, when the feed gives one. */
+  stopSector?: string | null;
   canceled: boolean;
   deviations: string[];
   /** The same notices with their source's codes (data/delay_causes.json), for showing them in the app's language. */
@@ -405,6 +407,8 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
           estimatedArr: m.actualArr === null && m.estimatedArr !== null ? new Date(m.estimatedArr) : null,
           estimatedDep: m.actualDep === null && m.estimatedDep !== null ? new Date(m.estimatedDep) : null,
           platform: m.platform ?? planned.get(m.seq) ?? null,
+          // Kept once known: the record and the other sources don't carry it, and mustn't clear it.
+          ...(m.stopSector ? { stopSector: m.stopSector } : {}),
           canceled: m.canceled,
           deviations: m.deviations,
           causes: JSON.stringify(m.causes ?? []),

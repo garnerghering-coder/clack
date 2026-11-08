@@ -498,6 +498,7 @@ export function getLeg(db: Db, userId: string, id: string) {
       estimatedArr: legStops.estimatedArr,
       estimatedDep: legStops.estimatedDep,
       platform: legStops.platform,
+      stopSector: legStops.stopSector,
       canceled: legStops.canceled,
       deviations: legStops.deviations,
       causes: legStops.causes,

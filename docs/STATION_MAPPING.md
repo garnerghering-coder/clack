@@ -117,3 +117,15 @@ The validator refuses `quality: "hand_curated"` unless all of these hold (`handC
 3. No entrance stands in from a footway end.
 4. Every level has a measured `height_m` (or the map has one level).
 5. No platform is `unconnected`.
+
+## Registers, the batch and the weekly hours
+
+- `scripts/stations/official/import_platforms.py <id>` writes `scripts/stations/<id>.official.json` from the registers
+  (sides per track, Danish outlines OSM lacks, Norway's NSR sectors and step-free flags); the drafter reads it before the
+  edits, which win. `scripts/stations/official/batch.sh` drafts every hub and mid station and every edited one, then
+  validates with coverage and writes `OSM_AUDIT.md` (`official/osm_audit.py`): per station, the missing facts as
+  questions. Each answer goes into the edits file with its source.
+- Opening hours from OSM are re-read weekly by `.github/workflows/hours.yml` (`scripts/stations/hours_recheck.py`, one
+  Overpass request per station, 10 s apart), which opens a pull request; the map's `hours_checked` says when. The
+  drafter keeps those over an older extract. Hours a person checked are re-checked by hand. The app says "Hours last
+  checked {date}" when a map's OSM hours are more than 30 days old.

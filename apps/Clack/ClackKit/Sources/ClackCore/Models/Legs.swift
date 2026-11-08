@@ -428,6 +428,8 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
     public let estimatedArr: Instant?
     public let estimatedDep: Instant?
     public let platform: String?
+    /// Finland: where the train stops along the platform ("B4"), as Digitraffic gives it; nil elsewhere and from older servers.
+    public var stopSector: String? = nil
     public let canceled: Bool
     /// Trafikverket's Swedish deviation texts (older servers send only these).
     public let deviations: [String]

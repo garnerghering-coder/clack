@@ -71,3 +71,19 @@ the Sources page and map attribution credit it as: `Source: Fintraffic / digitra
   on 2018-06-01, 1,114 of 1,123 passenger trains map to our stations.
 - Digitraffic's GTFS gives planned platforms on 467 of 1,306 stops, headsigns, `bikes_allowed`, and the commuter line
   letter in `trip_short_name` ("A (HL 8192)"); all are kept now.
+
+## Stop sectors (`stopSector`, checked 2026-11-09)
+
+- `timeTableRows[].stopSector` is a letter and a digit ("B1", "C4", "D5"; seen A0–D5), one per row. In the live
+  departures from Helsinki on 2026-11-09 (60 trains) long-distance trains (IC, S) carried one at most of their stops,
+  not only commuter trains; on 2026-11-08 220 of 7,892 Helsinki rows had one. The recorded IC 27 of 2026-10-24 has B4 at
+  Helsinki (track 7), C4 at Pasila, C2 at Tikkurila and Tampere.
+- What it means is not documented where we looked: one code per stop, so it is a position (most likely where the
+  train's front or the platform's stopping sign is), not the span the train covers. Clack shows it as the feed gives it
+  ("Platform 7, sector B4") and does **not** work out which sector a coach stands in: that needs the code's meaning and
+  each sector's length on the platform, and neither is in an open source. One real train (a photo of the train beside
+  the sector signs, with its number and date) would settle the meaning; then `wagons[].location`, `salesNumber` (the
+  coach number on the ticket) and `length` (cm) in the composition give each coach's place along the train.
+- Kept: on `leg_stops.stop_sector` (the departure row's at a stop, else the arrival's), and in the observed record's
+  `extra` per call (it was already kept there). Norway's NSR has lettered sectors with positions on some quays (4 of
+  19 at Oslo S), drawn on the station maps since build 64; no Norwegian feed says which sector a train stops at.

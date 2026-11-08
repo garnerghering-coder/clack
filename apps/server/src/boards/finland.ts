@@ -82,6 +82,7 @@ export function normalizeFinlandBoard(trains: DtTrain[], ctx: FinlandBoardContex
         done: actual !== null,
         delayMin: canceled ? null : delayMinutes(advertised, actual ?? estimated),
         platform,
+        stopSector: r.stopSector?.trim() || null,
         platformChange: change,
         canceled,
         deviations: deviationTexts(causes),

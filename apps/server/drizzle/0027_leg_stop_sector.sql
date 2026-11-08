@@ -1,0 +1,1 @@
+ALTER TABLE `leg_stops` ADD `stop_sector` text;

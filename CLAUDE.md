@@ -50,6 +50,8 @@ history. The owner is Garner (he/him).
 - `python3 scripts/ios/sync_assets.py`: copy the train drawings and the delay-cause table into the app (after changing either).
   `python3 scripts/ios/make_icon.py` (app icon), `python3 scripts/ios/make_colors.py` and
   `node scripts/ios/make_icons.mjs` (colours and Lucide icons) when those change.
+- `scripts/stations/official/batch.sh [ids]`: station maps from the registers and OSM, then coverage (`COVERAGE.md`) and
+  the questions (`OSM_AUDIT.md`); `npm run stations:validate -- --coverage` after any redraft (the tests check it).
 - `python3 scripts/ios/lint_design.py`: the design lint (coming in a later workstream; not there yet).
 - `python3 scripts/trains/<model>.py`: print a train drawing; then `python3 scripts/trains/export_svg.py` to refresh
   the SVG files in `assets/trains/`.

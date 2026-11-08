@@ -335,12 +335,11 @@ struct StationMapScreen: View {
     private func header(_ map: StationMap) -> some View {
         HStack(spacing: 8) {
             MapButton(icon: "arrow-left", label: l10n.t("common.back")) { dismiss() }
-            // A draft says so, and what it is missing, under the name (not a badge).
+            // A draft says so under the name (not a badge); what it is missing is said in the card below.
             VStack(alignment: .leading, spacing: 0) {
                 Text(map.name).clack(.headline).foregroundStyle(Ink.text).lineLimit(1)
                 if map.quality != .handCurated {
-                    Text([l10n.t("stationMap.draftOsm"), StationSceneLogic.coverageNote(map).map { l10n.t($0) }].compactMap { $0 }.joined(separator: " · "))
-                        .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
+                    Text(l10n.t("stationMap.draftOsm")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
                 }
             }
                 .padding(.vertical, 8).padding(.horizontal, 12)
@@ -501,6 +500,10 @@ struct StationMapScreen: View {
                         if picked != nil { ChipButton(text: l10n.t("stationMap.now")) { picked = nil } }
                     }
                     Text(l10n.t("stationMap.timeHint")).clack(.caption).foregroundStyle(Ink.text2)
+                }
+                // What the draft doesn't have yet, in full (the header has room for "Draft" only).
+                if let note = StationSceneLogic.coverageNote(map) {
+                    Text(l10n.t(note)).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
                 }
                 Text("\(l10n.t("stationMap.hoursNote")) · © OpenStreetMap contributors").clack(.mapAttribution).foregroundStyle(Ink.text3)
             }
@@ -840,6 +843,9 @@ private struct PoiSheet: View {
                 // Checked on the station owner's page: say so and when; else the general note.
                 if poi.hoursSource == "website", let checked = poi.hoursVerified {
                     Text(l10n.t("stationMap.hoursWebsite", ["date": checked])).clack(.caption).foregroundStyle(Ink.text2)
+                } else if let stale = StationSceneLogic.hoursStale(map) {
+                    // From OpenStreetMap, and not re-read for a month: say when they were.
+                    Text(l10n.t("stationMap.hoursStale", ["date": stale])).clack(.caption).foregroundStyle(Ink.text2)
                 } else {
                     Text(l10n.t("stationMap.hoursNote")).clack(.caption).foregroundStyle(Ink.text2)
                 }

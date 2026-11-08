@@ -35,6 +35,17 @@ describe('Digitraffic actuals for a leg', () => {
     expect(m.get(3)!.platform).toBe('2');
   });
 
+  it('takes the stop sector where the feed gives one, the boarding row first', () => {
+    const rows = ic27.timeTableRows.map((r) =>
+      r.stationShortCode === 'HKI' ? { ...r, stopSector: 'B1' } : r.stationShortCode === 'TPE' && r.type === 'ARRIVAL' ? { ...r, stopSector: 'C1' } : r,
+    );
+    const m = digitrafficStops([stop(1, 'board', 'HKI', null, '2026-10-24T11:20:00Z'), stop(2, 'through', 'PSL', '2026-10-24T11:25:00Z', '2026-10-24T11:26:00Z'), stop(3, 'alight', 'TPE', '2026-10-24T12:58:00Z', null)], { ...ic27, timeTableRows: rows }, Z('2026-10-24T19:00:00Z'));
+    expect(m.get(1)!.stopSector).toBe('B1');
+    // The recorded IC 27 carries one at Pasila already (C4 on 2026-10-24): the departure row's.
+    expect(m.get(2)!.stopSector).toBe(rowOf(ic27, 'PSL', 'DEPARTURE').stopSector ?? rowOf(ic27, 'PSL', 'ARRIVAL').stopSector);
+    expect(m.get(3)!.stopSector).toBe('C1');
+  });
+
   it('calls an "actual" time that is still ahead an estimate, and keeps a live estimate as expected', () => {
     const first = ic27.timeTableRows[0]!;
     const future: typeof ic27 = { ...ic27, timeTableRows: [{ ...first, actualTime: '2026-10-24T11:24:00Z' }, { ...ic27.timeTableRows[1]!, actualTime: undefined, liveEstimateTime: '2026-10-24T11:27:00Z' }] };

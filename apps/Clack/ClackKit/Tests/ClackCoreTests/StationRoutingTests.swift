@@ -241,3 +241,18 @@ struct RampTests {
     }
 }
 
+
+struct HoursStaleTests {
+    @Test func saysWhenHoursAreOlderThanAMonth() throws {
+        let json = """
+        {"station_id":"h","name":"H","updated":"2026-11-08","quality":"osm_draft","sources":[{"type":"osm","retrieved":"2026-10-01"}],"changelog":[],
+         "coord_system":"local_m","origin":{"lat":59,"lon":18},"levels":[],"shapes":[],"platforms":[],"nodes":[],"edges":[],"pois":[]}
+        """
+        var map = try JSONDecoder().decode(StationMap.self, from: Data(json.utf8))
+        let day = { (s: String) in ISO8601DateFormatter().date(from: s + "T12:00:00Z")! }
+        #expect(StationSceneLogic.hoursStale(map, now: day("2026-10-20")) == nil)
+        #expect(StationSceneLogic.hoursStale(map, now: day("2026-11-09")) == "2026-10-01")
+        map = try JSONDecoder().decode(StationMap.self, from: Data(json.replacingOccurrences(of: "\"pois\":[]", with: "\"pois\":[],\"hours_checked\":\"2026-11-02\"").utf8))
+        #expect(StationSceneLogic.hoursStale(map, now: day("2026-11-09")) == nil)
+    }
+}

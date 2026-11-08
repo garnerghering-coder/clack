@@ -18149,6 +18149,23 @@
         }
       }
     },
+    "stationMap.hoursStale" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hours last checked {{date}}; may have changed since"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppettiderna kontrollerades senast {{date}}; kan ha ändrats sedan"
+          }
+        }
+      }
+    },
     "stationMap.hoursUnknown" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -21246,6 +21263,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spår {{platform}}"
+          }
+        }
+      }
+    },
+    "trips.platformSector" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platform {{platform}}, sector {{sector}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spår {{platform}}, sektor {{sector}}"
           }
         }
       }

@@ -254,6 +254,8 @@ export const legStops = sqliteTable(
     estimatedArr: timestamp('estimated_arr'),
     estimatedDep: timestamp('estimated_dep'),
     platform: text('platform'),
+    /** Finland: the stop sector the feed gives for the train at this stop ("B1"; Digitraffic `stopSector`), as given. */
+    stopSector: text('stop_sector'),
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
     /** Stops between origin and destination. */
     passedThrough: integer('passed_through', { mode: 'boolean' }).notNull().default(false),

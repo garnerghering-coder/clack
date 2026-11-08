@@ -26,6 +26,8 @@ export interface DtRow {
   /** Passengers can get on or off. A stop with trainStopping and no commercialStop is a technical stop. */
   commercialStop?: boolean;
   commercialTrack?: string;
+  /** Where the train stops along the platform ("B1", "D4"), on some rows (FINLAND_DATA_FINDINGS.md, 2026-11-09). */
+  stopSector?: string;
   cancelled?: boolean;
   scheduledTime: string;
   liveEstimateTime?: string;
@@ -91,7 +93,7 @@ export function digitrafficStops(stops: StopForDt[], train: DtTrain, now = Date.
       used.add(row);
       const a =
         out.get(s.seq) ??
-        out.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], causes: [], trvTrainNumber: null, composition: null, onboard: null, source: 'digitraffic' }).get(s.seq)!;
+        out.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, stopSector: null, canceled: false, deviations: [], causes: [], trvTrainNumber: null, composition: null, onboard: null, source: 'digitraffic' }).get(s.seq)!;
       // An "actual" time that is still ahead of us is an estimate (the sanity rules in actuals.ts hold it back too).
       const actual = time(row.actualTime);
       const estimate = time(row.liveEstimateTime);
@@ -105,6 +107,9 @@ export function digitrafficStops(stops: StopForDt[], train: DtTrain, now = Date.
       // The platform you board at wins; arrivals fill in when there is no departure platform.
       const track = row.commercialTrack?.trim();
       if (track && (w.type === 'DEPARTURE' || !a.platform)) a.platform = track;
+      // The stop sector, the same way: the departure's where you board.
+      const sector = row.stopSector?.trim();
+      if (sector && (w.type === 'DEPARTURE' || !a.stopSector)) a.stopSector = sector;
       a.canceled ||= Boolean(row.cancelled || train.cancelled);
       a.causes = a.causes ?? [];
       for (const c of digitrafficCauses(row.causes)) if (!a.causes.some((x) => x.code === c.code)) a.causes.push(c);

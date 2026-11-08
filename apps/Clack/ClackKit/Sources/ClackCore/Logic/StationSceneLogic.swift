@@ -228,6 +228,18 @@ public nonisolated enum StationSceneLogic {
                 chips.append(PlatformChip(id: platform.id, x: node.x, y: node.y, label: mark?.label ?? platform.ref, mark: mark, sx: sx, sy: sy))
             }
         }
+        // A register's lettered stopping sectors (Entur's boarding positions at Oslo S), once zoomed in enough to read
+        // them: a small chip at each sign; the same letter for the two tracks of an island shows once.
+        if k >= 2.5 {
+            for platform in map.platforms where platform.level == level {
+                for mark in platform.sectors ?? [] {
+                    let r = rotate(mark.point.x, mark.point.y, degrees: rot)
+                    let (sx, sy) = (r.x * k, r.y * k)
+                    if chips.contains(where: { hypot($0.sx - sx, $0.sy - sy) < 28 && ($0.label == mark.ref || $0.mark != nil) }) { continue }
+                    chips.append(PlatformChip(id: "\(platform.id)@\(mark.track ?? "")\(mark.ref)", x: mark.point.x, y: mark.point.y, label: mark.ref, sx: sx, sy: sy))
+                }
+            }
+        }
         let marked = chips.filter { $0.mark != nil }
         let plain = chips.filter { chip in
             chip.mark == nil && !marked.contains { m in
@@ -403,5 +415,18 @@ public nonisolated enum StationSceneLogic {
         let points = map.platforms.flatMap { $0.geometry.flatMap { $0 } } + map.shapes.filter { $0.kind == .building }.flatMap(\.points)
         if points.isEmpty { return hypot(p.x, p.y) <= meters }
         return points.contains { hypot($0.x - p.x, $0.y - p.y) <= meters }
+    }
+
+    /// When a map's OpenStreetMap hours were last read (re-read weekly by scripts/stations/hours_recheck.py, else the
+    /// extract's date), as YYYY-MM-DD, when that is more than 30 days before `now`; nil while they are fresh.
+    public static func hoursStale(_ map: StationMap, now: Date = .now) -> String? {
+        guard let date = map.hoursChecked ?? map.sources.first(where: { $0.type == "osm" })?.retrieved else { return nil }
+        let f = DateFormatter()
+        f.calendar = Calendar(identifier: .gregorian)
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(identifier: "Europe/Stockholm")
+        f.dateFormat = "yyyy-MM-dd"
+        guard let day = f.date(from: String(date.prefix(10))) else { return nil }
+        return now.timeIntervalSince(day) > 30 * 86_400 ? String(date.prefix(10)) : nil
     }
 }
