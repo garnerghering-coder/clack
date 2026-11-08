@@ -1,0 +1,231 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "NSR:StopPlace:418",
+ "retrieved": "2026-11-08",
+ "pack": "NO-ASR",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:6344",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:6344"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -77.6,
+     79.8
+    ],
+    "points": [
+     [
+      30.1,
+      -76.9
+     ],
+     [
+      4.4,
+      -43.7
+     ],
+     [
+      -19.2,
+      -11.3
+     ],
+     [
+      -44.2,
+      26.3
+     ],
+     [
+      -78.7,
+      81.7
+     ],
+     [
+      -105.4,
+      128.0
+     ],
+     [
+      -125.0,
+      164.7
+     ],
+     [
+      -165.6,
+      246.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 1), 381 m along the platform; data/stations/research/NO-ASR"
+   }
+  ],
+  "6": [
+   {
+    "track": "6",
+    "near": [
+     8.7,
+     23.4
+    ],
+    "points": [
+     [
+      75.4,
+      -85.9
+     ],
+     [
+      -26.2,
+      80.9
+     ],
+     [
+      -58.3,
+      131.9
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 6 (track 6), 258 m along the platform; data/stations/research/NO-ASR"
+   }
+  ],
+  "4–5": [
+   {
+    "track": "4",
+    "near": [
+     -31.3,
+     52.0
+    ],
+    "points": [
+     [
+      43.0,
+      -61.9
+     ],
+     [
+      0.9,
+      0.3
+     ],
+     [
+      -24.1,
+      40.0
+     ],
+     [
+      -64.8,
+      109.4
+     ],
+     [
+      -95.5,
+      167.1
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 4), 270 m along the platform; data/stations/research/NO-ASR"
+   },
+   {
+    "track": "5",
+    "near": [
+     -31.3,
+     52.0
+    ],
+    "points": [
+     [
+      43.0,
+      -61.9
+     ],
+     [
+      0.9,
+      0.3
+     ],
+     [
+      -24.1,
+      40.0
+     ],
+     [
+      -64.8,
+      109.4
+     ],
+     [
+      -95.5,
+      167.1
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 5), 270 m along the platform; data/stations/research/NO-ASR"
+   }
+  ],
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     -62.0,
+     93.4
+    ],
+    "points": [
+     [
+      -150.2,
+      258.1
+     ],
+     [
+      -86.8,
+      138.0
+     ],
+     [
+      -70.4,
+      107.7
+     ],
+     [
+      -47.2,
+      68.2
+     ],
+     [
+      -14.4,
+      15.4
+     ],
+     [
+      39.6,
+      -65.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 3 (track 2), 378 m along the platform; data/stations/research/NO-ASR"
+   },
+   {
+    "track": "3",
+    "near": [
+     -62.0,
+     93.4
+    ],
+    "points": [
+     [
+      -150.2,
+      258.1
+     ],
+     [
+      -86.8,
+      138.0
+     ],
+     [
+      -70.4,
+      107.7
+     ],
+     [
+      -47.2,
+      68.2
+     ],
+     [
+      -14.4,
+      15.4
+     ],
+     [
+      39.6,
+      -65.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 3 (track 3), 378 m along the platform; data/stations/research/NO-ASR"
+   }
+  ]
+ },
+ "accessibility": {
+  "l": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99992 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:6344"
+}

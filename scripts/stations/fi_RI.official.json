@@ -1,0 +1,207 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:RI",
+ "retrieved": "2026-11-08",
+ "pack": "fi_RI",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     5.3,
+     24.0
+    ],
+    "points": [
+     [
+      56.6,
+      231.1
+     ],
+     [
+      49.8,
+      213.8
+     ],
+     [
+      43.5,
+      193.4
+     ],
+     [
+      27.3,
+      133.9
+     ],
+     [
+      -17.2,
+      -88.2
+     ],
+     [
+      -25.3,
+      -147.5
+     ],
+     [
+      -27.3,
+      -178.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L4 (track 4), 422 m along the platform; data/stations/research/fi_RI"
+   }
+  ],
+  "7": [
+   {
+    "track": "7",
+    "near": [
+     28.1,
+     25.9
+    ],
+    "points": [
+     [
+      59.3,
+      175.1
+     ],
+     [
+      50.4,
+      136.2
+     ],
+     [
+      2.8,
+      -96.7
+     ],
+     [
+      -1.1,
+      -119.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L7 (track 7), 303 m along the platform; data/stations/research/fi_RI"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     2.1,
+     74.4
+    ],
+    "points": [
+     [
+      -41.0,
+      -155.8
+     ],
+     [
+      -37.5,
+      -126.6
+     ],
+     [
+      -32.5,
+      -97.0
+     ],
+     [
+      16.5,
+      147.9
+     ],
+     [
+      25.4,
+      184.9
+     ],
+     [
+      28.6,
+      196.9
+     ],
+     [
+      35.0,
+      215.0
+     ],
+     [
+      46.3,
+      244.4
+     ],
+     [
+      57.1,
+      269.5
+     ],
+     [
+      70.0,
+      296.6
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L1 (track 1), 472 m along the platform; data/stations/research/fi_RI"
+   }
+  ],
+  "8": [
+   {
+    "track": "8",
+    "near": [
+     40.7,
+     21.9
+    ],
+    "points": [
+     [
+      70.1,
+      169.1
+     ],
+     [
+      11.8,
+      -121.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L8 (track 8), 299 m along the platform; data/stations/research/fi_RI"
+   }
+  ],
+  "5": [
+   {
+    "track": "5",
+    "near": [
+     17.6,
+     19.9
+    ],
+    "points": [
+     [
+      65.0,
+      227.8
+     ],
+     [
+      58.1,
+      207.4
+     ],
+     [
+      45.0,
+      159.1
+     ],
+     [
+      -9.4,
+      -114.0
+     ],
+     [
+      -19.3,
+      -181.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L5 (track 5), 418 m along the platform; data/stations/research/fi_RI"
+   }
+  ],
+  "11": [
+   {
+    "track": "11",
+    "near": [
+     39.3,
+     -65.7
+    ],
+    "points": [
+     [
+      47.1,
+      -26.2
+     ],
+     [
+      31.8,
+      -103.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object RI L11 (track 11), 80 m along the platform; data/stations/research/fi_RI"
+   }
+  ]
+ }
+}

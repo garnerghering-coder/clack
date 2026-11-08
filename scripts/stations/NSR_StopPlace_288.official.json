@@ -1,0 +1,30 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "NSR:StopPlace:288",
+ "retrieved": "2026-11-08",
+ "pack": "NO-NTH",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:4089",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:4089"
+  }
+ ],
+ "platform_edges": {},
+ "accessibility": {
+  "f": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:7373 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:4089"
+}

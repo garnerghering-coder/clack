@@ -264,13 +264,34 @@ struct StationSceneView: View {
         let label = pin.label.count > 28 ? "\(pin.label.prefix(27))…" : pin.label
         let width = min(190, Double(pin.label.count) * 6.4 + 18)
         return ZStack {
-            if pin.kind == .me { Circle().fill(Palette.me.opacity(0.2)).frame(width: 32, height: 32) }
+            if pin.kind == .me {
+                // How far off the position may be, at this zoom; and which way you face, when the compass is good.
+                let d = StationSceneLogic.accuracyDiameter(pin.accuracyM, k: view.k) ?? 32
+                Circle().fill(Palette.me.opacity(0.14)).overlay(Circle().strokeBorder(Palette.me.opacity(0.35), lineWidth: 1)).frame(width: d, height: d)
+                if let heading = pin.headingDeg {
+                    HeadingCone().fill(RadialGradient(colors: [Palette.me.opacity(0.55), Palette.me.opacity(0)], center: .center, startRadius: 4, endRadius: 44))
+                        .frame(width: 88, height: 88)
+                        .rotationEffect(.degrees(StationSceneLogic.screenHeading(heading, mapRotation: rotation)))
+                }
+            }
             Circle().fill(fill).frame(width: 13, height: 13).overlay(Circle().strokeBorder(Ink.mapBg, lineWidth: 2.5))
             Text(label).font(ClackFont.inter(11.5, .bold)).foregroundStyle(text).lineLimit(1)
                 .frame(width: width, height: 22)
                 .background(fill, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
                 .offset(y: -24)
         }
+    }
+}
+
+/// A wedge from the middle, pointing up, 60° wide: the me pin's heading cone (turned to the heading).
+struct HeadingCone: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        let apex = CGPoint(x: rect.midX, y: rect.midY)
+        p.move(to: apex)
+        p.addArc(center: apex, radius: rect.height / 2, startAngle: .degrees(-120), endAngle: .degrees(-60), clockwise: false)
+        p.closeSubpath()
+        return p
     }
 }
 

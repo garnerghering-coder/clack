@@ -1,0 +1,155 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "860000605",
+ "retrieved": "2026-11-08",
+ "pack": "860000605",
+ "sources": [
+  {
+   "type": "banedanmark",
+   "license": "CC BY 4.0",
+   "note": "Banedanmark Open Data Sporforløb (CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     -110.0,
+     -6.6
+    ],
+    "points": [
+     [
+      64.8,
+      -31.3
+     ],
+     [
+      -1.2,
+      -18.7
+     ],
+     [
+      -48.2,
+      -12.1
+     ],
+     [
+      -71.7,
+      -9.6
+     ],
+     [
+      -128.7,
+      -5.5
+     ],
+     [
+      -282.3,
+      -0.1
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 2 / track 2 (track 2), 351 m along the platform; data/stations/research/860000605"
+   },
+   {
+    "track": "3",
+    "near": [
+     -108.5,
+     -19.4
+    ],
+    "points": [
+     [
+      62.7,
+      -43.1
+     ],
+     [
+      -8.7,
+      -31.1
+     ],
+     [
+      -74.8,
+      -22.4
+     ],
+     [
+      -140.4,
+      -17.2
+     ],
+     [
+      -281.6,
+      -9.1
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 2 / track 3 (track 3), 350 m along the platform; data/stations/research/860000605"
+   }
+  ],
+  "4–5": [
+   {
+    "track": "4",
+    "near": [
+     -143.5,
+     -21.4
+    ],
+    "points": [
+     [
+      -61.4,
+      -28.3
+     ],
+     [
+      -115.7,
+      -23.1
+     ],
+     [
+      -220.5,
+      -17.1
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 3 / track 4 (track 4), 162 m along the platform; data/stations/research/860000605"
+   },
+   {
+    "track": "5",
+    "near": [
+     -141.6,
+     -31.7
+    ],
+    "points": [
+     [
+      -62.2,
+      -37.7
+     ],
+     [
+      -221.1,
+      -25.8
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 3 / track 5 (track 5), 161 m along the platform; data/stations/research/860000605"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -68.2,
+     -5.4
+    ],
+    "points": [
+     [
+      66.7,
+      -27.3
+     ],
+     [
+      1.7,
+      -14.7
+     ],
+     [
+      -59.4,
+      -6.3
+     ],
+     [
+      -109.4,
+      -2.0
+     ],
+     [
+      -200.1,
+      1.5
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 1 / track 1 (track 1), 271 m along the platform; data/stations/research/860000605"
+   }
+  ]
+ }
+}

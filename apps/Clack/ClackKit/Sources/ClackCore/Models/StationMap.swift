@@ -223,18 +223,21 @@ public nonisolated struct PlatformEdge: Codable, Hashable, Sendable {
 /// One lettered stopping sector ("A", "B") of a platform: where its sign stands, and the stretch when the source has it.
 public nonisolated struct SectorMark: Codable, Hashable, Sendable {
     public let ref: String
+    /// The track whose sector it is, when the platform serves more than one.
+    public let track: String?
     public let point: Pt
     public let from: Pt?
     public let to: Pt?
     public let source: String
 
     public enum CodingKeys: String, CodingKey {
-        case ref, point, from, to
+        case ref, track, point, from, to
         case source = "_source"
     }
 
-    public init(ref: String, point: Pt, from: Pt? = nil, to: Pt? = nil, source: String) {
+    public init(ref: String, track: String? = nil, point: Pt, from: Pt? = nil, to: Pt? = nil, source: String) {
         self.ref = ref
+        self.track = track
         self.point = point
         self.from = from
         self.to = to

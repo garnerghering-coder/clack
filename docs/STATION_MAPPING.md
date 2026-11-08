@@ -91,8 +91,9 @@ no source gives.
 - Tracks are kept without their sector letter ("2a" is track 2); the platform's ref keeps the letter.
 - When OSM tags no entrance, the drafter lets the walking network's loose ends away from the platforms (where a
   footway leaves the station area) stand in as exits, each sourced as such. That is read off OSM, not a door that was
-  seen; a plan or a walk replaces them with the real entrances. A draft whose platforms still reach no exit is
-  withheld (its edits file says so in the changelog) rather than shipped.
+  seen; a plan or a walk replaces them with the real entrances. A draft whose platforms still reach no exit ships
+  (since build 64) with its coverage saying so ("Not every platform has a known way out"), and the review queue and
+  `OSM_AUDIT.md` ask where the entrances are.
 - Heights only from measurement (AR walk) or a published plan; otherwise `height_m` stays unset.
 - Time constants (walking 1.3 m/s, stairs 0.55 m/s, escalator 0.75 m/s, lift 45 s + 8 s per extra level) are in the
   drafter; change them only with a measured reason (`data/walking_model.json` when it exists).

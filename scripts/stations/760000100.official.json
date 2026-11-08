@@ -1,0 +1,667 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "760000100",
+ "retrieved": "2026-11-08",
+ "pack": "NO-OSL_S",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:337",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:337"
+  }
+ ],
+ "platform_edges": {
+  "1–2": [
+   {
+    "track": "2",
+    "near": [
+     248.7,
+     47.2
+    ],
+    "points": [
+     [
+      79.2,
+      -33.7
+     ],
+     [
+      420.3,
+      129.5
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS1 (track 2), 380 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "11–12": [
+   {
+    "track": "12",
+    "near": [
+     203.3,
+     120.8
+    ],
+    "points": [
+     [
+      42.2,
+      43.7
+     ],
+     [
+      365.1,
+      198.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS11 (track 12), 360 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "15–16": [
+   {
+    "track": "16",
+    "near": [
+     192.3,
+     153.5
+    ],
+    "points": [
+     [
+      21.4,
+      71.5
+     ],
+     [
+      277.6,
+      194.4
+     ],
+     [
+      311.9,
+      207.5
+     ],
+     [
+      322.2,
+      210.4
+     ],
+     [
+      343.1,
+      215.4
+     ],
+     [
+      375.1,
+      221.3
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS15 (track 16), 388 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "3–4": [
+   {
+    "track": "4",
+    "near": [
+     274.3,
+     78.6
+    ],
+    "points": [
+     [
+      476.1,
+      175.4
+     ],
+     [
+      74.1,
+      -17.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS3 (track 4), 448 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "17–18": [
+   {
+    "track": "18",
+    "near": [
+     185.1,
+     168.8
+    ],
+    "points": [
+     [
+      13.7,
+      87.8
+     ],
+     [
+      261.7,
+      205.5
+     ],
+     [
+      287.4,
+      215.5
+     ],
+     [
+      308.6,
+      222.1
+     ],
+     [
+      368.4,
+      236.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS17 (track 18), 388 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "13–14": [
+   {
+    "track": "14",
+    "near": [
+     191.2,
+     134.0
+    ],
+    "points": [
+     [
+      35.7,
+      59.6
+     ],
+     [
+      289.7,
+      181.1
+     ],
+     [
+      352.0,
+      207.2
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS13 (track 14), 351 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "5–6": [
+   {
+    "track": "6",
+    "near": [
+     208.8,
+     66.4
+    ],
+    "points": [
+     [
+      353.3,
+      135.6
+     ],
+     [
+      67.9,
+      -1.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS5 (track 6), 320 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "7–8": [
+   {
+    "track": "8",
+    "near": [
+     163.8,
+     63.5
+    ],
+    "points": [
+     [
+      270.8,
+      115.2
+     ],
+     [
+      59.3,
+      13.6
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS7 (track 8), 237 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ],
+  "9–10": [
+   {
+    "track": "10",
+    "near": [
+     154.5,
+     78.4
+    ],
+    "points": [
+     [
+      49.8,
+      28.1
+     ],
+     [
+      261.5,
+      129.6
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track OS9 (track 10), 237 m along the platform; data/stations/research/NO-OSL_S"
+   }
+  ]
+ },
+ "sectors": {
+  "2": [
+   {
+    "ref": "A",
+    "track": "2",
+    "point": [
+     88.1,
+     -17.7
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4369 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "B",
+    "track": "2",
+    "point": [
+     111.9,
+     -6.3
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4370 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "C",
+    "track": "2",
+    "point": [
+     137.5,
+     6.0
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4371 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "D",
+    "track": "2",
+    "point": [
+     160.2,
+     17.1
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4372 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "E",
+    "track": "2",
+    "point": [
+     188.1,
+     30.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4373 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "F",
+    "track": "2",
+    "point": [
+     219.2,
+     44.4
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4374 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "G",
+    "track": "2",
+    "point": [
+     246.1,
+     58.8
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4375 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "H",
+    "track": "2",
+    "point": [
+     270.1,
+     70.7
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4376 on NSR:Quay:570 (Entur stop place register, NLOD)"
+   }
+  ],
+  "9": [
+   {
+    "ref": "A",
+    "track": "9",
+    "point": [
+     60.2,
+     36.3
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4377 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "B",
+    "track": "9",
+    "point": [
+     84.9,
+     48.0
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4378 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "C",
+    "track": "9",
+    "point": [
+     114.0,
+     61.8
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4379 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "D",
+    "track": "9",
+    "point": [
+     139.1,
+     73.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4380 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "E",
+    "track": "9",
+    "point": [
+     168.0,
+     87.5
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4381 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "F",
+    "track": "9",
+    "point": [
+     199.0,
+     102.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4382 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "G",
+    "track": "9",
+    "point": [
+     217.7,
+     111.9
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4383 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "H",
+    "track": "9",
+    "point": [
+     241.7,
+     123.1
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4384 on NSR:Quay:555 (Entur stop place register, NLOD)"
+   }
+  ],
+  "3": [
+   {
+    "ref": "A",
+    "track": "3",
+    "point": [
+     84.9,
+     -8.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4385 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "B",
+    "track": "3",
+    "point": [
+     107.2,
+     2.1
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4386 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "C",
+    "track": "3",
+    "point": [
+     132.6,
+     13.8
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4387 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "D",
+    "track": "3",
+    "point": [
+     156.5,
+     25.9
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4388 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "E",
+    "track": "3",
+    "point": [
+     185.3,
+     39.3
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4389 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "F",
+    "track": "3",
+    "point": [
+     215.8,
+     54.5
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4390 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "G",
+    "track": "3",
+    "point": [
+     242.7,
+     66.7
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4391 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "H",
+    "track": "3",
+    "point": [
+     266.8,
+     79.2
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4392 on NSR:Quay:554 (Entur stop place register, NLOD)"
+   }
+  ],
+  "1": [
+   {
+    "ref": "A",
+    "track": "1",
+    "point": [
+     95.5,
+     -22.0
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4393 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "B",
+    "track": "1",
+    "point": [
+     116.2,
+     -11.9
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4394 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "C",
+    "track": "1",
+    "point": [
+     141.7,
+     -0.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4395 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "D",
+    "track": "1",
+    "point": [
+     174.0,
+     14.5
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4396 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "E",
+    "track": "1",
+    "point": [
+     196.4,
+     25.2
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4397 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "F",
+    "track": "1",
+    "point": [
+     227.0,
+     39.9
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4398 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "G",
+    "track": "1",
+    "point": [
+     251.3,
+     51.9
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4399 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   },
+   {
+    "ref": "H",
+    "track": "1",
+    "point": [
+     275.5,
+     63.6
+    ],
+    "_source": "entur:nsr NSR:BoardingPosition:4400 on NSR:Quay:565 (Entur stop place register, NLOD)"
+   }
+  ]
+ },
+ "accessibility": {
+  "15": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:563 (Entur stop place register, NLOD)"
+  },
+  "2": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:570 (Entur stop place register, NLOD)"
+  },
+  "5": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:559 (Entur stop place register, NLOD)"
+  },
+  "7": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:553 (Entur stop place register, NLOD)"
+  },
+  "6": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:550 (Entur stop place register, NLOD)"
+  },
+  "11": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:571 (Entur stop place register, NLOD)"
+  },
+  "16": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:562 (Entur stop place register, NLOD)"
+  },
+  "13": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:557 (Entur stop place register, NLOD)"
+  },
+  "14": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:569 (Entur stop place register, NLOD)"
+  },
+  "9": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:555 (Entur stop place register, NLOD)"
+  },
+  "8": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:561 (Entur stop place register, NLOD)"
+  },
+  "4": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:566 (Entur stop place register, NLOD)"
+  },
+  "19": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:556 (Entur stop place register, NLOD)"
+  },
+  "17": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:564 (Entur stop place register, NLOD)"
+  },
+  "12": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:568 (Entur stop place register, NLOD)"
+  },
+  "3": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:554 (Entur stop place register, NLOD)"
+  },
+  "18": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:567 (Entur stop place register, NLOD)"
+  },
+  "10": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:551 (Entur stop place register, NLOD)"
+  },
+  "1": {
+   "step_free": "TRUE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:565 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:337"
+}

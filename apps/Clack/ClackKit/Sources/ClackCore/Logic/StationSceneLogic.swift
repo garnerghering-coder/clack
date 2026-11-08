@@ -54,13 +54,19 @@ public nonisolated enum StationSceneLogic {
         public var level: String
         public var label: String
         public var kind: Kind
+        /// For "me": how far off the position may be (metres, the fix's horizontal accuracy), drawn as a circle.
+        public var accuracyM: Double?
+        /// For "me": which way you face, degrees from true north, drawn as a cone; nil when not known well enough.
+        public var headingDeg: Double?
 
-        public init(x: Double, y: Double, level: String, label: String, kind: Kind) {
+        public init(x: Double, y: Double, level: String, label: String, kind: Kind, accuracyM: Double? = nil, headingDeg: Double? = nil) {
             self.x = x
             self.y = y
             self.level = level
             self.label = label
             self.kind = kind
+            self.accuracyM = accuracyM
+            self.headingDeg = headingDeg
         }
     }
 
@@ -283,10 +289,17 @@ public nonisolated enum StationSceneLogic {
         var named = Set<String>()
         if k > 3.2 {
             var slots = Set<String>()
+            // Platform chips and the route's pins hold their place: a name (about 90 px wide, under its pin) never runs
+            // under one of them.
+            let chips = platformChips(map: map, level: level, marks: marks, k: k, pins: pins)
+            func underChipOrPin(_ x: Double, _ y: Double) -> Bool {
+                chips.contains { abs($0.sx - x) < (Double($0.label.count) * 6.6 + 16) / 2 + 45 && abs($0.sy - y) < 22 }
+                    || covered(sx: x, sy: y, halfWidth: 45, by: pins, level: level, rot: rot, k: k)
+            }
             for p in ordered(onLevel.filter { shown.contains($0.id) && !$0.name.isEmpty }) {
                 let r = rotate(p.x, p.y, degrees: rot)
                 let cell = "\(Int((r.x * k / 96).rounded())),\(Int(((r.y * k + 24) / 30).rounded()))"
-                if slots.contains(cell) { continue }
+                if slots.contains(cell) || underChipOrPin(r.x * k, r.y * k + 24) { continue }
                 slots.insert(cell)
                 named.insert(p.id)
             }
@@ -340,5 +353,19 @@ public nonisolated enum StationSceneLogic {
         if c.entrances < 1 { return "stationMap.coverage.exits" }
         if c.sides < 1 { return "stationMap.coverage.sides" }
         return nil
+    }
+
+    /// The me pin's accuracy circle, in screen points across: the fix's accuracy at this zoom, never smaller than the
+    /// pin's own halo (32) and capped so a rough fix doesn't cover the whole plan.
+    public static func accuracyDiameter(_ meters: Double?, k: Double, maxPoints: Double = 600) -> Double? {
+        guard let meters, meters > 0, meters.isFinite else { return nil }
+        return min(max(meters * 2 * k, 32), maxPoints)
+    }
+
+    /// A heading (degrees from true north) as an angle on screen, clockwise from straight up: the plan is drawn
+    /// turned by its rotation, so north on screen is turned by as much.
+    public static func screenHeading(_ heading: Double, mapRotation: Double) -> Double {
+        let a = (heading + mapRotation).truncatingRemainder(dividingBy: 360)
+        return a < 0 ? a + 360 : a
     }
 }

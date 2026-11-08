@@ -333,6 +333,8 @@ public nonisolated enum StationRouting {
         guard let track, !track.isEmpty else { return nil }
         var base = track.lowercased()
         while let last = base.last, last.isLetter, last.isASCII { base.removeLast() }
+        // A track that is only letters (Oslo S's "B") is matched whole: stripping would leave nothing.
+        if base.isEmpty { base = track.lowercased() }
         return map.platforms.first { $0.tracks.contains(base) }
     }
 

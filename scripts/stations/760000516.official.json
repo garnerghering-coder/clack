@@ -1,0 +1,147 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "760000516",
+ "retrieved": "2026-11-08",
+ "pack": "NO-MOS",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:203",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:203"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -30.8,
+     -36.6
+    ],
+    "points": [
+     [
+      -103.9,
+      -145.5
+     ],
+     [
+      -95.6,
+      -128.0
+     ],
+     [
+      -81.6,
+      -105.1
+     ],
+     [
+      -70.7,
+      -89.7
+     ],
+     [
+      26.3,
+      39.4
+     ],
+     [
+      36.7,
+      53.9
+     ],
+     [
+      44.8,
+      67.0
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 1), 262 m along the platform; data/stations/research/NO-MOS"
+   }
+  ],
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     -30.1,
+     -27.6
+    ],
+    "points": [
+     [
+      -101.3,
+      -129.2
+     ],
+     [
+      -92.8,
+      -113.9
+     ],
+     [
+      -74.2,
+      -86.5
+     ],
+     [
+      22.8,
+      42.5
+     ],
+     [
+      40.5,
+      69.7
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 2 (track 2), 247 m along the platform; data/stations/research/NO-MOS"
+   },
+   {
+    "track": "3",
+    "near": [
+     -30.1,
+     -27.6
+    ],
+    "points": [
+     [
+      -101.3,
+      -129.2
+     ],
+     [
+      -92.8,
+      -113.9
+     ],
+     [
+      -74.2,
+      -86.5
+     ],
+     [
+      22.8,
+      42.5
+     ],
+     [
+      40.5,
+      69.7
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 2 (track 3), 247 m along the platform; data/stations/research/NO-MOS"
+   }
+  ]
+ },
+ "accessibility": {
+  "2": {
+   "step_free": "FALSE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "FALSE",
+   "_source": "entur:nsr NSR:Quay:331 (Entur stop place register, NLOD)"
+  },
+  "3": {
+   "step_free": "FALSE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "FALSE",
+   "_source": "entur:nsr NSR:Quay:333 (Entur stop place register, NLOD)"
+  },
+  "1": {
+   "step_free": "FALSE",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "FALSE",
+   "_source": "entur:nsr NSR:Quay:332 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:203"
+}

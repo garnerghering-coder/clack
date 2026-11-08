@@ -205,6 +205,23 @@
         }
       }
     },
+    "about.sources.stationMapRegisters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Station map platforms, tracks, sides and sectors: Trafikverket BanInfo (CC0); Väylävirasto through Digitraffic (CC BY 4.0, source: Väylävirasto); Entur’s stop place register (NLOD); Bane NOR’s station pages; Banedanmark Open Data (with Banedanmark’s permission), and station plans and opening hours from Jernhusen, Bane NOR and DSB, used with their permission."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationskartornas plattformar, spår, sidor och sektorer: Trafikverkets BanInfo (CC0); Väylävirasto via Digitraffic (CC BY 4.0, källa: Väylävirasto); Enturs hållplatsregister (NLOD); Bane NORs stationssidor; Banedanmarks öppna data (med Banedanmarks tillstånd), och stationsplaner och öppettider från Jernhusen, Bane NOR och DSB, med deras tillstånd."
+          }
+        }
+      }
+    },
     "about.sources.stationMaps" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18557,6 +18574,40 @@
         }
       }
     },
+    "stationMap.side.left" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "left"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vänstra"
+          }
+        }
+      }
+    },
+    "stationMap.side.right" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "right"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "högra"
+          }
+        }
+      }
+    },
     "stationMap.startHere" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18655,6 +18706,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Framme vid spår {{track}}"
+          }
+        }
+      }
+    },
+    "stationMap.step.continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk {{m}} m, past {{landmark}} on your {{side}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå {{m}} m, förbi {{landmark}} på din {{side}} sida"
+          }
+        }
+      }
+    },
+    "stationMap.step.continuePlain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå {{m}} m"
           }
         }
       }
@@ -18808,6 +18893,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Börja vid {{place}}"
+          }
+        }
+      }
+    },
+    "stationMap.step.turnLeft" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn left after {{landmark}}, {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sväng vänster efter {{landmark}}, {{m}} m"
+          }
+        }
+      }
+    },
+    "stationMap.step.turnLeftPlain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn left, then {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sväng vänster, sedan {{m}} m"
+          }
+        }
+      }
+    },
+    "stationMap.step.turnRight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn right after {{landmark}}, {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sväng höger efter {{landmark}}, {{m}} m"
+          }
+        }
+      }
+    },
+    "stationMap.step.turnRightPlain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn right, then {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sväng höger, sedan {{m}} m"
+          }
+        }
+      }
+    },
+    "stationMap.step.uTurn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn back, then {{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vänd, sedan {{m}} m"
           }
         }
       }

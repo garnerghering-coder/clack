@@ -84,6 +84,8 @@ export interface StationPlatform {
 /** One lettered stopping sector ("A", "B") of a platform: where its sign stands, and the stretch when known. */
 export interface SectorMark {
   ref: string;
+  /** The track whose sector it is, when the platform serves more than one. */
+  track?: string;
   point: Pt;
   from?: Pt;
   to?: Pt;
@@ -155,7 +157,7 @@ export interface StationPoi {
 }
 export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'lantmateriet' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons'
   // The other countries' laser (heights, ground) and platform registers (the research passes).
-  | 'helsinki' | 'nls' | 'kartverket' | 'sdfi' | 'digitraffic' | 'banenor' | 'banedanmark';
+  | 'helsinki' | 'nls' | 'kartverket' | 'sdfi' | 'digitraffic' | 'banenor' | 'banedanmark' | 'entur';
 /** The laser sources whose credit the map must show where their heights are drawn. */
 export const LASER_SOURCES: StationSourceType[] = ['lantmateriet', 'helsinki', 'nls', 'kartverket', 'sdfi'];
 export interface StationMap {
@@ -215,16 +217,17 @@ export function validateStationMap(m: StationMap): string[] {
     else if (!seen.has(p.node) && !islands.has(p.node)) errors.push(`poi ${p.id}: unreachable`);
     if (!levels.has(p.level)) errors.push(`poi ${p.id}: unknown level ${p.level}`);
   }
-  if ((m.schema ?? 1) >= 2) errors.push(...validateSchema2(m, nodes, adj));
+  if ((m.schema ?? 1) >= 2) errors.push(...validateSchema2(m, nodes));
   if (m.quality === 'hand_curated') errors.push(...handCuratedProblems(m).map((p) => `hand_curated, but ${p}`));
   return errors;
 }
 
 /**
  * Schema 2's stricter rules: every element says where it comes from; a change of level is stairs, an escalator or
- * a lift, never a plain walk; every platform reaches an entrance; a platform edge names a track the platform serves.
+ * a lift, never a plain walk; a platform edge names a track the platform serves. A platform with no known way to an
+ * entrance is not an error (build 64: such maps ship, and say so): `stationReview` lists it and the coverage counts it.
  */
-function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Map<string, [string, StationEdge][]>): string[] {
+function validateSchema2(m: StationMap, nodes: Map<string, StationNode>): string[] {
   const errors: string[] = [];
   const need = (what: string, src: SourceRef | undefined) => {
     if (!src || !src.trim()) errors.push(`${what}: no _source`);
@@ -258,23 +261,6 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
     if (a && b && a.level !== b.level && e.kind === 'walk') errors.push(`edge ${e.from}→${e.to}: changes level (${a.level}→${b.level}) but is a walk, not stairs, an escalator, a lift or a ramp`);
   }
   for (const p of m.pois) need(`poi ${p.id}`, p._source);
-  // Every platform reaches an exit.
-  const entrances = new Set(m.nodes.filter((n) => n.type === 'entrance').map((n) => n.id));
-  if (!entrances.size) errors.push('no entrance nodes: platforms cannot reach an exit');
-  else
-    for (const p of m.platforms.filter((p) => !p.unconnected)) {
-      const seen = new Set<string>();
-      const stack = [p.node];
-      let found = false;
-      while (stack.length && !found) {
-        const n = stack.pop()!;
-        if (seen.has(n)) continue;
-        seen.add(n);
-        if (entrances.has(n)) found = true;
-        for (const [to] of adj.get(n) ?? []) stack.push(to);
-      }
-      if (!found) errors.push(`platform ${p.ref}: no way to an entrance`);
-    }
   return errors;
 }
 
@@ -298,6 +284,11 @@ export function stationReview(m: StationMap, knownTracks?: string[] | null): str
   const vertical = m.edges.filter((e) => e.kind !== 'walk');
   if (m.levels.length > 1 && !vertical.length) out.push('several levels but no stairs, escalators or lifts between them');
   if (!m.nodes.some((n) => n.type === 'entrance')) out.push('no entrances mapped');
+  else {
+    const adj = adjacency(m);
+    const entrances = new Set(m.nodes.filter((n) => n.type === 'entrance').map((n) => n.id));
+    for (const p of m.platforms.filter((p) => !p.unconnected)) if (![...reachable(adj, [p.node])].some((n) => entrances.has(n))) out.push(`platform ${p.ref}: no way to an entrance`);
+  }
   for (const p of m.platforms)
     if (m.levels.length > 1 && !m.edges.some((e) => e.kind !== 'walk' && (m.nodes.find((n) => n.id === e.from)?.platform === p.id || m.nodes.find((n) => n.id === e.to)?.platform === p.id)) && levelsWithPlatforms.size < m.levels.length)
       out.push(`platform ${p.ref}: no stairs, escalator or lift of its own (reached along the platform level only)`);
@@ -490,7 +481,8 @@ export function secondsFrom(m: StationMap, sources: string[], p: WalkProfile = D
 /** The platform serving a Trafikverket track ("17b" → the platform with track 17). */
 export function platformForTrack(m: StationMap, track: string | null | undefined): StationPlatform | null {
   if (!track) return null;
-  const base = track.toLowerCase().replace(/[a-z]+$/, '');
+  // A track that is only letters (Oslo S's "B") is matched whole: stripping would leave nothing.
+  const base = track.toLowerCase().replace(/[a-z]+$/, '') || track.toLowerCase();
   return m.platforms.find((p) => p.tracks.includes(base)) ?? null;
 }
 
@@ -824,4 +816,100 @@ export function crossSection(rings: Pt[][], q: Pt, d: Pt): [Pt, Pt] | null {
   }
   if (!best || gap(best) > 15) return null;
   return [[q[0] + n[0] * best[0], q[1] + n[1] * best[0]], [q[0] + n[0] * best[1], q[1] + n[1] * best[1]]];
+}
+
+// ---------- Walk mode: directions with distance, turn and landmark (twin of ClackCore RouteGuide.swift) ----------
+export type GuideTurn = 'left' | 'right' | 'straight' | 'u_turn';
+export interface GuideStep {
+  key: Instruction['key'];
+  distanceM: number;
+  turn?: GuideTurn;
+  landmark?: { poiId: string; name: string; side: 'left' | 'right' };
+  at: Pt;
+  level: string;
+  seconds: number;
+  points: Pt[];
+}
+const GUIDE_TURN_DEG = 35, GUIDE_STEP_M = 2, GUIDE_WINDOW_M = 6, GUIDE_LANDMARK_M = 10;
+const len = (pts: Pt[]) => pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i]![0], q[1] - pts[i]![1]), 0);
+/** Degrees clockwise from north (up, −y). */
+const bearing = (a: Pt, b: Pt) => ((Math.atan2(b[0] - a[0], -(b[1] - a[1])) * 180) / Math.PI + 360) % 360;
+const turnDelta = (a: number, b: number) => ((((b - a) % 360) + 540) % 360) - 180;
+
+/** The route as walk-mode steps: walks on one level cut where they bend by more than 35°, and the level changes. */
+export function guide(m: StationMap, r: StationRoute): GuideStep[] {
+  const order = new Map(m.levels.map((l) => [l.id, l.order]));
+  const out: GuideStep[] = [];
+  let run: Pt[] = [], runSec = 0, runLevel = '';
+  const flush = () => {
+    if (run.length > 1) out.push(...splitWalk(m, run, runLevel, runSec));
+    run = [];
+    runSec = 0;
+  };
+  for (const s of r.steps) {
+    const g = s.edge.geometry && s.edge.geometry.length > 1 ? s.edge.geometry : ([[s.from.x, s.from.y], [s.to.x, s.to.y]] as Pt[]);
+    const pts = s.edge.from === s.from.id ? g : [...g].reverse();
+    if (s.kind === 'walk' && s.from.level === s.to.level) {
+      if (runLevel !== s.from.level) flush();
+      runLevel = s.from.level;
+      const last = run.at(-1);
+      run.push(...(last && Math.abs(last[0] - pts[0]![0]) < 0.01 && Math.abs(last[1] - pts[0]![1]) < 0.01 ? pts.slice(1) : pts));
+      runSec += s.seconds;
+    } else {
+      flush();
+      const up = (order.get(s.to.level) ?? 0) > (order.get(s.from.level) ?? 0);
+      const key = `${s.kind}_${up ? 'up' : 'down'}` as Instruction['key'];
+      const prev = out.at(-1);
+      if (prev && prev.key === key) {
+        prev.distanceM += len(pts);
+        prev.seconds += s.seconds;
+        prev.level = s.to.level;
+        prev.points.push(...pts.slice(1));
+      } else out.push({ key, distanceM: len(pts), at: pts[0]!, level: s.to.level, seconds: s.seconds, points: [...pts] });
+    }
+  }
+  flush();
+  return out;
+}
+
+function splitWalk(m: StationMap, pts: Pt[], level: string, seconds: number): GuideStep[] {
+  const s = resample(pts, GUIDE_STEP_M);
+  if (s.length <= 2) return [{ key: 'walk', distanceM: len(pts), at: pts[0]!, level, seconds, points: pts }];
+  const w = GUIDE_WINDOW_M / GUIDE_STEP_M;
+  const cuts: { i: number; a: number }[] = [];
+  const bend = (i: number) => turnDelta(bearing(s[i - w]!, s[i]!), bearing(s[i]!, s[i + w]!));
+  for (let i = w; i < s.length - w; ) {
+    const d = bend(i);
+    if (Math.abs(d) <= GUIDE_TURN_DEG) { i++; continue; }
+    let best = { i, a: d };
+    let j = i + 1;
+    for (; j < s.length - w; j++) {
+      const dj = bend(j);
+      if (Math.abs(dj) <= GUIDE_TURN_DEG) break;
+      if (Math.abs(dj) > Math.abs(best.a)) best = { i: j, a: dj };
+    }
+    cuts.push(best);
+    i = j + w;
+  }
+  const total = len(s);
+  const ends = [...cuts.map((c) => c.i), s.length - 1];
+  const out: GuideStep[] = [];
+  let start = 0;
+  ends.forEach((end, n) => {
+    const piece = s.slice(start, end + 1);
+    const dist = len(piece);
+    const from = s[Math.max(start - w, 0)]!, at = s[start]!, ahead = s[Math.min(start + w, s.length - 1)]!;
+    const dir: Pt = n === 0 ? [ahead[0] - at[0], ahead[1] - at[1]] : [at[0] - from[0], at[1] - from[1]];
+    const a = cuts[n - 1]?.a;
+    const turn: GuideTurn | undefined = n === 0 ? undefined : Math.abs(a!) > 150 ? 'u_turn' : a! > 0 ? 'right' : 'left';
+    const lm = m.pois
+      .filter((p) => p.level === level && p.name && !p.approximate)
+      .map((p) => ({ p, d: Math.hypot(p.x - at[0], p.y - at[1]) }))
+      .filter((x) => x.d <= GUIDE_LANDMARK_M)
+      .sort((x, y) => x.d - y.d)[0];
+    const side = lm ? (dir[0] * (lm.p.y - at[1]) - dir[1] * (lm.p.x - at[0]) > 0 ? 'right' : 'left') : undefined;
+    out.push({ key: 'walk', distanceM: dist, ...(turn ? { turn } : {}), ...(lm ? { landmark: { poiId: lm.p.id, name: lm.p.name, side: side! } } : {}), at, level, seconds: total > 0 ? (seconds * dist) / total : 0, points: piece });
+    start = end;
+  });
+  return out;
 }

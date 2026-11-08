@@ -244,7 +244,7 @@ struct StationMapScreen: View {
                 let colour = MapStyle.opColor(operatorA.flatMap { app.operatorsById[$0]?.brandColor }, dark: dark)
                 marks.append(.init(platformId: platform.id, label: arr.map { l10n.t("stationMap.arriveChip", ["track": fromE.track ?? "", "time": Format.time($0, tz: tz, clock: clock)]) } ?? l10n.t("stationMap.fromChip", ["track": fromE.track ?? ""]), color: colour))
             } else {
-                pins.append(.init(x: fromE.poi?.x ?? fromE.node.x, y: fromE.poi?.y ?? fromE.node.y, level: fromE.node.level, label: label(map, fromE), kind: fromE.kind == .me ? .me : .from))
+                pins.append(.init(x: fromE.poi?.x ?? fromE.node.x, y: fromE.poi?.y ?? fromE.node.y, level: fromE.node.level, label: label(map, fromE), kind: fromE.kind == .me ? .me : .from, accuracyM: fromE.kind == .me ? meAccuracy : nil))
             }
         }
         if let toE {

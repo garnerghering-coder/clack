@@ -347,6 +347,10 @@ def main():
     # Finnish ids carry a colon ("fi:HKI"); files are named with an underscore (fi_HKI.edits.json, fi_HKI.json).
     safe = sid.replace(":", "_")
     edits = json.load(open(os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")))
+    # The registers' facts (scripts/stations/official/import_platforms.py) come first; the hand edits win per platform.
+    opath = os.path.join(ROOT, f"scripts/stations/{safe}.official.json")
+    official = json.load(open(opath)) if os.path.exists(opath) else {}
+    edits["platform_edges"] = {**official.get("platform_edges", {}), **edits.get("platform_edges", {})}
     db = open_db()
     name, lat0, lon0 = db.execute("select name, lat, lon from stations where id=?", (sid,)).fetchone()
     if "origin" in edits:
@@ -438,8 +442,18 @@ def main():
         # Tracks without their sector letter ("2a" → "2"): the app and the validator match tracks that way; the
         # platform's ref keeps the letter, and so does an edge's track from the rail's own number.
         # A track that is only a letter (Oslo S's "B") keeps it: stripping would leave nothing to match.
-        tracks = list(dict.fromkeys((re.sub(r"[a-z]+$", "", x.strip().lower()) or x.strip().lower()) for x in re.split(r"[;,]", ref) if x.strip()))
+        # "1–3" (a ref the research wrote for a run of tracks) is tracks 1, 2 and 3; "15–16" is 15 and 16.
+        parts = []
+        for x in re.split(r"[;,]", ref):
+            m = re.fullmatch(r"\s*(\d+)\s*[–-]\s*(\d+)\s*", x)
+            parts += [str(n) for n in range(int(m.group(1)), int(m.group(2)) + 1)] if m and 0 < int(m.group(2)) - int(m.group(1)) <= 3 else [x]
+        tracks = list(dict.fromkeys((re.sub(r"[a-z]+$", "", x.strip().lower()) or x.strip().lower()) for x in parts if x.strip()))
         platforms.append(dict(ref=ref.replace(";", "–"), tracks=tracks, level=level_id[lv[0]], poly=p, wid=wid))
+    # Platforms OSM lacks, from a register's outline (Banedanmark's FOR_PERRONER_OD), on the default level.
+    for i, x in enumerate(official.get("extra_platforms", [])):
+        if x["ref"] in drop:
+            continue
+        platforms.append(dict(ref=x["ref"], tracks=x["tracks"], level=level_id[edits.get("default_level", "0")], poly=[tuple(q) for q in x["points"]], wid=f"official{i}", src=x["_source"]))
     # Merge pieces with the same ref.
     by_ref = defaultdict(list)
     for p in platforms:
@@ -524,13 +538,35 @@ def main():
                 e["note"] = "island platform: which side is which track is not in OSM" + (f" (rail says {track_ref})" if track_ref else "")
             out.append(e)
         for o in edits.get("platform_edges", {}).get(ref, []):
-            if not out:
-                break
             x, y = o["near"]
-            best = min(out, key=lambda e: min(math.hypot(px - x, py - y) for px, py in e["points"]))
+            gap = lambda e: min(math.hypot(px - x, py - y) for px, py in e["points"])
+            best = min(out, key=gap) if out else None
+            # A register's side with no OSM rail beside it (or none close): drawn from the register's own line.
+            if (best is None or gap(best) > 10) and o.get("points"):
+                out.append(dict(track=o["track"].lower(), points=o["points"], _source=o["_source"]))
+                continue
+            if best is None:
+                continue
             best["track"] = o["track"].lower()
             best["_source"] += f"; track from {o['_source']}"
             best.pop("note", None)
+        # A two-track platform with one side named: the side across from it is the other track (derived, and said so).
+        named = [e for e in out if e["track"]]
+        left = [t for t in tracks if not any(re.sub(r"[a-z]+$", "", e["track"]) == t for e in named)]
+        if len(tracks) == 2 and len(named) >= 1 and len(left) == 1:
+            cx, cy = sum(q[0] for q in verts) / len(verts), sum(q[1] for q in verts) / len(verts)
+            mid = lambda e: (sum(q[0] for q in e["points"]) / len(e["points"]) - cx, sum(q[1] for q in e["points"]) / len(e["points"]) - cy)
+            ref_v = mid(named[0])
+            across = [e for e in out if not e["track"] and mid(e)[0] * ref_v[0] + mid(e)[1] * ref_v[1] < 0]
+            if across:
+                e = max(across, key=lambda e: polylen(e["points"]))
+                e["track"] = left[0]
+                e["_source"] += f"; derived: across the platform from track {named[0]['track']} ({named[0]['_source'].split(';')[-1].strip()})"
+                e.pop("note", None)
+        # Every track has its side: the other rails along the outline (sidings, the next track's rails past the end) are
+        # not sides a train is boarded from.
+        if all(any(re.sub(r"[a-z]+$", "", e["track"] or "") == t for e in out) for t in tracks):
+            out = [e for e in out if e["track"]]
         # One edge per track: the longest.
         by_track = {}
         for e in out:
@@ -756,7 +792,7 @@ def main():
         cy = sum(q[1] for q in allpts) / len(allpts)
         level = pieces[0]["level"]
         node_id = f"{pid}_mid"
-        piece_src = ",".join(f"osm:way/{p['wid']}" for p in pieces)
+        piece_src = ",".join(p.get("src") or f"osm:way/{p['wid']}" for p in pieces)
         V[node_id] = dict(id=node_id, x=round(cx, 2), y=round(cy, 2), level=level, osm=None, type="platform", platform=pid, src=f"derived:middle of {piece_src}")
         access = [k for k, v in V.items() if v["level"] == level and v.get("type") != "platform" and any(dist_to_poly((v["x"], v["y"]), p["poly"]) <= 1.5 for p in pieces)]
         access += [k for k, r in pending_platform_links if r == ref and k not in access]
@@ -838,8 +874,10 @@ def main():
 
     # Entrances OSM doesn't tag (edits "entrances": [{"at": [x, y], "level": osm level, "name": …, "_source": …}]):
     # the nearest vertex on that level becomes an entrance.
+    platform_mids = {k for k, v in V.items() if v.get("type") == "platform"}
     for spec in edits.get("entrances", []):
-        k, d = nearest(*spec["at"], level_id[str(spec["level"])])
+        # Never a platform's own middle: that node must stay the platform's (Hallsberg's entrance took it).
+        k, d = nearest(*spec["at"], level_id[str(spec["level"])], exclude=platform_mids)
         if k is None:
             continue
         V[k]["type"] = "entrance"
@@ -961,6 +999,10 @@ def main():
     out_edges, seen_pairs = [], {}
     for e in final_edges:
         if e["a"] not in names or e["b"] not in names or e["a"] == e["b"]:
+            continue
+        # A plain walk between two levels is a gap in the sources (no stairs, lift or ramp mapped), not a way: left out.
+        # Only the pieces of the graph around unconnected platforms ever had one (the main graph is checked by hand).
+        if e["kind"] == "walk" and V[e["a"]]["level"] != V[e["b"]]["level"]:
             continue
         pts = e["pts"] or [(V[e["a"]]["x"], V[e["a"]]["y"]), (V[e["b"]]["x"], V[e["b"]]["y"])]
         meters = e["meters"] if e.get("meters") is not None else polylen(pts)
@@ -1107,7 +1149,9 @@ def main():
         quality=edits.get("quality", "osm_draft"),
         # Every source needs a type (the app and the format require one); hand edits that named theirs get "manual".
         sources=[dict(type="osm", license="ODbL", retrieved=osm["retrieved"], url="https://www.openstreetmap.org/copyright", note="via the Overpass API" if osm.get("source") == "overpass" else "from the Geofabrik/openstreetmap.fr extract")]
-        + [s if s.get("type") else {"type": "manual", **({"note": s["name"]} if "name" in s else {}), **({"retrieved": s["read"]} if "read" in s else {}), **{k: v for k, v in s.items() if k not in ("name", "read")}} for s in edits.get("sources", [])],
+        + [s if s.get("type") else {"type": "manual", **({"note": s["name"]} if "name" in s else {}), **({"retrieved": s["read"]} if "read" in s else {}), **{k: v for k, v in s.items() if k not in ("name", "read")}} for s in edits.get("sources", [])]
+        # The registers the official sidecar read (one entry each, unless the edits already list it).
+        + [dict(type=s["type"], **{k: v for k, v in s.items() if k != "type" and v is not None}, retrieved=official.get("retrieved")) for s in official.get("sources", []) if not any(e.get("note") == s.get("note") for e in edits.get("sources", []))],
         changelog=edits.get("changelog", []),
         coord_system="local_m",
         origin=dict(lat=lat0, lon=lon0),
@@ -1133,6 +1177,10 @@ def main():
                 raise SystemExit(f"sector_edges {p['ref']}: no track {sec['feature_track']} in {sec['file']}")
             pts = [[round(x, 1), round(y, 1)] for x, y in (xy(la, lo) for lo, la in f["geometry"]["coordinates"])]
             p.setdefault("edges", []).append(dict(track=sec["track"].lower(), points=pts, _source=sec["_source"], note="the sector's track line, not the platform edge itself"))
+        # Lettered stopping sectors from a register (Entur's boarding positions), on the platform serving their track.
+        marks = [m for t in p["tracks"] for m in official.get("sectors", {}).get(t, [])]
+        if marks:
+            p["sectors"] = marks
         if "height_m" in edits.get("platform_heights", {}).get(p["ref"], {}):
             p["height_m"] = edits["platform_heights"][p["ref"]]["height_m"]
             p["_source"] += f"; height from {edits['platform_heights'][p['ref']]['_source']}"

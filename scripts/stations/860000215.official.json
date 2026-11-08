@@ -1,0 +1,65 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "860000215",
+ "retrieved": "2026-11-08",
+ "pack": "860000215",
+ "sources": [
+  {
+   "type": "banedanmark",
+   "license": "CC BY 4.0",
+   "note": "Banedanmark Open Data Sporforløb (CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "0–1": [
+   {
+    "track": "0",
+    "near": [
+     39.8,
+     -138.1
+    ],
+    "points": [
+     [
+      56.9,
+      -194.2
+     ],
+     [
+      50.0,
+      -174.2
+     ],
+     [
+      38.7,
+      -133.9
+     ],
+     [
+      27.9,
+      -83.7
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 1 / track 0 (track 0), 116 m along the platform; data/stations/research/860000215"
+   },
+   {
+    "track": "1",
+    "near": [
+     39.1,
+     -80.9
+    ],
+    "points": [
+     [
+      65.3,
+      -191.1
+     ],
+     [
+      56.0,
+      -158.8
+     ],
+     [
+      16.1,
+      25.2
+     ]
+    ],
+    "_source": "Banedanmark Open Data Sporforløb (CC BY 4.0) object perron 1 / track 1 (track 1), 224 m along the platform; data/stations/research/860000215"
+   }
+  ]
+ }
+}

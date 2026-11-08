@@ -1,0 +1,103 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:JY",
+ "retrieved": "2026-11-08",
+ "pack": "fi_JY",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     21.3,
+     -0.8
+    ],
+    "points": [
+     [
+      73.8,
+      -56.6
+     ],
+     [
+      -30.9,
+      54.6
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JY L4 (track 4), 155 m along the platform; data/stations/research/fi_JY"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -94.1,
+     90.5
+    ],
+    "points": [
+     [
+      -249.1,
+      255.6
+     ],
+     [
+      58.1,
+      -71.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JY L1 (track 1), 449 m along the platform; data/stations/research/fi_JY"
+   }
+  ],
+  "2": [
+   {
+    "track": "2",
+    "near": [
+     -97.9,
+     103.5
+    ],
+    "points": [
+     [
+      -244.5,
+      259.5
+     ],
+     [
+      -158.4,
+      166.8
+     ],
+     [
+      -2.2,
+      1.9
+     ],
+     [
+      49.9,
+      -54.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JY L2 (track 2), 433 m along the platform; data/stations/research/fi_JY"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     -171.2,
+     196.7
+    ],
+    "points": [
+     [
+      -106.1,
+      127.9
+     ],
+     [
+      -235.9,
+      265.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JY L3 (track 3), 192 m along the platform; data/stations/research/fi_JY"
+   }
+  ]
+ }
+}

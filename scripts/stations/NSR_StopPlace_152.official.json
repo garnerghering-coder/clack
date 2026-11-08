@@ -1,0 +1,122 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "NSR:StopPlace:152",
+ "retrieved": "2026-11-08",
+ "pack": "NO-SKØ",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:153",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:153"
+  }
+ ],
+ "platform_edges": {
+  "1–2": [
+   {
+    "track": "1",
+    "near": [
+     39.3,
+     2.3
+    ],
+    "points": [
+     [
+      144.4,
+      62.2
+     ],
+     [
+      -24.8,
+      -33.8
+     ],
+     [
+      -47.7,
+      -45.5
+     ],
+     [
+      -73.1,
+      -57.2
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 1), 250 m along the platform; data/stations/research/NO-SKØ"
+   },
+   {
+    "track": "2",
+    "near": [
+     39.3,
+     2.3
+    ],
+    "points": [
+     [
+      144.4,
+      62.2
+     ],
+     [
+      -24.8,
+      -33.8
+     ],
+     [
+      -47.7,
+      -45.5
+     ],
+     [
+      -73.1,
+      -57.2
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 2), 250 m along the platform; data/stations/research/NO-SKØ"
+   }
+  ],
+  "3–4": [
+   {
+    "track": "3",
+    "near": [
+     19.3,
+     29.7
+    ],
+    "points": [
+     [
+      -89.4,
+      -29.7
+     ],
+     [
+      58.9,
+      51.4
+     ],
+     [
+      127.9,
+      87.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 3), 249 m along the platform; data/stations/research/NO-SKØ"
+   },
+   {
+    "track": "4",
+    "near": [
+     19.3,
+     29.7
+    ],
+    "points": [
+     [
+      -89.4,
+      -29.7
+     ],
+     [
+      58.9,
+      51.4
+     ],
+     [
+      127.9,
+      87.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 4), 249 m along the platform; data/stations/research/NO-SKØ"
+   }
+  ]
+ },
+ "nsr_stop_place": "NSR:StopPlace:153"
+}

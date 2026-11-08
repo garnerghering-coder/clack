@@ -1,0 +1,384 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "NSR:StopPlace:269",
+ "retrieved": "2026-11-08",
+ "pack": "NO-GAR",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:5357",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:5357"
+  }
+ ],
+ "platform_edges": {
+  "3–4": [
+   {
+    "track": "3",
+    "near": [
+     -31.6,
+     24.1
+    ],
+    "points": [
+     [
+      13.3,
+      -136.1
+     ],
+     [
+      -76.4,
+      181.1
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 3), 330 m along the platform; data/stations/research/NO-GAR"
+   },
+   {
+    "track": "4",
+    "near": [
+     -31.6,
+     24.1
+    ],
+    "points": [
+     [
+      13.3,
+      -136.1
+     ],
+     [
+      -76.4,
+      181.1
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 4), 330 m along the platform; data/stations/research/NO-GAR"
+   }
+  ],
+  "2, 3, 23": [
+   {
+    "track": "2",
+    "near": [
+     8.7,
+     -14.7
+    ],
+    "points": [
+     [
+      -22.6,
+      96.6
+     ],
+     [
+      2.5,
+      6.8
+     ],
+     [
+      41.7,
+      -125.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 2 (track 2), 234 m along the platform; data/stations/research/NO-GAR"
+   },
+   {
+    "track": "3",
+    "near": [
+     8.7,
+     -14.7
+    ],
+    "points": [
+     [
+      -22.6,
+      96.6
+     ],
+     [
+      2.5,
+      6.8
+     ],
+     [
+      41.7,
+      -125.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 2 (track 3), 234 m along the platform; data/stations/research/NO-GAR"
+   }
+  ],
+  "1–2": [
+   {
+    "track": "1",
+    "near": [
+     12.0,
+     34.9
+    ],
+    "points": [
+     [
+      -33.5,
+      192.9
+     ],
+     [
+      57.2,
+      -120.9
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 1), 329 m along the platform; data/stations/research/NO-GAR"
+   },
+   {
+    "track": "2",
+    "near": [
+     12.0,
+     34.9
+    ],
+    "points": [
+     [
+      -33.5,
+      192.9
+     ],
+     [
+      57.2,
+      -120.9
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 2), 329 m along the platform; data/stations/research/NO-GAR"
+   }
+  ]
+ },
+ "accessibility": {
+  "49": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9793 (Entur stop place register, NLOD)"
+  },
+  "11": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99416 (Entur stop place register, NLOD)"
+  },
+  "14": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110515 (Entur stop place register, NLOD)"
+  },
+  "45": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110511 (Entur stop place register, NLOD)"
+  },
+  "43": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110517 (Entur stop place register, NLOD)"
+  },
+  "47": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9795 (Entur stop place register, NLOD)"
+  },
+  "39": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110519 (Entur stop place register, NLOD)"
+  },
+  "10": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110524 (Entur stop place register, NLOD)"
+  },
+  "21": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110506 (Entur stop place register, NLOD)"
+  },
+  "31": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9789 (Entur stop place register, NLOD)"
+  },
+  "35": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110522 (Entur stop place register, NLOD)"
+  },
+  "48": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9787 (Entur stop place register, NLOD)"
+  },
+  "44": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99414 (Entur stop place register, NLOD)"
+  },
+  "19": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110508 (Entur stop place register, NLOD)"
+  },
+  "9": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110525 (Entur stop place register, NLOD)"
+  },
+  "41": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99411 (Entur stop place register, NLOD)"
+  },
+  "42": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99415 (Entur stop place register, NLOD)"
+  },
+  "46": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110510 (Entur stop place register, NLOD)"
+  },
+  "37": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99418 (Entur stop place register, NLOD)"
+  },
+  "32": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9786 (Entur stop place register, NLOD)"
+  },
+  "17": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110512 (Entur stop place register, NLOD)"
+  },
+  "36": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110521 (Entur stop place register, NLOD)"
+  },
+  "40": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110518 (Entur stop place register, NLOD)"
+  },
+  "20": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110507 (Entur stop place register, NLOD)"
+  },
+  "34": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110523 (Entur stop place register, NLOD)"
+  },
+  "50": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9785 (Entur stop place register, NLOD)"
+  },
+  "13": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110516 (Entur stop place register, NLOD)"
+  },
+  "33": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:99412 (Entur stop place register, NLOD)"
+  },
+  "18": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110509 (Entur stop place register, NLOD)"
+  },
+  "16": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110513 (Entur stop place register, NLOD)"
+  },
+  "12": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110526 (Entur stop place register, NLOD)"
+  },
+  "51": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:9794 (Entur stop place register, NLOD)"
+  },
+  "15": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110514 (Entur stop place register, NLOD)"
+  },
+  "38": {
+   "step_free": "UNKNOWN",
+   "lift_free": "UNKNOWN",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "UNKNOWN",
+   "_source": "entur:nsr NSR:Quay:110520 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:5357"
+}

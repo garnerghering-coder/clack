@@ -1,0 +1,271 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "740000002",
+ "retrieved": "2026-11-08",
+ "pack": "740000002",
+ "sources": [
+  {
+   "type": "trafikverket",
+   "license": "CC0",
+   "note": "Trafikverket BanInfo (CC0)"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     183.5,
+     3.9
+    ],
+    "points": [
+     [
+      308.9,
+      -37.9
+     ],
+     [
+      58.0,
+      45.8
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1614 (track 1), 267 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "8": [
+   {
+    "track": "8",
+    "near": [
+     124.6,
+     -34.4
+    ],
+    "points": [
+     [
+      261.3,
+      -73.7
+     ],
+     [
+      242.6,
+      -70.0
+     ],
+     [
+      205.1,
+      -60.3
+     ],
+     [
+      -9.6,
+      8.8
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1961 (track 8), 285 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "12": [
+   {
+    "track": "12",
+    "near": [
+     57.0,
+     -51.0
+    ],
+    "points": [
+     [
+      137.6,
+      -75.7
+     ],
+     [
+      116.7,
+      -70.3
+     ],
+     [
+      -20.0,
+      -26.0
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1626 (track 12), 167 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "10": [
+   {
+    "track": "10",
+    "near": [
+     62.9,
+     -33.9
+    ],
+    "points": [
+     [
+      143.0,
+      -59.5
+     ],
+     [
+      -15.4,
+      -8.9
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1962 (track 10), 168 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "15": [
+   {
+    "track": "15",
+    "near": [
+     81.6,
+     -81.4
+    ],
+    "points": [
+     [
+      197.3,
+      -97.8
+     ],
+     [
+      136.7,
+      -92.2
+     ],
+     [
+      98.1,
+      -85.5
+     ],
+     [
+      73.4,
+      -79.4
+     ],
+     [
+      -29.0,
+      -46.3
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1621 (track 15), 235 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "11": [
+   {
+    "track": "11",
+    "near": [
+     61.4,
+     -41.2
+    ],
+    "points": [
+     [
+      142.3,
+      -67.1
+     ],
+     [
+      -17.6,
+      -15.8
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 2593 (track 11), 170 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "13": [
+   {
+    "track": "13",
+    "near": [
+     51.4,
+     -56.8
+    ],
+    "points": [
+     [
+      127.2,
+      -78.9
+     ],
+     [
+      108.5,
+      -75.0
+     ],
+     [
+      -23.4,
+      -32.6
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1627 (track 13), 160 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     217.2,
+     -29.7
+    ],
+    "points": [
+     [
+      398.2,
+      -88.1
+     ],
+     [
+      36.3,
+      28.8
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1616 (track 4), 382 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "5": [
+   {
+    "track": "5",
+    "near": [
+     167.0,
+     -18.0
+    ],
+    "points": [
+     [
+      298.7,
+      -60.8
+     ],
+     [
+      35.3,
+      24.7
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1618 (track 5), 279 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "7": [
+   {
+    "track": "7",
+    "near": [
+     190.9,
+     -46.0
+    ],
+    "points": [
+     [
+      392.0,
+      -92.3
+     ],
+     [
+      274.6,
+      -69.4
+     ],
+     [
+      225.2,
+      -57.2
+     ],
+     [
+      -1.6,
+      16.7
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1622 (track 7), 411 m along the platform; data/stations/research/740000002"
+   }
+  ],
+  "9": [
+   {
+    "track": "9",
+    "near": [
+     97.0,
+     -33.5
+    ],
+    "points": [
+     [
+      206.4,
+      -68.9
+     ],
+     [
+      -12.4,
+      1.8
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 1623 (track 9), 232 m along the platform; data/stations/research/740000002"
+   }
+  ]
+ }
+}

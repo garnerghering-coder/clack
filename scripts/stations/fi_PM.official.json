@@ -1,0 +1,95 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:PM",
+ "retrieved": "2026-11-08",
+ "pack": "fi_PM",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "6": [
+   {
+    "track": "6",
+    "near": [
+     5.3,
+     -41.6
+    ],
+    "points": [
+     [
+      2.5,
+      52.6
+     ],
+     [
+      8.1,
+      -132.6
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PM L6 (track 6), 187 m along the platform; data/stations/research/fi_PM"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -29.0,
+     -64.7
+    ],
+    "points": [
+     [
+      -31.8,
+      41.6
+     ],
+     [
+      -25.5,
+      -165.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PM L1 (track 1), 209 m along the platform; data/stations/research/fi_PM"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     -23.3,
+     -70.5
+    ],
+    "points": [
+     [
+      -28.6,
+      104.4
+     ],
+     [
+      -18.1,
+      -243.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PM L3 (track 3), 350 m along the platform; data/stations/research/fi_PM"
+   }
+  ],
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     -3.9,
+     -69.7
+    ],
+    "points": [
+     [
+      -9.4,
+      104.5
+     ],
+     [
+      1.0,
+      -242.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PM L4 (track 4), 350 m along the platform; data/stations/research/fi_PM"
+   }
+  ]
+ }
+}

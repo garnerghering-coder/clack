@@ -1,0 +1,93 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:SK",
+ "retrieved": "2026-11-08",
+ "pack": "fi_SK",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -1.6,
+     4.8
+    ],
+    "points": [
+     [
+      158.5,
+      164.5
+     ],
+     [
+      -159.2,
+      -151.5
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object SK L1 (track 1), 450 m along the platform; data/stations/research/fi_SK"
+   }
+  ],
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     1.5,
+     1.3
+    ],
+    "points": [
+     [
+      160.6,
+      159.4
+     ],
+     [
+      -155.6,
+      -154.6
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object SK L2 (track 2), 448 m along the platform; data/stations/research/fi_SK"
+   },
+   {
+    "track": "3",
+    "near": [
+     -25.2,
+     -45.4
+    ],
+    "points": [
+     [
+      131.4,
+      110.4
+     ],
+     [
+      -186.8,
+      -206.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object SK L3 (track 3), 451 m along the platform; data/stations/research/fi_SK"
+   }
+  ],
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     -46.8,
+     -80.5
+    ],
+    "points": [
+     [
+      -181.4,
+      -214.7
+     ],
+     [
+      83.8,
+      49.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object SK L4 (track 4), 376 m along the platform; data/stations/research/fi_SK"
+   }
+  ]
+ }
+}

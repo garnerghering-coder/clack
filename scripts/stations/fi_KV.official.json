@@ -1,0 +1,165 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:KV",
+ "retrieved": "2026-11-08",
+ "pack": "fi_KV",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "9–10": [
+   {
+    "track": "9",
+    "near": [
+     21.4,
+     26.3
+    ],
+    "points": [
+     [
+      136.9,
+      13.6
+     ],
+     [
+      -90.1,
+      38.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L9 (track 9), 230 m along the platform; data/stations/research/fi_KV"
+   },
+   {
+    "track": "10",
+    "near": [
+     24.7,
+     39.7
+    ],
+    "points": [
+     [
+      137.8,
+      27.4
+     ],
+     [
+      -88.6,
+      52.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L10 (track 10), 230 m along the platform; data/stations/research/fi_KV"
+   }
+  ],
+  "6–7": [
+   {
+    "track": "6",
+    "near": [
+     -60.0,
+     9.6
+    ],
+    "points": [
+     [
+      -294.6,
+      35.6
+     ],
+     [
+      -154.6,
+      19.7
+     ],
+     [
+      175.3,
+      -15.6
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L6 (track 6), 475 m along the platform; data/stations/research/fi_KV"
+   },
+   {
+    "track": "7",
+    "near": [
+     -58.9,
+     25.5
+    ],
+    "points": [
+     [
+      -295.1,
+      52.3
+     ],
+     [
+      176.3,
+      -0.5
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L7 (track 7), 477 m along the platform; data/stations/research/fi_KV"
+   }
+  ],
+  "3–4": [
+   {
+    "track": "3",
+    "near": [
+     -78.3,
+     -13.7
+    ],
+    "points": [
+     [
+      128.6,
+      -35.6
+     ],
+     [
+      -155.7,
+      -5.3
+     ],
+     [
+      -237.8,
+      4.5
+     ],
+     [
+      -292.2,
+      13.4
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L3 (track 3), 426 m along the platform; data/stations/research/fi_KV"
+   },
+   {
+    "track": "4",
+    "near": [
+     -77.3,
+     1.9
+    ],
+    "points": [
+     [
+      129.7,
+      -21.6
+     ],
+     [
+      -195.4,
+      15.4
+     ],
+     [
+      -290.9,
+      24.7
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L4 (track 4), 425 m along the platform; data/stations/research/fi_KV"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -49.6,
+     -26.9
+    ],
+    "points": [
+     [
+      -224.8,
+      -7.4
+     ],
+     [
+      125.5,
+      -46.3
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object KV L1 (track 1), 355 m along the platform; data/stations/research/fi_KV"
+   }
+  ]
+ }
+}

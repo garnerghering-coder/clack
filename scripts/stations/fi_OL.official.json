@@ -1,0 +1,79 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:OL",
+ "retrieved": "2026-11-08",
+ "pack": "fi_OL",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -125.9,
+     182.5
+    ],
+    "points": [
+     [
+      -223.7,
+      338.7
+     ],
+     [
+      -52.8,
+      65.5
+     ],
+     [
+      -30.8,
+      29.3
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object OL L1 (track 1), 367 m along the platform; data/stations/research/fi_OL"
+   }
+  ],
+  "2": [
+   {
+    "track": "2",
+    "near": [
+     -141.8,
+     216.6
+    ],
+    "points": [
+     [
+      -250.7,
+      390.6
+     ],
+     [
+      -36.4,
+      48.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object OL L2 (track 2), 406 m along the platform; data/stations/research/fi_OL"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     -150.9,
+     256.3
+    ],
+    "points": [
+     [
+      -33.9,
+      69.5
+     ],
+     [
+      -268.0,
+      444.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object OL L3 (track 3), 444 m along the platform; data/stations/research/fi_OL"
+   }
+  ]
+ }
+}

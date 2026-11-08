@@ -1,0 +1,131 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:LH",
+ "retrieved": "2026-11-08",
+ "pack": "fi_LH",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     111.5,
+     0.8
+    ],
+    "points": [
+     [
+      -111.4,
+      -1.7
+     ],
+     [
+      44.9,
+      -2.6
+     ],
+     [
+      81.5,
+      -1.4
+     ],
+     [
+      231.7,
+      10.0
+     ],
+     [
+      289.0,
+      16.5
+     ],
+     [
+      335.7,
+      22.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object LH L4 (track 4), 450 m along the platform; data/stations/research/fi_LH"
+   }
+  ],
+  "2": [
+   {
+    "track": "2",
+    "near": [
+     66.2,
+     18.3
+    ],
+    "points": [
+     [
+      203.8,
+      28.4
+     ],
+     [
+      129.6,
+      22.4
+     ],
+     [
+      53.1,
+      17.5
+     ],
+     [
+      -62.6,
+      12.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object LH L2 (track 2), 269 m along the platform; data/stations/research/fi_LH"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     109.3,
+     35.1
+    ],
+    "points": [
+     [
+      -114.7,
+      20.7
+     ],
+     [
+      -42.8,
+      26.1
+     ],
+     [
+      166.7,
+      38.6
+     ],
+     [
+      335.5,
+      52.4
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object LH L1 (track 1), 453 m along the platform; data/stations/research/fi_LH"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     69.0,
+     13.5
+    ],
+    "points": [
+     [
+      -64.5,
+      7.4
+     ],
+     [
+      55.5,
+      12.6
+     ],
+     [
+      202.3,
+      23.5
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object LH L3 (track 3), 270 m along the platform; data/stations/research/fi_LH"
+   }
+  ]
+ }
+}

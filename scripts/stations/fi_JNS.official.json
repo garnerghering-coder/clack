@@ -1,0 +1,73 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:JNS",
+ "retrieved": "2026-11-08",
+ "pack": "fi_JNS",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     32.5,
+     -139.8
+    ],
+    "points": [
+     [
+      -16.6,
+      -35.3
+     ],
+     [
+      81.1,
+      -243.5
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JNS L1 (track 1), 232 m along the platform; data/stations/research/fi_JNS"
+   }
+  ],
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     12.7,
+     -80.3
+    ],
+    "points": [
+     [
+      79.7,
+      -223.2
+     ],
+     [
+      -56.4,
+      66.7
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JNS L2 (track 2), 322 m along the platform; data/stations/research/fi_JNS"
+   },
+   {
+    "track": "3",
+    "near": [
+     22.5,
+     -73.1
+    ],
+    "points": [
+     [
+      90.8,
+      -218.7
+     ],
+     [
+      -44.7,
+      70.3
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object JNS L3 (track 3), 321 m along the platform; data/stations/research/fi_JNS"
+   }
+  ]
+ }
+}

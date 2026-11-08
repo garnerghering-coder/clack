@@ -533,7 +533,7 @@ private struct StartOverRow: View {
 struct AboutScreen: View {
     @Environment(L10n.self) private var l10n
 
-    private static let sources = ["trafikverket", "gtfsSweden3", "gtfsSverige2", "entur", "digitraffic", "rejseplanen", "osm", "stationMaps", "onboard"]
+    private static let sources = ["trafikverket", "gtfsSweden3", "gtfsSverige2", "entur", "digitraffic", "rejseplanen", "osm", "stationMaps", "stationMapRegisters", "onboard"]
 
     var body: some View {
         Page {

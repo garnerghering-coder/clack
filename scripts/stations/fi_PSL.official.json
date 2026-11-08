@@ -1,0 +1,251 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:PSL",
+ "retrieved": "2026-11-08",
+ "pack": "fi_PSL",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "10": [
+   {
+    "track": "10",
+    "near": [
+     -87.8,
+     -151.7
+    ],
+    "points": [
+     [
+      -106.5,
+      -235.0
+     ],
+     [
+      -68.9,
+      -70.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L10 (track 10), 171 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "9": [
+   {
+    "track": "9",
+    "near": [
+     -73.8,
+     -155.1
+    ],
+    "points": [
+     [
+      -93.0,
+      -239.2
+     ],
+     [
+      -55.4,
+      -73.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L9 (track 9), 172 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "8": [
+   {
+    "track": "8",
+    "near": [
+     -63.7,
+     -129.7
+    ],
+    "points": [
+     [
+      -38.6,
+      -18.8
+     ],
+     [
+      -87.7,
+      -236.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L8 (track 8), 226 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "7": [
+   {
+    "track": "7",
+    "near": [
+     -51.9,
+     -130.6
+    ],
+    "points": [
+     [
+      -77.2,
+      -241.7
+     ],
+     [
+      -68.7,
+      -207.1
+     ],
+     [
+      -58.3,
+      -158.2
+     ],
+     [
+      -26.2,
+      -20.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L7 (track 7), 229 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "6": [
+   {
+    "track": "6",
+    "near": [
+     -44.7,
+     -138.6
+    ],
+    "points": [
+     [
+      -71.4,
+      -252.2
+     ],
+     [
+      -17.7,
+      -22.5
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L6 (track 6), 238 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "5": [
+   {
+    "track": "5",
+    "near": [
+     -33.7,
+     -142.3
+    ],
+    "points": [
+     [
+      -6.2,
+      -24.6
+     ],
+     [
+      -60.2,
+      -254.8
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L5 (track 5), 238 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     -28.5,
+     -140.1
+    ],
+    "points": [
+     [
+      -55.6,
+      -255.0
+     ],
+     [
+      -34.6,
+      -164.1
+     ],
+     [
+      0.0,
+      -26.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L4 (track 4), 237 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     -14.2,
+     -145.8
+    ],
+    "points": [
+     [
+      -41.6,
+      -260.5
+     ],
+     [
+      13.3,
+      -29.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L3 (track 3), 240 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     3.0,
+     -148.5
+    ],
+    "points": [
+     [
+      -22.9,
+      -258.2
+     ],
+     [
+      30.3,
+      -34.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L1 (track 1), 232 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "2": [
+   {
+    "track": "2",
+    "near": [
+     -7.4,
+     -140.4
+    ],
+    "points": [
+     [
+      -33.9,
+      -251.5
+     ],
+     [
+      -22.9,
+      -203.2
+     ],
+     [
+      18.8,
+      -31.0
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L2 (track 2), 229 m along the platform; data/stations/research/fi_PSL"
+   }
+  ],
+  "11": [
+   {
+    "track": "11",
+    "near": [
+     -99.0,
+     -144.3
+    ],
+    "points": [
+     [
+      -79.3,
+      -57.7
+     ],
+     [
+      -118.5,
+      -229.9
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object PSL L11 (track 11), 179 m along the platform; data/stations/research/fi_PSL"
+   }
+  ]
+ }
+}

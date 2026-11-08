@@ -1,0 +1,302 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "NSR:StopPlace:11",
+ "retrieved": "2026-11-08",
+ "pack": "NO-DRM",
+ "sources": [
+  {
+   "type": "banenor",
+   "license": null,
+   "note": "Bane NOR's track table, placed on OSM rails"
+  },
+  {
+   "type": "entur",
+   "license": "NLOD",
+   "note": "Entur stop place register (NSR) NSR:StopPlace:11",
+   "url": "https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:11"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     -63.3,
+     -70.5
+    ],
+    "points": [
+     [
+      81.5,
+      30.2
+     ],
+     [
+      55.4,
+      10.7
+     ],
+     [
+      -36.1,
+      -52.9
+     ],
+     [
+      -68.8,
+      -74.0
+     ],
+     [
+      -86.4,
+      -84.2
+     ],
+     [
+      -101.4,
+      -92.4
+     ],
+     [
+      -134.5,
+      -108.2
+     ],
+     [
+      -222.9,
+      -144.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 1 (track 1), 355 m along the platform; data/stations/research/NO-DRM"
+   }
+  ],
+  "2–3": [
+   {
+    "track": "2",
+    "near": [
+     -72.8,
+     -55.6
+    ],
+    "points": [
+     [
+      70.9,
+      44.5
+     ],
+     [
+      45.8,
+      26.1
+     ],
+     [
+      -47.5,
+      -38.6
+     ],
+     [
+      -93.5,
+      -68.5
+     ],
+     [
+      -123.4,
+      -84.5
+     ],
+     [
+      -142.0,
+      -93.5
+     ],
+     [
+      -229.7,
+      -132.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 3 (track 2), 352 m along the platform; data/stations/research/NO-DRM"
+   },
+   {
+    "track": "3",
+    "near": [
+     -72.8,
+     -55.6
+    ],
+    "points": [
+     [
+      70.9,
+      44.5
+     ],
+     [
+      45.8,
+      26.1
+     ],
+     [
+      -47.5,
+      -38.6
+     ],
+     [
+      -93.5,
+      -68.5
+     ],
+     [
+      -123.4,
+      -84.5
+     ],
+     [
+      -142.0,
+      -93.5
+     ],
+     [
+      -229.7,
+      -132.8
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 3 (track 3), 352 m along the platform; data/stations/research/NO-DRM"
+   }
+  ],
+  "4–5": [
+   {
+    "track": "4",
+    "near": [
+     -76.7,
+     -52.6
+    ],
+    "points": [
+     [
+      -233.6,
+      -129.6
+     ],
+     [
+      -143.5,
+      -89.2
+     ],
+     [
+      -125.8,
+      -80.5
+     ],
+     [
+      -96.4,
+      -64.6
+     ],
+     [
+      -65.6,
+      -45.4
+     ],
+     [
+      42.8,
+      29.7
+     ],
+     [
+      65.5,
+      46.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 4), 351 m along the platform; data/stations/research/NO-DRM"
+   },
+   {
+    "track": "5",
+    "near": [
+     -76.7,
+     -52.6
+    ],
+    "points": [
+     [
+      -233.6,
+      -129.6
+     ],
+     [
+      -143.5,
+      -89.2
+     ],
+     [
+      -125.8,
+      -80.5
+     ],
+     [
+      -96.4,
+      -64.6
+     ],
+     [
+      -65.6,
+      -45.4
+     ],
+     [
+      42.8,
+      29.7
+     ],
+     [
+      65.5,
+      46.4
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 4 (track 5), 351 m along the platform; data/stations/research/NO-DRM"
+   }
+  ],
+  "6": [
+   {
+    "track": "6",
+    "near": [
+     -83.8,
+     -35.9
+    ],
+    "points": [
+     [
+      -238.8,
+      -116.3
+     ],
+     [
+      -152.7,
+      -75.7
+     ],
+     [
+      -133.9,
+      -66.2
+     ],
+     [
+      -107.7,
+      -51.2
+     ],
+     [
+      -62.2,
+      -21.3
+     ],
+     [
+      55.4,
+      60.5
+     ]
+    ],
+    "_source": "Bane NOR's track table, placed on OSM rails object track 6 (track 6), 346 m along the platform; data/stations/research/NO-DRM"
+   }
+  ]
+ },
+ "accessibility": {
+  "4": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:26 (Entur stop place register, NLOD)"
+  },
+  "1": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:22 (Entur stop place register, NLOD)"
+  },
+  "5": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:101598 (Entur stop place register, NLOD)"
+  },
+  "2": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:18 (Entur stop place register, NLOD)"
+  },
+  "6": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:109342 (Entur stop place register, NLOD)"
+  },
+  "3": {
+   "step_free": "TRUE",
+   "lift_free": "TRUE",
+   "escalator_free": "UNKNOWN",
+   "wheelchair": "TRUE",
+   "_source": "entur:nsr NSR:Quay:20 (Entur stop place register, NLOD)"
+  }
+ },
+ "nsr_stop_place": "NSR:StopPlace:11"
+}

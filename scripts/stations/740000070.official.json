@@ -1,0 +1,63 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "740000070",
+ "retrieved": "2026-11-08",
+ "pack": "740000070",
+ "sources": [
+  {
+   "type": "trafikverket",
+   "license": "CC0",
+   "note": "Trafikverket BanInfo (CC0)"
+  }
+ ],
+ "platform_edges": {
+  "1": [
+   {
+    "track": "1a",
+    "near": [
+     164.5,
+     8.7
+    ],
+    "points": [
+     [
+      245.3,
+      9.5
+     ],
+     [
+      86.5,
+      7.4
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 2608 (track 1a), 161 m along the platform; data/stations/research/740000070"
+   }
+  ],
+  "4": [
+   {
+    "track": "4a",
+    "near": [
+     100.6,
+     30.4
+    ],
+    "points": [
+     [
+      213.0,
+      28.9
+     ],
+     [
+      182.7,
+      30.9
+     ],
+     [
+      147.0,
+      31.6
+     ],
+     [
+      -3.0,
+      27.5
+     ]
+    ],
+    "_source": "Trafikverket BanInfo (CC0) object 2615 (track 4a), 218 m along the platform; data/stations/research/740000070"
+   }
+  ]
+ }
+}

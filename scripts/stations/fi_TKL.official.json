@@ -1,0 +1,135 @@
+{
+ "_comment": "Written by scripts/stations/official/import_platforms.py; the drafter reads it before the hand edits, which win.",
+ "station_id": "fi:TKL",
+ "retrieved": "2026-11-08",
+ "pack": "fi_TKL",
+ "sources": [
+  {
+   "type": "digitraffic",
+   "license": "CC BY 4.0",
+   "note": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0)"
+  }
+ ],
+ "platform_edges": {
+  "6": [
+   {
+    "track": "6",
+    "near": [
+     76.1,
+     -177.0
+    ],
+    "points": [
+     [
+      63.3,
+      -120.4
+     ],
+     [
+      88.5,
+      -231.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L6 (track 6), 116 m along the platform; data/stations/research/fi_TKL"
+   }
+  ],
+  "1": [
+   {
+    "track": "1",
+    "near": [
+     30.8,
+     -156.6
+    ],
+    "points": [
+     [
+      53.8,
+      -257.6
+     ],
+     [
+      7.0,
+      -52.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L1 (track 1), 213 m along the platform; data/stations/research/fi_TKL"
+   }
+  ],
+  "2": [
+   {
+    "track": "2",
+    "near": [
+     38.0,
+     -168.4
+    ],
+    "points": [
+     [
+      51.8,
+      -229.1
+     ],
+     [
+      23.5,
+      -105.0
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L2 (track 2), 129 m along the platform; data/stations/research/fi_TKL"
+   }
+  ],
+  "4": [
+   {
+    "track": "4",
+    "near": [
+     55.4,
+     -163.0
+    ],
+    "points": [
+     [
+      69.5,
+      -225.0
+     ],
+     [
+      41.2,
+      -101.0
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L4 (track 4), 129 m along the platform; data/stations/research/fi_TKL"
+   }
+  ],
+  "5": [
+   {
+    "track": "5",
+    "near": [
+     67.6,
+     -159.8
+    ],
+    "points": [
+     [
+      81.2,
+      -222.2
+     ],
+     [
+      53.8,
+      -98.1
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L5 (track 5), 129 m along the platform; data/stations/research/fi_TKL"
+   }
+  ],
+  "3": [
+   {
+    "track": "3",
+    "near": [
+     50.7,
+     -164.6
+    ],
+    "points": [
+     [
+      37.0,
+      -102.0
+     ],
+     [
+      64.0,
+      -224.2
+     ]
+    ],
+    "_source": "Digitraffic infra-api platforms (Väylävirasto, CC BY 4.0) object TKL L3 (track 3), 127 m along the platform; data/stations/research/fi_TKL"
+   }
+  ]
+ }
+}

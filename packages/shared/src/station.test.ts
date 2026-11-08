@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { connectionStatus, handCuratedProblems, instructions, nearestNode, resolveEndpoint, routeBetween, routeTracks, stationCoverage, toLocal, validateStationMap, type StationMap } from './station';
+import { connectionStatus, guide, handCuratedProblems, instructions, nearestNode, resolveEndpoint, routeBetween, routeNodes, routeTracks, stationCoverage, toLocal, validateStationMap, type StationMap } from './station';
 
 // A tiny two-platform station: a tunnel below with stairs and a slower lift up to each platform.
 const map = (): StationMap => ({
@@ -161,5 +161,36 @@ describe('connection status (Layover Guide)', () => {
     expect(connectionStatus({ ...est, departure: t(5) }).status).toBe('miss');
     expect(connectionStatus({ ...base, timesLive: false }).status).toBe('margin');
     expect(connectionStatus({ ...base, departure: t(6), timesLive: false }).status).toBe('tight');
+  });
+});
+
+// The same fixtures as ClackCore's RouteGuideTests: a corridor north 40 m, then east 30 m (or 20° east of north).
+const corridor = (bent: boolean): StationMap => ({
+  ...map(),
+  levels: [{ id: 'L0', name: 'Platforms', order: 0 }],
+  platforms: [{ id: 'p1', ref: '1', tracks: ['1'], level: 'L0', geometry: [[[-2, -2], [2, -2], [2, 2], [-2, 2], [-2, -2]]], node: 'p1' }],
+  nodes: [
+    { id: 'p1', type: 'platform', level: 'L0', x: 0, y: 0 },
+    { id: 'e', type: 'entrance', level: 'L0', x: bent ? 10.3 : 30, y: bent ? -68.2 : -40 },
+  ],
+  edges: [{ from: 'p1', to: 'e', seconds: 54, step_free: true, kind: 'walk', geometry: [[0, 0], [0, -40], bent ? [10.3, -68.2] : [30, -40]] }],
+  pois: [{ id: 'c', category: 'cafe', name: 'Café', level: 'L0', x: -4, y: -44, node: 'e', hours_source: null, hours_verified: null }],
+});
+
+describe('walk mode directions', () => {
+  it('an L-shaped corridor is one turn, with the landmark on the right side', () => {
+    const m = corridor(false);
+    const steps = guide(m, routeNodes(m, 'p1', 'e')!);
+    expect(steps).toHaveLength(2);
+    expect(steps[0]!.turn).toBeUndefined();
+    expect(Math.abs(steps[0]!.distanceM - 40)).toBeLessThan(3);
+    expect(steps[1]!.turn).toBe('right');
+    expect(steps[1]!.landmark).toMatchObject({ name: 'Café', side: 'left' });
+  });
+  it('a 20° bend is no turn', () => {
+    const m = corridor(true);
+    const steps = guide(m, routeNodes(m, 'p1', 'e')!);
+    expect(steps).toHaveLength(1);
+    expect(Math.abs(steps[0]!.distanceM - 70)).toBeLessThan(3);
   });
 });
