@@ -29,25 +29,42 @@ struct StationSceneView: View {
     let fitKey: String
     var selectedPoi: String?
     var insets = StationSceneLogic.Insets()
+    /// Walk mode: the plan follows this camera (heading-up, around you) instead of being panned and pinched.
+    var camera: StationSceneLogic.Camera?
+    /// A pan while following: the caller leaves walk mode's camera for the overhead view.
+    var onCameraPan: (() -> Void)?
 
     @State private var size = CGSize(width: 393, height: 700)
     @State private var view = StationSceneLogic.View()
 
-    private var rotation: Double { map.view?.rotation ?? 0 }
+    private var rotation: Double {
+        camera.map { StationSceneLogic.view(for: $0, width: size.width, height: size.height).rotation } ?? map.view?.rotation ?? 0
+    }
+
+    /// The view in use: the camera's while following, else the panned and pinched one.
+    private var current: StationSceneLogic.View {
+        camera.map { StationSceneLogic.view(for: $0, width: size.width, height: size.height).view } ?? view
+    }
 
     /// What the pins and chips are at a zoom: worked out once for each zoom, not for each frame of a pan.
     @State private var layouts = SceneLayoutCache()
 
     var body: some View {
-        let layout = layouts.layout(map: map, level: level, marks: marks, pins: pins, k: view.k, state: poiState, dim: dimPoi)
+        let layout = layouts.layout(map: map, level: level, marks: marks, pins: pins, k: current.k, state: poiState, dim: dimPoi)
         let chips = layout.chips
         let shown = layout.pois
         let levelChanges = route?.steps.filter { $0.from.level != $0.to.level && ($0.from.level == level || $0.to.level == level) } ?? []
         ZStack(alignment: .topLeading) {
             // One finger pans, two pinch around their midpoint: iOS's own recognizers, which handle both at once.
             SceneGestureLayer(
-                onPan: { delta in view.tx += delta.width; view.ty += delta.height },
-                onPinch: { factor, anchor in view = StationSceneLogic.zoom(view, by: factor, aroundX: anchor.x, y: anchor.y) }
+                onPan: { delta in
+                    if camera != nil { onCameraPan?(); return }
+                    view.tx += delta.width; view.ty += delta.height
+                },
+                onPinch: { factor, anchor in
+                    guard camera == nil else { return }
+                    view = StationSceneLogic.zoom(view, by: factor, aroundX: anchor.x, y: anchor.y)
+                }
             )
             // The plan is drawn when the view or the plan changes; only the route's marching dots are on the clock (a
             // layer of their own, at 20 frames a second), so a shown route doesn't redraw the whole plan every frame.
@@ -97,6 +114,7 @@ struct StationSceneView: View {
     }
 
     private func refit() {
+        guard camera == nil else { return }
         if let fitted = StationSceneLogic.fit(map: map, level: level, route: route, marks: marks, pins: pins, width: size.width, height: size.height, insets: insets) {
             view = fitted
         }
@@ -105,14 +123,16 @@ struct StationSceneView: View {
     /// Where a world point is on screen.
     private func screen(_ x: Double, _ y: Double) -> CGPoint {
         let r = StationSceneLogic.rotate(x, y, degrees: rotation)
-        return CGPoint(x: view.tx + r.x * view.k, y: view.ty + r.y * view.k)
+        let v = current
+        return CGPoint(x: v.tx + r.x * v.k, y: v.ty + r.y * v.k)
     }
 
     // MARK: the plan
 
     private func place(_ context: inout GraphicsContext) {
-        context.translateBy(x: view.tx, y: view.ty)
-        context.scaleBy(x: view.k, y: view.k)
+        let v = current
+        context.translateBy(x: v.tx, y: v.ty)
+        context.scaleBy(x: v.k, y: v.k)
         context.rotate(by: .degrees(rotation))
     }
 
@@ -130,7 +150,7 @@ struct StationSceneView: View {
     }
 
     private func drawPlan(_ context: inout GraphicsContext) {
-        let k = view.k
+        let k = current.k
         place(&context)
         let onLevel = map.shapes.filter { $0.level == level }
         for shape in map.shapes where shape.kind == .building { context.fill(polygon(shape.points), with: .color(Ink.surface)) }
@@ -191,7 +211,7 @@ struct StationSceneView: View {
 
     /// The route on this level: a glow, and dots marching toward the destination.
     private func drawRoute(_ context: inout GraphicsContext, phase: Double) {
-        let k = view.k
+        let k = current.k
         place(&context)
         for step in route?.steps ?? [] where step.from.level == level && step.to.level == level {
             let path = line(StationSceneLogic.stepPoints(step))
@@ -266,7 +286,7 @@ struct StationSceneView: View {
         return ZStack {
             if pin.kind == .me {
                 // How far off the position may be, at this zoom; and which way you face, when the compass is good.
-                let d = StationSceneLogic.accuracyDiameter(pin.accuracyM, k: view.k) ?? 32
+                let d = StationSceneLogic.accuracyDiameter(pin.accuracyM, k: current.k) ?? 32
                 Circle().fill(Palette.me.opacity(0.14)).overlay(Circle().strokeBorder(Palette.me.opacity(0.35), lineWidth: 1)).frame(width: d, height: d)
                 if let heading = pin.headingDeg {
                     HeadingCone().fill(RadialGradient(colors: [Palette.me.opacity(0.55), Palette.me.opacity(0)], center: .center, startRadius: 4, endRadius: 44))

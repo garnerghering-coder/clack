@@ -116,6 +116,9 @@ final class ArrivalWatcher {
         await WidgetFeed.refresh(legs: legs, details: detailCache, app: app, immediate: widgetsNow)
         // The map around each of those trips, for when there is no connection.
         if await app.mapHasBasemap() { await OfflineMaps.ensure(soon.compactMap { detailCache[$0.id] }, keep: Set(soon.map(\.id))) }
+        // The station maps of where those trips end (the change stations and the destination), kept on the phone so
+        // they open, and walk mode works, with no connection. Kept maps cost a 304; on the same rule as the maps.
+        if await OfflineMaps.mayDownload() { await app.stations.prefetch(soon.map(\.destStationId)) }
     }
 
     private func evaluate() {

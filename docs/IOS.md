@@ -98,8 +98,24 @@ Live data is the truth when there is a connection; without one the app shows wha
   and dead reckoning from the last GPS fix. A trip that never went live is estimated too. With fresh server updates nothing is estimated.
 - **Maps** (`Map/OfflineMaps.swift`): MapLibre's tile cache is 250 MB, and while online the map around each trip in the next 36 hours is
   downloaded (zoom 0 to 10, 9 for long routes). Settings shows how many are saved and can clear them.
+- **Station maps** (`API/StationMapStore.swift`, build 63): every opened map is kept in Application Support with its ETag and checked
+  with a conditional GET (304 when unchanged); while online the maps of where the next 36 hours' trips end (change stations and the
+  destination) are fetched too, on the same Wi-Fi rule as the maps. A kept map opens, and walk mode runs, with no connection.
 - **Not kept:** station boards, search and live positions of other trains; the Live Activity can't receive pushes offline, so its line and
   countdowns run by themselves and it says "estimated" when it goes stale (5 minutes after the last push).
+
+## Walk mode in a station (build 65)
+
+"Start walking" on a station route opens `Features/Stations/WalkMode/WalkModeView.swift`: the plan heading-up and following
+you, about 15 m across with you a third up from the bottom, the next step on top ("Turn left after Pressbyrån, 40 m", from
+`Logic/RouteGuide.swift`, twin of `guide` in `packages/shared/src/station.ts`) with its distance counting down. Position
+(`Logic/WalkTracker.swift`, fed by `WalkPositioner.swift`): the pedometer carries you along the route's line; a GPS fix under 15 m
+within 15 m of the line nudges it 30 %; steps pass forwards only; a change of level ends on the barometer (60 % of the floors'
+measured height difference), or a tap on "Arrived at {level}?" (offered after the step's time × 1.5). `CLLocation.floor` is not
+used (it counts from the building's ground floor, not the map's platform level). "Position is estimated" shows after 20 s without
+a good fix. A haptic and a VoiceOver announcement mark each step; under Reduce Motion the plan turns in 30° steps. A pan or
+Overhead leaves the camera; Follow me goes back. In a layover it starts by itself within 150 m of the station (Settings: "Walk mode
+at a change", stored on the phone). Debug: `-walkMode -simulateWalk` with `-open layover:…` walks the route at 1.3 m/s.
 
 ## Widgets
 

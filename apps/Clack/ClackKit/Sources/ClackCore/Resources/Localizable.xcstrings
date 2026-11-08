@@ -16245,6 +16245,40 @@
         }
       }
     },
+    "settings.walkModeAuto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk mode at a change"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gångläge vid byte"
+          }
+        }
+      }
+    },
+    "settings.walkModeAutoHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "While you change trains, the station map starts walk mode by itself once you are within 150 m of the station."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "När du byter tåg startar stationskartan gångläget av sig självt när du är inom 150 m från stationen."
+          }
+        }
+      }
+    },
     "settings.walkPace" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19148,6 +19182,142 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "{{min}} min promenad"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.arrived" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’re there"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du är framme"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.confirmLevel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrived at {{level}}? Tap to confirm"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framme vid {{level}}? Tryck för att bekräfta"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.estimated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position is estimated"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positionen är uppskattad"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.follow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow me"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följ mig"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.overhead" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overhead"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Översikt"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start walking"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Börja gå"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.then" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Then: {{step}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sedan: {{step}}"
+          }
+        }
+      }
+    },
+    "stationMap.walkMode.toGo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{m}} m to go"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{m}} m kvar"
           }
         }
       }

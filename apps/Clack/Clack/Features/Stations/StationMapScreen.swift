@@ -53,6 +53,11 @@ struct StationMapScreen: View {
     @State private var stateCache = PoiStateCache()
     /// How exact the last position was (metres), while the walk starts at you.
     @State private var meAccuracy: Double?
+    /// Walk mode, over the map.
+    @State private var walking = false
+    /// Walk mode started by itself once already on this screen (a layover near the station).
+    @State private var autoWalked = false
+    @AppStorage("walkModeAutoStart") private var walkModeAuto = true
 
     private var tz: String { "Europe/Stockholm" }
     private var clock: ClockFormat { app.settings.clock }
@@ -81,6 +86,8 @@ struct StationMapScreen: View {
                 #if DEBUG
                 // `-stationSteps` opens the directions list, to check or photograph it.
                 if CommandLine.arguments.contains("-stationSteps") { showSteps = true }
+                // `-walkMode` opens walk mode on the route (with `-simulateWalk`, walking it).
+                if CommandLine.arguments.contains("-walkMode") { walking = true }
                 // `-station3D` opens the 3D view (where it is offered).
                 if CommandLine.arguments.contains("-station3D") { show3D = true }
                 // `-stationTime <ms>` looks at opening hours at that moment (a layover seen from the morning it happens).
@@ -190,6 +197,15 @@ struct StationMapScreen: View {
 
     private var walkingMe: Bool { from?.hasPrefix("me:") == true }
 
+    /// Debug builds: `-simulateWalk` walks the route at 1.3 m/s in walk mode, to watch it without a station.
+    private var simulateWalk: Bool {
+        #if DEBUG
+        CommandLine.arguments.contains("-simulateWalk")
+        #else
+        false
+        #endif
+    }
+
     /// The walk starts at the walkway point nearest the new position, on the level you're on.
     private func follow(_ map: StationMap, _ fix: CLLocation) {
         meAccuracy = fix.horizontalAccuracy
@@ -285,6 +301,26 @@ struct StationMapScreen: View {
             PlaceSearchSheet(map: map, mode: mode == .from ? .from : mode == .to ? .to : .find, level: level, state: state,
                              onPick: { spec in pickAs(mode == .from ? StationMapEnd.from : .to, spec) }, onPoi: { p in picking = nil; poi = p })
                 .presentationDetents([.fraction(0.8), .large])
+        }
+        .fullScreenCover(isPresented: $walking) {
+            if let route {
+                WalkModeView(map: map, route: route, simulate: simulateWalk, levelName: { levelName(map, $0) }, poiState: state)
+            }
+        }
+        // A layover: walk mode starts by itself once you are within 150 m of the station (Settings can turn it off).
+        .task(id: layover && route != nil && walkModeAuto && !autoWalked) {
+            guard layover, route != nil, walkModeAuto, !autoWalked, LocationModel.shared.allowed else { return }
+            let location = LocationModel.shared
+            location.start()
+            defer { location.stop() }
+            while !Task.isCancelled && !autoWalked {
+                if let fix = location.location, -fix.timestamp.timeIntervalSinceNow < 30,
+                   StationSceneLogic.within(map, lat: fix.coordinate.latitude, lon: fix.coordinate.longitude, meters: 150) {
+                    autoWalked = true
+                    walking = true
+                }
+                try? await Task.sleep(for: .seconds(5))
+            }
         }
         .sheet(item: $poi) { p in
             PoiSheet(map: map, poi: p, state: OpeningHours.openState(p.openingHours, from: window().0, to: window().1), detour: detours?[p.node], onHeight: { poiHeight = $0 }) { end in
@@ -427,6 +463,13 @@ struct StationMapScreen: View {
                             .clack(.caption).foregroundStyle(Ink.text2)
                     }
                     if let route, !route.steps.isEmpty {
+                        // Walk mode on a row of its own: the walk's main action.
+                        Button { walking = true } label: {
+                            HStack(spacing: 8) { LucideIcon(name: "navigation", size: 16); Text(l10n.t("stationMap.walkMode.start")) }
+                                .clack(.button).foregroundStyle(Ink.onAccent).frame(maxWidth: .infinity, minHeight: 44)
+                                .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
                         HStack(spacing: 8) {
                             Button { showSteps.toggle() } label: {
                                 HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.steps")) }

@@ -368,4 +368,40 @@ public nonisolated enum StationSceneLogic {
         let a = (heading + mapRotation).truncatingRemainder(dividingBy: 360)
         return a < 0 ? a + 360 : a
     }
+
+    /// Walk mode's camera: heading-up and following you, about 15 m across, you a third up from the bottom.
+    public struct Camera: Equatable, Sendable {
+        public var x: Double
+        public var y: Double
+        /// Which way is up on screen, degrees from true north.
+        public var heading: Double
+        public var acrossM: Double
+        /// How far down the screen you are (0 top, 1 bottom).
+        public var anchor: Double
+
+        public init(x: Double, y: Double, heading: Double, acrossM: Double = 15, anchor: Double = 2.0 / 3) {
+            self.x = x
+            self.y = y
+            self.heading = heading
+            self.acrossM = acrossM
+            self.anchor = anchor
+        }
+    }
+
+    /// The view and the plan's rotation for a camera on a screen this size: turning the plan by −heading puts the
+    /// heading straight up (rotations are clockwise on screen, bearings clockwise from north).
+    public static func view(for camera: Camera, width: Double, height: Double) -> (view: View, rotation: Double) {
+        let rotation = -camera.heading
+        let k = width / camera.acrossM
+        let r = rotate(camera.x, camera.y, degrees: rotation)
+        return (View(tx: width / 2 - r.x * k, ty: height * camera.anchor - r.y * k, k: k), rotation)
+    }
+
+    /// Whether a position is within `meters` of the station: of any platform's or shape's point, else the map's origin.
+    public static func within(_ map: StationMap, lat: Double, lon: Double, meters: Double) -> Bool {
+        let p = StationRouting.toLocal(map, lat: lat, lon: lon)
+        let points = map.platforms.flatMap { $0.geometry.flatMap { $0 } } + map.shapes.filter { $0.kind == .building }.flatMap(\.points)
+        if points.isEmpty { return hypot(p.x, p.y) <= meters }
+        return points.contains { hypot($0.x - p.x, $0.y - p.y) <= meters }
+    }
 }

@@ -81,6 +81,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
 struct SettingsScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @AppStorage("walkModeAutoStart") private var walkModeAuto = true
 
     /// Saves a change (shown at once; undone if the server refuses it).
     private func change(_ patch: SettingsPatch) {
@@ -150,7 +151,10 @@ struct SettingsScreen: View {
                     }
                 }
                 SettingsToggle(label: l10n.t("settings.stepFree"), isOn: s.stepFree) { value in change(SettingsPatch(stepFree: value)) }
-                SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage, last: true) { value in change(SettingsPatch(heavyLuggage: value)) }
+                SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage) { value in change(SettingsPatch(heavyLuggage: value)) }
+                // On this phone only (a stored choice, not an account setting): walk mode by itself during a change.
+                SettingsToggle(label: l10n.t("settings.walkModeAuto"), isOn: walkModeAuto, last: true) { walkModeAuto = $0 }
+                Text(l10n.t("settings.walkModeAutoHint")).clack(.caption).foregroundStyle(Ink.text2)
                 InfoNote(l10n.t("settings.changingNote"), more: l10n.t("settings.changingNoteMore"))
             }
             AlertsCard(change: change)
