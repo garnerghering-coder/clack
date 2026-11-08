@@ -135,6 +135,11 @@ struct ExploreScreen: View {
             // Not awaited here: clearing the request restarts this task, which would cancel the wait.
             Task { await model.focus(target) }
         }
+        .task(id: router.pendingStation) {
+            guard let id = router.pendingStation else { return }
+            router.pendingStation = nil
+            Task { await model.openStation(StationHit(id: id, name: "", code: nil, country: "SE", county: nil)) }
+        }
         .task(id: active) {
             while active, !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(5))

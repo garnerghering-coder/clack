@@ -16,19 +16,32 @@ struct SettingsLink: View {
     }
 }
 
-/// A settings row: the label, then its control; a hairline underneath except on the last row of a card (`.row`).
+/// A settings row: the label, then its control; a hairline underneath except on the last row of a card (`.row`). At
+/// the accessibility text sizes the control moves under the label and takes the width (2026-11-08: side by side, the
+/// segmented control's words and the menus' values were cut to "S…").
 private struct SettingsRow<Control: View>: View {
+    @Environment(\.dynamicTypeSize) private var typeSize
     let label: String
     var last = false
     @ViewBuilder var control: Control
 
     var body: some View {
-        HStack(spacing: 12) {
-            Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
-            Spacer(minLength: 0)
-            control
+        Group {
+            if typeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
+                    control.frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.vertical, 12)
+            } else {
+                HStack(spacing: 12) {
+                    Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
+                    Spacer(minLength: 0)
+                    control
+                }
+                .frame(minHeight: 52)
+            }
         }
-        .frame(minHeight: 52)
         .overlay(alignment: .bottom) { if !last { Rectangle().fill(Ink.hairline).frame(height: 1) } }
     }
 }
@@ -83,15 +96,12 @@ struct SettingsScreen: View {
             if CommandLine.arguments.contains("-ridersSetting") { RiderSharingCard() }
             #endif
             Card {
-                HStack(spacing: 12) {
-                    Text(l10n.t("settings.theme")).clack(.settingsRow).foregroundStyle(Ink.text)
-                    Spacer(minLength: 0)
+                SettingsRow(label: l10n.t("settings.theme"), last: true) {
                     SegmentedControl(
                         selection: Binding(get: { s.theme }, set: { value in change(SettingsPatch(theme: value)) }),
                         options: ThemeSetting.knownCases.map { ($0, l10n.t("settings.themes.\($0.rawValue)")) }, small: true
                     )
                 }
-                .frame(minHeight: 52)
             }
             Card {
                 SettingsRow(label: l10n.t("settings.language")) {

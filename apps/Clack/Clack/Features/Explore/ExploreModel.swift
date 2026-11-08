@@ -614,10 +614,12 @@ final class ExploreModel {
         deselect()
         // Close in on it (owner, 2026-10-30): a mapped station to its 3D (the tilt follows at that zoom), others to
         // its tracks, in the space above the station's sheet.
+        var name = hit.name
         if let info = await app?.stations.info(hit.id) {
             controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: info.hasMap ? Self.model3DZoom + 0.5 : 15, offset: min(260, controller.height * 0.29), topClearance: 72)
+            if name.isEmpty { name = info.name }
         }
-        stationSheet = StationSheetTarget(id: hit.id, name: hit.name)
+        stationSheet = StationSheetTarget(id: hit.id, name: name)
     }
 
     // MARK: selecting a train

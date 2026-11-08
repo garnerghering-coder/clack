@@ -78,6 +78,11 @@ final class Router {
                 tab = .explore
             }
         }
+        // `-station <id>` opens that station's sheet on Explore.
+        if let id = value("-station") {
+            pendingStation = id
+            tab = .explore
+        }
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
             // Asked for a screen: the landing rule leaves it in front, as it does for a link.
@@ -152,6 +157,8 @@ final class Router {
 
     /// A train Explore should open when it appears (`/explore?train=N&date=D&key=K`; the Explore screen reads and clears it).
     var pendingTrain: PendingTrain?
+    /// A station Explore should open the sheet of when it appears (`-station <id>`, for screenshots).
+    var pendingStation: String?
 
     struct PendingTrain: Hashable, Sendable {
         var number: String

@@ -239,6 +239,11 @@ Use UTC timestamps everywhere; store each station's IANA time zone and render in
   arrival, changes and missed changes), then each train as a card that opens its own page; the change between two trains
   that have run is judged on what happened (missed, tight), an upcoming one by the change rule.
 
+- **Reports of wrong data** (owner, 2026-11-07): "Report wrong data" in a trip's menu sends an optional note and what the
+  screen showed (times, platforms, delays, status) to `POST /api/legs/:id/report`; the server adds its own view of the
+  train and keeps it in `leg_reports` with the trip (one per trip per person per 10 minutes; deleted with the trip or the
+  person's data). Listed with `npm run import -- leg-reports`.
+
 ## 14. Passport (stats)
 
 All stats are plain SQL aggregations over the user's legs, filterable by **year / all time** and the **commuter toggle**:

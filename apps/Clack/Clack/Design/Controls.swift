@@ -116,6 +116,7 @@ struct SegmentedControl<Value: Hashable>: View {
     var small = false
     @Namespace private var thumb
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     private var thumbShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input - 4, style: .continuous) }
     private var trackShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input, style: .continuous) }
@@ -124,7 +125,9 @@ struct SegmentedControl<Value: Hashable>: View {
         segments
             .padding(4)
             .modifier(TrackSurface(shape: trackShape))
-            .frame(maxWidth: small ? 260 : .infinity)
+            // At the accessibility text sizes a small switch takes the width and its words may wrap (2026-11-08:
+            // "Sy… D… Li…" at 260 pt).
+            .frame(maxWidth: small && !typeSize.isAccessibilitySize ? 260 : .infinity)
             .textSelection(.disabled)
     }
 
@@ -137,7 +140,8 @@ struct SegmentedControl<Value: Hashable>: View {
                 } label: {
                     Text(option.label)
                         .clack(.button)
-                        .lineLimit(1)
+                        .lineLimit(typeSize.isAccessibilitySize ? 2 : 1)
+                        .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.85)
                         .foregroundStyle(chosen ? Ink.onAccent : Ink.text)
                         .frame(maxWidth: .infinity, minHeight: 44)

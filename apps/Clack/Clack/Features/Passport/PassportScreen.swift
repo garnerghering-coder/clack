@@ -24,8 +24,9 @@ struct PassportScreen: View {
 
     init() {
         #if DEBUG
-        // `-share` opens the share sheet straight away, to check the cards.
+        // `-share` opens the share sheet straight away, to check the cards; `-passportMap` the full-screen map.
         _sharing = State(initialValue: CommandLine.arguments.contains("-share"))
+        _mapOpen = State(initialValue: CommandLine.arguments.contains("-passportMap"))
         #endif
     }
 

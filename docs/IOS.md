@@ -121,7 +121,8 @@ medium, large, on the holographic foil), Departures (medium, large; the station 
   minute for 30 minutes, dropping trains as they leave, and fetches again after 15. Passport, Stats and Year: every 6 hours.
 - Departures shows trouble as the board does (owner, 2026-11-07): a cancelled train struck through and kept for 15 minutes
   past its time, "Replaced by bus" when the source says so (Trafikverket ANA007 or the same words), and a platform change
-  on its tag. Buses that are not replacements are left out by the server, as on the board.
+  on its tag. Only Sweden flags a replacement bus on the train's row; Norway's timetable import and Denmark's board leave
+  replacement buses out altogether, so there they simply don't appear. Ordinary buses are left out everywhere.
 - Between redraws the times run by themselves: within the hour "Departs in" is a live timer (Home Screen and Lock Screen),
   and on the train the bar fills between the departure and arrival times. When a tracked trip changes, the server's
   widget push (iOS 26) reloads them at once; that reaches only phones that have alerts on.
