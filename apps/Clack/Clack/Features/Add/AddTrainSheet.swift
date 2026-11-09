@@ -128,7 +128,7 @@ private struct SearchStep: View {
     }
 
     /// A search that has all it needs: two stations with the planner's answer in, or a train number with its results.
-    private static func isWholeSearch(_ r: SearchResponse) -> Bool {
+    nonisolated private static func isWholeSearch(_ r: SearchResponse) -> Bool {
         (r.interpretation.from != nil && r.interpretation.to != nil && r.journeys != nil) || (r.interpretation.trainNumber != nil && r.results != nil)
     }
 

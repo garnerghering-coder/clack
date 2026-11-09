@@ -7,6 +7,7 @@ import ClackCore
 import Foundation
 import MapLibre
 import Network
+import os
 
 /// Maps with no connection (owner, 2026-10-24): the tiles of maps you have looked at stay on the phone (a big cache), and the
 /// map around each trip about to be ridden is downloaded while online, so routes and the train show underground or out of range.
@@ -34,14 +35,18 @@ enum OfflineMaps {
         case .always: return true
         case .wifi:
             let monitor = NWPathMonitor()
+            // The first path answers; later updates (before `cancel`) must not resume the continuation again. A serial
+            // queue of its own and a lock make that hold however the monitor calls back.
+            let first = OSAllocatedUnfairLock(initialState: false)
             let path = await withCheckedContinuation { (c: CheckedContinuation<NWPath, Never>) in
-                var done = false
                 monitor.pathUpdateHandler = { path in
-                    guard !done else { return }
-                    done = true
-                    c.resume(returning: path)
+                    let already = first.withLock { done in
+                        defer { done = true }
+                        return done
+                    }
+                    if !already { c.resume(returning: path) }
                 }
-                monitor.start(queue: .global(qos: .utility))
+                monitor.start(queue: DispatchQueue(label: "clack.offline-maps.path", qos: .utility))
             }
             monitor.cancel()
             return path.status == .satisfied && !path.isExpensive && !path.isConstrained
