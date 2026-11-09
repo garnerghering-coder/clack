@@ -151,11 +151,14 @@ struct SettingsScreen: View {
                     }
                 }
                 SettingsToggle(label: l10n.t("settings.stepFree"), isOn: s.stepFree) { value in change(SettingsPatch(stepFree: value)) }
-                SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage) { value in change(SettingsPatch(heavyLuggage: value)) }
+                SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage, last: true) { value in change(SettingsPatch(heavyLuggage: value)) }
+                // The walking note belongs to the three rows above it, so it stays right under them.
+                InfoNote(l10n.t("settings.changingNote"), more: l10n.t("settings.changingNoteMore"))
+            }
+            Card {
                 // On this phone only (a stored choice, not an account setting): walk mode by itself during a change.
                 SettingsToggle(label: l10n.t("settings.walkModeAuto"), isOn: walkModeAuto, last: true) { walkModeAuto = $0 }
                 Text(l10n.t("settings.walkModeAutoHint")).clack(.caption).foregroundStyle(Ink.text2)
-                InfoNote(l10n.t("settings.changingNote"), more: l10n.t("settings.changingNoteMore"))
             }
             AlertsCard(change: change)
             OfflineMapsCard()
