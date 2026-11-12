@@ -409,12 +409,18 @@ public nonisolated enum StationSceneLogic {
         return (View(tx: width / 2 - r.x * k, ty: height * camera.anchor - r.y * k, k: k), rotation)
     }
 
-    /// Whether a position is within `meters` of the station: of any platform's or shape's point, else the map's origin.
+    /// Whether a position is within `meters` of the station: of any platform's line or building's outline (anywhere
+    /// along them, not only their corners: a long platform may be drawn as its two ends), else the map's origin.
     public static func within(_ map: StationMap, lat: Double, lon: Double, meters: Double) -> Bool {
         let p = StationRouting.toLocal(map, lat: lat, lon: lon)
-        let points = map.platforms.flatMap { $0.geometry.flatMap { $0 } } + map.shapes.filter { $0.kind == .building }.flatMap(\.points)
-        if points.isEmpty { return hypot(p.x, p.y) <= meters }
-        return points.contains { hypot($0.x - p.x, $0.y - p.y) <= meters }
+        let lines = map.platforms.flatMap(\.geometry)
+            + map.shapes.filter { $0.kind == .building }.map { ring in ring.points + ring.points.prefix(1) }
+        let drawn = lines.filter { !$0.isEmpty }
+        if drawn.isEmpty { return hypot(p.x, p.y) <= meters }
+        return drawn.contains { line in
+            let d = line.count == 1 ? hypot(line[0].x - p.x, line[0].y - p.y) : RouteGuide.project(p, on: line)?.distance
+            return (d ?? .infinity) <= meters
+        }
     }
 
     /// When a map's OpenStreetMap hours were last read (re-read weekly by scripts/stations/hours_recheck.py, else the

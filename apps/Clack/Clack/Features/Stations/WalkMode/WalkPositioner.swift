@@ -15,6 +15,7 @@ import Observation
 /// without a station.
 @MainActor @Observable
 final class WalkPositioner: NSObject, CLLocationManagerDelegate {
+    let route: StationRoute
     private(set) var tracker: WalkTracker
     /// Which way you face, degrees from true north, when the compass is good (better than 30°); else nil.
     private(set) var compass: Double?
@@ -34,6 +35,7 @@ final class WalkPositioner: NSObject, CLLocationManagerDelegate {
 
     init(map: StationMap, route: StationRoute, simulate: Bool = false) {
         self.map = map
+        self.route = route
         self.simulate = simulate
         tracker = WalkTracker(map: map, route: route, now: Date().timeIntervalSince1970)
         super.init()
@@ -44,6 +46,8 @@ final class WalkPositioner: NSObject, CLLocationManagerDelegate {
 
     func start() {
         let tick = simulateTick
+        clock?.cancel()
+        lastDistance = 0
         clock = Task { [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(tick))

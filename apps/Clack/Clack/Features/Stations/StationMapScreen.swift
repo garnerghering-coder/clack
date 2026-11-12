@@ -55,6 +55,8 @@ struct StationMapScreen: View {
     @State private var meAccuracy: Double?
     /// Walk mode, over the map.
     @State private var walking = false
+    /// The walk walk mode follows, made once when it opens: the route then, not whatever the screen works out later.
+    @State private var walk: WalkPositioner?
     /// Walk mode started by itself once already on this screen (a layover near the station).
     @State private var autoWalked = false
     @AppStorage("walkModeAutoStart") private var walkModeAuto = true
@@ -303,8 +305,17 @@ struct StationMapScreen: View {
                 .presentationDetents([.fraction(0.8), .large])
         }
         .fullScreenCover(isPresented: $walking) {
+            if let walk {
+                WalkModeView(map: map, positioner: walk, levelName: { levelName(map, $0) }, poiState: state)
+            }
+        }
+        .onChange(of: walking, initial: true) { _, on in
+            guard on else { return }
             if let route {
-                WalkModeView(map: map, route: route, simulate: simulateWalk, levelName: { levelName(map, $0) }, poiState: state)
+                walk = WalkPositioner(map: map, route: route, simulate: simulateWalk)
+            } else {
+                // Nothing to walk: close rather than show an empty cover with no way out.
+                walking = false
             }
         }
         // A layover: walk mode starts by itself once you are within 150 m of the station (Settings can turn it off).

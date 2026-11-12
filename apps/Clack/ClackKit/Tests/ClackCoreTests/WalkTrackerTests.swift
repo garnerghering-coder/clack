@@ -70,4 +70,49 @@ struct WalkTrackerTests {
         #expect(t.level == "L1")
         #expect(!t.askConfirm)
     }
+
+    @Test func aGoodFixAtAWalksEndFinishesIt() throws {
+        let map = try twoLevels()
+        let route = try #require(StationRouting.route(map, from: "p1", to: "e"))
+        var t = WalkTracker(map: map, route: route, now: 0)
+        // The nudge alone only closes 30 % of the gap; a fix at the stairs' foot is the end of the walk.
+        t.fix(Pt(0, -29.5), accuracy: 5, now: 1)
+        #expect(t.index == 1)
+        #expect(t.isLevelChange)
+    }
+
+    @Test func stairsWithinOneLevelArePartOfTheWalk() throws {
+        let json = """
+        {"station_id":"s","name":"Steps","updated":"2026-11-12","quality":"osm_draft","sources":[],"changelog":[],
+         "coord_system":"local_m","origin":{"lat":59,"lon":18},
+         "levels":[{"id":"L0","name":"Hall","order":0,"height_m":0}],"shapes":[],"platforms":[],
+         "nodes":[{"id":"a","type":"entrance","level":"L0","x":0,"y":0},{"id":"s0","type":"stairs","level":"L0","x":0,"y":-10},
+                  {"id":"s1","type":"stairs","level":"L0","x":0,"y":-14},{"id":"b","type":"entrance","level":"L0","x":0,"y":-30}],
+         "edges":[{"from":"a","to":"s0","seconds":8,"step_free":true,"kind":"walk"},{"from":"s0","to":"s1","seconds":4,"step_free":false,"kind":"stairs"},
+                  {"from":"s1","to":"b","seconds":12,"step_free":true,"kind":"walk"}],
+         "pois":[]}
+        """
+        let map = try JSONDecoder().decode(StationMap.self, from: Data(json.utf8))
+        let route = try #require(StationRouting.route(map, from: "a", to: "b"))
+        var t = WalkTracker(map: map, route: route, now: 0)
+        // No sensor could finish a change of level that doesn't change level, so there is none.
+        #expect(t.steps.allSatisfy { $0.key == .walk })
+        t.walked(31, now: 25)
+        #expect(t.done)
+    }
+
+    @Test func withinMeasuresAlongAPlatformNotOnlyToItsEnds() throws {
+        let json = """
+        {"station_id":"l","name":"Long","updated":"2026-11-12","quality":"osm_draft","sources":[],"changelog":[],
+         "coord_system":"local_m","origin":{"lat":59,"lon":18},
+         "levels":[{"id":"L0","name":"Platforms","order":0}],"shapes":[],
+         "platforms":[{"id":"p1","ref":"1","tracks":["1"],"level":"L0","geometry":[[[0,-200],[0,200]]],"node":"p1"}],
+         "nodes":[{"id":"p1","type":"platform","level":"L0","x":0,"y":0}],"edges":[],"pois":[]}
+        """
+        let map = try JSONDecoder().decode(StationMap.self, from: Data(json.utf8))
+        let metresPerDegree = 111_320 * cos(59 * Double.pi / 180)
+        // 100 m beside the platform's middle: 224 m from either end, but well within 150 m of the platform.
+        #expect(StationSceneLogic.within(map, lat: 59, lon: 18 + 100 / metresPerDegree, meters: 150))
+        #expect(!StationSceneLogic.within(map, lat: 59, lon: 18 + 200 / metresPerDegree, meters: 150))
+    }
 }

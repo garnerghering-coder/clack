@@ -451,7 +451,10 @@ final class ExploreModel {
             guard let (data, _) = answer, !Task.isCancelled, let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
             let tracks = Self.tracks(in: json)
             self.detailCache[key] = (json, tracks)
-            if self.detailCache.count > 40 { self.detailCache.removeValue(forKey: self.detailCache.keys.first!) }
+            // Over 40: drop another one (a dictionary has no order, so not "the oldest", but never the one just added).
+            if self.detailCache.count > 40, let old = self.detailCache.keys.first(where: { $0 != key }) {
+                self.detailCache.removeValue(forKey: old)
+            }
             self.show(json, tracks: tracks, key: key)
         }
     }

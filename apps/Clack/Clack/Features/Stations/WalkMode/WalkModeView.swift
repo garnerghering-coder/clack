@@ -15,20 +15,14 @@ struct WalkModeView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let map: StationMap
-    let route: StationRoute
+    /// Made by the station screen when walk mode opens, so the route stays the one you started on.
+    let positioner: WalkPositioner
     let levelName: (String) -> String
     let poiState: (StationPoi) -> OpenState
 
-    @State private var positioner: WalkPositioner
     @State private var overhead = false
 
-    init(map: StationMap, route: StationRoute, simulate: Bool, levelName: @escaping (String) -> String, poiState: @escaping (StationPoi) -> OpenState) {
-        self.map = map
-        self.route = route
-        self.levelName = levelName
-        self.poiState = poiState
-        _positioner = State(initialValue: WalkPositioner(map: map, route: route, simulate: simulate))
-    }
+    private var route: StationRoute { positioner.route }
 
     private var tracker: WalkTracker { positioner.tracker }
 

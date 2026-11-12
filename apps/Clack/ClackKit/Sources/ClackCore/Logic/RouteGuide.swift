@@ -57,7 +57,9 @@ public nonisolated enum RouteGuide {
         }
         for step in route.steps {
             let pts = StationSceneLogic.stepPoints(step)
-            if step.kind == .walk && step.from.level == step.to.level {
+            // Stairs, an escalator or a ramp that start and end on one level (a few steps within a hall) are part of
+            // the walk: no sensor could finish them as a change of level.
+            if step.from.level == step.to.level {
                 if runLevel != step.from.level { flush() }
                 runLevel = step.from.level
                 run += run.last.map { last in pts.first.map { same(last, $0) } == true ? Array(pts.dropFirst()) : pts } ?? pts

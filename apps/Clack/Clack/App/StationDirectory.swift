@@ -49,10 +49,12 @@ final class StationDirectory {
             await store.remove(id)
             return nil
         }
+        // Another caller may have started the same map while this one waited for the station page.
+        if let task = maps[id] { return await task.value }
         let task = Task<StationMap?, Never> { await Self.load(id, client: client, store: store) }
         maps[id] = task
         let map = await task.value
-        if map == nil { maps[id] = nil }
+        if map == nil, maps[id] == task { maps[id] = nil }
         return map
     }
 
@@ -66,6 +68,8 @@ final class StationDirectory {
                 return kept.flatMap { decode($0.data) }
             case .fresh(let data, let etag):
                 guard let map = decode(data) else { return kept.flatMap { decode($0.data) } }
+                // Cancelled by "Delete my data": don't keep it.
+                guard !Task.isCancelled else { return map }
                 await store.write(id, data: data, etag: etag)
                 return map
             case .none:
@@ -86,8 +90,14 @@ final class StationDirectory {
     /// Forgets everything (after "Delete my data").
     func reset() {
         infos = [:]
+        let pending = Array(maps.values)
         maps = [:]
+        pending.forEach { $0.cancel() }
         let store = store
-        Task { await store.removeAll() }
+        // A load already under way could write its map after the wipe: wait for them all first.
+        Task {
+            for task in pending { _ = await task.value }
+            await store.removeAll()
+        }
     }
 }

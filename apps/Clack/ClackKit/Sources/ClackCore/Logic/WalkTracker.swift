@@ -8,7 +8,7 @@ import Foundation
 /// Where you are along a station route in walk mode, from the phone's sensors (pure: the app feeds it). The
 /// pedometer carries the position along the route's line; a good GPS fix (under 15 m, within 15 m of the line) nudges
 /// it 30 % of the way to where the fix says; steps are passed forwards only. A change of level ends when the barometer
-/// has risen or fallen 60 % of the floors' measured height difference, when the phone's floor says so, or when you
+/// has risen or fallen 60 % of the floors' measured height difference, or when you
 /// confirm it (offered after the step's time × 1.5). Indoors GPS is ±30 m or worse, so the position is "estimated"
 /// whenever there has been no good fix for 20 s.
 public nonisolated struct WalkTracker: Sendable {
@@ -32,6 +32,8 @@ public nonisolated struct WalkTracker: Sendable {
     public static let estimatedAfterS = 20.0
     public static let levelShare = 0.6
     public static let confirmFactor = 1.5
+    /// A good fix this close to a walk's end finishes it.
+    public static let endM = 1.0
 
     public init(map: StationMap, route: StationRoute, now: Double) {
         steps = RouteGuide.steps(map, route)
@@ -79,6 +81,8 @@ public nonisolated struct WalkTracker: Sendable {
         lastGoodFix = now
         along += Self.nudge * (proj.s - along)
         along = max(0, along)
+        // The nudge only ever closes part of the gap, so a fix at the step's end finishes it outright.
+        if step.distanceM - proj.s < Self.endM { along = max(along, step.distanceM) }
         advance(now: now)
     }
 
@@ -91,11 +95,6 @@ public nonisolated struct WalkTracker: Sendable {
         // The right way, and far enough: a flat walk never changes the level.
         let moved = (relative - start) * (to > from ? 1 : -1)
         if moved >= Self.levelShare * abs(to - from) { finishStep(now: now) }
-    }
-
-    /// The phone's own floor said you are on this level.
-    public mutating func reachedLevel(_ id: String, now: Double) {
-        if isLevelChange, step?.level == id { finishStep(now: now) }
     }
 
     /// "Arrived at {level}?" was tapped.
