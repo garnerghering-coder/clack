@@ -1,0 +1,36 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "When's my train in ${applicationName}" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "När går mitt tåg i ${applicationName}"
+          }
+        }
+      }
+    },
+    "When does my train leave in ${applicationName}" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "När avgår mitt tåg i ${applicationName}"
+          }
+        }
+      }
+    },
+    "Where's my train in ${applicationName}" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Var är mitt tåg i ${applicationName}"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

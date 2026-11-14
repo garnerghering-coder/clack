@@ -26397,6 +26397,108 @@
           }
         }
       }
+    },
+    "intents.nextTrain.none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have no train coming up in Clack."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du har inget kommande tåg i Clack."
+          }
+        }
+      }
+    },
+    "intents.nextTrain.leaves" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}} to {{to}} leaves {{day}} at {{time}}{{platform}}{{delay}}."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}} till {{to}} går {{day}} kl. {{time}}{{platform}}{{delay}}."
+          }
+        }
+      }
+    },
+    "intents.nextTrain.arrives" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}} arrives in {{to}} at {{time}}{{delay}}."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}} är framme i {{to}} kl. {{time}}{{delay}}."
+          }
+        }
+      }
+    },
+    "intents.nextTrain.fromPlatform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "from platform {{platform}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "från spår {{platform}}"
+          }
+        }
+      }
+    },
+    "intents.nextTrain.yourTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ditt tåg"
+          }
+        }
+      }
+    },
+    "intents.nextTrain.cancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "it's cancelled"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "det är inställt"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
