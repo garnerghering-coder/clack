@@ -23273,6 +23273,23 @@
         }
       }
     },
+    "widgets.boardFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t update. Open Clack for the latest departures."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte uppdatera. Öppna Clack för de senaste avgångarna."
+          }
+        }
+      }
+    },
     "add.changesUpTo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -25928,6 +25945,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aldrig"
+          }
+        }
+      }
+    },
+    "settings.deleteFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t reach the server, so nothing was deleted. Try again when you’re online."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte nå servern, så ingenting raderades. Försök igen när du är uppkopplad."
           }
         }
       }

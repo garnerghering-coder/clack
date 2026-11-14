@@ -74,9 +74,9 @@ public struct PassportWidgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             ViewThatFits(in: .horizontal) {
                 ForEach(Array(roles.enumerated()), id: \.offset) { _, role in
-                    Text(value).clack(role).lineLimit(1).fixedSize()
+                    Text(value).clack(role).monospacedDigit().lineLimit(1).fixedSize()
                 }
-                Text(value).clack(roles.last ?? .walkBig).lineLimit(1).minimumScaleFactor(WidgetInsets.minimumScale)
+                Text(value).clack(roles.last ?? .walkBig).monospacedDigit().lineLimit(1).minimumScaleFactor(WidgetInsets.minimumScale)
             }
             .foregroundStyle(ink)
             FittingText(label).clack(.captionUpper).foregroundStyle(ink.opacity(0.65))

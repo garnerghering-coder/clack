@@ -65,7 +65,6 @@ struct EditManualTripSheet: View {
                 }
                 if let error { Section { Text(error).foregroundStyle(.red) } }
             }
-            .tint(Ink.accent)
             .navigationTitle(l10n.t("detail.menuEdit"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

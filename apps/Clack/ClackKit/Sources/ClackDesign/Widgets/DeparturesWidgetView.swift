@@ -44,7 +44,8 @@ public struct DeparturesWidgetView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             } else if stationId != nil {
-                EmptyWidget(title: stationName ?? l10n.t("board.departures"), hint: l10n.t("board.error"))
+                // A widget doesn't visibly retry: it says how to get fresh times (it said "Retrying…").
+                EmptyWidget(title: stationName ?? l10n.t("board.departures"), hint: l10n.t("widgets.boardFailed"))
             } else {
                 EmptyWidget(title: l10n.t("widgets.pickStation"), hint: l10n.t("widgets.pickStationHint"))
             }

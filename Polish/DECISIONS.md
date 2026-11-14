@@ -277,3 +277,17 @@ Left in build 73, and why:
 | B74.6 | Changing the year | The cover could say "2025" over all-time totals while loading, or after a failure | The numbers and their year change together and roll (`.numericText`); a year that couldn't load goes back to the one on screen with a toast | `PassportScreen.load` (`dataYear`), `PassportCard`, `Tile` | Same |
 | B74.7 | Passport loading and failure | One 120 pt bar; a red line with no retry | Placeholders shaped like the chips, cover and map; Try again | `PassportScreen` | Same |
 | B74.8 | Year in rail (designer, owner: build it) | — | "Your 2026 in rail" under the cover opens a few pages on the Passport's yellow (distance; trains, journeys and time; busiest month; most ridden route; stations and countries with flags; medals earned this year), ending on the share card. Only what the year's trips say; a page with nothing is left out | `YearRecap.swift`, the row in `PassportScreen.full` | Remove the row |
+
+## Build 75: Settings, widgets, Live Activity, Siri
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B75.1 | Settings switches | Yellow (about fifteen on one screen) | The system's green (Look L3); the Explore filter and edit-trip forms use the system's own tint | `SettingsToggle` (`clackToggleTint`), `ExploreFilterSheet`, `EditManualTripSheet` | `Look.toggles = .yellow`; the two `.tint(Ink.accent)` back |
+| B75.2 | Export my data (user test) | Two steps: "Export", then a yellow "Share the file" | One: the button shows a spinner, then the share sheet opens with the file | `ExportDataRow` | Revert this commit |
+| B75.3 | Delete my data failing | The button came back, nothing said | "Couldn't reach the server, so nothing was deleted…" | `DeleteMyDataRow` | Same |
+| B75.4 | Long values in Settings | One line ("From your fir…") | Two lines | `SettingsMenuRow` | `lineLimit(1)` |
+| B75.5 | Live Activity times | Proportional digits on the Lock Screen; jumped | Tabular, rolling | `TripCardLockScreen` | Same |
+| B75.6 | Lock Screen card in VoiceOver | Pieces | One combined element | same | Same |
+| B75.7 | Year and Passport widgets | Proportional digits | Tabular | `YearWidgetView`, `PassportWidgetView` | Same |
+| B75.8 | Departures widget failure | "Couldn't load the board. Retrying…" (a widget doesn't visibly retry) | "Couldn't update. Open Clack for the latest departures." | `DeparturesWidgetView`, catalog `widgets.boardFailed` | Same |
+| B75.9 | Next-trip widget progress | Yellow | The operator's colour (DESIGN §2.5) | `NextJourneyWidgetView.progress` | Same |

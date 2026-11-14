@@ -149,11 +149,12 @@ public struct NextJourneyWidgetView: View {
     private func progress(_ s: WidgetTimeline.Shown) -> some View {
         if case .onTrain(_, let p) = s.moment {
             if let l = s.leg, l.arrAt > l.depAt {
+                // The operator's colour, as in the app (DESIGN §2.5); yellow belongs to actions (polish pass 1).
                 ProgressView(timerInterval: wDate(l.depAt)...wDate(l.arrAt), countsDown: false) { EmptyView() } currentValueLabel: { EmptyView() }
                     .progressViewStyle(.linear)
-                    .tint(Ink.accent)
+                    .tint(Color(hex: l.color) ?? Ink.text)
             } else {
-                ProgressBar(value: p, color: Ink.accent)
+                ProgressBar(value: p, color: s.leg.flatMap { Color(hex: $0.color) } ?? Ink.text)
             }
         }
     }

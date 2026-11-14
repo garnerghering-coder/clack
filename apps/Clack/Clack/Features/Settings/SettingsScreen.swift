@@ -62,7 +62,8 @@ private struct ChoiceMenu<Value: Hashable>: View {
             }
         } label: {
             HStack(spacing: Space.s) {
-                Text(options.first { $0.value == selection }?.title ?? unsetTitle).lineLimit(1)
+                // Two lines before it is cut ("From your first trip" was "From your fir…").
+                Text(options.first { $0.value == selection }?.title ?? unsetTitle).lineLimit(2).multilineTextAlignment(.trailing)
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
             .clack(.body).foregroundStyle(Ink.text)
@@ -335,7 +336,8 @@ private struct SettingsToggle: View {
 
     var body: some View {
         SettingsRow(label: label, last: last) {
-            Toggle("", isOn: Binding(get: { isOn }, set: onChange)).labelsHidden().tint(Ink.accent)
+            // The system's switch tint (Look.toggles; polish pass 1: about fifteen yellow switches on one screen).
+            Toggle("", isOn: Binding(get: { isOn }, set: onChange)).labelsHidden().clackToggleTint()
         }
         .accessibilityElement(children: .combine)
     }
@@ -422,39 +424,37 @@ private struct LinkRow: View {
 /// "Export my data" (DESIGN §11): everything the server keeps for this phone, as a JSON file, shared from the phone.
 /// Fetched when you ask; then the share sheet sends it where you like.
 private struct ExportDataRow: View {
-    enum Phase: Equatable { case idle, busy, ready(URL), failed }
+    enum Phase: Equatable { case idle, busy, failed }
 
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @State private var phase = Phase.idle
+    /// The file, once made: the share sheet opens with it at once (one step; it was "prepare", then "share").
+    @State private var file: ExportFile?
+
+    struct ExportFile: Identifiable {
+        let url: URL
+        var id: URL { url }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.xs) {
-            switch phase {
-            case .ready(let file):
-                ShareLink(item: file) {
-                    HStack(spacing: Space.s) {
-                        LucideIcon(name: "share-2", size: 16)
-                        Text(l10n.t("settings.exportShare"))
-                    }
+            Button {
+                Task { await export() }
+            } label: {
+                HStack(spacing: Space.s) {
+                    if phase == .busy { ProgressView().controlSize(.small) } else { LucideIcon(name: "download", size: 16) }
+                    Text(l10n.t("settings.export"))
                 }
-                .buttonStyle(.clack(.primary))
-                Text(file.lastPathComponent).clack(.caption).foregroundStyle(Ink.text2)
-            default:
-                Button {
-                    Task { await export() }
-                } label: {
-                    HStack(spacing: Space.s) {
-                        LucideIcon(name: "download", size: 16)
-                        Text(l10n.t("settings.export"))
-                    }
-                }
-                .buttonStyle(.clack())
-                .disabled(phase == .busy)
-                if phase == .failed { Text(l10n.t("settings.exportFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
             }
+            .buttonStyle(.clack())
+            .disabled(phase == .busy)
+            if phase == .failed { Text(l10n.t("settings.exportFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
         }
         .padding(.vertical, Space.s)
+        .sheet(item: $file) { file in
+            ActivitySheet(items: [file.url]).presentationDetents([.medium, .large])
+        }
     }
 
     private func export() async {
@@ -463,7 +463,8 @@ private struct ExportDataRow: View {
             let data = try await app.client.exportData()
             let file = FileManager.default.temporaryDirectory.appendingPathComponent(DataExport.fileName(now: .now))
             try data.write(to: file, options: [.atomic, .completeFileProtection])
-            phase = .ready(file)
+            phase = .idle
+            self.file = ExportFile(url: file)
         } catch {
             phase = .failed
         }
@@ -478,6 +479,7 @@ private struct DeleteMyDataRow: View {
     @Environment(L10n.self) private var l10n
     @State private var phase = Phase.idle
     @State private var confirming = false
+    @State private var failed = false
 
     var body: some View {
         Group {
@@ -489,6 +491,7 @@ private struct DeleteMyDataRow: View {
                         .buttonStyle(.clack(.danger))
                         .disabled(phase == .busy)
                     Text(l10n.t("settings.deleteDataNote")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+                    if failed { Text(l10n.t("settings.deleteFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk).fixedSize(horizontal: false, vertical: true) }
                 }
                 .padding(.vertical, Space.s)
             }
@@ -497,7 +500,12 @@ private struct DeleteMyDataRow: View {
         .confirmationDialog(l10n.t("settings.deleteConfirm"), isPresented: $confirming, titleVisibility: .visible) {
             Button(l10n.t("settings.deleteData"), role: .destructive) {
                 phase = .busy
-                Task { phase = await app.deleteMyData() ? .done : .idle }
+                Task {
+                    let done = await app.deleteMyData()
+                    phase = done ? .done : .idle
+                    // A failure is said, not just a button that comes back (polish pass 1).
+                    if !done { failed = true }
+                }
             }
             Button(l10n.t("common.close"), role: .cancel) {}
         }

@@ -71,9 +71,9 @@ public struct YearWidgetView: View {
     private func stat(_ value: String, _ label: String) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             ViewThatFits(in: .horizontal) {
-                Text(value).clack(.walkBig).lineLimit(1).fixedSize()
-                Text(value).clack(.bigUnit).lineLimit(1).fixedSize()
-                Text(value).clack(.bigUnit).lineLimit(2).minimumScaleFactor(WidgetInsets.minimumScale)
+                Text(value).clack(.walkBig).monospacedDigit().lineLimit(1).fixedSize()
+                Text(value).clack(.bigUnit).monospacedDigit().lineLimit(1).fixedSize()
+                Text(value).clack(.bigUnit).monospacedDigit().lineLimit(2).minimumScaleFactor(WidgetInsets.minimumScale)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .foregroundStyle(Ink.text)

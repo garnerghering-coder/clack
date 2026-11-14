@@ -76,7 +76,7 @@ struct ExploreFilterSheet: View {
                     displayToggle("liveMap.show.stationNames", \.stationNames)
                 }
             }
-            .tint(Ink.accent)
+            // The system's own tints for the system's own controls (polish pass 1: yellow belongs to one action).
             .navigationTitle(l10n.t("liveMap.filters"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

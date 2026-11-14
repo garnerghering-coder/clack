@@ -339,7 +339,8 @@ public struct TripCardLockScreen: View {
             StatusRow(card: card)
             RouteLine(card: card).padding(.vertical, Space.xs)
             HStack(alignment: .firstTextBaseline, spacing: Space.s) {
-                Text(card.departs).clack(.cardTime).foregroundStyle(Ink.text).fixedSize()
+                // Tabular digits, rolling to a new time (polish pass 1: the island had them, the Lock Screen didn't).
+                Text(card.departs).clack(.cardTime).monospacedDigit().contentTransition(.numericText()).foregroundStyle(Ink.text).fixedSize()
                 Spacer(minLength: 0)
                 VStack(spacing: Space.xxs) {
                     if let p = card.state.platform {
@@ -352,11 +353,13 @@ public struct TripCardLockScreen: View {
                 }
                 .multilineTextAlignment(.center)
                 Spacer(minLength: 0)
-                Text(card.arrives).clack(.cardTime).foregroundStyle(Ink.text).fixedSize()
+                Text(card.arrives).clack(.cardTime).monospacedDigit().contentTransition(.numericText()).foregroundStyle(Ink.text).fixedSize()
             }
         }
         // Apple's standard Lock Screen margin is 14 pt; 16 keeps the 4 pt grid and still clears the card's corners.
         .padding(Space.l)
+        // One sentence for VoiceOver, not the card's pieces (polish pass 1).
+        .accessibilityElement(children: .combine)
     }
 }
 
