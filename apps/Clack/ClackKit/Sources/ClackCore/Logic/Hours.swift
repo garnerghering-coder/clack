@@ -295,3 +295,42 @@ public nonisolated enum OpeningHours {
         return anyOpen ? (.closingSoon, closesAt) : (.closed, nil)
     }
 }
+
+extension OpeningHours {
+    /// One line of a week's hours: the days it covers ("Mon–Sat") and their times ("06:00–20:30", or empty when
+    /// closed).
+    public struct WeekLine: Equatable, Sendable {
+        public var days: String
+        public var spans: [Hours.Span]
+    }
+
+    /// The week, read for a person instead of in OSM's syntax (designer, 2026-11-14: the raw "Mo-Sa 06:00-20:30" was
+    /// shown as it was): consecutive days with the same hours on one line, Monday first. Nil when the text can't be
+    /// read; then it is shown as listed. Public holidays are left out (the place's card says hours can differ then).
+    public static func week(_ text: String?, language: Language) -> [WeekLine]? {
+        guard let hours = parse(text) else { return nil }
+        let names = language == .sv ? ["mån", "tis", "ons", "tor", "fre", "lör", "sön"] : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        if hours.always { return [WeekLine(days: language == .sv ? "Alla dagar" : "Every day", spans: [Hours.Span(start: 0, end: 1440)])] }
+        // Each weekday's spans, later rules overriding earlier ones (as `spansOn`, without holidays).
+        let days: [[Hours.Span]] = (0..<7).map { wd in
+            var out: [Hours.Span] = []
+            for rule in hours.rules where rule.days.isEmpty || rule.days.contains(.weekday(wd)) { out = rule.spans }
+            return out
+        }
+        var lines: [WeekLine] = []
+        var start = 0
+        for wd in 1...7 where wd == 7 || days[wd] != days[start] {
+            let label = start == wd - 1 ? names[start] : "\(names[start])–\(names[wd - 1])"
+            lines.append(WeekLine(days: start == 0 && wd == 7 ? (language == .sv ? "Alla dagar" : "Every day") : label, spans: days[start]))
+            start = wd
+        }
+        return lines
+    }
+
+    /// "06:00–20:30", spans joined by a comma; a span past midnight ends at its clock time.
+    public static func spansText(_ spans: [Hours.Span]) -> String {
+        func t(_ m: Int) -> String { String(format: "%02d:%02d", (m / 60) % 24, m % 60) }
+        return spans.map { "\(t($0.start))–\(t($0.end))" }.joined(separator: ", ")
+    }
+}
+

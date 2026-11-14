@@ -27,7 +27,9 @@ struct TrainPicture: View {
             if picture.isStandIn {
                 image
                     .mask(LinearGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.6), .init(color: .black, location: 1)], startPoint: .leading, endPoint: .trailing))
-                    .opacity(picture.isUnknown ? 0.45 : 0.8)
+                    // The fade from the back says "the nearest drawing, not this train's own"; it no longer greys the
+                    // whole drawing, which read as disabled (designer, 2026-11-14). The type's name says "X11 or X14".
+                    .opacity(picture.isUnknown ? 0.8 : 1)
             } else {
                 image
             }

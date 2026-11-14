@@ -209,7 +209,7 @@ struct JourneyChangeChip: View {
                     wait.map { l10n.t("journey.changeChip", ["min": Format.minutesWords($0), "station": a.destination?.name ?? ""]) }
                         ?? l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]),
                     (a.arrPlatform != nil || b.depPlatform != nil)
-                        ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil,
+                        ? Format.changeTracks(l10n, arrival: a.arrPlatform, departure: b.depPlatform) : nil,
                     walk.map { l10n.t("connection.walk", ["min": String($0)]) },
                     verdict,
                 ].compactMap { $0 }.joined(separator: Format.separator)

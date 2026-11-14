@@ -25,7 +25,7 @@ const ICONS = [
   // Station map pictograms (the station map's points of interest).
   // Medals: the new milestone kinds.
   'snowflake', 'hourglass', 'ruler', 'train-track',
-  'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
+  'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed', 'utensils',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];
 // Icons that also get a "-filled" version (the same outline, filled in): the favourite star, on and off.

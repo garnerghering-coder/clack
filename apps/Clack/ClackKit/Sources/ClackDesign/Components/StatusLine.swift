@@ -60,7 +60,7 @@ public struct StatusLine: View {
                     .onAppear { if !reduceMotion { dim = true } }
                     .accessibilityHidden(true)
             }
-            Text(text).lineLimit(1)
+            Text(text).lineLimit(2)
         }
         .clack(.chip)
         .foregroundStyle(ink)

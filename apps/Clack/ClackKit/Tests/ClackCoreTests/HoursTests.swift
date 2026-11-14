@@ -75,4 +75,16 @@ struct HoursTests {
         // 2025: Midsummer Day is Saturday 21 June.
         #expect(OpeningHours.swedishHolidays(2025).isSuperset(of: ["2025-06-20", "2025-06-21"]))
     }
+
+    @Test func readsTheWeekForAPerson() {
+        let week = OpeningHours.week("Mo-Sa 06:00-20:30; Su off", language: .en)
+        #expect(week?.map(\.days) == ["Mon–Sat", "Sun"])
+        #expect(OpeningHours.spansText(week?[0].spans ?? []) == "06:00–20:30")
+        #expect(week?[1].spans.isEmpty == true)
+        #expect(OpeningHours.week("24/7", language: .sv)?.first?.days == "Alla dagar")
+        #expect(OpeningHours.week("Mo-Fr 07:00-10:00,15:00-19:00", language: .sv)?.first?.days == "mån–fre")
+        #expect(OpeningHours.spansText(OpeningHours.week("Mo-Fr 07:00-10:00,15:00-19:00", language: .en)?.first?.spans ?? []) == "07:00–10:00, 15:00–19:00")
+        // Something it can't read is shown as listed, never guessed.
+        #expect(OpeningHours.week("by appointment", language: .en) == nil)
+    }
 }

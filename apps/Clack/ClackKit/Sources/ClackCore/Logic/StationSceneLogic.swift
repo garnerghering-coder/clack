@@ -106,7 +106,7 @@ public nonisolated enum StationSceneLogic {
         switch category {
         case .toilet: "toilet"
         case .cafe: "coffee"
-        case .restaurant: "utensils-crossed"
+        case .restaurant: "utensils"
         case .kiosk: "shopping-basket"
         case .shop: "shopping-bag"
         case .ticket: "ticket"

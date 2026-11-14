@@ -197,7 +197,7 @@ struct JourneyChange: View {
             let result = model.result(a, b, profile: app.walkProfile)
             let walkMin = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
             let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-                ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
+                ? Format.changeTracks(l10n, arrival: a.arrPlatform, departure: b.depPlatform) : nil
             let caption = [
                 tracks,
                 walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },

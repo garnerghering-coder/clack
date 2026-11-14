@@ -34,6 +34,10 @@ struct TripDetailScreen: View {
     @State private var aboutOpen = false
     @State private var busy = false
     @State private var toast: String?
+    /// Counts the moments the trip on screen became cancelled (the warning haptic's trigger).
+    @State private var canceledNow = 0
+    @State private var answering = false
+    @Environment(Toaster.self) private var toaster
     @State private var confirmDelete = false
     /// "Report wrong data": the note being typed, and the answer once sent.
     @State private var reporting = false
@@ -104,6 +108,7 @@ struct TripDetailScreen: View {
         }
         .journeyShareSheet(sharing, l10n: l10n)
         .countsScreen("trip")
+        .haptic(.warning, trigger: canceledNow)
         .task(id: id) { await listen() }
         .onChange(of: leg, initial: true) { geo = leg.map(RouteGeo.init) }
         .task(id: toast) {
@@ -189,7 +194,10 @@ struct TripDetailScreen: View {
         for await update in app.live.updates() {
             guard update.legId == id else { continue }
             live = update.live
+            let wasCanceled = leg?.leg.canceled
             await load()
+            // The trip on screen has just been cancelled: one warning haptic, on the change only (polish pass 1).
+            if wasCanceled == false, leg?.leg.canceled == true { canceledNow += 1 }
             if let shown = update.events.first(where: { $0.type != .departed }), let leg {
                 let stops = leg.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }
                 let text = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops)
@@ -201,7 +209,15 @@ struct TripDetailScreen: View {
     }
 
     private func answer(_ answer: RideAnswer) async {
-        if let updated = try? await app.client.answerRide(id, answer) { leg = updated }
+        // Once: a second tap while the first is on its way sent the answer twice.
+        guard !answering else { return }
+        answering = true
+        defer { answering = false }
+        if let updated = try? await app.client.answerRide(id, answer) {
+            leg = updated
+        } else {
+            toaster.show(l10n.t("common.couldntSave"), isError: true)
+        }
     }
 
     /// Where a typed platform goes.
@@ -224,12 +240,20 @@ struct TripDetailScreen: View {
         let text = typedPlatform.trimmingCharacters(in: .whitespacesAndNewlines)
         let value: String? = text.isEmpty ? nil : String(text.prefix(6))
         let patch = end == .dep ? LegPatch(depPlatform: .some(value)) : LegPatch(arrPlatform: .some(value))
-        if let updated = try? await app.client.updateLeg(id, patch) { leg = updated }
+        if let updated = try? await app.client.updateLeg(id, patch) {
+            leg = updated
+        } else {
+            toaster.show(l10n.t("common.couldntSave"), isError: true)
+        }
     }
 
     private func refresh() async {
         busy = true
-        if let updated = try? await app.client.refreshLeg(id) { leg = updated }
+        if let updated = try? await app.client.refreshLeg(id) {
+            leg = updated
+        } else {
+            toaster.show(l10n.t("common.couldntRefresh"), isError: true)
+        }
         busy = false
     }
 
@@ -268,6 +292,8 @@ struct TripDetailScreen: View {
             TicketStore.shared.detach(legId: id)
             app.tripsChanged()
             dismiss()
+        } else {
+            toaster.show(l10n.t("detail.deleteFailed"), isError: true)
         }
     }
 
@@ -466,10 +492,14 @@ struct TripDetailScreen: View {
         let m = moment(detail, now: now)
         let live = m.shown, tracking = m.tracking, status = m.status
         return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
-            if tracking, let live {
-                LiveStatus(live: live, now: now)
-            } else {
-                StatusLine(statusKind(status), l10n.t("status.\(status.rawValue)"))
+            // Before and during the ride the status card below says the status in big type; the header doesn't say
+            // it again (polish pass 1: "Upcoming" over "Departs in 5d 8h", "Live" over "Arrives 10:55").
+            if m.stage == .after || l.canceled {
+                if tracking, let live {
+                    LiveStatus(live: live, now: now)
+                } else {
+                    StatusLine(statusKind(status), l10n.t("status.\(status.rawValue)"))
+                }
             }
         }
     }
@@ -539,12 +569,13 @@ struct TripDetailScreen: View {
                 Card {
                     if TripDetailLogic.getOffNext(detail.stops, shown: shown, stage: m.stage), let alight = detail.stops.first(where: { $0.role == .alight }) {
                         HStack(spacing: Space.s) {
-                            LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.accentInk)
-                            Text(l10n.t("detail.getOffNext", ["name": alight.name])).clack(.rowTitle).foregroundStyle(Ink.accentInk)
+                            LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.text)
+                            Text(l10n.t("detail.getOffNext", ["name": alight.name])).clack(.rowTitle).foregroundStyle(Ink.text)
                         }
                         .accessibilityElement(children: .combine)
                     }
-                    LiveModule(leg: detail.leg, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
+                    // Compact: the arrival is the status card's own line above (it was said twice).
+                    LiveModule(leg: detail.leg, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now, compact: true)
                 }
             }
         }
@@ -831,25 +862,47 @@ struct TimeBlock: View {
     /// Changes the platform you entered yourself (your own trip).
     var onSetPlatform: (() -> Void)?
 
-    /// The bare platform in the accent ink on a raised tag, like the stops list. Nothing when no platform is known: adding
-    /// one is done from the dash in the stops list. A platform you typed yourself can still be changed by tapping it.
+    /// The platform. Look.timeBlockPlatform `.tag` (polish pass 1): grey, its number on split-flap tiles that flip
+    /// with one tick when the platform changes (signature moment 2); `.yellow`: the solid yellow tag before. A
+    /// button (44 pt) only when it can be changed, a platform you typed yourself; otherwise not tappable at all
+    /// (user test 2026-11-07: it looked tappable and did nothing).
     @ViewBuilder
     private var platformTag: some View {
         if let platform {
-            // A marked box in the accent yellow with a rail mark, so it reads as the platform (owner, 2026-10-29).
-            HStack(spacing: Space.xs) {
+            let face = HStack(spacing: Space.xs) {
                 LucideIcon(name: "train-track", size: 12)
-                Text(platform).clack(.chip).fontWeight(.bold).monospacedDigit()
+                if Look.timeBlockPlatform == .tag {
+                    SplitFlap(value: platform, size: .sm, tick: true)
+                } else {
+                    Text(platform).clack(.chip).fontWeight(.bold).monospacedDigit()
+                }
             }
-                .foregroundStyle(Ink.bg)
-                .padding(.vertical, Space.xs).padding(.horizontal, Space.s)
-                .frame(minWidth: 32)
-                .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
-                .fixedSize()
-                .onTapGesture { onSetPlatform?() }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(l10n.t("trips.platform", ["platform": platform]))
+            .foregroundStyle(Look.timeBlockPlatform == .tag ? Ink.text2 : Ink.bg)
+            .padding(.vertical, Space.xxs).padding(.horizontal, Space.s)
+            .frame(minWidth: 32, minHeight: 26)
+            .background(Look.timeBlockPlatform == .tag ? Ink.surfaceRaised : Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+            .fixedSize()
+            if let onSetPlatform {
+                Button(action: onSetPlatform) { face.frame(minHeight: 44).contentShape(Rectangle()) }
+                    .buttonStyle(.press(radius: Radius.tag))
+                    .accessibilityLabel(l10n.t("trips.platform", ["platform": platform]))
+                    .accessibilityHint(l10n.t("detail.platformEditHint"))
+            } else {
+                face.accessibilityHidden(true)
+            }
         }
+    }
+
+    /// The block as one sentence: "Departure 08:07, 4 min late, timetabled 08:03, platform 3".
+    private var spoken: String {
+        let time = Format.time(actual ?? sched, tz: tz, clock: app.settings.clock)
+        let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
+        return Format.join([
+            "\(label) \(time)",
+            canceled ? l10n.t("delay.cancelled") : delay.flatMap { $0 > 0 ? l10n.t("passport.minutesLate", count: $0) : nil },
+            changed ? l10n.t("detail.timetabledAt", ["time": Format.time(sched, tz: tz, clock: app.settings.clock)]) : nil,
+            platform.map { l10n.t("trips.platform", ["platform": $0]) },
+        ], separator: ", ")
     }
 
     var body: some View {
@@ -859,12 +912,12 @@ struct TimeBlock: View {
             // wrap without being cut ("DEPARTU / RE" on a Pro Max at the default size, build 59).
             ViewThatFits(in: .horizontal) {
                 HStack(alignment: .top, spacing: Space.s) {
-                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).fixedSize()
+                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).fixedSize().accessibilityHidden(true)
                     Spacer(minLength: 0)
                     platformTag
                 }
                 VStack(alignment: .leading, spacing: Space.xs) {
-                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).minimumScaleFactor(0.7)
+                    Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).minimumScaleFactor(0.7).accessibilityHidden(true)
                     platformTag
                 }
             }
@@ -872,17 +925,20 @@ struct TimeBlock: View {
             // The planned time, struck, with the delay beside it on the same line (owner, 2026-10-29); blank when nothing changed.
             HStack(spacing: Space.s) {
                 Text(Format.time(sched, tz: tz, clock: app.settings.clock))
-                    .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                    .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text2)
                     .opacity(changed ? 1 : 0)
-                    .accessibilityHidden(!changed)
-                if delay != nil || canceled { DelayText(delay: delay, canceled: canceled) }
+                    .accessibilityHidden(true)
+                if delay != nil || canceled { DelayText(delay: delay, canceled: canceled).accessibilityHidden(true) }
             }
             HStack(alignment: .firstTextBaseline, spacing: Space.xxs) {
-                SplitFlap(value: Format.time(actual ?? sched, tz: tz, clock: app.settings.clock), size: .time, intro: true)
+                // A live change flips the changed digits with one tick (signature moment 2).
+                SplitFlap(value: Format.time(actual ?? sched, tz: tz, clock: app.settings.clock), size: .time, intro: true, tick: true)
                     .opacity(canceled ? 0.6 : 1)
                     .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
-                if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+                if extraDays > 0 { TimePair.plusText(extraDays) }
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(spoken)
         }
         .tileSurface()
     }
@@ -998,7 +1054,10 @@ struct StatusCard<Second: View>: View {
         HStack(alignment: .top, spacing: Space.m) {
             Rectangle().fill(ink).frame(width: 3)
             VStack(alignment: .leading, spacing: Space.xxs) {
-                Text(text).clack(.headline).foregroundStyle(ink).fixedSize(horizontal: false, vertical: true)
+                Text(text).clack(.headline).monospacedDigit().foregroundStyle(ink).fixedSize(horizontal: false, vertical: true)
+                    // A countdown or an arrival time rolls to its next value instead of jumping.
+                    .contentTransition(.numericText())
+                    .motion(.tap, value: text)
                 HStack(alignment: .firstTextBaseline, spacing: Space.s) { second() }
             }
             Spacer(minLength: 0)

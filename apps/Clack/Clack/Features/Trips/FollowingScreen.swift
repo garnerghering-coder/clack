@@ -242,7 +242,7 @@ struct FollowingChange: View {
         VStack(alignment: .leading, spacing: Space.xxs) {
             Text(SharedLogic.changeTitle(change, in: journey, l10n: l10n)).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
             if change.arrPlatform != nil || change.depPlatform != nil {
-                Text(l10n.t("connection.tracks", ["from": change.arrPlatform ?? Format.unknown, "to": change.depPlatform ?? Format.unknown]))
+                Text(Format.changeTracks(l10n, arrival: change.arrPlatform, departure: change.depPlatform) ?? "")
                     .clack(.caption).foregroundStyle(Ink.text2)
             }
             switch change.status {

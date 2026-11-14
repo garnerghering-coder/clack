@@ -65,7 +65,8 @@ struct PassportCard: View {
             // A machine-readable-zone look, spelled out from your own totals (decoration; nothing personal).
             Text(mrz(km: km))
                 .font(.system(size: 11, design: .monospaced)).tracking(1.3).foregroundStyle(Color.black.opacity(0.45))
-                .lineLimit(1)
+                // The whole line, shrunk to fit rather than cut (designer, 2026-11-14: "the truncated passport line").
+                .lineLimit(1).minimumScaleFactor(0.5)
                 .padding(.top, Space.s)
                 .overlay(alignment: .top) { Rectangle().stroke(Color.black.opacity(0.2), style: StrokeStyle(lineWidth: 1, dash: [3, 3])).frame(height: 1) }
                 .padding(.top, Space.xs)

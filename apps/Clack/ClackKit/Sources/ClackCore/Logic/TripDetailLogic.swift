@@ -167,6 +167,10 @@ extension TripDetailLogic {
         case .platformSet:
             return l10n.t(p.which == "departure" ? "activity.platformSetDeparture" : "activity.platformSetArrival", ["to": p.to ?? ""])
         case .platformChanged:
+            // No earlier platform known: say the new one, not "changed  → 9" (designer, 2026-11-14).
+            if (p.from ?? "").isEmpty {
+                return l10n.t(p.which == "departure" ? "activity.platformDepartureNow" : "activity.platformArrivalNow", ["to": p.to ?? ""])
+            }
             return l10n.t(p.which == "departure" ? "activity.platformDeparture" : "activity.platformArrival", ["from": p.from ?? "", "to": p.to ?? ""])
         case .cancelled:
             return l10n.t("activity.cancelled")

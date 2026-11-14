@@ -320,3 +320,23 @@ struct MapButtonFace: View {
         }
     }
 }
+
+/// A row that opens more: its words, then a chevron, the full width and at least 44 pt high (designer, 2026-11-14:
+/// "All milestones" looked like an underlined web link and "How we calculate this" like another kind of link). Put it
+/// in a `NavigationLink` or `Button` with `.buttonStyle(.pressRow)`.
+struct DisclosureRowLabel: View {
+    let title: String
+    var detail: String?
+
+    var body: some View {
+        HStack(spacing: Space.s) {
+            Text(title).clack(.rowTitle).foregroundStyle(Ink.text)
+            if let detail { Text(detail).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2) }
+            Spacer(minLength: Space.s)
+            LucideIcon(name: "chevron-right", size: 16).foregroundStyle(Ink.text3)
+        }
+        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+        .contentShape(Rectangle())
+        .textSelection(.disabled)
+    }
+}

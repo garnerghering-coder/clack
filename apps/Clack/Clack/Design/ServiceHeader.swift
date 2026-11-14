@@ -57,7 +57,7 @@ struct ServiceHeader<Status: View>: View {
         FlowLayout(spacing: Space.s, lineSpacing: 4, centered: true) {
             OperatorBadge(op: op, size: size)
             Text(service.isEmpty ? (fallback ?? l10n.t("trips.train")) : service)
-                .clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
+                .clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(2)
             if let category { Text(l10n.t("products.\(category)")).clack(.chip).foregroundStyle(Ink.text2).lineLimit(1) }
             if let seat { Text(seat).clack(.chip).foregroundStyle(Ink.text).lineLimit(1) }
             status

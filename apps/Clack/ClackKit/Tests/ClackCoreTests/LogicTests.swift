@@ -50,8 +50,8 @@ struct FormatTests {
         #expect(Format.distance(455_300, unit: .km) == "455 km")
         #expect(Format.distance(455_300, unit: .mi) == "283 mi")
         #expect(Format.distance(nil, unit: .km) == "—")
-        #expect(Format.delay(39) == "+39")
-        #expect(Format.delay(-2) == "−2")
+        #expect(Format.delay(39) == "+39 min")
+        #expect(Format.delay(-2) == "−2 min")
         #expect(Format.delay(0) == "0")
         #expect(Format.delay(nil) == "—")
     }

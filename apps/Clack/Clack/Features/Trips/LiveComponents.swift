@@ -136,7 +136,7 @@ struct LiveModule: View {
             Text("\(l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: LiveRules.dataAt(live), now: now)])) · \(source)")
                 .clack(.caption).foregroundStyle(Ink.text2)
         }
-        .padding(.top, compact ? 12 : 0)
+        .padding(.top, compact ? Space.m : 0)
         .accessibilityElement(children: .contain)
     }
 }
@@ -199,7 +199,7 @@ struct HeroConnection: View {
         let result = model.result(a, b, profile: app.walkProfile)
         let walk = result.walkSeconds.map { l10n.t("connection.walk", ["min": String(max(1, Int(($0 / 60).rounded())))]) }
         let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
+            ? Format.changeTracks(l10n, arrival: a.arrPlatform, departure: b.depPlatform) : nil
         let line = [l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]), tracks, walk].compactMap { $0 }.joined(separator: " · ")
         ViewThatFits(in: .horizontal) {
             HStack(spacing: Space.m) {
@@ -231,7 +231,7 @@ struct ConnectionCard: View {
         let times = TripsLogic.connectionTimes(a, b)
         let walkMin = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
         let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
+            ? Format.changeTracks(l10n, arrival: a.arrPlatform, departure: b.depPlatform) : nil
         // The chip already says the wait when it has the verdict; the caption then keeps to tracks and the walk.
         let chipSaysWait = result.comfort != nil && result.gapMin != nil
         let caption = [

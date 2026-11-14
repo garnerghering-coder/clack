@@ -63,7 +63,8 @@ struct StationMapScreen: View {
     @State private var autoWalked = false
     @AppStorage("walkModeAutoStart") private var walkModeAuto = true
 
-    private var tz: String { "Europe/Stockholm" }
+    /// The station's own time zone (it was Stockholm everywhere, an hour off in Finland).
+    private var tz: String { info?.tz ?? Format.zone(stationId: link.stationId) }
     private var clock: ClockFormat { app.settings.clock }
 
     var body: some View {
@@ -407,12 +408,12 @@ struct StationMapScreen: View {
             if map.levels.count > 1 && !listView {
                 // The floors as the app's one pick-one control (owner, 2026-11-07); the chosen segment is the floor's
                 // name, so the separate label that sat under it is gone.
-                let levels = map.levels.sorted { $0.order < $1.order }
-                SegmentedControl(
-                    selection: Binding(get: { level }, set: { self.level = $0 }),
-                    options: levels.map { ($0.id, StationSceneLogic.levelLabel($0)) }, small: true
+                // A narrow column on the edge, highest floor on top (designer, 2026-11-14: the wide switch sat on the
+                // map's icons).
+                LevelColumn(
+                    levels: map.levels.sorted { $0.order > $1.order }.map { ($0.id, StationSceneLogic.levelLabel($0)) },
+                    selection: Binding(get: { level }, set: { self.level = $0 })
                 )
-                .frame(width: min(260, CGFloat(levels.count) * 64 + 8))
             }
             MapButton(icon: listView ? "map" : "list", label: l10n.t(listView ? "stationMap.map" : "stationMap.list")) { listView.toggle() }
             #if DEBUG
@@ -866,8 +867,22 @@ private struct PoiSheet: View {
             if let hours = poi.openingHours {
                 VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(l10n.t("stationMap.hours").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2)
-                    Text(OpeningHours.parse(hours) != nil ? hours.replacingOccurrences(of: #";\s*"#, with: " · ", options: .regularExpression) : hours)
-                        .clack(.body).monospacedDigit().foregroundStyle(Ink.text)
+                    // The week as a person reads it (designer, 2026-11-14: "Mo-Sa 06:00-20:30" was shown raw); what
+                    // can't be read is shown as listed, under a line that says so.
+                    if let week = OpeningHours.week(hours, language: l10n.language) {
+                        Grid(alignment: .leading, horizontalSpacing: Space.l, verticalSpacing: Space.xs) {
+                            ForEach(Array(week.enumerated()), id: \.offset) { _, line in
+                                GridRow {
+                                    Text(line.days).foregroundStyle(Ink.text2)
+                                    Text(line.spans.isEmpty ? l10n.t("stationMap.closedAllDay") : OpeningHours.spansText(line.spans)).foregroundStyle(Ink.text)
+                                }
+                            }
+                        }
+                        .clack(.body).monospacedDigit()
+                    } else {
+                        Text(l10n.t("stationMap.hoursAsListed")).clack(.caption).foregroundStyle(Ink.text2)
+                        Text(hours).clack(.body).foregroundStyle(Ink.text)
+                    }
                 }
                 // Checked on the station owner's page: say so and when; else the general note.
                 if poi.hoursSource == "website", let checked = poi.hoursVerified {
@@ -899,7 +914,7 @@ private struct PoiSheet: View {
 
     private var stateLabel: String {
         if state.state == .closingSoon, let closes = state.closesAt {
-            return l10n.t("stationMap.closesAt", ["time": Format.time(closes, tz: "Europe/Stockholm", clock: app.settings.clock)])
+            return l10n.t("stationMap.closesAt", ["time": Format.time(closes, tz: Format.zone(stationId: map.stationId), clock: app.settings.clock)])
         }
         return l10n.t("stationMap.state.\(state.state.rawValue)")
     }
@@ -917,4 +932,46 @@ private struct PoiSheet: View {
 struct PoiGroup: Identifiable {
     let pois: [StationPoi]
     var id: String { pois.map(\.id).joined(separator: "|") }
+}
+
+/// The station map's floors as a vertical column of 44 pt buttons on one glass track, the chosen one in the
+/// selection ink (Look.selection).
+private struct LevelColumn: View {
+    let levels: [(id: String, label: String)]
+    @Binding var selection: String
+    @Environment(L10n.self) private var l10n
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ForEach(levels, id: \.id) { level in
+                let chosen = level.id == selection
+                Button {
+                    withMotion(.tap, reduceMotion: reduceMotion) { selection = level.id }
+                } label: {
+                    Text(level.label).clack(.button).monospacedDigit()
+                        .foregroundStyle(chosen ? Look.onSelection : Ink.text)
+                        .frame(width: 44, height: 44)
+                        .background(chosen ? Look.selectionFill : .clear, in: RoundedRectangle(cornerRadius: Radius.inner(Radius.input, padding: Space.xxs), style: .continuous))
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.press(radius: Radius.inner(Radius.input, padding: Space.xxs), scales: false))
+                .accessibilityLabel(l10n.t("stationMap.floor", ["floor": level.label]))
+                .accessibilityAddTraits(chosen ? [.isButton, .isSelected] : .isButton)
+            }
+        }
+        .padding(Space.xxs)
+        .modifier(GlassTrack())
+    }
+
+    private struct GlassTrack: ViewModifier {
+        func body(content: Content) -> some View {
+            let shape = RoundedRectangle(cornerRadius: Radius.input, style: .continuous)
+            if #available(iOS 26.0, *) {
+                content.glassEffect(.regular, in: shape)
+            } else {
+                content.background(Ink.glass, in: shape).background(.ultraThinMaterial, in: shape).overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
+            }
+        }
+    }
 }

@@ -7,13 +7,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Distance along the track × (comparison factor − train factor). Factors are well-to-wheel g CO₂e per passenger-km from IVL Swedish Environmental Research Institute, report U11173 (2026). Norwegian and Finnish trips use the same factors for now: we haven’t yet checked a Norwegian or a Finnish source."
+            "value" : "Distance along the track × (comparison factor − train factor), g CO₂e per passenger-km. Sweden: IVL Swedish Environmental Research Institute, report U11173 (2026), well-to-wheel. Norway: Vy's figure for electric trains (7 g). Finland: VR's figure for passenger trains (1.1 g). Denmark: the Danish transport ministry's 2024 figures from DSB, S-tog 11 g, other trains 42 g (the low end of diesel regional trains). These count only running the train, so outside Sweden the numbers are estimates. The car and flight figures are Sweden's (IVL) everywhere."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sträcka längs spåret × (jämförelsefaktor − tågfaktor). Faktorerna är well-to-wheel g CO₂e per personkilometer från IVL Svenska Miljöinstitutet, rapport U11173 (2026). Norska och finska resor räknas tills vidare med samma faktorer: vi har inte kontrollerat någon norsk eller finsk källa än."
+            "value" : "Sträcka längs spåret × (jämförelsefaktor − tågfaktor), g CO₂e per personkilometer. Sverige: IVL Svenska Miljöinstitutet, rapport U11173 (2026), well-to-wheel. Norge: Vys siffra för eltåg (7 g). Finland: VR:s siffra för persontåg (1,1 g). Danmark: danska transportministeriets siffror för 2024 från DSB, S-tog 11 g, övriga tåg 42 g (den lägre änden för dieseldrivna regionaltåg). De räknar bara själva tågdriften, så utanför Sverige är siffrorna uppskattningar. Bil- och flygsiffrorna är Sveriges (IVL) överallt."
           }
         }
       }
@@ -507,6 +507,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Händelser"
+          }
+        }
+      }
+    },
+    "activity.platformDepartureNow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Departure platform is now {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgångsspåret är nu {{to}}"
+          }
+        }
+      }
+    },
+    "activity.platformArrivalNow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrival platform is now {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ankomstspåret är nu {{to}}"
           }
         }
       }
@@ -1830,6 +1864,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Välkommen till"
+          }
+        }
+      }
+    },
+    "arrival.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load your journey. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta din resväg. Kontrollera anslutningen och försök igen."
           }
         }
       }
@@ -4724,6 +4775,23 @@
         }
       }
     },
+    "common.couldntSave" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t save. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte spara. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
     "connection.brokenBanner" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5009,6 +5077,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "{{min}} min promenad"
+          }
+        }
+      }
+    },
+    "connection.trackArrive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrive at platform {{n}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ankomst spår {{n}}"
+          }
+        }
+      }
+    },
+    "connection.trackLeave" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leave from platform {{n}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgång spår {{n}}"
           }
         }
       }
@@ -7039,13 +7141,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min in reality"
+            "value" : "{{min}} min with today's times"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{min}} min i verkligheten"
+            "value" : "{{min}} min med dagens tider"
           }
         }
       }
@@ -10933,13 +11035,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On time or early"
+            "value" : "On time (up to 5 min late)"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I tid eller tidigt"
+            "value" : "I tid (högst 5 min sent)"
           }
         }
       }
@@ -10950,13 +11052,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1–15 min"
+            "value" : "6–15 min"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1–15 min"
+            "value" : "6–15 min"
           }
         }
       }
@@ -13412,6 +13514,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sträcka {{year}}"
+          }
+        }
+      }
+    },
+    "passport.co2Method" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An estimate: distance × each country's published train figure (IVL for Sweden; Vy, VR and DSB's government data elsewhere), against a Swedish car or flight."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En uppskattning: sträcka × varje lands publicerade siffra för tåg (IVL för Sverige; Vy, VR och DSB:s statliga uppgifter annars), jämfört med en svensk bil eller flygresa."
           }
         }
       }
@@ -17900,13 +18019,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Draft from OpenStreetMap"
+            "value" : "From OpenStreetMap"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utkast från OpenStreetMap"
+            "value" : "Från OpenStreetMap"
           }
         }
       }
@@ -24164,6 +24283,57 @@
         }
       }
     },
+    "stationMap.closedAllDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stängt"
+          }
+        }
+      }
+    },
+    "stationMap.hoursAsListed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As listed:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Som angivet:"
+          }
+        }
+      }
+    },
+    "stationMap.floor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Floor {{floor}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plan {{floor}}"
+          }
+        }
+      }
+    },
     "add.noTrainAtHome" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24381,6 +24551,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tillagd för hand: tiderna är de du skrev in."
+          }
+        }
+      }
+    },
+    "detail.deleteFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t delete the trip. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte radera resan. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
+    "detail.platformEditHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes the platform you entered"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ändrar spåret du angav"
+          }
+        }
+      }
+    },
+    "detail.timetabledAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "timetabled {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "enligt tidtabell {{time}}"
           }
         }
       }

@@ -64,7 +64,8 @@ public struct TimePair: View {
     /// "+1", the one style for a later day.
     public static func plusText(_ days: Int) -> Text {
         let role = TextRole.captionUpper
-        return Text("+\(days)").font(role.font).foregroundStyle(Ink.text2)
+        // "+1 d", not "+1": a bare +1 read as a minute late (designer, 2026-11-14). "d" is day and dag alike.
+        return Text(verbatim: "+\(days) d").font(role.font).foregroundStyle(Ink.text2)
     }
 
     public var body: some View {

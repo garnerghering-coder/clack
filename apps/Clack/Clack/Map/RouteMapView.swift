@@ -94,6 +94,10 @@ struct RouteMapView: View {
                 .id("\(scheme == .dark)-\(basemap)")
                 // A preview (a card's strip, the confirm step) is a picture: a drag on it scrolls the page.
                 .allowsHitTesting(interactive)
+                // The map itself is one picture for VoiceOver; the Follow button below stays its own control
+                // (polish pass 1: the whole stack was one element, so Follow couldn't be reached).
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(label ?? "")
             }
             // The button shows once there is something for it to do: a live train to follow, or a map that was moved
             // off its framing (user test 2026-11-07: tapped before departure it did nothing, "dead button").
@@ -114,7 +118,7 @@ struct RouteMapView: View {
                             }
                         }
                     }
-                    .padding(.bottom, 16 + bottomInset)
+                    .padding(.bottom, Space.l + bottomInset)
                 }
                 .padding(.trailing, Space.l)
             }
@@ -126,15 +130,15 @@ struct RouteMapView: View {
                         // A credit line, not reading matter: it stays small at accessibility sizes (user test
                         // 2026-11-07, xxxLarge: it covered a third of the map).
                         .dynamicTypeSize(...DynamicTypeSize.xLarge)
-                        .padding(.leading, Space.s).padding(.bottom, 6 + bottomInset)
+                        .padding(.leading, Space.s).padding(.bottom, Space.xs + bottomInset)
                         .allowsHitTesting(false)
+                        .accessibilityHidden(true)
                     Spacer()
                 }
             }
         }
         .clipped()
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(label ?? "")
+        .accessibilityElement(children: .contain)
         .task { basemap = await app.mapHasBasemap() }
         // You got on (or the train's position came in): follow it, once; dragging the map stops it as before.
         .onChange(of: followTrain && train != nil) { _, on in if on { follow = true } }
@@ -361,7 +365,8 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         @objc private func step() {
             // The map is gone (the screen closed mid-draw): stop, or the link would fire for ever.
             guard let map else { return stopDrawOn() }
-            let k = min(1, (CACurrentMediaTime() - drawStart) / 1.2)
+            // 0.6 s (polish pass 1; DESIGN §10 said 1.2 s): it shows where the route goes, then gets out of the way.
+            let k = min(1, (CACurrentMediaTime() - drawStart) / 0.6)
             let eased = 1 - pow(1 - k, 3)
             map.setShape(MapGeometry.lines([MapGeometry.part(parent.route, eased)]), source: "route")
             if k >= 1 {

@@ -37,7 +37,7 @@ public nonisolated enum Format {
     public static func zone(stationId: String?) -> String {
         guard let stationId else { return defaultZone }
         if stationId.hasPrefix("fi:") { return zone(country: "FI") }
-        if stationId.hasPrefix("no:") { return zone(country: "NO") }
+        if stationId.hasPrefix("no:") || stationId.hasPrefix("76") { return zone(country: "NO") }
         return defaultZone
     }
 
@@ -162,11 +162,12 @@ public nonisolated enum Format {
         join([operatorName, number], separator: " ")
     }
 
-    /// `+8`, `−2` (a real minus sign), `0`, `—` when unknown.
+    /// `+8 min`, `−2 min` (a real minus sign), `0`, `—` when unknown. With its unit, so a delay can't be read as a
+    /// day ("+1") or a platform (designer, 2026-11-14: "+1", "28m", "4.5 min" all meant different things).
     public static func delay(_ min: Int?) -> String {
         guard let min else { return unknown }
         if min == 0 { return "0" }
-        return min > 0 ? "+\(min)" : "−\(abs(min))"
+        return min > 0 ? "+\(min) min" : "−\(abs(min)) min"
     }
 
     public static func todayIso(tz: String = Format.defaultZone) -> String {
@@ -189,3 +190,18 @@ public nonisolated enum Format {
         Instant.parse("\(iso)T12:00:00Z").map { $0.timeIntervalSince1970 * 1000 }
     }
 }
+
+extension Format {
+    /// The platforms of a change, saying only what is known (designer, 2026-11-14: "Platform — → 9"): both, the
+    /// arrival one, the departure one, or nothing.
+    @MainActor
+    public static func changeTracks(_ l10n: L10n, arrival: String?, departure: String?) -> String? {
+        switch (arrival?.isEmpty == false ? arrival : nil, departure?.isEmpty == false ? departure : nil) {
+        case let (a?, d?): l10n.t("connection.tracks", ["from": a, "to": d])
+        case let (a?, nil): l10n.t("connection.trackArrive", ["n": a])
+        case let (nil, d?): l10n.t("connection.trackLeave", ["n": d])
+        case (nil, nil): nil
+        }
+    }
+}
+

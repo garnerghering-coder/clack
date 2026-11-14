@@ -218,9 +218,17 @@ struct PassportScreen: View {
             if d.basedOn == 0 {
                 Text(l10n.t("passport.noDelayData")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                HStack(alignment: .firstTextBaseline, spacing: Space.m) {
-                    Text("\(Int((d.onTimePct ?? 0).rounded()))%").clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
-                    Text(l10n.t("passport.onTime")).clack(.caption).foregroundStyle(Ink.text2)
+                // A handful of trains is too few for a headline figure: then the count leads and the share is a line
+                // under it (designer, 2026-11-14: "67% on time" rested on 6 of 112 trains).
+                if d.basedOn < Self.headlineMinimum {
+                    Text(l10n.t("passport.basedOn", count: d.basedOn)).clack(.headline).foregroundStyle(Ink.text)
+                    Text("\(Int((d.onTimePct ?? 0).rounded()))% \(l10n.t("passport.onTime"))").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                } else {
+                    HStack(alignment: .firstTextBaseline, spacing: Space.m) {
+                        Text("\(Int((d.onTimePct ?? 0).rounded()))%").clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
+                            .contentTransition(.numericText(value: d.onTimePct ?? 0))
+                        Text(l10n.t("passport.onTime")).clack(.caption).foregroundStyle(Ink.text2)
+                    }
                 }
                 SegmentedBar(segments: bands.map { .init(id: $0.key, count: $0.count, color: $0.band.fill) })
                 VStack(alignment: .leading, spacing: Space.xs) {
@@ -242,10 +250,15 @@ struct PassportScreen: View {
                     }
                     RecordTile(label: l10n.t("passport.cancellations"), value: String(d.cancellations), sub: nil, legId: nil)
                 }
-                Text(l10n.t("passport.basedOn", count: d.basedOn)).clack(.caption).foregroundStyle(Ink.text2)
+                if d.basedOn >= Self.headlineMinimum {
+                    Text(l10n.t("passport.basedOn", count: d.basedOn)).clack(.caption).foregroundStyle(Ink.text2)
+                }
             }
         }
     }
+
+    /// Fewer trains with real arrival times than this, and the Delays card leads with how many there are.
+    private static let headlineMinimum = 20
 
     private func co2Card(_ data: Passport) -> some View {
         let c = data.co2
@@ -265,13 +278,12 @@ struct PassportScreen: View {
                 selection: Binding(get: { activeComparison }, set: { value in Task { await app.update(SettingsPatch(co2Comparison: value)) } }),
                 options: Settings.co2Choices.map { ($0, $0 == .flight ? l10n.t("passport.co2Flying") : l10n.t("passport.co2Car")) }, small: true
             )
-            (Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? String(format: "%.1f", c.trainKg) : String(Int(c.trainKg.rounded())), "other": grouped(c.comparisonKg), "mode": mode]) + " ")
-                + Text(.init("[\(l10n.t("passport.howWeCalculate"))](clack://about)")))
-                .clack(.caption).foregroundStyle(Ink.text2).tint(Ink.accentInk)
-                .environment(\.openURL, OpenURLAction { _ in
-                    router.setPath([.about], for: .passport)
-                    return .handled
-                })
+            // The method, in a line, where the number is (designer, 2026-11-14: "sanity-check it or show the method").
+            Text(l10n.t("passport.co2Method")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+            Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? String(format: "%.1f", c.trainKg) : String(Int(c.trainKg.rounded())), "other": grouped(c.comparisonKg), "mode": mode]))
+                .clack(.caption).foregroundStyle(Ink.text2)
+            NavigationLink(value: AppRoute.about) { DisclosureRowLabel(title: l10n.t("passport.howWeCalculate")) }
+                .buttonStyle(.pressRow)
         }
     }
 }
@@ -348,9 +360,9 @@ private struct MilestonesCard: View {
             }
             let total = PassportLogic.ladder(data.milestones).reduce(0) { $0 + $1.rungs.count }
             NavigationLink(value: AppRoute.passportMilestones) {
-                Text("\(l10n.t("passport.allMilestones")) · \(l10n.t("passport.earnedOf", ["earned": String(achieved.count), "total": String(total)]))")
+                DisclosureRowLabel(title: l10n.t("passport.allMilestones"), detail: l10n.t("passport.earnedOf", ["earned": String(achieved.count), "total": String(total)]))
             }
-            .buttonStyle(LinkButtonStyle())
+            .buttonStyle(.pressRow)
             if !next.isEmpty {
                 Text(l10n.t("passport.nextMilestones")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 LazyVGrid(columns: columns, spacing: Space.l) {

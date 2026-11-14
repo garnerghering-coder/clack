@@ -28,8 +28,10 @@ public struct Tile<Value: View>: View {
             Text(label).clack(.caption).foregroundStyle(secondary).lineLimit(2)
             value
                 .clack(.headline).monospacedDigit().foregroundStyle(primary)
-                .lineLimit(1).minimumScaleFactor(0.7)
-            if let sub { Text(sub).clack(.caption).foregroundStyle(secondary).lineLimit(1) }
+                // Two lines before anything is cut: a route or a station name ("Stockholm C → Göteborg C") wraps
+                // (polish pass 1: "Stockholm C → Götebo…").
+                .lineLimit(2).minimumScaleFactor(0.85)
+            if let sub { Text(sub).clack(.caption).foregroundStyle(secondary).lineLimit(2) }
         }
         .tileSurface(tone)
         .accessibilityElement(children: .combine)

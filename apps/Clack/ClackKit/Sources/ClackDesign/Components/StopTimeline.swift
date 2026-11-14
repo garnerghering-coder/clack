@@ -246,7 +246,8 @@ public struct StopRow: View {
         let text = Text(name)
             .clack(emphasis == .ridden || emphasis == .next ? .rowTitle : .body)
             .fontWeight(emphasis == .dim ? .medium : nil)
-            .foregroundStyle(emphasis == .dim ? Ink.text3 : Ink.text)
+            // Dimmed in text-2, still readable at 4.5:1 (designer, 2026-11-14: passed stops were too dim to read).
+            .foregroundStyle(emphasis == .dim ? Ink.text2 : Ink.text)
             .strikethrough(canceled)
             .opacity(canceled ? 0.6 : 1)
             .multilineTextAlignment(.leading)
@@ -254,7 +255,7 @@ public struct StopRow: View {
             // Selection off on the label: with it on (the app's default), a tap went to selecting the name and the
             // board never opened (user test 2026-11-07: "the one screen I actually want, I never reached").
             Button(action: onOpen) { text.textSelection(.disabled) }
-                .buttonStyle(.plain)
+                .buttonStyle(.press(radius: Radius.tag, scales: false))
                 .accessibilityLabel(openLabel ?? name)
         } else {
             text
@@ -275,10 +276,10 @@ public struct StopRow: View {
         if shown != nil {
         VStack(alignment: .trailing, spacing: 0) {
             SplitFlap(value: Format.time(shown, tz: tz, clock: clock), size: .sm, colour: tint)
-                .opacity(emphasis == .dim ? 0.6 : 1)
+                .opacity(emphasis == .dim ? 0.85 : 1)
             if FlapTime.changed(time, from: sched), let sched {
                 Text(Format.time(sched, tz: tz, clock: clock))
-                    .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                    .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text2)
             }
         }
         .opacity(canceled ? 0.5 : 1)

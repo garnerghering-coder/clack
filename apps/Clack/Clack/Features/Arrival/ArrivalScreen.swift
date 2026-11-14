@@ -19,6 +19,7 @@ struct ArrivalScreen: View {
     let moment: ArrivalMoment
 
     @State private var journey: Journey?
+    @State private var loadFailed = false
     @State private var progress: TripProgress?
     @State private var settled = false
 
@@ -39,6 +40,9 @@ struct ArrivalScreen: View {
                                 .transition(.opacity)
                         }
                         if let journey, !journey.legs.isEmpty { map(journey) }
+                    } else if loadFailed {
+                        // Said, with a way to try again, instead of a placeholder that never went (polish pass 1).
+                        ErrorStateView(message: l10n.t("arrival.loadFailed"), retry: { await load() })
                     } else {
                         Skeleton(height: 120)
                     }
@@ -138,7 +142,11 @@ struct ArrivalScreen: View {
     private func load() async {
         let id = moment.journeyId ?? "j-\(moment.legId)"
         let loaded: Journey
-        guard let fetched = try? await app.client.journey(id) else { return }
+        loadFailed = false
+        guard let fetched = try? await app.client.journey(id) else {
+            loadFailed = true
+            return
+        }
         loaded = fetched
         journey = loaded
         let client = app.client
@@ -179,7 +187,16 @@ private struct ArrivalBoard: View {
     }
 
     var body: some View {
-        SplitFlap(value: shown, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm), stagger: Self.stagger)
+        // One row when it fits; else a row per word, so "KØBENHAVN LUFTHAVN KASTRUP" never runs off the screen at
+        // larger text sizes (polish pass 1).
+        ViewThatFits(in: .horizontal) {
+            SplitFlap(value: shown, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm), stagger: Self.stagger)
+            VStack(alignment: .center, spacing: Space.xs) {
+                ForEach(Array(shown.split(separator: " ").enumerated()), id: \.offset) { _, word in
+                    SplitFlap(value: String(word), size: .sm, stagger: Self.stagger)
+                }
+            }
+        }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(plain)
             .task {
