@@ -70,7 +70,7 @@ public struct TimePair: View {
     public var body: some View {
         if let flap {
             let plus = Self.plusDays(dep, arr)
-            FlowLayout(spacing: 8, lineSpacing: 2) {
+            FlowLayout(spacing: Space.s, lineSpacing: 2) {
                 FlapTime(time: dep.time, sched: dep.sched, tz: dep.tz, clock: clock, style: flap, intro: intro, strikeOld: false)
                 Text("–").foregroundStyle(Ink.text3)
                 FlapTime(time: arr.time, sched: arr.sched, tz: arr.tz, clock: clock, style: flap, intro: intro, strikeOld: false)

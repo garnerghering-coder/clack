@@ -22,11 +22,11 @@ public struct InfoNote: View {
 
     public var body: some View {
         if let more, !more.isEmpty {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.xs) {
                 Button {
                     open.toggle()
                 } label: {
-                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
                         // The whole note, always (designer, 2026-11-07: cut to two lines it ended in an ellipsis on the
                         // largest phone); only the longer text waits behind the (i).
                         Text(text).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)

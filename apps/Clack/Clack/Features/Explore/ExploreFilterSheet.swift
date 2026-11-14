@@ -90,7 +90,7 @@ struct ExploreFilterSheet: View {
 
     /// A row's label with a leading mark and the count of trains in view.
     private func countedLabel<Icon: View>(_ title: String, count: Int, @ViewBuilder icon: () -> Icon) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Space.m) {
             icon()
             Text(title)
             Spacer(minLength: 8)
@@ -113,9 +113,9 @@ struct ExploreFilterSheet: View {
         if items.isEmpty {
             Text(l10n.t("liveMap.colorBy.operatorHint")).font(.footnote).foregroundStyle(.secondary)
         } else {
-            FlowLayout(spacing: 12, lineSpacing: 8) {
+            FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
                 ForEach(items, id: \.1) { hex, name in
-                    HStack(spacing: 4) {
+                    HStack(spacing: Space.xs) {
                         Circle().fill(operatorColor(hex, scheme: scheme)).frame(width: 10, height: 10)
                         Text(name).font(.footnote).foregroundStyle(.secondary)
                     }

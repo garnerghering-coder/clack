@@ -41,7 +41,7 @@ struct AlertsPrompt: View {
         } else if app.settings.notify, !leg.canceled {
             // Alerts are on for this train (and every other ahead): one line, and the way to what you get.
             NavigationLink(value: AppRoute.settings) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     LucideIcon(name: "bell", size: 16).foregroundStyle(Ink.accentInk)
                     Text(l10n.t(justOn ? "alertsPrompt.nowOn" : "alertsPrompt.on")).clack(.caption).foregroundStyle(Ink.text2)
                         .fixedSize(horizontal: false, vertical: true)

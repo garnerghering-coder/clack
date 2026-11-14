@@ -61,9 +61,9 @@ struct PassportBreakdownScreen: View {
     private func totals(_ data: Passport) -> some View {
         let t = data.totals
         let s = app.settings
-        return LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: 16) {
+        return LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: Space.l) {
             Tile(label: l10n.t("detail.distance")) { Text(Format.distance(t.distanceM, unit: s.distanceUnit, language: s.language)) }
-            Tile(label: l10n.t("passport.timeOnTrains")) { Text(Format.duration(t.minutes)) }
+            Tile(label: l10n.t("passport.timeOnTrains")) { Text(Format.duration(t.minutes, language: l10n.language)) }
             Tile(label: l10n.t("passport.trains")) { Text(String(t.trains)) }
             Tile(label: l10n.t("passport.journeys")) { Text(String(t.journeys)) }
             Tile(label: l10n.t("passport.stations")) { Text(String(t.stations)) }

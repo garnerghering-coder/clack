@@ -50,7 +50,7 @@ struct AddTrainSheet: View {
         }
         #endif
         .task(id: model.date) { await model.prepareHistory(app.client) }
-        .sensoryFeedback(.success, trigger: model.saved?.id)
+        .haptic(.success, trigger: model.saved?.id)
     }
 
     @ViewBuilder
@@ -100,7 +100,7 @@ private struct SearchStep: View {
             .onChange(of: model.response.map(Self.isWholeSearch) ?? false) { _, whole in if whole { focused = false } }
 
         if model.query.isEmpty {
-            FlowLayout(spacing: 8, lineSpacing: 8) {
+            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
                 Text(l10n.t("add.examples")).clack(.caption).foregroundStyle(Ink.text2)
                 ForEach(AddTrainLogic.examples, id: \.self) { example in
                     ChipButton(text: example) { model.query = example }
@@ -120,7 +120,7 @@ private struct SearchStep: View {
                 Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 stationList(model.suggestionsShown)
             }
-            VStack(spacing: 12) {
+            VStack(spacing: Space.m) {
                 Skeleton(height: 120)
                 Skeleton(height: 120)
             }
@@ -152,8 +152,8 @@ private struct SearchStep: View {
             changesSet ? (model.maxChanges == 0 ? l10n.t("add.changesNone") : l10n.t("add.changesUpTo", count: model.maxChanges)) : nil,
             model.minComfort > 0 && model.maxChanges > 0 ? l10n.t(["add.comfortAny", "add.comfortNormal", "add.comfortRelaxed"][model.minComfort]) : nil,
         ].compactMap { $0 }.joined(separator: Format.separator)
-        return HStack(alignment: .center, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
+        return HStack(alignment: .center, spacing: Space.m) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 Text(l10n.t("add.journeyCount", count: count)).clack(.rowTitle).foregroundStyle(Ink.text)
                 if !summary.isEmpty { Text(summary).clack(.caption).foregroundStyle(Ink.text2) }
             }
@@ -173,7 +173,7 @@ private struct SearchStep: View {
     private func results(_ response: SearchResponse) -> some View {
         if response.journeysPending == true {
             // The planner is building the day: the direct trains now, the journeys with changes in a moment.
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 ProgressView()
                 Text(l10n.t("add.journeysPending")).clack(.caption).foregroundStyle(Ink.text2)
             }
@@ -215,7 +215,7 @@ private struct SearchStep: View {
             }
         }
         if let list = model.journeys, !list.isEmpty {
-            VStack(spacing: 16) {
+            VStack(spacing: Space.l) {
                 ForEach(Array(list.enumerated()), id: \.element.id) { i, journey in
                     if let day = model.daySeparator(before: journey, previous: i > 0 ? list[i - 1] : nil, language: app.settings.language) {
                         Text(day).clack(.captionUpper).foregroundStyle(Ink.text2).frame(maxWidth: .infinity, alignment: .leading)
@@ -252,12 +252,12 @@ private struct SearchStep: View {
         Button(l10n.t("manual.cta")) { model.manual = true }
             .buttonStyle(LinkButtonStyle())
             .frame(maxWidth: .infinity)
-            .padding(.top, 8)
+            .padding(.top, Space.s)
     }
 
     /// Show earlier / Show later as a plain system link, replaced by a spinner and "Looking for more…" while it runs.
     private func pagingButton(_ label: String, busy: Bool, action: @escaping () async -> Void) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             if busy {
                 ProgressView().controlSize(.small)
                 Text(l10n.t("add.searchingMore")).clack(.caption).foregroundStyle(Ink.text2)
@@ -279,14 +279,14 @@ private struct SearchStep: View {
         }
         if response.outsideTimetable {
             Banner {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     if response.history == "loading" { ProgressView().controlSize(.small) }
                     Text(historyMessage(response))
                 }
             }
         }
         if let list = response.results, !list.isEmpty {
-            FlowLayout(spacing: 8, lineSpacing: 8) {
+            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
                 ForEach(AddTrainLogic.Filter.allCases, id: \.self) { filter in
                     ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
                 }
@@ -303,7 +303,7 @@ private struct SearchStep: View {
                 let day = Format.isoToNoonMs(model.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? model.date
                 otherDaysNote(l10n.t("add.noTrainAtHome", ["number": number, "country": l10n.t("countries.\(country)"), "day": day]), days: days)
             }
-            VStack(spacing: 16) {
+            VStack(spacing: Space.l) {
                 ForEach(model.results ?? []) { result in
                     ResultCard(result: result) { model.pick(result) }
                 }
@@ -315,7 +315,7 @@ private struct SearchStep: View {
                 // there), so a ticket and the app can be told apart (user test 2026-11-07, six of seven testers).
                 let day = Format.isoToNoonMs(model.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? model.date
                 let name = [interpretation.operator?.text, number].compactMap { $0 }.joined(separator: " ")
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     otherDaysNote(l10n.t("add.noTrainOnDay", ["train": name, "day": day]), days: response.otherDays ?? [])
                     Text(l10n.t("add.noTrainHint")).clack(.caption).foregroundStyle(Ink.text2)
                 }
@@ -326,7 +326,7 @@ private struct SearchStep: View {
         }
         if let list = response.results, list.isEmpty, let connections = response.connections, !connections.isEmpty {
             Text(l10n.t("add.withChange")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            VStack(spacing: 16) {
+            VStack(spacing: Space.l) {
                 ForEach(connections) { connection in ConnectionResultCard(connection: connection) { model.pickedConnection = connection } }
             }
         }
@@ -334,7 +334,7 @@ private struct SearchStep: View {
             Button(l10n.t("manual.cta")) { model.manual = true }
                 .buttonStyle(LinkButtonStyle())
                 .frame(maxWidth: .infinity)
-                .padding(.top, 8)
+                .padding(.top, Space.s)
         }
     }
 
@@ -344,7 +344,7 @@ private struct SearchStep: View {
         Text(line).clack(.body).foregroundStyle(Ink.text)
         if !days.isEmpty {
             Text(l10n.t("add.runsOn")).clack(.caption).foregroundStyle(Ink.text2)
-            FlowLayout(spacing: 8, lineSpacing: 8) {
+            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
                 ForEach(days, id: \.self) { iso in
                     ChipButton(text: Format.isoToNoonMs(iso).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? iso) { model.date = iso }
                 }
@@ -378,19 +378,19 @@ private struct DateRow: View {
     var body: some View {
         let today = Format.todayIso(tz: tz)
         let tomorrow = Format.addDaysIso(today, days: 1)
-        FlowLayout(spacing: 8, lineSpacing: 8) {
+        FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
             ChipButton(text: l10n.t("add.today"), active: date == today) { date = today }
             ChipButton(text: l10n.t("add.tomorrow"), active: date == tomorrow) { date = tomorrow ?? date }
             // A picked day is the button's own label (owner, 2026-10-30: no separate date line).
             let picked = date != today && date != tomorrow
             ChipButton(text: picked ? Format.day(Format.isoToNoonMs(date) ?? 0, tz: "UTC", language: app.settings.language) : l10n.t("add.pickDate"), active: picked) { picking = true }
             if date < today {
-                Text(l10n.t("add.pastTrip")).clack(.body).fontWeight(.medium).foregroundStyle(Ink.slightInk).padding(.leading, 4)
+                Text(l10n.t("add.pastTrip")).clack(.body).fontWeight(.medium).foregroundStyle(Ink.slightInk).padding(.leading, Space.xs)
             }
         }
         .sheet(isPresented: $picking) {
             let maxDate = AddTrainLogic.date(fromIso: Format.addDaysIso(today, days: 365) ?? today, tz: tz) ?? .now
-            VStack(spacing: 12) {
+            VStack(spacing: Space.m) {
                 DatePicker(
                     l10n.t("add.pickDate"),
                     selection: Binding(get: { AddTrainLogic.date(fromIso: date, tz: tz) ?? .now }, set: { date = AddTrainLogic.iso(from: $0, tz: tz) }),
@@ -400,7 +400,7 @@ private struct DateRow: View {
                 .tint(Ink.accent)
                 Button(l10n.t("common.done")) { picking = false }.buttonStyle(.clack(.primary, wide: true))
             }
-            .padding(16)
+            .padding(Space.l)
             .presentationDetents([.medium])
             .presentationBackground(Ink.surface)
             .presentationCornerRadius(Radius.sheet)
@@ -421,27 +421,27 @@ private struct ResultCard: View {
         let type = result.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let plus = Format.dayOffset(from: result.from.time, fromTz: result.from.tz, to: result.to.time, toTz: result.to.tz)
         Button(action: onPick) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.s) {
+                HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                     Text(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    Text(Format.duration(Double(result.durationMin)))
+                    Text(Format.duration(Double(result.durationMin), language: l10n.language))
                         .clack(.caption).foregroundStyle(Ink.text2)
                         .frame(maxWidth: .infinity)
                         .background { DashedHorizontalLine() }
-                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
                         Text(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                         if plus > 0 { TimePair.plusText(plus) }
                     }
                 }
                 .monospacedDigit()
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     Text(result.from.name)
                     Spacer(minLength: 0)
                     Text(result.to.name).multilineTextAlignment(.trailing)
                 }
                 .clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text2)
                 if let type {
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
                         // A typical type for the line, not a fact about this run (user test 2026-11-07: "X2000" here,
                         // the planned "SJ 3000 (X55)" on the trip, read as the app not knowing what it was).
@@ -457,7 +457,7 @@ private struct ResultCard: View {
                 ]))
                 .clack(.caption).foregroundStyle(Ink.text2)
             }
-            .padding(16)
+            .padding(Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
@@ -491,11 +491,11 @@ private struct ConnectionResultCard: View {
         let second = connection.second
         let total = Double(Int(((second.to.time - first.from.time) / 60_000).rounded()))
         let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: second.to.time, toTz: second.to.tz)
-        let card = VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
+        let card = VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                 Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                Text(Format.duration(total)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity).background { DashedHorizontalLine() }
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(Format.duration(total, language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity).background { DashedHorizontalLine() }
+                HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
                     Text(Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                     if plus > 0 { TimePair.plusText(plus) }
                 }
@@ -503,7 +503,7 @@ private struct ConnectionResultCard: View {
             .monospacedDigit()
             ForEach([first, second], id: \.id) { result in
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     ServiceHeader(op: op, number: result.trainNumber, size: .small, name: op == nil ? result.routeName : nil)
                     (TimePair.text(.init(time: result.from.time, tz: result.from.tz), .init(time: result.to.time, tz: result.to.tz), clock: app.settings.clock)
                         + Text(Format.separator + "\(result.from.name) → \(result.to.name)"))
@@ -512,7 +512,7 @@ private struct ConnectionResultCard: View {
             }
             Text(l10n.t("add.changeAt", ["station": connection.changeAt.name, "min": String(connection.changeMin)])).clack(.caption).foregroundStyle(Ink.text2)
         }
-        .padding(16)
+        .padding(Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -559,7 +559,7 @@ private struct ConfirmStep: View {
         let dep = (from?.dep ?? from?.arr)?.ms
         let arr = (to?.arr ?? to?.dep)?.ms
         Button(action: onBack) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(backLabel ?? l10n.t("add.back"))
             }
@@ -583,7 +583,7 @@ private struct ConfirmStep: View {
         if let from, let to, let dep, let arr, let trip {
             let d = AddTrainLogic.distance(stops: trip.stops, geometry: geometry, fromSeq: picked.fromSeq, toSeq: picked.toSeq)
             (Text("\(from.name) → \(to.name)").fontWeight(.semibold).foregroundStyle(Ink.text)
-                + Text(" · \(d.approximate ? "≈ " : "")\(Format.distance(d.metres, unit: app.settings.distanceUnit, language: app.settings.language)) · \(Format.duration((arr - dep) / 60_000))").foregroundStyle(Ink.text2))
+                + Text(" · \(d.approximate ? "≈ " : "")\(Format.distance(d.metres, unit: app.settings.distanceUnit, language: app.settings.language)) · \(Format.duration((arr - dep) / 60_000, language: l10n.language))").foregroundStyle(Ink.text2))
                 .clack(.body)
         }
         endPicker(from: from, to: to)
@@ -594,7 +594,7 @@ private struct ConfirmStep: View {
         if duplicate {
             Banner(kind: .warn) {
                 Text(l10n.t("add.duplicate"))
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Button(l10n.t("add.addAnyway")) { Task { await save(force: true) } }.buttonStyle(.clack(.primary, small: true)).disabled(saving)
                     Button(l10n.t("add.cancel")) { duplicate = false }.buttonStyle(.clack(small: true))
                 }
@@ -607,17 +607,17 @@ private struct ConfirmStep: View {
     }
 
     private func endPicker(from: TripStop?, to: TripStop?) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             ForEach([AddTrainLogic.End.from, .to], id: \.self) { end in
                 let active = picked.picking == end
                 Button {
                     picked.picking = end
                 } label: {
-                    VStack(alignment: .leading, spacing: 2) {
+                    VStack(alignment: .leading, spacing: Space.xxs) {
                         Text(l10n.t(end == .from ? "add.from" : "add.to")).clack(.captionUpper).foregroundStyle(active ? Ink.onAccent : Ink.text2)
                         Text((end == .from ? from : to)?.name ?? "—").clack(.rowTitle).foregroundStyle(active ? Ink.onAccent : Ink.text).lineLimit(1)
                     }
-                    .padding(.horizontal, 12).padding(.vertical, 8)
+                    .padding(.horizontal, Space.m).padding(.vertical, Space.s)
                     .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
                     .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: Radius.input - 3, style: .continuous))
                 }
@@ -625,7 +625,7 @@ private struct ConfirmStep: View {
                 .accessibilityAddTraits(active ? .isSelected : [])
             }
         }
-        .padding(4)
+        .padding(Space.xs)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
         .hairlineBorder(radius: Radius.input)
         .accessibilityLabel(l10n.t("add.tapToChoose"))
@@ -710,7 +710,7 @@ private struct ConfirmConnectionStep: View {
     var body: some View {
         let legs = [connection.first, connection.second]
         Button(action: onBack) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(l10n.t("add.back"))
             }
@@ -722,7 +722,7 @@ private struct ConfirmConnectionStep: View {
         if !dupes.isEmpty {
             Banner(kind: .warn) {
                 Text(dupes.count == legs.count ? l10n.t("add.duplicate") : l10n.t("add.duplicateOne", ["train": legs[dupes[0]].trainNumber ?? ""]))
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     if let kept { Button(l10n.t("add.keepAsIs")) { onSaved(kept) }.buttonStyle(.clack(small: true)) }
                     Button(l10n.t("add.addAnyway")) { Task { await save(force: true) } }.buttonStyle(.clack(.primary, small: true)).disabled(saving)
                 }
@@ -732,7 +732,7 @@ private struct ConfirmConnectionStep: View {
         Button(l10n.t("add.addBoth")) { Task { await save(force: false) } }
             .buttonStyle(.clack(.primary, wide: true))
             .disabled(saving || !dupes.isEmpty)
-            .padding(.top, 8)
+            .padding(.top, Space.s)
     }
 
     private func save(force: Bool) async {
@@ -785,7 +785,7 @@ private struct DoneStep: View {
         let legs = (journey?.legs.map(\.leg)).flatMap { $0.count > 1 ? $0 : nil }
         let first = legs?.first ?? l, last = legs?.last ?? l
         let ahead = (l.schedDep?.ms ?? 0) > Date.now.timeIntervalSince1970 * 1000
-        VStack(spacing: 12) {
+        VStack(spacing: Space.m) {
             ZStack {
                 Circle().stroke(Ink.onTime.opacity(0.35), lineWidth: 3)
                 CheckShape().trim(from: 0, to: drawn || reduceMotion ? 1 : 0)
@@ -815,13 +815,13 @@ private struct DoneStep: View {
             // straight away"; the switch was two screens deep in Settings).
             if ahead, !app.notifications.denied {
                 if app.settings.notify {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: "bell", size: 16).foregroundStyle(Ink.accentInk)
                         Text(l10n.t(alertsJustOn ? "alertsPrompt.nowOn" : "alertsPrompt.on")).clack(.caption).foregroundStyle(Ink.text2)
                     }
-                    .padding(.top, 4)
+                    .padding(.top, Space.xs)
                 } else {
-                    VStack(spacing: 8) {
+                    VStack(spacing: Space.s) {
                         Button {
                             Task { await turnOnAlerts() }
                         } label: {
@@ -831,10 +831,10 @@ private struct DoneStep: View {
                         .disabled(alertsBusy)
                         Text(l10n.t("alertsPrompt.body")).clack(.caption).foregroundStyle(Ink.text2)
                     }
-                    .padding(.top, 4)
+                    .padding(.top, Space.xs)
                 }
             }
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Button(l10n.t(legs != nil ? "add.viewJourney" : "add.viewTrip")) {
                     router.closeAdd()
                     router.tab = .trips
@@ -843,10 +843,10 @@ private struct DoneStep: View {
                 .buttonStyle(.clack(.primary))
                 Button(l10n.t("add.addAnother"), action: onAnother).buttonStyle(.clack())
             }
-            .padding(.top, 12)
+            .padding(.top, Space.m)
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 40)
+        .padding(.top, Space.xxl + Space.s)
         .multilineTextAlignment(.center)
         .task(id: l.journeyId) {
             guard let id = l.journeyId else { return }
@@ -940,7 +940,7 @@ private struct ManualTripStep: View {
                 }
             }
         }
-        FlowLayout(spacing: 8, lineSpacing: 8) {
+        FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
             ForEach(Self.categories, id: \.self) { c in
                 ChipButton(text: l10n.t("manual.kinds.\(c)"), active: category == c) { category = c }
             }
@@ -955,7 +955,7 @@ private struct ManualTripStep: View {
     }
 
     private func row<Content: View>(_ label: String, last: Bool = false, @ViewBuilder content: () -> Content) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Space.m) {
             Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
             Spacer(minLength: 0)
             content()
@@ -1012,7 +1012,7 @@ struct OperatorPickerButton: View {
         Button {
             open = true
         } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 if let op = app.operatorsById[selection] {
                     OperatorBadge(op: op, size: .small)
                     Text(op.name)
@@ -1022,7 +1022,7 @@ struct OperatorPickerButton: View {
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
             .clack(.body).foregroundStyle(Ink.text)
-            .padding(.vertical, 8).padding(.horizontal, 12)
+            .padding(.vertical, Space.s).padding(.horizontal, Space.m)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
         }
@@ -1067,7 +1067,7 @@ struct OperatorPickerSheet: View {
             List(selection: Binding<String?>(get: { selection }, set: { selection = $0 ?? "" })) {
                 Text(l10n.t("manual.unknown")).tag("")
                 ForEach(operators) { op in
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         OperatorBadge(op: op, size: .small)
                         VStack(alignment: .leading, spacing: 0) {
                             Text(op.name)
@@ -1107,7 +1107,7 @@ private struct ManualStationField: View {
                 }
                 .frame(minHeight: 52)
             } else {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     SearchField(text: $query, prompt: label)
                     ForEach(hits) { hit in
                         StationRow(station: hit) {
@@ -1116,7 +1116,7 @@ private struct ManualStationField: View {
                         }
                     }
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, Space.s)
             }
         }
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
@@ -1169,7 +1169,7 @@ private struct JourneyFilterSheet: View {
                 }
                 ToolbarItem(placement: .confirmationAction) { Button(l10n.t("common.done"), action: onDone) }
             }
-            .animation(.default, value: model.maxChanges > 0)
+            .motion(.layout, value: model.maxChanges > 0)
         }
     }
 }

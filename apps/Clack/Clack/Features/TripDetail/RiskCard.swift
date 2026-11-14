@@ -45,7 +45,7 @@ struct RiskCard: View {
                 tone: .watch, icon: "activity", title: l10n.t(nowWarn ? "risk.titleNow" : "risk.titlePattern"),
                 dismissKey: "risk:\(leg.id):\(risk.warnings.map(\.kind).joined(separator: ","))"
             ) {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     ForEach(Array(risk.warnings.enumerated()), id: \.offset) { _, warning in
                         (Text(l10n.t("risk.kind.\(warning.kind)")).fontWeight(.semibold).foregroundStyle(Ink.text2) + Text(" ") + Text(line(warning)))
                             .clack(.body).foregroundStyle(Ink.text)

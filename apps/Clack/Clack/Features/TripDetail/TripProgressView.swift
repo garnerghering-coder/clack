@@ -45,14 +45,14 @@ struct TripProgressView: View {
         } else {
             let firsts = firstsList(p)
             if !(quietIfNothing && p.unlocked.isEmpty && p.moved.isEmpty && firsts.isEmpty) {
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     if !p.unlocked.isEmpty {
-                        VStack(spacing: 8) {
+                        VStack(spacing: Space.s) {
                             Text(p.unlocked.count == 1 ? l10n.t("progress.unlockedOne") : l10n.t("progress.unlocked", count: p.unlocked.count))
                                 .clack(.captionUpper).foregroundStyle(Ink.text2)
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8, alignment: .top)], spacing: 16) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: Space.s, alignment: .top)], spacing: Space.l) {
                                 ForEach(Array(p.unlocked.enumerated()), id: \.offset) { index, milestone in
-                                    VStack(spacing: 2) {
+                                    VStack(spacing: Space.xxs) {
                                         Medal(m: milestone, size: 84)
                                         Text(l10n.milestoneLabel(milestone, language: app.settings.language, home: p.home ?? app.settings.homeCountry?.rawValue))
                                             .clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
@@ -66,13 +66,13 @@ struct TripProgressView: View {
                         .frame(maxWidth: .infinity)
                     }
                     if !firsts.isEmpty {
-                        FlowLayout(spacing: 16, lineSpacing: 8) {
+                        FlowLayout(spacing: Space.l, lineSpacing: Space.s) {
                             ForEach(firsts, id: \.self) { Chip(text: $0, accent: true) }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     if !p.moved.isEmpty {
-                        VStack(spacing: 12) {
+                        VStack(spacing: Space.m) {
                             ForEach(Array(p.moved.enumerated()), id: \.offset) { _, moved in movedRow(moved, home: p.home) }
                         }
                     }
@@ -101,7 +101,7 @@ struct TripProgressView: View {
     private func movedRow(_ moved: TripProgress.Moved, home: String?) -> some View {
         let reached = moved.after >= moved.target
         func fraction(_ v: Double) -> Double { min(1, v / moved.target) }
-        return VStack(spacing: 4) {
+        return VStack(spacing: Space.xs) {
             HStack {
                 Text(l10n.milestoneLabel(Milestone(family: moved.family, target: moved.target, at: nil, legId: nil, value: nil), language: app.settings.language, home: home ?? app.settings.homeCountry?.rawValue))
                     .clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)

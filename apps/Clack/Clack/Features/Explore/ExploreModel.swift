@@ -45,6 +45,8 @@ final class ExploreModel {
     // What's showing.
     var filters = ExploreLogic.Filters() { didSet { scheduleRender() } }
     private(set) var follows: [Follow] = []
+    /// Counts follows and unfollows the server confirmed, for the success haptic (loading the list doesn't count).
+    private(set) var followsConfirmed = 0
     private(set) var selected: LiveTrainDetail?
     private(set) var stops: StopsState = .loading
     private(set) var scheduled: TrainView?
@@ -542,6 +544,7 @@ final class ExploreModel {
                 try await client.follow(FollowBody(trainNumber: number, serviceDate: date, operatorId: operatorId, label: label))
             }
             follows = try await client.follows()
+            followsConfirmed += 1
             scheduleRender()
         } catch {
             // Unchanged; the button shows the real state.
@@ -730,7 +733,6 @@ final class ExploreModel {
         let mine = selection
         // The ring shows at once, so the tap is seen before the details arrive.
         controller.setSelected(id)
-        UISelectionFeedbackGenerator().selectionChanged()
         // A tap that doesn't answer is worse than a slow one: one more try before giving up.
         var fetched = try? await client.liveTrain(id)
         if fetched == nil {

@@ -22,8 +22,9 @@ CHECKED = [
 ]
 ALLOW = 'design-lint: allow'
 
-# Spacing and padding stay on the 4 pt grid; 0, 1 and 2 are allowed for hairlines and tight text pairs.
-GRID_OK = {0, 1, 2}
+# Spacing and padding are Space tokens (ClackDesign/Spacing.swift, polish pass 1); a number is allowed only for 0
+# and 1 (hairlines). A position under a floating control isn't spacing: mark it `design-lint: allow` and say why.
+GRID_OK = {0, 1}
 
 RULES = [
     (re.compile(r'ClackFont\.(inter|grotesk)\('), 'font outside the type roles: use .clack(<role>) (add a role in Typography.swift)'),
@@ -37,6 +38,8 @@ RULES = [
     (re.compile(r'Text\("•"\)'), 'bullet literal: join facts with Format.join'),
     (re.compile(r'LucideIcon\(name: "check"'), 'hand-made checkbox: use a Toggle or a List selection (DESIGN §2.3, native controls)'),
     (re.compile(r'\.pickerStyle\(\.(menu|inline|wheel)\)'), 'picker style: segmented for a few choices, a Menu for more (DESIGN §2.3)'),
+    (re.compile(r'UI(Impact|Notification|Selection)FeedbackGenerator'), 'UIKit haptic: use .haptic(<Haptic>, trigger:) (ClackDesign/Haptics.swift)'),
+    (re.compile(r'\.sensoryFeedback\('), 'raw sensoryFeedback: use .haptic(<Haptic>, trigger:), the app\'s vocabulary'),
     (re.compile(r'foreground(Style|Color)\([^)]*\bInk\.(slight|onTime|late|veryLate)\b(?!Ink)'),
      'status fill colour used as text: use the -Ink variant (slightInk, onTimeInk, lateInk, veryLateInk)'),
     (re.compile(r'\.clack\(\.(rowTitle|headline|body|detailRoute|sheetTitle|pageTitle)\)\s*\.fontWeight\(\.(bold|heavy|black)\)'),
@@ -60,8 +63,8 @@ def check_file(path):
                     problems.append(f'{rel}:{number}: {message}')
             for match in GRID.finditer(code):
                 value = float(match.group(1) or match.group(2))
-                if value not in GRID_OK and value % 4 != 0:
-                    problems.append(f'{rel}:{number}: spacing {value:g} is off the 4 pt grid')
+                if value not in GRID_OK:
+                    problems.append(f'{rel}:{number}: spacing {value:g}: use a Space token')
     return problems
 
 

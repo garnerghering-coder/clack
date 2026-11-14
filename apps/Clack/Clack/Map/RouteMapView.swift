@@ -116,7 +116,7 @@ struct RouteMapView: View {
                     }
                     .padding(.bottom, 16 + bottomInset)
                 }
-                .padding(.trailing, 16)
+                .padding(.trailing, Space.l)
             }
             VStack {
                 Spacer()
@@ -126,7 +126,7 @@ struct RouteMapView: View {
                         // A credit line, not reading matter: it stays small at accessibility sizes (user test
                         // 2026-11-07, xxxLarge: it covered a third of the map).
                         .dynamicTypeSize(...DynamicTypeSize.xLarge)
-                        .padding(.leading, 8).padding(.bottom, 6 + bottomInset)
+                        .padding(.leading, Space.s).padding(.bottom, 6 + bottomInset)
                         .allowsHitTesting(false)
                     Spacer()
                 }

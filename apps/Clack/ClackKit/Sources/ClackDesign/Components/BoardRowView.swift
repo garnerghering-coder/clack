@@ -87,19 +87,19 @@ public struct BoardRowView<Badge: View>: View {
     private var destination: String { line.destination.isEmpty ? Format.unknown : line.destination }
 
     private var fullRow: some View {
-        HStack(alignment: .top, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(alignment: .top, spacing: Space.m) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 FlapTime(time: line.time, tz: line.tz, clock: clock, style: .sm)
                 if FlapTime.changed(line.time, from: line.sched) {
                     Text(Format.time(line.sched, tz: line.tz, clock: clock)).clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
                 }
             }
             .frame(minWidth: timeWidth, alignment: .leading)
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.xs) {
                 Text(destination).clack(.rowTitle).foregroundStyle(Ink.text).strikethrough(line.canceled)
                 if let via = line.via { Text(via).clack(.caption).foregroundStyle(Ink.text2) }
                 if line.service != nil || ObjectIdentifier(Badge.self) != ObjectIdentifier(EmptyView.self) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         badge
                         if let service = line.service { Text(service).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
                     }
@@ -108,18 +108,18 @@ public struct BoardRowView<Badge: View>: View {
                 if let notes = line.notes { Text(notes).clack(.caption).foregroundStyle(Ink.text2) }
             }
             Spacer(minLength: 0)
-            VStack(alignment: .trailing, spacing: 4) {
+            VStack(alignment: .trailing, spacing: Space.xs) {
                 if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) }
                 if line.platformFrom != nil { Text(l10n.t("board.changed")).clack(.caption).foregroundStyle(Ink.lateInk) }
                 delay
                 if let done = line.done { Text(done).clack(.caption).foregroundStyle(Ink.text2) }
             }
         }
-        .padding(.vertical, 12)
+        .padding(.vertical, Space.m)
     }
 
     private var compactRow: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             FlapTime(time: line.time, sched: line.sched, tz: line.tz, clock: clock, style: .text, strikeOld: false)
                 .clack(.stopName).fontWeight(.semibold)
                 .frame(minWidth: timeWidth * 0.75, alignment: .leading)

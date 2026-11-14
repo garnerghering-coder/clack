@@ -34,7 +34,7 @@ struct ActivityGalleryView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: Space.xl) {
                 Toggle("Long station names", isOn: $long)
                 Toggle("Car and seat", isOn: $seat)
                 // `-galleryFrom <n>` starts at the n-th moment, to look at one without scrolling.
@@ -42,7 +42,7 @@ struct ActivityGalleryView: View {
                     moment(m)
                 }
             }
-            .padding(16)
+            .padding(Space.l)
         }
         .background(Ink.bg)
         .navigationTitle("Trip card faces")
@@ -61,10 +61,10 @@ struct ActivityGalleryView: View {
 
     private func moment(_ m: TestAlertsModel.Moment) -> some View {
         let card = face(m)
-        return VStack(alignment: .leading, spacing: 12) {
+        return VStack(alignment: .leading, spacing: Space.m) {
             Text(m.rawValue).clack(.sectionHeader).foregroundStyle(Ink.text2)
             island { expanded(card) }
-            HStack(spacing: 16) {
+            HStack(spacing: Space.l) {
                 compact(card)
                 minimal(card)
                 limited(card)
@@ -85,7 +85,7 @@ struct ActivityGalleryView: View {
         let m = TripIsland.expandedMargins
         let size = TripIsland.expandedSize
         let side = (size.width - camera.width) / 2 - m.leading
-        return VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: Space.s) {
             HStack(alignment: .center, spacing: 0) {
                 TripIslandExpandedLeading(card: card).frame(width: side - 4, alignment: .leading)
                 Spacer(minLength: camera.width + 8)

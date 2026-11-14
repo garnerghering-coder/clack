@@ -18,15 +18,15 @@ struct WidgetGalleryView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.m) {
                 Text(verbatim: "Widgets \(page)/\(Self.pages.count - 1)").clack(.captionUpper).foregroundStyle(Ink.text3)
                 ForEach(Array(Self.pages[min(page, Self.pages.count - 1)].enumerated()), id: \.offset) { _, row in
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         ForEach(Array(row.enumerated()), id: \.offset) { _, item in frame(item) }
                     }
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(Ink.surfaceRaised)

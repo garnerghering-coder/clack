@@ -24,27 +24,27 @@ struct TicketViewer: View {
     var body: some View {
         let entry = TicketStore.shared.entry(for: leg.id)
         VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 Text(l10n.t("ticket.title")).clack(.sheetTitle).foregroundStyle(Ink.text).accessibilityAddTraits(.isHeader)
                 Spacer(minLength: 0)
                 IconButton(icon: "x", label: l10n.t("common.close")) { dismiss() }
             }
-            .padding(.top, 20).padding(.horizontal, 16).padding(.bottom, 8)
+            .padding(.top, Space.xl).padding(.horizontal, Space.l).padding(.bottom, Space.s)
             if let url = TicketStore.shared.url(for: leg.id), let entry {
                 TicketPDFView(url: url, page: entry.page)
                     .accessibilityLabel(l10n.t("ticket.title"))
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     if let barcode = entry.barcode {
                         WalletPassButton(leg: leg, issuer: entry.issuer, barcode: barcode)
                     }
                     Button(l10n.t("ticket.delete")) { confirmDelete = true }
                         .buttonStyle(ClackButtonStyle(kind: .danger, small: true))
                 }
-                .padding(16)
+                .padding(Space.l)
             } else {
                 Text(l10n.t("ticket.missing")).clack(.body).foregroundStyle(Ink.text2)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .padding(16)
+                    .padding(Space.l)
             }
         }
         .background(Ink.surface)
@@ -115,7 +115,7 @@ struct WalletPassButton: View {
     @State private var failed = false
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: Space.s) {
             if testBuild && enabled && PKAddPassesViewController.canAddPasses() {
                 AddPassButton { Task { await fetch() } }
                     .frame(height: 48)

@@ -85,7 +85,7 @@ public struct StatsWidgetView<NextButton: View>: View {
     }
 
     private var dots: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             ForEach(StatsPage.allCases, id: \.rawValue) { p in
                 Circle().fill(p == page ? Ink.accentInk : Ink.text3).frame(width: 5, height: 5)
             }
@@ -100,18 +100,18 @@ public struct StatsWidgetView<NextButton: View>: View {
         let rows = Array(page.rows(stats).prefix(limit))
         let top = max(1, rows.map(\.count).max() ?? 1)
         let title = l10n.t(page.titleKey)
-        return VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: Space.s) {
             // The title, "Updated", the page dots and the button on one line; "Updated" goes under the title when they
             // don't fit.
             ViewThatFits(in: .horizontal) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(title).clack(.sectionHeader).foregroundStyle(Ink.text).lineLimit(1).fixedSize()
                     Spacer(minLength: 0)
                     updated()
                     dots
                     nextButton
                 }
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     VStack(alignment: .leading, spacing: 0) {
                         FittingText(title).clack(.sectionHeader).foregroundStyle(Ink.text)
                         updated()
@@ -122,7 +122,7 @@ public struct StatsWidgetView<NextButton: View>: View {
                 }
             }
             ForEach(rows) { row in
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     FittingText(row.name).clack(.chip).foregroundStyle(Ink.text).frame(width: 104, alignment: .leading)
                     GeometryReader { p in
                         RoundedRectangle(cornerRadius: Radius.bar)

@@ -87,9 +87,9 @@ public struct YearWidgetView: View {
     }
 
     private func content(_ y: WidgetSnapshot.YearBits) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             ViewThatFits(in: .horizontal) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("widgets.yearTitle", ["year": String(y.year)])).clack(.sectionHeader).foregroundStyle(Ink.text).fixedSize()
                     Spacer(minLength: 0)
                     UpdatedLine(updatedAt: snapshot.passportUpdatedAt, now: date, l10n: l10n, clock: snapshot.clock)
@@ -99,7 +99,7 @@ public struct YearWidgetView: View {
                     UpdatedLine(updatedAt: snapshot.passportUpdatedAt, now: date, l10n: l10n, clock: snapshot.clock)
                 }
             }
-            HStack(alignment: .top, spacing: 24) {
+            HStack(alignment: .top, spacing: Space.xl) {
                 stat(Format.distance(y.km * 1000, unit: snapshot.distanceUnit, language: snapshot.language), l10n.t("widgets.distance"))
                 stat(String(y.trains), l10n.t("passport.trains"))
             }

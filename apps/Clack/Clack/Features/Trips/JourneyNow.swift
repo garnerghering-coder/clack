@@ -46,7 +46,7 @@ struct JourneyNowSection: View {
         if let detail = model.detail {
             let shown = TripDetailLogic.shown(detail, live: model.live, now: now, offline: app.isOffline)
             let l = detail.leg
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.m) {
                 Text(l10n.t("journey.now")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
                     if TripDetailLogic.isTracking(shown), let shown {

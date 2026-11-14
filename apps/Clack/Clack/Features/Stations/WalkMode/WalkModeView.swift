@@ -50,19 +50,19 @@ struct WalkModeView: View {
             card
             VStack {
                 Spacer()
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     MapButton(icon: overhead ? "navigation" : "map", label: l10n.t(overhead ? "stationMap.walkMode.follow" : "stationMap.walkMode.overhead")) { overhead.toggle() }
                     Spacer()
                     MapButton(icon: "x", label: l10n.t("common.close")) { dismiss() }
                 }
-                .padding(.horizontal, 16).padding(.bottom, 24)
+                .padding(.horizontal, Space.l).padding(.bottom, Space.xl)
             }
         }
         .background(Ink.mapBg)
         .onAppear { positioner.start() }
         .onDisappear { positioner.stop() }
         // A tap of the hand for each new step, and the step read out to VoiceOver.
-        .sensoryFeedback(.impact(weight: .medium), trigger: tracker.index)
+        .haptic(.snap, trigger: tracker.index)
         .onChange(of: tracker.index) {
             AccessibilityNotification.Announcement(stepText(tracker.step) ?? l10n.t("stationMap.walkMode.arrived")).post()
         }
@@ -76,7 +76,7 @@ struct WalkModeView: View {
     }
 
     private var card: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             if let step = tracker.step {
                 Text(stepText(step) ?? "").clack(.walkBig).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
                 if step.key == .walk {
@@ -85,7 +85,7 @@ struct WalkModeView: View {
                 if tracker.askConfirm {
                     Button { positioner.confirmLevel() } label: {
                         Text(l10n.t("stationMap.walkMode.confirmLevel", ["level": levelName(step.level)]))
-                            .clack(.buttonSmall).foregroundStyle(Ink.onAccent).padding(.horizontal, 16).frame(minHeight: 44)
+                            .clack(.buttonSmall).foregroundStyle(Ink.onAccent).padding(.horizontal, Space.l).frame(minHeight: 44)
                             .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     }
                     .buttonStyle(.plain)
@@ -101,10 +101,10 @@ struct WalkModeView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
+        .padding(Space.l)
         .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
-        .padding(.horizontal, 12).padding(.top, 8)
+        .padding(.horizontal, Space.m).padding(.top, Space.s)
         .accessibilityElement(children: .combine)
     }
 }

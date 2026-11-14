@@ -110,7 +110,7 @@ private struct DisruptionBody: View {
                 title: l10n.t(arrived && kinds.first == .delayed ? "disruption.title.delayed_past" : "disruption.title.\(kinds.first?.rawValue ?? "delayed")"),
                 dismissKey: "disruption:\(l.id):\(kinds.map(\.rawValue).joined(separator: ","))"
             ) {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     ForEach(kinds, id: \.self) { kind in
                         Text(line(kind, train: train, board: board, alight: alight, next: next, arrived: arrived, tz: tz))
                             .clack(.body).foregroundStyle(Ink.text)
@@ -188,11 +188,11 @@ private struct DisruptionBody: View {
 
     @ViewBuilder
     private func alternatives(search: Search?, altCount: Int?, final: Leg, now: Double, schedDep: Double, tz: String, op: Operator?, tone: AlertTone) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             Button {
                 showAlts.toggle()
             } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(altCount == nil ? l10n.t("disruption.looking")
                         : altCount == 0 ? l10n.t("disruption.noAlternatives")
                         : showAlts ? l10n.t("disruption.hideSuggested") : l10n.t("disruption.viewSuggested"))
@@ -200,7 +200,7 @@ private struct DisruptionBody: View {
                     Spacer(minLength: 0)
                     if let altCount, altCount > 0 { LucideIcon(name: showAlts ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text) }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Space.l)
                 .frame(minHeight: 44)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                 .hairlineBorder(radius: Radius.input, color: tone.color.opacity(0.4))
@@ -213,7 +213,7 @@ private struct DisruptionBody: View {
                 if final.id != leg.id {
                     Text(l10n.t("disruption.journeyContinues", ["station": final.destination?.name ?? ""])).clack(.caption).foregroundStyle(Ink.text2)
                 }
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     ForEach(alts.direct) { r in directRow(r, now: now, schedDep: schedDep, tz: tz) }
                     ForEach(alts.connections) { c in connectionRow(c, now: now, schedDep: schedDep, tz: tz) }
                 }
@@ -232,13 +232,13 @@ private struct DisruptionBody: View {
             [op?.name ?? r.routeName, r.trainNumber].compactMap { $0 }.joined(separator: " "),
             otherDay(r.from.time, zone: r.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
-        return HStack(alignment: .top, spacing: 12) {
+        return HStack(alignment: .top, spacing: Space.m) {
             OperatorBadge(op: op, size: .small)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 TimePair(dep: .init(time: r.from.time, tz: r.from.tz), arr: .init(time: r.to.time, tz: r.to.tz), clock: app.settings.clock)
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Button(l10n.t("disruption.live")) { router.presentTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
                         .buttonStyle(.clack(small: true))
                     Button(l10n.t("disruption.useInstead")) {
@@ -246,11 +246,11 @@ private struct DisruptionBody: View {
                     }
                     .buttonStyle(.clack(.primary, small: true))
                 }
-                .padding(.top, 4)
+                .padding(.top, Space.xs)
             }
             Spacer(minLength: 0)
         }
-        .padding(.bottom, 12)
+        .padding(.bottom, Space.m)
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
     }
 
@@ -260,14 +260,14 @@ private struct DisruptionBody: View {
             l10n.t("add.changeAt", ["station": c.changeAt.name, "min": String(c.changeMin)]),
             otherDay(c.first.from.time, zone: c.first.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.joined(separator: " · ")
-        return HStack(alignment: .top, spacing: 12) {
+        return HStack(alignment: .top, spacing: Space.m) {
             OperatorBadge(op: op, size: .small)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 TimePair(dep: .init(time: c.first.from.time, tz: c.first.from.tz), arr: .init(time: c.second.to.time, tz: c.second.to.tz), clock: app.settings.clock)
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("disruption.live")) { router.presentTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
-                    .buttonStyle(.clack(small: true)).padding(.top, 4)
+                    .buttonStyle(.clack(small: true)).padding(.top, Space.xs)
             }
             Spacer(minLength: 0)
         }
@@ -284,10 +284,10 @@ private struct DisruptionBody: View {
             countries: countries, journeyKm: km, arrDelayMin: kinds.contains(.connectionMissed) ? nil : finalDelay, canceled: leg.leg.canceled
         )
         let operatorName = op?.name ?? l10n.t("disruption.theOperator")
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             Text(l10n.t("disruption.rightsTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             Text(rightsText(rights, operatorName: operatorName)).clack(.caption).foregroundStyle(Ink.text2)
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 if let url = rightsLink(rights) {
                     Link(l10n.t(rights == .seShort(priceReduction: true) || rights == .seShort(priceReduction: false) ? "disruption.linkSe" : "disruption.linkEu"), destination: url)
                 }

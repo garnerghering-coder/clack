@@ -53,11 +53,11 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
             grabber
             header
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     intro
                     if !collapsed { content }
                 }
-                .padding(.horizontal, 16).padding(.bottom, 16)
+                .padding(.horizontal, Space.l).padding(.bottom, Space.l)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .onGeometryChange(for: Double.self) { $0.size.height } action: { bodyHeight = $0 }
                 .onGeometryChange(for: Double.self) { $0.frame(in: .named("sheet-scroll")).minY } action: { scrolled = $0 < -6 }
@@ -72,7 +72,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()
-        .padding(.horizontal, 12).padding(.bottom, 12)
+        .padding(.horizontal, Space.m).padding(.bottom, Space.m)
         .frame(maxHeight: .infinity, alignment: .bottom)
         .onGeometryChange(for: Double.self) { $0.size.height } action: { room = $0 }
         .animation(reduceMotion ? nil : .timingCurve(0.2, 0.8, 0.2, 1, duration: 0.22), value: height)
@@ -100,11 +100,11 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var header: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Space.m) {
             OperatorBadge(op: op, size: .medium)
                 .scaleEffect(scrolled && !collapsed ? 0.8 : 1, anchor: .leading)
             Button { collapsed.toggle() } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
                     LucideIcon(name: collapsed ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text)
                     Spacer(minLength: 0)
@@ -115,14 +115,14 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
             .accessibilityAddTraits(.isHeader)
             IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
         }
-        .padding(.horizontal, 16).padding(.top, scrolled && !collapsed ? 4 : 0).padding(.bottom, scrolled && !collapsed ? 6 : 10)
+        .padding(.horizontal, Space.l).padding(.top, scrolled && !collapsed ? 4 : 0).padding(.bottom, scrolled && !collapsed ? 6 : 10)
         .overlay(alignment: .bottom) { Rectangle().fill(scrolled && !collapsed ? Ink.hairline : .clear).frame(height: 1) }
         .onGeometryChange(for: Double.self) { $0.size.height } action: { headHeight = $0 }
     }
 
     private var footer: some View {
-        HStack(spacing: 12) { actions }
-            .padding(.horizontal, 16).padding(.top, 12).padding(.bottom, 16)
+        HStack(spacing: Space.m) { actions }
+            .padding(.horizontal, Space.l).padding(.top, Space.m).padding(.bottom, Space.l)
             .overlay(alignment: .top) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .onGeometryChange(for: Double.self) { $0.size.height } action: { footHeight = $0 }
     }
@@ -185,7 +185,7 @@ struct StopList: View {
             let next = ExploreLogic.nextStopIndex(list)
             // The train is drawn between the stops it has left and the one it is heading for, as on a trip's page.
             let halves = TripDetailLogic.railHalves(count: list.count, fills: ExploreLogic.railFills(list, now: now), showTrain: true) { _ in true }
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Space.s) {
                 Text(l10n.t("liveMap.stops")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 VStack(spacing: 0) {
                     ForEach(Array(list.enumerated()), id: \.element.seq) { i, stop in
@@ -231,17 +231,17 @@ struct LiveSheetCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             content
         }
-        .padding(.horizontal, 16).padding(.vertical, 16)
+        .padding(.horizontal, Space.l).padding(.vertical, Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.glass)
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()
-        .padding(.horizontal, 12).padding(.bottom, 12)
+        .padding(.horizontal, Space.m).padding(.bottom, Space.m)
         .frame(maxHeight: .infinity, alignment: .bottom)
     }
 }
@@ -261,8 +261,8 @@ struct CorridorSheet: View {
 
     var body: some View {
         LiveSheetCard {
-            HStack(alignment: .top, spacing: 8) {
-                VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .top, spacing: Space.s) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Text(corridor.stations.joined(separator: " – ")).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(3)
                     Text(NetworkWording.corridorLine(corridor, l10n: l10n)).clack(.caption).monospacedDigit().foregroundStyle(Ink.lateInk)
                     if gone { Text(l10n.t("network.corridorGone")).clack(.caption).foregroundStyle(Ink.onTimeInk) }
@@ -271,7 +271,7 @@ struct CorridorSheet: View {
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     reasons
                     trains
                     Text(l10n.t("network.corridorHint")).clack(.micro).foregroundStyle(Ink.text3)
@@ -299,7 +299,7 @@ struct CorridorSheet: View {
             Text(l10n.t("network.noReason")).clack(.body).foregroundStyle(Ink.text2)
         } else {
             ForEach(Array(named.enumerated()), id: \.offset) { _, r in
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(l10n.t("network.reasonCount", count: r.count, ["reason": r.text, "count": String(r.count)])).clack(.body).foregroundStyle(Ink.text)
                     Text(l10n.t("notice.source", ["source": DelayCauses.sourceName(r.src)])).clack(.micro).foregroundStyle(Ink.text3)
                 }
@@ -309,17 +309,17 @@ struct CorridorSheet: View {
 
     @ViewBuilder
     private var trains: some View {
-        Text(l10n.t("network.corridorTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        Text(l10n.t("network.corridorTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, Space.xs)
         let list = corridor.lateTrains ?? []
         if list.isEmpty {
             Text(l10n.t("network.corridorNoneLate")).clack(.body).foregroundStyle(Ink.onTimeInk)
         } else {
             ForEach(list) { t in
                 Button { onTrain(t.id) } label: {
-                    HStack(alignment: .top, spacing: 12) {
+                    HStack(alignment: .top, spacing: Space.m) {
                         OperatorBadge(op: t.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
-                        VStack(alignment: .leading, spacing: 2) {
-                            HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: Space.xxs) {
+                            HStack(spacing: Space.s) {
                                 Text([t.operatorId.flatMap { app.operatorsById[$0]?.name }, t.number].compactMap { $0 }.joined(separator: " "))
                                     .clack(.rowTitle).foregroundStyle(Ink.text)
                                 Text(l10n.t("network.minLate", ["min": String(t.delayMin)])).clack(.delay).monospacedDigit()
@@ -355,7 +355,7 @@ struct NotRunningSheet: View {
     var body: some View {
         let op = follow?.operatorId.flatMap { app.operatorsById[$0] }
         LiveSheetCard {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 ServiceHeader(op: op, number: op == nil ? nil : number, size: .medium, fallback: l10n.t("liveMap.train", ["number": number]))
                 Spacer(minLength: 0)
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
@@ -363,9 +363,9 @@ struct NotRunningSheet: View {
             if let label = follow?.label { Text(label).clack(.rowTitle).foregroundStyle(Ink.text) }
             Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
             Text(l10n.t("liveMap.notRunningBody")).clack(.caption).foregroundStyle(Ink.text2)
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 if let follow {
-                    Button { onUnfollow(follow) } label: { HStack(spacing: 8) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
+                    Button { onUnfollow(follow) } label: { HStack(spacing: Space.s) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
                         .buttonStyle(.clack(wide: true))
                 }
                 Button(l10n.t("common.close"), action: onClose).buttonStyle(.clack(.primary, wide: true))
@@ -388,24 +388,34 @@ struct LiveStationSheet: View {
     @State private var info: StationInfo?
     @State private var rows: [BoardRow]?
     @State private var favorite = false
+    /// Taps on the star (the haptic follows the finger, not the favourite loading).
+    @State private var favoriteTaps = 0
+    @Environment(Toaster.self) private var toaster
 
     private func toggleFavorite() async {
         Usage.shared.count(.feature, "station.favorite")
-        if let on = try? await app.client.setFavorite(id, !favorite) {
+        // The star changes at once; the server is asked after, and a refusal puts it back and says so.
+        let want = !favorite
+        favorite = want
+        favoriteTaps += 1
+        if let on = try? await app.client.setFavorite(id, want) {
             favorite = on
             await app.stations.setFavorite(id, on)
+        } else {
+            favorite = !want
+            toaster.show(l10n.t("stations.favoriteFailed"), isError: true)
         }
     }
 
     var body: some View {
         LiveSheetCard {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(name).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(2)
                 Spacer(minLength: 0)
                 IconButton(
                     icon: "star", label: l10n.t(favorite ? "stations.unfavorite" : "stations.favorite"), size: .overMap, selected: favorite
                 ) { Task { await toggleFavorite() } }
-                    .sensoryFeedback(.selection, trigger: favorite)
+                    .haptic(.selection, trigger: favoriteTaps)
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }

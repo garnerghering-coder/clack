@@ -28,13 +28,13 @@ private struct SettingsRow<Control: View>: View {
     var body: some View {
         Group {
             if typeSize.isAccessibilitySize {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
                     control.frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding(.vertical, 12)
+                .padding(.vertical, Space.m)
             } else {
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
                     Spacer(minLength: 0)
                     control
@@ -61,7 +61,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
                 ForEach(Array(options.enumerated()), id: \.offset) { _, option in Text(option.title).tag(option.value) }
             }
         } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(options.first { $0.value == selection }?.title ?? unsetTitle).lineLimit(1)
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
@@ -69,7 +69,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
             // One value column (designer, 2026-11-07): every value box starts at the same left edge, however short
             // its word; a long one grows.
             .frame(minWidth: 104, alignment: .trailing)
-            .padding(.vertical, 8).padding(.horizontal, 12)
+            .padding(.vertical, Space.s).padding(.horizontal, Space.m)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
         }
@@ -301,14 +301,14 @@ private struct VersionFooter: View {
     }
 
     var body: some View {
-        VStack(spacing: 2) {
+        VStack(spacing: Space.xxs) {
             // In test builds the line names the build ("· TestFlight"), so a tester can see which one is installed
             // and that its test tools should be below (owner, 2026-11-07). App Store builds show the version alone.
             Text(channelLabel.map { "\(version) · \($0)" } ?? version).clack(.caption).foregroundStyle(Ink.text3)
             if let server { Text(l10n.t("settings.serverVersion", ["version": server])).clack(.caption).foregroundStyle(Ink.text3) }
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 4)
+        .padding(.top, Space.xs)
         // The server's commit is for the owner and testers (user test 2026-11-07: "I don't need to know your git hash").
         .task {
             let current = await BuildChannel.current()
@@ -429,11 +429,11 @@ private struct ExportDataRow: View {
     @State private var phase = Phase.idle
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             switch phase {
             case .ready(let file):
                 ShareLink(item: file) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: "share-2", size: 16)
                         Text(l10n.t("settings.exportShare"))
                     }
@@ -444,7 +444,7 @@ private struct ExportDataRow: View {
                 Button {
                     Task { await export() }
                 } label: {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: "download", size: 16)
                         Text(l10n.t("settings.export"))
                     }
@@ -454,7 +454,7 @@ private struct ExportDataRow: View {
                 if phase == .failed { Text(l10n.t("settings.exportFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, Space.s)
     }
 
     private func export() async {
@@ -484,16 +484,16 @@ private struct DeleteMyDataRow: View {
             if phase == .done {
                 Text(l10n.t("settings.deleted")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Button(l10n.t("settings.deleteData")) { confirming = true }
                         .buttonStyle(.clack(.danger))
                         .disabled(phase == .busy)
                     Text(l10n.t("settings.deleteDataNote")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, Space.s)
             }
         }
-        .sensoryFeedback(.warning, trigger: phase == .done)
+        .haptic(.success, trigger: phase) { _, new in new == .done }
         .confirmationDialog(l10n.t("settings.deleteConfirm"), isPresented: $confirming, titleVisibility: .visible) {
             Button(l10n.t("settings.deleteData"), role: .destructive) {
                 phase = .busy
@@ -513,15 +513,15 @@ private struct StartOverRow: View {
     @State private var confirming = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             Button(l10n.t("settings.startOver")) { confirming = true }
                 .buttonStyle(.clack(.danger))
                 .disabled(busy)
             Text(l10n.t("settings.startOverNote")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
             if failed { Text(l10n.t("settings.startOverFailed")).clack(.caption).foregroundStyle(Ink.text2) }
         }
-        .padding(.vertical, 8)
-        .sensoryFeedback(.warning, trigger: busy)
+        .padding(.vertical, Space.s)
+        .haptic(.error, trigger: failed) { _, new in new }
         .confirmationDialog(l10n.t("settings.startOverConfirm"), isPresented: $confirming, titleVisibility: .visible) {
             Button(l10n.t("settings.startOver"), role: .destructive) {
                 busy = true
@@ -544,11 +544,11 @@ struct AboutScreen: View {
 
     var body: some View {
         Page {
-            Card(spacing: 12) {
+            Card(spacing: Space.m) {
                 Text(l10n.t("about.intro")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.maker")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.sourcesTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     ForEach(Self.sources, id: \.self) { source in
                         Text(l10n.t("about.sources.\(source)")).clack(.body).foregroundStyle(Ink.text2)
                     }
@@ -572,10 +572,10 @@ struct PrivacyScreen: View {
 
     var body: some View {
         Page {
-            Card(spacing: 12) {
+            Card(spacing: Space.m) {
                 Text(l10n.t("privacy.intro")).clack(.body).foregroundStyle(Ink.text)
                 ForEach(Self.parts, id: \.self) { part in
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: Space.m) {
                         Text(l10n.t("privacy.\(part)Title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                         Text(l10n.t("privacy.\(part)Body")).clack(.body).foregroundStyle(Ink.text)
                         if part == "stored" { Text(l10n.t("privacy.idSync")).clack(.body).foregroundStyle(Ink.text) }
@@ -610,13 +610,13 @@ private struct TestToolsRow: View {
                 Card {
                     SettingsToggle(label: l10n.t("settings.test.walletPasses"), isOn: walletPasses, last: true) { walletPasses = $0 }
                 }
-                .padding(.top, 12)
+                .padding(.top, Space.m)
                 NavigationLink("Test alerts", value: AppRoute.testAlerts)
                     .buttonStyle(.clack(wide: true))
-                    .padding(.top, 12)
+                    .padding(.top, Space.m)
                 NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
                     .buttonStyle(.clack(wide: true))
-                    .padding(.top, 12)
+                    .padding(.top, Space.m)
             }
         }
         .task { if !shown { shown = await BuildChannel.current().showsTestTools } }

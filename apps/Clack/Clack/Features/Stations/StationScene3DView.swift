@@ -54,7 +54,7 @@ struct StationScene3DView: View {
             .accessibilityLabel(map.name)
 
             MapButton(icon: "x", label: l10n.t("station3d.close")) { dismiss() }
-                .padding(.trailing, 12).padding(.top, 8)
+                .padding(.trailing, Space.m).padding(.top, Space.s)
         }
         .safeAreaInset(edge: .bottom, spacing: 0) { panel }
         // Built again in the other theme; the cars are placed afresh after.
@@ -214,8 +214,8 @@ struct StationScene3DView: View {
         let notes = scene.notes
         let shown = trains.filter { $0.state != .upcoming }
         return ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.m) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Text(map.name).clack(.headline).foregroundStyle(Ink.text)
                     if notes.draft { note(l10n.t("station3d.note.draft")) }
                     if notes.standardPlatformHeight { note(l10n.t("station3d.note.platformHeight")) }
@@ -225,7 +225,7 @@ struct StationScene3DView: View {
                     if notes.bridgeUndersideMinimum { note(l10n.t("station3d.note.bridgeMinimum")) }
                     if notes.flatGround { note(l10n.t("station3d.note.flatGround")) }
                 }
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     Text(l10n.t("station3d.trains")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     if boardFailed {
                         Text(l10n.t("station3d.boardError")).clack(.caption).foregroundStyle(Ink.text2)
@@ -236,12 +236,12 @@ struct StationScene3DView: View {
                 }
                 let unknown = trains.filter { $0.platformId == nil }
                 if !unknown.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: Space.s) {
                         Text(l10n.t("station3d.platformUnknown")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                         ForEach(unknown) { trainRow($0) }
                     }
                 }
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(l10n.t("station3d.credits")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     Text(l10n.t("station3d.credit.osm")).clack(.micro).foregroundStyle(Ink.text3)
                     if let laser = notes.laserCredit { Text(l10n.t("station3d.credit.\(laser)")).clack(.micro).foregroundStyle(Ink.text3) }
@@ -250,7 +250,7 @@ struct StationScene3DView: View {
                 Text(l10n.t("station3d.hint")).clack(.micro).foregroundStyle(Ink.text3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(16)
+            .padding(Space.l)
         }
         .frame(maxHeight: 260)
         .fixedSize(horizontal: false, vertical: true)
@@ -258,7 +258,7 @@ struct StationScene3DView: View {
     }
 
     private func note(_ text: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 4) {
+        HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
             LucideIcon(name: "info", size: 12).foregroundStyle(Ink.text3)
             Text(text).clack(.caption).foregroundStyle(Ink.text2)
         }
@@ -269,8 +269,8 @@ struct StationScene3DView: View {
         let name = [op?.shortName, t.trainNumber].compactMap { $0 }.joined(separator: " ")
         let place = t.destination.map { l10n.t("station3d.to", ["place": $0]) } ?? t.origin.map { l10n.t("station3d.from", ["place": $0]) } ?? ""
         let platform = t.platform.map { l10n.t("station3d.platform", ["p": $0]) } ?? l10n.t("station3d.platformUnknown")
-        return VStack(alignment: .leading, spacing: 2) {
-            HStack(spacing: 8) {
+        return VStack(alignment: .leading, spacing: Space.xxs) {
+            HStack(spacing: Space.s) {
                 OperatorBadge(op: op, size: .small)
                 Text(name).clack(.trainNumber).foregroundStyle(Ink.text)
                 Text(place).clack(.body).foregroundStyle(Ink.text).lineLimit(1)

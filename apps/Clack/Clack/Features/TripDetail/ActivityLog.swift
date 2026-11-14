@@ -22,10 +22,10 @@ struct ActivityLog: View {
             if events.isEmpty {
                 Text(l10n.t("activity.empty")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     ForEach(events) { event in
                         let alarming = event.type == .cancelled || event.type == .shortTurned
-                        HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                             Text(Format.time(event.ts.ms, tz: tz, clock: app.settings.clock))
                                 .monospacedDigit().foregroundStyle(alarming ? Ink.veryLateInk : Ink.text2)
                                 .frame(minWidth: 56, alignment: .leading)

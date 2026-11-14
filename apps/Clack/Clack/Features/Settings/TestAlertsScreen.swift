@@ -296,11 +296,11 @@ struct TestAlertsScreen: View {
                 SegmentedControl(selection: Binding(get: { model.delay }, set: { model.delay = $0 }), options: [(5, "5 s"), (15, "15 s"), (30, "30 s")], small: true)
                 ForEach(model.samples(language: app.settings.language)) { sample in
                     Button { Task { await model.fire(sample) } } label: {
-                        VStack(alignment: .leading, spacing: 2) {
+                        VStack(alignment: .leading, spacing: Space.xxs) {
                             Text(model.label(sample.id)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(sample.body).clack(.caption).foregroundStyle(Ink.text2).multilineTextAlignment(.leading)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, Space.s)
                     }
                     .buttonStyle(.plain)
                 }

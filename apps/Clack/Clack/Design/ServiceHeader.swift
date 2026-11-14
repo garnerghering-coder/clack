@@ -54,7 +54,7 @@ struct ServiceHeader<Status: View>: View {
 
     var body: some View {
         let service = Format.service(name ?? op?.name, number)
-        FlowLayout(spacing: 8, lineSpacing: 4, centered: true) {
+        FlowLayout(spacing: Space.s, lineSpacing: 4, centered: true) {
             OperatorBadge(op: op, size: size)
             Text(service.isEmpty ? (fallback ?? l10n.t("trips.train")) : service)
                 .clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)

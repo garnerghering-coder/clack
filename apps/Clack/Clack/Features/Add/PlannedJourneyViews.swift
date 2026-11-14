@@ -18,7 +18,7 @@ struct ChangeLine: View {
     var typicalLateMin: Int? = nil
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             line
             if let typical = typicalLateMin, typical > 0 {
                 Text(l10n.t("change.historyNote", ["min": String(typical)])).clack(.micro).foregroundStyle(Ink.text3)
@@ -59,23 +59,23 @@ struct JourneyResultCard: View {
     var body: some View {
         let first = journey.legs[0], last = journey.legs[journey.legs.count - 1]
         let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: last.to.time, toTz: last.to.tz)
-        let card = VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
+        let card = VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                 Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                Text(Format.duration(Double(journey.durationMin))).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity)
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(Format.duration(Double(journey.durationMin), language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity)
+                HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
                     Text(Format.time(last.to.time, tz: last.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                     if plus > 0 { TimePair.plusText(plus) }
                 }
             }
             .monospacedDigit()
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(changesText).clack(.chip).foregroundStyle(Ink.text2)
                 if journey.fastest == true { Text(l10n.t("journey.fastest")).clack(.chip).foregroundStyle(Ink.accentInk) }
             }
             ForEach(Array(journey.legs.enumerated()), id: \.offset) { i, leg in
                 let op = leg.operatorId.flatMap { app.operatorsById[$0] }
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     ServiceHeader(op: op, number: leg.trainNumber, size: .small, name: op == nil ? leg.routeName : nil)
                     (TimePair.text(.init(time: leg.from.time, tz: leg.from.tz), .init(time: leg.to.time, tz: leg.to.tz), clock: app.settings.clock)
                         + Text(Format.separator + "\(leg.from.name) → \(leg.to.name)"))
@@ -87,7 +87,7 @@ struct JourneyResultCard: View {
                 }
             }
         }
-        .padding(16)
+        .padding(Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -144,7 +144,7 @@ struct PlannedJourneyStep: View {
         let legs = legs
         let first = legs[0], last = legs[legs.count - 1]
         Button(action: onBack) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(l10n.t("add.back"))
             }
@@ -155,8 +155,8 @@ struct PlannedJourneyStep: View {
             .fixedSize(horizontal: false, vertical: true)
         Text(Format.longDate(journey.dep, tz: first.origin?.tz ?? "Europe/Stockholm", language: app.settings.language))
             .clack(.body).foregroundStyle(Ink.text2)
-        HStack(spacing: 12) {
-            Tile(label: l10n.t("journey.doorToDoor"), value: Format.duration(Double(journey.durationMin)))
+        HStack(spacing: Space.m) {
+            Tile(label: l10n.t("journey.doorToDoor"), value: Format.duration(Double(journey.durationMin), language: l10n.language))
             Tile(label: l10n.t("passport.trains"), value: String(legs.count))
             Tile(label: l10n.t("detail.distance"), value: distances.count == legs.count
                  ? Format.distance(distances.values.reduce(0, +), unit: app.settings.distanceUnit, language: app.settings.language) : Format.unknown)
@@ -175,7 +175,7 @@ struct PlannedJourneyStep: View {
         if !dupes.isEmpty {
             Banner(kind: .warn) {
                 Text(l10n.t("add.duplicate"))
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Button(l10n.t("add.addAnyway")) { Task { await save(force: true) } }.buttonStyle(.clack(.primary, small: true)).disabled(saving)
                     Button(l10n.t("add.cancel")) {
                         if let savedSoFar { onSaved(savedSoFar) } else { dupes = [] }

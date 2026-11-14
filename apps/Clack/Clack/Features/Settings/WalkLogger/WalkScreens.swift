@@ -19,7 +19,7 @@ struct WalkLoggerScreen: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: Space.l) {
                 if recorder.isRecording {
                     WalkSessionView(recorder: recorder)
                 } else {
@@ -52,7 +52,7 @@ struct WalkLoggerScreen: View {
                     }
                 }
             }
-            .padding(16)
+            .padding(Space.l)
         }
         .screenTitle("Station walks")
         .sheet(item: Binding(get: { editing.map(EditID.init) }, set: { editing = $0?.id })) { item in
@@ -76,7 +76,7 @@ private struct WalkRow: View {
     let uploading: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             Text(entry.title).clack(.rowTitle).foregroundStyle(Ink.text)
             Text("\(Date(timeIntervalSince1970: entry.startedAt).formatted(date: .abbreviated, time: .shortened)) · \(Int(entry.duration / 60)) min · \(entry.routes) routes · \(entry.marks) marks · \(ByteCountFormatter.string(fromByteCount: Int64(entry.bytes), countStyle: .file))")
                 .clack(.caption).foregroundStyle(Ink.text2)
@@ -84,7 +84,7 @@ private struct WalkRow: View {
                 .clack(.caption).foregroundStyle(entry.uploaded ? Ink.text2 : Ink.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.vertical, 8)
+        .padding(.vertical, Space.s)
     }
 }
 
@@ -99,7 +99,7 @@ private struct WalkSessionView: View {
     @FocusState private var markFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Space.l) {
             Card {
                 Text(recorder.log?.title ?? "").clack(.sectionHeader).foregroundStyle(Ink.text2)
                 readings
@@ -150,7 +150,7 @@ private struct WalkSessionView: View {
                 ForEach(WalkLog.suggestedRoutes, id: \.self) { item in
                     let done = recorder.log?.checklist.contains(item) ?? false
                     Button { recorder.toggleChecklist(item) } label: {
-                        HStack(alignment: .top, spacing: 8) {
+                        HStack(alignment: .top, spacing: Space.s) {
                             LucideIcon(name: done ? "system:checkmark.square" : "system:square", size: 18)
                             Text(item).clack(.body).frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -172,7 +172,7 @@ private struct WalkSessionView: View {
     private var readings: some View {
         let log = recorder.log
         let loc = recorder.lastLocation
-        return VStack(alignment: .leading, spacing: 2) {
+        return VStack(alignment: .leading, spacing: Space.xxs) {
             Text("Time \(Int((log?.duration() ?? 0) / 60)) min · steps \(recorder.lastSteps)")
             Text(loc.map { String(format: "Position ±%.0f m%@", $0.horizontalAccuracy, $0.floor.map { " · floor \($0.level)" } ?? "") } ?? "Position: waiting")
             Text(recorder.lastRelAlt.map { String(format: "Barometer %+.1f m", $0) } ?? "Barometer: waiting")

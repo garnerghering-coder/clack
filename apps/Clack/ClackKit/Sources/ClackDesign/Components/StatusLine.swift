@@ -52,7 +52,7 @@ public struct StatusLine: View {
     }
 
     public var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             if kind == .live {
                 Circle().fill(Ink.onTime).frame(width: 8, height: 8)
                     .opacity(dim ? 0.35 : 1)

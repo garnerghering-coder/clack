@@ -45,6 +45,8 @@ struct FormatTests {
         #expect(Format.duration(168) == "2h 48m")
         #expect(Format.duration(45) == "45m")
         #expect(Format.duration(25 * 60 + 5) == "1d 1h")
+        #expect(Format.duration(168, language: .sv) == "2 h 48 min")
+        #expect(Format.duration(45, language: .sv) == "45 min")
         #expect(Format.distance(455_300, unit: .km) == "455 km")
         #expect(Format.distance(455_300, unit: .mi) == "283 mi")
         #expect(Format.distance(nil, unit: .km) == "—")

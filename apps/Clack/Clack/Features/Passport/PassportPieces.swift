@@ -31,12 +31,12 @@ struct RecordsGrid: View {
         let r = data.records
         let unit = app.settings.distanceUnit
         let lang = app.settings.language
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12, alignment: .top)], spacing: 12) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: Space.m, alignment: .top)], spacing: Space.m) {
             if let leg = r.longestDistance {
                 RecordTile(label: l10n.t("passport.longestTrip"), value: Format.distance(leg.distanceM, unit: unit, language: lang), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
             }
             if let leg = r.longestDuration {
-                RecordTile(label: l10n.t("passport.longestTime"), value: Format.duration(leg.minutes), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
+                RecordTile(label: l10n.t("passport.longestTime"), value: Format.duration(leg.minutes, language: l10n.language), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
             }
             if let leg = r.biggestDelay {
                 RecordTile(label: l10n.t("passport.biggestDelay"), value: l10n.t("passport.minutesLate", count: leg.delayMin ?? 0), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
@@ -80,11 +80,11 @@ struct YearChips: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 ChipButton(text: l10n.t("passport.allTime"), active: year == nil) { year = nil }
                 ForEach(years, id: \.self) { y in ChipButton(text: String(y), active: year == y) { year = y } }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, Space.l)
         }
     }
 }

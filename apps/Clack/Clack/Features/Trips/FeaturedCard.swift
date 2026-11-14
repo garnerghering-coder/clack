@@ -84,19 +84,19 @@ struct FeaturedCard: View {
                 featuredMap(grounded: grounded)
                 Text(tag)
                     .clack(.micro).foregroundStyle(Ink.text2)
-                    .padding(.vertical, 2).padding(.horizontal, 8)
+                    .padding(.vertical, Space.xxs).padding(.horizontal, Space.s)
                     .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                    .padding(.leading, 12).padding(.top, 8)
+                    .padding(.leading, Space.m).padding(.top, Space.s)
             }
             .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .accessibilityHidden(true)
 
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Space.s) {
                 // A journey is headed by what it is ("Journey · 4 trains") and its status; its trains are the cards
                 // below (user test 2026-11-07: headed by "Krösatåg 27604", it read as one train). One train is
                 // headed by its service, as before.
                 if isJourney {
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
                         Spacer(minLength: 0)
                         switch state {
@@ -126,7 +126,7 @@ struct FeaturedCard: View {
                 .clack(.heroTimes)
                 bottom(now: now, live: live)
             }
-            .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
+            .padding(.top, Space.l).padding(.bottom, Space.l).padding(.horizontal, Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Surface.Hero(op: op))
             }
@@ -136,7 +136,7 @@ struct FeaturedCard: View {
             .accessibilityLabel(l10n.t("trips.viewJourney", ["from": legs.first?.origin?.name ?? "", "to": legs.last?.destination?.name ?? ""]))
             if isJourney {
                 journeyLegs(now: now)
-                    .padding(.horizontal, 16).padding(.bottom, 12)
+                    .padding(.horizontal, Space.l).padding(.bottom, Space.m)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
@@ -148,7 +148,7 @@ struct FeaturedCard: View {
     /// The whole journey under the featured train as one rail: each train with its times and platform, the change
     /// between them, the one featured above marked. Every leg opens its trip and every change its station map.
     private func journeyLegs(now: Double) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             Rectangle().fill(Ink.hairline).frame(height: 1)
             // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
             JourneyBar(legs: legs, now: now, selected: leg.id)
@@ -184,20 +184,20 @@ struct FeaturedCard: View {
                 }
             }
         case .arrived:
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(leg.actualArr != nil
                     ? l10n.t("trips.arrivedAt", ["time": Format.time(leg.actualArr?.ms, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock)])
                     : l10n.t("trips.scheduledTimes"))
                     .clack(.caption).foregroundStyle(Ink.text2)
                 Spacer(minLength: 0)
-                HStack(spacing: 4) {
+                HStack(spacing: Space.xs) {
                     LucideIcon(name: "stamp", size: 14)
                     Text(l10n.t("trips.inPassport"))
                 }
                 .clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.accentInk)
             }
         case .upcoming:
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 CountdownLine(leg: leg, now: now)
                 if let platform = leg.depPlatform { Chip(text: l10n.t("trips.platform", ["platform": platform])) }
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }

@@ -27,7 +27,7 @@ public struct SearchField: View {
 
     public var body: some View {
         let shape = RoundedRectangle(cornerRadius: Radius.input, style: .continuous)
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             LucideIcon(name: "search", size: 18).foregroundStyle(Ink.text2)
             field
                 .clack(.searchField)
@@ -38,7 +38,7 @@ public struct SearchField: View {
                 .submitLabel(.search)
                 .accessibilityLabel(prompt)
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, Space.m)
         .frame(minHeight: Self.height)
         .background {
             if overMap {

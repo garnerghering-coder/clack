@@ -297,7 +297,7 @@ private struct StatusRow: View {
     }
 
     private func row(withTime: Bool) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        HStack(alignment: .firstTextBaseline, spacing: Space.s) {
             if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1).fixedSize() }
             Delay(card: card)
             Detail(card: card, withTime: withTime)
@@ -318,8 +318,8 @@ public struct TripCardLockScreen: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 switch card.phase {
                 case "arrived":
                     Image(systemName: "checkmark.circle.fill").foregroundStyle(Ink.onTimeInk).accessibilityHidden(true)
@@ -337,11 +337,11 @@ public struct TripCardLockScreen: View {
                 if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text2).lineLimit(1).fixedSize() }
             }
             StatusRow(card: card)
-            RouteLine(card: card).padding(.vertical, 4)
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            RouteLine(card: card).padding(.vertical, Space.xs)
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 Text(card.departs).clack(.cardTime).foregroundStyle(Ink.text).fixedSize()
                 Spacer(minLength: 0)
-                VStack(spacing: 2) {
+                VStack(spacing: Space.xxs) {
                     if let p = card.state.platform {
                         FitText(card.platform(p), .delay, ink: card.platformChanged ? Ink.accentInk : Ink.text)
                     }
@@ -356,7 +356,7 @@ public struct TripCardLockScreen: View {
             }
         }
         // Apple's standard Lock Screen margin is 14 pt; 16 keeps the 4 pt grid and still clears the card's corners.
-        .padding(16)
+        .padding(Space.l)
     }
 }
 
@@ -374,17 +374,17 @@ public struct TripCardSmall: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
+            HStack(spacing: Space.xs) {
                 LucideIcon(name: "train-front", size: 12).foregroundStyle(card.line)
                 FitText(card.route, .chip)
             }
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
                 key
                 Spacer(minLength: 2)
                 Delay(card: card)
             }
-            HStack(spacing: 4) {
+            HStack(spacing: Space.xs) {
                 if card.phase == "changing", let p = card.state.changePlatform {
                     Text(card.platform(p)).clack(.chip).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
                 } else if let p = card.state.platform {
@@ -395,7 +395,7 @@ public struct TripCardSmall: View {
                 if stale { Text(card.l10n.t("tripCard.estimated")).clack(.captionUpper).foregroundStyle(Ink.text3).lineLimit(1).fixedSize() }
             }
         }
-        .padding(8)
+        .padding(Space.s)
     }
 
     @ViewBuilder private var key: some View {
@@ -555,7 +555,7 @@ public struct TripIslandExpandedLeading: View {
     public init(card: TripCardFace) { self.card = card }
 
     public var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             LucideIcon(name: "train-front", size: 14).foregroundStyle(card.line)
             if let train = card.train { FitText(train, .cardTrain) }
         }
@@ -614,12 +614,12 @@ public struct TripIslandExpandedBottom: View {
             default: travelling
             }
         }
-        .padding(.bottom, 2)
+        .padding(.bottom, Space.xxs)
     }
 
     /// The times at each end with the line between them, in one row.
     private var timeline: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             Text(card.departs).fixedSize()
             RouteLine(card: card)
             Text(card.arrives).fixedSize()
@@ -628,8 +628,8 @@ public struct TripIslandExpandedBottom: View {
     }
 
     private var travelling: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 StatusRow(card: card).layoutPriority(2)
                 Spacer(minLength: 4)
                 if stale {
@@ -643,8 +643,8 @@ public struct TripIslandExpandedBottom: View {
     }
 
     private var getOff: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 Glyph(name: "map-pin")
                 FitText(card.l10n.t("tripCard.getOffAt", ["station": card.to]), .alertTitle).layoutPriority(1)
                 Spacer(minLength: 0)
@@ -654,13 +654,13 @@ public struct TripIslandExpandedBottom: View {
     }
 
     private var changing: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 Glyph(name: "repeat")
                 FitText(card.l10n.t("tripCard.changeAt", ["station": card.to]), .alertTitle).layoutPriority(1)
                 Spacer(minLength: 0)
             }
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 if let p = card.state.changePlatform {
                     Text(verbatim: "→ \(card.platform(p))").clack(.delay).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
                 }
@@ -674,14 +674,14 @@ public struct TripIslandExpandedBottom: View {
     }
 
     private var arrived: some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(alignment: .center, spacing: Space.s) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 26, weight: .semibold))
                 .foregroundStyle(Ink.onTimeInk)
                 .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 FitText(card.l10n.t("tripCard.welcome", ["station": card.to]), .alertTitle)
-                HStack(spacing: 6) {
+                HStack(spacing: Space.s) {
                     Text(card.l10n.t("tripCard.arrivedAt", ["time": card.arrives])).clack(.stopName).foregroundStyle(Ink.text2).lineLimit(1)
                     DelayText(delay: card.state.delayMin, canceled: false)
                 }
@@ -691,7 +691,7 @@ public struct TripIslandExpandedBottom: View {
     }
 
     private var cancelled: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        HStack(alignment: .firstTextBaseline, spacing: Space.s) {
             Glyph(name: "x", colour: Ink.veryLateInk)
             FitText(card.l10n.t("delay.cancelled"), .alertTitle, ink: Ink.veryLateInk)
             Spacer(minLength: 4)

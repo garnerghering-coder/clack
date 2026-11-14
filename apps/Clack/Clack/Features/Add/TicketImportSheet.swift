@@ -208,7 +208,7 @@ struct TicketImportSheet: View {
             content
         }
         .task { await model.load(file, app.client) }
-        .sensoryFeedback(.success, trigger: model.phase == .done)
+        .haptic(.success, trigger: model.phase == .done) { _, new in new }
         // Saved: show it in Trips and close the sheet by itself, after a moment to see what happened.
         .task(id: model.phase == .done) {
             guard model.phase == .done else { return }
@@ -226,7 +226,7 @@ struct TicketImportSheet: View {
         case .reading:
             Skeleton(height: 120)
         case .unreadable:
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: Space.l) {
                 Text(l10n.t("ticketImport.unreadable")).clack(.body).foregroundStyle(Ink.text2)
                 Button(l10n.t("ticketImport.addByHand")) {
                     router.ticketFile = nil
@@ -235,7 +235,7 @@ struct TicketImportSheet: View {
                 .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))
             }
         case .ready, .saving, .done:
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.m) {
                 ForEach(model.rows) { row in rowView(row) }
                 actions
             }
@@ -257,11 +257,11 @@ struct TicketImportSheet: View {
         return Button {
             model.toggle(row.id)
         } label: {
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 LucideIcon(name: row.selected ? "square-check" : "square", size: 22)
                     .foregroundStyle(row.selected ? Ink.accentInk : Ink.text3)
                     .opacity(row.choosable || row.selected ? 1 : 0.4)
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Text("\(from) → \(to)").clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
                     (times + Text(Format.separator + Format.day(Format.isoToNoonMs(row.train.date) ?? 0, tz: m?.from.tz ?? "Europe/Stockholm", language: app.settings.language)))
                         .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
@@ -270,7 +270,7 @@ struct TicketImportSheet: View {
                 }
                 Spacer(minLength: 0)
             }
-            .padding(16)
+            .padding(Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)

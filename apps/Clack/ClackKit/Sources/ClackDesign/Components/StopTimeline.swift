@@ -192,15 +192,15 @@ public struct StopRow: View {
         if typeSize.isAccessibilitySize {
             // At accessibility sizes the time and platform go under the name, which then has the row's width
             // (user test 2026-11-07, xxxLarge: "Stockholm C" broke into "Sto / ckh / olm / C" beside the time).
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 rail
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     nameView
                     ForEach(notes, id: \.self) { note in
                         Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
                     }
                     if let dwell { dwellLine(dwell) }
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         timeView
                         platformView
                         Spacer(minLength: 0)
@@ -211,8 +211,8 @@ public struct StopRow: View {
             }
             .frame(minHeight: compact ? 44 : 48)
         } else {
-            HStack(spacing: 12) {
-                HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
+                HStack(spacing: Space.m) {
                     rail
                     VStack(alignment: .leading, spacing: 0) {
                         nameView

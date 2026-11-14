@@ -94,9 +94,9 @@ struct DesignGalleryView: View {
         section("Medals") {
             // Every family at its top level, then some locked and one with the share cards' foil.
             let medals = MilestoneFamily.knownCases.map { f in Milestone(family: f, target: MedalStyle.levels(f).last ?? 1, at: nil, legId: nil, value: 0.4 * (MedalStyle.levels(f).last ?? 1)) }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 12) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Space.s), count: 3), spacing: Space.m) {
                 ForEach(Array(medals.enumerated()), id: \.offset) { _, m in
-                    VStack(spacing: 2) {
+                    VStack(spacing: Space.xxs) {
                         Medal(m: m, size: 84)
                         Text(m.family.rawValue).clack(.caption).foregroundStyle(Ink.text2)
                     }
@@ -108,11 +108,11 @@ struct DesignGalleryView: View {
         section("PlatformBoxes") {
             // The two time boxes (a known platform, then none) and the stops list's platform column (known, dash, tappable
             // dash): the three tags must end on one right edge.
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 TimeBlock(label: "Departure", sched: t, actual: nil, tz: tz, platform: "5", delay: nil, canceled: false)
                 TimeBlock(label: "Arrival", sched: t + 90 * minute, actual: nil, tz: tz, platform: nil, delay: nil, canceled: false)
             }
-            VStack(alignment: .trailing, spacing: 4) {
+            VStack(alignment: .trailing, spacing: Space.xs) {
                 PlatformTag(platform: "13")
                 UnknownPlatformTag()
                 UnknownPlatformTag(onSet: {})
@@ -136,9 +136,9 @@ struct DesignGalleryView: View {
                 .frame(width: ShareCardView.width, height: ShareCardView.height).scaleEffect(0.3, anchor: .topLeading).frame(width: 324, height: 405, alignment: .topLeading)
         }
         section("Colours") {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 4), spacing: 8) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Space.s), count: 4), spacing: Space.s) {
                 ForEach(swatches, id: \.0) { name, color in
-                    VStack(spacing: 4) {
+                    VStack(spacing: Space.xs) {
                         RoundedRectangle(cornerRadius: Radius.tag).fill(color).frame(height: 36)
                             .overlay(RoundedRectangle(cornerRadius: Radius.tag).strokeBorder(Ink.hairline))
                         Text(name).clack(.mapAttribution).foregroundStyle(Ink.text2).lineLimit(1)
@@ -163,25 +163,25 @@ struct DesignGalleryView: View {
             Text("1 234 567").clack(.passportBig).foregroundStyle(Ink.text)
         }
         section("Buttons") {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Button("Primary") {}.buttonStyle(.clack(.primary))
                 Button("Secondary") {}.buttonStyle(.clack())
                 Button("Danger") {}.buttonStyle(.clack(.danger))
             }
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Button("Small") {}.buttonStyle(.clack(small: true))
                 Button("Disabled") {}.buttonStyle(.clack()).disabled(true)
                 Button("Link") {}.buttonStyle(LinkButtonStyle())
             }
             Button("Wide primary") {}.buttonStyle(.clack(.primary, wide: true))
             SegmentedControl(selection: $segment, options: [(0, "System"), (1, "Dark"), (2, "Light")])
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 ChipButton(text: "Filter", active: chipActive) { chipActive.toggle() }
                 ChipButton(text: "Removable", removable: true) {}
             }
         }
         section("Delay") {
-            HStack(spacing: 16) {
+            HStack(spacing: Space.l) {
                 DelayText(delay: 0)
                 DelayText(delay: 8)
                 DelayText(delay: 22)
@@ -192,15 +192,15 @@ struct DesignGalleryView: View {
             }
         }
         section("Split-flap") {
-            HStack(spacing: 16) {
+            HStack(spacing: Space.l) {
                 SplitFlap(value: time, size: .time, intro: true)
                 Button("Flip") { time = time == "07:14" ? "19:48" : "07:14" }.buttonStyle(.clack(small: true))
             }
-            HStack(spacing: 16) {
+            HStack(spacing: Space.l) {
                 FlapTime(time: t, tz: tz, clock: app.settings.clock, style: .lg)
                 FlapTime(time: t + 13 * minute, sched: t, tz: tz, clock: .h24, style: .md)
             }
-            HStack(spacing: 16) {
+            HStack(spacing: Space.l) {
                 FlapTime(time: t, tz: tz, clock: .h24, style: .sm)
                 FlapTime(time: t, tz: tz, clock: .h12, style: .text)
                 FlapTime(time: t + 5 * minute, sched: t, tz: tz, clock: .h24, style: .text)
@@ -224,7 +224,7 @@ struct DesignGalleryView: View {
             Skeleton()
         }
         section("Icons") {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 8), spacing: 16) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 8), spacing: Space.l) {
                 ForEach(icons, id: \.self) { LucideIcon(name: $0, size: 20).foregroundStyle(Ink.text) }
                 LucideIcon(name: "star", size: 20, filled: true).foregroundStyle(Ink.accentInk)
             }
@@ -310,7 +310,7 @@ struct DesignGalleryView: View {
             BoardRowView(.init(time: t + 8 * minute, sched: t + 4 * minute, tz: tz, destination: "Uppsala C", platform: "5", delay: 4), clock: .h24, compact: true)
         }
         section("StatusLine") {
-            FlowLayout(spacing: 16, lineSpacing: 8) {
+            FlowLayout(spacing: Space.l, lineSpacing: Space.s) {
                 StatusLine(.live, "Live")
                 StatusLine(.stale, "Stale · updated 3 min ago")
                 StatusLine(.upcoming, "Departs in 2h 5m")
@@ -332,7 +332,7 @@ struct DesignGalleryView: View {
             ServiceHeader(op: app.operators.first, number: "423", size: .large, seat: "Car 4 · Seat 23") {
                 StatusLine(.upcoming, "Departs in 2 h")
             }
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 ForEach(app.operators.prefix(6)) { OperatorBadge(op: $0, size: .large) }
                 OperatorBadge(op: nil, size: .large)
             }
@@ -348,7 +348,7 @@ struct DesignGalleryView: View {
                 .clack(.heroTimes)
         }
         section("Tile") {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Tile(label: "Distance", value: "455 km")
                 Tile(label: "Duration", value: "2h 48m")
                 Tile(label: "Delay") { DelayText(delay: 8) }
@@ -366,7 +366,7 @@ struct DesignGalleryView: View {
             Button("Move") { progress = progress > 0.5 ? 0.2 : 0.8 }.buttonStyle(.clack(small: true))
         }
         section("IconButton") {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 IconButton(icon: "settings", label: "Settings") {}
                 IconButton(icon: "plus", label: "Add a train") {}
                 IconButton(icon: "star", label: "Favourite", selected: favourite) { favourite.toggle() }
@@ -378,7 +378,7 @@ struct DesignGalleryView: View {
             SearchField(text: $query, prompt: "Train number, route, or operator")
             ZStack {
                 Ink.mapBg.frame(height: 72)
-                SearchField(text: $query, prompt: "Search trains and stations", overMap: true).padding(.horizontal, 12)
+                SearchField(text: $query, prompt: "Search trains and stations", overMap: true).padding(.horizontal, Space.m)
             }
             .clipShape(RoundedRectangle(cornerRadius: Radius.card))
         }
@@ -387,7 +387,7 @@ struct DesignGalleryView: View {
             InfoNote("Times: Trafikverket.", more: "Times and platforms come from Trafikverket's open data; stops abroad come from the timetable only.")
         }
         section("PlatformTag") {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 PlatformTag(platform: "17b")
                 PlatformTag(platform: "4", changedFrom: "3")
                 PlatformTag(platform: "2", changedFrom: "")
@@ -396,11 +396,11 @@ struct DesignGalleryView: View {
     }
 
     private func section(_ title: String, @ViewBuilder content: () -> some View) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2)
             content()
         }
-        .padding(.top, 8)
+        .padding(.top, Space.s)
         .id(title)
     }
 }

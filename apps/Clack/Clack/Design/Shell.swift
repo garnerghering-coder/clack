@@ -30,7 +30,7 @@ struct PageHeader<Trailing: View>: View {
     @ViewBuilder var trailing: Trailing
 
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: Space.m) {
             Text(title)
                 .font(.largeTitle.bold())
                 .foregroundStyle(Ink.text)
@@ -40,7 +40,7 @@ struct PageHeader<Trailing: View>: View {
             Spacer(minLength: 0)
             trailing
         }
-        .padding(.top, 12)
+        .padding(.top, Space.m)
     }
 }
 
@@ -61,7 +61,7 @@ struct BackLink: View {
         Button {
             dismiss()
         } label: {
-            HStack(spacing: 6) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(label ?? l10n.t("common.back"))
             }
@@ -77,13 +77,13 @@ struct Page<Content: View>: View {
     var body: some View {
         ScrollView {
             // Lazy, with pinned section headers: the month headers stick to the top as they do on the web.
-            LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
+            LazyVStack(alignment: .leading, spacing: Space.l, pinnedViews: [.sectionHeaders]) {
                 content
             }
             .frame(maxWidth: 720, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 24)
+            .padding(.horizontal, Space.l)
+            .padding(.top, Space.m)
+            .padding(.bottom, Space.xl)
             .frame(maxWidth: .infinity)
         }
         .scrollBounceBehavior(.always)
@@ -98,15 +98,15 @@ struct OfflineBanner: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: Space.s) {
             LucideIcon(name: "wifi-off", size: 14)
             Text(l10n.t("offline.banner")).lineLimit(1)
         }
         .clack(.init(size: 12, lineHeight: 16, weight: .semibold, style: .caption))
         .foregroundStyle(Ink.text2)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 6)
-        .padding(.horizontal, 12)
+        .padding(.vertical, Space.xs)
+        .padding(.horizontal, Space.m)
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
         // Its colour runs up behind the status bar: the strip sits at the top of the screen, under the clock.
         .background(Ink.surfaceRaised.ignoresSafeArea(edges: .top))
@@ -125,21 +125,21 @@ struct SheetFrame<Content: View>: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 Text(title).clack(.sheetTitle).foregroundStyle(Ink.text).accessibilityAddTraits(.isHeader)
                 Spacer(minLength: 0)
                 IconButton(icon: "x", label: l10n.t("common.close"), action: onClose)
             }
-            .padding(.top, 20)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 8)
+            .padding(.top, Space.xl)
+            .padding(.horizontal, Space.l)
+            .padding(.bottom, Space.s)
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     content
                 }
-                .padding(.top, 8)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 32)
+                .padding(.top, Space.s)
+                .padding(.horizontal, Space.l)
+                .padding(.bottom, Space.xxl)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             // A scroll puts the keyboard away: the list is what you're reading now (user test 2026-11-07).
@@ -151,7 +151,7 @@ struct SheetFrame<Content: View>: View {
                     Button(title) { action.run?() }
                         .buttonStyle(.clack(.primary, wide: true))
                         .disabled(!action.enabled)
-                        .padding(.horizontal, 16).padding(.top, 8).padding(.bottom, 8)
+                        .padding(.horizontal, Space.l).padding(.top, Space.s).padding(.bottom, Space.s)
                         .background(Ink.surface)
                 }
             }

@@ -85,13 +85,13 @@ struct TripDetailScreen: View {
             if let toast {
                 Text(toast)
                     .clack(.body).fontWeight(.semibold).foregroundStyle(Ink.text)
-                    .padding(.vertical, 12).padding(.horizontal, 16)
+                    .padding(.vertical, Space.m).padding(.horizontal, Space.l)
                     .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                     .hairlineBorder(radius: Radius.input)
                     .clackShadow()
-                    .padding(.horizontal, 16).padding(.top, 12)
+                    .padding(.horizontal, Space.l).padding(.top, Space.m)
                     // Reduce Motion: it fades instead of sliding down.
-                    .transition(reduceMotion ? .opacity : .move(edge: .top).combined(with: .opacity))
+                    .transition(Motion.transition(from: .top, reduceMotion: reduceMotion))
                     .accessibilityAddTraits(.updatesFrequently)
             }
         }
@@ -109,7 +109,7 @@ struct TripDetailScreen: View {
         .task(id: toast) {
             guard toast != nil else { return }
             try? await Task.sleep(for: .seconds(6))
-            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { toast = nil }
+            withMotion(.appear, reduceMotion: reduceMotion) { toast = nil }
         }
         // Which end stays in `platformEnd`: the alert clears its own flag before the button's action runs.
         .alert(l10n.t("platform.title"), isPresented: $askingPlatform) {
@@ -193,7 +193,7 @@ struct TripDetailScreen: View {
             if let shown = update.events.first(where: { $0.type != .departed }), let leg {
                 let stops = leg.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }
                 let text = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops)
-                withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { toast = text }
+                withMotion(.appear, reduceMotion: reduceMotion) { toast = text }
                 // A delay or platform change is said out loud too (DESIGN §16).
                 AccessibilityNotification.Announcement(text).post()
             }
@@ -266,7 +266,6 @@ struct TripDetailScreen: View {
     private func remove() async {
         if (try? await app.client.deleteLeg(id)) != nil {
             TicketStore.shared.detach(legId: id)
-            UINotificationFeedbackGenerator().notificationOccurred(.warning)
             app.tripsChanged()
             dismiss()
         }
@@ -291,9 +290,9 @@ struct TripDetailScreen: View {
             VStack(spacing: 0) {
                 mapArea(detail, tracking: tracking, height: mapHeight, top: proxy.safeAreaInsets.top)
                 content(detail, shown: shown, tracking: tracking, stage: stage, now: now)
-                    .padding(.top, 20)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 24)
+                    .padding(.top, Space.xl)
+                    .padding(.horizontal, Space.l)
+                    .padding(.bottom, Space.xl)
                     .frame(maxWidth: 720)
                     .frame(maxWidth: .infinity)
                     .background(Ink.bg, in: UnevenRoundedRectangle(topLeadingRadius: Radius.sheet, topTrailingRadius: Radius.sheet))
@@ -309,7 +308,7 @@ struct TripDetailScreen: View {
         .refreshable { await (detail.leg.status == .snapshotted ? load() : refresh()) }
         .onChange(of: scrollTarget) { _, target in
             guard let target else { return }
-            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.3)) { scroller.scrollTo(target, anchor: .top) }
+            withMotion(.layout, reduceMotion: reduceMotion) { scroller.scrollTo(target, anchor: .top) }
             scrollTarget = nil
         }
         .onChange(of: focusTarget) { _, target in
@@ -317,7 +316,7 @@ struct TripDetailScreen: View {
             Task {
                 // After the keyboard has come up, so "visible" means above it.
                 try? await Task.sleep(for: .milliseconds(350))
-                withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { scroller.scrollTo(target, anchor: .center) }
+                withMotion(.layout, reduceMotion: reduceMotion) { scroller.scrollTo(target, anchor: .center) }
                 focusTarget = nil
             }
         }
@@ -360,7 +359,7 @@ struct TripDetailScreen: View {
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
-                    .padding(.vertical, 4).padding(.horizontal, 12)
+                    .padding(.vertical, Space.xs).padding(.horizontal, Space.m)
                     .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm)
                     .frame(maxWidth: .infinity)
@@ -398,15 +397,15 @@ struct TripDetailScreen: View {
     private func content(_ detail: LegDetail, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage, now: Double) -> some View {
         let l = detail.leg
         let tz = l.origin?.tz ?? "Europe/Stockholm"
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Space.l) {
             if let journey {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
                     JourneyBar(legs: journey.legs, now: now, selected: detail.id)
                 }
             }
             Ticking(every: 1) { now in head(detail, now: now) }
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.xs) {
                 Text("\(l.origin?.name ?? "") → \(l.destination?.name ?? "")")
                     .clack(.detailRoute).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
                 if let schedDep = l.schedDep?.ms {
@@ -415,7 +414,7 @@ struct TripDetailScreen: View {
             }
             // Where you sit, until the trip is over.
             if stage != .after, let seat = Seat.label(l10n, coach: l.coach, seat: l.seat) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     LucideIcon(name: "armchair", size: 18).foregroundStyle(Ink.text2)
                     Text(seat).clack(.rowTitle).foregroundStyle(Ink.text)
                 }
@@ -436,11 +435,11 @@ struct TripDetailScreen: View {
             }
             // The whole journey: every train as a card, the changes between them; a card puts that train in focus.
             if let journey {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     Text(l10n.t("journey.yourJourney")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     JourneyLegs(legs: journey.legs, now: now, selected: detail.id, select: journey.select)
                 }
-                .padding(.top, 8)
+                .padding(.top, Space.s)
             }
         }
     }
@@ -500,7 +499,7 @@ struct TripDetailScreen: View {
         let platform = l.depPlatform.map { p in
             board?.stopSector.map { l10n.t("trips.platformSector", ["platform": p, "sector": $0]) } ?? l10n.t("trips.platform", ["platform": p])
         } ?? l10n.t("detail.platformLater")
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             // One status card: the status word big in its ink, then the platform and the delay, under a rule in the same ink.
             StatusCard(kind: status.kind, text: status.text) {
                 if !l.canceled {
@@ -511,7 +510,7 @@ struct TripDetailScreen: View {
             // The train started earlier and is on its way to where you get on: where it is, and when it gets there.
             if let shown, shown.status == .approaching, let board {
                 // The status line already says "On its way"; this says when it reaches you.
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("live.arrivesAtLabel")).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: shown.eta?.ms, tz: board.tz, clock: app.settings.clock).clack(.body).foregroundStyle(Ink.text)
                     if shown.positionSource == .gps, !shown.localEstimate { Speedometer(kmh: shown.speedKmh, at: shown.positionAt?.ms, now: now).clack(.caption) }
@@ -528,7 +527,7 @@ struct TripDetailScreen: View {
     private func liveNow(_ detail: LegDetail, now: Double) -> some View {
         let m = moment(detail, now: now)
         if let shown = m.shown {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.m) {
                 // On the train: when it arrives, big, and how late it runs.
                 let dtz = detail.leg.destination?.tz ?? "Europe/Stockholm"
                 StatusCard(
@@ -539,7 +538,7 @@ struct TripDetailScreen: View {
                 }
                 Card {
                     if TripDetailLogic.getOffNext(detail.stops, shown: shown, stage: m.stage), let alight = detail.stops.first(where: { $0.role == .alight }) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.accentInk)
                             Text(l10n.t("detail.getOffNext", ["name": alight.name])).clack(.rowTitle).foregroundStyle(Ink.accentInk)
                         }
@@ -564,7 +563,7 @@ struct TripDetailScreen: View {
                 Text(l10n.t("progress.welcome", ["station": l.destination?.name ?? ""])).clack(.welcomeTitle).foregroundStyle(Ink.text)
             }
             // "Arrived 10:55" and the delay beside it.
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 Text(
                     l.canceled ? l10n.t("status.cancelled")
                         : arrived != nil ? l10n.t("trips.arrivedAt", ["time": Format.time(arrived, tz: dtz, clock: app.settings.clock)])
@@ -590,7 +589,7 @@ struct TripDetailScreen: View {
             Text(l10n.t("record.state.\(l.ride.rawValue)", ["why": l10n.t("record.why.\(l.rideReason ?? "no_reports")")]))
                 .clack(.stopName).foregroundStyle(l.ride == .review ? Ink.lateInk : Ink.text)
         }
-        FlowLayout(spacing: 16, lineSpacing: 8) {
+        FlowLayout(spacing: Space.l, lineSpacing: Space.s) {
             if l.ride == .review {
                 Button(l10n.t("record.yes")) { Task { await answer(.yes) } }.buttonStyle(.clack(.primary, small: true))
                 Button(l10n.t("record.no")) { Task { await answer(.no) } }.buttonStyle(.clack(small: true))
@@ -604,7 +603,7 @@ struct TripDetailScreen: View {
             Button {
                 router.tab = .passport
             } label: {
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     LucideIcon(name: "stamp", size: 18).foregroundStyle(Ink.accentInk)
                     Text(l10n.t("detail.seePassport")).clack(.rowTitle).foregroundStyle(Ink.text)
                     Spacer(minLength: 8)
@@ -629,7 +628,7 @@ struct TripDetailScreen: View {
         let extraDays = (schedDep != nil && schedArr != nil) ? Format.dayOffset(from: schedDep!, fromTz: tz, to: schedArr!, toTz: dtz) : 0
         // Side by side, or one under the other at accessibility text sizes, where two don't fit (user test
         // 2026-11-07, xxxLarge: "DEPARTU…" and the flap digits cut).
-        let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Space.m)) : AnyLayout(HStackLayout(alignment: .top, spacing: Space.m))
         return layout {
             TimeBlock(
                 label: l10n.t("detail.departure"), sched: schedDep, actual: l.actualDep?.ms ?? (tracking ? board?.estimatedDep?.ms : nil),
@@ -688,11 +687,11 @@ struct TripDetailScreen: View {
     @ViewBuilder
     private func about(_ detail: LegDetail, tracking: Bool) -> some View {
         let l = detail.leg
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Space.l) {
             Button {
-                withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { aboutOpen.toggle() }
+                withMotion(.layout, reduceMotion: reduceMotion) { aboutOpen.toggle() }
             } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("detail.aboutTrain")).clack(.rowTitle).foregroundStyle(Ink.text)
                     Spacer(minLength: 0)
                     LucideIcon(name: "chevron-down", size: 18).foregroundStyle(Ink.text2)
@@ -730,14 +729,14 @@ struct TripDetailScreen: View {
         let beyond = manual ? [] : TripDetailLogic.beyondCountries(detail.stops)
         let dep = l.actualDep?.ms ?? l.schedDep?.ms
         let arr = l.actualArr?.ms ?? l.schedArr?.ms
-        return Card(spacing: 12) {
+        return Card(spacing: Space.m) {
             Text(l10n.t("detail.details")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 Tile(
                     label: l10n.t("detail.distance"),
                     value: (l.isEstimatedGeometry ? "≈ " : "") + Format.distance(l.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)
                 )
-                Tile(label: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000) : Format.unknown)
+                Tile(label: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000, language: l10n.language) : Format.unknown)
             }
             SeatEditor(leg: l, onSaved: { leg = $0 }, onFocus: { focusTarget = "seat" })
                 .id("seat")
@@ -838,12 +837,12 @@ struct TimeBlock: View {
     private var platformTag: some View {
         if let platform {
             // A marked box in the accent yellow with a rail mark, so it reads as the platform (owner, 2026-10-29).
-            HStack(spacing: 4) {
+            HStack(spacing: Space.xs) {
                 LucideIcon(name: "train-track", size: 12)
                 Text(platform).clack(.chip).fontWeight(.bold).monospacedDigit()
             }
                 .foregroundStyle(Ink.bg)
-                .padding(.vertical, 4).padding(.horizontal, 8)
+                .padding(.vertical, Space.xs).padding(.horizontal, Space.s)
                 .frame(minWidth: 32)
                 .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                 .fixedSize()
@@ -855,30 +854,30 @@ struct TimeBlock: View {
 
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             // The label beside the platform when both fit on one line, else the platform under it: one word can't
             // wrap without being cut ("DEPARTU / RE" on a Pro Max at the default size, build 59).
             ViewThatFits(in: .horizontal) {
-                HStack(alignment: .top, spacing: 8) {
+                HStack(alignment: .top, spacing: Space.s) {
                     Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).fixedSize()
                     Spacer(minLength: 0)
                     platformTag
                 }
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1).minimumScaleFactor(0.7)
                     platformTag
                 }
             }
             .frame(minHeight: 26)
             // The planned time, struck, with the delay beside it on the same line (owner, 2026-10-29); blank when nothing changed.
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(Format.time(sched, tz: tz, clock: app.settings.clock))
                     .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
                     .opacity(changed ? 1 : 0)
                     .accessibilityHidden(!changed)
                 if delay != nil || canceled { DelayText(delay: delay, canceled: canceled) }
             }
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.xxs) {
                 SplitFlap(value: Format.time(actual ?? sched, tz: tz, clock: app.settings.clock), size: .time, intro: true)
                     .opacity(canceled ? 0.6 : 1)
                     .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
@@ -947,7 +946,7 @@ struct JourneyConnections: View {
     var body: some View {
         Group {
             if let legs, let i = legs.firstIndex(where: { $0.id == legId }) {
-                VStack(spacing: 8) {
+                VStack(spacing: Space.s) {
                     if i > 0, legs[i - 1].destination?.id == legs[i].origin?.id { ConnectionCard(a: legs[i - 1], b: legs[i]) }
                     if i < legs.count - 1, legs[i].destination?.id == legs[i + 1].origin?.id { ConnectionCard(a: legs[i], b: legs[i + 1]) }
                 }
@@ -996,11 +995,11 @@ struct StatusCard<Second: View>: View {
 
     var body: some View {
         let ink = StatusLine(kind, text).ink
-        HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .top, spacing: Space.m) {
             Rectangle().fill(ink).frame(width: 3)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 Text(text).clack(.headline).foregroundStyle(ink).fixedSize(horizontal: false, vertical: true)
-                HStack(alignment: .firstTextBaseline, spacing: 8) { second() }
+                HStack(alignment: .firstTextBaseline, spacing: Space.s) { second() }
             }
             Spacer(minLength: 0)
         }

@@ -24,12 +24,12 @@ struct WelcomeView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                Wordmark(fontSize: 40).padding(.top, 24)
+            VStack(alignment: .leading, spacing: Space.xl) {
+                Wordmark(fontSize: 40).padding(.top, Space.xl)
                 Text(l10n.t("firstRun.log")).clack(.body).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
                 // The search first, where the thumb goes (user test 2026-11-07: the brightest things were five Add
                 // buttons for trains nobody was taking; the welcome moved under a finger as the list loaded).
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     Button {
                         onDone()
                         router.openAdd()
@@ -41,8 +41,8 @@ struct WelcomeView: View {
                 }
                 soon
             }
-            // Room under "Not now" for the floating tab bar.
-            .padding(.horizontal, 16).padding(.bottom, 120)
+            // The scroll view's own safe area clears the floating tab bar (it was a fixed 120 pt before polish pass 1).
+            .padding(.horizontal, Space.l).padding(.bottom, Space.xl)
             .frame(maxWidth: 560, alignment: .leading)
             .frame(maxWidth: .infinity)
         }
@@ -51,7 +51,7 @@ struct WelcomeView: View {
     }
 
     @ViewBuilder private var soon: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             HStack {
                 Text(l10n.t(near ? "firstRun.nearTitle" : "firstRun.soonTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 Spacer(minLength: 8)
@@ -80,9 +80,9 @@ struct WelcomeView: View {
     private func row(_ t: SoonTrain) -> some View {
         let op = t.operatorId.flatMap { app.operatorsById[$0] }
         let tz = TimeZone.current.identifier
-        return HStack(spacing: 12) {
+        return HStack(spacing: Space.m) {
             OperatorBadge(op: op, size: .medium)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 Text("\(t.from.name) → \(t.to.name)").clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
                 Text(Format.join([
                     "\(Format.time(t.dep, tz: tz, clock: app.settings.clock))–\(Format.time(t.arr, tz: tz, clock: app.settings.clock))",
@@ -100,7 +100,7 @@ struct WelcomeView: View {
             .disabled(adding != nil)
             .accessibilityLabel(l10n.t("firstRun.addLabel", ["from": t.from.name, "to": t.to.name]))
         }
-        .padding(12)
+        .padding(Space.m)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
     }

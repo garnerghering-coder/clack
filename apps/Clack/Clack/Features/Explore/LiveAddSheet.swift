@@ -26,7 +26,7 @@ struct LiveAddSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     Text(title).clack(.headline).foregroundStyle(Ink.text)
                     Text(l10n.t(board == nil ? "liveAdd.pickBoard" : "liveAdd.pickAlight")).clack(.body).foregroundStyle(Ink.text2)
                     let choices = board.map { b in stops.filter { $0.seq > b.seq } } ?? Array(stops.dropLast())
@@ -39,7 +39,7 @@ struct LiveAddSheet: View {
                                     .clack(.body).monospacedDigit().foregroundStyle(Ink.text2)
                                 if let p = stop.platform { PlatformTag(platform: p) }
                             }
-                            .padding(.vertical, 8)
+                            .padding(.vertical, Space.s)
                             .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
@@ -48,7 +48,7 @@ struct LiveAddSheet: View {
                     if let error { Text(error).clack(.caption).foregroundStyle(Ink.errorText) }
                     Text(l10n.t("liveAdd.note")).clack(.caption).foregroundStyle(Ink.text2)
                 }
-                .padding(16)
+                .padding(Space.l)
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button(l10n.t("common.cancel")) { dismiss() } }
@@ -87,7 +87,7 @@ struct LiveAddButton: View {
 
     var body: some View {
         Button { open = true } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: "plus", size: 16)
                 Text(l10n.t("liveMap.plan")).lineLimit(1).minimumScaleFactor(0.85)
             }

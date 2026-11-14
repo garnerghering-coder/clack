@@ -65,16 +65,16 @@ public struct DeparturesWidgetView: View {
         let tz = board.tz ?? TimeZone.current.identifier
         return VStack(alignment: .leading, spacing: 0) {
             // The header strip: the station, "Departures", and "Updated 12:04" once the data is old.
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 FittingText(name).clack(Self.boardFace).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
                 UpdatedLine(updatedAt: board.updatedAt, now: date, l10n: l10n, clock: clock)
                 Text(l10n.t("board.departures")).clack(.captionUpper).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
             }
-            .padding(.bottom, 8)
+            .padding(.bottom, Space.s)
             ForEach(rows) { row in
                 Rectangle().fill(Ink.hairline).frame(height: 1)
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     SplitFlap(
                         value: Format.time(row.leaves, tz: tz, clock: clock), size: .sm,
                         colour: row.canceled ? (row.replacedByBus ? Ink.late : DelayBand.cancelled.ink) : (row.delayMin ?? 0) >= 1 ? DelayBand(delayMin: row.delayMin, canceled: false).ink : nil
@@ -95,7 +95,7 @@ public struct DeparturesWidgetView: View {
                     }
                     .frame(minWidth: 36, alignment: .trailing)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, Space.xs)
             }
             if rows.isEmpty { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
             Spacer(minLength: 0)

@@ -32,11 +32,11 @@ struct NetworkPanel: View {
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()
-        .padding(.horizontal, 16).padding(.top, 64)
+        .padding(.horizontal, Space.l).padding(.top, 64) // design-lint: allow clears the floating controls above or below
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             HStack(alignment: .firstTextBaseline) {
                 Text(l10n.t("network.title")).clack(.headline).foregroundStyle(Ink.text)
                 Spacer(minLength: 8)
@@ -58,16 +58,16 @@ struct NetworkPanel: View {
             }
             ChipButton(text: l10n.t("common.done")) { onClose() }
         }
-        .padding(16)
+        .padding(Space.l)
     }
 
     // MARK: countries
 
     private func countries(_ status: NetworkStatus) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             ForEach(["SE", "NO", "DK", "FI"].filter { status.countries[$0] != nil }, id: \.self) { code in
                 let c = status.countries[code]!
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Flag(country: code, size: 18, decorative: true)
                     Text(l10n.t("countries.\(code)")).clack(.body).foregroundStyle(Ink.text)
                     Spacer(minLength: 8)
@@ -84,18 +84,18 @@ struct NetworkPanel: View {
 
     @ViewBuilder
     private func corridors(_ status: NetworkStatus) -> some View {
-        Text(l10n.t("network.corridors")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        Text(l10n.t("network.corridors")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, Space.xs)
         if status.corridors.isEmpty {
             Text(l10n.t("network.noCorridors")).clack(.body).foregroundStyle(Ink.onTimeInk)
         } else {
             ForEach(status.corridors) { c in
                 Button { onCorridor(c) } label: {
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: Space.xs) {
                         Text(c.stations.joined(separator: " – ")).clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
                         Text(NetworkWording.corridorLine(c, l10n: l10n)).clack(.caption).monospacedDigit().foregroundStyle(Ink.lateInk)
                         Text(NetworkWording.reasons(c.causes, l10n: l10n)).clack(.caption).foregroundStyle(Ink.text2)
                     }
-                    .padding(12)
+                    .padding(Space.m)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm)
@@ -112,11 +112,11 @@ struct NetworkPanel: View {
     /// Cancelled in the next two hours, by stretch: whether a bus runs instead is written, never left to guess.
     @ViewBuilder
     private func cancelled(_ groups: [NetworkStatus.CancelledGroup], total: Int, tz: String) -> some View {
-        Text(l10n.t("network.cancelled")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        Text(l10n.t("network.cancelled")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, Space.xs)
         ForEach(groups) { g in
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 OperatorBadge(op: g.operatorIds.first.flatMap { app.operatorsById[$0] }, size: .small)
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(g.stations.joined(separator: " – ")).clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
                     Text(NetworkWording.cancelledLine(g, l10n: l10n, tz: tz, clock: app.settings.clock))
                         .clack(.caption).monospacedDigit().foregroundStyle(g.bus == g.trains ? Ink.lateInk : Ink.veryLateInk)
@@ -139,13 +139,13 @@ struct NetworkPanel: View {
 
     @ViewBuilder
     private func lateTrains(_ status: NetworkStatus) -> some View {
-        Text(l10n.t("network.lateTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        Text(l10n.t("network.lateTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, Space.xs)
         ForEach(status.late) { t in
             Button { onTrain(t) } label: {
-                HStack(alignment: .top, spacing: 12) {
+                HStack(alignment: .top, spacing: Space.m) {
                     OperatorBadge(op: t.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: Space.xxs) {
+                        HStack(spacing: Space.s) {
                             Text([t.operatorId.flatMap { app.operatorsById[$0]?.name }, t.number].compactMap { $0 }.joined(separator: " "))
                                 .clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(l10n.t("network.minLate", ["min": String(t.delayMin)])).clack(.delay).monospacedDigit()

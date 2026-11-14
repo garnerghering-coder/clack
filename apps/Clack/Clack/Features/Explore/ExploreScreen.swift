@@ -146,7 +146,8 @@ struct ExploreScreen: View {
                 now = Date().timeIntervalSince1970 * 1000
             }
         }
-        .sensoryFeedback(.selection, trigger: model.follows.count)
+        // A follow or unfollow the server confirmed (not the list loading).
+        .haptic(.success, trigger: model.followsConfirmed)
         #if DEBUG
         .task { await debugSearch() }
         // `-exploreNetwork` opens the network status; with `-networkSample`, filled with made-up data (a preview of a bad
@@ -223,7 +224,7 @@ struct ExploreScreen: View {
 
     private var top: some View {
         @Bindable var model = model
-        return HStack(spacing: 8) {
+        return HStack(spacing: Space.s) {
             SearchField(text: $model.query, prompt: l10n.t("liveMap.searchPlaceholder"), overMap: true, focus: $searchFocused)
                 .onChange(of: model.query) { model.queryChanged() }
                 .onChange(of: searchFocused) {
@@ -245,7 +246,7 @@ struct ExploreScreen: View {
                     .overlay(alignment: .topTrailing) {
                         if model.filteredCount > 0 {
                             Text("\(model.filteredCount)").clack(.micro).fontWeight(.heavy).foregroundStyle(Ink.bg)
-                                .frame(minWidth: 18, minHeight: 18).padding(.horizontal, 2)
+                                .frame(minWidth: 18, minHeight: 18).padding(.horizontal, Space.xxs)
                                 .background(Ink.text, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                                 .offset(x: 4, y: -4)
                         }
@@ -270,7 +271,7 @@ struct ExploreScreen: View {
             .accessibilityLabel(l10n.t("network.button"))
             .accessibilityAddTraits(model.showNetwork ? .isSelected : [])
         }
-        .padding(.horizontal, 12).padding(.top, 12)
+        .padding(.horizontal, Space.m).padding(.top, Space.m)
     }
 
     // MARK: search results
@@ -279,7 +280,7 @@ struct ExploreScreen: View {
         let q = model.query.trimmingCharacters(in: .whitespaces)
         let trainHits = model.trainHits()
         return SearchPanel(maxHeight: 420) {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 ForEach(trainHits) { train in
                     let op = train.operatorId.flatMap { app.operatorsById[$0] }
                     resultRow {
@@ -307,20 +308,20 @@ struct ExploreScreen: View {
                 }
                 if trainHits.isEmpty && model.stationHits.isEmpty {
                     if model.stationSearchPending {
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             ProgressView().controlSize(.small)
                             Text(l10n.t("liveMap.searching")).clack(.caption).foregroundStyle(Ink.text2)
                         }
-                        .padding(.vertical, 8)
+                        .padding(.vertical, Space.s)
                     } else if model.stationSearchFailed {
-                        Text(l10n.t("liveMap.searchFailed")).clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
+                        Text(l10n.t("liveMap.searchFailed")).clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, Space.s)
                     } else {
                         Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
-                            .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
+                            .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, Space.s)
                     }
                 }
                 // Closing is done with the search: the text goes too (user test 2026-11-07: "the box still says 421").
-                Button(l10n.t("common.close")) { model.endSearch() }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
+                Button(l10n.t("common.close")) { model.endSearch() }.buttonStyle(LinkButtonStyle()).padding(.top, Space.s)
             }
         }
     }
@@ -338,7 +339,7 @@ struct ExploreScreen: View {
 
     private func resultRow<Lead: View>(@ViewBuilder lead: () -> Lead, title: () -> String, caption: () -> String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 lead().frame(width: 26)
                 VStack(alignment: .leading, spacing: 0) {
                     Text(title()).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
@@ -355,12 +356,12 @@ struct ExploreScreen: View {
     // MARK: status and legend
 
     private var bottomLeft: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             Spacer()
             // While typing, the keyboard lifts the tab bar and this corner into the search panel: they wait below it.
             if !searchFocused {
                 if model.legend { legendCard }
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     statusChip
                     MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
                     // Your position: iOS asks the first time; then your dot, and the map goes to it.
@@ -370,7 +371,7 @@ struct ExploreScreen: View {
             Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen" + (model.laserCredit3D.map { " · " + l10n.t("explore.credit.\($0)") } ?? ""))
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
         }
-        .padding(.leading, 12).padding(.bottom, 8)
+        .padding(.leading, Space.m).padding(.bottom, Space.s)
     }
 
     /// Map states (brief §6.3): loading, live data down, delayed data, nothing in view, or trains running.
@@ -389,14 +390,14 @@ struct ExploreScreen: View {
                 StatusLine(simulated ? .estimated : .live, l10n.t(simulated ? "liveMap.simulated" : "liveMap.trainsRunning", count: total, ["count": String(total)]))
             }
         }
-        .padding(.vertical, 8).padding(.horizontal, 12)
+        .padding(.vertical, Space.s).padding(.horizontal, Space.m)
         .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
         .hairlineBorder(radius: Radius.controlSm)
     }
 
     private var legendCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             legendRow(l10n.t("liveMap.legendTrain")) { Circle().fill(Ink.text2).overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 1)).frame(width: 10, height: 10) }
             legendRow(l10n.t("liveMap.legendStation")) {
                 RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: Radius.bar).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
@@ -408,7 +409,7 @@ struct ExploreScreen: View {
             InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
         }
         .clack(.caption).foregroundStyle(Ink.text2)
-        .padding(.vertical, 16).padding(.horizontal, 16)
+        .padding(.vertical, Space.l).padding(.horizontal, Space.l)
         .frame(maxWidth: 280, alignment: .leading)
         .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
@@ -416,7 +417,7 @@ struct ExploreScreen: View {
     }
 
     private func legendRow<Mark: View>(_ text: String, @ViewBuilder mark: () -> Mark) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             mark().frame(width: 22)
             Text(text)
         }
@@ -483,12 +484,12 @@ struct ExploreScreen: View {
                 Text(l10n.t("liveMap.detailsLoading")).clack(.caption).foregroundStyle(Ink.text2)
             }
             if let next = train.next {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("live.nextStopName", ["name": next])).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: train.nextEta?.ms, tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country }), clock: app.settings.clock, style: .text)
                 }
             }
-            FlowLayout(spacing: 12, lineSpacing: 8) {
+            FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
                 if let delay = train.delayMin { DelayText(delay: delay) }
                 switch position {
                 case .estimated: StatusLine(.estimated, l10n.t("liveMap.posEstimated"))
@@ -508,7 +509,7 @@ struct ExploreScreen: View {
                 else { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
             }
         } actions: {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 followButton(following: followed) {
                     Task {
                         await model.toggleFollow(
@@ -556,7 +557,7 @@ struct ExploreScreen: View {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
         } actions: {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 followButton(following: followed) {
                     Task {
                         await model.toggleFollow(number: view.number, date: view.date, operatorId: view.operatorId, label: first.flatMap { f in last.map { "\(f.name) → \($0.name)" } })
@@ -569,7 +570,7 @@ struct ExploreScreen: View {
 
     /// The train's picture and name, or that its type isn't known.
     private func art(type: TrainType?, operatorId: String?) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             TrainPicture(type: type, operatorId: operatorId, height: 54)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
@@ -578,7 +579,7 @@ struct ExploreScreen: View {
     /// Two separate things (brief §6.2): watching a train, and planning to travel on it.
     private func followButton(following: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 LucideIcon(name: following ? "check" : "eye", size: 16)
                 Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
             }
@@ -593,7 +594,7 @@ struct ExploreScreen: View {
     private func planButton(legId: String?, trip: TrainTrip?) -> some View {
         if let legId {
             Button { router.push(.trip(legId)) } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     LucideIcon(name: "train-front", size: 16)
                     Text(l10n.t("liveMap.inYourTrips")).lineLimit(1).minimumScaleFactor(0.85)
                 }
@@ -603,7 +604,7 @@ struct ExploreScreen: View {
             Button {
                 if let trip { router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate)) }
             } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     LucideIcon(name: "plus", size: 16)
                     Text(l10n.t("liveMap.plan")).lineLimit(1).minimumScaleFactor(0.85)
                 }

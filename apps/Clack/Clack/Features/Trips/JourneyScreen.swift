@@ -126,8 +126,8 @@ private struct JourneyOverview: View {
                 Card {
                     Text(Format.longDate(summary.dep ?? first.schedDep?.ms ?? 0, tz: tz, language: app.settings.language))
                         .clack(.captionUpper).foregroundStyle(Ink.text2)
-                    LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: 16) {
-                        Tile(label: l10n.t("journey.doorToDoor")) { Text(summary.minutes.map(Format.duration) ?? Format.unknown) }
+                    LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: Space.l) {
+                        Tile(label: l10n.t("journey.doorToDoor")) { Text(summary.minutes.map { Format.duration($0, language: l10n.language) } ?? Format.unknown) }
                         Tile(label: l10n.t("journey.distance")) { Text(Format.distance(summary.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)) }
                         Tile(label: l10n.t("journey.finalArrival"), sub: summary.arr.map { Format.time($0, tz: last.destination?.tz ?? tz, clock: app.settings.clock) }) {
                             if last.canceled {
@@ -149,7 +149,7 @@ private struct JourneyOverview: View {
             }
             TimelineView(.periodic(from: .now, by: 60)) { context in
                 let now = context.date.timeIntervalSince1970 * 1000
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     JourneyBar(legs: legs, now: now)
                     JourneyLegs(legs: legs, now: now)
                 }

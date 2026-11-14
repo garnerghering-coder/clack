@@ -115,14 +115,14 @@ enum Surface {
 struct Card<Content: View>: View {
     var lit = false
     var op: Color = Ink.accent
-    var spacing: CGFloat = 12
+    var spacing: CGFloat = Space.m
     @ViewBuilder var content: Content
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             content
         }
-        .padding(16)
+        .padding(Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
             if lit { Surface.Lit(op: op) } else { Ink.surface }
@@ -156,13 +156,13 @@ struct Banner<Content: View>: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: Space.s) {
             content
         }
         .clack(.banner)
         .foregroundStyle(foreground)
-        .padding(.vertical, 12)
-        .padding(.horizontal, 14)
+        .padding(.vertical, Space.m)
+        .padding(.horizontal, Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(background, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
     }
@@ -171,6 +171,7 @@ struct Banner<Content: View>: View {
 /// A placeholder row or card while something loads: a soft shimmer from surface to raised and back (1.2 s).
 struct Skeleton: View {
     var height: CGFloat = 64
+    var radius: CGFloat = Radius.input
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var phase: CGFloat = 0
 
@@ -190,7 +191,7 @@ struct Skeleton: View {
             .offset(x: -w * 2 + phase * w * 2)
         }
         .frame(height: height)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         .accessibilityHidden(true)
         .onAppear {
             guard !reduceMotion else { return }

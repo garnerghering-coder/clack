@@ -28,15 +28,15 @@ struct CollectionList: View {
     private func content(_ tab: PassportLogic.CollectionTab) -> some View {
         let unit = app.settings.distanceUnit
         let ops = data.refs.operators
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             switch tab {
             case .operators:
                 Bars(rows: limited(data.operators, tab), unit: unit, label: { ops[$0.key]?.name ?? $0.key }, brand: { ops[$0.key]?.brandColor ?? "" }, lead: { OperatorBadge(op: ops[$0.key], size: .medium) })
                 showAll(tab, total: data.operators.count)
             case .countries:
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     ForEach(limited(data.countries, tab), id: \.code) { country in
-                        HStack(spacing: 12) {
+                        HStack(spacing: Space.m) {
                             Flag(country: country.code, size: 24, decorative: true)
                             Text(countryName(country.code)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Spacer(minLength: 0)
@@ -52,12 +52,12 @@ struct CollectionList: View {
                 Bars(rows: limited(data.products, tab), unit: unit, label: { l10n.t("products.\($0.key)") }, brand: { _ in nil }, lead: { _ in EmptyView() })
                 showAll(tab, total: data.products.count)
             case .trainTypes:
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     ForEach(limited(data.trainTypes, tab), id: \.key) { row in
                         let type = data.refs.trainTypes[row.key]
-                        HStack(spacing: 12) {
+                        HStack(spacing: Space.m) {
                             TrainPicture(type: type, operatorId: nil, height: 36).frame(width: 120, alignment: .leading).clipped()
-                            VStack(alignment: .leading, spacing: 2) {
+                            VStack(alignment: .leading, spacing: Space.xxs) {
                                 Text(type?.name ?? row.key).clack(.rowTitle).foregroundStyle(Ink.text)
                                 Text("\(l10n.t("passport.trainsCount", count: row.count)) · \(Format.distance(row.distanceM, unit: unit, language: app.settings.language))")
                                     .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
@@ -73,16 +73,16 @@ struct CollectionList: View {
     }
 
     private var stations: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            FlowLayout(spacing: 8, lineSpacing: 8) {
+        VStack(alignment: .leading, spacing: Space.m) {
+            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
                 ForEach(showAllStations || stationLimit == nil ? data.stations : Array(data.stations.prefix(stationLimit ?? 0))) { station in
                     NavigationLink(value: AppRoute.board(stationId: station.id, arrivals: false)) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             Text(station.name).foregroundStyle(Ink.text)
                             Text("×\(station.count)").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                         }
                         .clack(.stopName)
-                        .padding(.vertical, 8).padding(.horizontal, 12)
+                        .padding(.vertical, Space.s).padding(.horizontal, Space.m)
                         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                         .hairlineBorder(radius: Radius.controlSm)
                     }

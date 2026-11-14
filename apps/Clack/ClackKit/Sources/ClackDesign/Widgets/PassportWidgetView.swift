@@ -99,7 +99,7 @@ public struct PassportWidgetView: View {
     /// "PASSPORT" and "Updated 12:04" on one line, or the second under the first.
     private var titleLine: some View {
         ViewThatFits(in: .horizontal) {
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text(l10n.t("passport.title")).clack(.captionUpper).foregroundStyle(ink.opacity(0.7)).fixedSize()
                 Spacer(minLength: 0)
                 updated()
@@ -115,18 +115,18 @@ public struct PassportWidgetView: View {
     private func counts(_ items: [(String, String)], roles: [TextRole]) -> some View {
         ViewThatFits(in: .horizontal) {
             ForEach(roles.indices, id: \.self) { i in
-                HStack(spacing: 16) {
+                HStack(spacing: Space.l) {
                     ForEach(items, id: \.1) { value, label in big(value, label, roles: [roles[i]]).fixedSize() }
                 }
             }
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 ForEach(items, id: \.1) { value, label in big(value, label, roles: [roles.last ?? .bigUnit]) }
             }
         }
     }
 
     private func card(_ b: WidgetSnapshot.PassportBits) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             titleLine
             switch size {
             case .small:
@@ -134,8 +134,8 @@ public struct PassportWidgetView: View {
                 big(number(distance(b.km)), unit, roles: [.passportBig, .walkBig])
                 big(String(b.trains), l10n.t("passport.trains"), roles: [.bigTime])
             case .medium:
-                HStack(alignment: .center, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .center, spacing: Space.l) {
+                    VStack(alignment: .leading, spacing: Space.s) {
                         big(number(distance(b.km)), unit, roles: [.passportBig, .walkBig])
                         counts([
                             (String(b.trains), l10n.t("passport.trains")),
@@ -148,8 +148,8 @@ public struct PassportWidgetView: View {
                     if b.nextMedal != nil { ring(b).frame(width: 56, height: 56) }
                 }
             case .large:
-                HStack(alignment: .top, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top, spacing: Space.l) {
+                    VStack(alignment: .leading, spacing: Space.m) {
                         big(number(distance(b.km)), unit, roles: [.passportDistance, .passportBig])
                         counts([(String(b.trains), l10n.t("passport.trains")), (String(b.journeys), l10n.t("passport.journeys"))],
                                roles: [.walkBig, .bigUnit])
@@ -159,7 +159,7 @@ public struct PassportWidgetView: View {
                     .layoutPriority(1)
                     Spacer(minLength: 0)
                     if let medal = b.nextMedal {
-                        VStack(spacing: 4) {
+                        VStack(spacing: Space.xs) {
                             ring(b).frame(width: 64, height: 64)
                             Text(medal).clack(.chip).foregroundStyle(ink).multilineTextAlignment(.center)
                                 .lineLimit(3).minimumScaleFactor(WidgetInsets.minimumScale)
@@ -171,7 +171,7 @@ public struct PassportWidgetView: View {
                 }
                 Spacer(minLength: 0)
                 Rectangle().fill(ink.opacity(0.2)).frame(height: 1)
-                HStack(spacing: 24) {
+                HStack(spacing: Space.xl) {
                     if let pct = b.onTimePct { big("\(Int(pct.rounded()))%", l10n.t("widgets.onTime"), roles: [.walkBig, .bigUnit]) }
                     if let kg = b.co2SavedKg { big("\(number(kg)) kg", l10n.t("widgets.co2Saved"), roles: [.walkBig, .bigUnit]) }
                 }

@@ -49,7 +49,7 @@ struct JourneyBar: View {
         let first = legs.first, last = legs.last
         let dep = first.flatMap { TripsLogic.expected($0).dep }
         let arr = last.flatMap { TripsLogic.expected($0).arr }
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             GeometryReader { g in
                 // The changes get at least a few points, so a short one still shows as a gap.
                 let gaps = Double(parts.filter { $0.train == nil }.count) * 6
@@ -71,7 +71,7 @@ struct JourneyBar: View {
                 .frame(maxHeight: .infinity, alignment: .center)
             }
             .frame(height: 10)
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 Text("\(Format.time(dep, tz: first.map(TripsLogic.tz) ?? "Europe/Stockholm", clock: app.settings.clock)) \(first?.origin?.name ?? "")")
                 Spacer(minLength: 4)
                 Text(summary(dep: dep, arr: arr)).multilineTextAlignment(.center)
@@ -93,7 +93,7 @@ struct JourneyBar: View {
         let changes = legs.count - 1
         let changeText = changes == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(changes)])
         guard let dep, let arr, arr > dep else { return changeText }
-        return changeText + Format.separator + Format.duration((arr - dep) / 60_000)
+        return changeText + Format.separator + Format.duration((arr - dep) / 60_000, language: l10n.language)
     }
 
     private func segment(_ leg: Leg, width: Double) -> some View {
@@ -130,7 +130,7 @@ struct JourneyTrainCard: View {
             return min(1, max(0, (now - d) / (a - d)))
         }()
         let ends = TimePair.ends(leg)
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             HStack(alignment: .top) {
                 ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, category: leg.category) {
                     if let live = leg.live, LiveRules.isFresh(live, now: now), !TripsLogic.reached(leg, now: now).arrived {
@@ -147,17 +147,17 @@ struct JourneyTrainCard: View {
                         .accessibilityLabel(l10n.t("ticket.kept"))
                 }
                 if let d = x.dep, let a = x.arr, a > d {
-                    Text(Format.duration((a - d) / 60_000)).clack(.caption).foregroundStyle(Ink.text2)
+                    Text(Format.duration((a - d) / 60_000, language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2)
                 }
             }
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: Space.m) {
                 end(ends.dep, station: leg.origin?.name, platform: leg.depPlatform, alignment: .leading)
                 Spacer(minLength: 0)
                 end(ends.arr, station: leg.destination?.name, platform: leg.arrPlatform, alignment: .trailing)
             }
             ProgressBar(value: travelled, color: tint)
         }
-        .padding(16)
+        .padding(Space.l)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
@@ -167,7 +167,7 @@ struct JourneyTrainCard: View {
     }
 
     private func end(_ e: TimePair.End, station: String?, platform: String?, alignment: HorizontalAlignment) -> some View {
-        VStack(alignment: alignment, spacing: 2) {
+        VStack(alignment: alignment, spacing: Space.xxs) {
             FlapTime(time: e.time ?? e.sched, sched: e.sched, tz: e.tz, clock: app.settings.clock).clack(.bigTime).foregroundStyle(Ink.text)
             Text(station ?? "").clack(.stopName).foregroundStyle(Ink.text)
                 .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
@@ -224,7 +224,7 @@ struct JourneyChangeChip: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.horizontal, 16)
+        .padding(.horizontal, Space.l)
         .task { await model.load(stationId: a.destination?.id, using: app.stations) }
     }
 
@@ -232,13 +232,13 @@ struct JourneyChangeChip: View {
     /// opens the walk between the platforms.
     @ViewBuilder
     private func changeChip(_ text: String, ink: Color, stationId: String?) -> some View {
-        let chip = HStack(spacing: 8) {
+        let chip = HStack(spacing: Space.s) {
             LucideIcon(name: "arrow-down", size: 13)
             Text(text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
             if model.map != nil { LucideIcon(name: "map", size: 13) }
         }
         .clack(.chip).foregroundStyle(ink)
-        .padding(.horizontal, 12).padding(.vertical, 8)
+        .padding(.horizontal, Space.m).padding(.vertical, Space.s)
         .frame(maxWidth: .infinity)
         .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
         if model.map != nil, let stationId {
@@ -263,7 +263,7 @@ struct JourneyLegs: View {
     var route: (Leg) -> AppRoute = { .trip($0.id) }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             ForEach(Array(legs.enumerated()), id: \.element.id) { i, leg in
                 if i > 0 { JourneyChangeChip(a: legs[i - 1], b: leg) }
                 if let select {

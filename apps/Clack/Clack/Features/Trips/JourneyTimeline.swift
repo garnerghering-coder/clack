@@ -126,7 +126,7 @@ struct JourneyTimeline<LegContent: View, ChangeContent: View>: View {
         let b = rails[index + 1]
         let wait = waited.indices.contains(index) ? waited[index] : 0
         return changeContent(index)
-            .padding(.vertical, 8)
+            .padding(.vertical, Space.s)
             .padding(.leading, Self.railWidth + 8)
             .background(alignment: .leading) {
                 ZStack {
@@ -203,12 +203,12 @@ struct JourneyChange: View {
                 walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },
                 result.layoverSeconds.map { l10n.t("connection.layover", ["min": Format.minutesWords(Int((Double($0) / 60).rounded()))]) },
             ].compactMap { $0 }.joined(separator: " · ")
-            let content = VStack(alignment: .leading, spacing: 2) {
+            let content = VStack(alignment: .leading, spacing: Space.xxs) {
                 Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
                 if !caption.isEmpty { Text(caption).clack(.caption).foregroundStyle(Ink.text2) }
                 ConnectionChip(result: result)
                 if model.map != nil {
-                    HStack(spacing: 4) {
+                    HStack(spacing: Space.xs) {
                         LucideIcon(name: "map", size: 14)
                         Text(l10n.t("trips.layoverMap") + " ›")
                     }

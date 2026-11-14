@@ -96,7 +96,7 @@ public struct SegmentedBar: View {
         let total = max(1, segments.reduce(0) { $0 + $1.count })
         GeometryReader { proxy in
             let room = proxy.size.width - CGFloat(max(0, segments.count - 1)) * 2
-            HStack(spacing: 2) {
+            HStack(spacing: Space.xxs) {
                 ForEach(segments) { s in
                     Rectangle().fill(s.color).frame(width: max(6, room * Double(s.count) / Double(total)))
                 }

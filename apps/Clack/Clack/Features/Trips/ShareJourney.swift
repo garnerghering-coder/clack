@@ -165,13 +165,13 @@ struct SharingRow: View {
     let share: JourneyShare
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             LucideIcon(name: "link", size: 16).foregroundStyle(Ink.accentInk)
             Text(l10n.t("share.sharingNow")).clack(.caption).foregroundStyle(Ink.text2)
             Spacer(minLength: 8)
             Button(l10n.t("share.stop")) { Task { await share.stop(app) } }.buttonStyle(LinkButtonStyle())
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, Space.m)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
         .hairlineBorder(radius: Radius.input)
         .accessibilityElement(children: .combine)

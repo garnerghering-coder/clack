@@ -160,7 +160,7 @@ private struct NextJourneyView: View {
                 LucideIcon(name: "train-front", size: 12)
                 Text(platformCode(s, l) ?? Format.delay(nil)).clack(.bigTime).minimumScaleFactor(0.5).lineLimit(1)
             }
-            .padding(4)
+            .padding(Space.xs)
         }
     }
 

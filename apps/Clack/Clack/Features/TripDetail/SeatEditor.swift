@@ -40,9 +40,9 @@ struct SeatEditor: View {
     private var patch: LegPatch? { Seat.patch(coach: coach, seat: seat, was: leg) }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             Text(l10n.t("seat.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 field(l10n.t("seat.coachLabel"), text: $coach, field: .coach)
                 field(l10n.t("seat.seatLabel"), text: $seat, field: .seat)
             }
@@ -66,7 +66,7 @@ struct SeatEditor: View {
     }
 
     private func field(_ label: String, text: Binding<String>, field: Field) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             Text(label).clack(.caption).foregroundStyle(Ink.text2)
             TextField("", text: text, prompt: Text(Format.unknown).foregroundStyle(Ink.text3))
                 .focused($focus, equals: field)
@@ -80,7 +80,7 @@ struct SeatEditor: View {
                 .submitLabel(.done)
                 .onSubmit { Task { await save(); focus = nil } }
                 .clack(.body).monospacedDigit().foregroundStyle(Ink.text)
-                .padding(.vertical, 8).padding(.horizontal, 12)
+                .padding(.vertical, Space.s).padding(.horizontal, Space.m)
                 .frame(minHeight: 44)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                 .hairlineBorder(radius: Radius.input)

@@ -37,7 +37,7 @@ struct PassportScreen: View {
     var body: some View {
         Page {
             PageHeader(title: l10n.t("passport.title")) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     if let data, data.totals.trains > 0 {
                         IconButton(icon: "system:square.and.arrow.up", label: l10n.t("share.title")) { sharing = true; Usage.shared.count(.feature, "passport.share") }
                     }
@@ -99,7 +99,7 @@ struct PassportScreen: View {
 
     /// Nothing yet: say what is waiting rather than that it is empty, with the first medals to go for.
     private func welcoming(_ data: Passport) -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: Space.l) {
             Text(l10n.t("passport.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
             // The nearest medal is the hero, with its track and a first hair of yellow; the other two sit smaller
             // (designer, 2026-11-07: three grey medals read as locked content, not a starting line).
@@ -107,26 +107,26 @@ struct PassportScreen: View {
                 goal(hero, data, size: 112, titleRole: .rowTitle)
                 let others = Array(data.milestones.next.dropFirst().prefix(2))
                 if !others.isEmpty {
-                    HStack(alignment: .top, spacing: 8) {
+                    HStack(alignment: .top, spacing: Space.s) {
                         ForEach(Array(others.enumerated()), id: \.offset) { _, milestone in goal(milestone, data, size: 72, titleRole: .caption) }
                     }
                 }
             }
             Text(l10n.t("passport.emptyHow")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
-            VStack(spacing: 12) {
+            VStack(spacing: Space.m) {
                 Button(l10n.t("trips.findTrain")) { router.openAdd() }.buttonStyle(.clack(.primary, wide: true))
                 Button(l10n.t("trips.exploreTrains")) { router.tab = .explore }.buttonStyle(.clack(wide: true))
             }
             .frame(maxWidth: 320)
         }
-        .frame(maxWidth: .infinity).padding(.top, 32)
+        .frame(maxWidth: .infinity).padding(.top, Space.xxl)
     }
 
     /// A medal still to earn, with its name and how far along it is.
     private func goal(_ milestone: Milestone, _ data: Passport, size: CGFloat, titleRole: TextRole) -> some View {
         let label = l10n.milestoneLabel(milestone, language: settings.language, home: data.home)
         let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded())), "target": String(Int(milestone.target))])
-        return VStack(spacing: 4) {
+        return VStack(spacing: Space.xs) {
             Medal(m: milestone, locked: true, size: size)
             Text(label).clack(titleRole).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
             Text(progress).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
@@ -145,9 +145,9 @@ struct PassportScreen: View {
             let left = l10n.t("passport.toGo", count: PassportLogic.toGo(next))
             Card {
                 Text(l10n.t("passport.upNext")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                HStack(spacing: 16) {
+                HStack(spacing: Space.l) {
                     Medal(m: next, locked: true, size: 64)
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: Space.s) {
                         Text(label).clack(.rowTitle).foregroundStyle(Ink.text)
                         ProgressBar(value: min(1, value / next.target), color: Ink.accent).accessibilityHidden(true)
                         Text(left).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
@@ -164,7 +164,7 @@ struct PassportScreen: View {
     /// breakdown.
     @ViewBuilder
     private func full(_ data: Passport) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Space.l) {
             NavigationLink(value: AppRoute.passportBreakdown) {
                 PassportCard(data: data, year: year, flavorIndex: $flavorIndex)
             }
@@ -180,7 +180,7 @@ struct PassportScreen: View {
                 .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                 .hairlineBorder(radius: Radius.card)
                 .overlay(alignment: .topTrailing) {
-                    MapButtonFace(icon: "maximize-2").padding(8).allowsHitTesting(false)
+                    MapButtonFace(icon: "maximize-2").padding(Space.s).allowsHitTesting(false)
                 }
             }
             .buttonStyle(.plain)
@@ -201,7 +201,7 @@ struct PassportScreen: View {
     }
 
     private func groupTitle(_ title: String) -> some View {
-        Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 24).padding(.bottom, -10)
+        Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, Space.xl).padding(.bottom, -10)
     }
 
     // MARK: records and statistics
@@ -217,22 +217,22 @@ struct PassportScreen: View {
             if d.basedOn == 0 {
                 Text(l10n.t("passport.noDelayData")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                     Text("\(Int((d.onTimePct ?? 0).rounded()))%").clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
                     Text(l10n.t("passport.onTime")).clack(.caption).foregroundStyle(Ink.text2)
                 }
                 SegmentedBar(segments: bands.map { .init(id: $0.key, count: $0.count, color: $0.band.fill) })
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     ForEach(bands, id: \.key) { band in
-                        HStack(spacing: 4) {
+                        HStack(spacing: Space.xs) {
                             Circle().fill(band.band.fill).frame(width: 8, height: 8)
                             Text("\(l10n.t("passport.bands.\(band.key)")) · \(band.count) (\(total > 0 ? Int((100 * Double(band.count) / Double(total)).rounded()) : 0)%)")
                         }
                         .clack(.caption).foregroundStyle(Ink.text2)
                     }
                 }
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12, alignment: .top)], spacing: 12) {
-                    RecordTile(label: l10n.t("passport.timeLost"), value: Format.duration(d.totalLateMin), sub: nil, legId: nil)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: Space.m, alignment: .top)], spacing: Space.m) {
+                    RecordTile(label: l10n.t("passport.timeLost"), value: Format.duration(d.totalLateMin, language: l10n.language), sub: nil, legId: nil)
                     RecordTile(label: l10n.t("passport.averageDelay"), value: l10n.t("passport.minutesShort", ["n": d.averageMin.map { String(format: "%g", $0) } ?? "—"]), sub: nil, legId: nil)
                     // Only when something was late: an early or on-time "worst" is no record (user test 2026-11-07:
                     // "Worst delay: −1 min late").
@@ -291,12 +291,12 @@ struct Bars<Lead: View>: View {
 
     var body: some View {
         let most = max(1, rows.map(\.count).max() ?? 1)
-        VStack(spacing: 12) {
+        VStack(spacing: Space.m) {
             ForEach(rows, id: \.key) { row in
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     lead(row)
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    VStack(alignment: .leading, spacing: Space.s) {
+                        HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                             Text(label(row)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Spacer(minLength: 0)
                             Text("\(l10n.t("passport.trainsCount", count: row.count)) · \(Format.distance(row.distanceM, unit: unit, language: app.settings.language))")
@@ -327,14 +327,14 @@ private struct MilestonesCard: View {
         let achieved = data.milestones.achieved
         let next = data.milestones.next
         // Top-aligned cells: the medals line up along each row whatever the length of the titles under them.
-        let columns = Array(repeating: GridItem(.flexible(), spacing: 8, alignment: .top), count: 3)
+        let columns = Array(repeating: GridItem(.flexible(), spacing: Space.s, alignment: .top), count: 3)
         Card {
             Text(l10n.t("passport.milestones")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if !achieved.isEmpty {
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: columns, spacing: Space.l) {
                     ForEach(Array(achieved.prefix(6).enumerated()), id: \.offset) { index, milestone in
                         let label = l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home)
-                        let tile = VStack(spacing: 2) {
+                        let tile = VStack(spacing: Space.xxs) {
                             Medal(m: milestone)
                             title(label)
                             Text(milestone.at.map { Format.month($0.ms, tz: "Europe/Stockholm", language: app.settings.language) } ?? "").clack(.caption).foregroundStyle(Ink.text2)
@@ -352,12 +352,12 @@ private struct MilestonesCard: View {
             .buttonStyle(LinkButtonStyle())
             if !next.isEmpty {
                 Text(l10n.t("passport.nextMilestones")).clack(.captionUpper).foregroundStyle(Ink.text2)
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: columns, spacing: Space.l) {
                     ForEach(Array(next.enumerated()), id: \.offset) { _, milestone in
                         // Rounded as the card's km are (user test 2026-11-07: "345 km" on the card, "344 of 500" here).
                         let value = Int((milestone.value ?? 0).rounded())
                         let formatter = NumberFormatter()
-                        VStack(spacing: 2) {
+                        VStack(spacing: Space.xxs) {
                             Medal(m: milestone, locked: true)
                             title(l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home))
                             Text(l10n.t("passport.progressOf", ["value": String(value), "target": String(Int(milestone.target))])).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)

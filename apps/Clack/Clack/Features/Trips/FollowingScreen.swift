@@ -56,7 +56,7 @@ struct FollowingScreen: View {
     }
 
     private var ended: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             Text(l10n.t("share.web.ended")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("share.web.endedBody")).clack(.body).foregroundStyle(Ink.text2)
             Button(l10n.t("following.stop")) { Task { await stop() } }.buttonStyle(.clack(wide: true))
@@ -92,7 +92,7 @@ struct FollowingScreen: View {
         }
         Button(l10n.t("following.stop")) { Task { await stop() } }
             .buttonStyle(.clack(wide: true))
-            .padding(.top, 8)
+            .padding(.top, Space.s)
     }
 }
 
@@ -108,7 +108,7 @@ struct FollowingStatus: View {
             StatusLine(kind, SharedLogic.statusLine(journey, l10n: l10n, clock: clock))
                 .clack(.headline)
             if journey.summary.phase != .cancelled {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     if let line = SharedLogic.arrivalLine(journey, l10n: l10n, clock: clock) {
                         Text(line).clack(.body).foregroundStyle(Ink.text2)
                     }
@@ -177,15 +177,15 @@ struct FollowingLeg: View {
     let clock: ClockFormat
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(spacing: Space.m) {
                 OperatorBadge(op: leg.operator, size: .large)
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text("\(leg.from.name) → \(leg.to.name)").clack(.rowTitle).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
                     if !leg.service.isEmpty { Text(leg.service).clack(.caption).foregroundStyle(Ink.text2) }
                 }
             }
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 time(leg.expDep, leg.schedDep, tz: leg.from.tz)
                 Text("→").clack(.body).foregroundStyle(Ink.text3)
                 time(leg.expArr, leg.schedArr, tz: leg.to.tz)
@@ -195,9 +195,9 @@ struct FollowingLeg: View {
             if let platform = leg.depPlatform { Chip(text: l10n.t("trips.platform", ["platform": platform])) }
             if !leg.stops.isEmpty {
                 DisclosureGroup(l10n.t("share.stops")) {
-                    VStack(spacing: 4) {
+                    VStack(spacing: Space.xs) {
                         ForEach(Array(leg.stops.enumerated()), id: \.offset) { _, stop in
-                            VStack(alignment: .leading, spacing: 2) {
+                            VStack(alignment: .leading, spacing: Space.xxs) {
                                 HStack {
                                     Text(stop.name).strikethrough(stop.canceled)
                                     Spacer(minLength: 8)
@@ -214,16 +214,16 @@ struct FollowingLeg: View {
                             .foregroundStyle(stop.passed ? Ink.text3 : Ink.text)
                         }
                     }
-                    .padding(.top, 4)
+                    .padding(.top, Space.xs)
                 }
                 .clack(.caption).tint(Ink.text2).foregroundStyle(Ink.text2)
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, Space.s)
     }
 
     private func time(_ expected: Double?, _ scheduled: Double?, tz: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 4) {
+        HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
             Text(Format.time(expected, tz: tz, clock: clock)).clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
             if let expected, let scheduled, abs(expected - scheduled) >= 60_000 {
                 Text(Format.time(scheduled, tz: tz, clock: clock)).clack(.caption).monospacedDigit().strikethrough().foregroundStyle(Ink.text3)
@@ -239,7 +239,7 @@ struct FollowingChange: View {
     let change: SharedJourney.Change
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             Text(SharedLogic.changeTitle(change, in: journey, l10n: l10n)).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
             if change.arrPlatform != nil || change.depPlatform != nil {
                 Text(l10n.t("connection.tracks", ["from": change.arrPlatform ?? Format.unknown, "to": change.depPlatform ?? Format.unknown]))
@@ -265,8 +265,8 @@ struct FollowedJourneysSection: View {
     var body: some View {
         let list = app.followed.journeys
         if !list.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(l10n.t("trips.following")).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 2)
+            VStack(alignment: .leading, spacing: Space.s) {
+                Text(l10n.t("trips.following")).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, Space.xxs)
                 ForEach(list) { journey in
                     NavigationLink(value: AppRoute.following(journey.token)) { FollowingCard(journey: journey) }
                         .buttonStyle(.plain)
@@ -286,9 +286,9 @@ struct FollowingCard: View {
     var body: some View {
         let clock = app.settings.clock
         let running = journey.legs[safe: journey.summary.legIndex]
-        HStack(spacing: 12) {
+        HStack(spacing: Space.m) {
             OperatorBadge(op: running?.operator ?? journey.legs.first?.operator, size: .large)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 Text("\(journey.summary.from) → \(journey.summary.to)").clack(.rowTitle).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
                 Text(SharedLogic.statusLine(journey, l10n: l10n, clock: clock)).clack(.caption).foregroundStyle(Ink.text2)
@@ -298,7 +298,7 @@ struct FollowingCard: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.vertical, 12).padding(.horizontal, 16)
+        .padding(.vertical, Space.m).padding(.horizontal, Space.l)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .contentShape(Rectangle())

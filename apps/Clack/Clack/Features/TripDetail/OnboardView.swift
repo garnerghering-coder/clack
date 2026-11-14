@@ -41,13 +41,13 @@ struct OnboardView: View {
         if !hasFacts && typicalList.isEmpty {
             if !compact { Text(l10n.t("onboard.unknown")).clack(.caption).foregroundStyle(Ink.text2) }
         } else {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Space.s) {
                 if hasFacts, let facts { factChips(facts) }
                 if !typicalList.isEmpty {
                     Text(l10n.t("onboard.typically")).clack(.captionUpper).foregroundStyle(Ink.text2)
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: compact ? 130 : 150), spacing: 12, alignment: .top)], alignment: .leading, spacing: 8) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: compact ? 130 : 150), spacing: Space.m, alignment: .top)], alignment: .leading, spacing: Space.s) {
                         ForEach(typicalList, id: \.key) { entry in
-                            HStack(alignment: .top, spacing: 8) {
+                            HStack(alignment: .top, spacing: Space.s) {
                                 LucideIcon(name: Self.icons[entry.key] ?? "info", size: 16).foregroundStyle(Ink.text2).padding(.top, 1)
                                 (Text(label(entry.key, entry.claim)) + Text(entry.claim.note.map { !compact ? " · \($0)" : "" } ?? "").font(TextRole.caption.font).foregroundStyle(Ink.text2))
                                     .clack(.stopName).foregroundStyle(Ink.text)
@@ -70,7 +70,7 @@ struct OnboardView: View {
     }
 
     private func factChips(_ facts: OnboardFacts) -> some View {
-        FlowLayout(spacing: 8, lineSpacing: 8) {
+        FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
             if let catering = facts.catering {
                 let what = l10n.t("onboard.catering.\(catering)")
                 factChip("coffee", facts.cateringCar.map { l10n.t("onboard.cateringInCar", ["what": what, "car": $0]) } ?? what, tint: Ink.text)
@@ -81,7 +81,7 @@ struct OnboardView: View {
     }
 
     private func factChip(_ icon: String, _ text: String, tint: Color, iconTint: Color = Ink.text2) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             LucideIcon(name: icon, size: 14).foregroundStyle(iconTint)
             Text(text)
         }

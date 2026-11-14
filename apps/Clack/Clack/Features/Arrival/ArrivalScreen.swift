@@ -28,7 +28,7 @@ struct ArrivalScreen: View {
         ZStack {
             Ink.bg.ignoresSafeArea()
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: Space.l) {
                     if let last = legs.last, let destination = last.destination {
                         header(last, destination)
                         summary
@@ -44,13 +44,14 @@ struct ArrivalScreen: View {
                     }
                     actions
                 }
-                .padding(16)
+                .padding(Space.l)
             }
         }
         .preferredColorScheme(.dark)
-        .animation(reduceMotion ? nil : .snappy, value: settled)
-        .sensoryFeedback(.impact(weight: .heavy), trigger: settled)
-        .sensoryFeedback(.success, trigger: progress?.unlocked.count ?? 0)
+        .animation(Motion.tap.animation(reduceMotion: reduceMotion), value: settled)
+        // One haptic, not two: a soft landing as the board settles, or, when a medal came with the trip, success.
+        .haptic(.snap, trigger: settled) { _, new in new && (progress?.unlocked.isEmpty ?? true) }
+        .haptic(.success, trigger: progress?.unlocked.count ?? 0) { _, new in new > 0 }
         .task {
             app.arrivals.markShown(moment)
             await load()
@@ -60,7 +61,7 @@ struct ArrivalScreen: View {
     private func header(_ last: Leg, _ destination: StationRef) -> some View {
         let arr = TripsLogic.expected(last).arr ?? 0
         let name = destination.name.uppercased()
-        return VStack(alignment: .leading, spacing: 12) {
+        return VStack(alignment: .leading, spacing: Space.m) {
             Text("\(l10n.t("arrival.arrived")) · \(Format.time(arr, tz: destination.tz, clock: app.settings.clock))")
                 .clack(.captionUpper).foregroundStyle(Ink.accent)
             Text(l10n.t("arrival.welcomeTo")).clack(.welcomeTitle).foregroundStyle(Ink.text)
@@ -71,9 +72,9 @@ struct ArrivalScreen: View {
     @ViewBuilder
     private var summary: some View {
         let s = ArrivalLogic.summary(legs)
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 12) {
-                Tile(label: l10n.t("passport.timeOnTrains"), value: Format.duration(s.minutesOnBoard))
+        VStack(alignment: .leading, spacing: Space.m) {
+            HStack(spacing: Space.m) {
+                Tile(label: l10n.t("passport.timeOnTrains"), value: Format.duration(s.minutesOnBoard, language: l10n.language))
                 Tile(label: l10n.t("passport.trains"), value: String(s.trains))
                 if let distance = s.distanceM {
                     Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
@@ -119,7 +120,7 @@ struct ArrivalScreen: View {
     }
 
     private var actions: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Space.m) {
             Button(l10n.t("common.done")) { dismiss() }
                 .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))
             Button(l10n.t("arrival.seeJourney")) {
@@ -130,7 +131,7 @@ struct ArrivalScreen: View {
             .buttonStyle(LinkButtonStyle())
             .frame(maxWidth: .infinity)
         }
-        .padding(.top, 8)
+        .padding(.top, Space.s)
     }
 
     /// The journey, then what each of its legs did for the Passport, put together.

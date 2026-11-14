@@ -120,7 +120,6 @@ struct TripsScreen: View {
                 if let leg = deleting {
                     Task {
                         if await model.delete(leg, app.client) {
-                            UINotificationFeedbackGenerator().notificationOccurred(.warning)
                             app.tripsChanged()
                         }
                     }
@@ -149,7 +148,7 @@ struct TripsScreen: View {
         let hero = TripsLogic.hero(upcoming: upcoming, past: past, now: now)
         Page {
             PageHeader(title: l10n.t("trips.title")) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
                     SettingsLink()
                 }
@@ -160,7 +159,7 @@ struct TripsScreen: View {
             )
             if model.failed {
                 Banner(kind: .error) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         Text(l10n.t("trips.loadError"))
                         Button(l10n.t("trips.retry")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
                     }
@@ -169,7 +168,7 @@ struct TripsScreen: View {
             }
             if router.tripsTab == .upcoming { FollowedJourneysSection() }
             if model.legs == nil && !model.failed {
-                VStack(spacing: 12) {
+                VStack(spacing: Space.m) {
                     Skeleton()
                     Skeleton()
                     Skeleton()
@@ -199,15 +198,15 @@ struct TripsScreen: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Space.m) {
             DottedLine()
             Text(l10n.t("trips.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("trips.emptyBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
             EmptyActions()
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 48)
-        .padding(.horizontal, 16)
+        .padding(.top, Space.xxxl)
+        .padding(.horizontal, Space.l)
     }
 
     @ViewBuilder
@@ -225,7 +224,7 @@ struct TripsScreen: View {
         if hero != nil && upcoming.isEmpty { NothingAhead() }
         let shown = Set(heroJourney.map(\.id))
         let items = TripsLogic.journeys(upcoming.filter { !shown.contains($0.id) })
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Space.l) {
             ForEach(Array(items.enumerated()), id: \.element.first?.id) { index, item in
                 // A layover line between separate trips that still meet at a station.
                 let before = index == 0 ? heroJourney.last : items[index - 1].last
@@ -252,7 +251,7 @@ struct TripsScreen: View {
         if past.isEmpty { Text(l10n.t("trips.noPast")).clack(.body).foregroundStyle(Ink.text2) }
         ForEach(TripsLogic.months(past, language: app.settings.language), id: \.label) { month in
             Section {
-                VStack(spacing: 8) {
+                VStack(spacing: Space.s) {
                     ForEach(month.items, id: \.first?.id) { item in
                         if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0]).contextMenu { holdMenu(item[0]) } }
                     }
@@ -261,7 +260,7 @@ struct TripsScreen: View {
                 Text(month.label)
                     .clack(.sectionHeader).foregroundStyle(Ink.text2)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 12).padding(.bottom, 8)
+                    .padding(.top, Space.m).padding(.bottom, Space.s)
                     .background(Ink.bg)
             }
         }

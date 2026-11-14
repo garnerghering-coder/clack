@@ -43,7 +43,7 @@ public struct FreshnessLine: View {
         } else if age < 20 * 3_600_000 {
             when = l10n.t("common.updatedAt", ["time": Format.time(updatedAt, tz: tz, clock: clock)])
         } else {
-            when = l10n.t("common.updatedAt", ["time": Format.day(updatedAt, tz: tz, l10n: l10n)])
+            when = l10n.t("common.updatedAt", ["time": Format.day(updatedAt, tz: tz, now: now, language: l10n.language)])
         }
         return failed ? Format.join([l10n.t("common.couldntRefresh"), when]) : when
     }

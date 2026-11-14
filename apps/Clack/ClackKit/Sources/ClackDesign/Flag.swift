@@ -61,7 +61,7 @@ public struct StationRow: View {
 
     public var body: some View {
         Button(action: onPick) {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Flag(country: station.country, size: 32, decorative: true)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(station.name).clack(.rowTitle).foregroundStyle(Ink.text)
@@ -70,7 +70,7 @@ public struct StationRow: View {
                 Spacer(minLength: 0)
                 trailing
             }
-            .padding(.vertical, 10)
+            .padding(.vertical, Space.m)
             .frame(minHeight: 52)
             .contentShape(Rectangle())
         }

@@ -69,7 +69,7 @@ struct AlertCard<Content: View>: View {
             let tint = tone.color
             let watch = tone == .watch
             VStack(spacing: 0) {
-                HStack(spacing: 12) {
+                HStack(spacing: Space.m) {
                     LucideIcon(name: icon, size: 16)
                         .foregroundStyle(tone == .severe ? Ink.onTint : Ink.onAccent)
                         .frame(width: 30, height: 30)
@@ -82,15 +82,15 @@ struct AlertCard<Content: View>: View {
                         hidden = true
                     }
                 }
-                .padding(.vertical, 12).padding(.leading, 16).padding(.trailing, 12)
+                .padding(.vertical, Space.m).padding(.leading, Space.l).padding(.trailing, Space.m)
                 .background(
                     LinearGradient(
                         colors: [tint.opacity(watch ? 0.18 : 0.34), tint.opacity(watch ? 0.04 : 0.08)],
                         startPoint: UnitPoint(x: 0.0, y: 0.35), endPoint: UnitPoint(x: 1, y: 0.65)
                     )
                 )
-                VStack(alignment: .leading, spacing: 12) { content }
-                    .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
+                VStack(alignment: .leading, spacing: Space.m) { content }
+                    .padding(.top, Space.l).padding(.bottom, Space.l).padding(.horizontal, Space.l)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .background {

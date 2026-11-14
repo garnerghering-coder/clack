@@ -31,9 +31,9 @@ struct PassportCard: View {
         let flavors = flavorLines
         let ink = Ink.onAccent
         let soft = Color(red: 10 / 255, green: 10 / 255, blue: 10 / 255).opacity(0.62)
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .top, spacing: Space.m) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(l10n.t("passport.railPassport")).clack(.captionUpper).foregroundStyle(soft)
                     Text(year.map { l10n.t("passport.yearPassport", ["year": String($0)]) } ?? l10n.t("passport.allTimePassport"))
                         .font(ClackFont.inter(15, .heavy)).tracking(0.3).foregroundStyle(ink)
@@ -43,7 +43,7 @@ struct PassportCard: View {
                     .foregroundStyle(Color.black.opacity(0.75))
                     .frame(width: 44, height: 44)
                     .overlay(Circle().strokeBorder(Color.black.opacity(0.55), lineWidth: 2))
-                    .overlay(Circle().strokeBorder(Color.white.opacity(0.25), lineWidth: 4).padding(2))
+                    .overlay(Circle().strokeBorder(Color.white.opacity(0.25), lineWidth: 4).padding(Space.xxs))
                     .accessibilityHidden(true)
             }
             (Text(formatter.string(from: NSNumber(value: shown.rounded())) ?? "0") + Text(" \(unit.rawValue)").font(ClackFont.grotesk(22)).foregroundColor(soft))
@@ -55,23 +55,23 @@ struct PassportCard: View {
                 .buttonStyle(.plain)
                 .accessibilityHint(l10n.t("passport.nextFact"))
             }
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: Space.s), GridItem(.flexible(), spacing: Space.s)], spacing: Space.s) {
                 tile(String(t.trains), l10n.t("passport.trains"), soft: soft, ink: ink)
                 tile(String(t.journeys), l10n.t("passport.journeys"), soft: soft, ink: ink)
-                tile(Format.duration(t.minutes), l10n.t("passport.timeOnTrains"), soft: soft, ink: ink)
+                tile(Format.duration(t.minutes, language: l10n.language), l10n.t("passport.timeOnTrains"), soft: soft, ink: ink)
                 tile(String(t.stations), l10n.t("passport.stations"), soft: soft, ink: ink)
             }
-            .padding(.top, 6)
+            .padding(.top, Space.xs)
             // A machine-readable-zone look, spelled out from your own totals (decoration; nothing personal).
             Text(mrz(km: km))
                 .font(.system(size: 11, design: .monospaced)).tracking(1.3).foregroundStyle(Color.black.opacity(0.45))
                 .lineLimit(1)
-                .padding(.top, 8)
+                .padding(.top, Space.s)
                 .overlay(alignment: .top) { Rectangle().stroke(Color.black.opacity(0.2), style: StrokeStyle(lineWidth: 1, dash: [3, 3])).frame(height: 1) }
-                .padding(.top, 4)
+                .padding(.top, Space.xs)
                 .accessibilityHidden(true)
         }
-        .padding(.top, 20).padding(.horizontal, 20).padding(.bottom, 16)
+        .padding(.top, Space.xl).padding(.horizontal, Space.xl).padding(.bottom, Space.l)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background { cover }
         .clipShape(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
@@ -115,12 +115,12 @@ struct PassportCard: View {
             if europe >= 1 { out.append(l10n.t("passport.flavor.europe", ["n": String(format: "%.1f", europe)])) }
             else if europe >= 0.01 { out.append(l10n.t("passport.flavor.europePct", ["pct": String(Int((europe * 100).rounded()))])) }
         }
-        if t.minutes > 0 { out.append(l10n.t("passport.flavor.time", ["time": Format.duration(t.minutes)])) }
+        if t.minutes > 0 { out.append(l10n.t("passport.flavor.time", ["time": Format.duration(t.minutes, language: l10n.language)])) }
         if let route = f.topRoute { out.append(l10n.t("passport.flavor.route", count: route.count, ["route": route.route])) }
         if let month = f.busiestMonth, let ms = Format.isoToNoonMs("\(month.month)-15") {
             out.append(l10n.t("passport.flavor.month", count: month.count, ["month": Format.month(ms, tz: "UTC", language: app.settings.language)]))
         }
-        if f.lateMinutes >= 30 { out.append(l10n.t("passport.flavor.late", ["time": Format.duration(f.lateMinutes)])) }
+        if f.lateMinutes >= 30 { out.append(l10n.t("passport.flavor.late", ["time": Format.duration(f.lateMinutes, language: l10n.language)])) }
         return out
     }
 }

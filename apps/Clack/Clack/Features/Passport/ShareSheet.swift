@@ -76,7 +76,7 @@ struct ShareSheet: View {
             if let image {
                 // The picture itself (not a file of it), so the share sheet offers Save Image and the usual image actions.
                 ShareLink(item: image, preview: SharePreview(l10n.t("share.title"), image: image)) {
-                    HStack(spacing: 8) { LucideIcon(name: "system:square.and.arrow.up", size: 16); Text(l10n.t("share.share")) }
+                    HStack(spacing: Space.s) { LucideIcon(name: "system:square.and.arrow.up", size: 16); Text(l10n.t("share.share")) }
                 }
                 .buttonStyle(.clack(.primary, wide: true))
             }
@@ -139,7 +139,7 @@ struct ShareSheet: View {
             let labels = ends.count == 2 ? [ShareCardView.Label(at: ends[0], text: leg.origin?.name ?? ""), .init(at: ends[1], text: leg.destination?.name ?? "")] : []
             var onBoard = "—"
             if let dep, let arr = leg.schedArr?.ms {
-                onBoard = Format.duration(((leg.actualArr?.ms ?? arr) - (leg.actualDep?.ms ?? dep)) / 60_000)
+                onBoard = Format.duration(((leg.actualArr?.ms ?? arr) - (leg.actualDep?.ms ?? dep)) / 60_000, language: l10n.language)
             }
             return ShareCardView(
                 layout: .stats, kicker: [l10n.t("share.featured"), dep.map(monthYear)].compactMap { $0 }.joined(separator: " · "),
@@ -164,7 +164,7 @@ struct ShareSheet: View {
                 return ShareCardView(
                     layout: .stats, kicker: l10n.t("share.yearKicker", ["year": String(shownYear ?? 0)]), title: l10n.t("share.yearTitle", ["year": String(shownYear ?? 0)]), sub: nil,
                     heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue,
-                    stats: [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")), .init(value: Format.duration(p.totals.minutes), label: l10n.t("share.onBoard")), .init(value: String(p.totals.stations), label: l10n.t("passport.stations"))],
+                    stats: [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")), .init(value: Format.duration(p.totals.minutes, language: l10n.language), label: l10n.t("share.onBoard")), .init(value: String(p.totals.stations), label: l10n.t("passport.stations"))],
                     routes: routes, labels: [], medals: Array(medals),
                     mrz: PassportMRZ.line(year: shownYear, km: p.totals.distanceM / 1000, journeys: p.totals.journeys, stations: p.totals.stations)
                 )

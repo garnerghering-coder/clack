@@ -244,7 +244,7 @@ struct StationSceneView: View {
         return Button {
             if more > 0 {
                 let at = screen(poi.x, poi.y)
-                withAnimation(reduceMotion ? nil : .snappy) { view = StationSceneLogic.zoom(view, by: 2.2, aroundX: at.x, y: at.y) }
+                withMotion(.tap, reduceMotion: reduceMotion) { view = StationSceneLogic.zoom(view, by: 2.2, aroundX: at.x, y: at.y) }
             } else {
                 onPoi(poi)
             }
@@ -254,7 +254,7 @@ struct StationSceneView: View {
                 LucideIcon(name: StationSceneLogic.icon(poi.category), size: 15).foregroundStyle(Ink.text)
                 if more > 0 {
                     Text("+\(more)").font(ClackFont.inter(10, .heavy)).monospacedDigit().foregroundStyle(Ink.onAccent)
-                        .padding(.horizontal, 4).frame(minWidth: 16, minHeight: 16)
+                        .padding(.horizontal, Space.xs).frame(minWidth: 16, minHeight: 16)
                         .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                         .offset(x: 13, y: -11)
                 } else if state != .unknown {

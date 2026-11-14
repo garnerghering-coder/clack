@@ -80,7 +80,7 @@ struct MultiRouteMapView: View {
                 HStack {
                     Text("© OpenStreetMap contributors · Protomaps")
                         .clack(.mapAttribution).foregroundStyle(Ink.text3)
-                        .padding(.leading, 8).padding(.bottom, 6).allowsHitTesting(false)
+                        .padding(.leading, Space.s).padding(.bottom, Space.xs).allowsHitTesting(false)
                     Spacer()
                 }
             }

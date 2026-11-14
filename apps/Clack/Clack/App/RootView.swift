@@ -13,9 +13,13 @@ struct RootView: View {
     @State private var router = Router()
     /// The Passport the tab loaded, for the screens pushed from it (they don't fetch it again).
     @State private var passport = PassportStore()
+    /// The one toast line any screen can show (polish pass 1: a failed action says so; a removal offers Undo).
+    @State private var toaster = Toaster()
+    @State private var ticketReturn = TicketReturnState()
     @State private var splashMinDone = false
     @State private var splashGone = false
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     /// The splash goes once the settings have loaded (or failed to) and the tiles have had time to flip in.
     private var hideSplash: Bool { app.state != .loading && splashMinDone }
@@ -47,10 +51,6 @@ struct RootView: View {
                 router.setPath([], for: PrimaryTab.allCases[index])
             })
 
-            VStack {
-                Spacer()
-                TicketReturnPrompt().padding(.bottom, 64)
-            }
             if !splashGone {
                 Splash()
                     .opacity(hideSplash ? 0 : 1)
@@ -62,6 +62,8 @@ struct RootView: View {
         .environment(app.l10n)
         .environment(router)
         .environment(passport)
+        .environment(toaster)
+        .environment(ticketReturn)
         // Text can be held and selected, as anywhere on iOS (the controls turn it off for themselves).
         .textSelection(.enabled)
         .sheet(item: $router.addRequest) { request in
@@ -69,6 +71,8 @@ struct RootView: View {
                 .environment(app)
                 .environment(app.l10n)
                 .environment(router)
+                .environment(toaster)
+                .toastHost(toaster)
                 .preferredColorScheme(app.colorScheme)
         }
         // A train tapped anywhere but Explore opens here, over the screen you're on (`Router.presentTrain`).
@@ -77,6 +81,8 @@ struct RootView: View {
                 .environment(app)
                 .environment(app.l10n)
                 .environment(router)
+                .environment(toaster)
+                .toastHost(toaster)
                 .preferredColorScheme(app.colorScheme)
         }
         .sheet(item: $router.ticketFile) { file in
@@ -84,6 +90,7 @@ struct RootView: View {
                 .environment(app)
                 .environment(app.l10n)
                 .environment(router)
+                .environment(toaster)
                 .preferredColorScheme(app.colorScheme)
         }
         .onOpenURL { url in openURL(url) }
@@ -97,6 +104,7 @@ struct RootView: View {
                 .environment(app)
                 .environment(app.l10n)
                 .environment(router)
+                .environment(toaster)
         }
         // Alerts: tell the server this phone's address whenever it changes or alerts are switched on.
         // Going to the background: send the day's usage counts (at most every six hours).
@@ -225,13 +233,17 @@ struct RootView: View {
         // being covered (designer, 2026-11-07: the toast landed on Explore's search field; owner, 2026-11-14: a top
         // margin, not an overlay). A safe-area inset moved the content but left the navigation bar under the strip.
         VStack(spacing: 0) {
-            if app.isOffline { OfflineBanner().transition(.move(edge: .top).combined(with: .opacity)) }
+            if app.isOffline { OfflineBanner().transition(Motion.transition(from: .top, reduceMotion: reduceMotion)) }
             NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
                 root()
                     .appDestinations()
             }
         }
-        .animation(.easeInOut(duration: 0.2), value: app.isOffline)
+        .motion(.layout, value: app.isOffline)
+        // Above the tab bar (this is inside the tab, so the bottom safe area already clears the bar): the ticket
+        // prompt and the toast line, no fixed padding.
+        .overlay(alignment: .bottom) { if router.tab == tab { TicketReturnPrompt() } }
+        .toastHost(toaster)
         .modifier(NoBottomEdgeEffect())
     }
 

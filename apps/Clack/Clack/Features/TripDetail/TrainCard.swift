@@ -21,18 +21,18 @@ struct TrainCard: View {
         let type = leg.leg.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let source = leg.leg.trainTypeSource
         let operatorId = leg.leg.operator?.id
-        Card(spacing: 12) {
+        Card(spacing: Space.m) {
             Text(l10n.t("train.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if let type {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    TrainPicture(type: type, operatorId: operatorId, height: 56, label: type.name).padding(.top, 8).padding(.bottom, 2)
+                    TrainPicture(type: type, operatorId: operatorId, height: 56, label: type.name).padding(.top, Space.s).padding(.bottom, Space.xxs)
                 }
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(type.name).clack(.headline).foregroundStyle(Ink.text)
                     Chip(text: l10n.t(source == .user ? "train.yourChoice" : source == .composition ? "train.planned" : "train.typical"))
                 }
                 Text(type.about).clack(.caption).foregroundStyle(Ink.text2)
-                HStack(alignment: .top, spacing: 24) {
+                HStack(alignment: .top, spacing: Space.xl) {
                     if let top = type.maxKmh { fact(l10n.t("train.topSpeed"), "\(top) km/h") }
                     if let since = type.since { fact(l10n.t("train.since"), String(since)) }
                     if let builder = type.builder { fact(l10n.t("train.builder"), builder) }
@@ -42,7 +42,7 @@ struct TrainCard: View {
             }
             // How it usually runs at your stop, from Clack's own record (BUILDOUT O4); silent under four days.
             if let h = leg.leg.arrivalHistory, h.days >= 4, let station = leg.leg.destination?.name {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.xxs) {
                     Text(h.highMin >= 5
                         ? l10n.t("train.usuallyLate", ["low": String(Int(h.lowMin)), "high": String(Int(h.highMin)), "station": station, "late": String(h.lateDays), "days": String(h.days)])
                         : l10n.t("train.usuallyOnTime", ["station": station, "ontime": String(h.onTimeDays), "days": String(h.days)]))
@@ -57,7 +57,7 @@ struct TrainCard: View {
     }
 
     private func fact(_ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             Text(title).clack(.captionUpper).foregroundStyle(Ink.text2)
             Text(value).clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
         }
@@ -81,15 +81,15 @@ struct TrainCard: View {
     }
 
     private func picker(current: String?, source: TrainTypeSource?, operatorId: String?) -> some View {
-        VStack(spacing: 8) {
+        VStack(spacing: Space.s) {
             ForEach(pickable(current: current, operatorId: operatorId)) { type in
                 Button { choose(type.id) } label: {
-                    HStack(spacing: 12) {
+                    HStack(spacing: Space.m) {
                         TrainPicture(type: type, operatorId: operatorId, height: 44).frame(width: 150, alignment: .leading)
                         Text(type.name).clack(.caption).foregroundStyle(Ink.text2)
                         Spacer(minLength: 0)
                     }
-                    .padding(.vertical, 8).padding(.horizontal, 12)
+                    .padding(.vertical, Space.s).padding(.horizontal, Space.m)
                     .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm, color: type.id == current ? Ink.accentLine : Ink.hairline)
                 }
@@ -99,7 +99,7 @@ struct TrainCard: View {
                 Button { choose(nil) } label: {
                     Text(l10n.t("train.resetTypical")).clack(.body).foregroundStyle(Ink.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 8).padding(.horizontal, 12)
+                        .padding(.vertical, Space.s).padding(.horizontal, Space.m)
                         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                         .hairlineBorder(radius: Radius.controlSm)
                 }

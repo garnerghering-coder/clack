@@ -161,9 +161,9 @@ public struct NextJourneyWidgetView: View {
     /// The train and its delay on one line: the icon and the operator's name give way before the number does.
     private func topLine(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
         let names = services(l)
-        return HStack(spacing: 8) {
+        return HStack(spacing: Space.s) {
             ViewThatFits(in: .horizontal) {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     LucideIcon(name: "train-front", size: 14).foregroundStyle(Ink.accentInk)
                     Text(names[0]).lineLimit(1).fixedSize()
                 }
@@ -215,14 +215,14 @@ public struct NextJourneyWidgetView: View {
     }
 
     private func smallBody(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, route: RouteForm, headlineLines: Int = 2) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             topLine(s, l)
             smallRoute(l, route)
             Spacer(minLength: 0)
             // The time with the platform beside it, else the short platform, else under it.
             ViewThatFits(in: .horizontal) {
                 ForEach(platformCode(s, l).map(platformWords) ?? [""], id: \.self) { words in
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                         bigTimeText(s, l)
                         Text(words).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1).fixedSize()
                     }
@@ -245,8 +245,8 @@ public struct NextJourneyWidgetView: View {
     /// The train, what's happening and the seat as one block on the leading side; the big time on the trailing side,
     /// centred on the block's height (owner, 2026-10-24).
     private func header(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
-        HStack(alignment: .center, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(alignment: .center, spacing: Space.m) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 topLine(s, l)
                 headlineView(s, l, ink: Ink.text)
                 if let seat = seat(s, l) { FittingText(seat).clack(.caption).foregroundStyle(Ink.text2) }
@@ -257,16 +257,16 @@ public struct NextJourneyWidgetView: View {
 
     private func legRow(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, index: Int) -> some View {
         let active = s.moment.legIndex == index
-        return HStack(alignment: .center, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 8) {
+        return HStack(alignment: .center, spacing: Space.m) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
+                HStack(spacing: Space.s) {
                     FittingText(services(l)).clack(.trainNumber).foregroundStyle(Ink.text2)
                     DelayText(delay: l.depDelayMin, canceled: l.canceled)
                 }
                 FittingText(l10n.t("tripCard.route", ["from": l.from, "to": l.to])).clack(.stopName).foregroundStyle(Ink.text)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            VStack(alignment: .trailing, spacing: 2) {
+            VStack(alignment: .trailing, spacing: Space.xxs) {
                 Text(time(l.depAt, l.fromTz)).clack(.boardDestination).monospacedDigit().foregroundStyle(Ink.text)
                     .strikethrough(l.canceled).lineLimit(1).fixedSize()
                 if let p = l.depPlatform { FittingText(platformWords(p)).clack(.caption).foregroundStyle(Ink.text2) }
@@ -283,7 +283,7 @@ public struct NextJourneyWidgetView: View {
     }
 
     private func mediumBody(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, legs: Int) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             header(s, l)
             progress(s)
             Spacer(minLength: 0)
@@ -309,15 +309,15 @@ public struct NextJourneyWidgetView: View {
     }
 
     private func largeBody(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, stops: Int) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: Space.m) {
             mediumBody(s, l, legs: 2)
             if !l.stops.isEmpty, stops > 0 {
                 Rectangle().fill(Ink.hairline).frame(height: 1)
                 Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     ForEach(Array(stopWindow(l, count: stops).enumerated()), id: \.offset) { _, name in
                         let next = name == l.nextStop
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             Circle().fill(next ? Ink.accent : Ink.text3).frame(width: 6, height: 6)
                             FittingText(name).clack(.stopName).fontWeight(next ? .bold : .regular).foregroundStyle(Ink.text)
                         }

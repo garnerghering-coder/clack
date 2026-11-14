@@ -24,7 +24,7 @@ public struct Tile<Value: View>: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             Text(label).clack(.caption).foregroundStyle(secondary).lineLimit(2)
             value
                 .clack(.headline).monospacedDigit().foregroundStyle(primary)

@@ -22,7 +22,7 @@ struct StationDirectoryList: View {
 
     var body: some View {
         SearchPanel(maxHeight: 520) {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: Space.m) {
                 let favoriteIds = Set(favorites.map(\.id))
                 section(l10n.t("stations.favorites"), favorites, star: true)
                 section(l10n.t("stations.recent"), recent.filter { !favoriteIds.contains($0.id) })
@@ -45,7 +45,7 @@ struct StationDirectoryList: View {
     @ViewBuilder
     private func section(_ title: String, _ stations: [StationHit], star: Bool = false) -> some View {
         if !stations.isEmpty {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.xs) {
                 Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 ForEach(stations) { station in
                     StationRow(

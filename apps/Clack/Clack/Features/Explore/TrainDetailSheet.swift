@@ -75,12 +75,12 @@ struct TrainDetailSheet: View {
         let first = stops.first, last = stops.last
         let anyLive = stops.contains { $0.actualArr != nil || $0.actualDep != nil || $0.estimatedArr != nil || $0.estimatedDep != nil }
         // The service is the sheet's title; under it, the operator's badge, the category and the route.
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             OperatorBadge(op: op, size: .medium)
             if let product = view.product { Text(l10n.t("products.\(product)")).clack(.chip).foregroundStyle(Ink.text2) }
         }
         if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: Space.xxs) {
             TrainPicture(type: type, operatorId: view.operatorId, height: 54)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
@@ -95,12 +95,12 @@ struct TrainDetailSheet: View {
 
     @ViewBuilder
     private func actions(_ view: TrainView) -> some View {
-        VStack(spacing: 12) {
-            HStack(spacing: 12) {
+        VStack(spacing: Space.m) {
+            HStack(spacing: Space.m) {
                 Button {
                     Task { await toggleFollow(view) }
                 } label: {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: following ? "check" : "eye", size: 16)
                         Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
                     }
@@ -114,7 +114,7 @@ struct TrainDetailSheet: View {
                         close()
                         router.push(.trip(legId))
                     } label: {
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             LucideIcon(name: "train-front", size: 16)
                             Text(l10n.t("liveMap.inYourTrips")).lineLimit(1).minimumScaleFactor(0.85)
                         }
@@ -125,7 +125,7 @@ struct TrainDetailSheet: View {
                         close()
                         router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate))
                     } label: {
-                        HStack(spacing: 8) {
+                        HStack(spacing: Space.s) {
                             LucideIcon(name: "plus", size: 16)
                             Text(l10n.t("liveMap.plan")).lineLimit(1).minimumScaleFactor(0.85)
                         }
@@ -137,7 +137,7 @@ struct TrainDetailSheet: View {
                 Button {
                     router.openTrain(number: view.number, date: view.date, key: view.trip?.key ?? request.key)
                 } label: {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: "map", size: 16)
                         Text(l10n.t("liveMap.showOnMap"))
                     }

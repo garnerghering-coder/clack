@@ -59,7 +59,7 @@ struct ErrorStateView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Space.s) {
             HStack(alignment: .firstTextBaseline, spacing: Space.s) {
-                LucideIcon(name: "cloud-off", size: 16).foregroundStyle(Ink.errorText).accessibilityHidden(true)
+                LucideIcon(name: "wifi-off", size: 16).foregroundStyle(Ink.errorText).accessibilityHidden(true)
                 Text(message).clack(.banner).foregroundStyle(Ink.errorText)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -180,15 +180,19 @@ extension View {
 /// and shimmering, so the content that replaces it has the same size and nothing moves after first paint (polish
 /// pass 1, DECISIONS C2).
 struct Placeholder<Sample: View>: View {
-    var radius: CGFloat = Radius.card
     @ViewBuilder var sample: Sample
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var dim = false
 
     var body: some View {
         sample
             .redacted(reason: .placeholder)
             .allowsHitTesting(false)
-            .overlay {
-                Skeleton(radius: radius).opacity(0.6).blendMode(.plusLighter)
+            // A slow breathe instead of a sweep: it reads as "loading" on any shape. Still under Reduce Motion.
+            .opacity(dim ? 0.55 : 1)
+            .onAppear {
+                guard !reduceMotion else { return }
+                withAnimation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true)) { dim = true }
             }
             .accessibilityHidden(true)
     }

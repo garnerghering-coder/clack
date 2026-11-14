@@ -29,22 +29,22 @@ struct PassportMapScreen: View {
                 .ignoresSafeArea()
             }
             VStack(spacing: 0) {
-                HStack(alignment: .top, spacing: 8) {
+                HStack(alignment: .top, spacing: Space.s) {
                     if let data = store.data {
                         YearChips(years: data.years, year: $year)
                     }
                     Spacer(minLength: 0)
                     IconButton(icon: "system:xmark", label: l10n.t("common.close")) { dismiss() }
-                        .padding(.trailing, 16)
+                        .padding(.trailing, Space.l)
                 }
-                .padding(.top, 8)
+                .padding(.top, Space.s)
                 Spacer()
                 if let data = store.data {
                     Text(l10n.t("passport.mapLabel", count: data.totals.trains))
                         .clack(.caption).foregroundStyle(Ink.text2)
-                        .padding(.horizontal, 12).padding(.vertical, 8)
+                        .padding(.horizontal, Space.m).padding(.vertical, Space.s)
                         .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                        .padding(.bottom, 12)
+                        .padding(.bottom, Space.m)
                 }
             }
         }

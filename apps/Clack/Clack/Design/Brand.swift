@@ -25,7 +25,7 @@ struct Wordmark: View {
 
     var body: some View {
         let unit = fontSize * 1.32 / 84
-        HStack(spacing: 4 * unit) {
+        HStack(spacing: Space.xs * unit) {
             ForEach(0..<5, id: \.self) { index in
                 tile(index, unit: unit)
                     .rotation3DEffect(

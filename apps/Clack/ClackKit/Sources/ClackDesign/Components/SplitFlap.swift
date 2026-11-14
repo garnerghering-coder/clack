@@ -83,7 +83,7 @@ private struct HalfShape: Shape {
 }
 
 /// A single flap tile. When `from` differs, the top half of the old character falls away and the new one's bottom
-/// half drops into place: 180 ms ease-in, then 180 ms ease-out, started `delay` seconds from now.
+/// half drops into place: `Motion.flapHalf` ease-in, then the same ease-out, started `delay` seconds from now.
 private struct FlapTile: View {
     let char: String
     let from: String?
@@ -108,11 +108,11 @@ private struct FlapTile: View {
                 // Leaves: the old top half turns away, the new bottom half turns into place.
                 FlapFace(char: from, size: size, half: .top, colour: colour)
                     .rotation3DEffect(.degrees(started ? -90 : 0), axis: (x: 1, y: 0, z: 0), anchor: .center, perspective: 0.4)
-                    .animation(.easeIn(duration: 0.18).delay(delay), value: started)
+                    .animation(.easeIn(duration: Motion.flapHalf).delay(delay), value: started)
                     .zIndex(2)
                 FlapFace(char: char, size: size, half: .bottom, colour: colour)
                     .rotation3DEffect(.degrees(started ? 0 : 90), axis: (x: 1, y: 0, z: 0), anchor: .center, perspective: 0.4)
-                    .animation(.easeOut(duration: 0.18).delay(delay + 0.18), value: started)
+                    .animation(.easeOut(duration: Motion.flapHalf).delay(delay + Motion.flapHalf), value: started)
                     .zIndex(2)
             } else {
                 FlapFace(char: char, size: size, half: .whole, colour: colour)
@@ -138,25 +138,35 @@ private struct FlapTile: View {
     }
 }
 
-/// Split-flap characters (DESIGN §10): each character sits on its own tile. When one changes, it flips (360 ms, 50 ms
-/// stagger left to right), as on a departure board. Only changed characters flip; `intro` flips every tile in once
-/// on first show. Reduced motion: no flip. The tiles scale with Dynamic Type.
+/// Split-flap characters (DESIGN §10): each character sits on its own tile. When one changes, it flips (two
+/// `Motion.flapHalf` halves, `Motion.flapStagger` between changed tiles, left to right), as on a departure board. Only
+/// changed characters flip; `intro` flips every tile in once on first show. Reduce Motion: the changed tiles
+/// cross-fade instead. `tick` plays one light haptic when a change (not the first show) has landed. The tiles scale
+/// with Dynamic Type.
 public struct SplitFlap: View {
     public let value: String
     public var size: FlapSize = .time
     public var intro = false
     public var colour: Color?
     /// Seconds between one tile's flip and the next's, left to right.
-    public var stagger: Double = 0.05
+    public var stagger: Double = Motion.flapStagger
+    /// One light tick (Haptic.snap) when a live change has landed: the "clack" (polish pass 1, signature moment 2).
+    public var tick = false
 
     /// 100 at the default text size; the tiles are multiplied by this / 100.
     @ScaledMetric(relativeTo: .title) private var scale: CGFloat = 100
     @State private var previous: String
     @State private var from: String
     @State private var sequence = 0
+    @State private var landed = 0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    public init(value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil, stagger: Double = 0.05) {
+    public init(
+        value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil,
+        stagger: Double = Motion.flapStagger, tick: Bool = false
+    ) {
         self.stagger = stagger
+        self.tick = tick
         self.value = value
         self.size = size
         self.intro = intro
@@ -192,21 +202,35 @@ public struct SplitFlap: View {
                     Text(String(char))
                         .font(ClackFont.groteskFixed(shown.font))
                         .foregroundStyle(Ink.text2)
-                        .padding(.horizontal, 1)
+                        .padding(.horizontal, Space.xxs / 2)
                 } else {
                     FlapTile(
                         char: String(char), from: flips[index].map { String($0.before) }, delay: flips[index]?.delay ?? 0,
                         size: shown, colour: colour
                     )
-                    // A new id per change restarts the animation.
-                    .id("\(index)-\(sequence)")
+                    // A new id for a tile that changes restarts its flip (or, with Reduce Motion, cross-fades it);
+                    // the others keep theirs.
+                    .id(flips[index] == nil ? "\(index)" : "\(index)-\(sequence)")
+                    .transition(.opacity)
                 }
             }
         }
+        .animation(reduceMotion ? Motion.reduced : nil, value: sequence)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(value)
+        .haptic(.snap, trigger: landed)
         .onAppear { settle(to: value) }
-        .onChange(of: value) { _, new in settle(to: new) }
+        .onChange(of: value) { _, new in
+            settle(to: new)
+            guard tick else { return }
+            // The last changed tile lands after its stagger and both halves.
+            let changed = zip(Array(from), Array(new)).filter { $0 != $1 }.count + abs(from.count - new.count)
+            let total = Double(max(changed - 1, 0)) * stagger + 2 * Motion.flapHalf
+            Task {
+                try? await Task.sleep(for: .seconds(reduceMotion ? 0 : total))
+                landed += 1
+            }
+        }
     }
 
     private func settle(to new: String) {
@@ -233,11 +257,14 @@ public struct FlapTime: View {
     public var strikeOld = true
     /// The colour of a changed time; the accent ink when not given.
     public var colour: Color?
+    /// A light tick when a live change has landed (flip styles only).
+    public var tick = false
 
     public init(
         time: Double?, sched: Double? = nil, tz: String, clock: ClockFormat, style: Style = .text, intro: Bool = false,
-        strikeOld: Bool = true, colour: Color? = nil
+        strikeOld: Bool = true, colour: Color? = nil, tick: Bool = false
     ) {
+        self.tick = tick
         self.time = time
         self.sched = sched
         self.tz = tz
@@ -259,7 +286,7 @@ public struct FlapTime: View {
             let changed = Self.changed(time, from: sched)
             let text = Format.time(time, tz: tz, clock: clock)
             let schedText = sched.map { Format.time($0, tz: tz, clock: clock) }
-            HStack(spacing: 4) {
+            HStack(spacing: Space.xs) {
                 if changed, strikeOld, let schedText {
                     Text(schedText)
                         .clack(.struck).strikethrough().monospacedDigit()
@@ -272,8 +299,9 @@ public struct FlapTime: View {
                         .monospacedDigit()
                         .fontWeight(changed ? .bold : nil)
                         .foregroundStyle(changed ? (colour ?? Ink.accentInk) : Ink.text)
+                        .contentTransition(.numericText())
                 } else {
-                    SplitFlap(value: text, size: flapSize, intro: intro, colour: changed ? (colour ?? Ink.accentInk) : nil)
+                    SplitFlap(value: text, size: flapSize, intro: intro, colour: changed ? (colour ?? Ink.accentInk) : nil, tick: tick)
                         .accessibilityLabel(changed ? "\(text) (\(schedText ?? ""))" : text)
                 }
             }

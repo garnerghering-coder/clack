@@ -134,7 +134,7 @@ public struct EmptyWidget: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             LucideIcon(name: "train-front", size: 18).foregroundStyle(Ink.accentInk)
             Spacer(minLength: 0)
             Text(title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(2).minimumScaleFactor(WidgetInsets.minimumScale)

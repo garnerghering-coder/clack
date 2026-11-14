@@ -121,10 +121,15 @@ public nonisolated enum Format {
         return m == 0 ? "\(minutes / 60) h" : "\(minutes / 60) h \(m) min"
     }
 
-    /// `2h 48m`, `45m`, `1d 3h`.
-    public static func duration(_ minutes: Double) -> String {
+    /// `2h 48m`, `45m`, `1d 3h`; in Swedish `2 h 48 min`, `45 min`, `1 d 3 h` (the user test of 2026-11-07 read "2h 48m"
+    /// in the Swedish app as English).
+    public static func duration(_ minutes: Double, language: Language = .en) -> String {
         let h = Int((minutes / 60).rounded(.down))
         let m = Int(minutes.truncatingRemainder(dividingBy: 60).rounded())
+        if language == .sv {
+            if h >= 24 { return "\(h / 24) d \(h % 24) h" }
+            return h > 0 ? "\(h) h \(String(format: "%02d", m)) min" : "\(m) min"
+        }
         if h >= 24 { return "\(h / 24)d \(h % 24)h" }
         return h > 0 ? "\(h)h \(String(format: "%02d", m))m" : "\(m)m"
     }

@@ -35,10 +35,10 @@ struct MilestonesScreen: View {
                             Text("\(family.earned)/\(family.rungs.count)").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                         }
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(alignment: .top, spacing: 16) {
+                            HStack(alignment: .top, spacing: Space.l) {
                                 ForEach(family.rungs, id: \.milestone.target) { rung in rungView(rung, home: data.home) }
                             }
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, Space.l)
                         }
                         .padding(.horizontal, -16)
                     }
@@ -69,7 +69,7 @@ struct MilestonesScreen: View {
         let line: String = rung.earned
             ? (m.at.map { Format.month($0.ms, tz: "Europe/Stockholm", language: app.settings.language) } ?? "")
             : l10n.t("passport.progressOf", ["value": String(Int((m.value ?? 0).rounded())), "target": String(Int(m.target))])
-        let tile = VStack(spacing: 2) {
+        let tile = VStack(spacing: Space.xxs) {
             Medal(m: m, locked: !rung.earned, size: 72)
             Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

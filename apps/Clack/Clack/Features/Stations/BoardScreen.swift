@@ -65,6 +65,9 @@ struct BoardScreen: View {
     }
 
     @State private var favoriteOverride = false
+    /// Taps on the star (the haptic follows the finger, not the favourite loading).
+    @State private var favoriteTaps = 0
+    @Environment(Toaster.self) private var toaster
 
     private struct StreamKey: Hashable { var arrivals: Bool; var hasBoard: Bool }
 
@@ -117,17 +120,24 @@ struct BoardScreen: View {
     private func toggleFavorite() async {
         guard let station else { return }
         Usage.shared.count(.feature, "station.favorite")
-        if let on = try? await app.client.setFavorite(station.id, !favoriteOverride) {
+        // The star changes at once; the server is asked after, and a refusal puts it back and says so.
+        let want = !favoriteOverride
+        favoriteOverride = want
+        favoriteTaps += 1
+        if let on = try? await app.client.setFavorite(station.id, want) {
             favoriteOverride = on
             await app.stations.setFavorite(station.id, on)
+        } else {
+            favoriteOverride = !want
+            toaster.show(l10n.t("stations.favoriteFailed"), isError: true)
         }
     }
 
     // MARK: pieces
 
     private var head: some View {
-        HStack(alignment: .top, spacing: 12) {
-            VStack(alignment: .leading, spacing: 2) {
+        HStack(alignment: .top, spacing: Space.m) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 Text(station?.name ?? " ").clack(.pageTitle).foregroundStyle(Ink.text).lineLimit(2).minimumScaleFactor(0.7)
                     .accessibilityAddTraits(.isHeader)
                 if let county = station?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
@@ -143,10 +153,10 @@ struct BoardScreen: View {
                 IconButton(
                     icon: "star", label: l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"), selected: favoriteOverride
                 ) { Task { await toggleFavorite() } }
-                .sensoryFeedback(.selection, trigger: favoriteOverride)
+                .haptic(.selection, trigger: favoriteTaps)
             }
         }
-        .padding(.top, 12)
+        .padding(.top, Space.m)
     }
 
     private func status(_ board: Board) -> some View {
@@ -154,7 +164,7 @@ struct BoardScreen: View {
             let now = context.date.timeIntervalSince1970 * 1000
             let fresh = now - board.updatedAt < 120_000
             let ago = LiveRules.ago(l10n, then: board.updatedAt, now: now)
-            HStack(spacing: 8) {
+            HStack(spacing: Space.s) {
                 if !board.isLive {
                     // The timetable alone: no live source for this station right now.
                     StatusLine(.estimated, l10n.t("train.timetableOnly"))
@@ -184,7 +194,7 @@ struct BoardScreen: View {
                     VStack(spacing: 0) {
                         if page.shown.isEmpty {
                             Text(l10n.t("board.empty")).clack(.body).foregroundStyle(Ink.text2)
-                                .frame(maxWidth: .infinity).padding(.vertical, 24)
+                                .frame(maxWidth: .infinity).padding(.vertical, Space.xl)
                         }
                         ForEach(page.shown) { row in
                             StationBoardRow(row: row, arrivals: arrivals, now: now, tz: tz) { open(row) }
@@ -194,16 +204,16 @@ struct BoardScreen: View {
                         if page.more || (later == nil && !loadingLater) {
                             Button(l10n.t("board.showLater")) { Task { await showLater(more: page.more) } }
                                 .buttonStyle(LinkButtonStyle())
-                                .frame(maxWidth: .infinity).padding(.top, 16)
+                                .frame(maxWidth: .infinity).padding(.top, Space.l)
                         } else if loadingLater {
-                            Skeleton(height: 48).padding(.top, 16)
+                            Skeleton(height: 48).padding(.top, Space.l)
                         }
                     }
                 }
             } else if error {
                 Banner(kind: .error) { Text(l10n.t("board.error")) }.countsError("board.load")
             } else {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: Space.m) {
                     Skeleton(height: 64)
                     Skeleton(height: 64)
                     Text(l10n.t("board.loading")).clack(.caption).foregroundStyle(Ink.text2)

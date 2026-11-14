@@ -20,7 +20,7 @@ public struct PlatformTag: View {
 
     public var body: some View {
         let changed = changedFrom != nil
-        HStack(spacing: 4) {
+        HStack(spacing: Space.xs) {
             if let changedFrom, !changedFrom.isEmpty {
                 Text(changedFrom).strikethrough().foregroundStyle(Ink.text3).fontWeight(.medium)
             }
@@ -30,8 +30,8 @@ public struct PlatformTag: View {
         .fontWeight(.bold)
         .monospacedDigit()
         .foregroundStyle(changed ? Ink.lateInk : Ink.text)
-        .padding(.vertical, 2)
-        .padding(.horizontal, 8)
+        .padding(.vertical, Space.xxs)
+        .padding(.horizontal, Space.s)
         .frame(minWidth: 32)
         .background(changed ? Ink.late.opacity(0.18) : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
         .fixedSize()
@@ -56,8 +56,8 @@ public struct UnknownPlatformTag: View {
             .clack(.chip)
             .fontWeight(.bold)
             .foregroundStyle(onSet == nil ? Ink.text3 : Ink.text2)
-            .padding(.vertical, 2)
-            .padding(.horizontal, 8)
+            .padding(.vertical, Space.xxs)
+            .padding(.horizontal, Space.s)
             .frame(minWidth: 32)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
             .fixedSize()

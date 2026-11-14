@@ -30,12 +30,12 @@ struct SearchPanel<Content: View>: View {
             Spacer(minLength: 0)
         }
         // Below the field (12 + 48 + 4), and above the keyboard and the map's attribution line.
-        .padding(.horizontal, 12).padding(.top, 64).padding(.bottom, 32)
+        .padding(.horizontal, Space.m).padding(.top, 64).padding(.bottom, Space.xxl) // design-lint: allow clears the floating controls above or below
     }
 
     private var rows: some View {
         content
-            .padding(.horizontal, 16).padding(.vertical, 12)
+            .padding(.horizontal, Space.l).padding(.vertical, Space.m)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

@@ -31,9 +31,9 @@ struct StationNoticeCard: View {
         let list = notices
         if !list.isEmpty {
             AlertCard(tone: .info, icon: "info", title: l10n.t("notice.stationTitle"), dismissKey: "stations|\(leg.leg.id)|\(list.map(\.line.text).joined())") {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     ForEach(list, id: \.line) { item in
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: Space.xs) {
                             Text(l10n.shown(item.line)).clack(.body).foregroundStyle(Ink.text)
                                 .fixedSize(horizontal: false, vertical: true)
                             if let original = item.line.original, original != item.line.text {

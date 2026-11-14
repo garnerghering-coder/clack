@@ -54,7 +54,7 @@ struct Speedometer: View {
 
     var body: some View {
         if let kmh, let at, now - at <= LiveRules.speedFreshMs {
-            HStack(spacing: 4) {
+            HStack(spacing: Space.xs) {
                 LucideIcon(name: "gauge", size: 14)
                 Text("\(Int(kmh.rounded())) km/h").monospacedDigit()
             }
@@ -103,15 +103,15 @@ struct LiveModule: View {
         let op = operatorColor(leg.operator?.brandColor, scheme: scheme)
         let progress = max(0, min(1, live.progress ?? 0))
         let hollow = live.positionSource == .estimated || live.localEstimate
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Space.s) {
             ProgressBar(value: progress, color: op, marker: hollow ? .hollow : .solid)
-            .padding(.vertical, 2)
+            .padding(.vertical, Space.xxs)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(l10n.t("live.progressLabel", ["percent": String(Int((progress * 100).rounded())), "name": leg.destination?.name ?? ""]))
             .accessibilityValue("\(Int((progress * 100).rounded()))%")
 
             if !where_.isEmpty {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(where_).clack(.rowTitle).foregroundStyle(Ink.text)
                     if live.positionSource == .gps, !live.localEstimate {
                         Speedometer(kmh: live.speedKmh, at: live.positionAt?.ms, now: now).clack(.caption)
@@ -119,14 +119,14 @@ struct LiveModule: View {
                 }
             }
             if let nextId = live.nextStopId, live.status != .boarding {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("live.nextStopName", ["name": name(nextId)])).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: live.eta?.ms, tz: tz(nextId), clock: app.settings.clock)
                         .clack(.body).foregroundStyle(Ink.text)
                 }
             }
             if !compact {
-                HStack(spacing: 8) {
+                HStack(spacing: Space.s) {
                     Text(l10n.t("live.arrivesLabel")).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: live.arrivalEta?.ms, tz: leg.destination?.tz ?? "Europe/Stockholm", clock: app.settings.clock)
                         .clack(.body).foregroundStyle(Ink.text)
@@ -167,7 +167,7 @@ struct ConnectionChip: View {
     var body: some View {
         // The change rule's verdict when the server sends what it needs (build 50 on); the old walk-based one before.
         if let comfort = result.comfort, let gap = result.gapMin {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.xxs) {
                 StatusLine(.band(Self.band(comfort)), "\(l10n.t("comfort.\(comfort.rawValue)")) · \(l10n.t("connection.wait", ["min": String(gap)]))")
                 if let typical = result.typicalLateMin, typical > 0 {
                     Text(l10n.t("change.historyNote", ["min": String(typical)])).clack(.micro).foregroundStyle(Ink.text3)
@@ -202,12 +202,12 @@ struct HeroConnection: View {
             ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
         let line = [l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]), tracks, walk].compactMap { $0 }.joined(separator: " · ")
         ViewThatFits(in: .horizontal) {
-            HStack(spacing: 12) {
+            HStack(spacing: Space.m) {
                 Text(line).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
                 ConnectionChip(result: result)
             }
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Space.xs) {
                 Text(line).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
                 ConnectionChip(result: result)
             }
@@ -239,16 +239,16 @@ struct ConnectionCard: View {
             walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },
             chipSaysWait ? nil : result.layoverSeconds.map { l10n.t("connection.layover", ["min": Format.minutesWords(Int((Double($0) / 60).rounded()))]) },
         ].compactMap { $0 }.joined(separator: " · ")
-        let content = VStack(alignment: .leading, spacing: 8) {
+        let content = VStack(alignment: .leading, spacing: Space.s) {
             // The verdict beside the station when both fit, else under it (a long name and "Relaxed · 48 min to change").
             ViewThatFits(in: .horizontal) {
-                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                     Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
                         .fixedSize()
                     Spacer(minLength: 0)
                     ConnectionChip(result: result).fixedSize()
                 }
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: Space.xs) {
                     Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
                         .fixedSize(horizontal: false, vertical: true)
                     ConnectionChip(result: result)
@@ -263,7 +263,7 @@ struct ConnectionCard: View {
             }
             if model.map != nil, let stationId = a.destination?.id {
                 NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: Space.s) {
                         LucideIcon(name: "map", size: 16)
                         Text(l10n.t("connection.openMap"))
                     }
@@ -275,7 +275,7 @@ struct ConnectionCard: View {
             if compact {
                 content
             } else {
-                Card { content }.padding(.vertical, 8)
+                Card { content }.padding(.vertical, Space.s)
             }
         }
         .task { await model.load(stationId: a.destination?.id, using: app.stations) }

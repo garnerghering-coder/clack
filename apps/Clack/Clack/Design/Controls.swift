@@ -33,8 +33,9 @@ struct ClackButtonStyle: PrimitiveButtonStyle {
         .frame(minHeight: 44)
         .contentShape(Rectangle())
 
-        // Liquid Glass on iOS 26 and later (primary in yellow glass, the others in clear glass); the bordered styles before.
-        if #available(iOS 26.0, *) {
+        // Content buttons are solid fills (Look.contentButtons, DECISIONS L2): yellow primary, a quiet grey secondary,
+        // a red-labelled danger. With `.glass` (the look before) they are Liquid Glass on iOS 26 and later.
+        if #available(iOS 26.0, *), Look.contentButtons == .glass {
             switch kind {
             case .primary:
                 button.buttonStyle(.glassProminent).tint(Ink.accent).foregroundStyle(Ink.onAccent)
@@ -51,7 +52,7 @@ struct ClackButtonStyle: PrimitiveButtonStyle {
                 // A quiet grey fill (the tint) under a full-strength label.
                 button.buttonStyle(.bordered).tint(Ink.text3).foregroundStyle(Ink.text)
             case .danger:
-                button.buttonStyle(.bordered).tint(Ink.veryLate)
+                button.buttonStyle(.bordered).tint(Ink.veryLate).foregroundStyle(Ink.veryLateInk)
             }
         }
     }
@@ -118,12 +119,12 @@ struct SegmentedControl<Value: Hashable>: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
 
-    private var thumbShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input - 4, style: .continuous) }
+    private var thumbShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.inner(Radius.input, padding: Space.xs), style: .continuous) }
     private var trackShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input, style: .continuous) }
 
     var body: some View {
         segments
-            .padding(4)
+            .padding(Space.xs)
             .modifier(TrackSurface(shape: trackShape))
             // At the accessibility text sizes a small switch takes the width and its words may wrap (2026-11-08:
             // "Sy… D… Li…" at 260 pt).
@@ -136,14 +137,14 @@ struct SegmentedControl<Value: Hashable>: View {
             ForEach(Array(options.enumerated()), id: \.offset) { _, option in
                 let chosen = option.value == selection
                 Button {
-                    withAnimation(reduceMotion ? nil : .snappy(duration: 0.28)) { selection = option.value }
+                    withMotion(.tap, reduceMotion: reduceMotion) { selection = option.value }
                 } label: {
                     Text(option.label)
                         .clack(.button)
                         .lineLimit(typeSize.isAccessibilitySize ? 2 : 1)
                         .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.85)
-                        .foregroundStyle(chosen ? Ink.onAccent : Ink.text)
+                        .foregroundStyle(chosen ? Look.onSelection : Ink.text)
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .contentShape(Rectangle())
                 }
@@ -156,15 +157,16 @@ struct SegmentedControl<Value: Hashable>: View {
         }
     }
 
-    /// The yellow thumb: glass tinted in the accent on iOS 26, plain accent before.
+    /// The thumb, in the selection fill (Look.selection: ink, or yellow before): glass tinted with it on iOS 26, the
+    /// plain fill before.
     private struct Thumb: View {
         let shape: RoundedRectangle
 
         var body: some View {
             if #available(iOS 26.0, *) {
-                Color.clear.glassEffect(.regular.tint(Ink.accent), in: shape)
+                Color.clear.glassEffect(.regular.tint(Look.selectionFill), in: shape)
             } else {
-                shape.fill(Ink.accent)
+                shape.fill(Look.selectionFill)
             }
         }
     }
@@ -175,7 +177,7 @@ struct SegmentedControl<Value: Hashable>: View {
 
         func body(content: Content) -> some View {
             if #available(iOS 26.0, *) {
-                GlassEffectContainer(spacing: 8) {
+                GlassEffectContainer(spacing: Space.s) {
                     content.glassEffect(.regular, in: shape)
                 }
             } else {
@@ -214,7 +216,7 @@ struct Chip: View {
     var tint: Color?
 
     var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: Space.xs) {
             if accent {
                 Circle().fill(Ink.accentLine).frame(width: 6, height: 6)
             }
@@ -225,7 +227,8 @@ struct Chip: View {
     }
 }
 
-/// `.chip-button`: a filter, as a small system button: the chosen one yellow, the others grey. `removable` adds an x.
+/// `.chip-button`: a filter, as a small system button: the chosen one in the selection fill (Look.selection: ink, or
+/// yellow before), the others grey. `removable` adds an x.
 struct ChipButton: View {
     let text: String
     var active = false
@@ -234,19 +237,38 @@ struct ChipButton: View {
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 6) {
+            HStack(spacing: Space.s) {
                 Text(text)
                 if removable {
                     LucideIcon(name: "x", size: 14)
                 }
             }
+            .clack(.buttonSmall)
+            .lineLimit(1)
+            .textSelection(.disabled)
         }
-        .buttonStyle(.clack(active ? .primary : .secondary, small: true))
+        .controlSize(.regular)
+        .buttonBorderShape(.roundedRectangle(radius: Radius.controlSm))
+        .modifier(ChipFill(active: active))
+        .frame(minHeight: 44)
+        .contentShape(Rectangle())
         .accessibilityAddTraits(active ? .isSelected : [])
+    }
+
+    private struct ChipFill: ViewModifier {
+        let active: Bool
+
+        func body(content: Content) -> some View {
+            if active {
+                content.buttonStyle(.borderedProminent).tint(Look.selectionFill).foregroundStyle(Look.onSelection)
+            } else {
+                content.buttonStyle(.bordered).tint(Ink.text3).foregroundStyle(Ink.text)
+            }
+        }
     }
 }
 
-/// `.map-button`: a 40 pt glass circle floating over a map; pressed or toggled on it turns yellow.
+/// `.map-button`: a 44 pt glass circle floating over a map; toggled on, it takes the selection fill (Look.selection).
 struct MapButton: View {
     let icon: String
     let label: String
@@ -257,7 +279,7 @@ struct MapButton: View {
         Button(action: action) {
             MapButtonFace(icon: icon, pressed: pressed)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.press(radius: 22))
         .accessibilityLabel(label)
         .accessibilityAddTraits(pressed ? .isSelected : [])
     }
@@ -279,18 +301,18 @@ struct MapButtonFace: View {
                 LucideIcon(name: icon, size: 18)
             }
         }
-        .foregroundStyle(pressed ? Ink.onAccent : Ink.text)
+        .foregroundStyle(pressed ? Look.onSelection : Ink.text)
         .frame(width: 44, height: 44)
         .contentShape(Circle())
         .textSelection(.disabled)
         if #available(iOS 26.0, *) {
             glyph
                 // Not `.interactive()`: interactive glass handles touches itself and took the tap from the button.
-                .glassEffect(pressed ? .regular.tint(Ink.accent) : .regular, in: Circle())
+                .glassEffect(pressed ? .regular.tint(Look.selectionFill) : .regular, in: Circle())
         } else {
             glyph
                 .background {
-                    Circle().fill(pressed ? Ink.accent : Ink.glass)
+                    Circle().fill(pressed ? Look.selectionFill : Ink.glass)
                     if !pressed { Circle().fill(.ultraThinMaterial).opacity(0.5) }
                 }
                 .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
