@@ -18,24 +18,16 @@ struct NetworkPanel: View {
     var onCorridor: (NetworkStatus.Corridor) -> Void
     var onTrain: (NetworkStatus.LateTrain) -> Void
     var onClose: () -> Void
-    /// The content's own height: the card hugs it, up to 560 pt, then scrolls.
-    @State private var contentHeight = 200.0
+    @State private var allLate = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// A system sheet now (designer, 2026-11-14: one overlay system, and the dropdown covered the map that is the
+    /// picture): its own background, detents and grabber; the map behind it shows the status (late trains in colour).
     var body: some View {
         ScrollView {
-            // Exactly the card's width: a line wider than it was centred and cut at both edges (designer, 2026-11-14).
-            content
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .onGeometryChange(for: Double.self) { $0.size.height } action: { contentHeight = $0 }
+            content.frame(maxWidth: .infinity, alignment: .leading)
         }
         .scrollBounceBehavior(.basedOnSize)
-        .frame(maxWidth: 460)
-        .frame(height: min(contentHeight, 560))
-        .background(Ink.glass).background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, Space.l).padding(.top, 64) // design-lint: allow clears the floating controls above or below
     }
 
     private var content: some View {
@@ -59,7 +51,6 @@ struct NetworkPanel: View {
             } else {
                 Skeleton(height: 120)
             }
-            Button(l10n.t("common.close")) { onClose() }.buttonStyle(.clack(small: true))
         }
         .padding(Space.l)
     }
@@ -70,13 +61,25 @@ struct NetworkPanel: View {
         VStack(alignment: .leading, spacing: Space.s) {
             ForEach(["SE", "NO", "DK", "FI"].filter { status.countries[$0] != nil }, id: \.self) { code in
                 let c = status.countries[code]!
-                HStack(spacing: Space.s) {
-                    Flag(country: code, size: 18, decorative: true)
-                    Text(l10n.t("countries.\(code)")).clack(.body).foregroundStyle(Ink.text)
-                    Spacer(minLength: 8)
-                    Text(l10n.t("network.countryLate", ["late": String(c.late), "trains": String(c.trains)]))
-                        .clack(.caption).monospacedDigit()
-                        .foregroundStyle(NetworkWording.countryInk(c))
+                // A meter per country (designer, 2026-11-14): the share running on time as a bar, the count beside it.
+                VStack(alignment: .leading, spacing: Space.xs) {
+                    HStack(spacing: Space.s) {
+                        Flag(country: code, size: 18, decorative: true)
+                        Text(l10n.t("countries.\(code)")).clack(.body).foregroundStyle(Ink.text)
+                        Spacer(minLength: Space.s)
+                        Text(l10n.t("network.countryLate", ["late": String(c.late), "trains": String(c.trains)]))
+                            .clack(.caption).monospacedDigit()
+                            .foregroundStyle(NetworkWording.countryInk(c))
+                    }
+                    GeometryReader { g in
+                        let late = c.trains > 0 ? Double(c.late) / Double(c.trains) : 0
+                        HStack(spacing: Space.xxs) {
+                            RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.onTime).frame(width: max(0, g.size.width * (1 - late) - Space.xxs))
+                            if c.late > 0 { RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.late) }
+                        }
+                    }
+                    .frame(height: 4)
+                    .accessibilityHidden(true)
                 }
                 .accessibilityElement(children: .combine)
             }
@@ -143,7 +146,8 @@ struct NetworkPanel: View {
     @ViewBuilder
     private func lateTrains(_ status: NetworkStatus) -> some View {
         Text(l10n.t("network.lateTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, Space.xs)
-        ForEach(status.late) { t in
+        // The three latest first, the rest one tap away (designer, 2026-11-14).
+        ForEach(allLate ? status.late : Array(status.late.prefix(3))) { t in
             Button { onTrain(t) } label: {
                 HStack(alignment: .top, spacing: Space.m) {
                     OperatorBadge(op: t.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
@@ -166,7 +170,13 @@ struct NetworkPanel: View {
                 }
                 .frame(minHeight: 44).contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressRow)
+        }
+        if status.late.count > 3 {
+            Button(l10n.t(allLate ? "network.fewerLate" : "network.allLate", ["count": String(status.late.count)])) {
+                withMotion(.layout, reduceMotion: reduceMotion) { allLate.toggle() }
+            }
+            .buttonStyle(LinkButtonStyle())
         }
     }
 }

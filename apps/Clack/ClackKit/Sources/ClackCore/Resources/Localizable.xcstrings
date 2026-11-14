@@ -25361,6 +25361,40 @@
         }
       }
     },
+    "network.allLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All {{count}} late trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla {{count}} sena tåg"
+          }
+        }
+      }
+    },
+    "network.fewerLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show fewer"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa färre"
+          }
+        }
+      }
+    },
     "speech.fromTo" : {
       "extractionState" : "manual",
       "localizations" : {

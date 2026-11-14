@@ -33,18 +33,6 @@ struct ExploreScreen: View {
             if model.searching {
                 if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
             }
-            if model.showNetwork {
-                NetworkPanel(
-                    status: model.network, failed: model.networkFailed,
-                    onCorridor: { model.showCorridor($0) },
-                    onTrain: { t in
-                        model.showNetwork = false
-                        Task { await model.select(t.id) }
-                    },
-                    onClose: { model.showNetwork = false }
-                )
-                .task { await model.watchNetwork() }
-            }
             bottomLeft
             // A station's or train's sheet waits under an open search (it comes back on Close); a pick replaces it.
             if !model.searching { sheets }
@@ -146,6 +134,27 @@ struct ExploreScreen: View {
                 try? await Task.sleep(for: .seconds(5))
                 now = Date().timeIntervalSince1970 * 1000
             }
+        }
+        // Network now: a system sheet over the map, which shows the status meanwhile (late trains in colour).
+        .sheet(isPresented: Binding(get: { model.showNetwork }, set: { model.showNetwork = $0 })) {
+            NetworkPanel(
+                status: model.network, failed: model.networkFailed,
+                onCorridor: { c in
+                    model.showNetwork = false
+                    model.showCorridor(c)
+                },
+                onTrain: { t in
+                    model.showNetwork = false
+                    Task { await model.select(t.id) }
+                },
+                onClose: { model.showNetwork = false }
+            )
+            .task { await model.watchNetwork() }
+            .presentationDetents([.fraction(0.45), .large])
+            .presentationDragIndicator(.visible)
+            .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.45)))
+            .environment(app)
+            .environment(l10n)
         }
         .onChange(of: model.failure) { _, failure in if let failure { toaster.show(l10n.t(failure.key), isError: true) } }
         // A follow or unfollow the server confirmed (not the list loading).

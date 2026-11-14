@@ -62,7 +62,12 @@ final class ExploreModel {
     var legend = false
     var showFilters = false
     /// The network status panel (the button beside the filters), its answer, and whether asking failed.
-    var showNetwork = false
+    /// Network now is open: the map shows the status meanwhile, late trains in colour (designer, 2026-11-14).
+    var showNetwork = false {
+        didSet { if showNetwork != oldValue { needsFullRender = true; scheduleRender() } }
+    }
+    /// What the dots are coloured by now: the person's choice, or late trains while Network now is open.
+    private var colorBy: ExploreLogic.ColorBy { showNetwork ? .lateOnly : controller.display.colorBy }
     private(set) var network: NetworkStatus?
     private(set) var networkFailed = false
     /// The corridor on show (highlighted on the map, its sheet open) and whether it has since cleared.
@@ -423,11 +428,11 @@ final class ExploreModel {
                 bearing = here.bearing
             }
             if close, controller.contains(position.lat, position.lon) {
-                cars += carFeatures(train, at: position, bearing: bearing, color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId))
+                cars += carFeatures(train, at: position, bearing: bearing, color: ExploreLogic.color(of: train, by: colorBy) ?? color(train.operatorId))
             }
             points.append(TrainPoint(
                 id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number, dest: train.destination,
-                color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
+                color: ExploreLogic.color(of: train, by: colorBy) ?? color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
                 bearing: bearing, lat: position.lat, lon: position.lon
             ))
         }
