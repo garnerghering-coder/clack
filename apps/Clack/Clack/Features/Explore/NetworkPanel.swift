@@ -23,7 +23,10 @@ struct NetworkPanel: View {
 
     var body: some View {
         ScrollView {
-            content.onGeometryChange(for: Double.self) { $0.size.height } action: { contentHeight = $0 }
+            // Exactly the card's width: a line wider than it was centred and cut at both edges (designer, 2026-11-14).
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .onGeometryChange(for: Double.self) { $0.size.height } action: { contentHeight = $0 }
         }
         .scrollBounceBehavior(.basedOnSize)
         .frame(maxWidth: 460)
@@ -39,7 +42,7 @@ struct NetworkPanel: View {
         VStack(alignment: .leading, spacing: Space.m) {
             HStack(alignment: .firstTextBaseline) {
                 Text(l10n.t("network.title")).clack(.headline).foregroundStyle(Ink.text)
-                Spacer(minLength: 8)
+                Spacer(minLength: Space.s)
                 if let status {
                     Text(l10n.t("network.updated", ["time": Format.time(status.at, tz: TimeZone.current.identifier, clock: app.settings.clock)]))
                         .clack(.micro).foregroundStyle(Ink.text3)
@@ -56,7 +59,7 @@ struct NetworkPanel: View {
             } else {
                 Skeleton(height: 120)
             }
-            ChipButton(text: l10n.t("common.done")) { onClose() }
+            Button(l10n.t("common.close")) { onClose() }.buttonStyle(.clack(small: true))
         }
         .padding(Space.l)
     }

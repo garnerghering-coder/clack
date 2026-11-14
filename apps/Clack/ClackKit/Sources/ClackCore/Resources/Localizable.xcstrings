@@ -17611,13 +17611,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{n}} more here. Zooms in."
+            "value" : "{{n}} more here. Zooms in, or lists them when they share a spot."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "{{n}} till här. Zoomar in."
+            "value" : "{{n}} till här. Zoomar in, eller listar dem när de ligger på samma ställe."
           }
         }
       }
@@ -23110,6 +23110,91 @@
         }
       }
     },
+    "explore.creditShort.lantmateriet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "heights © Lantmäteriet"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "höjder © Lantmäteriet"
+          }
+        }
+      }
+    },
+    "explore.creditShort.helsinki" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "heights © City of Helsinki"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "höjder © Helsingfors stad"
+          }
+        }
+      }
+    },
+    "explore.creditShort.nls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "heights © National Land Survey of Finland"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "höjder © Lantmäteriverket i Finland"
+          }
+        }
+      }
+    },
+    "explore.creditShort.kartverket" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "heights © Kartverket"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "höjder © Kartverket"
+          }
+        }
+      }
+    },
+    "explore.creditShort.sdfi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "heights © Klimadatastyrelsen"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "höjder © Klimadatastyrelsen"
+          }
+        }
+      }
+    },
     "station3d.credit.sdfi" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24062,6 +24147,23 @@
         }
       }
     },
+    "stationMap.groupTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} places here"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} platser här"
+          }
+        }
+      }
+    },
     "add.noTrainAtHome" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24228,6 +24330,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slå på det i Inställningar för att se var du är på kartan."
+          }
+        }
+      }
+    },
+    "liveMap.credits" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map data © OpenStreetMap contributors (ODbL). Basemap: Protomaps. Trains: Trafikverket, Trafiklab, Digitraffic (Fintraffic, CC BY 4.0), Rejseplanen (CC BY 4.0). Contains data under the Norwegian licence for Open Government data (NLOD) distributed by Entur. All sources: Settings › Sources & methodology."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta: Protomaps. Tåg: Trafikverket, Trafiklab, Digitraffic (Fintraffic, CC BY 4.0), Rejseplanen (CC BY 4.0). Innehåller data under Norwegian licence for Open Government data (NLOD) distribuerad av Entur. Alla källor: Inställningar › Källor och metod."
           }
         }
       }

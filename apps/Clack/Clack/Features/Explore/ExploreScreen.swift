@@ -368,8 +368,15 @@ struct ExploreScreen: View {
                     MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation")) { model.centreOnMe() }
                 }
             }
-            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen" + (model.laserCredit3D.map { " · " + l10n.t("explore.credit.\($0)") } ?? ""))
-                .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
+            // One short line stays on the map; the full credits are behind ⓘ (the legend) and in Settings › About.
+            // Checked against each licence (docs/ATTRIBUTION.md): OSM allows collapsing behind an (i) as long as it is
+            // easy to find, CC BY 4.0 any reasonable manner, NLOD doesn't say where (designer, 2026-11-14: three lines
+            // sat above the tab bar and sheets half covered them).
+            HStack(spacing: 0) {
+                Link("© OpenStreetMap", destination: URL(string: "https://www.openstreetmap.org/copyright")!)
+                Text(verbatim: " · Protomaps" + (model.laserCredit3D.map { " · " + l10n.t("explore.creditShort.\($0)") } ?? ""))
+            }
+            .clack(.mapAttribution).foregroundStyle(Ink.text3).tint(Ink.text3).lineLimit(1)
         }
         .padding(.leading, Space.m).padding(.bottom, Space.s)
     }
@@ -407,6 +414,10 @@ struct ExploreScreen: View {
                 Rectangle().stroke(Ink.accent, style: StrokeStyle(lineWidth: 4, dash: [4, 3])).frame(width: 22, height: 4)
             }
             InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
+            // The full credits, here and in Settings › About.
+            Divider()
+            Text(l10n.t("liveMap.credits")).fixedSize(horizontal: false, vertical: true)
+            if let credit = model.laserCredit3D { Text(l10n.t("explore.credit.\(credit)")).fixedSize(horizontal: false, vertical: true) }
         }
         .clack(.caption).foregroundStyle(Ink.text2)
         .padding(.vertical, Space.l).padding(.horizontal, Space.l)
