@@ -30,6 +30,8 @@ struct StationMapScreen: View {
     /// The 3D view (one-station demo, Debug builds on iOS 18 and later).
     @State private var show3D = false
     @State private var poi: StationPoi?
+    /// Places that share one spot, listed together (a pin's count tapped where zooming can't split them).
+    @State private var poiGroup: PoiGroup?
     /// The open place's sheet content height, so the sheet fits it.
     @State private var poiHeight: CGFloat = 200
     @State private var picked: Date?
@@ -284,7 +286,7 @@ struct StationMapScreen: View {
             } else {
                 StationSceneView(
                     map: map, level: level, route: route, marks: marks, pins: pins, poiState: state, dimPoi: dim,
-                    onPoi: { poi = $0 }, fitKey: "\(from ?? "")|\(to ?? "")|\(level)", selectedPoi: poi?.id,
+                    onPoi: { poi = $0 }, onPoiGroup: { poiGroup = PoiGroup(pois: $0) }, fitKey: "\(from ?? "")|\(to ?? "")|\(level)", selectedPoi: poi?.id,
                     insets: .init(top: 140, bottom: (layover ? 250 : planningOrSet ? 320 : 150))
                 )
             }
@@ -332,6 +334,22 @@ struct StationMapScreen: View {
                 }
                 try? await Task.sleep(for: .seconds(5))
             }
+        }
+        .sheet(item: $poiGroup) { group in
+            NavigationStack {
+                List(group.pois) { p in
+                    PoiRow(poi: p, state: state(p), level: levelName(map, p.level), detour: detours?[p.node]) {
+                        poiGroup = nil
+                        poi = p
+                    }
+                }
+                .listStyle(.plain)
+                .navigationTitle(l10n.t("stationMap.groupTitle", count: group.pois.count))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar { ToolbarItem(placement: .cancellationAction) { Button(l10n.t("common.close")) { poiGroup = nil } } }
+            }
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
         .sheet(item: $poi) { p in
             PoiSheet(map: map, poi: p, state: OpeningHours.openState(p.openingHours, from: window().0, to: window().1), detour: detours?[p.node], onHeight: { poiHeight = $0 }) { end in
@@ -893,4 +911,10 @@ private struct PoiSheet: View {
         case nil: nil
         }
     }
+}
+
+/// Places that share one spot on the station map (one node, one building's centre), shown as a list.
+struct PoiGroup: Identifiable {
+    let pois: [StationPoi]
+    var id: String { pois.map(\.id).joined(separator: "|") }
 }

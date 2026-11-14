@@ -97,6 +97,39 @@ struct StationSceneLogicTests {
         #expect(zoomed.shown.count >= out.shown.count)
         #expect(zoomed.named.isSubset(of: zoomed.shown))
     }
+
+    /// Polish pass 1 (owner, 2026-11-14: "+1" and "+4" at København H never split, and piled on each other).
+    @Test func shownPinsNeverOverlapAndEveryPlaceIsShownOrCounted() throws {
+        let map = try stockholm()
+        let rot = map.view?.rotation ?? 0
+        for k in [0.5, 2, 8, StationSceneLogic.maxZoom] {
+            let out = StationSceneLogic.shownPois(map: map, level: "L0", k: k, state: { _ in .unknown }, dim: { _ in false })
+            let points = map.pois.filter { out.shown.contains($0.id) }.map { StationSceneLogic.rotate($0.x, $0.y, degrees: rot) }
+            for (i, a) in points.enumerated() {
+                for b in points[(i + 1)...] {
+                    #expect(hypot(a.x - b.x, a.y - b.y) * k >= StationSceneLogic.pinSpacing - 1e-9)
+                }
+            }
+            let counted = out.members.values.reduce(0) { $0 + $1.count }
+            #expect(out.shown.count + counted <= map.pois.filter { $0.level == "L0" }.count)
+        }
+    }
+
+    @Test func atTheClosestZoomOnlyPlacesThatShareASpotStayTogether() throws {
+        let map = try stockholm()
+        let rot = map.view?.rotation ?? 0
+        let out = StationSceneLogic.shownPois(map: map, level: "L0", k: StationSceneLogic.maxZoom, state: { _ in .unknown }, dim: { _ in false })
+        for (id, members) in out.members {
+            let group = ([id] + members).compactMap { m in map.pois.first { $0.id == m } }
+            #expect(StationSceneLogic.staysTogether(group, rotation: rot))
+        }
+    }
+
+    @Test func dimmedPlacesAreNotCounted() throws {
+        let map = try stockholm()
+        let all = StationSceneLogic.shownPois(map: map, level: "L0", k: 0.5, state: { _ in .unknown }, dim: { _ in true })
+        #expect(all.counts.isEmpty)
+    }
 }
 
 @MainActor

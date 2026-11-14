@@ -260,12 +260,18 @@ public nonisolated enum StationSceneLogic {
         }
     }
 
-    /// Pins that would overlap at this zoom: one per 26 px cell, toilets and open places first, and `counts` says how
-    /// many more sit under each shown pin (designer, 2026-11-07: pins stacked on top of each other with no sign of it;
-    /// the pin now carries the number and a tap zooms in). Names only when zoomed in, and only where one fits (one per
+    /// How far apart two shown pins are at least, in screen points: a 24 pt pin and the count bubble at its corner, so
+    /// neither pins nor bubbles overlap (polish pass 1).
+    public static let pinSpacing = 40.0
+
+    /// Pins that would overlap at this zoom: toilets and open places first, each later place within `pinSpacing` of a
+    /// shown pin joins it, and `members` says which places sit under each shown pin (designer, 2026-11-07: pins stacked
+    /// on top of each other with no sign of it; the pin now carries the number and a tap zooms in). By distance, not a
+    /// grid (polish pass 1: a 26 px grid let neighbours across a cell edge overlap and their "+N" badges pile up).
+    /// Dimmed places (filtered out by a chip) never count: a "+1" was sometimes a place you couldn't see. Names only when zoomed in, and only where one fits (one per
     /// 96 × 30 px cell, below its pin). The route's own pins and the marked platforms come first: an amenity under one
     /// of them is left out.
-    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool, pins: [PlacePin] = [], marks: [PlatformMark] = []) -> (shown: Set<String>, named: Set<String>, counts: [String: Int]) {
+    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool, pins: [PlacePin] = [], marks: [PlatformMark] = []) -> (shown: Set<String>, named: Set<String>, counts: [String: Int], members: [String: [String]]) {
         let rot = map.view?.rotation ?? 0
         let markedPlatforms = map.platforms.filter { p in p.level == level && marks.contains { $0.platformId == p.id } }
         let markPoints = markedPlatforms.compactMap { p in map.nodes.first { $0.id == p.node } }
@@ -285,19 +291,20 @@ public nonisolated enum StationSceneLogic {
             list.enumerated().sorted { (rank($0.element), $0.offset) < (rank($1.element), $1.offset) }.map(\.element)
         }
         let onLevel = map.pois.filter { $0.level == level && !underRoute($0) }
-        var taken = [String: String]()
+        var placed: [(id: String, x: Double, y: Double)] = []
         var shown = Set<String>()
-        var counts = [String: Int]()
+        var members = [String: [String]]()
         for p in ordered(onLevel) {
             let r = rotate(p.x, p.y, degrees: rot)
-            let cell = "\(Int((r.x * k / 26).rounded())),\(Int((r.y * k / 26).rounded()))"
-            if let winner = taken[cell] {
-                counts[winner, default: 0] += 1
+            let sx = r.x * k, sy = r.y * k
+            if let near = placed.first(where: { hypot($0.x - sx, $0.y - sy) < pinSpacing }) {
+                if !dim(p) { members[near.id, default: []].append(p.id) }
                 continue
             }
-            taken[cell] = p.id
+            placed.append((p.id, sx, sy))
             shown.insert(p.id)
         }
+        let counts = members.mapValues(\.count)
         var named = Set<String>()
         if k > 3.2 {
             var slots = Set<String>()
@@ -316,7 +323,19 @@ public nonisolated enum StationSceneLogic {
                 named.insert(p.id)
             }
         }
-        return (shown, named, counts)
+        return (shown, named, counts, members)
+    }
+
+    /// Whether the places under a pin would still sit on top of each other at the closest zoom (one node, one
+    /// building's centre): then zooming can never split them, and a tap lists them instead (polish pass 1: at
+    /// København H "+1" and "+4" never split however far in you went).
+    public static func staysTogether(_ pois: [StationPoi], rotation: Double) -> Bool {
+        guard let first = pois.first else { return true }
+        let a = rotate(first.x, first.y, degrees: rotation)
+        return pois.dropFirst().allSatisfy { p in
+            let b = rotate(p.x, p.y, degrees: rotation)
+            return hypot(a.x - b.x, a.y - b.y) * maxZoom < pinSpacing
+        }
     }
 
     // MARK: the page

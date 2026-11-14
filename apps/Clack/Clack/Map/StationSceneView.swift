@@ -25,6 +25,8 @@ struct StationSceneView: View {
     let poiState: (StationPoi) -> OpenState
     let dimPoi: (StationPoi) -> Bool
     let onPoi: (StationPoi) -> Void
+    /// Places that share one spot and can't be split by zooming: listed together (polish pass 1).
+    var onPoiGroup: ([StationPoi]) -> Void = { _ in }
     /// Change this to re-fit the view (when a route appears, or the floor changes).
     let fitKey: String
     var selectedPoi: String?
@@ -97,7 +99,7 @@ struct StationSceneView: View {
                 platformChip(chip).position(screen(chip.x, chip.y)).allowsHitTesting(false)
             }
             ForEach(map.pois.filter { $0.level == level && shown.shown.contains($0.id) }) { poi in
-                poiPin(poi, named: shown.named.contains(poi.id), more: shown.counts[poi.id] ?? 0).position(screen(poi.x, poi.y))
+                poiPin(poi, named: shown.named.contains(poi.id), more: shown.counts[poi.id] ?? 0, members: shown.members[poi.id] ?? []).position(screen(poi.x, poi.y))
             }
             ForEach(Array(pins.filter { $0.level == level }.enumerated()), id: \.offset) { _, pin in
                 placePin(pin).position(screen(pin.x, pin.y)).allowsHitTesting(false)
@@ -238,13 +240,19 @@ struct StationSceneView: View {
     /// A place's pin. `more` is how many places sit under it at this zoom: then it wears the number and a tap zooms
     /// in on it instead of opening the place (designer, 2026-11-07). Hours not known: no state dot at all (the "?"
     /// badge nobody could read is gone; the place's sheet says it in words).
-    private func poiPin(_ poi: StationPoi, named: Bool, more: Int) -> some View {
+    private func poiPin(_ poi: StationPoi, named: Bool, more: Int, members: [String]) -> some View {
         let state = poiState(poi)
         let dim = (dimPoi(poi) || state == .closed) && more == 0
         return Button {
             if more > 0 {
-                let at = screen(poi.x, poi.y)
-                withMotion(.tap, reduceMotion: reduceMotion) { view = StationSceneLogic.zoom(view, by: 2.2, aroundX: at.x, y: at.y) }
+                let group = [poi] + members.compactMap { id in map.pois.first { $0.id == id } }
+                // Zooming would never split them (one spot), or the map is already as close as it goes: list them.
+                if StationSceneLogic.staysTogether(group, rotation: map.view?.rotation ?? 0) || view.k * 1.01 >= StationSceneLogic.maxZoom {
+                    onPoiGroup(group)
+                } else {
+                    let at = screen(poi.x, poi.y)
+                    withMotion(.tap, reduceMotion: reduceMotion) { view = StationSceneLogic.zoom(view, by: 2.2, aroundX: at.x, y: at.y) }
+                }
             } else {
                 onPoi(poi)
             }
@@ -253,9 +261,10 @@ struct StationSceneView: View {
                 Circle().fill(Ink.surfaceRaised).overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1)).frame(width: 24, height: 24)
                 LucideIcon(name: StationSceneLogic.icon(poi.category), size: 15).foregroundStyle(Ink.text)
                 if more > 0 {
-                    Text("+\(more)").font(ClackFont.inter(10, .heavy)).monospacedDigit().foregroundStyle(Ink.onAccent)
+                    // The count of places in all (this one included), as one quiet bubble: yellow belongs to actions.
+                    Text("\(more + 1)").font(ClackFont.inter(10, .heavy)).monospacedDigit().foregroundStyle(Ink.bg)
                         .padding(.horizontal, Space.xs).frame(minWidth: 16, minHeight: 16)
-                        .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+                        .background(Ink.text, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                         .offset(x: 13, y: -11)
                 } else if state != .unknown {
                     Circle().fill(state == .open ? Ink.onTime : state == .closingSoon ? Ink.late : Ink.unknown)
@@ -273,9 +282,9 @@ struct StationSceneView: View {
             .contentShape(Rectangle())
             .opacity(dim ? 0.32 : 1)
         }
-        .buttonStyle(.plain)
         .accessibilityLabel(poi.name.isEmpty ? poi.category.rawValue : poi.name)
         .accessibilityHint(more > 0 ? app.l10n.t("stationMap.clusterHint", ["n": String(more)]) : "")
+        .buttonStyle(.press(radius: 22))
     }
 
     private func placePin(_ pin: Pin) -> some View {
@@ -366,7 +375,7 @@ struct SceneGestureLayer: UIViewRepresentable {
 final class SceneLayoutCache {
     struct Layout {
         var chips: [StationSceneLogic.PlatformChip]
-        var pois: (shown: Set<String>, named: Set<String>, counts: [String: Int])
+        var pois: (shown: Set<String>, named: Set<String>, counts: [String: Int], members: [String: [String]])
     }
 
     private var key: Key?
