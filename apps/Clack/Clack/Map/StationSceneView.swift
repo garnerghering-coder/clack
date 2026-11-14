@@ -425,7 +425,8 @@ private enum Palette {
     static let platform = dynamic(light: "#dcdcdc", dark: "#2a2a2a")
     static let hall = dynamic(light: "#efefef", dark: "#1b1b1b")
     static let shop = dynamic(light: "#e6e6e6", dark: "#222222")
-    static let me = dynamic(light: "#1a6ff0", dark: "#3b8bff")
+    /// You: the system's blue (polish pass 1), as on Explore and in Apple's maps.
+    static let me = Color(uiColor: .systemBlue)
     private static let unitFill = dynamic(light: "#e2e2e2", dark: "#2b2b2b")
     private static let unitFood = dynamic(light: "#ece4d6", dark: "#33302a")
     private static let unitService = dynamic(light: "#dde5ec", dark: "#2a2f33")

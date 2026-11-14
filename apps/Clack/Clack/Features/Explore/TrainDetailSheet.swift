@@ -17,7 +17,7 @@ struct TrainDetailSheet: View {
     @Environment(\.colorScheme) private var scheme
     let request: Router.TrainRequest
 
-    private enum Phase { case loading, notRunning, ready(TrainView) }
+    private enum Phase { case loading, notRunning, failed, ready(TrainView) }
 
     @State private var phase = Phase.loading
     @State private var following = false
@@ -30,6 +30,11 @@ struct TrainDetailSheet: View {
                 switch phase {
                 case .loading:
                     Skeleton(height: 120)
+                case .failed:
+                    ErrorStateView(message: l10n.t("liveMap.trainFailed"), retry: {
+                        phase = .loading
+                        if let view = try? await app.client.train(number: request.number, date: request.date, key: request.key) { phase = .ready(view) } else { phase = .failed }
+                    })
                 case .notRunning:
                     Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
                     Text(l10n.t("liveMap.notRunningBody")).clack(.caption).foregroundStyle(Ink.text2)
@@ -55,10 +60,13 @@ struct TrainDetailSheet: View {
     private func load() async {
         // Refreshed every 30 s while it's open, so a running train's times keep up.
         while !Task.isCancelled {
-            if let view = try? await app.client.train(number: request.number, date: request.date, key: request.key) {
-                phase = .ready(view)
-            } else if case .loading = phase {
-                phase = .notRunning
+            do {
+                phase = .ready(try await app.client.train(number: request.number, date: request.date, key: request.key))
+            } catch let error as APIError where error.status == 404 {
+                if case .ready = phase {} else { phase = .notRunning }
+            } catch {
+                // Not reached: said as such, with a way to try again; never "isn't running" (polish pass 1).
+                if case .ready = phase {} else { phase = .failed }
             }
             if let follows = try? await app.client.follows() {
                 following = follows.contains { $0.trainNumber == request.number && $0.serviceDate == request.date }
@@ -79,9 +87,9 @@ struct TrainDetailSheet: View {
             OperatorBadge(op: op, size: .medium)
             if let product = view.product { Text(l10n.t("products.\(product)")).clack(.chip).foregroundStyle(Ink.text2) }
         }
-        if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
+        if let first, let last { Text(verbatim: "\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
         VStack(alignment: .leading, spacing: Space.xxs) {
-            TrainPicture(type: type, operatorId: view.operatorId, height: 54)
+            TrainPicture(type: type, operatorId: view.operatorId, height: 32)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
         // Live times need no note; timetable ones say so.
@@ -96,19 +104,7 @@ struct TrainDetailSheet: View {
     @ViewBuilder
     private func actions(_ view: TrainView) -> some View {
         VStack(spacing: Space.m) {
-            HStack(spacing: Space.m) {
-                Button {
-                    Task { await toggleFollow(view) }
-                } label: {
-                    HStack(spacing: Space.s) {
-                        LucideIcon(name: following ? "check" : "eye", size: 16)
-                        Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
-                    }
-                }
-                .buttonStyle(.clack())
-                .fixedSize()
-                .disabled(busy)
-                .accessibilityAddTraits(following ? .isSelected : [])
+            TrainActions(following: following, busy: busy, onFollow: { Task { await toggleFollow(view) } }) {
                 if let legId = view.legId {
                     Button {
                         close()

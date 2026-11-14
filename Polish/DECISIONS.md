@@ -242,3 +242,13 @@ Left alone in build 71, and why:
 Left for later, and why:
 - **Scroll position isn't restored:** the list is lazy and its rows change by the minute. The open screen is restored.
 - **An open sheet isn't restored:** the Add sheet starts fresh.
+
+## Build 73: Explore, the station card, Network, the station map
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B73.1 | Explore's train dots (A/B in `Polish/compare/`) | Operator colours | **Kept: operator colours** (Garner chose A after seeing both). A new "Late" choice in the filters shows neutral dots, coloured only 6 min or more late | `ExploreLogic.ColorBy.lateOnly`; the default is `Look.mapDots = .operatorBrand` | Set `Look.mapDots = .lateOnly` to make B the default |
+| B73.2 | Your location dot | The app's tint (blue by luck) on Explore; a hard-coded blue on the station map | The system's blue, said explicitly in both | `LiveMapView` (`tintColor = .systemBlue`), `StationSceneView.Palette.me` | Remove those lines |
+| B73.3 | Train sheet actions (Garner) | Follow and Add to trips side by side, sounding alike | One primary, the full width (Add to trips / In your trips / add from live data); Follow in a `…` menu beside it under one line ("Following only watches a train: it isn't added to your trips or your Passport."); the button is filled when you follow. One shared view for Explore and the sheet opened elsewhere (they each had a copy) | `TrainActions` (`ExploreSheets.swift`) | Revert this commit |
+| B73.4 | Train sheet header (designer) | The drawing first (54 pt), then the route, then the next stop | The next stop and "in 3 min", the delay in words ("4 min late"), then the route; the drawing a 32 pt strip at the end | `liveTrainSheet`, `art()`, `TrainDetailSheet` | Same |
+| B73.5 | Explore failures | A train that wouldn't load: "This train isn't running right now"; a station board that wouldn't load: "No trains in this window"; a failed follow or train tap: nothing | Not running only on a 404, an empty board only when it's empty; otherwise "Couldn't load…" with Try again, or a toast | `ExploreModel.failure`, `openScheduled`, `select`, `toggleFollow`; `TrainDetailSheet.Phase.failed`; `LiveStationSheet.loadBoard` | Same |

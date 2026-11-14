@@ -385,6 +385,9 @@ struct LiveMapView: UIViewRepresentable {
         // towards the horizon, and a lake's outline then flickers between the two (owner, 2026-10-30, Vättern).
         map.tileLodPitchThreshold = 60 * .pi / 180
         map.delegate = context.coordinator
+        // Your position is the system's blue dot, as in Apple's own maps, never the app's yellow (designer,
+        // 2026-11-14: yellow meant the brand, actions, a delay, an operator and you).
+        map.tintColor = .systemBlue
         // Opens on Sweden, Norway, Finland and Denmark, Bergen to the Finnish east border, Gedser to Nordkapp. The map may be built before it has a
         // size (Explore is built at launch), so the framing is kept and applied when it gets one.
         map.setCenter(CLLocationCoordinate2D(latitude: 63, longitude: 17), zoomLevel: 3.8, animated: false)
@@ -566,8 +569,8 @@ struct MapDisplay: Codable, Equatable {
     var trainLabels = true
     var stations = true
     var stationNames = true
-    /// What the train dots' colours mean (owner, 2026-10-28).
-    var colorBy = ExploreLogic.ColorBy.operatorBrand
+    /// What the train dots' colours mean (owner, 2026-10-28); the default is `Look.mapDots` (polish pass 1).
+    var colorBy = Look.mapDots
 
     init() {}
 
@@ -579,15 +582,34 @@ struct MapDisplay: Codable, Equatable {
         trainLabels = try c.decodeIfPresent(Bool.self, forKey: .trainLabels) ?? true
         stations = try c.decodeIfPresent(Bool.self, forKey: .stations) ?? true
         stationNames = try c.decodeIfPresent(Bool.self, forKey: .stationNames) ?? true
-        colorBy = (try? c.decodeIfPresent(ExploreLogic.ColorBy.self, forKey: .colorBy)) ?? .operatorBrand
+        colorBy = (try? c.decodeIfPresent(ExploreLogic.ColorBy.self, forKey: .colorBy)) ?? Look.mapDots
     }
 
     private static let key = "explore.mapDisplay"
 
     static func load() -> MapDisplay {
-        guard let data = UserDefaults.standard.data(forKey: key), let d = try? JSONDecoder().decode(MapDisplay.self, from: data) else { return MapDisplay() }
+        guard let data = UserDefaults.standard.data(forKey: key), var d = try? JSONDecoder().decode(MapDisplay.self, from: data) else {
+            var fresh = MapDisplay()
+            #if DEBUG
+            fresh.debugColorBy()
+            #endif
+            return fresh
+        }
+        #if DEBUG
+        d.debugColorBy()
+        #endif
         return d
     }
+
+    #if DEBUG
+    /// `-exploreColorBy late|operator|…` for the colour comparison screenshots.
+    private mutating func debugColorBy() {
+        let args = CommandLine.arguments
+        if let at = args.firstIndex(of: "-exploreColorBy"), args.indices.contains(at + 1), let by = ExploreLogic.ColorBy(rawValue: args[at + 1]) {
+            colorBy = by
+        }
+    }
+    #endif
 
     func save() {
         if let data = try? JSONEncoder().encode(self) { UserDefaults.standard.set(data, forKey: Self.key) }

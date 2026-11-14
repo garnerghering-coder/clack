@@ -109,6 +109,10 @@ struct ExploreFilterSheet: View {
             (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"), (ExploreLogic.delayColors.unknown, l10n.t("liveMap.legend.unknown")),
         ]
         case .country: ["SE", "NO", "DK", "FI"].map { (ExploreLogic.countryColors[$0]!, l10n.t("countries.\($0)")) }
+        case .lateOnly: [
+            (ExploreLogic.otherColor, l10n.t("liveMap.legend.onTimeOrSlight")), (ExploreLogic.delayColors.slight, "6–15"),
+            (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"),
+        ]
         }
         if items.isEmpty {
             Text(l10n.t("liveMap.colorBy.operatorHint")).font(.footnote).foregroundStyle(.secondary)

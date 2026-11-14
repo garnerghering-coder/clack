@@ -3,6 +3,7 @@
 //  ClackDesign
 //
 
+import ClackCore
 import SwiftUI
 
 /// The look choices of polish pass 1 (Polish/DECISIONS.md), one switch each, so any of them can be put back by
@@ -29,6 +30,11 @@ public enum Look {
     /// control layer, polish brief: "remove custom backgrounds on bars and sheets"); `.surface` was the look before,
     /// the surface colour with 24 pt corners.
     public static let sheets: SheetLook = .system
+
+    /// What Explore's train dots are coloured by on a new phone (DECISIONS B73.1; Garner chooses from the A/B
+    /// comparison in Polish/compare/). `.operatorBrand` was the look before; `.lateOnly` is the designer's (neutral, a
+    /// colour only when late). Anyone can still choose in Explore's filters.
+    public static let mapDots: ExploreLogic.ColorBy = .operatorBrand
 
     public enum SelectionFill: Sendable { case ink, yellow }
     public enum SheetLook: Sendable { case system, surface }

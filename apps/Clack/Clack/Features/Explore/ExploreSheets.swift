@@ -391,6 +391,17 @@ struct LiveStationSheet: View {
     /// Taps on the star (the haptic follows the finger, not the favourite loading).
     @State private var favoriteTaps = 0
     @Environment(Toaster.self) private var toaster
+    @State private var boardFailed = false
+
+    private func loadBoard() async {
+        boardFailed = false
+        do {
+            let board = try await app.client.board(id, arrivals: false)
+            rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))
+        } catch {
+            boardFailed = true
+        }
+    }
 
     private func toggleFavorite() async {
         Usage.shared.count(.feature, "station.favorite")
@@ -419,7 +430,10 @@ struct LiveStationSheet: View {
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
-            if let rows {
+            if boardFailed {
+                // Not reached is said as such, not as "no trains" (polish pass 1).
+                ErrorStateView(message: l10n.t("board.loadFailed"), retry: { await loadBoard() })
+            } else if let rows {
                 if rows.isEmpty {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                 } else {
@@ -463,11 +477,7 @@ struct LiveStationSheet: View {
             info = station
             favorite = station.favorite
             guard station.hasBoard else { rows = []; return }
-            if let board = try? await app.client.board(id, arrivals: false) {
-                rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))
-            } else {
-                rows = []
-            }
+            await loadBoard()
         }
     }
 }
@@ -483,6 +493,35 @@ struct LateReasons: View {
         if !reasons.isEmpty {
             Text(l10n.t("liveMap.lateBecause", ["reasons": reasons.formatted(.list(type: .and))]))
                 .clack(.rowTitle).foregroundStyle(Ink.text)
+        }
+    }
+}
+
+/// A train's actions (owner, 2026-11-14): one primary action, the full width (Add to trips, In your trips, or adding a
+/// train from live data), and Following in a `…` menu beside it, under one line that says what following does. Shared
+/// by Explore's train sheets and the train sheet opened from anywhere else (they each had their own copy).
+struct TrainActions<Primary: View>: View {
+    @Environment(L10n.self) private var l10n
+    let following: Bool
+    var busy = false
+    let onFollow: () -> Void
+    @ViewBuilder var primary: Primary
+
+    var body: some View {
+        HStack(spacing: Space.m) {
+            primary.frame(maxWidth: .infinity)
+            Menu {
+                Section(l10n.t("liveMap.followExplain")) {
+                    Button(action: onFollow) {
+                        Label(l10n.t(following ? "liveMap.unfollow" : "liveMap.follow"), systemImage: following ? "eye.slash" : "eye")
+                    }
+                    .disabled(busy)
+                }
+            } label: {
+                // Following shows on the button itself, filled in the selection ink.
+                MapButtonFace(icon: following ? "eye" : "", pressed: following, symbol: following ? nil : "ellipsis")
+            }
+            .accessibilityLabel(l10n.t(following ? "liveMap.following" : "liveMap.moreActions"))
         }
     }
 }

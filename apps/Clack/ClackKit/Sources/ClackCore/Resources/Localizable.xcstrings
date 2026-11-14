@@ -2293,6 +2293,23 @@
         }
       }
     },
+    "board.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load the departures. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta avgångarna. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
     "cause.accident" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24738,6 +24755,125 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta: Protomaps. Tåg: Trafikverket, Trafiklab, Digitraffic (Fintraffic, CC BY 4.0), Rejseplanen (CC BY 4.0). Innehåller data under Norwegian licence for Open Government data (NLOD) distribuerad av Entur. Alla källor: Inställningar › Källor och metod."
+          }
+        }
+      }
+    },
+    "liveMap.colorBy.late" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sena"
+          }
+        }
+      }
+    },
+    "liveMap.legend.onTimeOrSlight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On time or up to 5 min late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I tid eller högst 5 min sent"
+          }
+        }
+      }
+    },
+    "liveMap.followExplain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following only watches a train: it isn't added to your trips or your Passport."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Att följa bara bevakar ett tåg: det läggs inte till i dina resor eller ditt pass."
+          }
+        }
+      }
+    },
+    "liveMap.moreActions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mer"
+          }
+        }
+      }
+    },
+    "liveMap.inMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in {{min}} min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "om {{min}} min"
+          }
+        }
+      }
+    },
+    "liveMap.trainFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load this train. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta tåget. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
+    "liveMap.followFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t change following. Try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte ändra följningen. Försök igen."
           }
         }
       }

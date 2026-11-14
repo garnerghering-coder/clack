@@ -47,6 +47,12 @@ final class ExploreModel {
     private(set) var follows: [Follow] = []
     /// Counts follows and unfollows the server confirmed, for the success haptic (loading the list doesn't count).
     private(set) var followsConfirmed = 0
+    /// Something the person asked for that couldn't be done, for a toast (a train that wouldn't load, a follow refused).
+    struct Failure: Equatable {
+        let id = UUID()
+        let key: String
+    }
+    var failure: Failure?
     private(set) var selected: LiveTrainDetail?
     private(set) var stops: StopsState = .loading
     private(set) var scheduled: TrainView?
@@ -566,7 +572,8 @@ final class ExploreModel {
             followsConfirmed += 1
             scheduleRender()
         } catch {
-            // Unchanged; the button shows the real state.
+            // Unchanged, and said (it used to look like a dead tap).
+            failure = Failure(key: "liveMap.followFailed")
         }
     }
 
@@ -760,8 +767,10 @@ final class ExploreModel {
         }
         guard mine == selection else { return }
         guard let detail = fetched else {
-            // The ring goes back to what is really selected (nothing, or the train that still is).
+            // The ring goes back to what is really selected (nothing, or the train that still is), and the tap is
+            // answered in words (polish pass 1: it just went away, a dead tap).
             controller.setSelected(selected?.train.id)
+            failure = Failure(key: "liveMap.trainFailed")
             return
         }
         selected = detail
@@ -843,8 +852,16 @@ final class ExploreModel {
     /// A train with no position: its timetable route drawn as "ahead", its stops with whatever live data exists.
     func openScheduled(number: String, date: String, key: String?) async {
         guard let client = app?.client else { return }
-        guard let view = try? await client.train(number: number, date: date, key: key) else {
+        let view: TrainView
+        do {
+            view = try await client.train(number: number, date: date, key: key)
+        } catch let error as APIError where error.status == 404 {
+            // Only the server saying so means the train isn't running.
             notRunning = NotRunningTarget(number: number, date: date)
+            return
+        } catch {
+            // Not reached is said as such, not as "this train isn't running" (polish pass 1).
+            failure = Failure(key: "liveMap.trainFailed")
             return
         }
         if let live = view.live, trains[live.id] != nil {

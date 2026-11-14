@@ -434,6 +434,9 @@ public nonisolated enum ExploreLogic {
     /// (DESIGN.md's delay bands), or its country.
     public enum ColorBy: String, CaseIterable, Codable, Sendable {
         case operatorBrand = "operator", product, delay, country
+        /// Neutral dots that take a delay colour only when the train runs 6 min or more late (designer, 2026-11-14:
+        /// DSB's red read as "cancelled", and colour meant too many things). Polish pass 1.
+        case lateOnly = "late"
     }
 
     /// One colour per kind of train, apart from each other on both map themes.
@@ -452,6 +455,7 @@ public nonisolated enum ExploreLogic {
         case .operatorBrand: return nil
         case .product: return train.product.flatMap { productColors[$0] } ?? otherColor
         case .delay: return delayColor(train.delayMin)
+        case .lateOnly: return (train.delayMin ?? 0) > 5 ? delayColor(train.delayMin) : otherColor
         case .country: return countryColors[country(ofTrainId: train.id)] ?? otherColor
         }
     }

@@ -12,6 +12,7 @@ import SwiftUI
 struct ExploreScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @Environment(Toaster.self) private var toaster
     @Environment(Router.self) private var router
     @Environment(\.colorScheme) private var scheme
     @State private var model = ExploreModel()
@@ -146,6 +147,7 @@ struct ExploreScreen: View {
                 now = Date().timeIntervalSince1970 * 1000
             }
         }
+        .onChange(of: model.failure) { _, failure in if let failure { toaster.show(l10n.t(failure.key), isError: true) } }
         // A follow or unfollow the server confirmed (not the list loading).
         .haptic(.success, trigger: model.followsConfirmed)
         #if DEBUG
@@ -487,21 +489,34 @@ struct ExploreScreen: View {
         let followed = model.isFollowed(number: train.number, date: train.date)
         let position = ExploreLogic.position(of: train, now: now)
         return TrainSheet(op: op, title: title, collapsed: collapsed, onClose: { model.deselect() }) {
-            if !collapsed.wrappedValue { art(type: type, operatorId: train.operatorId) }
+            // What's live leads (designer, 2026-11-14): the next stop and when, how late in words, then the route; the
+            // drawing is a strip at the end, so the stops get the room.
+            if let next = train.next {
+                HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                    Text(l10n.t("live.nextStopName", ["name": next])).clack(.rowTitle).foregroundStyle(Ink.text)
+                    Spacer(minLength: Space.s)
+                    if let eta = train.nextEta?.ms, eta > now {
+                        Text(l10n.t("liveMap.inMinutes", ["min": String(max(1, Int(((eta - now) / 60_000).rounded())))]))
+                            .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+                            .contentTransition(.numericText())
+                    } else {
+                        FlapTime(time: train.nextEta?.ms, tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country }), clock: app.settings.clock, style: .text)
+                    }
+                }
+            }
+            if let delay = train.delayMin, delay > 0 {
+                Text(l10n.t("passport.minutesLate", count: delay)).clack(.body).fontWeight(.semibold)
+                    .foregroundStyle(DelayBand(delayMin: delay, canceled: false).ink)
+            } else if train.delayMin != nil {
+                Text(l10n.t("delay.on_time")).clack(.body).foregroundStyle(Ink.text2)
+            }
             if train.origin != nil || train.destination != nil {
-                Text("\(train.origin ?? "…") → \(train.destination ?? "…")").clack(.rowTitle).foregroundStyle(Ink.text)
+                Text(verbatim: "\(train.origin ?? "…") → \(train.destination ?? "…")").clack(.caption).foregroundStyle(Ink.text2)
             }
             if train.origin == nil && train.destination == nil && train.next == nil {
                 Text(l10n.t("liveMap.detailsLoading")).clack(.caption).foregroundStyle(Ink.text2)
             }
-            if let next = train.next {
-                HStack(spacing: Space.s) {
-                    Text(l10n.t("live.nextStopName", ["name": next])).clack(.body).foregroundStyle(Ink.text)
-                    FlapTime(time: train.nextEta?.ms, tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country }), clock: app.settings.clock, style: .text)
-                }
-            }
             FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
-                if let delay = train.delayMin { DelayText(delay: delay) }
                 switch position {
                 case .estimated: StatusLine(.estimated, l10n.t("liveMap.posEstimated"))
                 case .old(let minutes): StatusLine(.stale, l10n.t("liveMap.posOld", ["min": String(minutes)]))
@@ -511,6 +526,7 @@ struct ExploreScreen: View {
             }
             Text(l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: train.at.ms, now: now)])).clack(.caption).foregroundStyle(Ink.text2)
             if case .list(let list) = model.stops { LateReasons(stops: list) }
+            if !collapsed.wrappedValue { art(type: type, operatorId: train.operatorId) }
         } content: {
             StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
@@ -520,15 +536,14 @@ struct ExploreScreen: View {
                 else { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
             }
         } actions: {
-            HStack(spacing: Space.m) {
-                followButton(following: followed) {
-                    Task {
-                        await model.toggleFollow(
-                            number: train.number, date: train.date, operatorId: train.operatorId,
-                            label: train.origin != nil && train.destination != nil ? "\(train.origin!) → \(train.destination!)" : nil
-                        )
-                    }
+            TrainActions(following: followed, onFollow: {
+                Task {
+                    await model.toggleFollow(
+                        number: train.number, date: train.date, operatorId: train.operatorId,
+                        label: train.origin != nil && train.destination != nil ? "\(train.origin!) → \(train.destination!)" : nil
+                    )
                 }
+            }) {
                 if detail.legId == nil, detail.trip == nil, case .list(let list) = model.stops {
                     // Not in any timetable of ours: added from the live feed's own stops (owner, 2026-11-01).
                     LiveAddButton(
@@ -559,7 +574,7 @@ struct ExploreScreen: View {
         let followed = model.isFollowed(number: view.number, date: view.date)
         return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), collapsed: collapsed, onClose: { model.closeScheduled() }) {
             if !collapsed.wrappedValue { art(type: type, operatorId: view.operatorId) }
-            if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
+            if let first, let last { Text(verbatim: "\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
             StatusLine(allCanceled ? .cancelled : .arrived, status)
             // Live times need no note; timetable ones say so.
             if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
@@ -568,12 +583,11 @@ struct ExploreScreen: View {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
         } actions: {
-            HStack(spacing: Space.m) {
-                followButton(following: followed) {
-                    Task {
-                        await model.toggleFollow(number: view.number, date: view.date, operatorId: view.operatorId, label: first.flatMap { f in last.map { "\(f.name) → \($0.name)" } })
-                    }
+            TrainActions(following: followed, onFollow: {
+                Task {
+                    await model.toggleFollow(number: view.number, date: view.date, operatorId: view.operatorId, label: first.flatMap { f in last.map { "\(f.name) → \($0.name)" } })
                 }
+            }) {
                 planButton(legId: view.legId, trip: view.trip)
             }
         }
@@ -582,23 +596,10 @@ struct ExploreScreen: View {
     /// The train's picture and name, or that its type isn't known.
     private func art(type: TrainType?, operatorId: String?) -> some View {
         VStack(alignment: .leading, spacing: Space.xxs) {
-            TrainPicture(type: type, operatorId: operatorId, height: 54)
+            // A strip, not a poster: the stop list gets the room (designer, 2026-11-14: two and a half stops showed).
+            TrainPicture(type: type, operatorId: operatorId, height: 32)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
-    }
-
-    /// Two separate things (brief §6.2): watching a train, and planning to travel on it.
-    private func followButton(following: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack(spacing: Space.s) {
-                LucideIcon(name: following ? "check" : "eye", size: 16)
-                Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
-            }
-        }
-        // As wide as its word, so the button beside it keeps the room (Plan a journey in one line).
-        .buttonStyle(.clack())
-        .fixedSize()
-        .accessibilityAddTraits(following ? .isSelected : [])
     }
 
     @ViewBuilder
