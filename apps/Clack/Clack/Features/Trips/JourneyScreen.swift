@@ -20,6 +20,7 @@ struct JourneyScreen: View {
     let id: String
     @State private var journey: Journey?
     @State private var missing = false
+    @State private var failed = false
     @State private var lastReload: Date = .distantPast
     /// The train picked by hand; nil follows the journey (the train under way, else the first).
     @State private var picked: String?
@@ -28,6 +29,19 @@ struct JourneyScreen: View {
     @State private var underWay = false
 
     private var legs: [Leg] { TripsLogic.taken((journey?.legs ?? []).map(\.leg)) }
+
+    /// Fetches the journey; only the server saying it doesn't exist (404) means "not found".
+    private func reload() async {
+        failed = false
+        do {
+            journey = try await app.client.journey(id)
+            updateCurrent()
+        } catch let error as APIError where error.status == 404 {
+            missing = true
+        } catch {
+            if journey == nil { failed = true }
+        }
+    }
 
     private func updateCurrent() {
         let legs = legs
@@ -50,20 +64,16 @@ struct JourneyScreen: View {
                     // A new train in focus is a fresh screen (its map, its live stream, its sections).
                     .id(focus)
             } else if let journey, !legs.isEmpty {
-                JourneyOverview(journey: journey, legs: legs)
+                JourneyOverview(journey: journey, legs: legs, onRefresh: { await reload() })
+            } else if failed {
+                // Not reached is said as such, with a way to try again (it said "not found", polish pass 1).
+                Page { ErrorStateView(message: l10n.t("journey.loadFailed"), retry: { await reload() }) }
             } else {
-                Page { Skeleton(height: 120) }
+                Page { Skeleton(height: 240, radius: Radius.card) }
             }
         }
         .countsScreen("journey")
-        .task(id: id) {
-            do {
-                journey = try await app.client.journey(id)
-                updateCurrent()
-            } catch {
-                missing = true
-            }
-        }
+        .task(id: id) { await reload() }
         .task(id: journey?.legs.map(\.id)) {
             while !Task.isCancelled {
                 updateCurrent()
@@ -86,75 +96,83 @@ struct JourneyScreen: View {
     }
 }
 
-/// The whole journey before and after the trip: every train on one map in its operator's colour, the journey's numbers
-/// (door to door, distance, the delay at the final arrival, changes and missed changes), the day as a bar, then each
-/// train as a card that opens its own page, with the change rule's verdict between them.
+/// The whole journey before and after the trip (designer, 2026-11-14: one line of numbers, then one rail): every train
+/// on one map in its operator's colour, a line with the day, the time door to door, the distance, the changes and how it
+/// arrived, then the journey as one vertical timeline, each train opening its own page and each change between them.
 private struct JourneyOverview: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.colorScheme) private var scheme
     let journey: Journey
     let legs: [Leg]
-
-    private var geometries: [String: String] {
-        Dictionary(uniqueKeysWithValues: journey.legs.compactMap { j in j.geometry.map { (j.leg.id, $0) } })
-    }
+    var onRefresh: () async -> Void = {}
+    /// The map's lines and dots, decoded once per journey (they were decoded on every redraw).
+    @State private var routes: [MultiRoute] = []
+    @State private var stations: [MultiStation] = []
 
     var body: some View {
-        let first = legs[0], last = legs[legs.count - 1]
-        let summary = TripsLogic.journeySummary(legs)
-        let tz = first.origin?.tz ?? TripsLogic.tz(first)
-        let geometries = geometries
+        let first = legs[0]
+        let last = legs[legs.count - 1]
         Page {
-            if legs.contains(where: { geometries[$0.id] != nil }) {
-                MultiRouteMapView(
-                    routes: legs.compactMap { leg in
-                        geometries[leg.id].map { MultiRoute(color: MapStyle.opColor(leg.operator?.brandColor, dark: scheme == .dark), geometry: $0, stops: []) }
-                    },
-                    // The ends and every change as a dot, from the ends of each train's line.
-                    stations: legs.compactMap { leg -> MultiStation? in
-                        guard let g = geometries[leg.id], let end = Polyline.decode(g).last else { return nil }
-                        return MultiStation(lat: end.lat, lon: end.lon, name: leg.destination?.name ?? "", count: 1)
-                    } + (geometries[first.id].flatMap { Polyline.decode($0).first }.map { [MultiStation(lat: $0.lat, lon: $0.lon, name: first.origin?.name ?? "", count: 1)] } ?? []),
-                    railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
-                )
-                .frame(height: 240)
-                .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-                .hairlineBorder(radius: Radius.card)
+            if !routes.isEmpty {
+                MultiRouteMapView(routes: routes, stations: stations, railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel"))
+                    .frame(height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                    .hairlineBorder(radius: Radius.card)
             }
-            if let summary {
-                Card {
-                    Text(Format.longDate(summary.dep ?? first.schedDep?.ms ?? 0, tz: tz, language: app.settings.language))
-                        .clack(.captionUpper).foregroundStyle(Ink.text2)
-                    LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: Space.l) {
-                        Tile(label: l10n.t("journey.doorToDoor")) { Text(summary.minutes.map { Format.duration($0, language: l10n.language) } ?? Format.unknown) }
-                        Tile(label: l10n.t("journey.distance")) { Text(Format.distance(summary.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)) }
-                        Tile(label: l10n.t("journey.finalArrival"), sub: summary.arr.map { Format.time($0, tz: last.destination?.tz ?? tz, clock: app.settings.clock) }) {
-                            if last.canceled {
-                                DelayText(delay: nil, canceled: true)
-                            } else if last.actualArr != nil || summary.arrivalDelayMin != nil {
-                                DelayText(delay: summary.arrivalDelayMin ?? 0)
-                            } else {
-                                Text(last.destination?.name ?? Format.unknown)
-                            }
-                        }
-                        Tile(
-                            label: l10n.t("journey.label", count: legs.count),
-                            sub: summary.missedChanges > 0 ? l10n.t("journey.missedChanges", ["n": String(summary.missedChanges)]) : nil
-                        ) {
-                            Text(summary.changes == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(summary.changes)]))
-                        }
-                    }
-                }
+            if let line = summaryLine {
+                Text(line).clack(.body).monospacedDigit().foregroundStyle(Ink.text2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             TimelineView(.periodic(from: .now, by: 60)) { context in
-                let now = context.date.timeIntervalSince1970 * 1000
-                VStack(alignment: .leading, spacing: Space.m) {
-                    JourneyBar(legs: legs, now: now)
-                    JourneyLegs(legs: legs, now: now)
+                JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
+                    LegRow(leg: leg, flat: true)
+                } change: { a, b in
+                    JourneyChange(a: a, b: b)
                 }
             }
         }
+        .refreshable { await onRefresh() }
         .screenTitle("\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
+        .task(id: journey.legs.map(\.leg.id)) { decodeMap() }
+    }
+
+    /// "Friday 20 November 2026 · 5h 15m · 712 km · 1 change · arrived 4 min late": once, where the four tiles and the
+    /// bar each said part of it twice.
+    private var summaryLine: String? {
+        guard let summary = TripsLogic.journeySummary(legs) else { return nil }
+        let first = legs[0], last = legs[legs.count - 1]
+        let tz = first.origin?.tz ?? TripsLogic.tz(first)
+        let arrival: String? = {
+            if last.canceled { return l10n.t("delay.cancelled") }
+            guard last.actualArr != nil || summary.arrivalDelayMin != nil else { return nil }
+            let delay = summary.arrivalDelayMin ?? 0
+            return delay > 0 ? l10n.t("journey.arrivedLate", ["min": String(delay)]) : l10n.t("delay.on_time")
+        }()
+        return Format.join([
+            Format.longDate(summary.dep ?? first.schedDep?.ms ?? 0, tz: tz, language: app.settings.language),
+            summary.minutes.map { Format.duration($0, language: l10n.language) },
+            summary.distanceM.map { Format.distance($0, unit: app.settings.distanceUnit, language: app.settings.language) },
+            summary.changes == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(summary.changes)]),
+            summary.missedChanges > 0 ? l10n.t("journey.missedChanges", ["n": String(summary.missedChanges)]) : nil,
+            arrival,
+        ])
+    }
+
+    private func decodeMap() {
+        let geometries = Dictionary(uniqueKeysWithValues: journey.legs.compactMap { j in j.geometry.map { (j.leg.id, $0) } })
+        let decoded = Dictionary(uniqueKeysWithValues: geometries.map { ($0.key, Polyline.decode($0.value)) })
+        routes = legs.compactMap { leg in
+            geometries[leg.id].map { MultiRoute(color: MapStyle.opColor(leg.operator?.brandColor, dark: scheme == .dark), geometry: $0, stops: []) }
+        }
+        // The ends and every change as a dot, from the ends of each train's line.
+        var dots = legs.compactMap { leg -> MultiStation? in
+            guard let end = decoded[leg.id]?.last else { return nil }
+            return MultiStation(lat: end.lat, lon: end.lon, name: leg.destination?.name ?? "", count: 1)
+        }
+        if let first = legs.first, let start = decoded[first.id]?.first {
+            dots.append(MultiStation(lat: start.lat, lon: start.lon, name: first.origin?.name ?? "", count: 1))
+        }
+        stations = dots
     }
 }

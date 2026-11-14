@@ -178,6 +178,9 @@ struct MonthsTests {
         #expect(months[0].items.count == 1)
         #expect(months[0].items[0].map(\.id) == ["oct-a", "oct-b"])
         #expect(months[1].items[0].map(\.id) == ["sep"])
+        // The header counts each train, as the Passport does.
+        #expect(months[0].tripCount == 2)
+        #expect(months[1].tripCount == 1)
     }
 }
 

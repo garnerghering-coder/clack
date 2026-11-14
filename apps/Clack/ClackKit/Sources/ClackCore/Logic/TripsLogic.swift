@@ -134,6 +134,12 @@ public nonisolated enum TripsLogic {
             self.label = label
             self.items = items
         }
+
+        /// How many trips the month holds (each train counts), for its header (designer, 2026-11-14: "give month
+        /// headers a job": "5 trips · 1,540 km" ties the list to the Passport, which counts trains the same way).
+        public var tripCount: Int { items.joined().count }
+        /// The month's distance in metres, from the trips that have one.
+        public var distanceM: Double { items.joined().compactMap(\.distanceM).reduce(0, +) }
     }
 
     /// Legs grouped by journey, each group in travel order; the groups keep the order of their first leg in `legs`

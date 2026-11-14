@@ -81,9 +81,9 @@ struct PassportScreen: View {
         Group {
             if !data.review.isEmpty {
                 Button {
-                    // The Past list itself, not whatever trip was left open on the Trips tab (user test 2026-11-07).
+                    // The trips to check on Trips, not whatever trip was left open there (user test 2026-11-07).
                     router.tripsPath = []
-                    router.tripsTab = .past
+                    router.tripsScrollTarget = .reviews
                     router.tab = .trips
                 } label: {
                     Banner { Text(l10n.t("passport.reviewBanner", count: data.review.count)).fontWeight(.semibold) }

@@ -218,3 +218,27 @@ Left alone in build 71, and why:
 - **The trip detail's four one-second clocks:** left until Instruments shows what they cost (Phase 4).
 - **"Turn on alerts" under the tab bar at rest:** it's scroll content; the scroll view's inset lets it scroll clear.
 - **Opening hours evaluated in Stockholm time:** that's right for Sweden, Norway and Denmark, but an hour off for Finnish stations. It gets fixed with the station map in build 73.
+
+## Build 72: Trips home and journey detail
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B72.1 | Trips structure (designer) | An Upcoming/Past switch, louder than the trips it filtered; Past in its own tab | One scroll: the featured card (your train, or the next) at the top; "Next" (other trips ahead); "To check"; Following; then history by month. `-tripsTab past` and the Passport's "trips to check" link scroll to their place (`Router.tripsScrollTarget`) | `TripsScreen.list`, `TripsAnchor` | Revert the Trips commit (it restores `TripsTab` and the switch) |
+| B72.2 | A journey in the list | A card per journey with a card per train inside (repeated the detail screen) | One compact row: label, day, route, the day as a slim bar with times, changes and length; it opens the journey | `JourneyCard` (rewritten) | Same commit |
+| B72.3 | The featured card | The whole journey stacked under it (bar + a card per train) | The bar only; the trains are on the journey's page | `FeaturedCard.journeyLegs` | Put `JourneyLegs(...)` back under the bar |
+| B72.4 | Month headers | The month | The month, and "5 trips · 1,540 km" (each train counts, as in Passport) | `TripsLogic.MonthGroup.tripCount/distanceM` (tested), `monthHeader` | Remove the right-hand text |
+| B72.5 | Swipe and hold (owner: Delete and Share) | A hold menu on single trips only (View trip, Delete); no swipe | The same actions in the same order on a swipe (iOS 27, `swipeActionsContainer`) and a hold: Share, then Delete; a journey's row offers Share (its trains are deleted on its page) | `TripSwipe`, `SwipeContainer`, `actions`, `shareButton`; catalog `trips.shareText`, `common.share` | Remove the `.modifier(TripSwipe…)` lines |
+| B72.6 | Deleting a trip | The row waited for the server; a failure said nothing; a warning buzz on success | It leaves at once, comes back with a toast if the server refuses; the confirmation stays (one safeguard) | `TripsModel.delete` | Same commit |
+| B72.7 | Trips loading | Skeletons until the server answered (up to 15 s); "Couldn't load your trips." over a full list | The kept list at once, with "Updated 12 min ago"; a failed refresh says "Couldn't refresh · Updated …" with Try again; first load placeholders shaped like the card and rows | `TripsModel.load` (`APIClient.saved`, `SavedAt`), `FreshnessLine` | Same commit |
+| B72.8 | Empty Trips (my call) | Two buttons (Find a train, Explore live trains) | One button, Explore as a link under it; "No trips yet" | `EmptyStateView` | Same commit |
+| B72.9 | Rows in VoiceOver | Pieces ("07:14 07:20 right arrow"); the featured card only "View journey: A to B" | One sentence each ("SJ 523, Stockholm C to Göteborg C, Fri 17 Oct, 08:03 to 10:51, 4 min late, Platform 3"), the featured card with its countdown and "Opens the journey" as a hint | `TripsSpeech`, `LegRow`, `JourneyCard`, `FeaturedCard` | Same commit |
+| B72.10 | Card → screen | A push | The trip or journey zooms out of its card, and back into it (iOS 18+; a push from anywhere else) | `ZoomSource`, `ZoomDestination`, `zoomNamespace` in `Destinations.swift` / `RootView` | Remove the two `.modifier(ZoomDestination…)` in `DestinationView` |
+| B72.11 | Signature 3: adding a train | The row just appeared | The new row settles into its place (from 92 %, a little higher, the one spring with bounce); a fade with Reduce Motion | `LandsWhenAdded`, `AppModel.justAdded` | Remove the `.modifier(LandsWhenAdded…)` lines |
+| B72.12 | Coming back after iOS closed the app | Trips, at the top | The same tab and the same open screens (trip, journey, board, settings, Passport pages) | `@SceneStorage` in `RootView`, `AppRoute.restorable` | Remove `restorePlace()` |
+| B72.13 | Journey page (designer) | A map, four tiles (door to door, distance, final arrival, changes), a bar saying the changes and time again, then a card per train | The map, one line ("Friday 20 November 2026 · 5h 15m · 624 km · 1 change · arrived 4 min late"), then the journey as one rail: each train a row that opens it, each change with its walk, wait and verdict | `JourneyOverview` (`JourneyTimeline`, `JourneyChange`) | Revert the journey commit |
+| B72.14 | Journey not reached | "Not found" for any failure | Not found only on a 404; otherwise "Couldn't load this journey" with Try again; pull to refresh | `JourneyScreen.reload` | Same commit |
+| B72.15 | Small delays (designer: "a one-minute delay gets the biggest, brightest text") | Any changed time bold in the accent ink | Only 6 min or more either way; smaller changes keep the struck timetabled time in plain ink | `FlapTime.notable` | Use `changed` again in `FlapTime` and `TimePair.timeText` |
+
+Left for later, and why:
+- **Scroll position isn't restored:** the list is lazy and its rows change by the minute. The open screen is restored.
+- **An open sheet isn't restored:** the Add sheet starts fresh.

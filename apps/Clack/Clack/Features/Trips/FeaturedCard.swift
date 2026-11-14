@@ -132,8 +132,16 @@ struct FeaturedCard: View {
             }
             .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel(l10n.t("trips.viewJourney", ["from": legs.first?.origin?.name ?? "", "to": legs.last?.destination?.name ?? ""]))
+            .buttonStyle(.press)
+            // One sentence: what, where, when and how it stands, with opening it as the hint (polish pass 1: VoiceOver
+            // heard only "View journey: A to B").
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Format.join([
+                isJourney ? TripsSpeech.journey(legs, l10n: l10n, settings: app.settings) : TripsSpeech.leg(leg, l10n: l10n, settings: app.settings),
+                state == .upcoming ? TripsLogic.countdownStatus(l10n, leg, now: Date.now.timeIntervalSince1970 * 1000).text : nil,
+            ], separator: ", "))
+            .accessibilityHint(l10n.t(isJourney ? "trips.opensJourney" : "trips.opensTrip"))
+            .accessibilityAddTraits(.isButton)
             if isJourney {
                 journeyLegs(now: now)
                     .padding(.horizontal, Space.l).padding(.bottom, Space.m)
@@ -143,6 +151,8 @@ struct FeaturedCard: View {
         .background(Surface.Hero(op: op))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
+        // The trip or journey zooms out of this card (polish pass 1).
+        .modifier(ZoomSource(id: isJourney ? leg.journeyId.map { "journey-\($0)" } ?? "trip-\(leg.id)" : "trip-\(leg.id)"))
     }
 
     /// The whole journey under the featured train as one rail: each train with its times and platform, the change
@@ -150,9 +160,9 @@ struct FeaturedCard: View {
     private func journeyLegs(now: Double) -> some View {
         VStack(alignment: .leading, spacing: Space.m) {
             Rectangle().fill(Ink.hairline).frame(height: 1)
-            // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
+            // The day as a bar with the times and changes; each train is on the journey's page, not stacked here too
+            // (designer, 2026-11-14: the list repeated the detail screen).
             JourneyBar(legs: legs, now: now, selected: leg.id)
-            JourneyLegs(legs: legs, now: now, selected: leg.id)
         }
     }
 

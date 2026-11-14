@@ -91,8 +91,11 @@ struct LegRow: View {
         TimelineView(.periodic(from: .now, by: 60)) { context in
             let now = context.date.timeIntervalSince1970 * 1000
             if linked {
-                NavigationLink(value: AppRoute.trip(leg.id)) { content(now: now) }
-                    .buttonStyle(.plain)
+                NavigationLink(value: AppRoute.trip(leg.id)) { content(now: now).modifier(ZoomSource(id: "trip-\(leg.id)")) }
+                    .buttonStyle(.press(radius: flat ? 0 : Radius.card, scales: !flat))
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(TripsSpeech.leg(leg, l10n: l10n, settings: app.settings))
+                    .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("trips.leg")
             } else {
                 content(now: now)
@@ -111,7 +114,7 @@ struct LegRow: View {
             OperatorBadge(op: leg.operator, size: .large)
             VStack(alignment: .leading, spacing: Space.xxs) {
                 if upcoming { CountdownLine(leg: leg, now: now) }
-                Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
+                Text(verbatim: "\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
                 metaLine
@@ -120,8 +123,8 @@ struct LegRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             side
         }
-        .padding(.vertical, flat ? 8 : 12)
-        .padding(.horizontal, flat ? 0 : 14)
+        .padding(.vertical, flat ? Space.s : Space.m)
+        .padding(.horizontal, flat ? 0 : Space.l)
         .background {
             if !flat { Surface.Pill(op: op) }
         }
@@ -295,58 +298,94 @@ struct TransferChip: View {
 /// A multi-leg journey in the Trips list. Legs in travel order; one card, with each train's operator colour glowing
 /// beside its own row.
 struct JourneyCard: View {
+    @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.colorScheme) private var scheme
     let legs: [Leg]
 
+    /// One compact row per journey (designer, 2026-11-14: the list repeated the detail screen, a card per train inside
+    /// a card per journey): the label, the route, the day as a slim strip with the times, the changes and the length.
+    /// The whole row opens the journey; its trains are there.
     var body: some View {
         let first = legs[0]
         let last = legs[legs.count - 1]
-        VStack(alignment: .leading, spacing: 0) {
-            if let id = first.journeyId {
-                NavigationLink(value: AppRoute.journey(id)) {
-                    VStack(alignment: .leading, spacing: Space.xxs) {
-                        Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
-                        Text("\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
-                            .clack(.rowTitle).foregroundStyle(Ink.text)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, Space.m)
-                    .padding(.bottom, Space.xs)
-                }
-                .buttonStyle(.plain)
-            }
+        let route = first.journeyId.map { AppRoute.journey($0) } ?? .trip(first.id)
+        NavigationLink(value: route) {
             TimelineView(.periodic(from: .now, by: 60)) { context in
-                let now = context.date.timeIntervalSince1970 * 1000
-                // Style D (owner, 2026-11-01): the day as a bar, then each train as a card and each change as a chip.
-                VStack(alignment: .leading, spacing: Space.m) {
-                    JourneyBar(legs: legs, now: now)
-                    // The whole card is the journey: a train's card opens the journey too, not the train alone.
-                    JourneyLegs(legs: legs, now: now, route: { leg in first.journeyId.map { .journey($0) } ?? .trip(leg.id) })
+                VStack(alignment: .leading, spacing: Space.s) {
+                    HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                        Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                        Spacer(minLength: Space.s)
+                        if let dep = first.schedDep?.ms {
+                            Text(Format.day(dep, tz: TripsLogic.tz(first), language: app.settings.language)).clack(.caption).foregroundStyle(Ink.text2)
+                        }
+                    }
+                    Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
+                        .clack(.rowTitle).foregroundStyle(Ink.text)
+                        .fixedSize(horizontal: false, vertical: true)
+                    JourneyBar(legs: legs, now: context.date.timeIntervalSince1970 * 1000)
                 }
-                .padding(.vertical, Space.s)
+                .padding(Space.l)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background {
+                    ZStack {
+                        Ink.surface
+                        ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
+                            CSSRadialGradient(
+                                rx: 0.75, ry: 1.1 / Double(legs.count), cx: 1, cy: (Double(index) + 0.6) / Double(legs.count),
+                                stops: [
+                                    .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0.18), location: 0),
+                                    .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0), location: 0.7),
+                                ]
+                            )
+                        }
+                    }
+                }
+                .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                .hairlineBorder(radius: Radius.card)
+                .modifier(ZoomSource(id: first.journeyId.map { "journey-\($0)" } ?? "trip-\(first.id)"))
             }
         }
-        .padding(.top, Space.xs)
-        .padding(.bottom, Space.s)
-        .padding(.horizontal, Space.l)
-        .background {
-            ZStack {
-                Ink.surface
-                ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
-                    CSSRadialGradient(
-                        rx: 0.75, ry: 1.1 / Double(legs.count), cx: 1, cy: (Double(index) + 0.6) / Double(legs.count),
-                        stops: [
-                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0.18), location: 0),
-                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0), location: 0.7),
-                        ]
-                    )
-                }
-            }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .padding(.bottom, Space.m)
+        .buttonStyle(.press)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(TripsSpeech.journey(legs, l10n: l10n, settings: app.settings))
+        .accessibilityAddTraits(.isButton)
+    }
+}
+
+/// What a trip or a journey in the list says to VoiceOver: one sentence, not its pieces (polish pass 1: "07:14
+/// 07:20 right arrow" and, on the featured card, only "View journey").
+@MainActor
+enum TripsSpeech {
+    static func leg(_ leg: Leg, l10n: L10n, settings: Settings) -> String {
+        let tz = TripsLogic.tz(leg)
+        let ends = TimePair.ends(leg)
+        let delay = leg.canceled ? l10n.t("delay.cancelled") : (leg.arrDelayMin ?? leg.depDelayMin).flatMap { $0 > 0 ? l10n.t("passport.minutesLate", count: $0) : nil }
+        return Format.join([
+            Format.service(leg.operator?.name, leg.trainNumber),
+            l10n.t("speech.fromTo", ["from": leg.origin?.name ?? "", "to": leg.destination?.name ?? ""]),
+            leg.schedDep.map { Format.day($0.ms, tz: tz, language: settings.language) },
+            l10n.t("speech.times", [
+                "dep": Format.time(ends.dep.time, tz: ends.dep.tz, clock: settings.clock),
+                "arr": Format.time(ends.arr.time, tz: ends.arr.tz, clock: settings.clock),
+            ]),
+            delay,
+            leg.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) },
+        ], separator: ", ")
+    }
+
+    static func journey(_ legs: [Leg], l10n: L10n, settings: Settings) -> String {
+        guard let first = legs.first, let last = legs.last else { return "" }
+        let a = TimePair.ends(first), b = TimePair.ends(last)
+        return Format.join([
+            l10n.t("journey.label", count: legs.count),
+            l10n.t("speech.fromTo", ["from": first.origin?.name ?? "", "to": last.destination?.name ?? ""]),
+            first.schedDep.map { Format.day($0.ms, tz: TripsLogic.tz(first), language: settings.language) },
+            l10n.t("speech.times", [
+                "dep": Format.time(a.dep.time, tz: a.dep.tz, clock: settings.clock),
+                "arr": Format.time(b.arr.time, tz: b.arr.tz, clock: settings.clock),
+            ]),
+        ], separator: ", ")
     }
 }
 
@@ -565,5 +604,30 @@ struct ReviewCard: View {
             await onAnswer(answer)
             busy = false
         }
+    }
+}
+
+/// The trip just added settles into its place in the list: in from a little smaller and lower, with the one spring
+/// that has a bounce (signature moment 3, polish pass 1). Only once, only for that trip; with Reduce Motion it fades in.
+struct LandsWhenAdded: ViewModifier {
+    let ids: [String]
+    @Environment(AppModel.self) private var app
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var landed = true
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(landed || reduceMotion ? 1 : 0.92, anchor: .top)
+            .offset(y: landed || reduceMotion ? 0 : -Space.xl)
+            .opacity(landed ? 1 : 0)
+            .onAppear {
+                guard let id = app.justAdded, ids.contains(id) else { return }
+                landed = false
+                Task {
+                    try? await Task.sleep(for: .milliseconds(250))
+                    withMotion(.signature, reduceMotion: reduceMotion) { landed = true }
+                    app.justAdded = nil
+                }
+            }
     }
 }

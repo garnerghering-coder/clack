@@ -4792,6 +4792,23 @@
         }
       }
     },
+    "common.share" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela"
+          }
+        }
+      }
+    },
     "connection.brokenBanner" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -21103,13 +21120,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No trains yet"
+            "value" : "No trips yet"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inga tåg än"
+            "value" : "Inga resor än"
           }
         }
       }
@@ -21637,6 +21654,176 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lägg till tåget du ska åka med, eller ett du redan har åkt."
+          }
+        }
+      }
+    },
+    "trips.opensJourney" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar resvägen"
+          }
+        }
+      }
+    },
+    "trips.opensTrip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the trip"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar resan"
+          }
+        }
+      }
+    },
+    "trips.next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nästa"
+          }
+        }
+      }
+    },
+    "trips.history" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Earlier"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidigare"
+          }
+        }
+      }
+    },
+    "trips.toCheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To check"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Att kontrollera"
+          }
+        }
+      }
+    },
+    "trips.monthTotals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{journeys}} · {{distance}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{journeys}} · {{distance}}"
+          }
+        }
+      }
+    },
+    "trips.journeysCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} trips"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} resor"
+          }
+        }
+      }
+    },
+    "trips.journeysCountOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 trip"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 resa"
+          }
+        }
+      }
+    },
+    "trips.shareText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{route}}, {{day}}{{train}} (with Clack)"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{route}}, {{day}}{{train}} (med Clack)"
+          }
+        }
+      }
+    },
+    "trips.deleteFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t delete the trip. It’s back in the list."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte radera resan. Den är tillbaka i listan."
           }
         }
       }
@@ -24470,6 +24657,40 @@
         }
       }
     },
+    "journey.arrivedLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "arrived {{min}} min late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "framme {{min}} min sent"
+          }
+        }
+      }
+    },
+    "journey.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load this journey. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta resvägen. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
     "liveMap.locationOffTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24813,6 +25034,40 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "speech.fromTo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} to {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{from}} till {{to}}"
+          }
+        }
+      }
+    },
+    "speech.times" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{dep}} to {{arr}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{dep}} till {{arr}}"
           }
         }
       }

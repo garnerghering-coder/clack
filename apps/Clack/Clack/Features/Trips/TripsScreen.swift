@@ -13,15 +13,25 @@ import SwiftUI
 final class TripsModel {
     private(set) var legs: [Leg]?
     private(set) var failed = false
+    /// The list on screen is the phone's kept copy, not yet refreshed (with when it was last fresh).
+    private(set) var savedAt: Double?
     private(set) var follows: [Follow] = []
     /// The kept details (stops and route) of the trips in the next day and a half, so they can be estimated offline.
     private var details: [String: LegDetail] = [:]
 
     func load(_ client: APIClient) async {
         failed = false
+        // The kept copy first, so the list is there at once on a slow connection (owner, 2026-11-14: "give the user
+        // stuff to have while the rest loads in"); the server's answer replaces it in place.
+        if legs == nil, let kept: [Leg] = await client.saved(["legs"]) {
+            legs = kept
+            savedAt = SavedAt.at("legs")
+        }
         do {
             let first = legs == nil
             legs = try await client.legs()
+            savedAt = nil
+            SavedAt.mark("legs")
             // Asked on a launch where a trip has already ended, not the moment one is added (user test 2026-11-07:
             // the dialog came up on top of adding a past trip, and once mid long-press after Settings).
             if first { UsageAsk.shared.check(legs ?? []) }
@@ -61,35 +71,44 @@ final class TripsModel {
         }
     }
 
-    /// Deletes a trip from the list (the hold menu on a card); the list is read again by the caller.
+    /// Deletes a trip: it leaves the list at once, and comes back if the server refuses (polish pass 1: the row
+    /// waited for the server and a failure said nothing).
     func delete(_ leg: Leg, _ client: APIClient) async -> Bool {
-        guard (try? await client.deleteLeg(leg.id)) != nil else { return false }
-        TicketStore.shared.detach(legId: leg.id)
+        let before = legs
         legs = legs?.filter { $0.id != leg.id }
+        guard (try? await client.deleteLeg(leg.id)) != nil else {
+            legs = before
+            return false
+        }
+        TicketStore.shared.detach(legId: leg.id)
         return true
     }
 
-    func answer(_ leg: Leg, _ answer: RideAnswer, _ client: APIClient) async {
-        guard let detail = try? await client.answerRide(leg.id, answer), var all = legs,
-              let index = all.firstIndex(where: { $0.id == leg.id }) else { return }
+    /// Answers a trip's ride check; false when the server couldn't be reached.
+    func answer(_ leg: Leg, _ answer: RideAnswer, _ client: APIClient) async -> Bool {
+        guard let detail = try? await client.answerRide(leg.id, answer) else { return false }
+        guard var all = legs, let index = all.firstIndex(where: { $0.id == leg.id }) else { return true }
         all[index].ride = detail.leg.ride
         all[index].rideReason = detail.leg.rideReason
         legs = all
+        return true
     }
 }
 
-enum TripsTab: String, Hashable {
-    case upcoming, past
+/// The places Trips can be scrolled to from elsewhere.
+enum TripsAnchor: String, Hashable {
+    case reviews, history
 }
 
 
-/// Trips home (DESIGN §4, product brief §5): Upcoming | Past. Upcoming leads with one featured card (route map on
-/// top, the journey under it) for the train you're on, else the next one; the rest are compact rows. Past is grouped
-/// by month.
+/// Trips home (DESIGN §4; one scroll since polish pass 1, designer 2026-11-14): the train you're on, or the next one,
+/// pinned at the top as the featured card; then the other trips ahead as compact rows; trips to check; then history
+/// by month, each month with its totals. No Upcoming/Past switch: it was louder than the trips it filtered.
 struct TripsScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(Router.self) private var router
+    @Environment(Toaster.self) private var toaster
     @State private var model = TripsModel()
     /// The welcome has been shown (`FirstRun`).
     @AppStorage(FirstRun.welcomeSeenKey) private var welcomeSeen = false
@@ -113,6 +132,7 @@ struct TripsScreen: View {
                     .transition(.opacity)
             }
         }
+        .motion(.appear, value: welcomeSeen)
         // Trips already there (an update, or a new phone with the same id): no welcome, now or later.
         .onChange(of: model.legs?.isEmpty) { _, empty in if empty == false { welcomeSeen = true } }
         .task(id: app.tripsVersion) { await model.load(app.client) }
@@ -122,6 +142,8 @@ struct TripsScreen: View {
                     Task {
                         if await model.delete(leg, app.client) {
                             app.tripsChanged()
+                        } else {
+                            toaster.show(l10n.t("trips.deleteFailed"), isError: true)
                         }
                     }
                 }
@@ -142,53 +164,68 @@ struct TripsScreen: View {
 
     @ViewBuilder
     private func content(now: Double) -> some View {
-        @Bindable var router = router
         let shown = model.legs.map { model.estimated($0, offline: app.isOffline, now: now) }
         let legs = shown ?? []
         let (upcoming, past) = TripsLogic.partition(legs, now: now)
         let hero = TripsLogic.hero(upcoming: upcoming, past: past, now: now)
-        Page {
-            PageHeader(title: l10n.t("trips.title")) {
-                HStack(spacing: Space.s) {
-                    IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
-                    SettingsLink()
-                }
-            }
-            SegmentedControl(
-                selection: $router.tripsTab,
-                options: [(TripsTab.upcoming, l10n.t("trips.upcoming")), (TripsTab.past, l10n.t("trips.past"))]
-            )
-            if model.failed {
-                Banner(kind: .error) {
+        ScrollViewReader { scroller in
+            Page {
+                PageHeader(title: l10n.t("trips.title")) {
                     HStack(spacing: Space.s) {
-                        Text(l10n.t("trips.loadError"))
-                        Button(l10n.t("trips.retry")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
+                        IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
+                        SettingsLink()
                     }
                 }
-                .countsError("trips.load")
-            }
-            if router.tripsTab == .upcoming { FollowedJourneysSection() }
-            if model.legs == nil && !model.failed {
-                VStack(spacing: Space.m) {
-                    Skeleton()
-                    Skeleton()
-                    Skeleton()
+                // Kept trips on screen and the refresh failed: said with their age, and a way to try again; never
+                // "Couldn't load your trips" over a full list (polish pass 1).
+                if model.failed, model.legs != nil {
+                    HStack(spacing: Space.s) {
+                        FreshnessLine(updatedAt: model.savedAt ?? SavedAt.at("legs") ?? Date.now.timeIntervalSince1970 * 1000, failed: true, clock: app.settings.clock)
+                        Spacer(minLength: Space.s)
+                        Button(l10n.t("common.tryAgain")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
+                    }
+                    .countsError("trips.load")
+                } else if model.failed {
+                    ErrorStateView(message: l10n.t("trips.loadError"), retry: { await model.load(app.client) }).countsError("trips.load")
+                } else if let at = model.savedAt {
+                    FreshnessLine(updatedAt: at, clock: app.settings.clock)
+                }
+                FollowedJourneysSection()
+                if model.legs == nil && !model.failed {
+                    // Shaped like what comes: the featured card, then two rows (polish pass 1: three 64 pt bars).
+                    VStack(spacing: Space.l) {
+                        Skeleton(height: 300, radius: Radius.card)
+                        Skeleton(height: 84, radius: Radius.card)
+                        Skeleton(height: 84, radius: Radius.card)
+                    }
+                }
+                if let all = shown {
+                    if all.isEmpty {
+                        EmptyStateView(
+                            icon: "train-front", title: l10n.t("trips.emptyTitle"), message: l10n.t("trips.emptyBody"),
+                            action: (l10n.t("trips.findTrain"), { router.openAdd() }),
+                            link: (l10n.t("trips.exploreTrains"), { router.tab = .explore })
+                        )
+                        FollowingSection(follows: unshared(model.follows))
+                    } else {
+                        list(all, upcoming: upcoming, past: past, hero: hero)
+                    }
                 }
             }
-            if let all = shown {
-                if all.isEmpty {
-                    emptyState
-                    if router.tripsTab == .upcoming { FollowingSection(follows: unshared(model.follows)) }
-                } else if router.tripsTab == .upcoming {
-                    upcomingTab(all, upcoming: upcoming, hero: hero)
-                } else {
-                    pastTab(past)
+            .refreshable {
+                await model.load(app.client)
+                await model.loadFollows(app.client)
+            }
+            .modifier(SwipeContainer())
+            .onChange(of: router.tripsScrollTarget, initial: true) { _, target in
+                guard let target else { return }
+                Task {
+                    // Once the list is laid out.
+                    try? await Task.sleep(for: .milliseconds(300))
+                    withAnimation(Motion.layout.animation) { scroller.scrollTo(target.rawValue, anchor: .top) }
+                    router.tripsScrollTarget = nil
                 }
             }
-        }
-        .refreshable {
-            await model.load(app.client)
-            await model.loadFollows(app.client)
         }
     }
 
@@ -198,21 +235,9 @@ struct TripsScreen: View {
         return follows.filter { !covered.contains("\($0.trainNumber)|\($0.serviceDate)") }
     }
 
-    private var emptyState: some View {
-        VStack(spacing: Space.m) {
-            DottedLine()
-            Text(l10n.t("trips.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
-            Text(l10n.t("trips.emptyBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
-            EmptyActions()
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.top, Space.xxxl)
-        .padding(.horizontal, Space.l)
-    }
-
     @ViewBuilder
-    private func upcomingTab(_ all: [Leg], upcoming: [Leg], hero: (leg: Leg, state: TripsLogic.HeroState)?) -> some View {
-        // The featured card carries its whole journey; every other journey is one card, as in Past (owner, 2026-10-25).
+    private func list(_ all: [Leg], upcoming: [Leg], past: [Leg], hero: (leg: Leg, state: TripsLogic.HeroState)?) -> some View {
+        // The featured card carries its whole journey; every other journey is one row.
         let heroJourney = hero.map { TripsLogic.journey(of: $0.leg, in: all) } ?? []
         if let hero {
             FeaturedCard(
@@ -222,48 +247,119 @@ struct TripsScreen: View {
         } else {
             NothingAhead()
         }
-        if hero != nil && upcoming.isEmpty { NothingAhead() }
         let shown = Set(heroJourney.map(\.id))
-        let items = TripsLogic.journeys(upcoming.filter { !shown.contains($0.id) })
-        VStack(alignment: .leading, spacing: Space.l) {
-            ForEach(Array(items.enumerated()), id: \.element.first?.id) { index, item in
+        let next = TripsLogic.journeys(upcoming.filter { !shown.contains($0.id) })
+        if !next.isEmpty {
+            sectionTitle(l10n.t("trips.next"))
+            ForEach(Array(next.enumerated()), id: \.element.first?.id) { index, item in
                 // A layover line between separate trips that still meet at a station.
-                let before = index == 0 ? heroJourney.last : items[index - 1].last
+                let before = index == 0 ? heroJourney.last : next[index - 1].last
                 if item.count == 1, let before, TripsLogic.meets(before, item[0]) { Layover(a: before, b: item[0]) }
-                if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0], upcoming: true).contextMenu { holdMenu(item[0]) } }
+                row(item, upcoming: true)
+            }
+        }
+        let toCheck = past.filter { $0.ride == .review }
+        if !toCheck.isEmpty {
+            sectionTitle(l10n.t("trips.toCheck")).id(TripsAnchor.reviews.rawValue)
+            ForEach(toCheck) { leg in
+                ReviewCard(leg: leg) { answer in
+                    if !(await model.answer(leg, answer, app.client)) { toaster.show(l10n.t("common.couldntSave"), isError: true) }
+                }
             }
         }
         FollowingSection(follows: unshared(model.follows))
+        let history = past.filter { !shown.contains($0.id) }
+        ForEach(Array(TripsLogic.months(history, language: app.settings.language).enumerated()), id: \.element.label) { index, month in
+            Section {
+                ForEach(month.items, id: \.first?.id) { item in row(item, upcoming: false) }
+            } header: {
+                monthHeader(month).id(index == 0 ? TripsAnchor.history.rawValue : "month-\(month.label)")
+            }
+        }
     }
 
-    /// Holding a trip in the list (user test 2026-11-07: "deleting a trip is open → … → Delete"; "no context menu
-    /// anywhere"): open it, or delete it.
+    /// A journey's compact row, or a single trip's, with the same actions on a swipe and a hold, in the same order:
+    /// Share, then Delete (owner, 2026-11-14). A journey's row opens the journey, where its trains can be deleted.
     @ViewBuilder
-    private func holdMenu(_ leg: Leg) -> some View {
-        Button { router.push(.trip(leg.id)) } label: { Label(l10n.t("add.viewTrip"), systemImage: "arrow.up.right") }
+    private func row(_ item: [Leg], upcoming: Bool) -> some View {
+        if item.count > 1 {
+            JourneyCard(legs: item)
+                .contextMenu { shareButton(item) }
+                .modifier(TripSwipe { shareButton(item) })
+                .modifier(LandsWhenAdded(ids: item.map(\.id)))
+        } else {
+            LegRow(leg: item[0], upcoming: upcoming)
+                .contextMenu { actions(item[0]) }
+                .modifier(TripSwipe { actions(item[0]) })
+                .modifier(LandsWhenAdded(ids: [item[0].id]))
+        }
+    }
+
+    @ViewBuilder
+    private func actions(_ leg: Leg) -> some View {
+        shareButton([leg])
         Button(role: .destructive) { deleting = leg } label: { Label(l10n.t("detail.delete"), systemImage: "trash") }
     }
 
-    @ViewBuilder
-    private func pastTab(_ past: [Leg]) -> some View {
-        ForEach(past.filter { $0.ride == .review }) { leg in
-            ReviewCard(leg: leg) { answer in await model.answer(leg, answer, app.client) }
+    private func shareButton(_ legs: [Leg]) -> some View {
+        ShareLink(item: shareText(legs)) { Label(l10n.t("common.share"), systemImage: "square.and.arrow.up") }
+    }
+
+    /// "Stockholm C → Göteborg C, Fri 17 Oct · SJ 523 (with Clack)".
+    private func shareText(_ legs: [Leg]) -> String {
+        guard let first = legs.first, let last = legs.last else { return "" }
+        let train = legs.count == 1 ? Format.service(first.operator?.name, first.trainNumber) : l10n.t("journey.label", count: legs.count)
+        return l10n.t("trips.shareText", [
+            "route": "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")",
+            "day": first.schedDep.map { Format.day($0.ms, tz: TripsLogic.tz(first), language: app.settings.language) } ?? "",
+            "train": train.isEmpty ? "" : Format.separator + train,
+        ])
+    }
+
+    private func sectionTitle(_ text: String) -> some View {
+        Text(text).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, Space.s)
+            .accessibilityAddTraits(.isHeader)
+    }
+
+    /// "October 2026", and the month's trips and distance (designer, 2026-11-14: "give month headers a job").
+    private func monthHeader(_ month: TripsLogic.MonthGroup) -> some View {
+        let count = month.tripCount == 1 ? l10n.t("trips.journeysCountOne") : l10n.t("trips.journeysCount", ["count": String(month.tripCount)])
+        let distance = month.distanceM > 0 ? Format.distance(month.distanceM, unit: app.settings.distanceUnit, language: app.settings.language) : nil
+        return HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+            Text(month.label).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            Spacer(minLength: Space.s)
+            Text(Format.join([count, distance])).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
         }
-        if past.isEmpty { Text(l10n.t("trips.noPast")).clack(.body).foregroundStyle(Ink.text2) }
-        ForEach(TripsLogic.months(past, language: app.settings.language), id: \.label) { month in
-            Section {
-                VStack(spacing: Space.s) {
-                    ForEach(month.items, id: \.first?.id) { item in
-                        if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0]).contextMenu { holdMenu(item[0]) } }
-                    }
-                }
-            } header: {
-                Text(month.label)
-                    .clack(.sectionHeader).foregroundStyle(Ink.text2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, Space.m).padding(.bottom, Space.s)
-                    .background(Ink.bg)
-            }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, Space.m).padding(.bottom, Space.s)
+        .background(Ink.bg)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
+    }
+}
+
+/// Swipe actions on a row of the Trips list: iOS 27 lets them work outside a `List` (a `LazyVStack` in a scroll
+/// view), so they're there from iOS 27; before, the hold menu has the same actions.
+private struct TripSwipe<Actions: View>: ViewModifier {
+    @ViewBuilder var actions: Actions
+
+    func body(content: Content) -> some View {
+        if #available(iOS 27.0, *) {
+            content.swipeActions(edge: .trailing, allowsFullSwipe: false) { actions }
+        } else {
+            content
+        }
+    }
+}
+
+private struct SwipeContainer: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 27.0, *) {
+            content.swipeActionsContainer()
+        } else {
+            content
         }
     }
 }

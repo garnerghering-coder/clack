@@ -58,15 +58,15 @@ struct AddTrainSheet: View {
         if let saved = model.saved {
             DoneStep(leg: saved) { model.reset() }
         } else if model.manual {
-            ManualTripStep(date: model.date, from: model.interpretation?.from, to: model.interpretation?.to) { model.manual = false } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
+            ManualTripStep(date: model.date, from: model.interpretation?.from, to: model.interpretation?.to) { model.manual = false } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
         } else if let journey = model.pickedJourney {
-            PlannedJourneyStep(journey: journey) { model.pickedJourney = nil } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
+            PlannedJourneyStep(journey: journey) { model.pickedJourney = nil } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
         } else if let connection = model.pickedConnection {
-            ConfirmConnectionStep(connection: connection) { model.pickedConnection = nil } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
+            ConfirmConnectionStep(connection: connection) { model.pickedConnection = nil } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
         } else if let picked = model.picked {
             ConfirmStep(
                 result: picked, originChosen: model.originChosen, backLabel: model.openedWithTrip ? l10n.t("common.back") : nil,
-                onBack: { model.openedWithTrip ? router.closeAdd() : (model.picked = nil) }, onSaved: { model.didSave($0, app.client); app.tripsChanged() }
+                onBack: { model.openedWithTrip ? router.closeAdd() : (model.picked = nil) }, onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
             )
         } else {
             ScrollViewReader { proxy in SearchStep(scroller: proxy) }

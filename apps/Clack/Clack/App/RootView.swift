@@ -16,6 +16,13 @@ struct RootView: View {
     /// The one toast line any screen can show (polish pass 1: a failed action says so; a removal offers Undo).
     @State private var toaster = Toaster()
     @State private var ticketReturn = TicketReturnState()
+    @Namespace private var zoom
+    /// Where you were, brought back when iOS reopens the app it closed in the background (polish pass 1): the tab and
+    /// each tab's open screens.
+    @SceneStorage("restore.tab") private var savedTab = ""
+    @SceneStorage("restore.trips") private var savedTrips = ""
+    @SceneStorage("restore.explore") private var savedExplore = ""
+    @SceneStorage("restore.passport") private var savedPassport = ""
     @State private var splashMinDone = false
     @State private var splashGone = false
     /// A tap on the splash, or 1.2 s gone: the app shows whatever it has (polish pass 1: the splash never holds it).
@@ -160,6 +167,11 @@ struct RootView: View {
         // Anything the person opens or switches before the landing rule has decided cancels it. (A zero-distance drag
         // over the whole app did this before; it took taps from the tab bar, the segmented control and menus.)
         .modifier(TouchWatch(router: router))
+        .onAppear { restorePlace() }
+        .onChange(of: router.tab) { _, tab in savedTab = tab.rawValue }
+        .onChange(of: router.tripsPath) { _, path in savedTrips = AppRoute.save(path) }
+        .onChange(of: router.explorePath) { _, path in savedExplore = AppRoute.save(path) }
+        .onChange(of: router.passportPath) { _, path in savedPassport = AppRoute.save(path) }
         .task {
             // The flip takes about 0.46 s.
             try? await Task.sleep(for: .milliseconds(500))
@@ -204,6 +216,19 @@ struct RootView: View {
         #else
         false
         #endif
+    }
+
+    /// Puts back the tab and the open screens iOS kept for this scene, unless something (a link, an alert, a launch
+    /// argument) has already said where to go. Counts as a touch, so the landing rule leaves it there.
+    private func restorePlace() {
+        guard !router.touched, router.tripsPath.isEmpty, router.explorePath.isEmpty, router.passportPath.isEmpty,
+              let tab = PrimaryTab(rawValue: savedTab) else { return }
+        let trips = AppRoute.restore(savedTrips), explore = AppRoute.restore(savedExplore), passport = AppRoute.restore(savedPassport)
+        router.tab = tab
+        router.tripsPath = trips
+        router.explorePath = explore
+        router.passportPath = passport
+        router.touched = true
     }
 
     private func openAlert() {
@@ -254,6 +279,8 @@ struct RootView: View {
                 root()
                     .appDestinations()
             }
+            // Cards and the screens they open share it: a trip zooms out of its card (polish pass 1).
+            .environment(\.zoomNamespace, zoom)
         }
         .motion(.layout, value: app.isOffline)
         // Above the tab bar (this is inside the tab, so the bottom safe area already clears the bar): the ticket
@@ -303,7 +330,6 @@ private struct TouchWatch: ViewModifier {
                 Usage.shared.count(.screen, "tab.\(tab.rawValue)")
             }
             .onAppear { Usage.shared.count(.screen, "tab.\(router.tab.rawValue)") }
-            .onChange(of: router.tripsTab) { router.touched = true }
             .onChange(of: router.tripsPath.count + router.explorePath.count + router.passportPath.count) { router.touched = true }
             .onChange(of: router.addRequest == nil) { router.touched = true }
     }

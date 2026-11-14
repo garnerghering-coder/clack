@@ -275,6 +275,14 @@ public struct FlapTime: View {
         self.colour = colour
     }
 
+    /// Whether a changed time is worth the accent colour: 6 minutes or more either way (designer, 2026-11-14: "a
+    /// one-minute delay on a finished trip gets the biggest, brightest text on the card"). Smaller changes still show
+    /// the timetabled time struck through, in plain ink.
+    public static func notable(_ time: Double?, from sched: Double?) -> Bool {
+        guard let time, let sched else { return false }
+        return abs(floor(time / 60_000) - floor(sched / 60_000)) > Double(5)
+    }
+
     /// Whether `time` is in a different minute from `sched`.
     public static func changed(_ time: Double?, from sched: Double?) -> Bool {
         guard let time, let sched else { return false }
@@ -295,13 +303,14 @@ public struct FlapTime: View {
                         .fixedSize()
                 }
                 if style == .text {
+                    let notable = Self.notable(time, from: sched)
                     Text(text)
                         .monospacedDigit()
-                        .fontWeight(changed ? .bold : nil)
-                        .foregroundStyle(changed ? (colour ?? Ink.accentInk) : Ink.text)
+                        .fontWeight(notable ? .bold : nil)
+                        .foregroundStyle(notable ? (colour ?? Ink.accentInk) : Ink.text)
                         .contentTransition(.numericText())
                 } else {
-                    SplitFlap(value: text, size: flapSize, intro: intro, colour: changed ? (colour ?? Ink.accentInk) : nil, tick: tick)
+                    SplitFlap(value: text, size: flapSize, intro: intro, colour: Self.notable(time, from: sched) ? (colour ?? Ink.accentInk) : nil, tick: tick)
                         .accessibilityLabel(changed ? "\(text) (\(schedText ?? ""))" : text)
                 }
             }

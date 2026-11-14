@@ -58,7 +58,7 @@ public struct TimePair: View {
     private static func part(_ end: End, clock: ClockFormat) -> Text {
         guard let time = end.time else { return Text(Format.unknown).foregroundStyle(Ink.text2) }
         let shown = Text(Format.time(time, tz: end.tz, clock: clock))
-        return FlapTime.changed(time, from: end.sched) ? shown.foregroundStyle(Ink.accentInk).bold() : shown
+        return FlapTime.notable(time, from: end.sched) ? shown.foregroundStyle(Ink.accentInk).bold() : shown
     }
 
     /// "+1", the one style for a later day.

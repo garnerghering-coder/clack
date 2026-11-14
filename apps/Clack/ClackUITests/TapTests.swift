@@ -35,34 +35,40 @@ final class TapTests: XCTestCase {
         XCTWaiter().wait(for: [expectation(for: NSPredicate(format: format), evaluatedWith: element)], timeout: 5) == .completed
     }
 
+    /// A past trip of the sample phone, by its train number: one scroll since polish pass 1 (no Upcoming/Past), and
+    /// each row reads as one sentence starting with the train.
     @MainActor
-    func testUpcomingAndPastSwitch() throws {
+    private func scrollToRow(_ app: XCUIApplication, startingWith text: String) -> XCUIElement {
+        let row = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", text)).firstMatch
+        var tries = 0
+        while !(row.exists && row.isHittable) && tries < 12 {
+            app.swipeUp()
+            tries += 1
+        }
+        return row
+    }
+
+    @MainActor
+    func testHistoryIsInTheSameScroll() throws {
         let app = launch()
-        let past = app.buttons["Past"]
-        XCTAssertTrue(past.waitForExistence(timeout: 15))
-        past.tap()
-        XCTAssertTrue(waitFor(past, "isSelected == true"), "Past didn't take the tap")
-        let upcoming = app.buttons["Upcoming"]
-        upcoming.tap()
-        XCTAssertTrue(waitFor(upcoming, "isSelected == true"), "Upcoming didn't take the tap")
+        XCTAssertTrue(app.staticTexts["Trips"].waitForExistence(timeout: 15))
+        let row = scrollToRow(app, startingWith: "SJ 439")
+        XCTAssertTrue(row.exists && row.isHittable, "a past trip wasn't reached by scrolling")
     }
 
     @MainActor
     func testOpenATripAndGoBack() throws {
         let app = launch()
-        let past = app.buttons["Past"]
-        XCTAssertTrue(past.waitForExistence(timeout: 15))
-        past.tap()
-        // A past trip of the sample phone, by its train number.
-        let row = app.staticTexts["SJ 439"].firstMatch
-        XCTAssertTrue(row.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Trips"].waitForExistence(timeout: 15))
+        let row = scrollToRow(app, startingWith: "SJ 439")
+        XCTAssertTrue(row.exists)
         row.tap()
         // The system's back button since build 59 (the trip page has the navigation bar again).
         let back = app.navigationBars.buttons.element(boundBy: 0)
         XCTAssertTrue(back.waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["trip.more"].exists)
         back.tap()
-        XCTAssertTrue(app.buttons["Past"].waitForExistence(timeout: 5), "Back didn't go back")
+        XCTAssertTrue(app.staticTexts["Trips"].waitForExistence(timeout: 5), "Back didn't go back")
     }
 
     @MainActor
@@ -84,18 +90,12 @@ final class TapTests: XCTestCase {
         XCTAssertTrue(waitFor(trips, "isSelected == true"), "The Trips tab didn't take the tap")
     }
 
-    /// Taps the switch back and forth and counts the taps that didn't land (should be none).
+    /// Taps the tabs back and forth and counts the taps that didn't land (should be none).
     @MainActor
     func testManyTaps() throws {
         let app = launch()
-        let past = app.buttons["Past"], upcoming = app.buttons["Upcoming"]
-        XCTAssertTrue(past.waitForExistence(timeout: 15))
+        XCTAssertTrue(app.tabBars.buttons["Passport"].waitForExistence(timeout: 15))
         var missed: [Int] = []
-        for i in 0..<12 {
-            let target = i % 2 == 0 ? past : upcoming
-            target.tap()
-            if !waitFor(target, "isSelected == true") { missed.append(i) }
-        }
         let tabs = ["Passport", "Explore", "Trips", "Passport", "Trips"]
         for (i, name) in tabs.enumerated() {
             let b = app.tabBars.buttons[name]

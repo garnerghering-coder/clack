@@ -23,8 +23,8 @@ private struct DestinationView: View {
 
     var body: some View {
         switch route {
-        case .trip(let id): TripDetailScreen(id: id)
-        case .journey(let id): JourneyScreen(id: id)
+        case .trip(let id): TripDetailScreen(id: id).modifier(ZoomDestination(id: "trip-\(id)"))
+        case .journey(let id): JourneyScreen(id: id).modifier(ZoomDestination(id: "journey-\(id)"))
         case .following(let token): FollowingScreen(token: token)
         case .settings: SettingsScreen()
         case .about: AboutScreen()
@@ -62,5 +62,41 @@ extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
 
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         viewControllers.count > 1
+    }
+}
+
+// MARK: zoom from a card (polish pass 1)
+
+extension EnvironmentValues {
+    /// The namespace a tab's stack shares between its cards and the screens they open, for the zoom transition.
+    @Entry var zoomNamespace: Namespace.ID?
+}
+
+/// A trip or journey card: the place its screen zooms out of, and back into (iOS 18 and later; a push before).
+struct ZoomSource: ViewModifier {
+    let id: String
+    @Environment(\.zoomNamespace) private var namespace
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *), let namespace {
+            content.matchedTransitionSource(id: id, in: namespace) { $0.clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous)) }
+        } else {
+            content
+        }
+    }
+}
+
+/// A trip's or journey's screen: zooms out of the card that opened it (iOS 18 and later). Opened from anywhere else
+/// (a link, the Passport), there is no card with its id and it arrives as a push.
+struct ZoomDestination: ViewModifier {
+    let id: String
+    @Environment(\.zoomNamespace) private var namespace
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *), let namespace {
+            content.navigationTransition(.zoom(sourceID: id, in: namespace))
+        } else {
+            content
+        }
     }
 }

@@ -38,20 +38,20 @@ nonisolated enum AppRoute: Hashable, Sendable {
 @Observable
 final class Router {
     var tab: PrimaryTab = .trips
-    /// Which part of Trips shows (Passport links to Past).
-    var tripsTab: TripsTab = .upcoming
+    /// Where Trips should scroll to once (Passport's "trips to check" link): one scroll since polish pass 1, no tabs.
+    var tripsScrollTarget: TripsAnchor?
     /// Set by any touch or link before the landing rule has decided: it then leaves the tab alone.
     var touched = false
 
     init() {
         #if DEBUG
-        // Launch arguments for checking a screen without tapping: `-tab explore`, `-tripsTab past`.
+        // Launch arguments for checking a screen without tapping: `-tab explore`, `-tripsTab past` (scrolls to history).
         let args = CommandLine.arguments
         func value(_ flag: String) -> String? {
             args.firstIndex(of: flag).flatMap { args.indices.contains($0 + 1) ? args[$0 + 1] : nil }
         }
         if let raw = value("-tab"), let tab = PrimaryTab(rawValue: raw) { self.tab = tab }
-        if let raw = value("-tripsTab"), let tab = TripsTab(rawValue: raw) { tripsTab = tab }
+        if value("-tripsTab") == "past" { tripsScrollTarget = .history }
         // `-add` opens the Add a train sheet; `-addTrip <key>|<date>|<from>|<to>` at its confirm step.
         if args.contains("-add") { addRequest = AddRequest(link: nil) }
         // `-firstRun` shows the welcome and the alerts question again, as on a new phone.
@@ -286,5 +286,59 @@ extension AppRoute {
         case .walkLogger: .other
         case .testAlerts: .other
         }
+    }
+}
+
+// MARK: restoring where you were (polish pass 1)
+
+extension AppRoute {
+    /// The route as a short string for `@SceneStorage`, so after iOS has closed the app in the background it opens
+    /// on the same trip; nil for routes not worth bringing back (a station map, the test tools).
+    var restorable: String? {
+        switch self {
+        case .trip(let id): "trip:\(id)"
+        case .journey(let id): "journey:\(id)"
+        case .following(let token): "following:\(token)"
+        case .settings: "settings"
+        case .about: "about"
+        case .privacy: "privacy"
+        case .board(let id, let arrivals): "board:\(arrivals ? 1 : 0):\(id)"
+        case .passportBreakdown: "passportBreakdown"
+        case .passportMilestones: "passportMilestones"
+        case .stations, .stationMap, .walkLogger, .testAlerts: nil
+        }
+    }
+
+    init?(restored text: String) {
+        let parts = text.split(separator: ":", maxSplits: 1).map(String.init)
+        switch (parts.first, parts.count > 1 ? parts[1] : nil) {
+        case ("trip", let id?): self = .trip(id)
+        case ("journey", let id?): self = .journey(id)
+        case ("following", let token?): self = .following(token)
+        case ("settings", nil): self = .settings
+        case ("about", nil): self = .about
+        case ("privacy", nil): self = .privacy
+        case ("passportBreakdown", nil): self = .passportBreakdown
+        case ("passportMilestones", nil): self = .passportMilestones
+        case ("board", let rest?):
+            let p = rest.split(separator: ":", maxSplits: 1).map(String.init)
+            guard p.count == 2 else { return nil }
+            self = .board(stationId: p[1], arrivals: p[0] == "1")
+        default: return nil
+        }
+    }
+
+    /// A stack as one string, up to the first route that isn't brought back.
+    static func save(_ path: [AppRoute]) -> String {
+        var out: [String] = []
+        for route in path {
+            guard let text = route.restorable else { break }
+            out.append(text)
+        }
+        return out.joined(separator: "\n")
+    }
+
+    static func restore(_ text: String) -> [AppRoute] {
+        text.split(separator: "\n").compactMap { AppRoute(restored: String($0)) }
     }
 }

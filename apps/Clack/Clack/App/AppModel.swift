@@ -36,6 +36,9 @@ final class AppModel {
 
     func tripsChanged() { tripsVersion += 1 }
 
+    /// The trip just added: its row lands in Trips (signature moment 3, polish pass 1), then this is cleared.
+    var justAdded: String?
+
     /// The last change to settings couldn't be saved.
     private(set) var saveFailed = false
 
