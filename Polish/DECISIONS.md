@@ -292,3 +292,10 @@ Left in build 73, and why:
 | B75.8 | Departures widget failure | "Couldn't load the board. Retrying…" (a widget doesn't visibly retry) | "Couldn't update. Open Clack for the latest departures." | `DeparturesWidgetView`, catalog `widgets.boardFailed` | Same |
 | B75.9 | Next-trip widget progress | Yellow | The operator's colour (DESIGN §2.5) | `NextJourneyWidgetView.progress` | Same |
 | B75.10 | Siri (designer, owner: build it) | — | An App Shortcut, "When's my train in Clack" (also "When does my train leave", "Where's my train"; Swedish "När går mitt tåg i Clack"). It answers without opening the app: "SJ 523 to Göteborg C leaves today at 08:03 from platform 4, 3 min late", or the arrival when you're on it, or that nothing is coming up. The trips are the server's, else the phone's kept copy; the language is Clack's setting | `Clack/App/Intents/NextTrainIntent.swift`; phrases in `Clack/AppShortcuts.xcstrings`; the intent's title and description in `Clack/Localizable.xcstrings` (App Intents read titles only from the app's own bundle, so these two are the one exception to ClackKit's catalog); the spoken sentence in ClackKit's catalog (`intents.nextTrain.*`) | Delete those three files |
+
+## Found in verification
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| V.1 | Settings switches | Showed in the app-wide accent ink (black on light), not the system green as decided | Explicitly the system green (`Look.toggleTint`) | `Look.swift` | — |
+| V.2 | Journey bar labels at AX3 | "Stockh…", "chang…", "CPH Ai…" | Stacked at the accessibility sizes, nothing cut | `JourneyBar` (`AdaptiveStack`) | — |

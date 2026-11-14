@@ -15,6 +15,7 @@ import SwiftUI
 /// as it has gone), each change a gap as long as the wait; the first departure and last arrival under it.
 struct JourneyBar: View {
     @Environment(AppModel.self) private var app
+    @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(L10n.self) private var l10n
     @Environment(\.colorScheme) private var scheme
     let legs: [Leg]
@@ -71,16 +72,17 @@ struct JourneyBar: View {
                 .frame(maxHeight: .infinity, alignment: .center)
             }
             .frame(height: 10)
-            HStack(spacing: Space.s) {
-                Text("\(Format.time(dep, tz: first.map(TripsLogic.tz) ?? "Europe/Stockholm", clock: app.settings.clock)) \(first?.origin?.name ?? "")")
-                Spacer(minLength: 4)
+            // Stacked at the accessibility sizes, so the names and the changes aren't cut (polish pass 1, AX3).
+            AdaptiveStack(spacing: Space.s) {
+                Text(verbatim: "\(Format.time(dep, tz: first.map(TripsLogic.tz) ?? "Europe/Stockholm", clock: app.settings.clock)) \(first?.origin?.name ?? "")")
+                Spacer(minLength: Space.xs)
                 Text(summary(dep: dep, arr: arr)).multilineTextAlignment(.center)
-                Spacer(minLength: 4)
-                Text("\(Format.time(arr, tz: last?.destination?.tz ?? "Europe/Stockholm", clock: app.settings.clock)) \(last?.destination?.name ?? "")")
+                Spacer(minLength: Space.xs)
+                Text(verbatim: "\(Format.time(arr, tz: last?.destination?.tz ?? "Europe/Stockholm", clock: app.settings.clock)) \(last?.destination?.name ?? "")")
                     .multilineTextAlignment(.trailing)
             }
-            .clack(.micro).foregroundStyle(Ink.text2)
-            .lineLimit(2)
+            .clack(.micro).monospacedDigit().foregroundStyle(Ink.text2)
+            .lineLimit(typeSize.isAccessibilitySize ? nil : 2)
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel([

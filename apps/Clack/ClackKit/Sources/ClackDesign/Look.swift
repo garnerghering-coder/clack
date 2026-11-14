@@ -46,14 +46,13 @@ public enum Look {
     public static var selectionFill: Color { selection == .ink ? Ink.text : Ink.accent }
     /// The text on a chosen chip or segment.
     public static var onSelection: Color { selection == .ink ? Ink.bg : Ink.onAccent }
-    /// The tint of a `Toggle`; nil leaves the system's.
-    public static var toggleTint: Color? { toggles == .yellow ? Ink.accent : nil }
+    /// The tint of a `Toggle`: the system's green, said explicitly (left alone, a switch took the app-wide accent ink).
+    public static var toggleTint: Color { toggles == .yellow ? Ink.accent : .green }
 }
 
 extension View {
     /// A `Toggle`'s tint as `Look.toggles` says.
-    @ViewBuilder
     public func clackToggleTint() -> some View {
-        if let tint = Look.toggleTint { self.tint(tint) } else { self }
+        tint(Look.toggleTint)
     }
 }
