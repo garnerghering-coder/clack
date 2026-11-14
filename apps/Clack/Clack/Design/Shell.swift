@@ -70,6 +70,21 @@ struct BackLink: View {
     }
 }
 
+/// The top edge of a tab root that hides the system bar and draws its own header (Trips, Passport): the background
+/// colour behind the status bar, so the page scrolls under it instead of into the clock (designer, 2026-11-14).
+private struct StatusBarBackdrop: ViewModifier {
+    func body(content: Content) -> some View {
+        content.safeAreaInset(edge: .top, spacing: 0) {
+            // A zero-height inset whose background runs up into the status bar's area.
+            Color.clear.frame(height: 0).background(Ink.bg)
+        }
+    }
+}
+
+extension View {
+    func statusBarBackdrop() -> some View { modifier(StatusBarBackdrop()) }
+}
+
 /// The page body: a scrolling column with 16 pt gutters and 16 pt between blocks (`.page`).
 struct Page<Content: View>: View {
     @ViewBuilder var content: Content

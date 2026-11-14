@@ -102,6 +102,7 @@ struct TripsScreen: View {
             content(now: context.date.timeIntervalSince1970 * 1000)
         }
         .toolbar(.hidden, for: .navigationBar)
+        .statusBarBackdrop()
         // The first time, over the empty list: what Clack does and how to start.
         .overlay {
             // Also when the list couldn't be fetched yet on a new phone: the welcome, not a red "Couldn't load" as

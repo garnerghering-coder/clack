@@ -54,6 +54,7 @@ struct PassportScreen: View {
         }
         .refreshable { await load() }
         .toolbar(.hidden, for: .navigationBar)
+        .statusBarBackdrop()
         .task(id: "\(year.map(String.init) ?? "all")|\(settings.includeCommuter)|\(activeComparison.rawValue)") { await load() }
         .sheet(isPresented: $sharing) {
             if let data { ShareSheet(passport: data, year: year, commuter: settings.includeCommuter) { sharing = false } }
