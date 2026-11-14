@@ -25,7 +25,11 @@ struct StationMapScreen: View {
     @State private var loaded = Loaded.loading
     @State private var info: StationInfo?
     @State private var level: String?
+    /// The chip picked; the essentials when none is (polish pass 1).
     @State private var filter: String?
+    /// Closed places hidden unless asked for (designer, 2026-11-14).
+    @State private var showClosed = false
+    @State private var showAboutMap = false
     @State private var listView = false
     /// The 3D view (one-station demo, Debug builds on iOS 18 and later).
     @State private var show3D = false
@@ -252,9 +256,11 @@ struct StationMapScreen: View {
         let toE = StationRouting.resolveEndpoint(map, to)
         let route = StationRouting.routeBetween(map, fromE, toE, profile: profile)
         let detours: [String: Double]? = along && route != nil ? StationRouting.secondsFrom(map, sources: route!.nodes.map(\.id), profile: profile) : nil
-        let activeCategories = filter.flatMap { key in StationSceneLogic.filters.first { $0.key == key }?.categories }
+        let activeCategories = StationSceneLogic.filters.first { $0.key == (filter ?? "essentials") }?.categories
+        let hoursWindow = window()
         let dim: (StationPoi) -> Bool = { p in
             (activeCategories.map { !$0.contains(p.category) } ?? false) || (detours.map { !(($0[p.node] ?? .infinity) <= StationSceneLogic.alongSeconds) } ?? false)
+                || (!showClosed && OpeningHours.openState(p.openingHours, from: hoursWindow.0, to: hoursWindow.1).state == .closed)
         }
         let layover = arr != nil && dep != nil
         let dark = app.colorScheme != .light
@@ -286,7 +292,7 @@ struct StationMapScreen: View {
                 list(map, dim: dim, detours: detours)
             } else {
                 StationSceneView(
-                    map: map, level: level, route: route, marks: marks, pins: pins, poiState: state, dimPoi: dim,
+                    map: map, level: level, route: route, marks: marks, pins: pins, poiState: state, dimPoi: dim, hideDimmed: !planningOrSet,
                     onPoi: { poi = $0 }, onPoiGroup: { poiGroup = PoiGroup(pois: $0) }, fitKey: "\(from ?? "")|\(to ?? "")|\(level)", selectedPoi: poi?.id,
                     insets: .init(top: 140, bottom: (layover ? 250 : planningOrSet ? 320 : 150))
                 )
@@ -369,7 +375,20 @@ struct StationMapScreen: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(map.name).clack(.headline).foregroundStyle(Ink.text).lineLimit(1)
                 if map.quality != .handCurated {
-                    Text(l10n.t("stationMap.draftOsm")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
+                    Button { showAboutMap = true } label: {
+                        HStack(spacing: Space.xs) {
+                            Text(l10n.t("stationMap.draftOsm")).lineLimit(1)
+                            LucideIcon(name: "info", size: 12)
+                        }
+                        .clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint(l10n.t("stationMap.aboutHint"))
+                    .alert(l10n.t("stationMap.aboutTitle"), isPresented: $showAboutMap) {
+                        Button(l10n.t("common.close"), role: .cancel) {}
+                    } message: {
+                        Text(Format.join([StationSceneLogic.coverageNote(map).map { l10n.t($0) }, l10n.t("stationMap.hoursNote")], separator: "\n\n"))
+                    }
                 }
             }
                 .padding(.vertical, Space.s).padding(.horizontal, Space.m)
@@ -387,8 +406,10 @@ struct StationMapScreen: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: Space.s) {
                 ForEach(StationSceneLogic.filters, id: \.key) { f in
-                    ChipButton(text: l10n.t("stationMap.filters.\(f.key)"), active: filter == f.key) { filter = filter == f.key ? nil : f.key }
+                    let active = (filter ?? "essentials") == f.key
+                    ChipButton(text: l10n.t("stationMap.filters.\(f.key)"), active: active) { filter = active ? nil : f.key }
                 }
+                ChipButton(text: l10n.t("stationMap.showClosed"), active: showClosed) { showClosed.toggle() }
             }
             .padding(.horizontal, Space.m)
         }
@@ -529,13 +550,10 @@ struct StationMapScreen: View {
                         timeChip
                         if picked != nil { ChipButton(text: l10n.t("stationMap.now")) { picked = nil } }
                     }
-                    Text(l10n.t("stationMap.timeHint")).clack(.caption).foregroundStyle(Ink.text2)
                 }
-                // What the draft doesn't have yet, in full (the header has room for "Draft" only).
-                if let note = StationSceneLogic.coverageNote(map) {
-                    Text(l10n.t(note)).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
-                }
-                Text("\(l10n.t("stationMap.hoursNote")) · © OpenStreetMap contributors").clack(.mapAttribution).foregroundStyle(Ink.text3)
+                // The credit stays; what the map lacks and the note on holiday hours are behind ⓘ by the name
+                // (designer, 2026-11-14: the bottom card was mostly explanation).
+                Text(verbatim: "© OpenStreetMap contributors").clack(.mapAttribution).foregroundStyle(Ink.text3)
             }
             .padding(Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -574,9 +592,11 @@ struct StationMapScreen: View {
 
     /// The time to look at opening hours for: the system's own time picker, in sight (designer, 2026-11-07: the
     /// picker hidden under a chip meant "Now" did nothing anyone could see).
+    /// "Open at 22:40": the time the open and closed states are for, in one chip (the line explaining it is gone).
     private var timeChip: some View {
         HStack(spacing: Space.s) {
             LucideIcon(name: "clock", size: 14).foregroundStyle(Ink.text2)
+            Text(l10n.t("stationMap.openAt")).clack(.caption).foregroundStyle(Ink.text2)
             DatePicker("", selection: Binding(get: { picked ?? Date() }, set: { picked = $0 }), displayedComponents: .hourAndMinute)
                 .labelsHidden()
                 .tint(Ink.accentInk)

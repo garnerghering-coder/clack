@@ -114,6 +114,38 @@ final class ExploreModel {
         controller.centreOnUser()
     }
 
+    @ObservationIgnored private var openedWhereItMatters = false
+
+    /// Once, when the map is first ready (designer, 2026-11-14: "open on the user's region or their next route, not
+    /// all four countries with most of the screen empty"): your trip's route if one runs or leaves within 24 hours,
+    /// else where you are if location is already allowed (never asked for here), else the four countries as before.
+    /// Never over something you've opened or moved to already.
+    func openWhereItMatters() async {
+        guard !openedWhereItMatters, let client = app?.client else { return }
+        openedWhereItMatters = true
+        #if DEBUG
+        let args = CommandLine.arguments
+        if ["-exploreAt", "-train", "-station", "-exploreSearch", "-exploreSelect", "-exploreCorridor"].contains(where: args.contains) { return }
+        #endif
+        let now = Date.now.timeIntervalSince1970 * 1000
+        var legs: [Leg] = await client.saved(["legs"]) ?? []
+        if legs.isEmpty { legs = (try? await client.legs()) ?? [] }
+        let (upcoming, past) = TripsLogic.partition(legs, now: now)
+        if let hero = TripsLogic.hero(upcoming: upcoming, past: past, now: now), hero.state != .arrived,
+           let dep = hero.leg.schedDep?.ms, dep - now < 24 * 3_600_000,
+           let detail = try? await client.leg(hero.leg.id) {
+            let route = detail.mapRoute().route
+            if route.count > 1, untouched {
+                controller.fit(route, padding: UIEdgeInsets(top: 140, left: 60, bottom: 200, right: 60))
+                return
+            }
+        }
+        if LocationModel.shared.allowed, untouched { controller.centreOnUser() }
+    }
+
+    /// Nothing opened on the map yet: a train, a station, a search.
+    private var untouched: Bool { selected == nil && scheduled == nil && stationSheet == nil && !searching }
+
     /// The theme the map is drawn in (colours of markers and routes).
     var dark = true
 
@@ -141,6 +173,7 @@ final class ExploreModel {
             self?.ready = true
             self?.needsFullRender = true
             self?.scheduleRender()
+            Task { await self?.openWhereItMatters() }
         }
         // A new map (the theme changed): not ready until its style loads, so the stream starts again once it is.
         controller.onRebuild = { [weak self] in

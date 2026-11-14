@@ -391,13 +391,40 @@ struct LiveStationSheet: View {
     /// Taps on the star (the haptic follows the finger, not the favourite loading).
     @State private var favoriteTaps = 0
     @Environment(Toaster.self) private var toaster
+    @Environment(PassportStore.self) private var passport
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var boardFailed = false
+    /// Pulled up: the next twelve departures in place, instead of four.
+    @State private var expanded = false
+
+    private func boardRow(_ row: BoardRow, now: Double) -> some View {
+        let time = row.estimated ?? row.advertised
+        let minutes = Int(((time - now) / 60_000).rounded(.down))
+        let countdown: String? = minutes <= 0 ? l10n.t("board.now") : minutes < 60 ? l10n.t("board.minutes", ["min": String(minutes)]) : nil
+        return Button { onTrain(row) } label: {
+            BoardRowView(
+                .init(
+                    time: time, sched: row.advertised, tz: info?.tz ?? Format.zone(stationId: id),
+                    destination: row.endpoints.joined(separator: ", "), platform: row.platform,
+                    delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil,
+                    // Cancelled trains read as running here before (2026-11-07).
+                    canceled: row.canceled,
+                    replacedByBus: row.canceled && row.allCauses.contains(where: \.isBusReplacement),
+                    countdown: countdown
+                ),
+                clock: app.settings.clock, compact: true
+            ) {
+                OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
+            }
+        }
+        .buttonStyle(.pressRow)
+    }
 
     private func loadBoard() async {
         boardFailed = false
         do {
             let board = try await app.client.board(id, arrivals: false)
-            rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))
+            rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(12))
         } catch {
             boardFailed = true
         }
@@ -430,6 +457,10 @@ struct LiveStationSheet: View {
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
+            // Yours: how often you've been here, from your Passport (designer, 2026-11-14: "make it personal").
+            if let visits = passport.data?.stations.first(where: { $0.id == id })?.count, visits > 0 {
+                Text(visits == 1 ? l10n.t("station.visitedOne") : l10n.t("station.visited", ["count": String(visits)])).clack(.caption).foregroundStyle(Ink.text2)
+            }
             if boardFailed {
                 // Not reached is said as such, not as "no trains" (polish pass 1).
                 ErrorStateView(message: l10n.t("board.loadFailed"), retry: { await loadBoard() })
@@ -437,39 +468,68 @@ struct LiveStationSheet: View {
                 if rows.isEmpty {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                 } else {
-                    VStack(spacing: 0) {
-                        ForEach(rows) { row in
-                            Button { onTrain(row) } label: {
-                                BoardRowView(
-                                    .init(
-                                        time: row.estimated ?? row.advertised, sched: row.advertised, tz: info?.tz ?? Format.zone(stationId: id),
-                                        destination: row.endpoints.joined(separator: ", "), platform: row.platform,
-                                        delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil,
-                                        // Cancelled trains read as running here before (2026-11-07).
-                                        canceled: row.canceled,
-                                        replacedByBus: row.canceled && row.allCauses.contains(where: \.isBusReplacement)
-                                    ),
-                                    clock: app.settings.clock, compact: true
-                                ) {
-                                    OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
-                                }
-                            }
-                            .buttonStyle(.plain)
+                    // The board itself, here (designer, 2026-11-14: the card was a signpost to another screen): the next
+                    // four, and pulled up (or "More departures") the next twelve, in place.
+                    TimelineView(.everyMinute) { context in
+                        let now = context.date.timeIntervalSince1970 * 1000
+                        let shown = Array(rows.prefix(expanded ? 12 : 4))
+                        let list = VStack(spacing: 0) {
+                            ForEach(shown) { row in boardRow(row, now: now) }
                         }
+                        if expanded {
+                            ScrollView { list }.frame(maxHeight: 380)
+                        } else {
+                            list
+                        }
+                    }
+                    if rows.count > 4 {
+                        Button(l10n.t(expanded ? "board.fewerDepartures" : "board.moreDepartures")) {
+                            withMotion(.layout, reduceMotion: reduceMotion) { expanded.toggle() }
+                        }
+                        .buttonStyle(LinkButtonStyle())
                     }
                 }
             } else {
-                Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2)
+                // The rows' place, held.
+                ForEach(0..<4, id: \.self) { _ in Skeleton(height: 44, radius: Radius.tag).padding(.vertical, Space.xxs) }
             }
-            // The station's board, pushed on Explore (the Stations screen's job, now here).
-            // One way in: the board has the departures / arrivals switch.
-            if info?.hasBoard == true {
-                Button(l10n.t("board.openBoard", ["station": name]), action: onBoard).buttonStyle(.clack(.primary, wide: true))
-            }
-            if info?.hasMap == true {
-                Button(l10n.t("stationMap.open"), action: onMap).buttonStyle(.clack(wide: true))
+            HStack(spacing: Space.m) {
+                if info?.hasMap == true {
+                    // The station map as a tile, not a second button (designer, 2026-11-14).
+                    Button(action: onMap) {
+                        HStack(spacing: Space.s) {
+                            LucideIcon(name: "map", size: 18)
+                            Text(l10n.t("stationMap.open")).clack(.rowTitle).lineLimit(2)
+                        }
+                        .foregroundStyle(Ink.text)
+                        .padding(Space.m)
+                        .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+                    }
+                    .buttonStyle(.press(radius: Radius.input))
+                }
+                if info?.hasBoard == true {
+                    // Arrivals and earlier or later trains: the full board, still one tap away.
+                    Button(action: onBoard) {
+                        HStack(spacing: Space.s) {
+                            LucideIcon(name: "list", size: 18)
+                            Text(l10n.t("board.fullBoard")).clack(.rowTitle).lineLimit(2)
+                        }
+                        .foregroundStyle(Ink.text)
+                        .padding(Space.m)
+                        .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+                    }
+                    .buttonStyle(.press(radius: Radius.input))
+                }
             }
         }
+        // Pulled up: the board grows in place; pulled down: back to the next four.
+        .gesture(DragGesture(minimumDistance: 24).onEnded { value in
+            guard (rows?.count ?? 0) > 4 else { return }
+            if value.translation.height < -40, !expanded { withMotion(.layout, reduceMotion: reduceMotion) { expanded = true } }
+            if value.translation.height > 40, expanded { withMotion(.layout, reduceMotion: reduceMotion) { expanded = false } }
+        })
         .task(id: id) {
             info = nil
             rows = nil

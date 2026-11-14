@@ -96,9 +96,13 @@ public nonisolated enum StationSceneLogic {
     public static let maxZoom = 40.0
 
     /// The category filter chips, in order (StationMapPage.tsx FILTERS).
+    /// The chips over the station map. The first, the essentials, is what shows when nothing is picked (designer,
+    /// 2026-11-14: about forty icons competed, most of them closed); "all" shows everything.
     public static let filters: [(key: String, categories: [PoiCategory])] = [
+        ("essentials", [.toilet, .ticket, .info]),
         ("toilets", [.toilet]), ("food", [.cafe, .restaurant, .kiosk]), ("shops", [.shop, .pharmacy]),
         ("tickets", [.ticket]), ("lockers", [.locker]), ("info", [.info, .waiting, .atm]),
+        ("all", PoiCategory.knownCases),
     ]
 
     /// Lucide icon per kind of place: one pictogram per category (owner feedback 2026-10-21).

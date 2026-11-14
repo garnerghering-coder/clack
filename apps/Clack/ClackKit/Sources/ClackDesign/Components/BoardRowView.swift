@@ -34,12 +34,16 @@ public struct BoardRowView<Badge: View>: View {
         public var done: String?
         /// Gone a while ago: faded.
         public var past: Bool
+        /// "1 min", "Now": leads the compact row with the clock time under it (designer, 2026-11-14: what someone on a
+        /// concourse reads first). Nil: the clock time leads, as before.
+        public var countdown: String?
 
         public init(
             time: Double, sched: Double, tz: String, destination: String, via: String? = nil, service: String? = nil,
             notes: String? = nil, platform: String? = nil, platformFrom: String? = nil, delay: Int? = nil,
-            canceled: Bool = false, replacedByBus: Bool = false, done: String? = nil, past: Bool = false
+            canceled: Bool = false, replacedByBus: Bool = false, done: String? = nil, past: Bool = false, countdown: String? = nil
         ) {
+            self.countdown = countdown
             self.time = time
             self.sched = sched
             self.tz = tz
@@ -120,9 +124,19 @@ public struct BoardRowView<Badge: View>: View {
 
     private var compactRow: some View {
         HStack(spacing: Space.s) {
-            FlapTime(time: line.time, sched: line.sched, tz: line.tz, clock: clock, style: .text, strikeOld: false)
-                .clack(.stopName).fontWeight(.semibold)
+            if let countdown = line.countdown {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(countdown).clack(.stopName).fontWeight(.semibold).monospacedDigit().foregroundStyle(Ink.text)
+                        .contentTransition(.numericText())
+                    FlapTime(time: line.time, sched: line.sched, tz: line.tz, clock: clock, style: .text, strikeOld: false)
+                        .clack(.caption).foregroundStyle(Ink.text2)
+                }
                 .frame(minWidth: timeWidth * 0.75, alignment: .leading)
+            } else {
+                FlapTime(time: line.time, sched: line.sched, tz: line.tz, clock: clock, style: .text, strikeOld: false)
+                    .clack(.stopName).fontWeight(.semibold)
+                    .frame(minWidth: timeWidth * 0.75, alignment: .leading)
+            }
             badge
             Text(destination).clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text).lineLimit(1)
                 // A widget can't be opened for the rest: shrink a little before cutting.

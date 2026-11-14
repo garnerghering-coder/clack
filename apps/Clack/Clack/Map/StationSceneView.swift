@@ -24,6 +24,9 @@ struct StationSceneView: View {
     var pins: [Pin] = []
     let poiState: (StationPoi) -> OpenState
     let dimPoi: (StationPoi) -> Bool
+    /// Places that don't match leave the map instead of dimming (the essentials-first view); while a walk is planned
+    /// they dim, so the route's context stays.
+    var hideDimmed = false
     let onPoi: (StationPoi) -> Void
     /// Places that share one spot and can't be split by zooming: listed together (polish pass 1).
     var onPoiGroup: ([StationPoi]) -> Void = { _ in }
@@ -98,7 +101,7 @@ struct StationSceneView: View {
             ForEach(chips) { chip in
                 platformChip(chip).position(screen(chip.x, chip.y)).allowsHitTesting(false)
             }
-            ForEach(map.pois.filter { $0.level == level && shown.shown.contains($0.id) }) { poi in
+            ForEach(map.pois.filter { $0.level == level && shown.shown.contains($0.id) && !(hideDimmed && dimPoi($0)) }) { poi in
                 poiPin(poi, named: shown.named.contains(poi.id), more: shown.counts[poi.id] ?? 0, members: shown.members[poi.id] ?? []).position(screen(poi.x, poi.y))
             }
             ForEach(Array(pins.filter { $0.level == level }.enumerated()), id: \.offset) { _, pin in
