@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ARCTIC_CIRCLE_LAT, COUNTRY_LENGTH_KM, EUROPE_KM, co2, co2FactorsFor, computeMilestones, homeCountryOf, computePassport, loadPassportLegs, type PassportLeg, type PassportStop } from '../src/stats/passport.js';
+import { ARCTIC_CIRCLE_LAT, COUNTRY_LENGTH_KM, EUROPE_KM, MILESTONES, MILESTONE_TIERS, co2, co2FactorsFor, computeMilestones, homeCountryOf, computePassport, loadPassportLegs, type PassportLeg, type PassportStop } from '../src/stats/passport.js';
 import { LOCAL_USER_ID, openDb } from '../src/db/client.js';
 import { refreshLegActuals } from '../src/legs/actuals.js';
 import { createLeg } from '../src/legs/legs.js';
@@ -138,6 +138,55 @@ describe('milestones: levels and new families', () => {
   const keys = (legs: PassportLeg[], home?: 'SE' | 'NO' | 'FI') => computeMilestones(legs, home).achieved.map((m) => `${m.family}:${m.target}`);
   const hour = 3_600_000;
   const at = (i: number, p: Partial<PassportLeg> = {}) => leg({ id: `l${i}`, dep: 1_000_000 + i * 10 * hour, arr: 1_000_000 + i * 10 * hour + hour, schedDep: 1_000_000 + i * 10 * hour, ...p });
+
+  // Polish pass 1's families.
+  const day = 24 * hour;
+  const stAt = (id: string, country: string, role: string, lat: number): PassportStop => ({ stationId: id, name: id, country, lat, lon: 15, role });
+  // 2026-01-05 is a Monday; 05:30 in Stockholm (UTC+1 in winter) is 04:30Z.
+  const monday = Date.UTC(2026, 0, 5, 4, 30);
+
+  it('early bird, weekender and a streak of days', () => {
+    const north = (i: number) => [stAt('A', 'SE', 'board', 59), stAt('B', 'SE', 'alight', 59.5)];
+    const legs = Array.from({ length: 7 }, (_, i) => leg({ id: `d${i}`, dep: monday + i * day, arr: monday + i * day + hour, schedDep: monday + i * day, stops: north(i) }));
+    const k = keys(legs);
+    expect(k).toEqual(expect.arrayContaining(['earlyBird:1', 'earlyBird:5', 'streak:3', 'streak:7']));
+    // Saturday and Sunday of that week: two weekend trips, short of the first level (5).
+    expect(k).not.toContain('weekender:5');
+  });
+
+  it('every month and four seasons of one year, and the capitals', () => {
+    const caps = ['740000001', '760000100', '860000626', 'fi:HKI'];
+    const legs = Array.from({ length: 12 }, (_, m) => leg({
+      id: `m${m}`, dep: Date.UTC(2026, m, 10, 10), arr: Date.UTC(2026, m, 10, 12), schedDep: Date.UTC(2026, m, 10, 10),
+      stops: [stAt(caps[m % 4]!, 'SE', 'board', 59), stAt('X', 'SE', 'alight', 59)],
+    }));
+    expect(keys(legs)).toEqual(expect.arrayContaining(['everyMonth:12', 'fourSeasons:4', 'capitals:4']));
+  });
+
+  it('the far north counts from 59°N, the far south below 55.5°N, and Öresund crossings', () => {
+    const kiruna = leg({ id: 'k', stops: [stAt('S', 'SE', 'board', 59.3), stAt('K', 'SE', 'alight', 67.86)] });
+    expect(keys([kiruna])).toContain('farNorth:8');
+    expect(keys([kiruna])).not.toContain('farNorth:9');
+    const ore = leg({ id: 'o', stops: [stAt('M', 'SE', 'board', 55.6), stAt('C', 'DK', 'alight', 55.67)] });
+    expect(keys([ore])).toContain('oresund:1');
+    expect(keys([ore])).not.toContain('farSouth:1');
+    const ystad = leg({ id: 'y', stops: [stAt('M', 'SE', 'board', 55.6), stAt('Y', 'SE', 'alight', 55.43)] });
+    expect(keys([ystad])).toContain('farSouth:1');
+  });
+
+  it('a run of on-time trips breaks on a late one; an hour late counts once as patient', () => {
+    const timed = (i: number, delay: number) => at(i, { dataQuality: 'full', arrDelayMin: delay, stops: [stAt('A', 'SE', 'board', 59), stAt('B', 'SE', 'alight', 59)] });
+    const legs = [...Array.from({ length: 9 }, (_, i) => timed(i, 2)), timed(9, 61), ...Array.from({ length: 10 }, (_, i) => timed(10 + i, 0))];
+    const k = keys(legs);
+    expect(k).toContain('onTimeRun:10');
+    expect(k).toContain('patient:1');
+  });
+
+  it('every level has a tier, bronze to platinum', () => {
+    for (const [family, levels] of Object.entries(MILESTONES)) {
+      expect(MILESTONE_TIERS[family as keyof typeof MILESTONES].length).toBe(levels.length);
+    }
+  });
 
   it('border crossings and night trains have four levels', () => {
     const cross = (i: number) => at(i, { product: 'night', stops: [st('A', 'SE', 'board'), st('B', 'NO', 'alight')] });

@@ -72,6 +72,15 @@ export const EUROPE_KM = Math.round(greatCircleKm(NORDKINN, TARIFA));
 
 /** The Arctic Circle: 66°33′51.1″N (Wikipedia, "Arctic Circle"; it drifts by metres a year). */
 export const ARCTIC_CIRCLE_LAT = 66 + 33 / 60 + 51.1 / 3600;
+/** The mean distance from the Earth to the Moon, 384,400 km (NASA, Moon fact sheet:
+ * https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html, "Mean distance from Earth"). */
+export const MOON_KM = 384_400;
+/** The Nordic capitals' main stations, for the capitals medal: Stockholm C, Oslo S, København H, Helsinki. */
+export const NORDIC_CAPITALS = ['740000001', '760000100', '860000626', 'fi:HKI'] as const;
+/** The four Nordic countries the app covers. */
+export const NORDICS = ['SE', 'NO', 'DK', 'FI'] as const;
+/** Where the far-north medal counts from: 59°N. */
+export const FAR_NORTH_FROM = 59;
 
 /** The kinds of train "Every kind of train" asks for; heritage trains are left out. */
 export const KINDS_OF_TRAIN = ['high_speed', 'intercity', 'night', 'regional', 'commuter'] as const;
@@ -111,6 +120,28 @@ function co2ForLegs(rides: PassportLeg[], comparison: Co2Comparison) {
     sum.savedKg += c.savedKg;
   }
   return sum;
+}
+
+/** A moment as a local day: its date, Monday = 0 to Sunday = 6, month 1–12, year and minutes past midnight. */
+const localDay = (ms: number, tz: string = COUNTRIES.SE.tz) => {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('en-GB', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false })
+      .formatToParts(ms)
+      .map((x) => [x.type, x.value]),
+  );
+  const weekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(p.weekday!);
+  return { date: `${p.year}-${p.month}-${p.day}`, weekday, monthNumber: Number(p.month), year: Number(p.year), minutes: (Number(p.hour) % 24) * 60 + Number(p.minute) };
+};
+
+/** How many days in a row, ending on `date`, are in `days` (dates "YYYY-MM-DD"). */
+function streakEnding(days: Set<string>, date: string): number {
+  let n = 0;
+  let d = new Date(`${date}T12:00:00Z`);
+  while (days.has(d.toISOString().slice(0, 10))) {
+    n++;
+    d = new Date(d.getTime() - 86_400_000);
+  }
+  return n;
 }
 
 const localParts = (ms: number, tz: string = COUNTRIES.SE.tz) => {
@@ -267,16 +298,16 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
 
 /** Each family's thresholds. The label says exactly what earns it ("10 journeys", "1,000 km"). */
 export const MILESTONES = {
-  journeys: [1, 10, 25, 50, 100, 250],
-  distanceKm: [100, 500, 1000, 2500, 5000, 10_000, EARTH_KM],
-  stations: [10, 25, 50, 100, 200],
-  operators: [3, 5, 10],
+  journeys: [1, 10, 25, 50, 100, 250, 500, 1000],
+  distanceKm: [100, 500, 1000, 2500, 5000, 10_000, EARTH_KM, 100_000, MOON_KM],
+  stations: [10, 25, 50, 100, 200, 300, 500],
+  operators: [3, 5, 10, 15, 20],
   countries: [2, 3, 5],
   borderCrossings: [1, 5, 10, 25],
   nightTrains: [1, 5, 10, 25],
   /** The longest single train ride, in km (a maximum, not a sum). */
   longestTrainKm: [300, 500, 1000],
-  hoursOnBoard: [10, 50, 100, 250],
+  hoursOnBoard: [10, 50, 100, 250, 500, 1000],
   /** Distinct known train types; trips with no known type never count. */
   trainTypes: [5, 10, 20],
   /** Distinct kinds of train ridden, out of KINDS_OF_TRAIN. */
@@ -286,7 +317,82 @@ export const MILESTONES = {
   /** Total km as a multiple of the home country's length, and of Europe's. */
   homeLength: [1],
   europeLength: [1],
+  // Polish pass 1 (owner, 2026-11-14: "significantly increase the medals… get creative"), every one from the trips'
+  // own times, stops and kinds; nothing guessed.
+  /** Trains that left before 06:00, local time where you got on. */
+  earlyBird: [1, 5, 25],
+  /** Trains that arrived between midnight and 04:00, local time. */
+  nightOwl: [1, 5, 25],
+  /** Trains on a Saturday or a Sunday. */
+  weekender: [5, 25, 100],
+  /** Trains in all four seasons (Dec–Feb, Mar–May, Jun–Aug, Sep–Nov) of one calendar year. */
+  fourSeasons: [4],
+  /** Trains in all twelve months of one calendar year. */
+  everyMonth: [12],
+  /** Days in a row with a train. */
+  streak: [3, 7, 14],
+  /** The same route (where you got on and off, either way) ridden this many times. */
+  regular: [10, 50, 100],
+  /** The Nordic capitals' main stations got on or off at (NORDIC_CAPITALS). */
+  capitals: [4],
+  /** Times a ridden line crossed between Sweden and Denmark (the Öresund link is the only rail between them). */
+  oresund: [1, 10],
+  /** The farthest north reached, in degrees north of FAR_NORTH_FROM (59°N, Oslo and Stockholm), so progress starts
+   * where most people live: 8 is 67°N (Kiruna, Bodø), 9 is 68°N (Narvik). */
+  farNorth: [8, 9],
+  /** A station south of 55.5°N (Trelleborg, Ystad, Lolland and Falster): 1 when reached. */
+  farSouth: [1],
+  /** Km on high-speed trains. */
+  highSpeedKm: [500, 1000, 5000],
+  /** Heritage trains. */
+  heritage: [1, 5],
+  /** The most hours on trains in one day. */
+  longDay: [8, 12],
+  /** Trains that arrived an hour or more late (patience, recorded kindly). */
+  patient: [1],
+  /** Trips in a row that arrived at most 5 min late (trips with real times). */
+  onTimeRun: [10, 25],
+  /** All four Nordic countries ridden in. */
+  allNordics: [4],
 } as const;
+
+/**
+ * One metal language (owner, 2026-11-14): the tier of each level, said once and the same everywhere. Bronze is a first
+ * step, silver is a regular rider, gold a dedicated one, platinum exceptional. Same length as each family's levels.
+ */
+export const MILESTONE_TIERS: Record<keyof typeof MILESTONES, readonly ('bronze' | 'silver' | 'gold' | 'platinum')[]> = {
+  journeys: ['bronze', 'bronze', 'silver', 'silver', 'gold', 'gold', 'platinum', 'platinum'],
+  distanceKm: ['bronze', 'bronze', 'silver', 'silver', 'gold', 'gold', 'platinum', 'platinum', 'platinum'],
+  stations: ['bronze', 'silver', 'silver', 'gold', 'gold', 'platinum', 'platinum'],
+  operators: ['bronze', 'silver', 'gold', 'platinum', 'platinum'],
+  countries: ['bronze', 'silver', 'gold'],
+  borderCrossings: ['bronze', 'silver', 'gold', 'platinum'],
+  nightTrains: ['bronze', 'silver', 'gold', 'platinum'],
+  longestTrainKm: ['bronze', 'silver', 'gold'],
+  hoursOnBoard: ['bronze', 'silver', 'silver', 'gold', 'platinum', 'platinum'],
+  trainTypes: ['bronze', 'silver', 'gold'],
+  kindsOfTrain: ['gold'],
+  arcticCircle: ['gold'],
+  homeLength: ['gold'],
+  europeLength: ['platinum'],
+  earlyBird: ['bronze', 'silver', 'gold'],
+  nightOwl: ['bronze', 'silver', 'gold'],
+  weekender: ['bronze', 'silver', 'gold'],
+  fourSeasons: ['gold'],
+  everyMonth: ['platinum'],
+  streak: ['silver', 'gold', 'platinum'],
+  regular: ['silver', 'gold', 'platinum'],
+  capitals: ['gold'],
+  oresund: ['bronze', 'silver'],
+  farNorth: ['silver', 'gold'],
+  farSouth: ['silver'],
+  highSpeedKm: ['bronze', 'silver', 'gold'],
+  heritage: ['silver', 'gold'],
+  longDay: ['silver', 'gold'],
+  patient: ['bronze'],
+  onTimeRun: ['silver', 'gold'],
+  allNordics: ['gold'],
+};
 export type MilestoneFamily = keyof typeof MILESTONES;
 
 export interface Milestone {
@@ -313,6 +419,24 @@ class Tally {
   arctic = 0;
   longestKm = 0;
   hours = 0;
+  early = 0;
+  owl = 0;
+  weekend = 0;
+  seasonsByYear = new Map<number, Set<number>>();
+  monthsByYear = new Map<number, Set<number>>();
+  days = new Set<string>();
+  bestStreak = 0;
+  routes = new Map<string, number>();
+  capitals = new Set<string>();
+  oresund = 0;
+  maxLat = -90;
+  minLat = 90;
+  highSpeedKm = 0;
+  heritage = 0;
+  hoursByDay = new Map<string, number>();
+  patient = 0;
+  onTimeRun = 0;
+  bestOnTimeRun = 0;
   constructor(private readonly home: CountryCode) {}
 
   add(l: PassportLeg) {
@@ -334,6 +458,39 @@ class Tally {
       if (a.lat >= ARCTIC_CIRCLE_LAT !== b.lat >= ARCTIC_CIRCLE_LAT) this.arctic++;
     }
     if (l.product === 'night') this.nights++;
+
+    // Polish pass 1's families, from the trip's own local times, stops and kind.
+    const dep = localDay(l.dep, l.tz);
+    const arr = localDay(l.arr, l.tz);
+    if (dep.minutes < 6 * 60) this.early++;
+    if (arr.minutes < 4 * 60 && arr.date !== dep.date) this.owl++;
+    if (dep.weekday >= 5) this.weekend++;
+    const season = Math.floor((dep.monthNumber % 12) / 3); // Dec–Feb 0, Mar–May 1, Jun–Aug 2, Sep–Nov 3
+    if (!this.seasonsByYear.has(dep.year)) this.seasonsByYear.set(dep.year, new Set());
+    this.seasonsByYear.get(dep.year)!.add(season);
+    if (!this.monthsByYear.has(dep.year)) this.monthsByYear.set(dep.year, new Set());
+    this.monthsByYear.get(dep.year)!.add(dep.monthNumber);
+    this.days.add(dep.date);
+    this.bestStreak = Math.max(this.bestStreak, streakEnding(this.days, dep.date));
+    const ends = l.stops.filter((st) => st.role === 'board' || st.role === 'alight').map((st) => st.stationId).sort();
+    if (ends.length === 2) this.routes.set(ends.join('|'), (this.routes.get(ends.join('|')) ?? 0) + 1);
+    for (const st of l.stops) {
+      if ((st.role === 'board' || st.role === 'alight') && (NORDIC_CAPITALS as readonly string[]).includes(st.stationId)) this.capitals.add(st.stationId);
+      this.maxLat = Math.max(this.maxLat, st.lat);
+      this.minLat = Math.min(this.minLat, st.lat);
+    }
+    for (let i = 1; i < l.stops.length; i++) {
+      const pair = [l.stops[i - 1]!.country, l.stops[i]!.country].sort().join('');
+      if (pair === 'DKSE') this.oresund++;
+    }
+    if (l.product === 'high_speed') this.highSpeedKm += l.distanceM / 1000;
+    if (l.product === 'heritage' || l.category === 'heritage') this.heritage++;
+    this.hoursByDay.set(dep.date, (this.hoursByDay.get(dep.date) ?? 0) + Math.max(0, l.arr - l.dep) / 3_600_000);
+    if (l.arrDelayMin !== null && l.arrDelayMin !== undefined && l.dataQuality === 'full') {
+      if (l.arrDelayMin >= 60) this.patient++;
+      this.onTimeRun = l.arrDelayMin <= ON_TIME_MAX_DELAY_MIN ? this.onTimeRun + 1 : 0;
+      this.bestOnTimeRun = Math.max(this.bestOnTimeRun, this.onTimeRun);
+    }
   }
 
   value(f: MilestoneFamily): number {
@@ -352,6 +509,23 @@ class Tally {
       case 'arcticCircle': return this.arctic;
       case 'homeLength': return this.km / COUNTRY_LENGTH_KM[this.home];
       case 'europeLength': return this.km / EUROPE_KM;
+      case 'earlyBird': return this.early;
+      case 'nightOwl': return this.owl;
+      case 'weekender': return this.weekend;
+      case 'fourSeasons': return Math.max(0, ...[...this.seasonsByYear.values()].map((x) => x.size));
+      case 'everyMonth': return Math.max(0, ...[...this.monthsByYear.values()].map((x) => x.size));
+      case 'streak': return this.bestStreak;
+      case 'regular': return Math.max(0, ...this.routes.values());
+      case 'capitals': return this.capitals.size;
+      case 'oresund': return this.oresund;
+      case 'farNorth': return Math.max(0, this.maxLat - FAR_NORTH_FROM);
+      case 'farSouth': return this.minLat < 55.5 ? 1 : 0;
+      case 'highSpeedKm': return this.highSpeedKm;
+      case 'heritage': return this.heritage;
+      case 'longDay': return Math.max(0, ...this.hoursByDay.values());
+      case 'patient': return this.patient;
+      case 'onTimeRun': return this.bestOnTimeRun;
+      case 'allNordics': return NORDICS.filter((c) => this.countries.has(c)).length;
     }
   }
 }

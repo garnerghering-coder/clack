@@ -8,11 +8,14 @@ import Foundation
 public nonisolated enum MilestoneFamily: OpenEnum {
     case journeys, distanceKm, stations, operators, countries, borderCrossings, nightTrains
     case longestTrainKm, hoursOnBoard, trainTypes, kindsOfTrain, arcticCircle, homeLength, europeLength
+    // Polish pass 1 (owner, 2026-11-14: many more medals).
+    case earlyBird, nightOwl, weekender, fourSeasons, everyMonth, streak, regular, capitals, oresund, farNorth, farSouth, highSpeedKm, heritage, longDay, patient, onTimeRun, allNordics
     case unknown(String)
 
     public static let knownCases: [MilestoneFamily] = [
         .journeys, .distanceKm, .stations, .operators, .countries, .borderCrossings, .nightTrains,
         .longestTrainKm, .hoursOnBoard, .trainTypes, .kindsOfTrain, .arcticCircle, .homeLength, .europeLength,
+        .earlyBird, .nightOwl, .weekender, .fourSeasons, .everyMonth, .streak, .regular, .capitals, .oresund, .farNorth, .farSouth, .highSpeedKm, .heritage, .longDay, .patient, .onTimeRun, .allNordics,
     ]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
@@ -31,6 +34,23 @@ public nonisolated enum MilestoneFamily: OpenEnum {
         case .arcticCircle: "arcticCircle"
         case .homeLength: "homeLength"
         case .europeLength: "europeLength"
+        case .earlyBird: "earlyBird"
+        case .nightOwl: "nightOwl"
+        case .weekender: "weekender"
+        case .fourSeasons: "fourSeasons"
+        case .everyMonth: "everyMonth"
+        case .streak: "streak"
+        case .regular: "regular"
+        case .capitals: "capitals"
+        case .oresund: "oresund"
+        case .farNorth: "farNorth"
+        case .farSouth: "farSouth"
+        case .highSpeedKm: "highSpeedKm"
+        case .heritage: "heritage"
+        case .longDay: "longDay"
+        case .patient: "patient"
+        case .onTimeRun: "onTimeRun"
+        case .allNordics: "allNordics"
         case .unknown(let raw): raw
         }
     }

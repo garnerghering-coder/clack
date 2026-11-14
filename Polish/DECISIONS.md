@@ -264,3 +264,10 @@ Left in build 73, and why:
 - **The place sheet's day bar.** The week now reads as a table (B71.11); a drawn bar was left out.
 - **Explore: clustered dots at country zoom, bigger dots from zoom 9.** These are map style changes that need on-device feel; the 44 pt hit box stays.
 - **The one shared sheet mechanic for every Explore overlay.** The Network panel moved to a system sheet; the train and station cards keep their own, already shared, sheet.
+
+## Build 74: Passport and medals
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B74.1 | Medal rims (Garner: "one metal language") | The metal followed a level's place in its family, so silver meant something different in each family, and there was no legend | Every level has an explicit tier, the same on the server and in the app: bronze a first step, silver a regular rider, gold a dedicated one, platinum exceptional; a legend line on the Milestones screen | `MILESTONE_TIERS` (`passport.ts`), `PassportLogic.milestoneTiers/tier`, `MedalStyle.metal`; tests both sides | `MedalStyle.metal` back to the index rule |
+| B74.2 | Medals (Garner: "significantly increase… get creative") | 14 families, 50 levels | 31 families. Ladders extended: journeys to 1,000; distance to 100,000 km and to the Moon (384,400 km, NASA's figure, cited); stations to 500; operators to 20; hours to 1,000. New: early bird (before 06:00), night owl (after midnight), weekender, four seasons, every month, days in a row, regular (one route 10/50/100×), the four Nordic capitals, Öresund, far north (67°N, 68°N), far south (below 55.5°N), high-speed km, heritage, long day, patience (an hour's delay), on time in a row, all the Nordics. Each comes only from the trips' own times, stops and kinds; each has its own face colour (4.5:1 ink, tested) and Lucide icon | Server `MILESTONES` + `Tally`, `MilestoneFamily`, `PassportLogic.milestoneLevels`, `MedalStyle.face/icon`, `L10n.milestoneLabel`, 13 icons via `make_icons.mjs` | Remove the families from `MILESTONES` (older apps already show unknown families safely) |

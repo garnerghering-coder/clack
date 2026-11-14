@@ -110,8 +110,9 @@ describe('milestones', () => {
     expect(got).toContain('borderCrossings:1@y');
     expect(got).toContain('countries:2@y');
     expect(got).not.toContain('distanceKm:500@z');
-    // Nearest first: 2 of 3 countries, then 4 of 10 stations.
+    // Nearest first: 2 of 3 countries, 2 of the 4 Nordic countries, then 4 of 10 stations.
     expect(m.next[0]).toMatchObject({ family: 'countries', target: 3, value: 2 });
-    expect(m.next[1]).toMatchObject({ family: 'stations', target: 10, value: 4 });
+    expect(m.next[1]).toMatchObject({ family: 'allNordics', target: 4, value: 2 });
+    expect(m.next[2]).toMatchObject({ family: 'stations', target: 10, value: 4 });
   });
 });

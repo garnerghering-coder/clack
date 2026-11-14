@@ -27,6 +27,17 @@ struct MilestonesScreen: View {
                 let earned = ladder.reduce(0) { $0 + $1.earned }
                 let total = ladder.reduce(0) { $0 + $1.rungs.count }
                 Text(l10n.t("passport.earnedOf", ["earned": String(earned), "total": String(total)])).clack(.headline).foregroundStyle(Ink.text)
+                // One metal language, said once (owner, 2026-11-14): what each rim means, the same in every family.
+                HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                    HStack(spacing: Space.xxs) {
+                        ForEach(0..<MedalStyle.metals.count, id: \.self) { i in
+                            Circle().fill(MedalStyle.metalSwatch(i)).frame(width: 10, height: 10)
+                        }
+                    }
+                    .accessibilityHidden(true)
+                    Text(l10n.t("passport.metals")).clack(.caption).foregroundStyle(Ink.text2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 ForEach(ladder, id: \.family) { family in
                     Card {
                         HStack(alignment: .firstTextBaseline) {

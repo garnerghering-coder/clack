@@ -28,12 +28,30 @@ nonisolated enum MedalStyle {
         case .arcticCircle: ("#bdf0ff", "#2aa7cf")
         case .homeLength: ("#d9b38c", "#8a5a2b")
         case .europeLength: ("#b8c6d9", "#4a5f7a")
+        case .earlyBird: ("#ffd29a", "#e07a1f")
+        case .nightOwl: ("#b9a8ff", "#4b3aa8")
+        case .weekender: ("#ffb3c7", "#c43a6b")
+        case .fourSeasons: ("#a8e6a1", "#3f8f2f")
+        case .everyMonth: ("#a0d8ff", "#1f6fa8")
+        case .streak: ("#ffa07a", "#d1401f")
+        case .regular: ("#c7d2fe", "#4357c9")
+        case .capitals: ("#f2d39a", "#9a6a12")
+        case .oresund: ("#8fd3e8", "#16708a")
+        case .farNorth: ("#dbeaff", "#5a7fb5")
+        case .farSouth: ("#ffe8a3", "#c79a00")
+        case .highSpeedKm: ("#ff9f9f", "#c22b2b")
+        case .heritage: ("#d8c3a5", "#6e4f2e")
+        case .longDay: ("#fff1a8", "#b39500")
+        case .patient: ("#d6d6d6", "#6b6b6b")
+        case .onTimeRun: ("#9ff0c8", "#178a55")
+        case .allNordics: ("#c3e0ff", "#2f5fa0")
         case .unknown: ("#e5e5e5", "#8e8e8e")
         }
     }
 
     static func icon(_ family: MilestoneFamily, target: Double) -> String {
-        if target >= 40_000 { return "globe" }
+        if family == .distanceKm, target >= 384_400 { return "moon" }
+        if family == .distanceKm, target >= 40_000 { return "globe" }
         switch family {
         case .journeys: return "train-front"
         case .distanceKm: return "route"
@@ -49,6 +67,23 @@ nonisolated enum MedalStyle {
         case .arcticCircle: return "snowflake"
         case .homeLength: return "flag"
         case .europeLength: return "globe"
+        case .earlyBird: return "sunrise"
+        case .nightOwl: return "moon-star"
+        case .weekender: return "calendar-days"
+        case .fourSeasons: return "sun-snow"
+        case .everyMonth: return "calendar-range"
+        case .streak: return "flame"
+        case .regular: return "repeat"
+        case .capitals: return "landmark"
+        case .oresund: return "bridge"
+        case .farNorth: return "mountain-snow"
+        case .farSouth: return "waves"
+        case .highSpeedKm: return "gauge"
+        case .heritage: return "history"
+        case .longDay: return "sun"
+        case .patient: return "armchair"
+        case .onTimeRun: return "badge-check"
+        case .allNordics: return "map"
         case .unknown: return "star"
         }
     }
@@ -66,6 +101,9 @@ nonisolated enum MedalStyle {
         )
     }
 
+    /// A tier's metal as one colour, for the legend (0 bronze … 3 platinum).
+    static func metalSwatch(_ tier: Int) -> Color { Color(hex: metals[min(metals.count - 1, max(0, tier))].1) ?? .gray }
+
     /// Bronze, silver, gold, platinum: light, dark.
     static let metals: [(String, String)] = [("#f0b27a", "#9c5a25"), ("#f4f4f4", "#8e8e8e"), ("#ffe9a0", "#c48a1c"), ("#e9f7ff", "#7fa7c2")]
 
@@ -73,16 +111,18 @@ nonisolated enum MedalStyle {
     /// medals and the Milestones screen).
     static func levels(_ family: MilestoneFamily) -> [Double] { PassportLogic.milestoneLevels(family) }
 
+    /// The level's metal, from its tier (one metal language, owner 2026-11-14): bronze a first step, silver a regular
+    /// rider, gold a dedicated one, platinum exceptional. It used to follow the level's place in its family, so the same
+    /// metal meant different things in different families.
     static func metal(_ m: Milestone) -> (String, String) {
-        let levels = levels(m.family)
-        if levels.count == 1 { return metals[2] }
-        let i = max(0, levels.firstIndex(of: m.target) ?? 0)
-        return metals[min(metals.count - 1, (i * metals.count) / levels.count)]
+        metals[min(metals.count - 1, max(0, PassportLogic.tier(m)))]
     }
 
     /// "1k", "2.5k", "10k"; the first ones, once-around-the-Earth and the one-off medals get an icon instead of a number.
     static func centre(_ m: Milestone) -> String? {
-        if m.target == 1 || m.target >= 40_000 || levels(m.family).count == 1 { return nil }
+        if m.target == 1 || (m.family == .distanceKm && m.target >= 40_000) || levels(m.family).count == 1 { return nil }
+        // Degrees north: the latitude itself ("67°").
+        if m.family == .farNorth { return "\(Int(m.target) + 59)°" }
         if m.target >= 1000 {
             let k = m.target / 1000
             return (k == k.rounded() ? String(Int(k)) : String(format: "%.1f", k)) + "k"

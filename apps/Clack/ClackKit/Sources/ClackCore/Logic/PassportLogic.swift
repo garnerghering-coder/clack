@@ -59,18 +59,61 @@ public nonisolated enum PassportLogic {
     /// an extra rung (`ladder`), so the app never hides a medal it was given.
     public static func milestoneLevels(_ family: MilestoneFamily) -> [Double] {
         switch family {
-        case .journeys: [1, 10, 25, 50, 100, 250]
-        case .distanceKm: [100, 500, 1000, 2500, 5000, 10_000, 40_075]
-        case .stations: [10, 25, 50, 100, 200]
-        case .operators: [3, 5, 10]
+        case .journeys: [1, 10, 25, 50, 100, 250, 500, 1000]
+        case .distanceKm: [100, 500, 1000, 2500, 5000, 10_000, 40_075, 100_000, 384_400]
+        case .stations: [10, 25, 50, 100, 200, 300, 500]
+        case .operators: [3, 5, 10, 15, 20]
         case .countries: [2, 3, 5]
         case .borderCrossings, .nightTrains: [1, 5, 10, 25]
         case .longestTrainKm: [300, 500, 1000]
-        case .hoursOnBoard: [10, 50, 100, 250]
+        case .hoursOnBoard: [10, 50, 100, 250, 500, 1000]
         case .trainTypes: [5, 10, 20]
         case .kindsOfTrain: [5]
         case .arcticCircle, .homeLength, .europeLength, .unknown: [1]
+        case .earlyBird, .nightOwl: [1, 5, 25]
+        case .weekender: [5, 25, 100]
+        case .fourSeasons, .capitals, .allNordics: [4]
+        case .everyMonth: [12]
+        case .streak: [3, 7, 14]
+        case .regular: [10, 50, 100]
+        case .oresund: [1, 10]
+        // Degrees north of 59°N: 8 is 67°N, 9 is 68°N (the server's FAR_NORTH_FROM).
+        case .farNorth: [8, 9]
+        case .farSouth, .patient: [1]
+        case .highSpeedKm: [500, 1000, 5000]
+        case .heritage: [1, 5]
+        case .longDay: [8, 12]
+        case .onTimeRun: [10, 25]
         }
+    }
+
+    /// One metal language (owner, 2026-11-14), mirroring MILESTONE_TIERS on the server: bronze is a first step, silver
+    /// a regular rider, gold a dedicated one, platinum exceptional. 0 bronze … 3 platinum, one per level.
+    public static func milestoneTiers(_ family: MilestoneFamily) -> [Int] {
+        switch family {
+        case .journeys: [0, 0, 1, 1, 2, 2, 3, 3]
+        case .distanceKm: [0, 0, 1, 1, 2, 2, 3, 3, 3]
+        case .stations: [0, 1, 1, 2, 2, 3, 3]
+        case .operators: [0, 1, 2, 3, 3]
+        case .countries, .longestTrainKm, .trainTypes, .earlyBird, .nightOwl, .weekender, .highSpeedKm: [0, 1, 2]
+        case .borderCrossings, .nightTrains: [0, 1, 2, 3]
+        case .hoursOnBoard: [0, 1, 1, 2, 3, 3]
+        case .kindsOfTrain, .arcticCircle, .homeLength, .fourSeasons, .capitals, .allNordics: [2]
+        case .europeLength, .everyMonth: [3]
+        case .streak, .regular: [1, 2, 3]
+        case .oresund: [0, 1]
+        case .farNorth, .heritage, .longDay, .onTimeRun: [1, 2]
+        case .farSouth: [1]
+        case .patient: [0]
+        case .unknown: [2]
+        }
+    }
+
+    /// The tier of one level (0 bronze … 3 platinum); a level the app doesn't list (a newer server) is gold.
+    public static func tier(_ m: Milestone) -> Int {
+        let levels = milestoneLevels(m.family), tiers = milestoneTiers(m.family)
+        guard let i = levels.firstIndex(of: m.target), tiers.indices.contains(i) else { return 2 }
+        return tiers[i]
     }
 
     /// One level of a family: the medal (with the family's current value when locked) and whether it is earned.

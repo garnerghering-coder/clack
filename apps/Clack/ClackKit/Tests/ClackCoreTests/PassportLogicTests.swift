@@ -42,8 +42,8 @@ struct PassportLogicTests {
         let next = Milestone(family: .journeys, target: 25, at: nil, legId: nil, value: 14)
         let ladder = PassportLogic.ladder(Passport.Milestones(achieved: [earned, odd], next: [next]))
         let journeys = ladder.first { $0.family == .journeys }!
-        #expect(journeys.rungs.map(\.milestone.target) == [1, 10, 25, 50, 100, 250])
-        #expect(journeys.rungs.map(\.earned) == [false, true, false, false, false, false])
+        #expect(journeys.rungs.map(\.milestone.target) == [1, 10, 25, 50, 100, 250, 500, 1000])
+        #expect(journeys.rungs.map(\.earned) == [false, true, false, false, false, false, false, false])
         // A locked level shows the family's current value; the earned one keeps its own medal (date and trip).
         #expect(journeys.rungs[2].milestone.value == 14)
         #expect(journeys.rungs[1].milestone.legId == "L")
@@ -52,6 +52,15 @@ struct PassportLogicTests {
         let kinds = ladder.first { $0.family == .kindsOfTrain }!
         #expect(kinds.rungs.map(\.milestone.target) == [5, 6])
         #expect(ladder.count == MilestoneFamily.knownCases.count)
+    }
+
+    /// One metal language (polish pass 1): every level of every family has a tier, the same as the server's.
+    @Test func everyLevelHasATier() {
+        for family in MilestoneFamily.knownCases {
+            #expect(PassportLogic.milestoneTiers(family).count == PassportLogic.milestoneLevels(family).count, "\(family.rawValue)")
+        }
+        #expect(PassportLogic.tier(Milestone(family: .journeys, target: 1, at: nil, legId: nil, value: nil)) == 0)
+        #expect(PassportLogic.tier(Milestone(family: .distanceKm, target: 384_400, at: nil, legId: nil, value: nil)) == 3)
     }
 
     @Test func theSameStretchRiddenTwiceIsOneLineWithWeightTwo() {
