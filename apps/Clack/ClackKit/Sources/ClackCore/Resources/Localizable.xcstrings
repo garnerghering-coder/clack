@@ -166,7 +166,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ombord: servering och dagens avvikelser kommer från Trafikverket för varje avgång; allt som står under \"Brukar finnas\" kommer från operatörens egna sidor, med datum då det kontrollerades."
+            "value" : "Ombord: servering och dagens avvikelser kommer från Trafikverket för varje avgång; allt som står under \"Brukar finnas\" kommer från tågbolagets egna sidor, med datum då det kontrollerades."
           }
         }
       }
@@ -523,7 +523,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till ett till"
+            "value" : "Lägg till ett tåg till"
           }
         }
       }
@@ -1585,13 +1585,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Find your train"
+            "value" : "Find a train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hitta ditt tåg"
+            "value" : "Hitta ett tåg"
           }
         }
       }
@@ -1840,13 +1840,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add to my trips"
+            "value" : "Add to trips"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till i mina resor"
+            "value" : "Lägg till i resor"
           }
         }
       }
@@ -4673,6 +4673,57 @@
         }
       }
     },
+    "common.updatedAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppdaterad {{time}}"
+          }
+        }
+      }
+    },
+    "common.couldntRefresh" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t refresh"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte uppdatera"
+          }
+        }
+      }
+    },
+    "common.tryAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Försök igen"
+          }
+        }
+      }
+    },
     "connection.brokenBanner" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5362,7 +5413,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tåget är inställt. Kolla med operatören om ersättningsbussar eller andra tåg."
+            "value" : "Tåget är inställt. Kolla med tågbolaget om ersättningsbussar eller andra tåg."
           }
         }
       }
@@ -5396,7 +5447,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort resan"
+            "value" : "Radera resan"
           }
         }
       }
@@ -5413,7 +5464,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort den här resan?"
+            "value" : "Radera den här resan?"
           }
         }
       }
@@ -6331,7 +6382,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inga andra tåg i tidtabellen under resten av dagen och i morgon. Fråga operatören om ersättningstrafik."
+            "value" : "Inga andra tåg i tidtabellen under resten av dagen och i morgon. Fråga tågbolaget om ersättningstrafik."
           }
         }
       }
@@ -6569,7 +6620,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "operatören"
+            "value" : "tågbolaget"
           }
         }
       }
@@ -6801,13 +6852,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Find your train"
+            "value" : "Find a train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hitta ditt tåg"
+            "value" : "Hitta ett tåg"
           }
         }
       }
@@ -7953,7 +8004,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bolag"
+            "value" : "Tågbolag"
           }
         }
       }
@@ -7970,7 +8021,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Varje tåg i sitt bolags färg."
+            "value" : "Varje tåg i sitt tågbolags färg."
           }
         }
       }
@@ -8463,7 +8514,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Punkt: ett tåg, i operatörens färg"
+            "value" : "Punkt: ett tåg, i tågbolagets färg"
           }
         }
       }
@@ -9226,7 +9277,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unfollow"
+            "value" : "Stop following"
           }
         },
         "sv" : {
@@ -9504,7 +9555,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Operatör"
+            "value" : "Tågbolag"
           }
         }
       }
@@ -9515,13 +9566,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add trip"
+            "value" : "Add to trips"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till resa"
+            "value" : "Lägg till i resor"
           }
         }
       }
@@ -9685,13 +9736,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add train"
+            "value" : "Find a train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till tåg"
+            "value" : "Hitta ett tåg"
           }
         }
       }
@@ -11650,7 +11701,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Operatörer"
+            "value" : "Tågbolag"
           }
         }
       }
@@ -13009,7 +13060,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Slag"
+            "value" : "Tågslag"
           }
         }
       }
@@ -15564,13 +15615,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Couldn’t export. Is the server running?"
+            "value" : "Couldn’t export. Check your connection and try again."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kunde inte exportera. Är servern igång?"
+            "value" : "Kunde inte exportera. Kontrollera anslutningen och försök igen."
           }
         }
       }
@@ -15928,13 +15979,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Couldn’t save. Is the server running?"
+            "value" : "Couldn’t save. Check your connection and try again."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kunde inte spara. Är servern igång?"
+            "value" : "Kunde inte spara. Kontrollera anslutningen och försök igen."
           }
         }
       }
@@ -16648,7 +16699,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Operatör"
+            "value" : "Tågbolag"
           }
         }
       }
@@ -19475,6 +19526,23 @@
         }
       }
     },
+    "stations.favoriteFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t save the favourite. Try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte spara favoriten. Försök igen."
+          }
+        }
+      }
+    },
     "status.approaching" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19760,13 +19828,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a train"
+            "value" : "Find a train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till ett tåg"
+            "value" : "Hitta ett tåg"
           }
         }
       }
@@ -19998,13 +20066,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add to my trips"
+            "value" : "Add to trips"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till i mina resor"
+            "value" : "Lägg till i resor"
           }
         }
       }
@@ -20174,7 +20242,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öppnar operatörens egen webbplats. Sök {{from}} → {{to}}, {{day}} {{time}} ({{train}})."
+            "value" : "Öppnar tågbolagets egen webbplats. Sök {{from}} → {{to}}, {{day}} {{time}} ({{train}})."
           }
         }
       }
@@ -21290,7 +21358,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Retry"
+            "value" : "Try again"
           }
         },
         "sv" : {
@@ -21851,13 +21919,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a train in Clack"
+            "value" : "Find a train in Clack"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till ett tåg i Clack"
+            "value" : "Hitta ett tåg i Clack"
           }
         }
       }
@@ -23258,7 +23326,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort det här tåget"
+            "value" : "Radera det här tåget"
           }
         }
       }
@@ -23275,7 +23343,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort {{route}} från resan?"
+            "value" : "Radera {{route}} från resvägen?"
           }
         }
       }
@@ -23292,7 +23360,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort {{route}}?"
+            "value" : "Radera {{route}}?"
           }
         }
       }
@@ -23700,7 +23768,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Slag"
+            "value" : "Tågslag"
           }
         }
       }
