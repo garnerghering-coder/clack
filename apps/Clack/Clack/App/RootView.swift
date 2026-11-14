@@ -221,14 +221,15 @@ struct RootView: View {
 
     /// One tab's stack: its root screen, and whatever has been pushed onto it (kept when you switch tabs).
     private func stack<Root: View>(_ tab: PrimaryTab, @ViewBuilder root: () -> Root) -> some View {
-        NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
-            root()
-                .appDestinations()
-        }
-        // Offline: a strip in the safe area, so every screen moves down under it instead of being covered (designer,
-        // 2026-11-07: the toast landed on Explore's search field).
-        .safeAreaInset(edge: .top, spacing: 0) {
+        // Offline: a strip above the stack, so the whole screen (its navigation bar too) starts below it instead of
+        // being covered (designer, 2026-11-07: the toast landed on Explore's search field; owner, 2026-11-14: a top
+        // margin, not an overlay). A safe-area inset moved the content but left the navigation bar under the strip.
+        VStack(spacing: 0) {
             if app.isOffline { OfflineBanner().transition(.move(edge: .top).combined(with: .opacity)) }
+            NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
+                root()
+                    .appDestinations()
+            }
         }
         .animation(.easeInOut(duration: 0.2), value: app.isOffline)
         .modifier(NoBottomEdgeEffect())

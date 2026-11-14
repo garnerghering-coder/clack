@@ -107,8 +107,9 @@ struct OfflineBanner: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 6)
         .padding(.horizontal, 12)
-        .background(Ink.surfaceRaised)
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
+        // Its colour runs up behind the status bar: the strip sits at the top of the screen, under the clock.
+        .background(Ink.surfaceRaised.ignoresSafeArea(edges: .top))
         .accessibilityElement(children: .combine)
     }
 }
