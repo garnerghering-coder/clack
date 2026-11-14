@@ -8,6 +8,33 @@ import Foundation
 /// The live map's rules (pages/LiveMapPage.tsx): which trains show, where the selected train's route is cut, how a
 /// marker glides, what the status chip says, the train sheet's three sizes.
 public nonisolated enum ExploreLogic {
+    /// The camera tilts into 3D close in on a station with measured structures, and flattens out again (DESIGN §2.7):
+    /// in at zoom 16, out below 15.5, so it doesn't flip at the edge.
+    public static let tiltInZoom = 16.0
+    public static let tiltOutZoom = 15.5
+    public static let tiltDegrees = 55.0
+
+    /// Whether the map should be tilted, given where it is and whether it is tilted now (polish pass 1).
+    public static func wantTilt(zoom: Double, tilted: Bool, hasStructures: Bool) -> Bool {
+        hasStructures && zoom >= (tilted ? tiltOutZoom : tiltInZoom)
+    }
+
+    /// Whether the camera's real pitch disagrees with what was asked: a gesture can cut the tilt or flatten animation
+    /// short, leaving the map half tilted with nothing to set it right (owner, 2026-11-14: "it still struggled to get
+    /// out of the tilted view"). Then the pitch is asked for again.
+    /// Tilting by hand is allowed while tilted (DESIGN §2.7), so a tilted map only counts as stuck when it is flat.
+    public static func pitchNeedsFix(pitch: Double, tilted: Bool) -> Bool {
+        tilted ? pitch < 5 : pitch > 1
+    }
+
+    /// The box to fetch station detail for. Tilted, the visible box reaches to the horizon and is too big to ask
+    /// for, so the detail never refreshed and the map couldn't tell it had left the station; then a box around the
+    /// centre is used instead.
+    public static func detailBox(visible: (w: Double, s: Double, e: Double, n: Double), centre: (lat: Double, lon: Double), tilted: Bool) -> (w: Double, s: Double, e: Double, n: Double) {
+        guard tilted else { return visible }
+        return (centre.lon - 0.01, centre.lat - 0.005, centre.lon + 0.01, centre.lat + 0.005)
+    }
+
     public static let products = ["high_speed", "intercity", "regional", "commuter", "night"]
     public static let glideMs = 1500.0
     public static let staleMs = 60_000.0

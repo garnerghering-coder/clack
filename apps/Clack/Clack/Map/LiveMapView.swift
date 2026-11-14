@@ -64,6 +64,9 @@ final class LiveMapController {
     var onTapStation: (_ id: String, _ name: String) -> Void = { _, _ in }
     /// The visible area as "W,S,E,N" (3 decimals) and the zoom, after the map settles.
     var onViewChange: (_ bbox: String, _ zoom: Double) -> Void = { _, _ in }
+    /// The camera's pitch now, and its centre, read with the view change (the tilt rule checks the real pitch).
+    var pitch: Double { Double(mapView?.camera.pitch ?? 0) }
+    var centre: CLLocationCoordinate2D? { mapView?.centerCoordinate }
     var onReady: () -> Void = {}
     /// A new map view was made (its style isn't loaded yet).
     var onRebuild: () -> Void = {}
@@ -279,16 +282,20 @@ final class LiveMapController {
     /// only while tilted.
     func setTilt(_ degrees: Double) {
         guard let mapView else { return }
-        // Tilting allowed first when tilting, and only switched off after the camera is flat again: with tilting off,
-        // MapLibre keeps the pitch it has (owner, 2026-10-30: "it doesn't untilt when you zoom out").
-        if degrees > 0 { mapView.allowsTilting = true }
+        // Tilting allowed while the camera moves either way, and only switched off once it is flat again: with tilting
+        // off, MapLibre keeps the pitch it has (owner, 2026-10-30: "it doesn't untilt when you zoom out").
+        mapView.allowsTilting = true
         // Same zoom level at the new pitch: MapLibre keeps the camera's altitude, which shifts the zoom by ~0.8 at 55°,
         // and that flipped the tilt straight back.
         let camera = mapView.camera
         camera.pitch = degrees
         camera.altitude = MLNAltitudeForZoomLevel(mapView.zoomLevel, degrees, mapView.centerCoordinate.latitude, mapView.bounds.size)
-        mapView.setCamera(camera, withDuration: 0.6, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut)) { [weak mapView] in
-            if degrees == 0 { mapView?.allowsTilting = false }
+        // Reduce Motion: straight there.
+        let duration = UIAccessibility.isReduceMotionEnabled ? 0 : 0.6
+        mapView.setCamera(camera, withDuration: duration, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut)) { [weak mapView] in
+            // Only once it really is flat: if a gesture cut the animation short, the next view change asks again
+            // (`ExploreLogic.pitchNeedsFix`), so tilting must stay allowed until then.
+            if degrees == 0, let mapView, mapView.camera.pitch < 1 { mapView.allowsTilting = false }
         }
     }
 

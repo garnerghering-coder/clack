@@ -16,6 +16,34 @@ struct ExploreLogicTests {
         )
     }
 
+    @Test func tiltsInAtSixteenAndOutBelowFifteenAndAHalf() {
+        #expect(!ExploreLogic.wantTilt(zoom: 15.9, tilted: false, hasStructures: true))
+        #expect(ExploreLogic.wantTilt(zoom: 16, tilted: false, hasStructures: true))
+        #expect(ExploreLogic.wantTilt(zoom: 15.6, tilted: true, hasStructures: true))
+        #expect(!ExploreLogic.wantTilt(zoom: 15.4, tilted: true, hasStructures: true))
+        // Away from anything measured it flattens at any zoom.
+        #expect(!ExploreLogic.wantTilt(zoom: 18, tilted: true, hasStructures: false))
+    }
+
+    @Test func aPitchLeftHalfWayIsAskedForAgainButAHandTiltIsLeftAlone() {
+        // Flattening was cut short by a gesture: still tilted.
+        #expect(ExploreLogic.pitchNeedsFix(pitch: 30, tilted: false))
+        #expect(!ExploreLogic.pitchNeedsFix(pitch: 0, tilted: false))
+        // Tilting never happened.
+        #expect(ExploreLogic.pitchNeedsFix(pitch: 0, tilted: true))
+        // Tilted by hand to 40°: allowed.
+        #expect(!ExploreLogic.pitchNeedsFix(pitch: 40, tilted: true))
+    }
+
+    @Test func tiltedTheDetailBoxFollowsTheCentreNotTheHorizon() {
+        let visible = (w: 10.0, s: 55.0, e: 14.0, n: 60.0)
+        let flat = ExploreLogic.detailBox(visible: visible, centre: (lat: 55.67, lon: 12.56), tilted: false)
+        #expect(flat.w == 10 && flat.n == 60)
+        let tilted = ExploreLogic.detailBox(visible: visible, centre: (lat: 55.67, lon: 12.56), tilted: true)
+        #expect(tilted.e - tilted.w <= 0.06 && tilted.n - tilted.s <= 0.03)
+        #expect(abs((tilted.w + tilted.e) / 2 - 12.56) < 1e-9)
+    }
+
     @Test func filtersByProductOperatorDelayMineAndFollowed() {
         var f = ExploreLogic.Filters()
         #expect(ExploreLogic.visible(train(), f, followed: []))

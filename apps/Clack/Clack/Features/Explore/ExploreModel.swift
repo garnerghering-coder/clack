@@ -137,7 +137,11 @@ final class ExploreModel {
             self?.scheduleRender()
         }
         // A new map (the theme changed): not ready until its style loads, so the stream starts again once it is.
-        controller.onRebuild = { [weak self] in self?.ready = false }
+        controller.onRebuild = { [weak self] in
+            self?.ready = false
+            // The new map starts flat: the tilt rule decides again from there.
+            self?.tilted = false
+        }
         controller.onViewChange = { [weak self] bbox, zoom in
             self?.bbox = bbox
             self?.zoom = zoom
@@ -436,9 +440,12 @@ final class ExploreModel {
         }
         let parts = bbox.split(separator: ",").compactMap { Double($0) }
         guard parts.count == 4 else { return }
+        // Tilted, a box round the centre (the visible one reaches the horizon; ExploreLogic.detailBox).
+        let centre = controller.centre.map { (lat: $0.latitude, lon: $0.longitude) } ?? (lat: (parts[1] + parts[3]) / 2, lon: (parts[0] + parts[2]) / 2)
+        let box = ExploreLogic.detailBox(visible: (parts[0], parts[1], parts[2], parts[3]), centre: centre, tilted: tilted)
         // A little wider than the screen, rounded to about 100 m, so a nudge doesn't ask again.
         let r = { (v: Double) in (v / 0.001).rounded() * 0.001 }
-        let w = r(parts[0] - 0.002), s = r(parts[1] - 0.001), e = r(parts[2] + 0.002), n = r(parts[3] + 0.001)
+        let w = r(box.w - 0.002), s = r(box.s - 0.001), e = r(box.e + 0.002), n = r(box.n + 0.001)
         guard e - w <= 0.06, n - s <= 0.03 else { return }
         let key = String(format: "%.3f,%.3f,%.3f,%.3f", w, s, e, n)
         if key == detailShownKey { return }
@@ -450,7 +457,15 @@ final class ExploreModel {
             comps?.queryItems = [URLQueryItem(name: "bbox", value: key)]
             guard let url = comps?.url else { return }
             let answer = try? await URLSession.shared.data(from: url)
-            guard let (data, _) = answer, !Task.isCancelled, let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            guard let (data, _) = answer, !Task.isCancelled, let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                // No answer for this place: nothing measured is known here, so the map doesn't stay tilted on the
+                // strength of the last station.
+                if !Task.isCancelled, self.detailHasStructures {
+                    self.detailHasStructures = false
+                    self.updateTilt()
+                }
+                return
+            }
             let tracks = Self.tracks(in: json)
             self.detailCache[key] = (json, tracks)
             // Over 40: drop another one (a dictionary has no order, so not "the oldest", but never the one just added).
@@ -479,8 +494,8 @@ final class ExploreModel {
     /// Close in on a station with measured structures, the map tilts into 3D (owner, 2026-10-30: "when a user zooms in
     /// close enough to the station, it switches into the 3d view"); out again, or away from it, it flattens. In at
     /// `model3DZoom`, out a whole zoom below, so it doesn't flip at the edge.
-    static let model3DZoom = 16.0
-    static let tiltDegrees = 55.0
+    static let model3DZoom = ExploreLogic.tiltInZoom
+    static let tiltDegrees = ExploreLogic.tiltDegrees
     @ObservationIgnored private var detailHasStructures = false
     /// The camera stays on the selected train until the map is dragged.
     @ObservationIgnored private var followingSelected = false
@@ -489,10 +504,14 @@ final class ExploreModel {
     private(set) var laserCredit3D: String?
 
     private func updateTilt() {
-        let want = detailHasStructures && zoom >= (tilted ? Self.model3DZoom - 1 : Self.model3DZoom)
-        guard want != tilted else { return }
-        tilted = want
-        controller.setTilt(want ? Self.tiltDegrees : 0)
+        let want = ExploreLogic.wantTilt(zoom: zoom, tilted: tilted, hasStructures: detailHasStructures)
+        if want != tilted {
+            tilted = want
+            controller.setTilt(want ? Self.tiltDegrees : 0)
+        } else if ExploreLogic.pitchNeedsFix(pitch: controller.pitch, tilted: tilted) {
+            // A gesture cut the last tilt or flatten short: ask again (polish pass 1).
+            controller.setTilt(tilted ? Self.tiltDegrees : 0)
+        }
     }
 
     /// The track lines of a detail answer, for laying trains on.
