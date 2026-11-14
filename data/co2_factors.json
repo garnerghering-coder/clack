@@ -1,15 +1,75 @@
 {
-  "_comment": "CO2 factors (SPEC §15), g CO2e per passenger-km, well-to-wheel, keyed by country. Source for SE: IVL Swedish Environmental Research Institute, 'Typvärden för klimatpåverkande utsläpp från långväga personresor i Sverige', report U11173, May 2026 (commissioned by SJ AB); electric car: Trafikverket rural WTW value, excludes vehicle manufacturing. Values as given in SPEC.md §15; re-check against the report before any public launch.",
+  "_comment": "CO2 factors (SPEC §15), g CO2e per passenger-km, well-to-wheel, keyed by country. Source for SE: IVL Swedish Environmental Research Institute, 'Typvärden för klimatpåverkande utsläpp från långväga personresor i Sverige', report U11173, May 2026 (commissioned by SJ AB); electric car: Trafikverket rural WTW value, excludes vehicle manufacturing. Values as given in SPEC.md §15; re-check against the report before any public launch. Denmark, Norway and Finland (polish pass 1, 2026-11-14): each operator's or government's own published train figure, used as an estimate (owner: 'estimates are fine'); their methods differ from IVL's (some count only the energy to run the train), so they are estimates, said so in the app. The car and flight comparisons are Sweden's for every country.",
   "SE": {
-    "train": { "g_per_pkm": 0.27, "source": "IVL U11173 (2026), average SJ train", "year": 2026 },
+    "train": {
+      "g_per_pkm": 0.27,
+      "source": "IVL U11173 (2026), average SJ train",
+      "year": 2026
+    },
     "comparisons": {
-      "flight": { "g_per_pkm": 170, "source": "IVL U11173 (2026), domestic flight incl. high-altitude effect", "year": 2026 },
-      "car_1": { "g_per_pkm": 190, "source": "IVL U11173 (2026), average Swedish car, rural, 1 person", "year": 2026 },
-      "car_2": { "g_per_pkm": 95, "source": "IVL U11173 (2026), 2 people", "year": 2026 },
-      "car_3": { "g_per_pkm": 63, "source": "IVL U11173 (2026), 3 people", "year": 2026 },
-      "car_avg": { "g_per_pkm": 130, "source": "IVL U11173 (2026), average occupancy 1.45", "year": 2026 },
-      "ev_1": { "g_per_pkm": 10, "source": "Trafikverket rural WTW; excludes vehicle manufacturing", "year": 2026 },
-      "coach": { "g_per_pkm": 15, "source": "IVL U11173 (2026), long-distance coach", "year": 2026 }
+      "flight": {
+        "g_per_pkm": 170,
+        "source": "IVL U11173 (2026), domestic flight incl. high-altitude effect",
+        "year": 2026
+      },
+      "car_1": {
+        "g_per_pkm": 190,
+        "source": "IVL U11173 (2026), average Swedish car, rural, 1 person",
+        "year": 2026
+      },
+      "car_2": {
+        "g_per_pkm": 95,
+        "source": "IVL U11173 (2026), 2 people",
+        "year": 2026
+      },
+      "car_3": {
+        "g_per_pkm": 63,
+        "source": "IVL U11173 (2026), 3 people",
+        "year": 2026
+      },
+      "car_avg": {
+        "g_per_pkm": 130,
+        "source": "IVL U11173 (2026), average occupancy 1.45",
+        "year": 2026
+      },
+      "ev_1": {
+        "g_per_pkm": 10,
+        "source": "Trafikverket rural WTW; excludes vehicle manufacturing",
+        "year": 2026
+      },
+      "coach": {
+        "g_per_pkm": 15,
+        "source": "IVL U11173 (2026), long-distance coach",
+        "year": 2026
+      }
+    }
+  },
+  "DK": {
+    "train": {
+      "g_per_pkm": 42,
+      "source": "Danish Ministry of Transport, answer to TRU question 193 (2023-24), data from DSB 2024: diesel regional trains 42–132 g CO2 per passenger-km depending on stock and occupancy; the low end, as most long-distance DSB trains are still diesel IC3. Running only, no infrastructure. https://www.ft.dk/samling/20231/almdel/tru/spm/193/svar/2029862/2835871/index.htm",
+      "year": 2024
+    },
+    "by_product": {
+      "commuter": {
+        "g_per_pkm": 11,
+        "source": "Same answer: S-tog 11 g CO2 per passenger-km.",
+        "year": 2024
+      }
+    }
+  },
+  "NO": {
+    "train": {
+      "g_per_pkm": 7,
+      "source": "Vy, Sustainability and social responsibility: electric train in the Nordic countries 7 g CO2e per passenger-km. https://www.vy.no/en/the-vy-group/sustainability-and-social-responsibility",
+      "year": 2025
+    }
+  },
+  "FI": {
+    "train": {
+      "g_per_pkm": 1.1,
+      "source": "VR, Train travel sustainability (carbon calculator): passenger trains 1.1 g CO2 per passenger-km, travel only. https://www.vr.fi/en/vinkkeja-junamatkailuun/uusilla-raiteilla/environment",
+      "year": 2025
     }
   }
 }

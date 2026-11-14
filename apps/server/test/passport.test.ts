@@ -49,7 +49,8 @@ describe('passport', () => {
   it('counts delays only from trains with full actual times', () => {
     expect(p.delays.basedOn).toBe(1);
     expect(p.delays.onTimePct).toBe(100); // +3 is within the 5-minute on-time threshold
-    expect(p.delays.bands).toEqual({ on_time: 0, slight: 1, late: 0, very_late: 0 });
+    // The bar agrees with the number (polish pass 1): +3 is on time in both.
+    expect(p.delays.bands).toEqual({ on_time: 1, slight: 0, late: 0, very_late: 0 });
   });
 
   it('ranks operators and train types', () => {
@@ -108,11 +109,14 @@ describe('Finland in the passport', () => {
     expect(computePassport([{ ...ny, tz: undefined }], opts).years).toEqual([2026]);
   });
 
-  it("uses Sweden's CO2 factors for Norway and Finland, until they have figures of their own", () => {
-    expect(co2FactorsFor('FI')).toBe(co2FactorsFor('SE'));
-    expect(co2FactorsFor('NO')).toBe(co2FactorsFor('SE'));
-    expect(co2FactorsFor(undefined)).toBe(co2FactorsFor('SE'));
-    expect(computePassport([tornio], opts).co2.trainKg).toBeCloseTo(co2(2, 'flight').trainKg, 8);
+  it("uses each country's own published train figure, with Sweden's car and flight comparisons", () => {
+    expect(co2FactorsFor('FI').train.g_per_pkm).toBe(1.1);
+    expect(co2FactorsFor('NO').train.g_per_pkm).toBe(7);
+    expect(co2FactorsFor('DK').train.g_per_pkm).toBe(42);
+    expect(co2FactorsFor('DK', 'commuter').train.g_per_pkm).toBe(11);
+    expect(co2FactorsFor('DK').comparisons).toEqual(co2FactorsFor('SE').comparisons);
+    expect(co2FactorsFor(undefined).train.g_per_pkm).toBe(co2FactorsFor('SE').train.g_per_pkm);
+    expect(computePassport([tornio], opts).co2.trainKg).toBeCloseTo(co2(2, 'flight', co2FactorsFor(tornio.stops[0]!.country)).trainKg, 8);
   });
 
   it('reads a ridden Finnish leg from the database with the Helsinki zone', async () => {

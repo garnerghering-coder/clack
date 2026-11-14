@@ -2,7 +2,7 @@
 // computePassport is pure (tests feed it legs directly); loadPassportLegs reads them from the database.
 import { and, asc, eq, inArray } from 'drizzle-orm';
 import { countedRide } from '../legs/recording.js';
-import { ON_TIME_MAX_DELAY_MIN, delayBand, type Co2Comparison } from '@clack/shared';
+import { ON_TIME_MAX_DELAY_MIN, punctualityBand, type Co2Comparison } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, operators, stations, timetableTrips } from '../db/schema.js';
 import { readDataFile } from '../dataFiles.js';
@@ -76,27 +76,36 @@ export const ARCTIC_CIRCLE_LAT = 66 + 33 / 60 + 51.1 / 3600;
 /** The kinds of train "Every kind of train" asks for; heritage trains are left out. */
 export const KINDS_OF_TRAIN = ['high_speed', 'intercity', 'night', 'regional', 'commuter'] as const;
 
-type Co2Factors = Record<string, { train: { g_per_pkm: number }; comparisons: Record<string, { g_per_pkm: number; source: string }> }>;
+type Co2Factor = { g_per_pkm: number; source?: string };
+type Co2Factors = Record<string, { train: Co2Factor; by_product?: Record<string, Co2Factor>; comparisons?: Record<string, Co2Factor> }>;
 let factors: Co2Factors | null = null;
 export const co2Factors = () => (factors ??= readDataFile<Co2Factors>('co2_factors.json'));
 
 /**
- * Emission factors for a country. Only Sweden's are sourced (IVL); Norway and Finland have no figures of their own
- * here, so they use Sweden's, and the Passport says so (about.co2Body). A country with no entry uses Sweden's too.
+ * Emission factors for a country (data/co2_factors.json, each with its source). Sweden's are IVL's; Denmark, Norway
+ * and Finland have their own operators' or government's published train figures, used as estimates (polish pass 1,
+ * owner: "estimates are fine"). The car and flight comparisons are Sweden's everywhere. A country with no entry uses
+ * Sweden's train figure too. `product` picks a kind's own figure where the source gives one (Denmark's S-tog).
  */
-export const co2FactorsFor = (country: string | null | undefined) => (country === 'NO' || country === 'FI' ? co2Factors().SE! : (co2Factors()[country ?? 'SE'] ?? co2Factors().SE!));
+export function co2FactorsFor(country: string | null | undefined, product?: string | null) {
+  const all = co2Factors();
+  const se = all.SE!;
+  const own = all[country ?? 'SE'] ?? se;
+  const train = (product && own.by_product?.[product]) || own.train;
+  return { train, comparisons: own.comparisons ?? se.comparisons ?? {} };
+}
 
-export function co2(distanceKm: number, comparison: Co2Comparison, f = co2Factors().SE!) {
+export function co2(distanceKm: number, comparison: Co2Comparison, f: { train: Co2Factor; comparisons: Record<string, Co2Factor> } = co2FactorsFor('SE')) {
   const train = (distanceKm * f.train.g_per_pkm) / 1000;
   const other = (distanceKm * (f.comparisons[comparison]?.g_per_pkm ?? 0)) / 1000;
   return { trainKg: train, comparisonKg: other, savedKg: other - train };
 }
 
-/** The CO2 of a set of rides, each with its own country's factors (all of them Sweden's for now: see co2FactorsFor). */
+/** The CO2 of a set of rides, each with the factors of the country it starts in (see co2FactorsFor). */
 function co2ForLegs(rides: PassportLeg[], comparison: Co2Comparison) {
   const sum = { trainKg: 0, comparisonKg: 0, savedKg: 0 };
   for (const l of rides) {
-    const c = co2(l.distanceM / 1000, comparison, co2FactorsFor(l.stops[0]?.country));
+    const c = co2(l.distanceM / 1000, comparison, co2FactorsFor(l.stops[0]?.country, l.product));
     sum.trainKg += c.trainKg;
     sum.comparisonKg += c.comparisonKg;
     sum.savedKg += c.savedKg;
@@ -176,7 +185,7 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
   const timed = rides.filter((l) => l.dataQuality === 'full' && l.arrDelayMin !== null);
   const bands = { on_time: 0, slight: 0, late: 0, very_late: 0 };
   for (const l of timed) {
-    const b = delayBand(l.arrDelayMin);
+    const b = punctualityBand(l.arrDelayMin);
     if (b in bands) bands[b as keyof typeof bands]++;
   }
   const late = timed.map((l) => Math.max(0, l.arrDelayMin!));
