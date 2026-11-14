@@ -1408,13 +1408,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Train number, route, or operator"
+            "value" : "SJ 523 or Stockholm Göteborg"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tågnummer, sträcka eller tågbolag"
+            "value" : "SJ 523 eller Stockholm Göteborg"
           }
         }
       }
@@ -23688,6 +23688,23 @@
         }
       }
     },
+    "manual.setTime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set time"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ange tid"
+          }
+        }
+      }
+    },
     "edit.stationsStay" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24062,6 +24079,74 @@
         }
       }
     },
+    "add.resultLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}}, {{from}} {{dep}} to {{to}} {{arr}}, {{duration}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{train}}, {{from}} {{dep}} till {{to}} {{arr}}, {{duration}}"
+          }
+        }
+      }
+    },
+    "add.tripLoadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load this train’s stops. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta tågets uppehåll. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
+    "add.saveFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t save the trip. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte spara resan. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
+    "add.shareTicketHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Have an SJ ticket as a PDF or an email? Share it to Clack and the train is found for you."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Har du en SJ-biljett som pdf eller mejl? Dela den till Clack så hittas tåget åt dig."
+          }
+        }
+      }
+    },
     "journey.addOrFollowNote" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -24092,6 +24177,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Den hamnar bland dina resor och i ditt pass."
+          }
+        }
+      }
+    },
+    "journey.followFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t follow this journey. Try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte följa resvägen. Försök igen."
           }
         }
       }

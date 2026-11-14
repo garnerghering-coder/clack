@@ -106,10 +106,15 @@ private struct SearchStep: View {
                     ChipButton(text: example) { model.query = example }
                 }
             }
+            // The other way in, said once where people look for it (user test 2026-11-07: nobody knew).
+            Text(l10n.t("add.shareTicketHint")).clack(.caption).foregroundStyle(Ink.text2)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        if model.searchFailed { Banner(kind: .error) { Text(l10n.t("add.searchError")) }.countsError("add.search") }
+        if model.searchFailed {
+            ErrorStateView(message: l10n.t("add.searchError"), retry: { model.searchAgain() }).countsError("add.search")
+        }
 
-        if model.query.isEmpty {
+        if model.query.isEmpty, !model.popular.isEmpty {
             Text(l10n.t("add.popular")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             stationList(model.popular)
         } else if let response = model.response {
@@ -120,9 +125,9 @@ private struct SearchStep: View {
                 Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 stationList(model.suggestionsShown)
             }
-            VStack(spacing: Space.m) {
-                Skeleton(height: 120)
-                Skeleton(height: 120)
+            VStack(spacing: Space.l) {
+                ResultCardSample()
+                ResultCardSample()
             }
         }
     }
@@ -165,7 +170,10 @@ private struct SearchStep: View {
         }
         .sheet(isPresented: $showJourneyFilters) {
             JourneyFilterSheet(model: model) { showJourneyFilters = false }
-                .presentationDetents([.height(model.maxChanges > 0 ? 300 : 190)])
+                // The system's detents, so the sheet grows with the text instead of clipping it (polish pass 1: a fixed
+                // 190/300 pt cut off at the accessibility sizes).
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         }
     }
 
@@ -286,11 +294,17 @@ private struct SearchStep: View {
             }
         }
         if let list = response.results, !list.isEmpty {
-            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
-                ForEach(AddTrainLogic.Filter.allCases, id: \.self) { filter in
-                    ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
+            // One row that scrolls sideways, in every language (polish pass 1: it wrapped to two lines in English and
+            // ran off the edge in Swedish).
+            ScrollView(.horizontal) {
+                HStack(spacing: Space.s) {
+                    ForEach(AddTrainLogic.Filter.allCases, id: \.self) { filter in
+                        ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
+                    }
                 }
             }
+            .scrollIndicators(.hidden)
+            .scrollClipDisabled()
             if model.hasHiddenEarlier {
                 Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
             }
@@ -397,13 +411,13 @@ private struct DateRow: View {
                     in: ...maxDate, displayedComponents: .date
                 )
                 .datePickerStyle(.graphical)
-                .tint(Ink.accent)
+                // The chosen day in the selection ink; yellow stays on Done, the one action (Look.selection).
+                .tint(Look.selectionFill)
                 Button(l10n.t("common.done")) { picking = false }.buttonStyle(.clack(.primary, wide: true))
             }
             .padding(Space.l)
-            .presentationDetents([.medium])
-            .presentationBackground(Ink.surface)
-            .presentationCornerRadius(Radius.sheet)
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
 }
@@ -420,24 +434,16 @@ private struct ResultCard: View {
         let op = result.operatorId.flatMap { app.operatorsById[$0] }
         let type = result.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let plus = Format.dayOffset(from: result.from.time, fromTz: result.from.tz, to: result.to.time, toTz: result.to.tz)
+        let dep = Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)
+        let arr = Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)
+        let duration = Format.duration(Double(result.durationMin), language: l10n.language)
         Button(action: onPick) {
             VStack(alignment: .leading, spacing: Space.s) {
-                HStack(alignment: .firstTextBaseline, spacing: Space.m) {
-                    Text(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    Text(Format.duration(Double(result.durationMin), language: l10n.language))
-                        .clack(.caption).foregroundStyle(Ink.text2)
-                        .frame(maxWidth: .infinity)
-                        .background { DashedHorizontalLine() }
-                    HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
-                        Text(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                        if plus > 0 { TimePair.plusText(plus) }
-                    }
-                }
-                .monospacedDigit()
-                HStack(spacing: Space.m) {
-                    Text(result.from.name)
+                TimesRow(dep: dep, arr: arr, duration: duration, plus: plus)
+                AdaptiveStack(spacing: Space.m) {
+                    Text(result.from.name).lineLimit(2)
                     Spacer(minLength: 0)
-                    Text(result.to.name).multilineTextAlignment(.trailing)
+                    Text(result.to.name).multilineTextAlignment(.trailing).lineLimit(2)
                 }
                 .clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text2)
                 if let type {
@@ -450,7 +456,7 @@ private struct ResultCard: View {
                 }
                 // Without the operator's mark the route's name stands in, unless it is only the number again
                 // (user test 2026-11-07: "427 427 ?").
-                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil && result.routeName != result.trainNumber ? result.routeName : nil)
+                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: AddTrainLogic.standInName(result, op: op))
                 Text(Format.join([
                     result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
                     result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
@@ -461,9 +467,80 @@ private struct ResultCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
-            .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.press)
+        // One sentence for VoiceOver, not a dozen pieces.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(l10n.t("add.resultLabel", [
+            "train": [op?.name, result.trainNumber].compactMap { $0 }.joined(separator: " "),
+            "from": result.from.name, "dep": dep, "to": result.to.name, "arr": arr, "duration": duration,
+        ]))
+        .accessibilityAddTraits(.isButton)
+    }
+}
+
+/// Departure, the trip's length on a dashed line, arrival. The times never shrink or wrap; at large text sizes the
+/// three stack instead of squeezing (polish pass 1: "07:2 / 2" at AX3).
+private struct TimesRow: View {
+    let dep: String
+    let arr: String
+    let duration: String
+    let plus: Int
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
+                time(dep)
+                Text(duration)
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity)
+                    .background { DashedHorizontalLine() }
+                arrival
+            }
+            VStack(alignment: .leading, spacing: Space.xxs) {
+                time(dep)
+                Text(duration).clack(.caption).foregroundStyle(Ink.text2)
+                arrival
+            }
+        }
+        .monospacedDigit()
+    }
+
+    private func time(_ text: String) -> some View {
+        Text(text).clack(.bigTime).foregroundStyle(Ink.text).fixedSize()
+    }
+
+    private var arrival: some View {
+        HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
+            time(arr)
+            if plus > 0 { TimePair.plusText(plus) }
+        }
+        .fixedSize()
+    }
+}
+
+/// While the first results load: a card shaped like a result (times, names, a train, a line), so nothing moves when
+/// the real ones arrive.
+private struct ResultCardSample: View {
+    var body: some View {
+        Placeholder {
+            VStack(alignment: .leading, spacing: Space.s) {
+                TimesRow(dep: "08:03", arr: "10:51", duration: "2h 48m", plus: 0)
+                HStack {
+                    Text(verbatim: "Stockholm C")
+                    Spacer(minLength: 0)
+                    Text(verbatim: "Göteborg C")
+                }
+                .clack(.stopName).fontWeight(.semibold)
+                Color.clear.frame(height: 28)
+                ServiceHeader(op: nil, number: "523", size: .medium)
+                Text(verbatim: "4 stops between").clack(.caption)
+            }
+            .padding(Space.l)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        }
     }
 }
 
@@ -492,21 +569,17 @@ private struct ConnectionResultCard: View {
         let total = Double(Int(((second.to.time - first.from.time) / 60_000).rounded()))
         let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: second.to.time, toTz: second.to.tz)
         let card = VStack(alignment: .leading, spacing: Space.s) {
-            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
-                Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                Text(Format.duration(total, language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity).background { DashedHorizontalLine() }
-                HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
-                    Text(Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    if plus > 0 { TimePair.plusText(plus) }
-                }
-            }
-            .monospacedDigit()
+            TimesRow(
+                dep: Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock),
+                arr: Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock),
+                duration: Format.duration(total, language: l10n.language), plus: plus
+            )
             ForEach([first, second], id: \.id) { result in
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
                 VStack(alignment: .leading, spacing: Space.xxs) {
-                    ServiceHeader(op: op, number: result.trainNumber, size: .small, name: op == nil ? result.routeName : nil)
+                    ServiceHeader(op: op, number: result.trainNumber, size: .small, name: AddTrainLogic.standInName(result, op: op))
                     (TimePair.text(.init(time: result.from.time, tz: result.from.tz), .init(time: result.to.time, tz: result.to.tz), clock: app.settings.clock)
-                        + Text(Format.separator + "\(result.from.name) → \(result.to.name)"))
+                        + Text(verbatim: Format.separator + "\(result.from.name) → \(result.to.name)"))
                         .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
                 }
             }
@@ -517,7 +590,7 @@ private struct ConnectionResultCard: View {
         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         Group {
-            if let onPick { Button(action: onPick) { card }.buttonStyle(.plain) } else { card }
+            if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
         }
     }
 }
@@ -539,6 +612,8 @@ private struct ConfirmStep: View {
     @State private var picked: AddTrainLogic.Picked
     @State private var duplicate = false
     @State private var error: String?
+    /// The train's stops couldn't be fetched (said as such, with Try again; not as a save error).
+    @State private var loadFailed = false
     @State private var saving = false
 
     init(result: TripResult, originChosen: Bool, backLabel: String? = nil, onBack: @escaping () -> Void, onSaved: @escaping (LegDetail) -> Void) {
@@ -566,6 +641,13 @@ private struct ConfirmStep: View {
         }
         .buttonStyle(LinkButtonStyle())
         Text(l10n.t("add.confirmTitle")).clack(.headline).foregroundStyle(Ink.text)
+        if loadFailed {
+            ErrorStateView(message: l10n.t("add.tripLoadFailed"), retry: { await load() })
+        } else if trip == nil {
+            // The map's place is held from the first frame, so the picker and the stops below don't jump down when
+            // the train arrives (polish pass 1: the main button moved about 100 pt under a finger).
+            Skeleton(height: 180, radius: Radius.card)
+        }
         if let trip {
             let map = AddTrainLogic.mapRoute(stops: trip.stops, geometry: geometry, fromSeq: picked.fromSeq, toSeq: picked.toSeq)
             let ridden = trip.stops.filter { $0.seq >= picked.fromSeq && $0.seq <= picked.toSeq }
@@ -579,16 +661,23 @@ private struct ConfirmStep: View {
             .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
         }
-        ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
+        ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: AddTrainLogic.standInName(result, op: op))
+        if trip == nil, !loadFailed {
+            // The summary line's place, held too.
+            Text(verbatim: "\(result.from.name) → \(result.to.name) · 000 km · 0h 00m").clack(.body).redacted(reason: .placeholder)
+        }
         if let from, let to, let dep, let arr, let trip {
             let d = AddTrainLogic.distance(stops: trip.stops, geometry: geometry, fromSeq: picked.fromSeq, toSeq: picked.toSeq)
-            (Text("\(from.name) → \(to.name)").fontWeight(.semibold).foregroundStyle(Ink.text)
+            (Text(verbatim: "\(from.name) → \(to.name)").fontWeight(.semibold).foregroundStyle(Ink.text)
                 + Text(" · \(d.approximate ? "≈ " : "")\(Format.distance(d.metres, unit: app.settings.distanceUnit, language: app.settings.language)) · \(Format.duration((arr - dep) / 60_000, language: l10n.language))").foregroundStyle(Ink.text2))
                 .clack(.body)
         }
         endPicker(from: from, to: to)
         Text(picked.picking == .from ? l10n.t("add.tapFrom") : l10n.t("add.tapTo")).clack(.caption).foregroundStyle(Ink.text2)
         VStack(spacing: 0) {
+            if trip == nil, !loadFailed {
+                ForEach(0..<6, id: \.self) { _ in Skeleton(height: 40, radius: Radius.tag).padding(.vertical, Space.xxs) }
+            }
             ForEach(trip?.stops ?? []) { stop in stopRow(stop, color: color) }
         }
         if duplicate {
@@ -600,7 +689,7 @@ private struct ConfirmStep: View {
                 }
             }
         }
-        if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
+        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("add.addToClack"), enabled: !(trip == nil || saving || duplicate)) { Task { await save(force: false) } }
             .task(id: result.id) { await load() }
@@ -614,21 +703,23 @@ private struct ConfirmStep: View {
                     picked.picking = end
                 } label: {
                     VStack(alignment: .leading, spacing: Space.xxs) {
-                        Text(l10n.t(end == .from ? "add.from" : "add.to")).clack(.captionUpper).foregroundStyle(active ? Ink.onAccent : Ink.text2)
-                        Text((end == .from ? from : to)?.name ?? "—").clack(.rowTitle).foregroundStyle(active ? Ink.onAccent : Ink.text).lineLimit(1)
+                        Text(l10n.t(end == .from ? "add.from" : "add.to")).clack(.captionUpper).foregroundStyle(active ? Look.onSelection : Ink.text2)
+                        Text((end == .from ? from : to)?.name ?? "—").clack(.rowTitle).foregroundStyle(active ? Look.onSelection : Ink.text).lineLimit(2)
                     }
                     .padding(.horizontal, Space.m).padding(.vertical, Space.s)
                     .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
-                    .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: Radius.input - 3, style: .continuous))
+                    .background(active ? Look.selectionFill : .clear, in: RoundedRectangle(cornerRadius: Radius.inner(Radius.input, padding: Space.xs), style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.press(radius: Radius.inner(Radius.input, padding: Space.xs), scales: false))
+                // Each end says what it is and what it holds ("From, Stockholm C"); the hint says what a tap does.
+                .accessibilityLabel(Format.join([l10n.t(end == .from ? "add.from" : "add.to"), (end == .from ? from : to)?.name], separator: ", "))
+                .accessibilityHint(l10n.t("add.tapToChoose"))
                 .accessibilityAddTraits(active ? .isSelected : [])
             }
         }
         .padding(Space.xs)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
         .hairlineBorder(radius: Radius.input)
-        .accessibilityLabel(l10n.t("add.tapToChoose"))
     }
 
     private func stopRow(_ stop: TripStop, color: Color) -> some View {
@@ -662,19 +753,22 @@ private struct ConfirmStep: View {
             )
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
-        // A stop that can't become the end being chosen does nothing when tapped (it isn't dimmed, as on the web).
-        .allowsHitTesting(selectable || end)
+        .buttonStyle(.pressRow)
+        // A stop that can't become the end being chosen is dimmed and disabled, so it doesn't look tappable and
+        // VoiceOver doesn't call it a button (polish pass 1: it looked like the others and did nothing).
+        .disabled(!(selectable || end))
+        .opacity(selectable || end || role == .outside ? 1 : 0.45)
     }
 
     private func load() async {
         // Both at once: the stops shouldn't wait for the map. The mini map is a nice-to-have: without it the summary
         // falls back to straight-line distance.
+        loadFailed = false
         async let route = try? app.client.timetableTripGeometry(result.key, date: result.serviceDate)
         do {
             trip = try await app.client.timetableTrip(result.key, date: result.serviceDate)
         } catch {
-            self.error = (error as? APIError)?.message ?? error.localizedDescription
+            loadFailed = true
         }
         geometry = await route
     }
@@ -728,11 +822,10 @@ private struct ConfirmConnectionStep: View {
                 }
             }
         }
-        if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
-        Button(l10n.t("add.addBoth")) { Task { await save(force: false) } }
-            .buttonStyle(.clack(.primary, wide: true))
-            .disabled(saving || !dupes.isEmpty)
-            .padding(.top, Space.s)
+        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        // Pinned at the bottom like every step's main button, above the keyboard and in reach.
+        Color.clear.frame(height: 0)
+            .sheetAction(l10n.t("add.addBoth"), enabled: !(saving || !dupes.isEmpty)) { Task { await save(force: false) } }
     }
 
     private func save(force: Bool) async {
@@ -790,7 +883,7 @@ private struct DoneStep: View {
                 Circle().stroke(Ink.onTime.opacity(0.35), lineWidth: 3)
                 CheckShape().trim(from: 0, to: drawn || reduceMotion ? 1 : 0)
                     .stroke(Ink.onTime, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                    .animation(reduceMotion ? nil : .easeOut(duration: 0.35), value: drawn)
+                    .animation(Motion.appear.animation(reduceMotion: reduceMotion), value: drawn)
             }
             .frame(width: 72, height: 72)
             // Drawn once the view is on screen (user test 2026-11-07: "it never drew a tick, just a ring").
@@ -800,7 +893,7 @@ private struct DoneStep: View {
             }
             Text(l10n.t("add.added")).clack(.sheetTitle).foregroundStyle(Ink.text)
             // A journey is named whole (user test 2026-11-07: "Added" named only the last of two trains).
-            Text("\(first.origin?.name ?? "") → \(last.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text)
+            Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text)
             if let legs {
                 Text(l10n.t("journey.label", count: legs.count) + Format.separator + legs.map { [$0.operator?.name, $0.trainNumber].compactMap { $0 }.joined(separator: " ") }.joined(separator: ", "))
                     .clack(.caption).foregroundStyle(Ink.text2)
@@ -822,6 +915,8 @@ private struct DoneStep: View {
                     .padding(.top, Space.xs)
                 } else {
                     VStack(spacing: Space.s) {
+                        // The reason first, then the button that asks iOS (polish pass 1: lead with the reason).
+                        Text(l10n.t("alertsPrompt.body")).clack(.caption).foregroundStyle(Ink.text2)
                         Button {
                             Task { await turnOnAlerts() }
                         } label: {
@@ -829,7 +924,6 @@ private struct DoneStep: View {
                         }
                         .buttonStyle(.clack(small: true))
                         .disabled(alertsBusy)
-                        Text(l10n.t("alertsPrompt.body")).clack(.caption).foregroundStyle(Ink.text2)
                     }
                     .padding(.top, Space.xs)
                 }
@@ -946,8 +1040,9 @@ private struct ManualTripStep: View {
             }
         }
         InfoNote(l10n.t("manual.timesNote"), more: l10n.t("manual.timesNoteMore"))
-        if let error { Banner(kind: .error) { Text(error) } }
-        Button(l10n.t("manual.save")) { Task { await save() } }.buttonStyle(.clack(.primary)).disabled(!ready || saving)
+        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        Color.clear.frame(height: 0)
+            .sheetAction(l10n.t("manual.save"), enabled: ready && !saving) { Task { await save() } }
             .onAppear {
                 fromStation = fromStation ?? from
                 toStation = toStation ?? to
@@ -966,15 +1061,22 @@ private struct ManualTripStep: View {
 
     private func timeRow(_ label: String, value: Binding<Date>, set: Binding<Bool>) -> some View {
         row(label) {
-            DatePicker("", selection: Binding(get: { value.wrappedValue }, set: { new in
-                value.wrappedValue = new
-                set.wrappedValue = true
-                // The arrival follows the departure (an hour on) until it is set itself: one wheel less to spin.
-                if !arrSet, label == l10n.t("manual.dep") { arr = new.addingTimeInterval(3600) }
-            }), displayedComponents: .hourAndMinute)
-                .labelsHidden()
-                .opacity(set.wrappedValue ? 1 : 0.5)
-                .environment(\.timeZone, TimeZone(identifier: "UTC") ?? .gmt)
+            if set.wrappedValue {
+                DatePicker("", selection: Binding(get: { value.wrappedValue }, set: { new in
+                    value.wrappedValue = new
+                    // The arrival follows the departure (an hour on) until it is set itself: one wheel less to spin.
+                    if !arrSet, label == l10n.t("manual.dep") { arr = new.addingTimeInterval(3600) }
+                }), displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+                    .environment(\.timeZone, TimeZone(identifier: "UTC") ?? .gmt)
+            } else {
+                // Not set yet: said in words, not as a faded picker that looked disabled (polish pass 1).
+                Button(l10n.t("manual.setTime")) {
+                    set.wrappedValue = true
+                    if !arrSet, label == l10n.t("manual.dep") { arr = dep.addingTimeInterval(3600) }
+                }
+                .buttonStyle(.clack(small: true))
+            }
         }
     }
 
@@ -1144,18 +1246,16 @@ private struct JourneyFilterSheet: View {
             Form {
                 Section(l10n.t("add.changesLabel")) {
                     // Direct · 1 · 2 · 3 · 4 · 5 (the planner does up to five changes, owner 2026-10-28).
-                    SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesDirectShort"))] + (1...AddTrainModel.maxChangesLimit).map { ($0, String($0)) })
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    FormSegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesDirectShort"))] + (1...AddTrainModel.maxChangesLimit).map { ($0, String($0)) })
                     Text(model.maxChanges == 0 ? l10n.t("add.changesNone") : l10n.t("add.changesUpTo", count: model.maxChanges)).font(.footnote).foregroundStyle(.secondary)
                 }
                 if model.maxChanges > 0 {
                     Section(l10n.t("add.comfortLabel")) {
-                        SegmentedControl(selection: $model.minComfort, options: [(0, l10n.t("add.comfortAnyShort")), (1, l10n.t("add.comfortNormalShort")), (2, l10n.t("comfort.relaxed"))])
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                        FormSegmentedControl(selection: $model.minComfort, options: [(0, l10n.t("add.comfortAnyShort")), (1, l10n.t("add.comfortNormalShort")), (2, l10n.t("comfort.relaxed"))])
                     }
                 }
             }
-            .tint(Ink.accent)
+            .tint(Ink.accentInk)
             .navigationTitle(l10n.t("liveMap.filters"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -1171,5 +1271,17 @@ private struct JourneyFilterSheet: View {
             }
             .motion(.layout, value: model.maxChanges > 0)
         }
+    }
+}
+
+extension AddTrainLogic {
+    /// The name shown in place of a missing operator mark: the route's name, unless it is only the train number again
+    /// (user test 2026-11-07: "427 427 ?"; polish pass 1 put this one rule on every card).
+    static func standInName(routeName: String?, trainNumber: String?, op: Operator?) -> String? {
+        op == nil && routeName != trainNumber ? routeName : nil
+    }
+
+    static func standInName(_ result: TripResult, op: Operator?) -> String? {
+        standInName(routeName: result.routeName, trainNumber: result.trainNumber, op: op)
     }
 }

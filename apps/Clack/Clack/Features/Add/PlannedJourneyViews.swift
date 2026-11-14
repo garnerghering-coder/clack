@@ -76,9 +76,9 @@ struct JourneyResultCard: View {
             ForEach(Array(journey.legs.enumerated()), id: \.offset) { i, leg in
                 let op = leg.operatorId.flatMap { app.operatorsById[$0] }
                 VStack(alignment: .leading, spacing: Space.xxs) {
-                    ServiceHeader(op: op, number: leg.trainNumber, size: .small, name: op == nil ? leg.routeName : nil)
+                    ServiceHeader(op: op, number: leg.trainNumber, size: .small, name: AddTrainLogic.standInName(routeName: leg.routeName, trainNumber: leg.trainNumber, op: op))
                     (TimePair.text(.init(time: leg.from.time, tz: leg.from.tz), .init(time: leg.to.time, tz: leg.to.tz), clock: app.settings.clock)
-                        + Text(Format.separator + "\(leg.from.name) → \(leg.to.name)"))
+                        + Text(verbatim: Format.separator + "\(leg.from.name) → \(leg.to.name)"))
                         .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
                 }
                 if i < journey.changes.count {
@@ -120,6 +120,9 @@ struct PlannedJourneyStep: View {
     @State private var distances: [Int: Double] = [:]
     @State private var saving = false
     @State private var followed = false
+    /// One journey group for every save of this journey, retries included.
+    @State private var group = UUID().uuidString
+    @Environment(Toaster.self) private var toaster
     @State private var dupes: [Int] = []
     /// The trains saved by the first try when some were already there, for "Keep what I have".
     @State private var savedSoFar: LegDetail?
@@ -184,7 +187,7 @@ struct PlannedJourneyStep: View {
                 }
             }
         }
-        if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
+        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
         let ahead = journey.arr > Date.now.timeIntervalSince1970 * 1000
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("journey.addToTrips"), enabled: !saving && dupes.isEmpty) { Task { await save(force: false) } }
@@ -200,13 +203,26 @@ struct PlannedJourneyStep: View {
             .task { await loadRoutes() }
     }
 
-    /// Each train's ridden route (its stops and geometry), drawn in its operator's colour.
+    /// Each train's ridden route (its stops and geometry), drawn in its operator's colour. The trains are fetched
+    /// together, not one after another (polish pass 1).
     private func loadRoutes() async {
+        let client = app.client
+        let fetched = await withTaskGroup(of: (Int, TimetableTrip?, TripGeometry?).self) { group in
+            for (i, leg) in journey.legs.enumerated() {
+                group.addTask {
+                    async let geo = try? client.timetableTripGeometry(leg.key, date: leg.serviceDate)
+                    let trip = try? await client.timetableTrip(leg.key, date: leg.serviceDate)
+                    return (i, trip, await geo)
+                }
+            }
+            var all: [(Int, TimetableTrip?, TripGeometry?)] = []
+            for await item in group { all.append(item) }
+            return all.sorted { $0.0 < $1.0 }
+        }
         var out: [MultiRoute] = []
-        for (i, leg) in journey.legs.enumerated() {
-            async let geo = try? app.client.timetableTripGeometry(leg.key, date: leg.serviceDate)
-            guard let trip = try? await app.client.timetableTrip(leg.key, date: leg.serviceDate) else { continue }
-            let geometry = await geo
+        for (i, trip, geometry) in fetched {
+            guard let trip else { continue }
+            let leg = journey.legs[i]
             if let segments = geometry?.segments {
                 distances[i] = segments.filter { $0.fromSeq >= leg.from.seq && $0.toSeq <= leg.to.seq }.reduce(0) { $0 + $1.lengthM }
             }
@@ -221,7 +237,9 @@ struct PlannedJourneyStep: View {
     private func save(force: Bool) async {
         saving = true
         error = nil
-        let group = UUID().uuidString
+        // The same group on every try, so "Add anyway" puts the forced train in the journey with the others
+        // (polish pass 1: a new id each time split it off).
+        let group = self.group
         var already: [Int] = []
         var last: LegDetail?
         do {
@@ -245,17 +263,24 @@ struct PlannedJourneyStep: View {
         saving = false
     }
 
-    /// Follows every train of the journey as one journey (Following shows it with its trains inside).
+    /// Follows every train of the journey as one journey (Following shows it with its trains inside). The button
+    /// says Following at once; if the server refuses, it goes back and says so (polish pass 1: it said Following even
+    /// when nothing was saved).
     private func follow() async {
         let group = UUID().uuidString
         let first = journey.legs[0], last = journey.legs[journey.legs.count - 1]
         let name = "\(first.from.name) → \(last.to.name)"
-        for leg in journey.legs {
-            guard let number = leg.trainNumber else { continue }
-            try? await app.client.follow(FollowBody(
-                trainNumber: number, serviceDate: leg.serviceDate, operatorId: leg.operatorId,
-                label: "\(leg.from.name) → \(leg.to.name)", journeyGroup: group, journeyLabel: name))
-        }
         followed = true
+        do {
+            for leg in journey.legs {
+                guard let number = leg.trainNumber else { continue }
+                try await app.client.follow(FollowBody(
+                    trainNumber: number, serviceDate: leg.serviceDate, operatorId: leg.operatorId,
+                    label: "\(leg.from.name) → \(leg.to.name)", journeyGroup: group, journeyLabel: name))
+            }
+        } catch {
+            followed = false
+            toaster.show(l10n.t("journey.followFailed"), isError: true)
+        }
     }
 }

@@ -25,7 +25,13 @@ public enum Look {
     /// `.yellow` the solid yellow tag before.
     public static let timeBlockPlatform: PlatformLook = .tag
 
+    /// A sheet's background and corners (DECISIONS L5): `.system` leaves them to iOS (Liquid Glass belongs to the
+    /// control layer, polish brief: "remove custom backgrounds on bars and sheets"); `.surface` was the look before,
+    /// the surface colour with 24 pt corners.
+    public static let sheets: SheetLook = .system
+
     public enum SelectionFill: Sendable { case ink, yellow }
+    public enum SheetLook: Sendable { case system, surface }
     public enum ContentButtons: Sendable { case solid, glass }
     public enum ToggleTint: Sendable { case system, yellow }
     public enum PlatformLook: Sendable { case tag, yellow }

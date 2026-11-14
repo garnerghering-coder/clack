@@ -151,3 +151,32 @@ Each screen's step adds its own table below: element, before, after, how, undo.
 | P1.10 | Long names and times in the suggestions | One line each (names and times truncated) | Names wrap to two lines; times never truncate; the row stacks at accessibility sizes | `WelcomeView.rowLayout` (`AdaptiveStack`) | Same |
 | P1.11 | Empty suggestions text | "…Find yours below." (the button is above) | "…Use Find a train above." | catalog `firstRun.soonEmpty` | catalog |
 | P1.12 | Bottom padding | Fixed 120 pt for the tab bar | The scroll view's own safe area | `WelcomeView` | Put `.padding(.bottom, 120)` back |
+
+### 2. Find a train (the Add sheet)
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| P2.1 | Confirm step ("Where did you get on and off?") while the train loads | Nothing held the map's or the stops' place, so the picker, rows and main button jumped down about 100 pt when it arrived (user test) | A 180 pt map placeholder, the summary line redacted, six stop placeholders, from the first frame | `ConfirmStep` in `AddTrainSheet.swift` | That file from before this step's commit |
+| P2.2 | The train couldn't be loaded | "Couldn't save: <raw error>", no retry | "Couldn't load this train's stops…" with Try again (`ErrorStateView`) | `ConfirmStep.loadFailed` | Same |
+| P2.3 | Save failed (all steps) | "Couldn't save: <server or system message in English>" | "Couldn't save the trip. Check your connection and try again." | catalog `add.saveFailed` | Same, and the catalog |
+| P2.4 | Stops that can't be picked | Looked like the others, did nothing; VoiceOver called them buttons | Dimmed to 45 % and disabled | `ConfirmStep.stopRow` | Same |
+| P2.5 | From / To picker | Yellow when chosen; VoiceOver read one label for both | Selection ink (Look L1), concentric inner corners, names wrap to two lines; each end reads "From, Stockholm C" with a hint | `ConfirmStep.endPicker` | Same |
+| P2.6 | Result card times at AX sizes | "07:2 / 2" (wrapped) | Times never shrink or wrap; the three parts stack when they don't fit | `TimesRow` (`ViewThatFits`) | Same |
+| P2.7 | Result card in VoiceOver | Read piece by piece | One sentence: "SJ 523, Stockholm C 07:22 to Malmö C 11:53, 4h 31m" | catalog `add.resultLabel` | Same |
+| P2.8 | Result card press | `.plain` (faint dim) | `PressStyle` | `ResultCard`, `ConnectionResultCard` | Same |
+| P2.9 | Loading results | Two 120 pt bars | Two cards shaped like a result (`ResultCardSample`) | `SearchStep` | Same |
+| P2.10 | Filter chips | Wrapped to two lines in English, ran off the edge in Swedish | One row that scrolls sideways, in every language | `trainResults` | Same |
+| P2.11 | "427 427" | Guard on one card only | One rule for every card (`AddTrainLogic.standInName`) | `AddTrainSheet.swift`, `PlannedJourneyViews.swift` | Same |
+| P2.12 | Journey filter sheet | Fixed 190/300 pt detents (clipped at AX sizes), Clack's own segmented control inside a system Form, yellow tint | `.medium/.large` with a grabber, the system's segmented control (the app's rule), accent ink | `JourneyFilterSheet` | Same |
+| P2.13 | Date picker sheet | Custom surface background and corners, yellow chosen day and yellow Done | System sheet with a grabber; chosen day in selection ink; Done stays the one yellow | `DateRow` | Same |
+| P2.14 | Main buttons on the connection and manual steps | Inline, narrow, could sit under the keyboard | Pinned at the bottom like the confirm step (`sheetAction`) | `ConfirmConnectionStep`, `ManualTripStep` | Same |
+| P2.15 | Unset times on the manual form | A faded time picker that looked disabled | A "Set time" button; the picker appears once set | `ManualTripStep.timeRow`, catalog `manual.setTime` | Same |
+| P2.16 | Alerts offer after adding | Button, then the reason under it | The reason, then the button | `DoneStep` | Same |
+| P2.17 | Hint text in the search field | "Train number, route, or operator" | "SJ 523 or Stockholm Göteborg" (a real example) | catalog `add.placeholder` | catalog |
+| P2.18 | Sharing a ticket file | Never mentioned in the Add sheet | One line under the examples | catalog `add.shareTicketHint` | Remove the `Text` in `SearchStep` |
+| P2.19 | Search failed | A red banner, no retry | `ErrorStateView` with Try again | `SearchStep` | Same |
+| P2.20 | "Popular stations" header | Could show over an empty list | Only with stations under it | `SearchStep` | Same |
+| P2.21 | Follow a planned journey | Said "Following" even when the server refused | Says it at once, goes back with a toast if refused | `PlannedJourneyStep.follow` | `PlannedJourneyViews.swift` |
+| P2.22 | "Add anyway" on a planned journey | A new journey group each try, splitting the forced train off | One group for every try | same file (`group` state) | Same |
+| P2.23 | A planned journey's routes | Fetched one train after another | Fetched together | `loadRoutes` (task group) | Same |
+| L5 | Sheets (`SheetFrame`, every Add step) | Custom surface background, 24 pt corners | The system's sheet (Liquid Glass at partial heights on iOS 26, its own corners) | `Look.sheets = .system` | `Look.sheets = .surface` |

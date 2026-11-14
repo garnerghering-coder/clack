@@ -152,14 +152,27 @@ struct SheetFrame<Content: View>: View {
                         .buttonStyle(.clack(.primary, wide: true))
                         .disabled(!action.enabled)
                         .padding(.horizontal, Space.l).padding(.top, Space.s).padding(.bottom, Space.s)
-                        .background(Ink.surface)
+                        .background(Look.sheets == .surface ? AnyShapeStyle(Ink.surface) : AnyShapeStyle(.background))
                 }
             }
         }
         .environment(action)
-        .background(Ink.surface)
-        .presentationCornerRadius(Radius.sheet)
-        .presentationBackground(Ink.surface)
+        .modifier(SheetSurface())
+    }
+}
+
+/// The sheet's own background and corners (Look.sheets, DECISIONS L5): the system's (Liquid Glass at a partial
+/// height on iOS 26, its own concentric corners), or the surface colour and the 24 pt corners before.
+private struct SheetSurface: ViewModifier {
+    func body(content: Content) -> some View {
+        if Look.sheets == .surface {
+            content
+                .background(Ink.surface)
+                .presentationCornerRadius(Radius.sheet)
+                .presentationBackground(Ink.surface)
+        } else {
+            content
+        }
     }
 }
 
