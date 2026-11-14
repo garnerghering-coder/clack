@@ -6937,13 +6937,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No trains leave the big stations in the next hour. Find yours below."
+            "value" : "No trains leave the big stations in the next hour. Use Find a train above."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inga tåg går från de stora stationerna den närmaste timmen. Hitta ditt nedan."
+            "value" : "Inga tåg går från de stora stationerna den närmaste timmen. Använd Hitta ett tåg ovan."
           }
         }
       }
@@ -23837,6 +23837,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunde inte hämta avgångar just nu."
+          }
+        }
+      }
+    },
+    "firstRun.nearAskTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show trains near you?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa tåg nära dig?"
+          }
+        }
+      }
+    },
+    "firstRun.nearAskBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To show trains from the stations nearest you, Clack needs your location once. It isn’t kept."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "För att visa tåg från stationerna närmast dig behöver Clack din plats en gång. Den sparas inte."
+          }
+        }
+      }
+    },
+    "firstRun.nearAskYes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use my location"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Använd min plats"
+          }
+        }
+      }
+    },
+    "firstRun.nearNoPosition" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t find where you are. Try again outdoors, or use Find a train above."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hitta var du är. Försök igen utomhus, eller använd Hitta ett tåg ovan."
+          }
+        }
+      }
+    },
+    "firstRun.nearEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No trains leave the stations near you in the next hour."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inga tåg går från stationerna nära dig den närmaste timmen."
           }
         }
       }

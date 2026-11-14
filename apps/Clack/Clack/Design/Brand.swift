@@ -32,7 +32,8 @@ struct Wordmark: View {
                         .degrees(animates && !shown ? -90 : 0), axis: (x: 1, y: 0, z: 0), anchor: .center, perspective: 1 / 3
                     )
                     .opacity(animates && !shown ? 0 : 1)
-                    .animation(.timingCurve(0.3, 0.7, 0.2, 1, duration: 0.42).delay(Double(index) * 0.06), value: shown)
+                    // Five tiles in about 0.46 s (polish pass 1: was 0.42 s each, 60 ms apart, about 0.66 s).
+                    .animation(.timingCurve(0.3, 0.7, 0.2, 1, duration: 0.3).delay(Double(index) * 0.04), value: shown)
             }
         }
         .fixedSize()
@@ -72,8 +73,9 @@ private struct WordmarkLetter: Shape {
     }
 }
 
-/// The launch screen: the wordmark flipping in on signal yellow (#FFD400), nothing else. Shown until the settings have
-/// loaded and at least 700 ms have passed, then it fades out over 250 ms.
+/// The launch screen: the wordmark flipping in on signal yellow (#FFD400), nothing else. It goes once the flip is done
+/// and the first screen can draw (from the phone's kept copy), at the latest after 1.2 s, or at once on a tap
+/// (polish pass 1: it used to wait for the server, up to 15 s on a weak connection, and ignored taps).
 struct Splash: View {
     var body: some View {
         ZStack {

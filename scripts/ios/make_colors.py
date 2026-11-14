@@ -12,6 +12,7 @@ import os
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackDesign', 'Resources', 'Assets.xcassets', 'Colors')
+APP_ASSETS = os.path.join(ROOT, 'apps', 'Clack', 'Clack', 'Assets.xcassets')
 
 
 def hex_(value):
@@ -120,6 +121,18 @@ def main():
             'info': {'author': 'xcode', 'version': 1},
         })
     print(f'{len(TOKENS)} colour sets -> {os.path.relpath(OUT, ROOT)}')
+    # The launch screen's colour must be in the app's own asset catalog: iOS reads `UILaunchScreen.UIColorName` from
+    # the main bundle before any code runs, and a colour only in the package's catalog drew a white launch screen
+    # that then flashed to the yellow splash (polish pass 1).
+    d = os.path.join(APP_ASSETS, 'launch-bg.colorset')
+    shutil.rmtree(d, ignore_errors=True)
+    os.makedirs(d)
+    value = TOKENS['launch-bg']
+    write_json(os.path.join(d, 'Contents.json'), {
+        'colors': [color_json(value), color_json(value, dark=True)],
+        'info': {'author': 'xcode', 'version': 1},
+    })
+    print(f'launch-bg -> {os.path.relpath(d, ROOT)}')
 
 
 if __name__ == '__main__':

@@ -134,3 +134,20 @@ These are off the scale on purpose:
 ## Screens
 
 Each screen's step adds its own table below: element, before, after, how, undo.
+
+### 1. Launch and first run
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| P1.1 | System launch screen | White (dark: black): `launch-bg` lived only in the package's asset catalog, which iOS can't read before the app runs, so a cold start flashed white, then yellow | Yellow from the first frame, the same as the splash after it | `scripts/ios/make_colors.py` also writes `launch-bg.colorset` into `apps/Clack/Clack/Assets.xcassets` | Delete that colour set (and the lines in `make_colors.py`) |
+| P1.2 | Splash length | Until the server answered settings, operators, train types and amenities, plus at least 0.7 s; up to about 15 s on a weak connection; taps ignored | Goes once the wordmark has flipped in (≈ 0.5 s) and the first screen can draw; at the latest after 1.2 s; at once on a tap | `RootView` (`splashSkipped`, the 1.2 s task, `.onTapGesture`) | `RootView.swift` from before this step's commit |
+| P1.3 | Settings and reference data at start | Network first; the kept copy only after a failure or the 15 s timeout | The kept copies paint first (settings, operators, train types, amenities), then the server's answer replaces them in place | `AppModel.applySaved()`, `APIClient.saved` (`Clack/App/SavedCopy.swift`, reads the existing cache only) | Remove the `applySaved` line at the top of `AppModel.load()` |
+| P1.4 | Wordmark flip on the splash | 0.42 s per tile, 60 ms apart (≈ 0.66 s) | 0.3 s per tile, 40 ms apart (≈ 0.46 s) | `Brand.swift`, `Wordmark` | Put the old numbers back |
+| P1.5 | Landing rule (open on the tab that matters) | Never ran: `onChange(of: tab, initial: true)` counted the first appearance as a touch and overwrote the remembered tab | Runs: only a real change counts as a touch | `RootView.swift`, `TouchWatch` | Put `initial: true` back |
+| P1.6 | "Trains leaving soon" while loading | Two grey 64 pt bars | Two rows shaped like the real ones (badge, route, times, button), redacted | `WelcomeView.rowLayout` inside `Placeholder` | `WelcomeView.swift` from before this step's commit |
+| P1.7 | Departures failed | One grey line ("Couldn't fetch departures right now.") with no way to retry | `ErrorStateView` with Try again | `WelcomeView.soon` | Same |
+| P1.8 | "Near you" | iOS's location prompt straight away; if there was no position or no trains, nothing happened | One sentence first ("To show trains from the stations nearest you, Clack needs your location once. It isn't kept."), then iOS's prompt; no position, nothing near, or a failure each says so in a toast | `WelcomeView` (`askingLocation`, `loadNear`), strings `firstRun.nearAsk*`, `firstRun.nearNoPosition`, `firstRun.nearEmpty` | Same |
+| P1.9 | Adding a suggested train fails | Spinner stops, nothing said | Toast "Couldn't add the train. Try again in a moment." | `WelcomeView.add` | Same |
+| P1.10 | Long names and times in the suggestions | One line each (names and times truncated) | Names wrap to two lines; times never truncate; the row stacks at accessibility sizes | `WelcomeView.rowLayout` (`AdaptiveStack`) | Same |
+| P1.11 | Empty suggestions text | "…Find yours below." (the button is above) | "…Use Find a train above." | catalog `firstRun.soonEmpty` | catalog |
+| P1.12 | Bottom padding | Fixed 120 pt for the tab bar | The scroll view's own safe area | `WelcomeView` | Put `.padding(.bottom, 120)` back |

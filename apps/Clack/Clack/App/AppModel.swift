@@ -126,7 +126,9 @@ final class AppModel {
 
     /// Loads the four reference documents at once. The language setting switches the texts as soon as it arrives.
     func load() async {
-        state = .loading
+        // What the phone kept from the last time paints first, so a returning person is never held behind the
+        // splash by a slow connection (polish pass 1); the server's answer then replaces it in place.
+        if state != .ready, await applySaved() { state = .ready } else if state != .ready { state = .loading }
         do {
             async let settings = client.settings()
             async let operators = client.operators()
@@ -154,8 +156,25 @@ final class AppModel {
                 }
             }
         } catch {
-            state = .failed
+            // With the kept copies on screen the app works on; only a first start with nothing kept has failed.
+            if state != .ready { state = .failed }
         }
+    }
+
+    /// Applies the kept settings, operators, train types and amenities, if all four are on the phone.
+    private func applySaved() async -> Bool {
+        async let settings: Settings? = client.saved(["settings"])
+        async let operators: [Operator]? = client.saved(["operators"])
+        async let trainTypes: [TrainType]? = client.saved(["train-types"])
+        async let amenities: [AmenityEntry]? = client.saved(["amenities"])
+        guard let s = await settings, let ops = await operators, let types = await trainTypes, let am = await amenities else { return false }
+        self.settings = s
+        self.operators = ops
+        self.operatorsById = Dictionary(ops.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        self.trainTypes = types
+        self.amenities = am
+        l10n.language = s.language
+        return true
     }
 
     private static let languageChosenKey = "clack.language.chosen"

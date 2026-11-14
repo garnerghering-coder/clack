@@ -18,11 +18,14 @@ struct RootView: View {
     @State private var ticketReturn = TicketReturnState()
     @State private var splashMinDone = false
     @State private var splashGone = false
+    /// A tap on the splash, or 1.2 s gone: the app shows whatever it has (polish pass 1: the splash never holds it).
+    @State private var splashSkipped = false
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// The splash goes once the settings have loaded (or failed to) and the tiles have had time to flip in.
-    private var hideSplash: Bool { app.state != .loading && splashMinDone }
+    /// The splash goes once the tiles have flipped in and the first screen can draw (the kept settings make that
+    /// immediate for a returning person), after 1.2 s at the latest, or at once when tapped.
+    private var hideSplash: Bool { splashSkipped || (app.state != .loading && splashMinDone) }
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -54,8 +57,10 @@ struct RootView: View {
             if !splashGone {
                 Splash()
                     .opacity(hideSplash ? 0 : 1)
-                    .animation(.easeInOut(duration: 0.25), value: hideSplash)
+                    .animation(Motion.reduced, value: hideSplash)
                     .allowsHitTesting(!hideSplash)
+                    // A tap goes straight through to the app.
+                    .onTapGesture { if !holdSplash { splashSkipped = true } }
                     .accessibilityIdentifier("splash")
             }
         }
@@ -156,20 +161,22 @@ struct RootView: View {
         // over the whole app did this before; it took taps from the tab bar, the segmented control and menus.)
         .modifier(TouchWatch(router: router))
         .task {
-            // The flip takes about 0.7 s; the splash is gone by about 1 s.
-            try? await Task.sleep(for: .milliseconds(700))
-            #if DEBUG
-            // `-holdSplash` keeps the splash on screen, to look at it.
-            if CommandLine.arguments.contains("-holdSplash") { return }
-            #endif
-            // The logos get a moment more (0.3 s at most, and none if the load failed); a badge without its logo yet
+            // The flip takes about 0.46 s.
+            try? await Task.sleep(for: .milliseconds(500))
+            if holdSplash { return }
+            // The logos get a moment more (0.2 s at most, and none if the load failed); a badge without its logo yet
             // shows initials and the logo fades in.
             var waited = 0
-            while app.state != .failed && !app.logosSettled && waited < 3 {
+            while app.state != .failed && !app.logosSettled && waited < 2 {
                 try? await Task.sleep(for: .milliseconds(100))
                 waited += 1
             }
             splashMinDone = true
+        }
+        .task {
+            // Never more than 1.2 s: past that the app shows what it has, and each screen says what is still loading.
+            try? await Task.sleep(for: .milliseconds(1200))
+            if !holdSplash { splashSkipped = true }
         }
         .onChange(of: hideSplash) { _, hide in
             guard hide else { return }
@@ -187,6 +194,15 @@ struct RootView: View {
                 openTicket(URL(fileURLWithPath: CommandLine.arguments[at + 1]))
             }
         }
+        #endif
+    }
+
+    /// `-holdSplash` (Debug) keeps the splash on screen, to look at it.
+    private var holdSplash: Bool {
+        #if DEBUG
+        CommandLine.arguments.contains("-holdSplash")
+        #else
+        false
         #endif
     }
 
@@ -279,11 +295,14 @@ private struct TouchWatch: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: router.tab, initial: true) { _, tab in
+            // Not `initial`: the first appearance isn't a touch, and saving the tab then overwrote the one the landing
+            // rule reads (polish pass 1: the landing rule never ran).
+            .onChange(of: router.tab) { _, tab in
                 Landing.saveLastTab(tab)
                 router.touched = true
                 Usage.shared.count(.screen, "tab.\(tab.rawValue)")
             }
+            .onAppear { Usage.shared.count(.screen, "tab.\(router.tab.rawValue)") }
             .onChange(of: router.tripsTab) { router.touched = true }
             .onChange(of: router.tripsPath.count + router.explorePath.count + router.passportPath.count) { router.touched = true }
             .onChange(of: router.addRequest == nil) { router.touched = true }

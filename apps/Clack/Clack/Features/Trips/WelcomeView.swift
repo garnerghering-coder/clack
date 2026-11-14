@@ -8,7 +8,7 @@ import ClackDesign
 import SwiftUI
 
 /// The first time Clack opens (owner, 2026-10-25: value in the first minute, permissions only in context): the
-/// wordmark, one line, and real trains leaving in the next hour that go into Trips with one tap, plus "Find your train".
+/// wordmark, one line, and real trains leaving in the next hour that go into Trips with one tap, plus "Find a train".
 /// No permission prompts here: location is asked only if they tap "Trains near you", alerts on a trip still ahead
 /// (`AlertsPrompt`). Shown once (`FirstRun`).
 struct WelcomeView: View {
@@ -21,6 +21,9 @@ struct WelcomeView: View {
     @State private var failed = false
     @State private var near = false
     @State private var adding: String?
+    @State private var askingLocation = false
+    @State private var locating = false
+    @Environment(Toaster.self) private var toaster
 
     var body: some View {
         ScrollView {
@@ -54,42 +57,55 @@ struct WelcomeView: View {
         VStack(alignment: .leading, spacing: Space.s) {
             HStack {
                 Text(l10n.t(near ? "firstRun.nearTitle" : "firstRun.soonTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Spacer(minLength: 8)
-                // Asked only when tapped: iOS's own prompt, then the trains from the stations nearest you.
+                Spacer(minLength: Space.s)
+                // Asked only when tapped, after one sentence in Clack's words, then iOS's own prompt.
                 if !near && !LocationModel.shared.denied {
                     Button {
-                        Task { await loadNear() }
+                        if LocationModel.shared.allowed { Task { await loadNear() } } else { askingLocation = true }
                     } label: {
                         Label { Text(l10n.t("firstRun.nearYou")) } icon: { LucideIcon(name: "locate-fixed", size: 14) }
                     }
                     .buttonStyle(.clack(small: true))
+                    .disabled(locating)
                 }
             }
             if let trains {
-                if trains.isEmpty {
-                    Text(l10n.t(failed ? "firstRun.soonFailed" : "firstRun.soonEmpty")).clack(.caption).foregroundStyle(Ink.text2)
+                if failed {
+                    // A failure is said as one, with a way to try again; never as "no trains".
+                    ErrorStateView(message: l10n.t("firstRun.soonFailed"), retry: { await load() })
+                } else if trains.isEmpty {
+                    Text(l10n.t("firstRun.soonEmpty")).clack(.caption).foregroundStyle(Ink.text2)
                 }
                 ForEach(trains) { train in row(train) }
             } else {
-                Skeleton(height: 64)
-                Skeleton(height: 64)
+                // Two rows shaped like the real ones, so the list doesn't move when the trains arrive.
+                ForEach(0..<2, id: \.self) { _ in
+                    Placeholder {
+                        rowLayout(op: nil, title: "Stockholm C → Göteborg C", detail: "08:03–10:51 · SJ 523") { EmptyView() }
+                    }
+                }
             }
+        }
+        .motion(.appear, value: trains == nil)
+        .alert(l10n.t("firstRun.nearAskTitle"), isPresented: $askingLocation) {
+            Button(l10n.t("firstRun.nearAskYes")) { Task { await loadNear() } }
+            Button(l10n.t("firstRun.skip"), role: .cancel) {}
+        } message: {
+            Text(l10n.t("firstRun.nearAskBody"))
         }
     }
 
     private func row(_ t: SoonTrain) -> some View {
         let op = t.operatorId.flatMap { app.operatorsById[$0] }
         let tz = TimeZone.current.identifier
-        return HStack(spacing: Space.m) {
-            OperatorBadge(op: op, size: .medium)
-            VStack(alignment: .leading, spacing: Space.xxs) {
-                Text("\(t.from.name) → \(t.to.name)").clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
-                Text(Format.join([
-                    "\(Format.time(t.dep, tz: tz, clock: app.settings.clock))–\(Format.time(t.arr, tz: tz, clock: app.settings.clock))",
-                    [op?.name, t.trainNumber].compactMap { $0 }.joined(separator: " "),
-                ])).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
-            }
-            Spacer(minLength: 8)
+        return rowLayout(
+            op: op,
+            title: "\(t.from.name) → \(t.to.name)",
+            detail: Format.join([
+                "\(Format.time(t.dep, tz: tz, clock: app.settings.clock))–\(Format.time(t.arr, tz: tz, clock: app.settings.clock))",
+                [op?.name, t.trainNumber].compactMap { $0 }.joined(separator: " "),
+            ])
+        ) {
             Button {
                 Task { await add(t) }
             } label: {
@@ -99,6 +115,23 @@ struct WelcomeView: View {
             .buttonStyle(.clack(small: true))
             .disabled(adding != nil)
             .accessibilityLabel(l10n.t("firstRun.addLabel", ["from": t.from.name, "to": t.to.name]))
+        }
+    }
+
+    /// One suggested train: the badge, the route (two lines before it truncates), the times (never truncated), and
+    /// the Add button. The placeholder draws the same layout, so nothing moves when the trains arrive.
+    private func rowLayout<Trailing: View>(op: Operator?, title: String, detail: String, @ViewBuilder trailing: () -> Trailing) -> some View {
+        AdaptiveStack(horizontalAlignment: .leading, spacing: Space.m) {
+            HStack(spacing: Space.m) {
+                OperatorBadge(op: op, size: .medium)
+                VStack(alignment: .leading, spacing: Space.xxs) {
+                    Text(verbatim: title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(2)
+                    Text(verbatim: detail).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            Spacer(minLength: Space.s)
+            trailing()
         }
         .padding(Space.m)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
@@ -119,20 +152,36 @@ struct WelcomeView: View {
         trains = found ?? []
     }
 
+    /// The trains from the stations nearest you. Whatever happens is said: no position, nothing near, or a failure.
     private func loadNear() async {
-        guard let here = await LocationModel.shared.current() else { return }
-        let found = (try? await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)) ?? []
-        if !found.isEmpty {
-            near = true
-            trains = found
+        locating = true
+        defer { locating = false }
+        guard let here = await LocationModel.shared.current() else {
+            if !LocationModel.shared.denied { toaster.show(l10n.t("firstRun.nearNoPosition"), isError: true) }
+            return
+        }
+        do {
+            let found = try await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)
+            if found.isEmpty {
+                toaster.show(l10n.t("firstRun.nearEmpty"))
+            } else {
+                near = true
+                failed = false
+                trains = found
+            }
+        } catch {
+            toaster.show(l10n.t("firstRun.soonFailed"), isError: true)
         }
     }
 
-    /// Saves the whole run as a planned trip and opens it.
+    /// Saves the whole run as a planned trip and opens it; a failure is said, and the row stays.
     private func add(_ t: SoonTrain) async {
         adding = t.id
         defer { adding = nil }
-        guard let saved = try? await app.client.createLeg(t.body) else { return }
+        guard let saved = try? await app.client.createLeg(t.body) else {
+            toaster.show(l10n.t("liveAdd.failed"), isError: true)
+            return
+        }
         Usage.shared.count(.feature, "firstRun.addSuggested")
         app.tripsChanged()
         onDone()
