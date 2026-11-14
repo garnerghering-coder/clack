@@ -18,6 +18,7 @@ struct CollectionList: View {
     var limit: Int? = 6
     var stationLimit: Int? = 12
     @State private var showAllStations = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showAllRows = false
 
     var body: some View { content(tab) }
@@ -72,28 +73,24 @@ struct CollectionList: View {
         }
     }
 
+    /// The stations you've been to most, five at first and the rest a tap away, as rows that open each one's board
+    /// (designer, 2026-11-14: a cloud of 32 chips looked like filters; the map's sized dots carry the rest).
     private var stations: some View {
-        VStack(alignment: .leading, spacing: Space.m) {
-            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
-                ForEach(showAllStations || stationLimit == nil ? data.stations : Array(data.stations.prefix(stationLimit ?? 0))) { station in
-                    NavigationLink(value: AppRoute.board(stationId: station.id, arrivals: false)) {
-                        HStack(spacing: Space.s) {
-                            Text(station.name).foregroundStyle(Ink.text)
-                            Text("×\(station.count)").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
-                        }
-                        .clack(.stopName)
-                        .padding(.vertical, Space.s).padding(.horizontal, Space.m)
-                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                        .hairlineBorder(radius: Radius.controlSm)
-                    }
-                    .buttonStyle(.plain)
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(showAllStations ? data.stations : Array(data.stations.prefix(5))) { station in
+                NavigationLink(value: AppRoute.board(stationId: station.id, arrivals: false)) {
+                    DisclosureRowLabel(title: station.name, detail: l10n.t("passport.visitsCount", count: station.count))
                 }
+                .buttonStyle(.pressRow)
+                if station.id != (showAllStations ? data.stations : Array(data.stations.prefix(5))).last?.id { Divider() }
             }
-            if let stationLimit, data.stations.count > stationLimit {
-                Button(showAllStations ? l10n.t("passport.showFewer") : l10n.t("passport.showAllStations", count: data.stations.count)) { showAllStations.toggle() }
-                    .buttonStyle(LinkButtonStyle())
+            if data.stations.count > 5 {
+                Button(showAllStations ? l10n.t("passport.showFewer") : l10n.t("passport.allStations", ["count": String(data.stations.count)])) {
+                    withMotion(.layout, reduceMotion: reduceMotion) { showAllStations.toggle() }
+                }
+                .buttonStyle(LinkButtonStyle())
             }
-            Text(l10n.t("passport.stationsNote")).clack(.caption).foregroundStyle(Ink.text2)
+            Text(l10n.t("passport.stationsNote")).clack(.caption).foregroundStyle(Ink.text2).padding(.top, Space.s)
         }
     }
 

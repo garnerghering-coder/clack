@@ -22,10 +22,8 @@ struct PassportBreakdownScreen: View {
         Page {
             if let data {
                 Text(passportScopeLine(l10n, year: store.data == nil ? nil : store.year)).clack(.caption).foregroundStyle(Ink.text2)
-                Card {
-                    Text(l10n.t("passport.totals")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                    totals(data)
-                }
+                // No totals grid: the cover says them, and Delays the cancellations (designer, 2026-11-14: the
+                // Breakdown repeated the card). It shows what the card doesn't.
                 section(l10n.t("passport.operators"), count: data.operators.count) { CollectionList(tab: .operators, data: data, limit: nil) }
                 section(l10n.t("passport.countries"), count: data.countries.count) { CollectionList(tab: .countries, data: data, limit: nil) }
                 section(l10n.t("passport.stationsVisited"), count: data.stations.count) { CollectionList(tab: .stations, data: data, limit: nil, stationLimit: nil) }
@@ -55,21 +53,6 @@ struct PassportBreakdownScreen: View {
             loaded = try await app.client.passport(year: nil, commuter: app.settings.includeCommuter, comparison: app.settings.co2Comparison)
         } catch {
             failed = true
-        }
-    }
-
-    private func totals(_ data: Passport) -> some View {
-        let t = data.totals
-        let s = app.settings
-        return LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: Space.l) {
-            Tile(label: l10n.t("detail.distance")) { Text(Format.distance(t.distanceM, unit: s.distanceUnit, language: s.language)) }
-            Tile(label: l10n.t("passport.timeOnTrains")) { Text(Format.duration(t.minutes, language: l10n.language)) }
-            Tile(label: l10n.t("passport.trains")) { Text(String(t.trains)) }
-            Tile(label: l10n.t("passport.journeys")) { Text(String(t.journeys)) }
-            Tile(label: l10n.t("passport.stations")) { Text(String(t.stations)) }
-            Tile(label: l10n.t("passport.countries")) { Text(String(t.countries)) }
-            Tile(label: l10n.t("passport.family.borderCrossings")) { Text(String(t.borderCrossings)) }
-            Tile(label: l10n.t("passport.cancellations")) { Text(String(t.cancellations)) }
         }
     }
 

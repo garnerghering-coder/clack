@@ -28,6 +28,7 @@ public struct Tile<Value: View>: View {
             Text(label).clack(.caption).foregroundStyle(secondary).lineLimit(2)
             value
                 .clack(.headline).monospacedDigit().foregroundStyle(primary)
+                .contentTransition(.numericText())
                 // Two lines before anything is cut: a route or a station name ("Stockholm C → Göteborg C") wraps
                 // (polish pass 1: "Stockholm C → Götebo…").
                 .lineLimit(2).minimumScaleFactor(0.85)

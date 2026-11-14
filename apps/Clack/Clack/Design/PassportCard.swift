@@ -48,6 +48,8 @@ struct PassportCard: View {
             }
             (Text(formatter.string(from: NSNumber(value: shown.rounded())) ?? "0") + Text(" \(unit.rawValue)").font(ClackFont.grotesk(22)).foregroundColor(soft))
                 .clack(.passportDistance).monospacedDigit().foregroundStyle(ink)
+                // A year changed: the distance rolls to its new value (it jumped).
+                .contentTransition(.numericText(value: shown))
             if !flavors.isEmpty {
                 Button { flavorIndex += 1 } label: {
                     Text(flavors[flavorIndex % flavors.count]).clack(.rowTitle).foregroundStyle(ink).multilineTextAlignment(.leading)

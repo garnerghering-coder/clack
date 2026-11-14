@@ -38,9 +38,7 @@ struct RecordsGrid: View {
             if let leg = r.longestDuration {
                 RecordTile(label: l10n.t("passport.longestTime"), value: Format.duration(leg.minutes, language: l10n.language), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
             }
-            if let leg = r.biggestDelay {
-                RecordTile(label: l10n.t("passport.biggestDelay"), value: l10n.t("passport.minutesLate", count: leg.delayMin ?? 0), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
-            }
+            // The biggest delay is the Delays card's "Worst delay", once (designer, 2026-11-14: it appeared twice).
             if let route = r.mostRiddenRoute {
                 RecordTile(label: l10n.t("passport.mostRidden"), value: route.route, sub: l10n.t("passport.timesCount", count: route.count), legId: nil)
             }

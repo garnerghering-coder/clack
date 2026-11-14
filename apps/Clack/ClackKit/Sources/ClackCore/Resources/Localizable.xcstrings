@@ -14334,6 +14334,40 @@
         }
       }
     },
+    "passport.allStations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All {{count}} stations"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla {{count}} stationer"
+          }
+        }
+      }
+    },
+    "passport.yearFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load that year. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta det året. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
     "platform.add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -26139,6 +26173,193 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Du har varit här en gång"
+          }
+        }
+      }
+    },
+    "recap.open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your {{year}} in rail"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ditt {{year}} på räls"
+          }
+        }
+      }
+    },
+    "recap.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{year}} in rail"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{year}} på räls"
+          }
+        }
+      }
+    },
+    "recap.distance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "on trains this year."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "med tåg i år."
+          }
+        }
+      }
+    },
+    "recap.trains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "trains, in {{journeys}} journeys and {{time}} on board."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tåg, på {{journeys}} resor och {{time}} ombord."
+          }
+        }
+      }
+    },
+    "recap.month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "was your busiest month: {{count}} trains."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "var din mest resta månad: {{count}} tåg."
+          }
+        }
+      }
+    },
+    "recap.route" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your most ridden route: {{count}} times."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din mest åkta sträcka: {{count}} gånger."
+          }
+        }
+      }
+    },
+    "recap.places" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "stations, in {{countries}} countries."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "stationer, i {{countries}} länder."
+          }
+        }
+      }
+    },
+    "recap.medals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "medals earned this year."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "medaljer i år."
+          }
+        }
+      }
+    },
+    "recap.shareTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share your year"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela ditt år"
+          }
+        }
+      }
+    },
+    "recap.shareBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As a card from your Passport, with the numbers above."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Som ett kort från ditt pass, med siffrorna ovan."
+          }
+        }
+      }
+    },
+    "recap.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t load your year. Check your connection and try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte hämta ditt år. Kontrollera anslutningen och försök igen."
           }
         }
       }

@@ -18,15 +18,21 @@ struct PassportScreen: View {
     @State private var year: Int?
     @State private var mapOpen = false
     @State private var data: Passport?
+    /// The year `data` is for: the cover says this one, not the chip just tapped, until its numbers arrive.
+    @State private var dataYear: Int?
     @State private var failed = false
+    @Environment(Toaster.self) private var toaster
     @State private var flavorIndex = 0
     @State private var sharing = false
+    @State private var recapOpen = false
 
     init() {
         #if DEBUG
         // `-share` opens the share sheet straight away, to check the cards; `-passportMap` the full-screen map.
         _sharing = State(initialValue: CommandLine.arguments.contains("-share"))
         _mapOpen = State(initialValue: CommandLine.arguments.contains("-passportMap"))
+        // `-recap` opens this year's recap.
+        _recapOpen = State(initialValue: CommandLine.arguments.contains("-recap"))
         #endif
     }
 
@@ -45,11 +51,14 @@ struct PassportScreen: View {
                 }
             }
             if failed {
-                Banner(kind: .error) { Text(l10n.t("passport.loadError")) }.countsError("passport.load")
+                ErrorStateView(message: l10n.t("passport.loadError"), retry: { await load() }).countsError("passport.load")
             } else if let data {
                 content(data)
             } else {
-                Skeleton(height: 120)
+                // Shaped like the page: the year chips, the cover, the map.
+                Skeleton(height: 44, radius: Radius.controlSm)
+                Skeleton(height: 330, radius: Radius.sheet)
+                Skeleton(height: 280, radius: Radius.card)
             }
         }
         .refreshable { await load() }
@@ -61,14 +70,27 @@ struct PassportScreen: View {
         }
     }
 
+    /// Loads the year asked for; the numbers change together with the year they belong to, and a year that couldn't be
+    /// loaded goes back to the one on screen with a word (polish pass 1: the cover said "2025" over all-time totals).
     private func load() async {
+        let asked = year
         do {
-            data = try await app.client.passport(year: year, commuter: settings.includeCommuter, comparison: activeComparison)
-            store.data = data
-            store.year = year
+            let fresh = try await app.client.passport(year: asked, commuter: settings.includeCommuter, comparison: activeComparison)
+            guard asked == year else { return }
+            withMotion(.layout, reduceMotion: false) {
+                data = fresh
+                dataYear = asked
+            }
+            store.data = fresh
+            store.year = asked
             failed = false
         } catch {
-            if data == nil { failed = true }
+            if data == nil {
+                failed = true
+            } else if asked != dataYear {
+                year = dataYear
+                toaster.show(l10n.t("passport.yearFailed"), isError: true)
+            }
         }
     }
 
@@ -167,10 +189,25 @@ struct PassportScreen: View {
     private func full(_ data: Passport) -> some View {
         VStack(alignment: .leading, spacing: Space.l) {
             NavigationLink(value: AppRoute.passportBreakdown) {
-                PassportCard(data: data, year: year, flavorIndex: $flavorIndex)
+                PassportCard(data: data, year: dataYear, flavorIndex: $flavorIndex)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.press(radius: Radius.sheet))
             .accessibilityHint(l10n.t("passport.breakdownHint"))
+            // The year told in a few pages, ending on the share card (designer, 2026-11-14).
+            let thisYear = Calendar(identifier: .gregorian).component(.year, from: .now)
+            if data.years.contains(thisYear) {
+                Button { recapOpen = true } label: {
+                    HStack(spacing: Space.s) {
+                        LucideIcon(name: "sun", size: 18).foregroundStyle(Ink.text)
+                        DisclosureRowLabel(title: l10n.t("recap.open", ["year": String(thisYear)]))
+                    }
+                }
+                .buttonStyle(.pressRow)
+                .fullScreenCover(isPresented: $recapOpen) {
+                    YearRecap(year: thisYear, milestones: data.milestones)
+                        .environment(app).environment(l10n).environment(toaster)
+                }
+            }
             if PassportLogic.stage(journeys: data.totals.journeys) == .starting { upNext(data) }
             Button { mapOpen = true } label: {
                 MultiRouteMapView(
@@ -331,7 +368,10 @@ private struct MilestonesCard: View {
     @Environment(L10n.self) private var l10n
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let data: Passport
-    @State private var shown = false
+    /// Medals earned since the last visit: they press in like a stamp (signature moment 4, polish pass 1); the others
+    /// just appear.
+    @State private var fresh: Set<String> = []
+    @State private var stamped = false
     /// Room for a two-line title under every medal (two caption lines, 18 pt each), so a medal whose title wraps sits
     /// at the same height as its neighbours (owner, 2026-10-24).
     @ScaledMetric(relativeTo: .footnote) private var titleHeight: CGFloat = 36
@@ -345,15 +385,18 @@ private struct MilestonesCard: View {
             Text(l10n.t("passport.milestones")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if !achieved.isEmpty {
                 LazyVGrid(columns: columns, spacing: Space.l) {
-                    ForEach(Array(achieved.prefix(6).enumerated()), id: \.offset) { index, milestone in
+                    ForEach(Array(achieved.prefix(6)), id: \.stampKey) { milestone in
                         let label = l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home)
+                        let pressing = fresh.contains(milestone.stampKey) && !stamped
                         let tile = VStack(spacing: Space.xxs) {
                             Medal(m: milestone)
+                                // The stamp: a new medal comes down a little large and turned, and settles.
+                                .scaleEffect(pressing && !reduceMotion ? 1.15 : 1)
+                                .rotationEffect(.degrees(pressing && !reduceMotion ? -8 : 0))
+                                .opacity(pressing && reduceMotion ? 0 : 1)
                             title(label)
                             Text(milestone.at.map { Format.month($0.ms, tz: "Europe/Stockholm", language: app.settings.language) } ?? "").clack(.caption).foregroundStyle(Ink.text2)
                         }
-                        .scaleEffect(shown || reduceMotion ? 1 : 0.6).opacity(shown || reduceMotion ? 1 : 0)
-                        .animation(reduceMotion ? nil : .timingCurve(0.2, 1.4, 0.4, 1, duration: 0.45).delay(Double(index) * 0.06), value: shown)
                         if let legId = milestone.legId { NavigationLink(value: AppRoute.trip(legId)) { tile }.buttonStyle(.plain).accessibilityLabel(label) } else { tile }
                     }
                 }
@@ -383,7 +426,14 @@ private struct MilestonesCard: View {
             }
             Text(l10n.t("passport.milestonesNote")).clack(.caption).foregroundStyle(Ink.text2)
         }
-        .onAppear { shown = true }
+        .haptic(.success, trigger: stamped) { _, new in new && !fresh.isEmpty }
+        .task(id: achieved.map(\.stampKey)) {
+            fresh = StampMemory.fresh(achieved.map(\.stampKey))
+            stamped = false
+            guard !fresh.isEmpty else { return }
+            try? await Task.sleep(for: .milliseconds(300))
+            withMotion(.signature, reduceMotion: reduceMotion) { stamped = true }
+        }
     }
 
     /// A medal's title: top-aligned in a box two lines tall, so the line under it starts at the same height too.
@@ -391,5 +441,25 @@ private struct MilestonesCard: View {
         Text(text).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .frame(maxWidth: .infinity, minHeight: titleHeight, alignment: .top)
+    }
+}
+
+extension Milestone {
+    /// "journeys:10": one medal, the same across reloads (it was its place in the list, so the entrance animation
+    /// landed on the wrong medal when the year changed).
+    var stampKey: String { "\(family.rawValue):\(target)" }
+}
+
+/// Which medals the Passport has shown before, kept on the phone, so only new ones are stamped.
+enum StampMemory {
+    private static let key = "clack.passport.seenMedals"
+
+    /// The keys not seen before, and from now on all of them are. The first time (nothing kept yet) none are fresh:
+    /// medals earned before this was built aren't all stamped at once.
+    static func fresh(_ keys: [String]) -> Set<String> {
+        let kept = UserDefaults.standard.stringArray(forKey: key)
+        UserDefaults.standard.set(Array(Set(keys).union(kept ?? [])), forKey: key)
+        guard let kept else { return [] }
+        return Set(keys).subtracting(kept)
     }
 }
