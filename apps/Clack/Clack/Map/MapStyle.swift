@@ -179,8 +179,9 @@ nonisolated enum MapStyle {
         ]
     }
 
-    /// The Explore map's own layers (LiveMapPage.tsx): stations you can tap, and the trains, clustered when zoomed out.
-    /// Images (`station`, `cluster`, `tdot-<colour>`, `tpuck-<colour>`) are drawn on demand by the map's delegate.
+    /// The Explore map's own layers (LiveMapPage.tsx): stations you can tap, and the trains, each its own dot at every
+    /// zoom (never grouped: owner, 2026-10-27, again 2026-11-15). Images (`station`, `tdot-<colour>`, `tpuck-<colour>`)
+    /// are drawn on demand by the map's delegate.
     /// Station detail from zoom 13 (plan 2026-10-29): every track at full detail, sidings and yards fainter, and
     /// the platforms of the mapped stations with their numbers from zoom 14. Under the trains.
     static func stationDetailLayers(_ c: Colors, dark isDark: Bool) -> [[String: Any]] {

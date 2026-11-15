@@ -162,7 +162,6 @@ The tables give one line per change and its reason. The full before, after, how 
   - There's no lighter concourse and no named entrances.
 
   These depend on each station's data.
-- **Explore's clustered dots at country zoom and bigger dots from zoom 9:** these need feel on a device. The 44 pt hit box stays.
 - **The trip detail's four one-second clocks:** not batched yet; that waits until Instruments shows what they cost.
 - **The tip-tap of the flap is the system's light impact,** not Core Haptics, so there's no Haptics switch in Settings.
 
@@ -192,7 +191,6 @@ The hotspots the audit expects, from reading the code:
 7. **The designer's remaining items**, for a later pass:
    - "your trips affected" on Network, incidents merged, numbered pins;
    - platform-first station maps;
-   - Explore clustering.
 
 ## On your phone: what to try (I can't feel haptics or judge 120 Hz in a simulator)
 1. **Cold start:** close Clack fully and open it. The screen should be yellow from the first frame with no white. Tap the splash: it should go at once.

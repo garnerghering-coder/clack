@@ -14,7 +14,7 @@ results and other developers' notes, not the pages themselves.
 | GPS | API `journeyPos`: another developer got empty results with a Labs key (Oct 2026). | Not yet; to be tested with the key. |
 | Platforms | API `rtTrack` (key). Planned `platform_code` in GTFS: the column exists, mostly empty. | Planned platforms kept where given. |
 | Boards | API `departureBoard`/`arrivalBoard` (key), one station per call. | Not yet. |
-| Disruptions | API `himSearch` (key), free Danish text, no cause codes; no SIRI-SX in Denmark. | Not yet. |
+| Disruptions | `HimSearch` on the mgate backend (no key; checked 2026-11-15): Danish text (head, lead, text), from/to stations (`fLocX`/`tLocX` into `locL`, UIC in `extId`), validity `sDate`/`sTime`–`eDate`/`eTime` and a daily window `sDaily`/`eDaily`; no cause codes; no SIRI-SX in Denmark. | Network now (build 83): rail-replacement buses and track work. |
 | Archive | No official per-train archive (Banedanmark publishes monthly punctuality only). train-archive.eu has daily files since 2026-09-30; permission given by phone 2026-10-27. | Each finished day projected into the observed record (`observed/dk-archive.ts`, source `train_archive_dk`); Swedish cross-border trains named from Sweden's feed by stop times since 2026-11-07 (below). |
 
 ## The timetable (Rejseplanen GTFS, 2026-10-27)

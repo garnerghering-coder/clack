@@ -133,3 +133,31 @@ describe('disruptions: one per kind and place', () => {
     expect(out.map((x) => [x.id, x.to, x.lines])).toEqual([['a', 20, ['x']], ['c', null, []]]);
   });
 });
+
+describe('disruptions: planned work in Norway and Denmark (build 83)', () => {
+  it('Norway: Entur\'s own words say closure, works or incident', async () => {
+    const { norwegianKind } = await import('../src/livemap/disruptions.js');
+    const s = (no: string, en = '') => ({ Summary: [{ value: no, lang: 'NO' }, { value: en, lang: 'EN' }] }) as never;
+    expect(norwegianKind(s('Stengt: Gjøvik–Roa', 'Line closed: Gjøvik–Roa'))).toBe('closure');
+    expect(norwegianKind(s('Buss for tog', 'Bus for train'))).toBe('closure');
+    expect(norwegianKind(s('Sørtoget: Bane NOR utfører vedlikeholdsarbeid.'))).toBe('works');
+    expect(norwegianKind(s('Færre spor: Skøyen', 'Fewer tracks: Skøyen'))).toBe('incident');
+  });
+
+  it('Denmark: a rail-replacement bus is a closure, track work is works, a lift is nothing', async () => {
+    const { danishKind, parseHim } = await import('../src/livemap/disruptions.js');
+    expect(danishKind({ head: 'Bemærk, at du skal med Togbus på denne rejse.', lead: 'Ændringen skyldes sporarbejde.' })).toBe('closure');
+    expect(danishKind({ head: 'Sporarbejde mellem Aarhus og Randers' })).toBe('works');
+    expect(danishKind({ head: 'Elevatoren på Ballerup St. er ude af drift' })).toBeNull();
+    const locs = [{ name: 'Vejle St.', extId: '8600073', lat: 55.7, lon: 9.5 }, { name: 'Jelling St.', extId: '8600079', lat: 55.75, lon: 9.42 }];
+    const place = (uic: string) => ({ name: uic === '8600073' ? 'Vejle' : 'Jelling', point: { id: uic, lat: 55.7, lon: 9.5 } });
+    const now = Date.parse('2026-11-15T10:00:00Z');
+    const msg = { hid: 'H1', act: true, head: 'Togbus mellem Vejle og Jelling', fLocX: 0, tLocX: 1, sDate: '20261114', sTime: '000000', eDate: '20261116', eTime: '235900' };
+    expect(parseHim([msg], locs, now, place, () => 'line')).toEqual([
+      expect.objectContaining({ id: 'dk:H1', country: 'DK', kind: 'closure', places: ['Vejle', 'Jelling'], lines: ['line'], source: 'rejseplanen' }),
+    ]);
+    // Over, or only at night while it's day, it doesn't show.
+    expect(parseHim([{ ...msg, eDate: '20261115', eTime: '080000' }], locs, now, place, () => 'line')).toEqual([]);
+    expect(parseHim([{ ...msg, sDaily: '000000', eDaily: '053000' }], locs, now, place, () => 'line')).toEqual([]);
+  });
+});

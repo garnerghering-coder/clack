@@ -15,15 +15,18 @@ import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import { fetchJson } from '../digitraffic/client.js';
 import { trvQuery } from '../trafikverket/client.js';
 import { latestSituations } from '../observed/norway.js';
+import { rejseplanen, type HimLocation, type HimMessage } from '../rejseplanen/client.js';
+import { cleanDanishName, danishStationId } from '../import/gtfs-dk.js';
+import { zonedToUtc } from '../lib/time.js';
 
 export type DisruptionKind = 'works' | 'closure' | 'incident';
 
 export interface Disruption {
   id: string;
-  country: 'SE' | 'NO' | 'FI';
+  country: 'SE' | 'NO' | 'FI' | 'DK';
   kind: DisruptionKind;
   /** The source's own short words for it, in its language(s); the app shows its kind first and this under it. */
-  title: { sv?: string; en?: string; no?: string } | null;
+  title: { sv?: string; en?: string; no?: string; da?: string } | null;
   /** The stations at its ends (or the one it's at), by name. */
   places: string[];
   /** Epoch ms; null when the source gives none (open-ended). */
@@ -34,7 +37,7 @@ export interface Disruption {
   lon: number;
   /** The track it covers, as encoded polylines (empty for a pin only). */
   lines: string[];
-  source: 'trafikverket' | 'digitraffic' | 'entur';
+  source: 'trafikverket' | 'digitraffic' | 'entur' | 'rejseplanen';
 }
 
 const ms = (s: unknown): number | null => {
@@ -227,6 +230,7 @@ interface SxSituation {
   Progress?: string;
   ValidityPeriod?: { StartTime?: string; EndTime?: string }[];
   Summary?: SxText[];
+  Description?: SxText[];
   Affects?: unknown;
 }
 
@@ -254,6 +258,15 @@ function isRail(s: SxSituation): boolean {
   return [...JSON.stringify(s.Affects ?? {}).matchAll(/"([A-Z]{3}):(?:Line|DatedServiceJourney|ServiceJourney):/g)].some((m) => RAIL_CODESPACES.has(m[1]!));
 }
 
+/** What a Norwegian situation is, in Entur's own words (its summary and description, Norwegian and English): trains
+ * replaced or the line closed is a closure; maintenance or track work is works; anything else an incident. */
+export function norwegianKind(s: SxSituation): DisruptionKind {
+  const words = [...(s.Summary ?? []), ...(s.Description ?? [])].map((t) => t.value ?? '').join(' ').toLowerCase();
+  if (/\bstengt\b|line closed|buss for tog|bus for train|ingen tog|no trains/.test(words)) return 'closure';
+  if (/vedlikehold|sporarbeid|anleggsarbeid|arbeid på|maintenance work|engineering work|track work|planned work/.test(words)) return 'works';
+  return 'incident';
+}
+
 export function parseSituations(situations: SxSituation[], now: number, station: (nsrId: string) => { name: string; lat: number; lon: number } | null): Disruption[] {
   const out: Disruption[] = [];
   for (const s of situations) {
@@ -261,7 +274,10 @@ export function parseSituations(situations: SxSituation[], now: number, station:
     const period = s.ValidityPeriod?.[0];
     const from = ms(period?.StartTime);
     const to = ms(period?.EndTime);
-    if ((from !== null && from > now) || (to !== null && to <= now)) continue;
+    const kind = norwegianKind(s);
+    // Planned work and closures show from a day ahead, as the other countries' do; incidents once they've begun.
+    const ahead = kind === 'incident' ? 0 : 24 * 3600_000;
+    if ((from !== null && from > now + ahead) || (to !== null && to <= now)) continue;
     // Rail: the stops it names that are our stations; the one named most carries the pin.
     const counts = new Map<string, number>();
     for (const id of stopPlaces(s.Affects)) if (station(id)) counts.set(id, (counts.get(id) ?? 0) + 1);
@@ -270,9 +286,68 @@ export function parseSituations(situations: SxSituation[], now: number, station:
     const at = station(top)!;
     const text = (lang: string) => s.Summary?.find((t) => t.lang?.toUpperCase() === lang)?.value;
     out.push({
-      id: `no:${s.SituationNumber?.value ?? `${top}:${from}`}`, country: 'NO', kind: 'incident',
+      id: `no:${s.SituationNumber?.value ?? `${top}:${from}`}`, country: 'NO', kind,
       title: { en: text('EN'), no: text('NO') ?? text('NB') }, places: [at.name], from, to, lat: at.lat, lon: at.lon,
       lines: [], source: 'entur',
+    });
+  }
+  return out;
+}
+
+// ---------- Denmark ----------
+
+/** "20261113" + "111700", Copenhagen time, as epoch ms. */
+function himTime(date: string | undefined, time: string | undefined): number | null {
+  if (!date || !/^\d{8}$/.test(date)) return null;
+  const t = time && /^\d{6}$/.test(time) ? time : '000000';
+  return zonedToUtc(+date.slice(0, 4), +date.slice(4, 6), +date.slice(6, 8), +t.slice(0, 2), +t.slice(2, 4), +t.slice(4, 6), 'Europe/Copenhagen');
+}
+
+/** What a Danish message is, in Rejseplanen's own (Danish) words: trains replaced by buses or not running is a closure,
+ * track work is works; a message about neither (a lift, a station hall) is none of Network now's business. */
+export function danishKind(m: HimMessage): DisruptionKind | null {
+  const words = [m.head, m.lead, m.text].filter(Boolean).join(' ').toLowerCase();
+  if (/togbus|bus(ser)? i stedet for tog|ingen tog|kører ikke/.test(words)) return 'closure';
+  if (/sporarbejde|banearbejde/.test(words)) return 'works';
+  return null;
+}
+
+/** Rejseplanen's service messages (HimSearch) about trains on a stretch, in force now or starting within a day; a
+ * daily window ("nights only") counts only inside it. */
+export function parseHim(
+  messages: HimMessage[],
+  locations: HimLocation[],
+  now: number,
+  place: (uic: string) => { name: string; point: StationPoint } | null,
+  track: (a: StationPoint, b: StationPoint) => string | null,
+): Disruption[] {
+  const out: Disruption[] = [];
+  const nowLocal = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Copenhagen', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).format(now).replace(/:/g, '');
+  for (const m of messages) {
+    if (m.act === false || !m.hid) continue;
+    const kind = danishKind(m);
+    if (!kind) continue;
+    const from = himTime(m.sDate, m.sTime);
+    const to = himTime(m.eDate, m.eTime);
+    if ((from !== null && from > now + 24 * 3600_000) || (to !== null && to <= now)) continue;
+    if (m.sDaily && m.eDaily && !(m.sDaily === '000000' && m.eDaily >= '235900')) {
+      const inside = m.sDaily <= m.eDaily ? nowLocal >= m.sDaily && nowLocal <= m.eDaily : nowLocal >= m.sDaily || nowLocal <= m.eDaily;
+      if (!inside && (from === null || from <= now)) continue;
+    }
+    const at = (x: number | undefined) => {
+      const l = x === undefined ? undefined : locations[x];
+      return l?.extId ? place(l.extId) : null;
+    };
+    const a = at(m.fLocX);
+    const b = at(m.tLocX);
+    const ends = [a, b].filter((e): e is NonNullable<typeof e> => !!e);
+    if (!ends.length) continue;
+    const line = a && b && a.point.id !== b.point.id ? track(a.point, b.point) : null;
+    out.push({
+      id: `dk:${m.hid}`, country: 'DK', kind, title: { da: m.head?.trim() },
+      places: [...new Set(ends.map((e) => e.name))], from, to,
+      lat: ends.reduce((n, e) => n + e.point.lat, 0) / ends.length, lon: ends.reduce((n, e) => n + e.point.lon, 0) / ends.length,
+      lines: line ? [line] : [], source: 'rejseplanen',
     });
   }
   return out;
@@ -322,6 +397,7 @@ export class Disruptions {
       this.keep('trafikverket', () => this.sweden(now)),
       this.keep('digitraffic', () => this.finland(now)),
       this.keep('entur', () => this.norway(now)),
+      this.keep('rejseplanen', () => this.denmark(now)),
     ]);
   }
 
@@ -347,6 +423,23 @@ export class Disruptions {
     };
     const track = (a: StationPoint, b: StationPoint) => encodePolyline(segmentBetween(this.db, a, b).points);
     return [...parseTrafikverket(events, now, place, track), ...parseWorksStretches(this.worksStretches(), place, track)];
+  }
+
+  private async denmark(now: number) {
+    const { messages, locations } = await rejseplanen().himSearch();
+    const byId = new Map(this.db.select({ id: stations.id, name: stations.name, lat: stations.lat, lon: stations.lon }).from(stations).all().map((s) => [s.id, s]));
+    return parseHim(
+      messages,
+      locations,
+      now,
+      (uic) => {
+        const s = byId.get(danishStationId(uic));
+        if (s) return { name: s.name, point: { id: s.id, lat: s.lat, lon: s.lon } };
+        const l = locations.find((x) => x.extId === uic);
+        return l && l.lat !== null && l.lon !== null ? { name: cleanDanishName(l.name), point: { id: `dk:${uic}`, lat: l.lat, lon: l.lon } } : null;
+      },
+      (a, b) => encodePolyline(segmentBetween(this.db, a, b).points),
+    );
   }
 
   private async finland(now: number) {

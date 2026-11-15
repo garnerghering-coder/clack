@@ -262,7 +262,7 @@ Left in build 73, and why:
 - **Network: "Your trips today: affected", incidents merged by area, numbered pins on the track.** These need matching your trips against corridors and grouping incidents, which is new logic on top of the server's data rather than polish. Listed for a later pass.
 - **Station map: platform numbers always on, a lighter concourse, named entrances.** These depend on what each station's data has. Platform chips already show from their zoom; a lighter concourse needs shape data the maps don't all have. The walk for a change is already drawn when you open the map from a change (the layover link).
 - **The place sheet's day bar.** The week now reads as a table (B71.11); a drawn bar was left out.
-- **Explore: clustered dots at country zoom, bigger dots from zoom 9.** These are map style changes that need on-device feel; the 44 pt hit box stays.
+- **Explore dots are never grouped** (owner, 2026-10-27, again 2026-11-15): every train its own dot at every zoom. Not a later item.
 - **The one shared sheet mechanic for every Explore overlay.** The Network panel moved to a system sheet; the train and station cards keep their own, already shared, sheet.
 
 ## Build 74: Passport and medals
@@ -362,3 +362,11 @@ Left in build 73, and why:
 | B82.2 | Repeated disruptions | Entur posts one message per line about the same stop: several pins and rows | One per kind and place, its track joined | `mergeSame`; test | Return the list unmerged |
 | B82.3 | Network now, your trains (designer's list) | Nothing about you | First: "Your trains today run as normal", or each of today's trains that is cancelled, 10+ min late, or has trouble at its station, tapping to its page | `NetworkLogic` (ClackCore, tests), `NetworkPanel.yours`, `ExploreScreen` `onTrip` | Remove `yours(status)` |
 | B82.4 | "Kind of train saved" (build 81 check) | Reported missing | Checked: it shows, sliding in about a second after the header changes; the check looked too early. No change | — | — |
+
+## Build 83 (owner, 2026-11-15: planned track work for every country; dots never grouped)
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B83.1 | Norway's disruptions | All shown as incidents | Entur's own words decide: "Stengt" / "Buss for tog" a closure, "vedlikeholdsarbeid" / "sporarbeid" track work, the rest incidents; planned ones from a day ahead | `norwegianKind`, `parseSituations`; test | All `incident` |
+| B83.2 | Denmark | No disruptions ("no source") | Rejseplanen's service messages (HimSearch, the same backend and request limit as the live map): rail-replacement buses and "ingen tog" a closure, "sporarbejde" track work, drawn between their stations; lifts and station halls left out; daily windows honoured | `RejseplanenClient.himSearch`, `danishKind`, `parseHim`; Danish words on the model (`Title.da`); test | Drop the `rejseplanen` source |
+| B83.3 | Dot grouping on Explore | Dead cluster tap code and image left from the web map | Removed; comments say never grouped | `LiveMapView`, `MapStyle`; dropped from CHANGES/DECISIONS lists | — |

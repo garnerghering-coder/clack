@@ -33,10 +33,10 @@ Thresholds live in `apps/server/src/livemap/network.ts` (`LATE_MIN`, `MIN_TRAINS
 
 | Country | Source | What counts | Where on the map |
 |---|---|---|---|
-| Sweden | Trafikverket `OperativeEvent` (ols.open 1.0) | Events with a `TrafficImpact`, not ended; code 16 (Banarbete/transport) is track work, the rest incidents. An event with no end not updated for 24 h is taken as left open (one from May was still open in November). | `EventSection` from and to signatures → stations or Trafikverket locations → the track between |
+| Sweden | Trafikverket `OperativeEvent` (ols.open 1.0), and the stretches whose trains carry the "Banarbete" notice (ANA003) in the next two hours | Events with a `TrafficImpact`, not ended; code 16 (Banarbete/transport) is track work, the rest incidents. An event with no end not updated for 24 h is taken as left open (one from May was still open in November). | `EventSection` from and to signatures → stations or Trafikverket locations → the track between |
 | Finland | Digitraffic RUMA: `trafficrestriction-notifications?state=SENT`, `trackwork-notifications?state=ACTIVE` | Restrictions in force now (`CLOSED_FROM_TRAFFIC`, `CLOSED_FROM_ELECTRIC_ROLLING_STOCK` are a closed track, the rest track work); track-work notices with a part starting today | The notices' own track geometry |
-| Norway | Entur SIRI-SX, the list the archive's 10-minute poll fetched (Entur rate-limits a second ask) | Open situations from a train operator (codespaces NSB, VYG, GOA, FLT, SJN) that name a station we know | A pin at the station named most |
-| Denmark | none | Rejseplanen's notices are free text per journey | — |
+| Norway | Entur SIRI-SX, the list the archive's 10-minute poll fetched (Entur rate-limits a second ask) | Open situations from a train operator (codespaces NSB, VYG, GOA, FLT, SJN) that name a station we know; Entur's own words make it a closure (Stengt, Buss for tog), track work (vedlikeholdsarbeid, sporarbeid) or an incident; planned ones from a day ahead | A pin at the station named most |
+| Denmark | Rejseplanen `HimSearch` (the mgate backend, same request limit as the live map) | Messages whose own Danish words name a rail-replacement bus or no trains (closure) or track work (sporarbejde); lifts and station halls left out; daily windows kept | From and to stations → the track between |
 
 ## Not done yet
 

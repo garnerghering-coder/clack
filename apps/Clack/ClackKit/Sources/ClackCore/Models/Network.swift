@@ -191,11 +191,14 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
             public let sv: String?
             public let en: String?
             public let no: String?
+            /// Denmark's messages come in Danish only.
+            public let da: String?
 
-            public init(sv: String? = nil, en: String? = nil, no: String? = nil) {
+            public init(sv: String? = nil, en: String? = nil, no: String? = nil, da: String? = nil) {
                 self.sv = sv
                 self.en = en
                 self.no = no
+                self.da = da
             }
         }
 
@@ -233,8 +236,8 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         public func words(_ language: Language) -> String? {
             guard let title else { return nil }
             switch language {
-            case .sv: return title.sv ?? title.no ?? title.en
-            default: return title.en ?? title.sv ?? title.no
+            case .sv: return title.sv ?? title.no ?? title.da ?? title.en
+            default: return title.en ?? title.sv ?? title.no ?? title.da
             }
         }
     }

@@ -148,7 +148,7 @@ final class LiveMapController {
     func setTrains(_ points: [TrainPoint]) {
         guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
         source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.rebuild(points))
-        // Your own trains and the ones you follow are also kept out of the clusters, so they stay marked when zoomed out.
+        // Your own trains and the ones you follow are drawn again on top, so they stay marked among the others.
         if let pinned = mapView?.style?.source(withIdentifier: "trains-pinned") as? MLNShapeSource {
             pinned.shape = MLNShapeCollectionFeature(shapes: pinnedFeatures.rebuild(points.filter { $0.mine || $0.followed }))
         }
@@ -382,7 +382,7 @@ final class LiveMapController {
 }
 
 /// The live map (LiveMapPage.tsx): the basemap and rail network, stations you can tap, every running train as a marker
-/// (clustered when zoomed out) and the selected train's route.
+/// (every train its own dot at every zoom; owner, 2026-10-27 and 2026-11-15: never grouped) and the selected train's route.
 struct LiveMapView: UIViewRepresentable {
     let controller: LiveMapController
     let base: URL
@@ -457,7 +457,6 @@ struct LiveMapView: UIViewRepresentable {
         func mapView(_ mapView: MLNMapView, didFailToLoadImage imageName: String) -> UIImage? {
             let c = MapStyle.colors(dark: dark)
             if imageName == "station" { return LiveMapImages.station(fill: UIColor(cssColor: c.bg), line: UIColor(cssColor: c.text)) }
-            if imageName == "cluster" { return LiveMapImages.cluster(light: !dark) }
             if imageName.hasPrefix("tdot-") { return LiveMapImages.train(color: UIColor(cssColor: String(imageName.dropFirst(5))), heading: false) }
             if imageName.hasPrefix("tpuck-") { return LiveMapImages.train(color: UIColor(cssColor: String(imageName.dropFirst(6))), heading: true) }
             return nil
@@ -473,12 +472,6 @@ struct LiveMapView: UIViewRepresentable {
             // A fingertip is wider than the dot: 44 pt square (the system's hit size; user test 2026-11-07: dots
             // "too small to hit" at country zoom), and the nearest dot to the finger wins.
             let box = CGRect(x: point.x - 22, y: point.y - 22, width: 44, height: 44)
-            // Clusters zoom in two levels at the tap.
-            if !map.visibleFeatures(at: point, styleLayerIdentifiers: ["clusters"]).isEmpty {
-                let at = map.convert(point, toCoordinateFrom: map)
-                map.setCenter(at, zoomLevel: map.zoomLevel + 2, animated: !UIAccessibility.isReduceMotionEnabled)
-                return
-            }
             // Trains bunch up at stations: of the dots under the finger, take the one nearest to it.
             let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot", "train-cars", "model-cars"])
             if let best = trains.min(by: { distance($0, point, map) < distance($1, point, map) }), let id = best.attribute(forKey: "id") as? String {
@@ -505,7 +498,7 @@ struct LiveMapView: UIViewRepresentable {
     }
 }
 
-/// The marker pictures (LiveMapPage.tsx `trainMarkerImage`, `clusterImage`, `stationImage`), drawn at pixel ratio 2.
+/// The marker pictures (LiveMapPage.tsx `trainMarkerImage`, `stationImage`), drawn at pixel ratio 2.
 enum LiveMapImages {
     private static func render(_ size: CGFloat, _ draw: (CGContext) -> Void) -> UIImage {
         let format = UIGraphicsImageRendererFormat()
@@ -545,21 +538,6 @@ enum LiveMapImages {
             g.restoreGState()
             g.setFillColor(color.cgColor)
             g.fillEllipse(in: CGRect(x: c.x - 12, y: c.y - 12, width: 24, height: 24))
-        }
-    }
-
-    /// Several trains: a flat material circle with a hairline white edge and a soft shadow (the count is drawn on top).
-    static func cluster(light: Bool) -> UIImage {
-        render(76) { g in
-            let rect = CGRect(x: 38 - 27, y: 38 - 27, width: 54, height: 54)
-            g.saveGState()
-            g.setShadow(offset: CGSize(width: 0, height: -2), blur: 8, color: UIColor.black.withAlphaComponent(0.3).cgColor)
-            g.setFillColor((light ? UIColor.white.withAlphaComponent(0.96) : UIColor(red: 44 / 255, green: 44 / 255, blue: 46 / 255, alpha: 0.94)).cgColor)
-            g.fillEllipse(in: rect)
-            g.restoreGState()
-            g.setLineWidth(2)
-            g.setStrokeColor((light ? UIColor.black.withAlphaComponent(0.08) : UIColor.white.withAlphaComponent(0.55)).cgColor)
-            g.strokeEllipse(in: rect)
         }
     }
 

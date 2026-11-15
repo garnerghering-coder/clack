@@ -21,6 +21,32 @@ const FAILS_TO_REST = 5;
 const REST_MS = 10 * 60_000;
 const TIMEOUT_MS = 15_000;
 
+/** A HIM service message as HimSearch sends it (the fields Clack reads). Dates "YYYYMMDD", times "HHMMSS", local. */
+export interface HimMessage {
+  hid?: string;
+  act?: boolean;
+  head?: string;
+  lead?: string;
+  text?: string;
+  fLocX?: number;
+  tLocX?: number;
+  sDate?: string;
+  sTime?: string;
+  eDate?: string;
+  eTime?: string;
+  /** A daily window inside the dates ("000000"–"053000": nights only). */
+  sDaily?: string;
+  eDaily?: string;
+}
+
+export interface HimLocation {
+  name: string;
+  /** The UIC number for a station. */
+  extId: string | null;
+  lat: number | null;
+  lon: number | null;
+}
+
 export class RejseplanenUnavailable extends Error {}
 
 export interface ClientOptions {
@@ -89,6 +115,18 @@ export class RejseplanenClient {
   async journeyDetails(jid: string): Promise<Journey | null> {
     const { res, common } = await this.call<{ journey?: RawJourney }>('JourneyDetails', { jid, getPolyline: false });
     return res.journey ? journeyOf(common, res.journey) : null;
+  }
+
+  /** Rejseplanen's service messages for trains (HIM): planned works, rail-replacement buses, station notices, each with
+   * its validity and the stations it runs from and to (indices into `common.locL`). One request. */
+  async himSearch(): Promise<{ messages: HimMessage[]; locations: HimLocation[] }> {
+    const { res, common } = await this.call<{ msgL?: HimMessage[] }>('HimSearch', {
+      himFltrL: [{ type: 'PROD', mode: 'INC', value: String(TRAIN_PRODUCTS) }], getPolyline: false, maxNum: 300,
+    });
+    const locations = ((common as { locL?: { name?: string; extId?: string; crd?: { x: number; y: number } }[] }).locL ?? []).map((l) => ({
+      name: l.name ?? '', extId: l.extId ?? null, lat: l.crd ? l.crd.y / 1e6 : null, lon: l.crd ? l.crd.x / 1e6 : null,
+    }));
+    return { messages: res.msgL ?? [], locations };
   }
 
   /** Every train in a box (all of Denmark by default) with its position. */
