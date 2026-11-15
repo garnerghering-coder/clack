@@ -66,28 +66,14 @@ struct FeaturedCard: View {
         let grounded = state == .active && live != nil && LiveRules.isFresh(live, now: now)
             && live?.lat != nil && live?.lon != nil && live?.positionSource != nil
 
-        let tag: String = {
-            switch state {
-            case .upcoming: return l10n.t("trips.routePreview")
-            case .arrived: return l10n.t("trips.routeSummary")
-            case .active:
-                guard grounded else { return l10n.t("trips.noPositionShort") }
-                return live?.positionSource == .estimated ? l10n.t("live.estimatedPosition") : l10n.t("live.livePosition")
-            }
-        }()
         // The top of the card opens the journey (the trip itself when it stands alone); each leg and change below has its own link.
         let top: AppRoute = isJourney ? leg.journeyId.map { .journey($0) } ?? .trip(leg.id) : .trip(leg.id)
         return VStack(spacing: 0) {
             NavigationLink(value: top) {
             VStack(spacing: 0) {
-            ZStack(alignment: .topLeading) {
-                featuredMap(grounded: grounded)
-                Text(tag)
-                    .clack(.micro).foregroundStyle(Ink.text2)
-                    .padding(.vertical, Space.xxs).padding(.horizontal, Space.s)
-                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                    .padding(.leading, Space.m).padding(.top, Space.s)
-            }
+            // The map alone (owner, 2026-11-15: no "Route preview" pill on it); the status line below says whether the
+            // position is live or estimated.
+            featuredMap(grounded: grounded)
             .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .accessibilityHidden(true)
 

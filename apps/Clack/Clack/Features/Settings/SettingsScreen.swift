@@ -74,6 +74,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
         }
+        .clackMenu()
         .accessibilityLabel(label)
     }
 }

@@ -155,24 +155,6 @@ struct ExploreLogicTests {
         #expect(!ExploreLogic.searchesStations("g"))
     }
 
-    @Test func sheetSizesFollowTheRoomAndTheContent() {
-        let t = ExploreLogic.sheetTargets(room: 700, content: 900, head: 60, foot: 74)
-        #expect(t.full == 676)
-        #expect(t.mid == 518)
-        #expect(t.small == 254)
-        let short = ExploreLogic.sheetTargets(room: 700, content: 300, head: 60, foot: 74)
-        #expect(short.mid == 300 && short.small == 254)
-    }
-
-    @Test func aDragSettlesOnTheNearestSizeAndAFlickGoesOneFurther() {
-        let t = ExploreLogic.SheetTargets(small: 250, mid: 500, full: 700)
-        #expect(ExploreLogic.settle(height: 480, velocity: 0, from: .mid, targets: t) == .mid)
-        #expect(ExploreLogic.settle(height: 640, velocity: 0, from: .mid, targets: t) == .full)
-        #expect(ExploreLogic.settle(height: 505, velocity: -0.8, from: .mid, targets: t) == .full)
-        #expect(ExploreLogic.settle(height: 495, velocity: 0.8, from: .mid, targets: t) == .small)
-        #expect(ExploreLogic.settle(height: 250, velocity: -0.8, from: .small, targets: t) == .mid)
-    }
-
     @Test func stopTimesUseArrivalForTheLastStopAndActualBeforeEstimated() {
         let mid = LiveTrainStop(seq: 2, stationId: "a", name: "A", arr: 0, dep: 60_000, actualArr: nil, actualDep: nil, estimatedArr: nil, estimatedDep: 5 * 60_000 + 60_000, platform: nil, canceled: false, passed: false)
         let t = ExploreLogic.stopTimes(mid, isLast: false)

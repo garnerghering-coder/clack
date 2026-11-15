@@ -58,7 +58,8 @@ final class ExploreModel {
     private(set) var scheduled: TrainView?
     var notRunning: NotRunningTarget?
     var stationSheet: StationSheetTarget?
-    var collapsed = false
+    /// The top of Explore's sheet on screen (global y), while one is open: the map's corner controls sit above it.
+    var sheetTop: CGFloat?
     var legend = false
     var showFilters = false
     /// The network status panel (the button beside the filters), its answer, and whether asking failed.
@@ -765,6 +766,22 @@ final class ExploreModel {
         }
     }
 
+    /// Something shows in Explore's one system sheet: a train, a station, a corridor, Network now.
+    var panelOpen: Bool {
+        selected != nil || notRunning != nil || scheduled != nil || corridor != nil || stationSheet != nil || showNetwork
+    }
+
+    /// The sheet was swiped away: everything in it closes.
+    func closePanels() {
+        if selected != nil { deselect() }
+        if scheduled != nil { closeScheduled() }
+        if corridor != nil { closeCorridor() }
+        notRunning = nil
+        stationSheet = nil
+        showNetwork = false
+        sheetTop = nil
+    }
+
     func closeCorridor() {
         corridor = nil
         corridorGone = false
@@ -814,7 +831,6 @@ final class ExploreModel {
         selected = detail
         followingSelected = true
         scheduled = nil
-        collapsed = false
         stops = detail.trip == nil ? .none : .loading
         stationSheet = nil
         controller.setSelected(id)
@@ -912,7 +928,6 @@ final class ExploreModel {
         // The ring and the stops of the train that was selected go with it.
         stopsTask?.cancel()
         controller.setSelected(nil)
-        collapsed = false
         stationSheet = nil
         startScheduledRefresh(number: number, date: date, key: key)
         clearRoute()

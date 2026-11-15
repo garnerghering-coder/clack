@@ -65,6 +65,15 @@ def check_file(path):
                 value = float(match.group(1) or match.group(2))
                 if value not in GRID_OK:
                     problems.append(f'{rel}:{number}: spacing {value:g}: use a Space token')
+    # A Menu with its own label is drawn as that label alone (`.clackMenu()`): otherwise it takes the accent tint as a
+    # see-through yellow ring in dark mode (owner, 2026-11-15). A toolbar menu is the system's: mark it allowed.
+    with open(path, encoding='utf-8') as f:
+        text = f.read()
+    menus = [m.start() for m in re.finditer(r'\bMenu \{', text)]
+    allowed = text.count('design-lint: allow menu')
+    if len(menus) > text.count('.clackMenu()') + allowed:
+        line = text.count('\n', 0, menus[0]) + 1
+        problems.append(f'{rel}:{line}: Menu without .clackMenu(): its label gets a yellow ring in dark mode')
     return problems
 
 

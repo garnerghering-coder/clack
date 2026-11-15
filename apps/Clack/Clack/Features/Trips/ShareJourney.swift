@@ -126,6 +126,7 @@ struct ShareControl: View {
                     Button { start() } label: { Label(l10n.t("share.action"), systemImage: "square.and.arrow.up") }
                     Button(role: .destructive) { Task { await share.stop(app) } } label: { Label(l10n.t("share.stop"), systemImage: "xmark.circle") }
                 } label: { glyph }
+                .clackMenu()
             } else {
                 Button { start() } label: { glyph }
             }

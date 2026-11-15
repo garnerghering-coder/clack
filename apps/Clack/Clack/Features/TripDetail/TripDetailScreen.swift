@@ -381,18 +381,6 @@ struct TripDetailScreen: View {
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
-            // Under the navigation bar's buttons (back, the menu, sharing).
-            if detail.leg.isEstimatedGeometry {
-                Text(l10n.t("detail.estimatedRoute"))
-                    .clack(.caption).foregroundStyle(Ink.text)
-                    .padding(.vertical, Space.xs).padding(.horizontal, Space.m)
-                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                    .hairlineBorder(radius: Radius.controlSm)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, top + 60)
-                    // A label only: taps go through to the map.
-                    .allowsHitTesting(false)
-            }
         }
         .frame(height: height)
         .frame(maxWidth: .infinity)
@@ -424,6 +412,10 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let tz = l.origin?.tz ?? "Europe/Stockholm"
         VStack(alignment: .leading, spacing: Space.l) {
+            // Said under the map, not boxed on it (owner, 2026-11-15: no pills over the map).
+            if l.isEstimatedGeometry {
+                Text(l10n.t("detail.estimatedRoute")).clack(.caption).foregroundStyle(Ink.text2)
+            }
             if let journey {
                 VStack(alignment: .leading, spacing: Space.s) {
                     Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
@@ -794,6 +786,7 @@ struct TripDetailScreen: View {
         let ahead = (l.schedDep?.ms ?? 0) > Date.now.timeIntervalSince1970 * 1000 && !l.canceled
         let service = [l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")
         let route = "\(l.origin?.name ?? "") \(l.destination?.name ?? "")"
+        // design-lint: allow menu (a toolbar item: the system draws it)
         return Menu {
             if l.status != .snapshotted {
                 Button { Task { await refresh() } } label: { Label(l10n.t("detail.refresh"), systemImage: "arrow.clockwise") }

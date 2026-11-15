@@ -7,161 +7,44 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// A train's sheet, live or from the timetable: a header with just the operator and train (it tightens once you scroll),
-/// one scrolling body (the journey, its stops, what's on board, tickets) and the actions pinned below. The handle on top
-/// drags it between three sizes (just the train, the usual half, nearly the whole screen) and it settles on the nearest
-/// one when let go; a flick goes one size further. A tap folds it like the title does (LiveMapPage.tsx `TrainSheet`).
+/// A train's sheet, live or from the timetable, inside Explore's system sheet (owner, 2026-11-15: every panel the
+/// native way, as Network now): a header with the operator and train, one scrolling body (what's live, the stops,
+/// what's on board) and the actions pinned below. The system sheet does the sizes and the dragging.
 struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     @Environment(L10n.self) private var l10n
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let op: Operator?
     let title: String
-    @Binding var collapsed: Bool
     let onClose: () -> Void
     @ViewBuilder var intro: Intro
     @ViewBuilder var content: Content
     @ViewBuilder var actions: Actions
 
-    @State private var full = false
-    @State private var scrolled = false
-    /// The height while dragging or settling; nil when the sheet sizes itself.
-    @State private var dragHeight: Double?
-    @State private var dragStart: DragStart?
-    @State private var room = 700.0
-    @State private var headHeight = 60.0
-    @State private var bodyHeight = 200.0
-    @State private var footHeight = 74.0
-
-    private struct DragStart {
-        var height: Double
-        var size: ExploreLogic.SheetSize
-        var lastY: Double
-        var lastTime: Date
-        var velocity = 0.0
-        var moved = false
-    }
-
-    private var size: ExploreLogic.SheetSize { collapsed ? .small : full ? .full : .mid }
-
-    private var targets: ExploreLogic.SheetTargets {
-        ExploreLogic.sheetTargets(room: room, content: headHeight + bodyHeight + footHeight + 14, head: headHeight, foot: footHeight)
-    }
-
     var body: some View {
-        let height = dragHeight ?? targets[size]
-        VStack(spacing: 0) {
-            grabber
-            header
-            ScrollView {
-                VStack(alignment: .leading, spacing: Space.m) {
-                    intro
-                    if !collapsed { content }
-                }
-                .padding(.horizontal, Space.l).padding(.bottom, Space.l)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .onGeometryChange(for: Double.self) { $0.size.height } action: { bodyHeight = $0 }
-                .onGeometryChange(for: Double.self) { $0.frame(in: .named("sheet-scroll")).minY } action: { scrolled = $0 < -6 }
+        ScrollView {
+            VStack(alignment: .leading, spacing: Space.m) {
+                header
+                intro
+                content
             }
-            .coordinateSpace(name: "sheet-scroll")
-            .scrollBounceBehavior(.basedOnSize)
-            footer
+            .padding(.horizontal, Space.l).padding(.top, Space.l).padding(.bottom, Space.l)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(height: height)
-        .background(Ink.glass)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, Space.m).padding(.bottom, Space.m)
-        .frame(maxHeight: .infinity, alignment: .bottom)
-        .onGeometryChange(for: Double.self) { $0.size.height } action: { room = $0 }
-        .animation(reduceMotion ? nil : .timingCurve(0.2, 0.8, 0.2, 1, duration: 0.22), value: height)
+        .scrollBounceBehavior(.basedOnSize)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            HStack(spacing: Space.m) { actions }
+                .padding(.horizontal, Space.l).padding(.top, Space.m).padding(.bottom, Space.m)
+                .background(.bar)
+        }
         .accessibilityElement(children: .contain)
-    }
-
-    private var grabber: some View {
-        RoundedRectangle(cornerRadius: Radius.bar, style: .continuous)
-            .fill(Ink.text3.opacity(0.6))
-            .frame(width: 36, height: 5)
-            .frame(maxWidth: .infinity).frame(height: 28)
-            .contentShape(Rectangle())
-            .gesture(drag)
-            .accessibilityElement()
-            .accessibilityLabel(l10n.t(collapsed ? "liveMap.expandSheet" : "liveMap.collapseSheet"))
-            .accessibilityAddTraits(.isButton)
-            .accessibilityAction { collapsed.toggle() }
-            .accessibilityAdjustableAction { direction in
-                switch direction {
-                case .increment: settle(size == .small ? .mid : .full)
-                case .decrement: settle(size == .full ? .mid : .small)
-                @unknown default: break
-                }
-            }
     }
 
     private var header: some View {
         HStack(spacing: Space.m) {
             OperatorBadge(op: op, size: .medium)
-                .scaleEffect(scrolled && !collapsed ? 0.8 : 1, anchor: .leading)
-            Button { collapsed.toggle() } label: {
-                HStack(spacing: Space.s) {
-                    Text(title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
-                    LucideIcon(name: collapsed ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text)
-                    Spacer(minLength: 0)
-                }
-                .frame(minHeight: 44).contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityAddTraits(.isHeader)
+            Text(title).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(2)
+                .accessibilityAddTraits(.isHeader)
+            Spacer(minLength: 0)
             IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
-        }
-        .padding(.horizontal, Space.l).padding(.top, scrolled && !collapsed ? 4 : 0).padding(.bottom, scrolled && !collapsed ? 6 : 10)
-        .overlay(alignment: .bottom) { Rectangle().fill(scrolled && !collapsed ? Ink.hairline : .clear).frame(height: 1) }
-        .onGeometryChange(for: Double.self) { $0.size.height } action: { headHeight = $0 }
-    }
-
-    private var footer: some View {
-        HStack(spacing: Space.m) { actions }
-            .padding(.horizontal, Space.l).padding(.top, Space.m).padding(.bottom, Space.l)
-            .overlay(alignment: .top) { Rectangle().fill(Ink.hairline).frame(height: 1) }
-            .onGeometryChange(for: Double.self) { $0.size.height } action: { footHeight = $0 }
-    }
-
-    // MARK: dragging between sizes
-
-    private var drag: some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { value in
-                var start = dragStart ?? DragStart(height: dragHeight ?? targets[size], size: size, lastY: value.location.y, lastTime: value.time)
-                let dy = value.location.y - value.startLocation.y
-                if abs(dy) > 4 { start.moved = true }
-                guard start.moved else { dragStart = start; return }
-                let dt = max(1, value.time.timeIntervalSince(start.lastTime) * 1000)
-                start.velocity = 0.7 * start.velocity + 0.3 * ((value.location.y - start.lastY) / dt)
-                start.lastY = value.location.y
-                start.lastTime = value.time
-                dragStart = start
-                // Dragging up from the small size shows the rest of the sheet straight away.
-                if collapsed && dy < -24 { collapsed = false }
-                dragHeight = max(96, min(targets.full, start.height - dy))
-            }
-            .onEnded { value in
-                guard let start = dragStart else { return }
-                dragStart = nil
-                guard start.moved else { collapsed.toggle(); return }
-                let h = max(96, start.height - (value.location.y - value.startLocation.y))
-                settle(ExploreLogic.settle(height: h, velocity: start.velocity, from: start.size, targets: targets))
-            }
-    }
-
-    private func settle(_ to: ExploreLogic.SheetSize) {
-        dragHeight = targets[to]
-        collapsed = to == .small
-        full = to == .full
-        // The height follows the size from here; the animation carries it there.
-        Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(230))
-            dragHeight = nil
         }
     }
 }
@@ -226,23 +109,20 @@ private func arrivalDelay(_ stop: LiveTrainStop) -> Int? {
 
 // MARK: the other sheets
 
-/// A plain bottom card for the sheets without drag sizes (`.live-sheet`).
+/// The body of Explore's system sheet for the panels without a pinned footer: padded content that scrolls when it
+/// doesn't fit the sheet's size.
 struct LiveSheetCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Space.m) {
-            content
+        ScrollView {
+            VStack(alignment: .leading, spacing: Space.m) {
+                content
+            }
+            .padding(.horizontal, Space.l).padding(.vertical, Space.l)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.horizontal, Space.l).padding(.vertical, Space.l)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.glass)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, Space.m).padding(.bottom, Space.m)
-        .frame(maxHeight: .infinity, alignment: .bottom)
+        .scrollBounceBehavior(.basedOnSize)
     }
 }
 
@@ -270,20 +150,13 @@ struct CorridorSheet: View {
                 Spacer(minLength: 0)
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
-            ScrollView {
-                VStack(alignment: .leading, spacing: Space.m) {
-                    reasons
-                    trains
-                    Text(l10n.t("network.corridorHint")).clack(.micro).foregroundStyle(Ink.text3)
-                    if let updatedAt {
-                        Text(l10n.t("network.updated", ["time": Format.time(updatedAt, tz: TimeZone.current.identifier, clock: app.settings.clock)]))
-                            .clack(.micro).foregroundStyle(Ink.text3)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+            reasons
+            trains
+            Text(l10n.t("network.corridorHint")).clack(.micro).foregroundStyle(Ink.text3)
+            if let updatedAt {
+                Text(l10n.t("network.updated", ["time": Format.time(updatedAt, tz: TimeZone.current.identifier, clock: app.settings.clock)]))
+                    .clack(.micro).foregroundStyle(Ink.text3)
             }
-            .scrollBounceBehavior(.basedOnSize)
-            .frame(maxHeight: 300)
         }
         .accessibilityElement(children: .contain)
     }
@@ -392,10 +265,7 @@ struct LiveStationSheet: View {
     @State private var favoriteTaps = 0
     @Environment(Toaster.self) private var toaster
     @Environment(PassportStore.self) private var passport
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var boardFailed = false
-    /// Pulled up: the next twelve departures in place, instead of four.
-    @State private var expanded = false
 
     private func boardRow(_ row: BoardRow, now: Double) -> some View {
         let time = row.estimated ?? row.advertised
@@ -469,24 +339,12 @@ struct LiveStationSheet: View {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                 } else {
                     // The board itself, here (designer, 2026-11-14: the card was a signpost to another screen): the next
-                    // four, and pulled up (or "More departures") the next twelve, in place.
+                    // twelve; the sheet's size says how many show, pulled up for the rest.
                     TimelineView(.everyMinute) { context in
                         let now = context.date.timeIntervalSince1970 * 1000
-                        let shown = Array(rows.prefix(expanded ? 12 : 4))
-                        let list = VStack(spacing: 0) {
-                            ForEach(shown) { row in boardRow(row, now: now) }
+                        VStack(spacing: 0) {
+                            ForEach(rows) { row in boardRow(row, now: now) }
                         }
-                        if expanded {
-                            ScrollView { list }.frame(maxHeight: 380)
-                        } else {
-                            list
-                        }
-                    }
-                    if rows.count > 4 {
-                        Button(l10n.t(expanded ? "board.fewerDepartures" : "board.moreDepartures")) {
-                            withMotion(.layout, reduceMotion: reduceMotion) { expanded.toggle() }
-                        }
-                        .buttonStyle(LinkButtonStyle())
                     }
                 }
             } else {
@@ -524,12 +382,6 @@ struct LiveStationSheet: View {
                 }
             }
         }
-        // Pulled up: the board grows in place; pulled down: back to the next four.
-        .gesture(DragGesture(minimumDistance: 24).onEnded { value in
-            guard (rows?.count ?? 0) > 4 else { return }
-            if value.translation.height < -40, !expanded { withMotion(.layout, reduceMotion: reduceMotion) { expanded = true } }
-            if value.translation.height > 40, expanded { withMotion(.layout, reduceMotion: reduceMotion) { expanded = false } }
-        })
         .task(id: id) {
             info = nil
             rows = nil
@@ -581,6 +433,7 @@ struct TrainActions<Primary: View>: View {
                 // Following shows on the button itself, filled in the selection ink.
                 MapButtonFace(icon: following ? "eye" : "", pressed: following, symbol: following ? nil : "ellipsis")
             }
+            .clackMenu()
             .accessibilityLabel(l10n.t(following ? "liveMap.following" : "liveMap.moreActions"))
         }
     }

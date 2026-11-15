@@ -16,7 +16,12 @@ struct ExploreScreen: View {
     @Environment(Router.self) private var router
     @Environment(\.colorScheme) private var scheme
     @State private var model = ExploreModel()
+    @Environment(PassportStore.self) private var passport
     @State private var basemap: Bool?
+    /// The size of Explore's sheet.
+    @State private var detent: PresentationDetent = .medium
+    /// Container's bottom on screen (global y): the corner controls lift above the sheet by the difference.
+    @State private var containerBottom: CGFloat = 0
     @State private var now = Date().timeIntervalSince1970 * 1000
     @FocusState private var searchFocused: Bool
 
@@ -34,10 +39,9 @@ struct ExploreScreen: View {
                 if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
             }
             bottomLeft
-            // A station's or train's sheet waits under an open search (it comes back on Close); a pick replaces it.
-            if !model.searching { sheets }
         }
         .clipped()
+        .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { containerBottom = $0 }
         // The map runs edge to edge, under the status bar and the glass tab bar; the controls stay in the safe area.
         .background {
             ZStack {
@@ -135,27 +139,29 @@ struct ExploreScreen: View {
                 now = Date().timeIntervalSince1970 * 1000
             }
         }
-        // Network now: a system sheet over the map, which shows the status meanwhile (late trains in colour).
-        .sheet(isPresented: Binding(get: { model.showNetwork }, set: { model.showNetwork = $0 })) {
-            NetworkPanel(
-                status: model.network, failed: model.networkFailed,
-                onCorridor: { c in
-                    model.showNetwork = false
-                    model.showCorridor(c)
-                },
-                onTrain: { t in
-                    model.showNetwork = false
-                    Task { await model.select(t.id) }
-                },
-                onClose: { model.showNetwork = false }
-            )
-            .task { await model.watchNetwork() }
-            .presentationDetents([.fraction(0.45), .large])
-            .presentationDragIndicator(.visible)
-            .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.45)))
-            .environment(app)
-            .environment(l10n)
+        // One system sheet for everything Explore opens from below (owner, 2026-11-15: "bring this design logic to
+        // our other tabs", after Network now): a train, a train with no position, one not running, a slow stretch,
+        // a station and Network now. A new one replaces what's in it, so the sheet stays up; swiped away, all close.
+        // The map stays usable behind it up to half height. It waits under an open search and comes back on Close.
+        .sheet(isPresented: Binding(
+            get: { model.panelOpen && !model.searching },
+            set: { if !$0, !model.searching { model.closePanels() } }
+        )) {
+            panel
+                .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).minY } action: { model.sheetTop = $0 }
+                .onDisappear { model.sheetTop = nil }
+                .presentationDetents([.fraction(0.32), .medium, .large], selection: $detent)
+                .presentationDragIndicator(.visible)
+                .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+                .environment(app)
+                .environment(l10n)
+                .environment(model)
+                .environment(toaster)
+                .environment(router)
+                .environment(passport)
         }
+        // Another kind of panel opens at the usual half; another train in the same panel keeps the size you chose.
+        .onChange(of: panelKind) { detent = .medium }
         .onChange(of: model.failure) { _, failure in if let failure { toaster.show(l10n.t(failure.key), isError: true) } }
         // A follow or unfollow the server confirmed (not the list loading).
         .haptic(.success, trigger: model.followsConfirmed)
@@ -389,7 +395,15 @@ struct ExploreScreen: View {
             }
             .clack(.mapAttribution).foregroundStyle(Ink.text3).tint(Ink.text3).lineLimit(1)
         }
-        .padding(.leading, Space.m).padding(.bottom, Space.s)
+        .padding(.leading, Space.m).padding(.bottom, Space.s + cornerLift)
+        // Over a sheet pulled past half, the corner has no room: it waits until the sheet comes down.
+        .opacity(cornerLift > 0 && model.sheetTop.map { $0 < containerBottom * 0.45 } == true ? 0 : 1)
+    }
+
+    /// How far the corner controls rise to sit above Explore's sheet.
+    private var cornerLift: CGFloat {
+        guard let top = model.sheetTop else { return 0 }
+        return max(0, containerBottom - top)
     }
 
     /// Map states (brief §6.3): loading, live data down, delayed data, nothing in view, or trains running.
@@ -447,11 +461,40 @@ struct ExploreScreen: View {
 
     // MARK: sheets (one at a time; a selected train hides the others)
 
+    /// What Explore's sheet holds: Network now, or one of the others.
+    @ViewBuilder
+    private var panel: some View {
+        if model.showNetwork {
+            NetworkPanel(
+                status: model.network, failed: model.networkFailed,
+                onCorridor: { c in model.showCorridor(c) },
+                onTrain: { t in
+                    model.showNetwork = false
+                    Task { await model.select(t.id) }
+                },
+                onClose: { model.showNetwork = false }
+            )
+            .task { await model.watchNetwork() }
+        } else {
+            sheets
+        }
+    }
+
+    /// The kind of panel showing, for its starting size.
+    private var panelKind: String {
+        if model.showNetwork { return "network" }
+        if model.selected != nil || model.scheduled != nil { return "train" }
+        if model.notRunning != nil { return "notRunning" }
+        if model.corridor != nil { return "corridor" }
+        if model.stationSheet != nil { return "station" }
+        return ""
+    }
+
     @ViewBuilder
     private var sheets: some View {
         @Bindable var model = model
         if let train = model.selectedTrain, let detail = model.selected {
-            liveTrainSheet(train, detail: detail, collapsed: $model.collapsed)
+            liveTrainSheet(train, detail: detail)
         } else if let notRunning = model.notRunning {
             NotRunningSheet(
                 follow: model.follows.first { $0.trainNumber == notRunning.number && (notRunning.date == nil || $0.serviceDate == notRunning.date) },
@@ -465,7 +508,7 @@ struct ExploreScreen: View {
                 onClose: { model.notRunning = nil }
             )
         } else if let view = model.scheduled {
-            scheduledSheet(view, collapsed: $model.collapsed)
+            scheduledSheet(view)
         } else if let corridor = model.corridor {
             CorridorSheet(corridor: corridor, gone: model.corridorGone, updatedAt: model.network?.at, onClose: { model.closeCorridor() }) { id in
                 model.closeCorridor()
@@ -491,18 +534,22 @@ struct ExploreScreen: View {
         }
     }
 
-    private func liveTrainSheet(_ train: LiveTrain, detail: LiveTrainDetail, collapsed: Binding<Bool>) -> some View {
+    private func liveTrainSheet(_ train: LiveTrain, detail: LiveTrainDetail) -> some View {
         let op = train.operatorId.flatMap { app.operatorsById[$0] }
         let type = train.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let title = (train.productName != nil || op != nil) ? [train.productName ?? op?.name, train.number].compactMap { $0 }.joined(separator: " ") : l10n.t("liveMap.train", ["number": train.number])
         let followed = model.isFollowed(number: train.number, date: train.date)
         let position = ExploreLogic.position(of: train, now: now)
-        return TrainSheet(op: op, title: title, collapsed: collapsed, onClose: { model.deselect() }) {
-            // What's live leads (designer, 2026-11-14): the next stop and when, how late in words, then the route; the
-            // drawing is a strip at the end, so the stops get the room.
+        return TrainSheet(op: op, title: title, onClose: { model.closePanels() }) {
+            // Shown, then told (owner, 2026-11-15: the top had become text and the drawing a strip): the drawing at its
+            // size, where it runs, and one live line, the next stop, when, and how late.
+            art(type: type, operatorId: train.operatorId)
+            if train.origin != nil || train.destination != nil {
+                Text(verbatim: "\(train.origin ?? "…") → \(train.destination ?? "…")").clack(.rowTitle).foregroundStyle(Ink.text)
+            }
             if let next = train.next {
                 HStack(alignment: .firstTextBaseline, spacing: Space.s) {
-                    Text(l10n.t("live.nextStopName", ["name": next])).clack(.rowTitle).foregroundStyle(Ink.text)
+                    Text(l10n.t("live.nextStopName", ["name": next])).clack(.body).foregroundStyle(Ink.text2).lineLimit(1)
                     Spacer(minLength: Space.s)
                     if let eta = train.nextEta?.ms, eta > now {
                         Text(l10n.t("liveMap.inMinutes", ["min": String(max(1, Int(((eta - now) / 60_000).rounded())))]))
@@ -511,33 +558,27 @@ struct ExploreScreen: View {
                     } else {
                         FlapTime(time: train.nextEta?.ms, tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country }), clock: app.settings.clock, style: .text)
                     }
+                    if let delay = train.delayMin, delay > 0 {
+                        Text(Format.delay(delay)).clack(.rowTitle).monospacedDigit()
+                            .foregroundStyle(DelayBand(delayMin: delay, canceled: false).ink)
+                    }
                 }
-            }
-            if let delay = train.delayMin, delay > 0 {
-                Text(l10n.t("passport.minutesLate", count: delay)).clack(.body).fontWeight(.semibold)
-                    .foregroundStyle(DelayBand(delayMin: delay, canceled: false).ink)
-            } else if train.delayMin != nil {
-                Text(l10n.t("delay.on_time")).clack(.body).foregroundStyle(Ink.text2)
-            }
-            if train.origin != nil || train.destination != nil {
-                Text(verbatim: "\(train.origin ?? "…") → \(train.destination ?? "…")").clack(.caption).foregroundStyle(Ink.text2)
-            }
-            if train.origin == nil && train.destination == nil && train.next == nil {
+            } else if train.origin == nil && train.destination == nil {
                 Text(l10n.t("liveMap.detailsLoading")).clack(.caption).foregroundStyle(Ink.text2)
             }
+        } content: {
+            StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
+            if case .list(let list) = model.stops { LateReasons(stops: list) }
+            // How the position is known and how fresh, under the stops: worth having, not worth leading with.
             FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
                 switch position {
                 case .estimated: StatusLine(.estimated, l10n.t("liveMap.posEstimated"))
                 case .old(let minutes): StatusLine(.stale, l10n.t("liveMap.posOld", ["min": String(minutes)]))
                 case .gps: StatusLine(.live, l10n.t("liveMap.posGps"))
                 }
-                if !collapsed.wrappedValue, !train.estimated { Speedometer(kmh: train.speedKmh, at: train.at.ms, now: now) }
+                if !train.estimated { Speedometer(kmh: train.speedKmh, at: train.at.ms, now: now) }
             }
             Text(l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: train.at.ms, now: now)])).clack(.caption).foregroundStyle(Ink.text2)
-            if case .list(let list) = model.stops { LateReasons(stops: list) }
-            if !collapsed.wrappedValue { art(type: type, operatorId: train.operatorId) }
-        } content: {
-            StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
             if detail.trip == nil {
                 // With the feed's own stops it can still be added, as a trip from live data.
@@ -566,7 +607,7 @@ struct ExploreScreen: View {
         }
     }
 
-    private func scheduledSheet(_ view: TrainView, collapsed: Binding<Bool>) -> some View {
+    private func scheduledSheet(_ view: TrainView) -> some View {
         let op = view.operatorId.flatMap { app.operatorsById[$0] }
         let type = view.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let stops = view.stops ?? []
@@ -581,15 +622,15 @@ struct ExploreScreen: View {
         else if let departs, departs > now { status = l10n.t("train.statusDeparts", ["time": Format.time(departs, tz: Format.zone(stationId: first?.stationId), clock: app.settings.clock)]) }
         else { status = l10n.t("train.statusNoPosition") }
         let followed = model.isFollowed(number: view.number, date: view.date)
-        return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), collapsed: collapsed, onClose: { model.closeScheduled() }) {
-            if !collapsed.wrappedValue { art(type: type, operatorId: view.operatorId) }
+        return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), onClose: { model.closePanels() }) {
+            art(type: type, operatorId: view.operatorId)
             if let first, let last { Text(verbatim: "\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
             StatusLine(allCanceled ? .cancelled : .arrived, status)
-            // Live times need no note; timetable ones say so.
-            if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
-            LateReasons(stops: view.stops ?? [])
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
+            LateReasons(stops: view.stops ?? [])
+            // Live times need no note; timetable ones say so.
+            if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
         } actions: {
             TrainActions(following: followed, onFollow: {
@@ -605,8 +646,9 @@ struct ExploreScreen: View {
     /// The train's picture and name, or that its type isn't known.
     private func art(type: TrainType?, operatorId: String?) -> some View {
         VStack(alignment: .leading, spacing: Space.xxs) {
-            // A strip, not a poster: the stop list gets the room (designer, 2026-11-14: two and a half stops showed).
-            TrainPicture(type: type, operatorId: operatorId, height: 32)
+            // At its size again (owner, 2026-11-15: "the train icon didn't need to get smaller"); the system sheet's
+            // sizes give the stop list its room.
+            TrainPicture(type: type, operatorId: operatorId, height: 56)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
     }

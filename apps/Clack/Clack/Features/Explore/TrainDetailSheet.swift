@@ -89,7 +89,7 @@ struct TrainDetailSheet: View {
         }
         if let first, let last { Text(verbatim: "\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
         VStack(alignment: .leading, spacing: Space.xxs) {
-            TrainPicture(type: type, operatorId: view.operatorId, height: 32)
+            TrainPicture(type: type, operatorId: view.operatorId, height: 56)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
         // Live times need no note; timetable ones say so.

@@ -93,6 +93,15 @@ extension PrimitiveButtonStyle where Self == GlassControlStyle {
     static func glassControl(prominent: Bool = false) -> GlassControlStyle { GlassControlStyle(prominent: prominent) }
 }
 
+/// A `Menu` drawn only as its own label (owner, 2026-11-15: a half-see-through yellow ring around the "…" and the
+/// Settings choices). A menu with a custom label took the app's accent tint, which is yellow in dark mode, as a
+/// highlight around it; its items read in ink.
+extension View {
+    func clackMenu() -> some View {
+        menuStyle(.button).buttonStyle(.plain).tint(Ink.text)
+    }
+}
+
 /// An inline action in a line of text or under a card: the system's borderless button in accent ink, at least 44 pt
 /// high so it is as easy to hit as any button (DESIGN §16).
 struct LinkButtonStyle: PrimitiveButtonStyle {

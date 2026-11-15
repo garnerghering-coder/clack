@@ -315,52 +315,6 @@ public nonisolated enum ExploreLogic {
         return q.count >= 2 && !q.allSatisfy(\.isNumber)
     }
 
-    // MARK: the train sheet
-
-    public enum SheetSize: Int, Sendable { case small, mid, full }
-
-    public struct SheetTargets: Equatable, Sendable {
-        public var small: Double
-        public var mid: Double
-        public var full: Double
-
-        public subscript(_ size: SheetSize) -> Double {
-            switch size {
-            case .small: small
-            case .mid: mid
-            case .full: full
-            }
-        }
-
-        public init(small: Double, mid: Double, full: Double) {
-            self.small = small
-            self.mid = mid
-            self.full = full
-        }
-    }
-
-    /// The height each size settles at, from the room there is and what the sheet holds (`targets`, `:1011-1018`).
-    public static func sheetTargets(room: Double, content: Double, head: Double, foot: Double) -> SheetTargets {
-        let full = room - 24
-        let mid = min(content, min(room * 0.74, 680), full)
-        let small = min(head + foot + 120, mid)
-        return SheetTargets(small: small, mid: mid, full: full)
-    }
-
-    /// Where a drag ends: the nearest size, but a flick (faster than half a point a millisecond) goes at least one
-    /// size on from where the drag began.
-    public static func settle(height: Double, velocity: Double, from: SheetSize, targets: SheetTargets) -> SheetSize {
-        let order: [SheetSize] = [.small, .mid, .full]
-        let nearest = order.reduce(SheetSize.small) { a, b in abs(targets[b] - height) < abs(targets[a] - height) ? b : a }
-        let start = from.rawValue
-        let near = nearest.rawValue
-        let to: Int
-        if velocity < -0.5 { to = max(near, min(2, start + 1)) }
-        else if velocity > 0.5 { to = min(near, max(0, start - 1)) }
-        else { to = near }
-        return order[to]
-    }
-
     // MARK: stops
 
     /// The stop list's per-stop facts: the time to show, how late it is, and which stop is next.

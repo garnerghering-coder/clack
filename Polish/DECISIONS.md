@@ -309,3 +309,14 @@ Left in build 73, and why:
 | B76.3 | "x of y" under a locked medal | Rounded to the nearest: 0.96 lengths of Sweden read "1 of 1", unearned | Never rounded up to an unreached target; small fractions keep a decimal ("0.9 of 1") | `PassportLogic.progressValue`, used by Passport and Milestones | `Int(value.rounded())` |
 | B76.4 | Journey duration | The row counted the reported delay, the page didn't ("8h 18m" vs "8h 17m") | Both use `TripsLogic.expected` | `TripsLogic.journeySummary` | Actual else scheduled |
 | B76.5 | Trip map framing (Release check) | The route ran up under the status bar and the "…" and share buttons: the map's insets were passed but never used | The fit keeps clear of them (`max` of the old padding and the inset plus `Space.m`) | `RouteMapRepresentable.fitPadding` | Use `MapPadding` alone |
+
+## Build 77 (owner, 2026-11-15: "bring this design logic to our other tabs")
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B77.1 | Explore's panels (train, train with no position, not running, slow stretch, station, Network now) | Hand-made bottom cards: a dragged three-size train sheet (`ExploreLogic.sheetTargets`/`settle`), glass cards, a pull-to-expand station card; Network alone a system sheet | One system sheet for all of them, sizes 32 %, half and full, the map usable behind it up to half; a new panel swaps what's in it; swiped away, all close; the map's corner controls rise above it | `ExploreScreen` (`.sheet`, `panel`, `panelKind`, `cornerLift`), `ExploreModel.panelOpen/closePanels/sheetTop`, `TrainSheet` and `LiveSheetCard` as sheet content; the old sizing logic and its tests removed | Revert the commit |
+| B77.2 | Train sheet's top | Operator header, then next stop, delay in words, route, position, speed, updated, reasons, and a 32 pt drawing at the end | Drawing at 56 pt first, the route, one live line (next stop, countdown, "+4 min" in its ink); position, speed, updated and reasons under the stops | `ExploreScreen.liveTrainSheet` / `scheduledSheet` / `art`; `TrainDetailSheet` 56 pt | The commit |
+| B77.3 | Menus with their own label ("…" on a train, Settings choices, share) | Took the accent tint (yellow in dark mode) as a see-through ring | Drawn as their label alone, items in ink; the lint refuses a `Menu` without it (a toolbar menu marked allowed) | `View.clackMenu()` in `Controls.swift`, `lint_design.py` | Drop `.clackMenu()` |
+| B77.4 | Station sheet's board tile | "Full board" / "Hela tavlan" | "Timeboard" / "Tidtavla" | `board.fullBoard` | Old strings |
+| B77.5 | Trips card map | A glass "Route preview" / "Route" / position tag on the map | The map alone; the status line says live or estimated | `FeaturedCard.card` | The commit |
+| B77.6 | Trip page "Estimated route" | A glass box over the map | A caption line under the map | `TripDetailScreen.content` | The commit |
