@@ -86,3 +86,14 @@ struct SeatTests {
         #expect(with.contains(#""coach":"4""#) && with.contains(#""seat":"23""#))
     }
 }
+
+/// Build 81: the kind of train on any trip, set and cleared.
+struct KindPatchTests {
+    @Test func aKindIsSentAndNullGoesBackToTheRules() throws {
+        let set = String(data: try JSONEncoder().encode(LegPatch(product: .some("night"))), encoding: .utf8)
+        #expect(set == #"{"product":"night"}"#)
+        let cleared = String(data: try JSONEncoder().encode(LegPatch(product: .some(nil))), encoding: .utf8)
+        #expect(cleared == #"{"product":null}"#)
+        #expect(!LegPatch(product: .some(nil)).isEmpty)
+    }
+}

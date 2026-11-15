@@ -26,7 +26,7 @@ struct EditManualTripSheet: View {
     @State private var error: String?
     @FocusState private var numberFocused: Bool
 
-    private static let categories = ["intercity", "regional", "commuter", "night", "heritage"]
+    private static let categories = ["high_speed", "intercity", "regional", "commuter", "night", "heritage"]
     private static let utc = TimeZone(identifier: "UTC") ?? .gmt
 
     var body: some View {

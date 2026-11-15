@@ -1,0 +1,1 @@
+ALTER TABLE `legs` ADD `user_product` text;

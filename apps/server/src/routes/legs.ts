@@ -1,4 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
+import { isProduct, setUserProduct } from '../legs/product.js';
 import type { Db } from '../db/client.js';
 import { cleanPlatform, cleanSeatField, createLeg, createManualLeg, deleteLeg, editManualLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, setUserPlatforms, type CreateLegInput, type ManualLegEdit, type ManualLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
@@ -65,9 +66,14 @@ export const legRoutes =
     // off when no source has one (409 when one does). Absent fields stay as they are; each accepts null to clear.
     app.patch<{
       Params: { id: string };
-      Body: { trainType?: string | null; coach?: string | null; seat?: string | null; depPlatform?: string | null; arrPlatform?: string | null } & ManualLegEdit;
+      Body: { trainType?: string | null; coach?: string | null; seat?: string | null; depPlatform?: string | null; arrPlatform?: string | null; product?: string | null } & ManualLegEdit;
     }>('/legs/:id', async (req, reply) => {
       const body = req.body ?? {};
+      // The kind of train, on any trip (owner, 2026-11-15): the owner's choice wins over the rules; null goes back to them.
+      if (body.product !== undefined) {
+        if (body.product !== null && !isProduct(body.product)) return reply.code(400).send({ error: 'Unknown kind of train' });
+        if (!setUserProduct(db, req.userId, req.params.id, body.product)) return reply.code(404).send({ error: 'not found' });
+      }
       // A hand-added trip's day, times, operator, number and kind (editManualLeg says what it allows).
       const manual: ManualLegEdit = {};
       for (const k of ['date', 'dep', 'arr', 'operatorId', 'trainNumber', 'category'] as const) if (body[k] !== undefined) (manual as Record<string, unknown>)[k] = body[k];

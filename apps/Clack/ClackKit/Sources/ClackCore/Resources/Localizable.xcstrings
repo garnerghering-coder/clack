@@ -24929,6 +24929,23 @@
         }
       }
     },
+    "manual.kinds.high_speed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-speed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snabbtåg"
+          }
+        }
+      }
+    },
     "edit.stationsStay" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -25945,6 +25962,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "enligt tidtabell {{time}}"
+          }
+        }
+      }
+    },
+    "detail.kindMenu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kind of train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tågslag"
+          }
+        }
+      }
+    },
+    "detail.kindAuto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiskt"
+          }
+        }
+      }
+    },
+    "detail.kindSaved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kind of train saved"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tågslaget sparat"
           }
         }
       }

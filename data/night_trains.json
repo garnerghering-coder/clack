@@ -1,0 +1,15 @@
+{
+  "_source": "Night trains: services sold as night trains (sleeper or couchette), by train number. Owner's rule (2026-11-15): a late-evening seated train is not one. Each list says where it comes from; Sweden's are also taken live from GTFS Sverige 3 (route_type 105) and Trafikverket's product names ('SJ Nattåg', 'EuroNight'), see apps/server/src/legs/product.ts.",
+  "NO": {
+    "_source": "Entur Journey Planner v3: lines(transportModes: rail) → serviceJourneys with transportSubmode 'nightRail', their privateCode (train number); fetched 2026-11-15. Vy F4 Oslo S–Bergen, Go-Ahead F5 Sørtoget, SJ Nord F6 Dovrebanen and F7 Nordlandsbanen.",
+    "numbers": ["605", "606", "80605", "80606", "725", "726", "405", "406", "80405", "80406", "475", "476"]
+  },
+  "SE": {
+    "_source": "Entur Journey Planner v3, as above: Snälltåget's 'NT Berlin Hbf' line, transportSubmode 'nightRail', fetched 2026-11-15; GTFS Sverige 3 (route_type 105 'Sleeper Rail') for SJ's night trains, 2026-11-15; Trafikverket's ProductInformation 'SJ Nattåg' and 'RDC EuroNight' in the observed record (2026-10/11).",
+    "numbers": ["1", "2", "67", "68", "70", "71", "91", "92", "93", "94", "3992", "3993", "3994", "3995", "20", "21", "300", "301", "304", "305", "3900", "3901", "3902", "3903", "3904", "3905", "10300", "10301", "13900", "13901", "344", "345", "13471"]
+  },
+  "DK": {
+    "_source": "No Danish source marks a train as a night train (Rejseplanen's GTFS has no sleeper type); none are listed. Snälltåget's Berlin trains count by their number wherever they run.",
+    "numbers": []
+  }
+}

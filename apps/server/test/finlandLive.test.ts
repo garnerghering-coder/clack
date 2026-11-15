@@ -224,7 +224,7 @@ describe('three feeds on one map', () => {
     } finally {
       await app.close();
     }
-  });
+  }, 15_000); // An integration test over the whole app (about 3 s alone; over 5 s under the full parallel run).
 
   it('marks a Finnish train as yours by its trip, or by its number when the timetable lacks the trip', () => {
     const t = (extra: Partial<LiveTrain>): LiveTrain => ({

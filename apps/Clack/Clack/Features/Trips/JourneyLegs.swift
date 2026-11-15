@@ -141,7 +141,7 @@ struct JourneyTrainCard: View {
         let ends = TimePair.ends(leg)
         VStack(alignment: .leading, spacing: Space.m) {
             HStack(alignment: .top) {
-                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, category: leg.category) {
+                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, category: leg.kind) {
                     if let live = leg.live, LiveRules.isFresh(live, now: now), !TripsLogic.reached(leg, now: now).arrived {
                         LiveStatus(live: live, now: now)
                     } else {

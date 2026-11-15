@@ -29,16 +29,14 @@ export const isReplacementBus = (tripId: string) => /:ServiceJourney:B/i.test(tr
 
 /**
  * Category from the line: L = local (commuter), R/RE/RX = regional, F = long distance (intercity), FLY = airport
- * express (regional, frequent), and a long-distance trip leaving late and arriving after 05:00 the next day = night.
+ * express (regional, frequent). Night trains are not told from the clock (owner, 2026-11-15: a late seated train isn't
+ * one): legs/product.ts marks them by Entur's own nightRail, by train number. The times stay in the signature for callers.
  */
-export function norwegianCategory(line: string, depSec: number | null, arrSec: number | null): string {
+export function norwegianCategory(line: string, _depSec: number | null, _arrSec: number | null): string {
   const l = line.toUpperCase();
   if (l.startsWith('FLY')) return 'regional';
   if (/^L\d/.test(l)) return 'commuter';
-  if (/^F\d/.test(l)) {
-    if (depSec !== null && arrSec !== null && depSec >= 20 * 3600 && arrSec - depSec >= 6 * 3600) return 'night';
-    return 'intercity';
-  }
+  if (/^F\d/.test(l)) return 'intercity';
   return 'regional';
 }
 

@@ -6,7 +6,7 @@ import { ON_TIME_MAX_DELAY_MIN, punctualityBand, type Co2Comparison } from '@cla
 import type { Db } from '../db/client.js';
 import { legStops, legs, operators, stations, timetableTrips } from '../db/schema.js';
 import { readDataFile } from '../dataFiles.js';
-import { productOf } from '../search/timetable.js';
+import { classifyProduct, kindLists } from '../legs/product.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { withLogo } from '../import/brands.js';
 import { COUNTRIES, isCountryCode, type CountryCode } from '../lib/countries.js';
@@ -664,6 +664,7 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
   const byLeg = new Map<string, (PassportStop & { tz: string })[]>();
   for (const s of stops)
     if (s.role === 'board' || s.role === 'through' || s.role === 'alight') (byLeg.get(s.legId) ?? byLeg.set(s.legId, []).get(s.legId)!).push(s);
+  const lists = kindLists(db);
   return rows.map(({ l, routeType }) => ({
     id: l.id,
     journeyId: l.journeyId,
@@ -672,7 +673,11 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
     schedDep: l.schedDep!.getTime(),
     distanceM: l.distanceM ?? 0,
     operatorId: l.operatorId,
-    product: productOf(routeType ?? '', l.category ?? 'regional'),
+    // One kind for every screen (legs/product.ts): the owner's choice, else the feeds' and the sourced lists'.
+    product: classifyProduct(
+      { country: byLeg.get(l.id)?.[0]?.country ?? null, operatorId: l.operatorId, trainNumber: l.trainNumber, category: l.category, routeType: routeType ?? null, userProduct: l.userProduct },
+      lists,
+    ).product,
     category: l.category,
     trainType: l.trainType,
     trainNumber: l.trainNumber,

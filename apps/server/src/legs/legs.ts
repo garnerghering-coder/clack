@@ -5,6 +5,7 @@ import { and, asc, desc, eq, sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { legStops, legs, operators, stations, timetableTrips } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
+import { classifyProduct, kindLists, routeTypes } from './product.js';
 import { productOf, tripStops, type TripStop } from '../search/timetable.js';
 import { typicalTrainType } from './trainTypes.js';
 import { regroupJourneys } from './journeys.js';
@@ -392,6 +393,7 @@ const legColumns = {
   dataQuality: legs.dataQuality,
   trainNumber: legs.trainNumber,
   category: legs.category,
+  userProduct: legs.userProduct,
   serviceDate: legs.serviceDate,
   schedDep: legs.schedDep,
   schedArr: legs.schedArr,
@@ -431,8 +433,10 @@ export function arrivalHistoryOf(db: Db, leg: { trainNumber: string | null; serv
   return punctuality(db, { trainNumber: leg.trainNumber, stationId: leg.destStationId, before: leg.serviceDate });
 }
 
-function attachRefs<T extends { id: string; operatorId: string | null; originStationId: string; destStationId: string; trainNumber: string | null; serviceDate: string | null }>(db: Db, rows: T[]) {
+function attachRefs<T extends { id: string; operatorId: string | null; originStationId: string; destStationId: string; trainNumber: string | null; serviceDate: string | null; category: string | null; userProduct: string | null; timetableTripKey: string | null }>(db: Db, rows: T[]) {
   const ops = new Map(db.select().from(operators).all().map((o) => [o.id, o]));
+  const lists = kindLists(db);
+  const types = routeTypes(db, rows.map((r) => r.timetableTripKey));
   const ids = [...new Set(rows.flatMap((r) => [r.originStationId, r.destStationId]))];
   const st = new Map(
     ids.length
@@ -453,8 +457,16 @@ function attachRefs<T extends { id: string; operatorId: string | null; originSta
       where ls.leg_id in (${sql.join(chunk.map((x) => sql`${x}`), sql`, `)}) group by ls.leg_id, s.country`))
       for (let k = 0; k < c.n; k++) (countries.get(c.id) ?? countries.set(c.id, []).get(c.id)!).push(c.country);
   }
-  return rows.map((r) => ({
+  return rows.map((r) => {
+    // The kind of train, the same everywhere (legs/product.ts), and whether it is the owner's own choice.
+    const kind = classifyProduct(
+      { country: st.get(r.originStationId)?.country ?? null, operatorId: r.operatorId, trainNumber: r.trainNumber, category: r.category, routeType: (r.timetableTripKey && types.get(r.timetableTripKey)) || null, userProduct: r.userProduct },
+      lists,
+    );
+    return {
     ...r,
+    product: kind.product,
+    productSource: kind.source,
     operator: r.operatorId && ops.get(r.operatorId) ? withLogo(ops.get(r.operatorId)!) : null,
     origin: st.get(r.originStationId) ?? null,
     destination: st.get(r.destStationId) ?? null,
@@ -462,7 +474,8 @@ function attachRefs<T extends { id: string; operatorId: string | null; originSta
     /** The change rule's tier of the station the leg starts at (hub / mid / default), and the train's country. */
     originTier: tierOf(r.originStationId),
     trainCountry: countryOfStops(countries.get(r.id) ?? []),
-  }));
+    };
+  });
 }
 
 export function listLegs(db: Db, userId: string) {

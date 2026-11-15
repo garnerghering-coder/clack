@@ -27,10 +27,10 @@ describe("Rejseplanen's ids and names", () => {
     expect(cleanDanishName('København H')).toBe('København H');
   });
 
-  it('calls the S-tog commuter, IC intercity (night when late and long), the rest regional', () => {
+  it('calls the S-tog commuter, IC intercity (late and long too: a seated train), the rest regional', () => {
     expect(danishCategory('109', 'A', 5 * 3600, 6 * 3600)).toBe('commuter');
     expect(danishCategory('2', 'IC', 8 * 3600, 11 * 3600)).toBe('intercity');
-    expect(danishCategory('2', 'RJ', 21 * 3600, 33 * 3600)).toBe('night');
+    expect(danishCategory('2', 'RJ', 21 * 3600, 33 * 3600)).toBe('intercity');
     expect(danishCategory('2', 'RE', 8 * 3600, 9 * 3600)).toBe('regional');
     expect(danishCategory('2', '930R', 8 * 3600, 9 * 3600)).toBe('regional');
   });

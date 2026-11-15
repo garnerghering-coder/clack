@@ -48,7 +48,7 @@ struct JourneyNowSection: View {
             let l = detail.leg
             VStack(alignment: .leading, spacing: Space.m) {
                 Text(l10n.t("journey.now")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
+                ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.kind) {
                     if TripDetailLogic.isTracking(shown), let shown {
                         LiveStatus(live: shown, now: now)
                     }

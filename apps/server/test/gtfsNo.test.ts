@@ -12,11 +12,11 @@ describe('Norway timetable import', () => {
     expect(isReplacementBus('SJN:ServiceJourney:B42-A2_54592-R')).toBe(true);
     expect(isReplacementBus('VYG:ServiceJourney:135_443135-R')).toBe(false);
   });
-  it('categorises by line, with overnight long-distance trains as night trains', () => {
+  it('categorises by line; night trains are never told from the clock (owner, 2026-11-15)', () => {
     expect(norwegianCategory('L1', 8 * 3600, 9 * 3600)).toBe('commuter');
     expect(norwegianCategory('RE20', 8 * 3600, 11 * 3600)).toBe('regional');
     expect(norwegianCategory('F4', 8 * 3600, 15 * 3600)).toBe('intercity');
-    expect(norwegianCategory('F5', 22 * 3600, 31 * 3600)).toBe('night');
+    expect(norwegianCategory('F5', 22 * 3600, 31 * 3600)).toBe('intercity');
     expect(norwegianCategory('FLY1', 8 * 3600, 9 * 3600)).toBe('regional');
   });
   it('reuses a station that already exists, and drops the "stasjon" in names', () => {

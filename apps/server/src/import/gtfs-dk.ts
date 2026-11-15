@@ -52,16 +52,13 @@ export const UIC_COUNTRY: Record<string, string> = { '86': 'DK', '74': 'SE', '76
 export const cleanDanishName = (s: string) => s.replace(/\s+St\.?$/i, '').trim();
 
 /**
- * Category from the product: the S-tog is commuter; DSB's IC, ICL, ECE and RJ are intercity (night when it leaves at
- * 20:00 or later and runs six hours or more, as for Norway); everything else (RE, Vores Tog, Lokaltog, Midttrafik, NT)
- * is regional. Pure.
+ * Category from the product: the S-tog is commuter; DSB's IC, ICL, ECE and RJ are intercity; everything else (RE,
+ * Vores Tog, Lokaltog, Midttrafik, NT) is regional. No Danish train is a night train by the clock (owner, 2026-11-15:
+ * DSB's late ICs to Hamburg and Aalborg are seated trains); legs/product.ts lists the real ones. Pure.
  */
-export function danishCategory(routeType: string, product: string, depSec: number | null, arrSec: number | null): string {
+export function danishCategory(routeType: string, product: string, _depSec: number | null, _arrSec: number | null): string {
   if (routeType === '109') return 'commuter';
-  if (INTERCITY_PRODUCTS.has(product.toUpperCase())) {
-    if (depSec !== null && arrSec !== null && depSec >= 20 * 3600 && arrSec - depSec >= 6 * 3600) return 'night';
-    return 'intercity';
-  }
+  if (INTERCITY_PRODUCTS.has(product.toUpperCase())) return 'intercity';
   return 'regional';
 }
 

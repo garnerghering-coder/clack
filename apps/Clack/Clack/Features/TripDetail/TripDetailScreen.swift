@@ -247,6 +247,20 @@ struct TripDetailScreen: View {
         }
     }
 
+    /// The kinds of train, as the server knows them (legs/product.ts).
+    private static let kinds = ["high_speed", "intercity", "night", "regional", "commuter", "heritage"]
+
+    /// The owner's kind for this trip; nil goes back to the rules.
+    private func setKind(_ product: String?) async {
+        Usage.shared.count(.feature, "trip.kind")
+        if let updated = try? await app.client.updateLeg(id, LegPatch(product: .some(product))) {
+            leg = updated
+            toaster.show(l10n.t("detail.kindSaved"))
+        } else {
+            toaster.show(l10n.t("common.couldntSave"), isError: true)
+        }
+    }
+
     private func refresh() async {
         busy = true
         if let updated = try? await app.client.refreshLeg(id) {
@@ -483,7 +497,7 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let m = moment(detail, now: now)
         let live = m.shown, tracking = m.tracking, status = m.status
-        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
+        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.kind) {
             // Before and during the ride the status card below says the status in big type; the header doesn't say
             // it again (polish pass 1: "Upcoming" over "Departs in 5d 8h", "Live" over "Arrives 10:55").
             if m.stage == .after || l.canceled {
@@ -800,6 +814,19 @@ struct TripDetailScreen: View {
             }
             if l.dataQuality == .manual {
                 Button { editingManual = true } label: { Label(l10n.t("detail.menuEdit"), systemImage: "pencil") }
+            }
+            // The kind of train, on any trip (owner, 2026-11-15): Automatic follows the rules, a choice wins everywhere.
+            // design-lint: allow menu (a submenu of the toolbar's menu: the system draws it)
+            Menu {
+                Picker(l10n.t("detail.kindMenu"), selection: Binding(
+                    get: { l.productSource == "user" ? (l.product ?? "") : "" },
+                    set: { picked in Task { await setKind(picked.isEmpty ? nil : picked) } }
+                )) {
+                    Text(l10n.t("detail.kindAuto")).tag("")
+                    ForEach(Self.kinds, id: \.self) { k in Text(l10n.t("products.\(k)")).tag(k) }
+                }
+            } label: {
+                Label(l10n.t("detail.kindMenu"), systemImage: "tram")
             }
             // The commute (user test 2026-11-07): the same train on another day, the search filled in.
             if !service.isEmpty, l.trainNumber != nil, let date = l.serviceDate {

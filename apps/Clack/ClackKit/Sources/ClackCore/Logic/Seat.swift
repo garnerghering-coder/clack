@@ -51,9 +51,12 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
     public var operatorId: String??
     public var trainNumber: String??
     public var category: String?
+    /// The kind of train on any trip (the owner's choice; null goes back to the rules).
+    public var product: String??
 
     public init(trainType: String?? = nil, coach: String?? = nil, seat: String?? = nil, depPlatform: String?? = nil, arrPlatform: String?? = nil,
-                date: String? = nil, dep: String? = nil, arr: String? = nil, operatorId: String?? = nil, trainNumber: String?? = nil, category: String? = nil) {
+                date: String? = nil, dep: String? = nil, arr: String? = nil, operatorId: String?? = nil, trainNumber: String?? = nil, category: String? = nil, product: String?? = nil) {
+        self.product = product
         self.trainType = trainType
         self.coach = coach
         self.seat = seat
@@ -70,7 +73,7 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
     /// The server refuses an empty patch ("nothing to change").
     public var isEmpty: Bool {
         trainType == nil && coach == nil && seat == nil && depPlatform == nil && arrPlatform == nil
-            && date == nil && dep == nil && arr == nil && operatorId == nil && trainNumber == nil && category == nil
+            && date == nil && dep == nil && arr == nil && operatorId == nil && trainNumber == nil && category == nil && product == nil
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -87,7 +90,8 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
         if let operatorId { try c.encode(operatorId, forKey: .operatorId) }
         if let trainNumber { try c.encode(trainNumber, forKey: .trainNumber) }
         if let category { try c.encode(category, forKey: .category) }
+        if let product { try c.encode(product, forKey: .product) }
     }
 
-    private enum CodingKeys: String, CodingKey { case trainType, coach, seat, depPlatform, arrPlatform, date, dep, arr, operatorId, trainNumber, category }
+    private enum CodingKeys: String, CodingKey { case trainType, coach, seat, depPlatform, arrPlatform, date, dep, arr, operatorId, trainNumber, category, product }
 }

@@ -213,6 +213,9 @@ export const legs = sqliteTable(
     geometry: text('geometry'),
     isEstimatedGeometry: integer('is_estimated_geometry', { mode: 'boolean' }).notNull().default(false),
     /** Rolling stock id from data/train_types.json. */
+    /** The kind of train the owner chose (high_speed, intercity, night, regional, commuter, heritage); wins over the
+     * rules in legs/product.ts. Null: worked out from the feeds. */
+    userProduct: text('user_product'),
     trainType: text('train_type'),
     /** typical (guessed from operator/product) | composition (Trafikverket's planned coach order) | user (the owner's choice) */
     trainTypeSource: text('train_type_source'),

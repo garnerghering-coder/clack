@@ -279,6 +279,13 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     public let trainNumber: String?
     /// `intercity`, `regional`, `commuter`, `heritage`, `night`, and for manual trips `high_speed`.
     public let category: String?
+    /// The kind of train, the same on every screen and in the Passport (server `legs/product.ts`): the owner's choice,
+    /// else the feeds' and the sourced lists'. Nil from an older server.
+    public var product: String? = nil
+    /// `user` when the owner chose it; `feed` or `rule` otherwise.
+    public var productSource: String? = nil
+    /// What to show as the kind: `product`, else (an older server) `category`.
+    public var kind: String? { product ?? category }
     /// YYYY-MM-DD.
     public let serviceDate: String?
     public let schedDep: Instant?
