@@ -42,7 +42,14 @@ struct NetworkLogicTests {
         let near = try leg("d", depMin: 60, to: "Hässleholm C")
         let out = NetworkLogic.affected([fine, late, gone, near], status: status(disruptionAt: "Lund C"))
         #expect(out.map(\.leg.id) == ["b", "c", "d"])
-        #expect(out.map(\.why) == [.late(12), .canceled, .near("Hässleholm C")])
+        #expect(out.map(\.why) == [.late(12), .canceled, .near("Hässleholm C", .disruption("x"))])
         #expect(NetworkLogic.affected([fine], status: status()).isEmpty)
+    }
+
+    @Test func aTrainsTroubleNamesWhatItIsSoTappingCanShowIt() throws {
+        let corridor = NetworkStatus.Corridor(stations: ["Lund C", "Malmö C"], country: "SE", trains: 3, late: 2, medianDelay: 12, maxDelay: 15, lat: 0, lon: 0, causes: [], trainIds: [])
+        let status = NetworkStatus(at: now, lateMin: 10, countries: [:], corridors: [corridor], late: [], disruptions: nil)
+        let out = NetworkLogic.affected([try leg("e", depMin: 60, to: "Malmö C")], status: status)
+        #expect(out.map(\.why) == [.near("Malmö C", .corridor("Lund C|Malmö C"))])
     }
 }

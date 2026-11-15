@@ -15,7 +15,7 @@ const event = (over: Record<string, unknown> = {}) => ({
   Deleted: false,
   Geometry: { WGS84: 'POINT (57.81 12.25)' },
   EventSection: [{ FromLocation: { Signature: 'G' }, ToLocation: { Signature: 'A' } }],
-  TrafficImpact: [{ PublicMessage: { Header: 'Banarbete Göteborg–Alingsås' } }],
+  TrafficImpact: [{ PublicMessage: { Header: 'Banarbete Göteborg–Alingsås', Description: 'Ett spår avstängt mellan Göteborg och Alingsås.\n' } }],
   ...over,
 });
 const places: Record<string, { name: string; point: { id: string; lat: number; lon: number } }> = {
@@ -33,7 +33,7 @@ describe('disruptions: Sweden', () => {
 
   it('track work is code 16, drawn along its stretch with its two ends named', () => {
     const [d] = se([event()]);
-    expect(d).toMatchObject({ id: 'se:O1', kind: 'works', places: ['Göteborg C', 'Alingsås'], lines: ['line'], title: { sv: 'Banarbete Göteborg–Alingsås' } });
+    expect(d).toMatchObject({ id: 'se:O1', kind: 'works', places: ['Göteborg C', 'Alingsås'], lines: ['line'], title: { sv: 'Banarbete Göteborg–Alingsås' }, detail: { sv: 'Ett spår avstängt mellan Göteborg och Alingsås.' } });
     expect(se([event({ EventType: { Description: 'Spårväxel', EventTypeCode: '20' } })])[0]!.kind).toBe('incident');
   });
 
@@ -83,13 +83,14 @@ describe('disruptions: Norway', () => {
     Progress: 'open',
     ValidityPeriod: [{ StartTime: iso(now - H) }],
     Summary: [{ value: 'Fewer tracks: Skøyen', lang: 'EN' }, { value: 'Færre spor: Skøyen', lang: 'NO' }],
+    Description: [{ value: 'Fewer trains between Oslo S and Skøyen.', lang: 'EN' }],
     Affects: { Networks: { AffectedNetwork: [{ AffectedLine: [{ LineRef: { value: line }, Routes: [{ StopPoints: stops.map(stop) }] }] }] } },
   });
 
   it('keeps train operators\' situations, pinned at the station named most, in both languages', () => {
     const out = parseSituations([sx('VYG', 'VYG:Line:L1', ['NSR:StopPlace:152', 'NSR:StopPlace:288', 'NSR:StopPlace:152'])] as never, now, (id) => stations[id] ?? null);
     expect(out).toHaveLength(1);
-    expect(out[0]).toMatchObject({ country: 'NO', kind: 'incident', places: ['Skøyen'], title: { en: 'Fewer tracks: Skøyen', no: 'Færre spor: Skøyen' } });
+    expect(out[0]).toMatchObject({ country: 'NO', kind: 'incident', places: ['Skøyen'], title: { en: 'Fewer tracks: Skøyen', no: 'Færre spor: Skøyen' }, detail: { en: 'Fewer trains between Oslo S and Skøyen.' } });
   });
 
   it('leaves out buses, even at a stop we know', () => {
@@ -118,7 +119,7 @@ describe('disruptions: Sweden, planned track work from the announcements', () =>
   it('becomes track work drawn between its two ends', () => {
     const out = parseWorksStretches([{ fromSig: 'A', toSig: 'G', trains: 3, at: t0 }], (s) => places[s] ?? null, () => 'line');
     expect(out).toEqual([
-      expect.objectContaining({ id: 'se:works:A|G', kind: 'works', title: { sv: 'Banarbete' }, places: ['Alingsås', 'Göteborg C'], lines: ['line'] }),
+      expect.objectContaining({ id: 'se:works:A|G', kind: 'works', title: null, places: ['Alingsås', 'Göteborg C'], lines: ['line'] }),
     ]);
     expect(parseWorksStretches([{ fromSig: 'A', toSig: 'X', trains: 1, at: t0 }], (s) => places[s] ?? null, () => 'line')).toEqual([]);
   });
@@ -128,7 +129,7 @@ describe('disruptions: one per kind and place', () => {
   it('merges messages about the same stop or stretch', async () => {
     const { mergeSame } = await import('../src/livemap/disruptions.js');
     const d = (id: string, places: string[], to: number | null, lines: string[] = []) =>
-      ({ id, country: 'NO', kind: 'incident', title: null, places, from: null, to, lat: 0, lon: 0, lines, source: 'entur' }) as const;
+      ({ id, country: 'NO', kind: 'incident', title: null, detail: null, places, from: null, to, lat: 0, lon: 0, lines, source: 'entur' }) as const;
     const out = mergeSame([d('a', ['Skøyen'], 10), d('b', ['Skøyen'], 20, ['x']), d('c', ['Oslo S'], null)]);
     expect(out.map((x) => [x.id, x.to, x.lines])).toEqual([['a', 20, ['x']], ['c', null, []]]);
   });
@@ -152,9 +153,9 @@ describe('disruptions: planned work in Norway and Denmark (build 83)', () => {
     const locs = [{ name: 'Vejle St.', extId: '8600073', lat: 55.7, lon: 9.5 }, { name: 'Jelling St.', extId: '8600079', lat: 55.75, lon: 9.42 }];
     const place = (uic: string) => ({ name: uic === '8600073' ? 'Vejle' : 'Jelling', point: { id: uic, lat: 55.7, lon: 9.5 } });
     const now = Date.parse('2026-11-15T10:00:00Z');
-    const msg = { hid: 'H1', act: true, head: 'Togbus mellem Vejle og Jelling', fLocX: 0, tLocX: 1, sDate: '20261114', sTime: '000000', eDate: '20261116', eTime: '235900' };
+    const msg = { hid: 'H1', act: true, head: 'Togbus mellem Vejle og Jelling', text: 'Togbus mellem <b>Vejle</b> og Jelling.', fLocX: 0, tLocX: 1, sDate: '20261114', sTime: '000000', eDate: '20261116', eTime: '235900' };
     expect(parseHim([msg], locs, now, place, () => 'line')).toEqual([
-      expect.objectContaining({ id: 'dk:H1', country: 'DK', kind: 'closure', places: ['Vejle', 'Jelling'], lines: ['line'], source: 'rejseplanen' }),
+      expect.objectContaining({ id: 'dk:H1', country: 'DK', kind: 'closure', detail: { da: 'Togbus mellem Vejle og Jelling.' }, places: ['Vejle', 'Jelling'], lines: ['line'], source: 'rejseplanen' }),
     ]);
     // Over, or only at night while it's day, it doesn't show.
     expect(parseHim([{ ...msg, eDate: '20261115', eTime: '080000' }], locs, now, place, () => 'line')).toEqual([]);

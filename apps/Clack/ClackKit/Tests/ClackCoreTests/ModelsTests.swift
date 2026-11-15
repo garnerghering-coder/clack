@@ -132,11 +132,13 @@ struct DisruptionModelTests {
     @Test func aDisruptionDecodesAndSpeaksTheAppsLanguage() throws {
         let json = """
         {"id":"no:1","country":"NO","kind":"incident","title":{"en":"Fewer tracks: Skøyen","no":"Færre spor: Skøyen"},
-         "places":["Skøyen"],"from":1,"to":null,"lat":59.92,"lon":10.68,"lines":[],"source":"entur"}
+         "detail":{"en":"Fewer trains between Oslo S and Skøyen."},"places":["Skøyen"],"from":1,"to":null,"lat":59.92,"lon":10.68,"lines":[],"source":"entur"}
         """
         let d = try JSONDecoder().decode(NetworkStatus.Disruption.self, from: Data(json.utf8))
         #expect(d.kind == .incident && d.to == nil && d.tracks.isEmpty)
-        #expect(d.words(.en) == "Fewer tracks: Skøyen")
-        #expect(d.words(.sv) == "Færre spor: Skøyen")
+        #expect(d.text(.en) == CauseLine(text: "Fewer tracks: Skøyen", lang: "en", original: nil))
+        // No Swedish: the nearest language it has, named so the phone can translate it.
+        #expect(d.text(.sv) == CauseLine(text: "Færre spor: Skøyen", lang: "no", original: nil))
+        #expect(d.detailText(.sv)?.lang == "en")
     }
 }

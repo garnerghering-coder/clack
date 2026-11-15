@@ -1,5 +1,5 @@
 // Disruptions on the network now, for Network now's map (owner, 2026-11-15: "show track closure, where maintenance is
-// happening"). Three sources, each only where it says something:
+// happening"). Four sources, each only where it says something:
 //  - Sweden, Trafikverket OperativeEvent (namespace ols.open 1.0; DATA_FINDINGS.md): live events with a time window,
 //    a type (code 16 is "Banarbete/transport", track work) and the stretch they sit on (EventSection, from and to
 //    location signatures). Only events with a traffic impact (TrafficImpact) are shown: the rest touch no train.
@@ -7,7 +7,8 @@
 //    CLOSED_FROM_TRAFFIC is a closed track) and track-work notices with a part on today, each with its track geometry.
 //  - Norway, Entur's SIRI-SX situations: rail ones are those whose affected stops are stations we know (by NSR stop
 //    place); shown as a pin at the stop named most, in Entur's own words (English and Norwegian).
-// Denmark: no structured source (Rejseplanen's notices are free text per journey), so none.
+//  - Denmark, Rejseplanen's service messages (HimSearch; DENMARK_DATA_FINDINGS.md): train ones about a stretch, in Danish.
+// Each keeps the source's own words, short (`title`) and long (`detail`); the app translates them on the phone.
 import { encodePolyline } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { stations, trvLocations } from '../db/schema.js';
@@ -21,12 +22,21 @@ import { zonedToUtc } from '../lib/time.js';
 
 export type DisruptionKind = 'works' | 'closure' | 'incident';
 
+/** Text in the languages a source gives it in. */
+export type Words = { sv?: string; en?: string; no?: string; da?: string };
+
+/** Trimmed, or undefined when empty. */
+const clean = (s: string | undefined): string | undefined => s?.replace(/<[^>]+>/g, ' ').replace(/[ \t]+/g, ' ').trim() || undefined;
+
 export interface Disruption {
   id: string;
   country: 'SE' | 'NO' | 'FI' | 'DK';
   kind: DisruptionKind;
   /** The source's own short words for it, in its language(s); the app shows its kind first and this under it. */
-  title: { sv?: string; en?: string; no?: string; da?: string } | null;
+  title: Words | null;
+  /** The source's longer text for it, when it has one (Trafikverket's message, Entur's description, Rejseplanen's
+   * message), in its language(s). */
+  detail: Words | null;
   /** The stations at its ends (or the one it's at), by name. */
   places: string[];
   /** Epoch ms; null when the source gives none (open-ended). */
@@ -61,7 +71,7 @@ interface TrvOperativeEvent {
   Deleted?: boolean;
   Geometry?: { WGS84?: string };
   EventSection?: TrvSection[];
-  TrafficImpact?: { PublicMessage?: { Header?: string } }[];
+  TrafficImpact?: { PublicMessage?: { Header?: string; Description?: string } }[];
 }
 
 /** An open-ended event not updated for this long is taken as left open. */
@@ -105,11 +115,13 @@ export function parseTrafikverket(
     if (!point) continue;
     const line = a && b && a.point.id !== b.point.id ? track(a.point, b.point) : null;
     const header = e.TrafficImpact.map((t) => t.PublicMessage?.Header).find((h) => h);
+    const description = clean(e.TrafficImpact.map((t) => t.PublicMessage?.Description).find((h) => h?.trim()));
     out.push({
       id: `se:${e.OperativeEventId}`,
       country: 'SE',
       kind: e.EventType?.EventTypeCode === TRV_WORKS_CODE ? 'works' : 'incident',
       title: { sv: header ?? e.EventType?.Description },
+      detail: description ? { sv: description } : null,
       places: [...new Set([a?.name, b?.name].filter((n): n is string => !!n))],
       from,
       to,
@@ -144,7 +156,7 @@ export function parseWorksStretches(
     if (!a || !b || a.point.id === b.point.id) continue;
     const line = track(a.point, b.point);
     out.push({
-      id: `se:works:${w.fromSig}|${w.toSig}`, country: 'SE', kind: 'works', title: { sv: 'Banarbete' },
+      id: `se:works:${w.fromSig}|${w.toSig}`, country: 'SE', kind: 'works', title: null, detail: null,
       places: [a.name, b.name], from: w.at, to: null,
       lat: (a.point.lat + b.point.lat) / 2, lon: (a.point.lon + b.point.lon) / 2, lines: line ? [line] : [], source: 'trafikverket',
     });
@@ -201,7 +213,7 @@ export function parseRuma(
     const [lon, lat] = r.location;
     const near = nearest(lat, lon);
     out.push({
-      id: `fi:${r.id}`, country: 'FI', kind: CLOSING.has(r.limitation ?? '') ? 'closure' : 'works', title: null,
+      id: `fi:${r.id}`, country: 'FI', kind: CLOSING.has(r.limitation ?? '') ? 'closure' : 'works', title: null, detail: null,
       places: near ? [near] : [], from, to, lat, lon, lines: rumaLines(r.locations), source: 'digitraffic',
     });
   }
@@ -211,7 +223,7 @@ export function parseRuma(
     const [lon, lat] = w.location;
     const near = nearest(lat, lon);
     out.push({
-      id: `fi:${w.id}`, country: 'FI', kind: 'works', title: null, places: near ? [near] : [], from: null, to: null,
+      id: `fi:${w.id}`, country: 'FI', kind: 'works', title: null, detail: null, places: near ? [near] : [], from: null, to: null,
       lat, lon, lines: parts.flatMap((p) => rumaLines(p.locations)), source: 'digitraffic',
     });
   }
@@ -284,10 +296,14 @@ export function parseSituations(situations: SxSituation[], now: number, station:
     if (!counts.size) continue;
     const top = [...counts].sort((x, y) => y[1] - x[1])[0]![0];
     const at = station(top)!;
-    const text = (lang: string) => s.Summary?.find((t) => t.lang?.toUpperCase() === lang)?.value;
+    const text = (list: SxText[] | undefined, lang: string) => clean(list?.find((t) => t.lang?.toUpperCase() === lang)?.value);
+    const words = (list: SxText[] | undefined): Words | null => {
+      const w = { en: text(list, 'EN'), no: text(list, 'NO') ?? text(list, 'NB') };
+      return w.en || w.no ? w : null;
+    };
     out.push({
       id: `no:${s.SituationNumber?.value ?? `${top}:${from}`}`, country: 'NO', kind,
-      title: { en: text('EN'), no: text('NO') ?? text('NB') }, places: [at.name], from, to, lat: at.lat, lon: at.lon,
+      title: words(s.Summary), detail: words(s.Description), places: [at.name], from, to, lat: at.lat, lon: at.lon,
       lines: [], source: 'entur',
     });
   }
@@ -344,7 +360,7 @@ export function parseHim(
     if (!ends.length) continue;
     const line = a && b && a.point.id !== b.point.id ? track(a.point, b.point) : null;
     out.push({
-      id: `dk:${m.hid}`, country: 'DK', kind, title: { da: m.head?.trim() },
+      id: `dk:${m.hid}`, country: 'DK', kind, title: { da: clean(m.head) }, detail: clean(m.text ?? m.lead) ? { da: clean(m.text ?? m.lead) } : null,
       places: [...new Set(ends.map((e) => e.name))], from, to,
       lat: ends.reduce((n, e) => n + e.point.lat, 0) / ends.length, lon: ends.reduce((n, e) => n + e.point.lon, 0) / ends.length,
       lines: line ? [line] : [], source: 'rejseplanen',

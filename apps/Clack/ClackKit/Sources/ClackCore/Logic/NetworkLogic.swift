@@ -10,8 +10,16 @@ public nonisolated enum NetworkLogic {
     public enum Why: Equatable, Sendable {
         case canceled
         case late(Int)
-        /// A disruption, a slow stretch or cancellations at one of its stations.
-        case near(String)
+        /// A disruption, a slow stretch or cancellations at one of its stations: which station, and what's there
+        /// (so tapping the train can show it).
+        case near(String, Trouble)
+    }
+
+    /// What touches a station: a disruption (by id), a slow stretch (by corridor id) or cancelled trains.
+    public enum Trouble: Equatable, Sendable {
+        case disruption(String)
+        case corridor(String)
+        case cancelled
     }
 
     public struct Affected: Equatable, Sendable {
@@ -33,18 +41,27 @@ public nonisolated enum NetworkLogic {
     /// Which of today's trains the network touches, and how: cancelled, running late (`lateMin` or more), or with
     /// trouble at one of its stations (a disruption, a slow stretch, cancellations there).
     public static func affected(_ legs: [Leg], status: NetworkStatus) -> [Affected] {
-        var troubled = Set<String>()
-        for d in status.disruptions ?? [] { troubled.formUnion(d.places) }
-        for c in status.corridors { troubled.formUnion(c.stations) }
-        for g in status.cancelled ?? [] { troubled.formUnion(g.stations) }
+        // The first trouble named at each station: disruptions first (they have a page of their own), then slow
+        // stretches, then cancellations.
+        var troubled: [String: Trouble] = [:]
+        for d in status.disruptions ?? [] { for p in d.places where troubled[p] == nil { troubled[p] = .disruption(d.id) } }
+        for c in status.corridors { for p in c.stations where troubled[p] == nil { troubled[p] = .corridor(c.id) } }
+        for g in status.cancelled ?? [] { for p in g.stations where troubled[p] == nil { troubled[p] = .cancelled } }
         return legs.compactMap { leg in
             if leg.canceled { return Affected(leg: leg, why: .canceled) }
             let delay = max(leg.depDelayMin ?? 0, leg.arrDelayMin ?? 0, leg.live?.arrivalDelayMin ?? 0)
             if delay >= status.lateMin { return Affected(leg: leg, why: .late(delay)) }
-            for name in [leg.origin?.name, leg.destination?.name].compactMap({ $0 }) where troubled.contains(name) {
-                return Affected(leg: leg, why: .near(name))
+            for name in [leg.origin?.name, leg.destination?.name].compactMap({ $0 }) {
+                if let trouble = troubled[name] { return Affected(leg: leg, why: .near(name, trouble)) }
             }
             return nil
         }
+    }
+
+    /// The disruptions at stations you pass on this leg (where you get on, through, where you get off), by name.
+    public static func onRoute(_ stops: [LegStop], status: NetworkStatus) -> [NetworkStatus.Disruption] {
+        let names = Set(stops.filter { $0.role == .board || $0.role == .through || $0.role == .alight }.map(\.name))
+        guard !names.isEmpty else { return [] }
+        return (status.disruptions ?? []).filter { d in d.places.contains(where: names.contains) }
     }
 }

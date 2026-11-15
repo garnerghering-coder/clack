@@ -184,7 +184,8 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
     }
 
     /// Track work, a closed track or an incident on the network now: Trafikverket's events (Sweden), Digitraffic's
-    /// RUMA notices (Finland) and Entur's situations about trains (Norway).
+    /// RUMA notices (Finland), Entur's situations about trains (Norway) and Rejseplanen's messages (Denmark). Its words
+    /// are the source's own, in its language; the app translates them on the phone.
     public nonisolated struct Disruption: Codable, Hashable, Sendable, Identifiable {
         public enum Kind: String, Codable, Sendable { case works, closure, incident }
         public struct Title: Codable, Hashable, Sendable {
@@ -206,6 +207,8 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         public let country: String
         public let kind: Kind
         public let title: Title?
+        /// The source's longer text, when it has one.
+        public let detail: Title?
         public let places: [String]
         public let from: Double?
         public let to: Double?
@@ -215,11 +218,12 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         public let lines: [String]
         public let source: String
 
-        public init(id: String, country: String, kind: Kind, title: Title?, places: [String], from: Double?, to: Double?, lat: Double, lon: Double, lines: [String], source: String) {
+        public init(id: String, country: String, kind: Kind, title: Title?, detail: Title? = nil, places: [String], from: Double?, to: Double?, lat: Double, lon: Double, lines: [String], source: String) {
             self.id = id
             self.country = country
             self.kind = kind
             self.title = title
+            self.detail = detail
             self.places = places
             self.from = from
             self.to = to
@@ -232,13 +236,23 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         /// The track it covers, decoded.
         public var tracks: [[LatLon]] { lines.map { Polyline.decode($0) }.filter { $0.count >= 2 } }
 
-        /// The source's words in the language asked for, else any (Swedish events only come in Swedish).
-        public func words(_ language: Language) -> String? {
-            guard let title else { return nil }
-            switch language {
-            case .sv: return title.sv ?? title.no ?? title.da ?? title.en
-            default: return title.en ?? title.sv ?? title.no ?? title.da
+        /// The short words in the language asked for if the source has them, else the nearest it has, with the
+        /// language they're in (to translate on the phone). Nil when the source gives none (Finland's notices).
+        public func text(_ language: Language) -> CauseLine? { Self.pick(title, language) }
+
+        /// The longer text, picked the same way.
+        public func detailText(_ language: Language) -> CauseLine? { Self.pick(detail, language) }
+
+        private static func pick(_ words: Title?, _ language: Language) -> CauseLine? {
+            guard let words else { return nil }
+            let all: [(String, String?)] = [("sv", words.sv), ("no", words.no), ("da", words.da), ("en", words.en)]
+            let order = language == .sv ? ["sv", "no", "da", "en"] : ["en", "sv", "no", "da"]
+            for code in order {
+                if let text = all.first(where: { $0.0 == code })?.1?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty {
+                    return CauseLine(text: text, lang: code, original: nil)
+                }
             }
+            return nil
         }
     }
 }
