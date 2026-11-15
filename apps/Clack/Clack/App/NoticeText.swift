@@ -5,6 +5,7 @@
 
 import ClackCore
 import Foundation
+import NaturalLanguage
 import Observation
 #if canImport(FoundationModels)
 import FoundationModels
@@ -49,6 +50,29 @@ final class NoticeText {
         return Line(text: Self.clip(line.text), translated: false)
     }
 
+    /// The on-device model's answer keeps only what the notice says: every number in it (a date, a time, a platform)
+    /// must be in the notice too. It once wrote "on 12 June" for a Danish notice with no date at all (build 84 check,
+    /// 2026-11-15); an answer like that is dropped and the notice shows as written (or as the translator has it).
+    static func addsNothing(_ answer: String, to source: String) -> Bool {
+        func numbers(_ s: String) -> Set<String> {
+            // "08" and "8" are the same number.
+            Set(s.split(whereSeparator: { !$0.isNumber }).map { part in
+                let digits = String(part.drop(while: { $0 == "0" }))
+                return digits.isEmpty ? "0" : digits
+            })
+        }
+        return numbers(answer).isSubset(of: numbers(source))
+    }
+
+    /// The answer is in the language asked for: the model sometimes hands the notice back as it was (a Danish line
+    /// marked translated, build 84 check), which would then show as a translation.
+    static func isIn(_ target: String, _ answer: String) -> Bool {
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(answer)
+        guard let found = recognizer.dominantLanguage else { return true }
+        return found.rawValue == target
+    }
+
     /// At most `maxWords` words, with "…" when cut.
     static func clip(_ text: String) -> String {
         let words = text.split(whereSeparator: \.isWhitespace)
@@ -69,7 +93,7 @@ final class NoticeText {
                     """)
                 if let answer = try? await session.respond(to: "Notice: \(text)") {
                     let line = answer.content.trimmingCharacters(in: .whitespacesAndNewlines)
-                    if !line.isEmpty { return line }
+                    if !line.isEmpty, Self.addsNothing(line, to: text), Self.isIn(target, line) { return line }
                 }
             }
             #endif
@@ -97,8 +121,15 @@ final class NoticeText {
         return Line(text: line.text, translated: false)
     }
 
+    /// A translation made with Apple's translator after the person let it download the language (the problem sheet's
+    /// "Translate" button): kept, so the list and the sheet show it from now on.
+    func keep(_ line: CauseLine, language: String, translation: String) {
+        guard let source = line.lang else { return }
+        done["¶\(source)>\(language)|\(line.text)"] = Line(text: translation, translated: true)
+    }
+
     /// Norwegian comes from the feeds as "no"; the translator knows it as Bokmål.
-    private static func translatorLanguage(_ code: String) -> Locale.Language {
+    static func translatorLanguage(_ code: String) -> Locale.Language {
         Locale.Language(identifier: code == "no" ? "nb" : code)
     }
 
@@ -119,7 +150,7 @@ final class NoticeText {
                     """)
                 if let answer = try? await session.respond(to: text) {
                     let out = answer.content.trimmingCharacters(in: .whitespacesAndNewlines)
-                    if !out.isEmpty { return out }
+                    if !out.isEmpty, Self.addsNothing(out, to: text), Self.isIn(target, out) { return out }
                 }
             }
             #endif
@@ -143,6 +174,11 @@ extension L10n {
 
     /// A longer text as shown: translated whole on the phone when it's in another language (see `paragraph`).
     func shownWhole(_ line: CauseLine) -> NoticeText.Line {
-        NoticeText.shared.paragraph(line, language: language.rawValue)
+        // Danish messages made only of the table's checked sentences read exactly so, on every phone.
+        if line.lang == "da", language.rawValue != "da",
+           let checked = DelayCauses.danishSentences(line.text, translate: { t($0, $1) }) {
+            return NoticeText.Line(text: checked, translated: true)
+        }
+        return NoticeText.shared.paragraph(line, language: language.rawValue)
     }
 }

@@ -313,7 +313,7 @@ struct YearRecap: View {
         VStack(alignment: .leading, spacing: Space.l) {
             if let route = d.records.mostRiddenRoute {
                 Text(verbatim: route.route).clack(.pageTitle).foregroundStyle(Ink.onAccent).fixedSize(horizontal: false, vertical: true)
-                line(l10n.t("recap.route", ["count": String(route.count)]))
+                line(l10n.t("recap.route", count: route.count))
             }
             if let station = d.records.busiestStation {
                 Text(verbatim: station.name).clack(.pageTitle).foregroundStyle(Ink.onAccent).padding(.top, Space.xl)

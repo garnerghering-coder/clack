@@ -242,7 +242,7 @@ struct NetworkPanel: View {
                         icon: d.kind == .works ? "construction" : d.kind == .closure ? "ban" : "triangle-alert",
                         color: d.kind == .works ? Ink.late : Ink.veryLate,
                         title: d.places.isEmpty ? kind : d.places.joined(separator: " – "),
-                        detail: Format.join([d.places.isEmpty ? nil : kind, d.text(l10n.language).map { l10n.shown($0) }]),
+                        detail: Format.join([d.places.isEmpty ? nil : kind, d.text(l10n.language).map { l10n.shownWhole($0).text }]),
                         figure: until(d), figureInk: Ink.text2
                     ) { onDisruption(d) }
                     .accessibilityHint(l10n.t("network.openProblem"))

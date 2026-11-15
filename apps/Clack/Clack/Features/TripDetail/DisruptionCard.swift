@@ -337,7 +337,7 @@ struct TrackWorkCard: View {
                                 HStack(spacing: Space.m) {
                                     VStack(alignment: .leading, spacing: Space.xxs) {
                                         Text(d.places.joined(separator: " – ")).clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
-                                        Text(Format.join([l10n.t("network.kind.\(d.kind.rawValue)"), d.text(l10n.language).map { l10n.shown($0) }]))
+                                        Text(Format.join([l10n.t("network.kind.\(d.kind.rawValue)"), d.text(l10n.language).map { l10n.shownWhole($0).text }]))
                                             .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2).multilineTextAlignment(.leading)
                                     }
                                     Spacer(minLength: 0)

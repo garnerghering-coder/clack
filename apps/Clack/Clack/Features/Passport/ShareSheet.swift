@@ -171,7 +171,7 @@ struct ShareSheet: View {
                 monthsTitle: l10n.t("recap.monthsTitle"),
                 months: (months?.contains { $0.trains > 0 } ?? false) ? months : nil,
                 route: p.records.mostRiddenRoute?.route,
-                routeLine: p.records.mostRiddenRoute.map { l10n.t("recap.route", ["count": String($0.count)]) },
+                routeLine: p.records.mostRiddenRoute.map { l10n.t("recap.route", count: $0.count) },
                 trainsTitle: l10n.t("recap.trainsTitle"),
                 trains: Array(trains.prefix(3)),
                 medals: Array(medals)

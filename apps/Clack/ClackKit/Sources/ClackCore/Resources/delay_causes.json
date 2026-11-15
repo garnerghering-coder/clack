@@ -1651,5 +1651,15 @@
     { "pattern": "\\bsignalfejl\\b", "key": "cause.signalFault", "kind": "cause" },
     { "pattern": "\\bsporarbejde\\b", "key": "cause.engineeringWork", "kind": "cause" },
     { "pattern": "\\b(?:togbus|togbusser)\\b", "key": "cause.busReplaces", "kind": "notice" }
+  ],
+  "_rjSentencesComment": "rjSentences: whole sentences of Rejseplanen's service messages as Network now shows them (a problem's heading and text), each to a locale key; a message is shown translated this way only when every one of its sentences matches, otherwise it goes to the phone's translator. Seen on Rejseplanen's HimSearch feed on 2026-11-15 (DSB's messages for Vejle–Jelling, Ringsted–Køge Nord, Helsingør–København H). Meanings from Den Danske Ordbog (ordnet.dk): bemærk = note, togbus = rail replacement bus, rejse = journey, cykel = bicycle, derfor = therefore, varer = lasts, længere end normalt = longer than usual, ændringen = the change, skyldes = is due to, sporarbejde = track work, akut = urgent, færre = fewer, kører = run.",
+  "rjSentences": [
+    { "pattern": "^Bemærk, at du skal med togbus på denne rejse\\.?$", "key": "disruption.dk.takeBus" },
+    { "pattern": "^Du kan ikke tage din cykel med i togbussen\\.?$", "key": "disruption.dk.noBikes" },
+    { "pattern": "^Derfor varer rejsen længere end normalt\\.?$", "key": "disruption.dk.longer" },
+    { "pattern": "^Ændringen skyldes sporarbejde\\.?$", "key": "disruption.dk.dueToWorks" },
+    { "pattern": "^Det skyldes (?:et )?akut sporarbejde\\.?$", "key": "disruption.dk.dueToUrgentWorks" },
+    { "pattern": "^(?:Læs mere her|Se mere information på):? (?:www\\.)?dsb\\.dk\\.?$", "key": "disruption.dk.moreAtDsb" },
+    { "pattern": "^Der kører færre tog mellem (?<a>.+?) og (?<b>.+?)\\.?$", "key": "disruption.dk.fewerTrains" }
   ]
 }

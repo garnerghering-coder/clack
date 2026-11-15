@@ -42,17 +42,20 @@ public nonisolated enum DelayCauses {
         let trvText: [String: Entry]
         let dt: [String: Entry]
         let rj: [Pattern]
+        /// Whole sentences of Rejseplanen's service messages (Network now's problems), to keys.
+        let rjSentences: [Pattern]
 
         /// Trafikverket's announced Swedish text (lower case) to its entry: the old exact-text lookup, from the table.
         let bySwedishText: [String: Entry]
 
-        private enum CodingKeys: String, CodingKey { case trv, trvText, dt, rj }
+        private enum CodingKeys: String, CodingKey { case trv, trvText, dt, rj, rjSentences }
 
-        init(trv: [String: Entry], trvText: [String: Entry], dt: [String: Entry], rj: [Pattern] = []) {
+        init(trv: [String: Entry], trvText: [String: Entry], dt: [String: Entry], rj: [Pattern] = [], rjSentences: [Pattern] = []) {
             self.trv = trv
             self.trvText = trvText
             self.dt = dt
             self.rj = rj
+            self.rjSentences = rjSentences
             var text: [String: Entry] = [:]
             for entry in trv.values { if let sv = entry.sv { text[sv.lowercased()] = entry } }
             bySwedishText = text
@@ -62,7 +65,8 @@ public nonisolated enum DelayCauses {
             let c = try decoder.container(keyedBy: CodingKeys.self)
             self.init(
                 trv: try c.decode([String: Entry].self, forKey: .trv), trvText: try c.decode([String: Entry].self, forKey: .trvText),
-                dt: try c.decode([String: Entry].self, forKey: .dt), rj: (try? c.decode([Pattern].self, forKey: .rj)) ?? []
+                dt: try c.decode([String: Entry].self, forKey: .dt), rj: (try? c.decode([Pattern].self, forKey: .rj)) ?? [],
+                rjSentences: (try? c.decode([Pattern].self, forKey: .rjSentences)) ?? []
             )
         }
 
@@ -110,6 +114,35 @@ public nonisolated enum DelayCauses {
         default:
             return Resolved(key: nil, kind: .cause, text: text)
         }
+    }
+
+    /// A Danish service message in the app's language from the table's checked sentences (`rjSentences`), only when
+    /// every sentence in it is known: a message half in the table and half not is left to the phone's translator, so
+    /// nothing shows half translated. Nil when any sentence is unknown.
+    public static func danishSentences(_ text: String, table: Table = DelayCauses.table, translate: (String, [String: String]) -> String) -> String? {
+        // Split after ".", "!" or "?" followed by a space ("dsb.dk" stays whole).
+        let flat = text.replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
+        let sentences = flat.replacingOccurrences(of: #"([.!?]) "#, with: "$1\n", options: .regularExpression)
+            .split(separator: "\n").map(String.init)
+        guard !sentences.isEmpty, !table.rjSentences.isEmpty else { return nil }
+        var out: [String] = []
+        for sentence in sentences {
+            var hit: String?
+            for p in table.rjSentences {
+                guard let regex = try? NSRegularExpression(pattern: p.pattern, options: [.caseInsensitive]),
+                      let m = regex.firstMatch(in: sentence, range: NSRange(sentence.startIndex..., in: sentence)) else { continue }
+                var values: [String: String] = [:]
+                for name in ["a", "b"] {
+                    let r = m.range(withName: name)
+                    if r.location != NSNotFound, let range = Range(r, in: sentence) { values[name] = String(sentence[range]) }
+                }
+                hit = translate(p.key, values)
+                break
+            }
+            guard let hit else { return nil }
+            out.append(hit)
+        }
+        return out.joined(separator: " ")
     }
 
     /// A Rejseplanen heading matched to the table's patterns, with the station and platform it names.

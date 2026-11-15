@@ -6,6 +6,7 @@
 import ClackCore
 import ClackDesign
 import SwiftUI
+import Translation
 
 /// A train's sheet, live or from the timetable, inside Explore's system sheet (owner, 2026-11-15: every panel the
 /// native way, as Network now): a header with the operator and train, one scrolling body (what's live, the stops,
@@ -283,10 +284,19 @@ struct DisruptionSheet: View {
             Text(l10n.t("network.noText")).clack(.body).foregroundStyle(Ink.text2)
         } else {
             VStack(alignment: .leading, spacing: Space.s) {
-                if let short, short.text != long?.text { Text(short.text).clack(.headline).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
-                if let long { Text(long.text).clack(.body).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
+                // One translated and the other not (the translator managed one): only the one in your language.
+                let mixed = short != nil && long != nil && short?.translated != long?.translated
+                if let short, short.text != long?.text, !(mixed && !short.translated) { Text(short.text).clack(.headline).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
+                if let long, !(mixed && !long.translated) { Text(long.text).clack(.body).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
                 if short?.translated == true || long?.translated == true {
                     Text(l10n.t("network.translatedOnPhone")).clack(.micro).foregroundStyle(Ink.text3)
+                }
+                // Still in the source's language: Apple's translator can do it once the language is downloaded (it
+                // asks first; free, on the phone).
+                let pending = [d.text(l10n.language), d.detailText(l10n.language)].compactMap { $0 }
+                    .filter { $0.lang != l10n.language.rawValue && l10n.shownWhole($0).translated == false }
+                if !pending.isEmpty, #available(iOS 18.0, *) {
+                    TranslateButton(lines: pending)
                 }
             }
             .textSelection(.enabled)
@@ -317,6 +327,44 @@ struct DisruptionSheet: View {
                     }
                     .buttonStyle(.pressRow)
                 }
+            }
+        }
+    }
+}
+
+/// "Translate": Apple's on-device translator for a problem's text still in its source's language. The system asks
+/// to download the language the first time; the translations are kept for the session (`NoticeText.keep`).
+@available(iOS 18.0, *)
+private struct TranslateButton: View {
+    @Environment(L10n.self) private var l10n
+    let lines: [CauseLine]
+    @State private var configuration: TranslationSession.Configuration?
+    @State private var available = false
+
+    var body: some View {
+        Group {
+            if available {
+                Button {
+                    if configuration == nil {
+                        configuration = .init(source: NoticeText.translatorLanguage(lines[0].lang ?? "da"), target: NoticeText.translatorLanguage(l10n.language.rawValue))
+                    } else {
+                        configuration?.invalidate()
+                    }
+                } label: {
+                    Label { Text(l10n.t("network.translate")) } icon: { LucideIcon(name: "globe", size: 16) }
+                }
+                .buttonStyle(.clack(.secondary))
+            }
+        }
+        .task(id: lines.map(\.text).joined()) {
+            guard let source = lines.first?.lang else { return }
+            let status = await LanguageAvailability().status(from: NoticeText.translatorLanguage(source), to: NoticeText.translatorLanguage(l10n.language.rawValue))
+            available = status != .unsupported
+        }
+        .translationTask(configuration) { session in
+            for line in lines {
+                guard let answer = try? await session.translate(line.text) else { continue }
+                await MainActor.run { NoticeText.shared.keep(line, language: l10n.language.rawValue, translation: answer.targetText) }
             }
         }
     }

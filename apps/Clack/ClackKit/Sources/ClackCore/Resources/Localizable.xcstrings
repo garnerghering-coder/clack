@@ -26691,15 +26691,39 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your most ridden route: {{count}} times."
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Your most ridden route: once."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Your most ridden route: %lld times."
+                }
+              }
+            }
           }
         },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Din mest åkta sträcka: {{count}} gånger."
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Din mest åkta sträcka: en gång."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Din mest åkta sträcka: %lld gånger."
+                }
+              }
+            }
           }
         }
       }
@@ -27353,6 +27377,142 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "disruption.dk.takeBus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note: this journey is by rail replacement bus."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Observera att den här resan går med ersättningsbuss."
+          }
+        }
+      }
+    },
+    "disruption.dk.noBikes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bikes can't be taken on the replacement bus."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cyklar kan inte tas med på ersättningsbussen."
+          }
+        }
+      }
+    },
+    "disruption.dk.longer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So the journey takes longer than usual."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Därför tar resan längre tid än vanligt."
+          }
+        }
+      }
+    },
+    "disruption.dk.dueToWorks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The change is due to track work."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ändringen beror på banarbete."
+          }
+        }
+      }
+    },
+    "disruption.dk.dueToUrgentWorks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is due to urgent track work."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det beror på akut banarbete."
+          }
+        }
+      }
+    },
+    "disruption.dk.moreAtDsb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More at dsb.dk"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mer information på dsb.dk"
+          }
+        }
+      }
+    },
+    "disruption.dk.fewerTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fewer trains run between {{a}} and {{b}}."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Färre tåg går mellan {{a}} och {{b}}."
+          }
+        }
+      }
+    },
+    "network.translate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translate"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Översätt"
           }
         }
       }
