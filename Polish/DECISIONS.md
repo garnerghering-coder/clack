@@ -353,3 +353,12 @@ Left in build 73, and why:
 | B81.3 | High speed | Route type 101 only in today's feed | 101 (Arlanda Express, Flytoget, Vy's Göteborg–Oslo "Snabbtåg" included, as the feed says), Finland's Pendolino, and for older Swedish feeds the numbers today's feed marks 101 | `classifyProduct` | — |
 | B81.4 | Setting it yourself | Only on a trip added by hand, without high speed | "Kind of train" in any trip's menu: Automatic or one of six; the choice wins everywhere (`legs.user_product`, migration 0028); high speed added to the hand-added trip's kinds | `PATCH /legs/:id {product}`, `setUserProduct`, `TripDetailScreen.setKind`, `EditManualTripSheet` | Drop the menu item |
 | B81.5 | Test timeout | The Finland integration test at the default 5 s (about 3 s alone, over 5 s in the full parallel run) | 15 s | `finlandLive.test.ts` | — |
+
+## Build 82 (owner, 2026-11-15: "complete any open works")
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B82.1 | Sweden's planned track work | Only work running over its time (OperativeEvent) | Also the stretches whose trains carry Trafikverket's "Banarbete" notice (ANA003, its reason-code list) now or in the next two hours, drawn as track work | `worksPart`/`AnnouncementCache.works` (announcements.ts), `LiveMapIngest.worksStretches`, `parseWorksStretches`; tests | Drop the provider in `routes/livemap.ts` |
+| B82.2 | Repeated disruptions | Entur posts one message per line about the same stop: several pins and rows | One per kind and place, its track joined | `mergeSame`; test | Return the list unmerged |
+| B82.3 | Network now, your trains (designer's list) | Nothing about you | First: "Your trains today run as normal", or each of today's trains that is cancelled, 10+ min late, or has trouble at its station, tapping to its page | `NetworkLogic` (ClackCore, tests), `NetworkPanel.yours`, `ExploreScreen` `onTrip` | Remove `yours(status)` |
+| B82.4 | "Kind of train saved" (build 81 check) | Reported missing | Checked: it shows, sliding in about a second after the header changes; the check looked too early. No change | — | — |

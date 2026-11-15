@@ -19,7 +19,11 @@ struct NetworkPanel: View {
     var onCorridor: (NetworkStatus.Corridor) -> Void
     var onTrain: (NetworkStatus.LateTrain) -> Void
     var onDisruption: (NetworkStatus.Disruption) -> Void = { _ in }
+    /// One of your trains tapped: its trip page.
+    var onTrip: (String) -> Void = { _ in }
     var onClose: () -> Void
+    /// Your trains left to run today, loaded when the panel opens (nil until then; empty: none today).
+    @State private var mine: [Leg]?
     @State private var allLate = false
     @State private var allOnTrack = false
     @State private var about = false
@@ -30,6 +34,10 @@ struct NetworkPanel: View {
             content.frame(maxWidth: .infinity, alignment: .leading)
         }
         .scrollBounceBehavior(.basedOnSize)
+        .task {
+            let legs = (try? await app.client.legs()) ?? []
+            mine = NetworkLogic.today(legs, now: Date.now.timeIntervalSince1970 * 1000)
+        }
         .alert(l10n.t("network.about"), isPresented: $about) {
             Button(l10n.t("common.close"), role: .cancel) {}
         } message: {
@@ -51,6 +59,7 @@ struct NetworkPanel: View {
                 IconButton(icon: "info", label: l10n.t("network.about"), size: .overMap) { about = true }
             }
             if let status {
+                yours(status)
                 countries(status)
                 counts(status)
                 corridors(status)
@@ -64,6 +73,41 @@ struct NetworkPanel: View {
             }
         }
         .padding(Space.l)
+    }
+
+    // MARK: your trains
+
+    /// Your trains today first (designer, 2026-11-14: "Your trips today: affected"): that they run as normal, or each one
+    /// the network touches and how; tapping one opens it. Nothing when you have none today.
+    @ViewBuilder
+    private func yours(_ status: NetworkStatus) -> some View {
+        if let mine, !mine.isEmpty {
+            let hit = NetworkLogic.affected(mine, status: status)
+            if hit.isEmpty {
+                HStack(spacing: Space.s) {
+                    LucideIcon(name: "badge-check", size: 18).foregroundStyle(Ink.onTimeInk)
+                    Text(l10n.t("network.mineFine")).clack(.rowTitle).foregroundStyle(Ink.text)
+                }
+                .accessibilityElement(children: .combine)
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    header("network.mineTitle")
+                    ForEach(hit, id: \.leg.id) { a in
+                        let service = Format.join([a.leg.operator?.name, a.leg.trainNumber], separator: " ")
+                        let (why, ink): (String, Color) = switch a.why {
+                        case .canceled: (l10n.t("network.whyCanceled"), Ink.veryLateInk)
+                        case .late(let min): (Format.delay(min), min >= 30 ? Ink.veryLateInk : Ink.lateInk)
+                        case .near(let station): (l10n.t("network.whyNear", ["station": station]), Ink.lateInk)
+                        }
+                        row(
+                            icon: "train-front", color: ink,
+                            title: "\(a.leg.origin?.name ?? "") → \(a.leg.destination?.name ?? "")",
+                            detail: service.isEmpty ? nil : service, figure: why, figureInk: ink
+                        ) { onTrip(a.leg.id) }
+                    }
+                }
+            }
+        }
     }
 
     // MARK: countries, as rings

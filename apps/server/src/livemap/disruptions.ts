@@ -119,6 +119,36 @@ export function parseTrafikverket(
   return out;
 }
 
+/** A stretch where Swedish trains run under track work, from Trafikverket's announcements (livemap/announcements.ts). */
+export interface WorksStretch {
+  fromSig: string;
+  toSig: string;
+  trains: number;
+  at: number;
+}
+
+/** Planned track work in Sweden: the stretches whose trains carry Trafikverket's "Banarbete" notice (ANA003) now or in
+ * the next two hours. OperativeEvent only has work that runs over its time; this is the work trains are planned around. */
+export function parseWorksStretches(
+  stretches: WorksStretch[],
+  place: (signature: string) => { name: string; point: StationPoint } | null,
+  track: (a: StationPoint, b: StationPoint) => string | null,
+): Disruption[] {
+  const out: Disruption[] = [];
+  for (const w of stretches) {
+    const a = place(w.fromSig);
+    const b = place(w.toSig);
+    if (!a || !b || a.point.id === b.point.id) continue;
+    const line = track(a.point, b.point);
+    out.push({
+      id: `se:works:${w.fromSig}|${w.toSig}`, country: 'SE', kind: 'works', title: { sv: 'Banarbete' },
+      places: [a.name, b.name], from: w.at, to: null,
+      lat: (a.point.lat + b.point.lat) / 2, lon: (a.point.lon + b.point.lon) / 2, lines: line ? [line] : [], source: 'trafikverket',
+    });
+  }
+  return out;
+}
+
 // ---------- Finland ----------
 
 type LonLat = [number, number];
@@ -252,6 +282,19 @@ export function parseSituations(situations: SxSituation[], now: number, station:
 
 const REFRESH_MS = 5 * 60_000;
 
+/** One entry per kind of trouble at one place: several messages about the same stop (Entur posts one per line) or
+ * the same stretch become one, the first kept, its track joined with the others'. */
+export function mergeSame(list: Disruption[]): Disruption[] {
+  const out = new Map<string, Disruption>();
+  for (const d of list) {
+    const k = `${d.country}|${d.kind}|${[...d.places].sort().join('|') || d.id}`;
+    const had = out.get(k);
+    if (!had) out.set(k, d);
+    else out.set(k, { ...had, lines: [...new Set([...had.lines, ...d.lines])], to: had.to === null || d.to === null ? null : Math.max(had.to, d.to) });
+  }
+  return [...out.values()];
+}
+
 /** The disruptions now, asked of each source at most every five minutes; a source that fails keeps its last answer. */
 export class Disruptions {
   private bySource = new Map<string, Disruption[]>();
@@ -261,6 +304,8 @@ export class Disruptions {
   constructor(
     private readonly db: Db,
     private readonly fetchImpl: typeof fetch = fetch,
+    /** Swedish stretches under track work, from the live map's announcements (none in tests). */
+    private readonly worksStretches: () => WorksStretch[] = () => [],
   ) {}
 
   /** What is known now; starts a refresh in the background when it is due. */
@@ -269,7 +314,7 @@ export class Disruptions {
       this.at = now;
       this.running = this.refresh(now).finally(() => (this.running = null));
     }
-    return [...this.bySource.values()].flat();
+    return mergeSame([...this.bySource.values()].flat());
   }
 
   async refresh(now = Date.now()) {
@@ -294,17 +339,14 @@ export class Disruptions {
     const events = ((await trvQuery<{ OperativeEvent?: TrvOperativeEvent[] }>(q, this.fetchImpl)).OperativeEvent ?? []) as TrvOperativeEvent[];
     const locations = new Map(this.db.select().from(trvLocations).all().map((l) => [l.signature, l]));
     const bySignature = new Map(this.db.select({ id: stations.id, name: stations.name, sig: stations.trvSignature, lat: stations.lat, lon: stations.lon }).from(stations).all().filter((s) => s.sig).map((s) => [s.sig!, s]));
-    return parseTrafikverket(
-      events,
-      now,
-      (sig) => {
-        const s = bySignature.get(sig);
-        if (s) return { name: s.name, point: { id: s.id, lat: s.lat, lon: s.lon } };
-        const l = locations.get(sig);
-        return l && l.lat !== null && l.lon !== null ? { name: l.name, point: { id: `trv:${sig}`, lat: l.lat, lon: l.lon } } : null;
-      },
-      (a, b) => encodePolyline(segmentBetween(this.db, a, b).points),
-    );
+    const place = (sig: string) => {
+      const s = bySignature.get(sig);
+      if (s) return { name: s.name, point: { id: s.id, lat: s.lat, lon: s.lon } };
+      const l = locations.get(sig);
+      return l && l.lat !== null && l.lon !== null ? { name: l.name, point: { id: `trv:${sig}`, lat: l.lat, lon: l.lon } } : null;
+    };
+    const track = (a: StationPoint, b: StationPoint) => encodePolyline(segmentBetween(this.db, a, b).points);
+    return [...parseTrafikverket(events, now, place, track), ...parseWorksStretches(this.worksStretches(), place, track)];
   }
 
   private async finland(now: number) {

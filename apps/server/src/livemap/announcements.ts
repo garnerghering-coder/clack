@@ -124,6 +124,23 @@ export function cancelledPart(rows: AnnRow[], now: number, aheadMs: number): Can
   };
 }
 
+/** Trafikverket's notice for track work at a stop (ANA003 "Banarbete", its reason-code list). */
+export const isWorksNote = (c: DelayCause) => c.code?.toUpperCase() === 'ANA003' || /^banarbete$/i.test(c.text ?? '');
+
+/** One train's stretch running under track work (its stops with the "Banarbete" notice) from a few minutes ago to
+ * `aheadMs` ahead: Trafikverket's own sign of planned work where trains run differently. Null when none. Pure. */
+export function worksPart(rows: AnnRow[], now: number, aheadMs: number): { fromSig: string; toSig: string; at: number } | null {
+  if (!rows.length || !rows.every(isTrain)) return null;
+  const sorted = [...rows].sort((a, b) => Date.parse(a.AdvertisedTimeAtLocation) - Date.parse(b.AdvertisedTimeAtLocation) || (a.ActivityType === 'Ankomst' ? -1 : 1));
+  const marked = sorted.filter((r) => trvCauses(r.Deviation).some(isWorksNote));
+  const soon = marked.filter((r) => {
+    const t = Date.parse(r.AdvertisedTimeAtLocation);
+    return t >= now - 5 * 60_000 && t <= now + aheadMs;
+  });
+  if (!soon.length || marked[0]!.LocationSignature === marked.at(-1)!.LocationSignature) return null;
+  return { fromSig: marked[0]!.LocationSignature, toSig: marked.at(-1)!.LocationSignature, at: Date.parse(soon[0]!.AdvertisedTimeAtLocation) };
+}
+
 /** What one train's announcements say about it now. Pure, for tests. */
 export function summarizeTrain(rows: AnnRow[], now: number): TrainInfo | null {
   if (!rows.length) return null;
@@ -275,6 +292,22 @@ export class AnnouncementCache {
       if (part) out.push(part);
     }
     return out;
+  }
+
+  /** Stretches running under track work, from a few minutes ago to `aheadMs` ahead, with how many trains each. */
+  works(aheadMs: number): { fromSig: string; toSig: string; trains: number; at: number }[] {
+    const now = this.now();
+    const out = new Map<string, { fromSig: string; toSig: string; trains: number; at: number }>();
+    for (const ids of this.byTrain.values()) {
+      const part = worksPart([...ids].map((id) => this.rows.get(id)!).filter(Boolean), now, aheadMs);
+      if (!part) continue;
+      // Both directions are the same stretch.
+      const [a, b] = [part.fromSig, part.toSig].sort() as [string, string];
+      const k = `${a}|${b}`;
+      const had = out.get(k);
+      out.set(k, had ? { ...had, trains: had.trains + 1, at: Math.min(had.at, part.at) } : { fromSig: a, toSig: b, trains: 1, at: part.at });
+    }
+    return [...out.values()];
   }
 
   /** Every train in the window, as [number, date]. */

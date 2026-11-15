@@ -327,7 +327,7 @@ export const liveMapRoutes =
     // Network status: corridors where most trains are running 10+ minutes late now (livemap/network.ts). Read off the
     // live map, so it is as fresh as the map; worked out at most every 15 s.
     let network: { at: number; body: NetworkStatus } | null = null;
-    const disruptions = new Disruptions(db);
+    const disruptions = new Disruptions(db, fetch, () => ingest.worksStretches());
     app.get('/live/network', async () => {
       const now = Date.now();
       if (!network || now - network.at > 15_000) {

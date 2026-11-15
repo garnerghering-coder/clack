@@ -477,6 +477,11 @@ struct ExploreScreen: View {
                     model.focus(d)
                     detent = .fraction(0.32)
                 },
+                onTrip: { id in
+                    // Your train: its page, over Explore, with the sheet closed.
+                    model.closePanels()
+                    router.push(.trip(id))
+                },
                 onClose: { model.showNetwork = false }
             )
             .task { await model.watchNetwork() }

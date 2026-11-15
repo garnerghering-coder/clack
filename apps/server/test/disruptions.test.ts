@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseRuma, parseSituations, parseTrafikverket, STALE_MS, trvPoint } from '../src/livemap/disruptions.js';
+import { parseRuma, parseSituations, parseTrafikverket, parseWorksStretches, STALE_MS, trvPoint } from '../src/livemap/disruptions.js';
 
 const now = Date.parse('2026-11-15T10:00:00Z');
 const iso = (t: number) => new Date(t).toISOString();
@@ -94,5 +94,42 @@ describe('disruptions: Norway', () => {
 
   it('leaves out buses, even at a stop we know', () => {
     expect(parseSituations([sx('INN', 'INN:Line:241', ['NSR:StopPlace:11272'])] as never, now, (id) => stations[id] ?? null)).toEqual([]);
+  });
+});
+
+describe('disruptions: Sweden, planned track work from the announcements', () => {
+  const at = (hhmm: string) => `2026-11-15T${hhmm}:00.000+01:00`;
+  const t0 = Date.parse(at('10:00'));
+  const stop = (id: string, sig: string, time: string, works: boolean) =>
+    ({
+      ActivityId: id, ActivityType: 'Avgang', AdvertisedTrainIdent: '3021', AdvertisedTimeAtLocation: at(time), LocationSignature: sig,
+      Canceled: false, ProductInformation: [{ Description: 'Västtågen' }],
+      Deviation: works ? [{ Code: 'ANA003', Description: 'Banarbete' }] : [],
+    }) as never;
+
+  it('a train\'s stops with the "Banarbete" notice make its stretch under work', async () => {
+    const { worksPart } = await import('../src/livemap/announcements.js');
+    expect(worksPart([stop('1', 'G', '10:10', false), stop('2', 'Ls', '10:30', true), stop('3', 'A', '10:50', true)], t0, 2 * 3600_000)).toMatchObject({ fromSig: 'Ls', toSig: 'A' });
+    // A notice at one stop alone names no stretch; one long past or far ahead doesn't count.
+    expect(worksPart([stop('1', 'G', '10:10', true)], t0, 2 * 3600_000)).toBeNull();
+    expect(worksPart([stop('1', 'G', '15:10', true), stop('2', 'A', '15:40', true)], t0, 2 * 3600_000)).toBeNull();
+  });
+
+  it('becomes track work drawn between its two ends', () => {
+    const out = parseWorksStretches([{ fromSig: 'A', toSig: 'G', trains: 3, at: t0 }], (s) => places[s] ?? null, () => 'line');
+    expect(out).toEqual([
+      expect.objectContaining({ id: 'se:works:A|G', kind: 'works', title: { sv: 'Banarbete' }, places: ['Alingsås', 'Göteborg C'], lines: ['line'] }),
+    ]);
+    expect(parseWorksStretches([{ fromSig: 'A', toSig: 'X', trains: 1, at: t0 }], (s) => places[s] ?? null, () => 'line')).toEqual([]);
+  });
+});
+
+describe('disruptions: one per kind and place', () => {
+  it('merges messages about the same stop or stretch', async () => {
+    const { mergeSame } = await import('../src/livemap/disruptions.js');
+    const d = (id: string, places: string[], to: number | null, lines: string[] = []) =>
+      ({ id, country: 'NO', kind: 'incident', title: null, places, from: null, to, lat: 0, lon: 0, lines, source: 'entur' }) as const;
+    const out = mergeSame([d('a', ['Skøyen'], 10), d('b', ['Skøyen'], 20, ['x']), d('c', ['Oslo S'], null)]);
+    expect(out.map((x) => [x.id, x.to, x.lines])).toEqual([['a', 20, ['x']], ['c', null, []]]);
   });
 });

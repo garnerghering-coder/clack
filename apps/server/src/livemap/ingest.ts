@@ -621,6 +621,11 @@ export class LiveMapIngest extends EventEmitter {
     });
   }
 
+  /** Swedish stretches where trains run under track work in the next two hours (Trafikverket's "Banarbete" notice). */
+  worksStretches(aheadMs = 2 * 3600_000) {
+    return this.ann.works(aheadMs);
+  }
+
   /** Train k at this position, with what the announcements say about it; or off the map if it shouldn't show. */
   private put(k: string, fix: Fix, abroadNext?: { name: string; eta: number | null } | null) {
     const [number, date] = k.split('|') as [string, string];
