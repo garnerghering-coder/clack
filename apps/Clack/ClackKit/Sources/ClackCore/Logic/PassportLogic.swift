@@ -52,6 +52,23 @@ public nonisolated enum PassportLogic {
 
     public static func toGo(_ milestone: Milestone) -> Int { toGo(value: milestone.value, target: milestone.target) }
 
+    /// The "value" of "value of target" under a locked medal: whole numbers rounded as the cover's are, but never
+    /// rounded up to the target it hasn't reached ("1 of 1" under an unearned "Once the length of Sweden"); a fraction
+    /// of a small target keeps one decimal ("0,9 of 1").
+    public static func progressValue(_ value: Double?, target: Double, language: Language) -> String {
+        let v = max(0, value ?? 0)
+        if v < target, target <= 10, v.rounded(.down) != v {
+            let formatter = NumberFormatter()
+            formatter.locale = Format.locale(language)
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = 1
+            formatter.roundingMode = .down
+            return formatter.string(from: NSNumber(value: v)) ?? String(v)
+        }
+        let whole = v.rounded()
+        return String(Int(v < target ? min(whole, (target - 1).rounded(.up)) : whole))
+    }
+
     // MARK: milestones, every level
 
     /// The thresholds per family (mirrors MILESTONES in the server's stats/passport.ts). `kindsOfTrain` is every kind
@@ -129,13 +146,15 @@ public nonisolated enum PassportLogic {
     }
 
     /// Every family with every level (owner, 2026-11-07: the Milestones screen shows what is still to earn), built from
-    /// what the server sends: the medals earned (with their date and trip) and the nearest next ones (which carry the
-    /// family's current value). A locked level takes the family's value from either; with neither it shows no progress.
+    /// what the server sends: the medals earned (with their date and trip), every family's current value, and (from
+    /// older servers, which send no values) the nearest next ones. A locked level takes the family's value from those;
+    /// with none it shows no progress.
     public static func ladder(_ milestones: Passport.Milestones) -> [FamilyLadder] {
         MilestoneFamily.knownCases.map { family in
             let achieved = milestones.achieved.filter { $0.family == family }
             let next = milestones.next.filter { $0.family == family }
-            let value: Double? = next.compactMap(\.value).max() ?? achieved.compactMap(\.value).max() ?? achieved.map(\.target).max()
+            let value: Double? = milestones.values?[family.rawValue] ?? next.compactMap(\.value).max()
+                ?? achieved.compactMap(\.value).max() ?? achieved.map(\.target).max()
             let targets = (milestoneLevels(family) + achieved.map(\.target)).reduce(into: [Double]()) { if !$0.contains($1) { $0.append($1) } }.sorted()
             let rungs = targets.map { target -> Rung in
                 if let done = achieved.first(where: { $0.target == target }) { return Rung(milestone: done, earned: true) }

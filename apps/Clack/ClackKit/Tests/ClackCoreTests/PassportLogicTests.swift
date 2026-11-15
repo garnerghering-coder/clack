@@ -54,6 +54,24 @@ struct PassportLogicTests {
         #expect(ladder.count == MilestoneFamily.knownCases.count)
     }
 
+    /// Build 76 (Release check): a family missing from the three `next` showed its last level reached ("1 of 10" with
+    /// two journeys); the server's per-family values win.
+    @Test func theLadderTakesEachFamilysValueFromTheServersValues() {
+        let earned = Milestone(family: .journeys, target: 1, at: Instant(ms: 1), legId: "L", value: nil)
+        let ladder = PassportLogic.ladder(Passport.Milestones(achieved: [earned], next: [], values: ["journeys": 2]))
+        #expect(ladder.first { $0.family == .journeys }!.rungs[1].milestone.value == 2)
+    }
+
+    /// Never rounded up to a target not reached ("1 of 1" under an unearned medal); small fractions keep a decimal.
+    @Test func progressIsNeverRoundedUpToTheTarget() {
+        #expect(PassportLogic.progressValue(0.96, target: 1, language: .en) == "0.9")
+        #expect(PassportLogic.progressValue(0.96, target: 1, language: .sv) == "0,9")
+        #expect(PassportLogic.progressValue(344.6, target: 500, language: .en) == "345")
+        #expect(PassportLogic.progressValue(499.7, target: 500, language: .en) == "499")
+        #expect(PassportLogic.progressValue(2, target: 10, language: .en) == "2")
+        #expect(PassportLogic.progressValue(nil, target: 10, language: .en) == "0")
+    }
+
     /// One metal language (polish pass 1): every level of every family has a tier, the same as the server's.
     @Test func everyLevelHasATier() {
         for family in MilestoneFamily.knownCases {

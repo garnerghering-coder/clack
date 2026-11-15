@@ -451,10 +451,13 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
         public let achieved: [Milestone]
         /// Up to three, closest first.
         public let next: [Milestone]
+        /// Every family's current value, by family name (servers before build 76 don't send it).
+        public let values: [String: Double]?
 
-        public init(achieved: [Milestone], next: [Milestone]) {
+        public init(achieved: [Milestone], next: [Milestone], values: [String: Double]? = nil) {
             self.achieved = achieved
             self.next = next
+            self.values = values
         }
     }
 

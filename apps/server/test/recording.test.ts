@@ -114,5 +114,8 @@ describe('milestones', () => {
     expect(m.next[0]).toMatchObject({ family: 'countries', target: 3, value: 2 });
     expect(m.next[1]).toMatchObject({ family: 'allNordics', target: 4, value: 2 });
     expect(m.next[2]).toMatchObject({ family: 'stations', target: 10, value: 4 });
+    // Every family's value, not only the three nearest (the app's ladder read "1 of 10" with two journeys).
+    expect(m.values.journeys).toBe(2);
+    expect(m.values.distanceKm).toBe(120);
   });
 });

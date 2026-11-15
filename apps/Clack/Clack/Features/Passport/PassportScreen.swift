@@ -148,7 +148,7 @@ struct PassportScreen: View {
     /// A medal still to earn, with its name and how far along it is.
     private func goal(_ milestone: Milestone, _ data: Passport, size: CGFloat, titleRole: TextRole) -> some View {
         let label = l10n.milestoneLabel(milestone, language: settings.language, home: data.home)
-        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded())), "target": String(Int(milestone.target))])
+        let progress = l10n.t("passport.progressOf", ["value": PassportLogic.progressValue(milestone.value, target: milestone.target, language: l10n.language), "target": String(Int(milestone.target))])
         return VStack(spacing: Space.xs) {
             Medal(m: milestone, locked: true, size: size)
             Text(label).clack(titleRole).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
@@ -410,16 +410,17 @@ private struct MilestonesCard: View {
                 Text(l10n.t("passport.nextMilestones")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 LazyVGrid(columns: columns, spacing: Space.l) {
                     ForEach(Array(next.enumerated()), id: \.offset) { _, milestone in
-                        // Rounded as the card's km are (user test 2026-11-07: "345 km" on the card, "344 of 500" here).
-                        let value = Int((milestone.value ?? 0).rounded())
+                        // Rounded as the card's km are (user test 2026-11-07: "345 km" on the card, "344 of 500" here),
+                        // but never up to a target not reached.
+                        let value = PassportLogic.progressValue(milestone.value, target: milestone.target, language: l10n.language)
                         let formatter = NumberFormatter()
                         VStack(spacing: Space.xxs) {
                             Medal(m: milestone, locked: true)
                             title(l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home))
-                            Text(l10n.t("passport.progressOf", ["value": String(value), "target": String(Int(milestone.target))])).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                            Text(l10n.t("passport.progressOf", ["value": value, "target": String(Int(milestone.target))])).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home)): \(l10n.t("passport.progressOf", ["value": String(value), "target": String(Int(milestone.target))]))")
+                        .accessibilityLabel("\(l10n.milestoneLabel(milestone, language: app.settings.language, home: data.home)): \(l10n.t("passport.progressOf", ["value": value, "target": String(Int(milestone.target))]))")
                         let _ = formatter
                     }
                 }

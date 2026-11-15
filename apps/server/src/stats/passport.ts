@@ -530,7 +530,7 @@ class Tally {
   }
 }
 
-export function computeMilestones(all: PassportLeg[], home: CountryCode = 'SE'): { achieved: Milestone[]; next: Milestone[] } {
+export function computeMilestones(all: PassportLeg[], home: CountryCode = 'SE'): { achieved: Milestone[]; next: Milestone[]; values: Partial<Record<MilestoneFamily, number>> } {
   const rides = [...all].filter((l) => !l.canceled).sort((a, b) => a.dep - b.dep);
   const tally = new Tally(home);
   const families = Object.keys(MILESTONES) as MilestoneFamily[];
@@ -557,7 +557,9 @@ export function computeMilestones(all: PassportLeg[], home: CountryCode = 'SE'):
     })
     .filter((m): m is Milestone & { value: number } => m !== null)
     .sort((a, b) => b.value / b.target - a.value / a.target);
-  return { achieved: achieved.reverse(), next: next.slice(0, 3) };
+  // Every family's current value (rounded down to a tenth, as `next`), for the full ladder: `next` only carries three.
+  const values = Object.fromEntries(families.map((f) => [f, Math.floor(tally.value(f) * 10) / 10])) as Partial<Record<MilestoneFamily, number>>;
+  return { achieved: achieved.reverse(), next: next.slice(0, 3), values };
 }
 
 /** Running totals behind the milestones (same counting as computeMilestones). */

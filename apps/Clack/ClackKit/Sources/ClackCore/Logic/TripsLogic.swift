@@ -231,8 +231,10 @@ public nonisolated enum TripsLogic {
 
     public static func journeySummary(_ legs: [Leg]) -> JourneySummary? {
         guard let first = legs.first, let last = legs.last else { return nil }
-        let dep = first.actualDep?.ms ?? first.schedDep?.ms
-        let arr = last.actualArr?.ms ?? last.schedArr?.ms
+        // The same estimate the journey's row on Trips uses (actual, else live, else scheduled plus delay), so the two
+        // never disagree by a minute (Release check, build 76: "8h 18m" on the row, "8h 17m" on the page).
+        let dep = expected(first).dep
+        let arr = expected(last).arr
         let minutes = dep.flatMap { d in arr.map { ($0 - d) / 60_000 } }
         let distances = legs.map(\.distanceM)
         let distanceM = distances.allSatisfy { $0 != nil } ? distances.reduce(0) { $0 + ($1 ?? 0) } : nil

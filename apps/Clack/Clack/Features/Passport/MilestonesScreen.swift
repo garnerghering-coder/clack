@@ -79,7 +79,7 @@ struct MilestonesScreen: View {
         let label = l10n.milestoneLabel(m, language: app.settings.language, home: home)
         let line: String = rung.earned
             ? (m.at.map { Format.month($0.ms, tz: "Europe/Stockholm", language: app.settings.language) } ?? "")
-            : l10n.t("passport.progressOf", ["value": String(Int((m.value ?? 0).rounded())), "target": String(Int(m.target))])
+            : l10n.t("passport.progressOf", ["value": PassportLogic.progressValue(m.value, target: m.target, language: l10n.language), "target": String(Int(m.target))])
         let tile = VStack(spacing: Space.xxs) {
             Medal(m: m, locked: !rung.earned, size: 72)
             Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
