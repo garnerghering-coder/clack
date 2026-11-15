@@ -7,6 +7,7 @@ import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { openDb } from '../src/db/client.js';
 import { buildApp } from '../src/app.js';
+import { resetKindLists } from '../src/legs/product.js';
 import { followedTrains, stations, timetableStopTimes, timetableTripDates, timetableTrips } from '../src/db/schema.js';
 
 const A = '3f1c2b4a-8d9e-4f00-a1b2-c3d4e5f60718';
@@ -49,6 +50,19 @@ describe('coach and seat, and the export', () => {
     return res.json();
   };
   const patch = (u: string, id: string, payload: object) => app.inject({ method: 'PATCH', url: `/api/legs/${id}`, headers: headers(u), payload });
+
+  it('sets the kind of train on any trip, the owner\'s choice winning, and null goes back to the rules (build 81)', async () => {
+    resetKindLists();
+    const tt = (await app.inject({ method: 'POST', url: '/api/legs', headers: headers(A), payload: { tripKey: 'k1', serviceDate: '2026-10-20', fromSeq: 4, toSeq: 5 } })).json();
+    // The fixture's train 1 is SJ's night train 1 (data/night_trains.json), though the feed row says 102.
+    expect(tt).toMatchObject({ product: 'night', productSource: 'rule' });
+    const set = await patch(A, tt.id, { product: 'regional' });
+    expect(set.statusCode).toBe(200);
+    expect(set.json()).toMatchObject({ product: 'regional', productSource: 'user' });
+    expect((await patch(A, tt.id, { product: null })).json()).toMatchObject({ product: 'night', productSource: 'rule' });
+    expect((await patch(A, tt.id, { product: 'tram' })).statusCode).toBe(400);
+    expect((await patch(B, tt.id, { product: 'night' })).statusCode).toBe(404);
+  });
 
   it('is null when not given and stored trimmed when given (manual and timetable legs)', async () => {
     const plain = await create(A);

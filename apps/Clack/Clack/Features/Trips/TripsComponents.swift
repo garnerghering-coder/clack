@@ -334,7 +334,7 @@ struct JourneyCard: View {
                         .clack(.rowTitle).foregroundStyle(Ink.text)
                         .fixedSize(horizontal: false, vertical: true)
                     JourneyBar(legs: legs, now: now)
-                    if single { status(first) }
+                    if single { status(first) } else { journeyStatus(last) }
                 }
                 .padding(Space.l)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -379,6 +379,19 @@ struct JourneyCard: View {
             }
             Spacer(minLength: Space.s)
             Text(distance(leg)).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+        }
+    }
+
+    /// A journey's line under its strip, like a single train's: how it arrived (when known) and how far in all.
+    private func journeyStatus(_ last: Leg) -> some View {
+        let known = legs.map(\.distanceM)
+        let total: Double? = known.allSatisfy { $0 != nil } ? known.reduce(0) { $0 + ($1 ?? 0) } : nil
+        return HStack(spacing: Space.s) {
+            if !upcoming, last.arrDelayMin != nil || last.canceled { DelayText(delay: last.arrDelayMin, canceled: last.canceled) }
+            Spacer(minLength: Space.s)
+            if let total {
+                Text(Format.distance(total, unit: app.settings.distanceUnit, language: app.settings.language)).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+            }
         }
     }
 

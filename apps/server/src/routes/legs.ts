@@ -101,7 +101,7 @@ export const legRoutes =
         if (e instanceof LegError) return reply.code(e.status).send({ error: e.message });
         throw e;
       }
-      if (t === undefined && coach === undefined && seat === undefined && dep === undefined && arr === undefined && !Object.keys(manual).length) return reply.code(400).send({ error: 'nothing to change' });
+      if (t === undefined && coach === undefined && seat === undefined && dep === undefined && arr === undefined && !Object.keys(manual).length && body.product === undefined) return reply.code(400).send({ error: 'nothing to change' });
       if (t !== undefined && t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
       if (dep !== undefined || arr !== undefined) {
         const saved = setUserPlatforms(db, req.userId, req.params.id, { dep, arr });
