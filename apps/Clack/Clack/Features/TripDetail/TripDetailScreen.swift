@@ -60,6 +60,12 @@ struct TripDetailScreen: View {
     @State private var focusTarget: String?
     /// Where the stop rail last drew the train, so it only moves forward (`TripDetailLogic.steadyTrain`).
     @State private var trainHold = TripDetailLogic.TrainHold()
+    /// How far down the content the status and the times row end (`FirstScreenBottom`), so the map can leave room.
+    @State private var firstScreenBottom: CGFloat = 0
+    /// The bottom inset without the keyboard (the tab bar and the home indicator).
+    @State private var restingBottom: CGFloat?
+    /// This trip's journey's trains, for the changes into and out of it (`JourneyConnections`), when opened on its own.
+    @State private var journeyLegs: [Leg]?
 
     var body: some View {
         GeometryReader { proxy in
@@ -107,6 +113,12 @@ struct TripDetailScreen: View {
         }
         .task(id: leg?.leg.journeyId ?? leg?.id) {
             if let l = leg?.leg { await sharing.refresh(app, journeyId: l.journeyId, legId: l.id) }
+        }
+        .task(id: leg?.leg.journeyId) {
+            // Fetched here, not by the cards' view: an empty view with a task still took a place in the stack, an
+            // extra gap above "About this train" on a trip on its own (build 87).
+            guard journey == nil, let journeyId = leg?.leg.journeyId else { journeyLegs = nil; return }
+            journeyLegs = (try? await app.client.journey(journeyId))?.legs.map(\.leg)
         }
         .journeyShareSheet(sharing, l10n: l10n)
         .countsScreen("trip")
@@ -327,12 +339,22 @@ struct TripDetailScreen: View {
         // 130 pt under the finger (user test 2026-11-07, run 2). Before departure a little less map, so the alerts
         // question and its button sit above the tab bar on the first screen.
         let fullHeight = proxy.size.height + proxy.safeAreaInsets.bottom
-        let mapHeight = min(fullHeight * (stage == .before ? 0.42 : 0.5) + proxy.safeAreaInsets.top, 520)
+        let preferred = min(fullHeight * (stage == .before ? 0.42 : 0.5) + proxy.safeAreaInsets.top, 520)
+        // Less map when the status and the times row wouldn't both show above the tab bar on the first screen (build
+        // 87: the departure and arrival cards were cut off against it on a small phone). Measured from the content
+        // itself, so a disruption card or a journey's strip above them counts; never under a strip of map.
+        let visible = proxy.safeAreaInsets.top + fullHeight - (restingBottom ?? proxy.safeAreaInsets.bottom)
+        let fit = visible - (firstScreenBottom + Space.xl - 24) - Space.m
+        let mapHeight = firstScreenBottom > 0 ? max(min(preferred, fit), min(preferred, proxy.safeAreaInsets.top + 150)) : preferred
         ScrollViewReader { scroller in
         ScrollView {
             VStack(spacing: 0) {
                 mapArea(detail, tracking: tracking, height: mapHeight, top: proxy.safeAreaInsets.top)
                 content(detail, shown: shown, tracking: tracking, stage: stage, now: now)
+                    .coordinateSpace(name: FirstScreenBottom.space)
+                    .onPreferenceChange(FirstScreenBottom.self) { bottom in
+                        if abs(bottom - firstScreenBottom) > 1 { firstScreenBottom = bottom }
+                    }
                     .padding(.top, Space.xl)
                     .padding(.horizontal, Space.l)
                     .padding(.bottom, Space.xl)
@@ -343,6 +365,10 @@ struct TripDetailScreen: View {
             }
         }
         .ignoresSafeArea(edges: .top)
+        .onChange(of: proxy.safeAreaInsets.bottom, initial: true) { _, inset in
+            // The keyboard only ever adds to it.
+            if inset < (restingBottom ?? .infinity) { restingBottom = inset }
+        }
         // The system's edge effect under the bar's buttons, asked for by name: with the page running under the bar
         // the automatic one didn't show, so scrolled text ran into the back button (user test 2026-11-07, run 2).
         .modifier(SoftTopEdge())
@@ -488,14 +514,18 @@ struct TripDetailScreen: View {
     private func section(_ part: TripDetailLogic.Section, _ detail: LegDetail, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage) -> some View {
         let color = operatorColor(detail.leg.operator?.brandColor, scheme: scheme)
         switch part {
-        case .countdown: Ticking(every: 1) { now in countdown(detail, now: now) }
+        case .countdown: Ticking(every: 1) { now in countdown(detail, now: now) }.modifier(FirstScreenBottom.Mark())
         case .risk: RiskCard(leg: detail)
-        case .live: Ticking(every: 1) { now in liveNow(detail, now: now) }
-        case .result: result(detail)
-        case .times: timesRow(detail, live: shown, tracking: tracking).id("times")
+        case .live: Ticking(every: 1) { now in liveNow(detail, now: now) }.modifier(FirstScreenBottom.Mark())
+        case .result: result(detail).modifier(FirstScreenBottom.Mark())
+        case .times: timesRow(detail, live: shown, tracking: tracking).modifier(FirstScreenBottom.Mark()).id("times")
         case .stops: Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
         // Inside the journey screen its cards say this already.
-        case .connections: if journey == nil { JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId) }
+        // Nothing at all when there's no change (not an empty view, which still takes a gap in the stack).
+        case .connections:
+            if journey == nil, let legs = journeyLegs, !JourneyConnections.pairs(legId: detail.id, legs: legs).isEmpty {
+                JourneyConnections(legId: detail.id, legs: legs)
+            }
         case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
         }
@@ -777,8 +807,14 @@ struct TripDetailScreen: View {
                 }
             }
         }
+        // The hairline as far from the header's words as from what's above it (build 87: uneven): the stack's gap
+        // above, the same gap down to the 44 pt header's text.
+        .padding(.top, aboutGap)
         .overlay(alignment: .top) { Rectangle().fill(Ink.hairline).frame(height: 1) }
     }
+
+    /// Space under the hairline, so the header's text sits `Space.l` below it as the card above sits `Space.l` above.
+    private var aboutGap: CGFloat { max(0, Space.l - 10) }
 
     private func detailsCard(_ detail: LegDetail) -> some View {
         let l = detail.leg
@@ -1044,23 +1080,21 @@ struct JourneyContext {
 
 /// On a trip's page: the change into it and out of it, when it's part of a journey (ADDITIONS_01 C3).
 struct JourneyConnections: View {
-    @Environment(AppModel.self) private var app
     let legId: String
-    let journeyId: String?
-    @State private var legs: [Leg]?
+    let legs: [Leg]
+
+    /// The changes into and out of the trip: the train before it and the one after, where they meet at a station.
+    static func pairs(legId: String, legs: [Leg]) -> [(Leg, Leg)] {
+        guard let i = legs.firstIndex(where: { $0.id == legId }) else { return [] }
+        var out: [(Leg, Leg)] = []
+        if i > 0, legs[i - 1].destination?.id == legs[i].origin?.id { out.append((legs[i - 1], legs[i])) }
+        if i < legs.count - 1, legs[i].destination?.id == legs[i + 1].origin?.id { out.append((legs[i], legs[i + 1])) }
+        return out
+    }
 
     var body: some View {
-        Group {
-            if let legs, let i = legs.firstIndex(where: { $0.id == legId }) {
-                VStack(spacing: Space.s) {
-                    if i > 0, legs[i - 1].destination?.id == legs[i].origin?.id { ConnectionCard(a: legs[i - 1], b: legs[i]) }
-                    if i < legs.count - 1, legs[i].destination?.id == legs[i + 1].origin?.id { ConnectionCard(a: legs[i], b: legs[i + 1]) }
-                }
-            }
-        }
-        .task(id: journeyId) {
-            guard let journeyId else { return }
-            legs = (try? await app.client.journey(journeyId))?.legs.map(\.leg)
+        VStack(spacing: Space.s) {
+            ForEach(Array(Self.pairs(legId: legId, legs: legs).enumerated()), id: \.offset) { _, pair in ConnectionCard(a: pair.0, b: pair.1) }
         }
     }
 }
@@ -1124,6 +1158,24 @@ private struct SoftTopEdge: ViewModifier {
             content.scrollEdgeEffectStyle(.soft, for: .top)
         } else {
             content
+        }
+    }
+}
+
+/// The lowest point, in the content under the map, of what the first screen must show in full: the status (countdown,
+/// live card or result) and the times row.
+struct FirstScreenBottom: PreferenceKey {
+    static let space = "tripContent"
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = max(value, nextValue()) }
+
+    struct Mark: ViewModifier {
+        func body(content: Content) -> some View {
+            content.background {
+                GeometryReader { g in
+                    Color.clear.preference(key: FirstScreenBottom.self, value: g.frame(in: .named(FirstScreenBottom.space)).maxY)
+                }
+            }
         }
     }
 }

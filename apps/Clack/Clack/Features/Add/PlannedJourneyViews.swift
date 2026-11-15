@@ -49,7 +49,31 @@ struct ChangeLine: View {
     }
 }
 
-/// A planned journey in the results: when it leaves and arrives, how long, how many changes, each train, each change.
+/// Timetable trains as unsaved trips (`Leg.planned`), so a search result is drawn with the saved trip's card
+/// (owner, build 87: "it should use that same ui styling as a saved trip, with that line layout").
+@MainActor
+enum PlannedLegs {
+    static func op(_ id: String?, app: AppModel) -> LegOperator? {
+        id.flatMap { app.operatorsById[$0] }.map {
+            LegOperator(id: $0.id, name: $0.name, shortName: $0.shortName, company: $0.company, country: $0.country, brandColor: $0.brandColor, logoPath: $0.logoPath, logoUrl: $0.logoUrl)
+        }
+    }
+
+    static func legs(_ trains: [TripResult], journeyId: String, app: AppModel) -> [Leg] {
+        trains.map { Leg.planned($0, operator: op($0.operatorId, app: app), journeyId: journeyId) }
+    }
+
+    /// A single train's header: the operator and number, or the route's name when the operator isn't known (user
+    /// test 2026-11-07: "427 427 ?"), or "Train".
+    static func title(_ r: TripResult, app: AppModel, l10n: L10n) -> String {
+        let op = r.operatorId.flatMap { app.operatorsById[$0] }
+        let service = Format.service(AddTrainLogic.standInName(r, op: op) ?? op?.name, r.trainNumber)
+        return service.isEmpty ? l10n.t("trips.train") : service
+    }
+}
+
+/// A planned journey in the results, drawn as a saved trip or journey is in Trips (`JourneyCardContent`), with what
+/// only search says under the strip: direct or each change with its comfort, and the fastest of the list.
 struct JourneyResultCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -57,43 +81,32 @@ struct JourneyResultCard: View {
     var onPick: (() -> Void)?
 
     var body: some View {
-        let first = journey.legs[0], last = journey.legs[journey.legs.count - 1]
-        let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: last.to.time, toTz: last.to.tz)
-        let card = VStack(alignment: .leading, spacing: Space.s) {
-            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
-                Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                Text(Format.duration(Double(journey.durationMin), language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity)
-                HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
-                    Text(Format.time(last.to.time, tz: last.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    if plus > 0 { TimePair.plusText(plus) }
+        let legs = PlannedLegs.legs(journey.legs, journeyId: journey.id, app: app)
+        let single = legs.count == 1
+        let card = JourneyCardContent(legs: legs, now: 0, title: single ? PlannedLegs.title(journey.legs[0], app: app, l10n: l10n) : nil) {
+            VStack(alignment: .leading, spacing: Space.xs) {
+                if journey.changes.isEmpty || journey.fastest == true {
+                    HStack(spacing: Space.s) {
+                        if journey.changes.isEmpty { Text(l10n.t("journey.direct")).clack(.caption).foregroundStyle(Ink.text2) }
+                        if journey.fastest == true { Text(l10n.t("journey.fastest")).clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.accentInk) }
+                    }
                 }
-            }
-            .monospacedDigit()
-            HStack(spacing: Space.s) {
-                Text(changesText).clack(.chip).foregroundStyle(Ink.text2)
-                if journey.fastest == true { Text(l10n.t("journey.fastest")).clack(.chip).foregroundStyle(Ink.accentInk) }
-            }
-            ForEach(Array(journey.legs.enumerated()), id: \.offset) { i, leg in
-                let op = leg.operatorId.flatMap { app.operatorsById[$0] }
-                VStack(alignment: .leading, spacing: Space.xxs) {
-                    ServiceHeader(op: op, number: leg.trainNumber, size: .small, name: AddTrainLogic.standInName(routeName: leg.routeName, trainNumber: leg.trainNumber, op: op))
-                    (TimePair.text(.init(time: leg.from.time, tz: leg.from.tz), .init(time: leg.to.time, tz: leg.to.tz), clock: app.settings.clock)
-                        + Text(verbatim: Format.separator + "\(leg.from.name) → \(leg.to.name)"))
-                        .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
-                }
-                if i < journey.changes.count {
-                    let c = journey.changes[i]
+                ForEach(Array(journey.changes.enumerated()), id: \.offset) { _, c in
                     ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort, typicalLateMin: c.typicalLateMin)
                 }
             }
         }
-        .padding(Space.l)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
         Group {
-            if let onPick { Button(action: onPick) { card }.buttonStyle(.plain) } else { card }
+            if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Format.join([
+            single ? TripsSpeech.leg(legs[0], l10n: l10n, settings: app.settings) : TripsSpeech.journey(legs, l10n: l10n, settings: app.settings),
+            changesText,
+            journey.changes.map { l10n.t("change.line", ["station": $0.name, "min": String($0.gapMin)]) + ", " + l10n.t("comfort.\($0.comfort.rawValue)") }.joined(separator: ", "),
+            journey.fastest == true ? l10n.t("journey.fastest") : nil,
+        ], separator: ", "))
+        .accessibilityAddTraits(onPick == nil ? [] : .isButton)
     }
 
     private var changesText: String {
@@ -133,11 +146,8 @@ struct PlannedJourneyStep: View {
     /// The trains as unsaved trips, with the planner's tier and country so the change cards agree with it.
     private var legs: [Leg] {
         journey.legs.enumerated().map { i, r in
-            let op = r.operatorId.flatMap { app.operatorsById[$0] }.map {
-                LegOperator(id: $0.id, name: $0.name, shortName: $0.shortName, company: $0.company, country: $0.country, brandColor: $0.brandColor, logoPath: $0.logoPath, logoUrl: $0.logoUrl)
-            }
-            return Leg.planned(
-                r, operator: op, journeyId: journey.id,
+            Leg.planned(
+                r, operator: PlannedLegs.op(r.operatorId, app: app), journeyId: journey.id,
                 originTier: i > 0 ? (journey.changes.indices.contains(i - 1) ? journey.changes[i - 1].tier : nil) : nil,
                 country: journey.legCountries.flatMap { $0.indices.contains(i) ? $0[i] : nil },
                 distanceM: distances[i]

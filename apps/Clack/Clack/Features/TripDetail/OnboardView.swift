@@ -45,10 +45,15 @@ struct OnboardView: View {
                 if hasFacts, let facts { factChips(facts) }
                 if !typicalList.isEmpty {
                     Text(l10n.t("onboard.typically")).clack(.captionUpper).foregroundStyle(Ink.text2)
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: compact ? 130 : 150), spacing: Space.m, alignment: .top)], alignment: .leading, spacing: Space.s) {
+                    // Each item from the top left of its cell, so a row with a wrapped item starts level (build 87).
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: compact ? 130 : 150), spacing: Space.m, alignment: .topLeading)], alignment: .leading, spacing: Space.s) {
                         ForEach(typicalList, id: \.key) { entry in
-                            HStack(alignment: .top, spacing: Space.s) {
-                                LucideIcon(name: Self.icons[entry.key] ?? "info", size: 16).foregroundStyle(Ink.text2).padding(.top, 1)
+                            HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                                // The icon centred on the first line of its words, at any text size: it sits on a
+                                // hidden line of the same text, whose baseline lines up with theirs.
+                                Text(verbatim: "X").clack(.stopName).hidden().frame(width: 16)
+                                    .overlay { LucideIcon(name: Self.icons[entry.key] ?? "info", size: 16).foregroundStyle(Ink.text2) }
+                                    .accessibilityHidden(true)
                                 (Text(label(entry.key, entry.claim)) + Text(entry.claim.note.map { !compact ? " · \($0)" : "" } ?? "").font(TextRole.caption.font).foregroundStyle(Ink.text2))
                                     .clack(.stopName).foregroundStyle(Ink.text)
                                 Spacer(minLength: 0)

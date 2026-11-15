@@ -56,7 +56,6 @@ struct AddTrainSheet: View {
         }
         #endif
         .task(id: model.date) { await model.prepareHistory(app.client) }
-        .haptic(.success, trigger: model.saved?.id)
     }
 
     @ViewBuilder
@@ -499,6 +498,8 @@ private struct DateRow: View {
 
 // MARK: results
 
+/// A train in the results, drawn as the saved trip it becomes (`JourneyCardContent`; owner, build 87), with what only
+/// search says under the strip: the type the line usually runs, with its drawing, and the stops between.
 private struct ResultCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -508,40 +509,30 @@ private struct ResultCard: View {
     var body: some View {
         let op = result.operatorId.flatMap { app.operatorsById[$0] }
         let type = result.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
-        let plus = Format.dayOffset(from: result.from.time, fromTz: result.from.tz, to: result.to.time, toTz: result.to.tz)
         let dep = Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)
         let arr = Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)
         let duration = Format.duration(Double(result.durationMin), language: l10n.language)
+        let legs = PlannedLegs.legs([result], journeyId: result.id, app: app)
         Button(action: onPick) {
-            VStack(alignment: .leading, spacing: Space.s) {
-                TimesRow(dep: dep, arr: arr, duration: duration, plus: plus)
-                AdaptiveStack(spacing: Space.m) {
-                    Text(result.from.name).lineLimit(2)
-                    Spacer(minLength: 0)
-                    Text(result.to.name).multilineTextAlignment(.trailing).lineLimit(2)
-                }
-                .clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text2)
-                if let type {
-                    HStack(spacing: Space.m) {
-                        TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
-                        // A typical type for the line, not a fact about this run (user test 2026-11-07: "X2000" here,
-                        // the planned "SJ 3000 (X55)" on the trip, read as the app not knowing what it was).
-                        Text(l10n.t("add.usuallyType", ["type": type.name])).clack(.caption).foregroundStyle(Ink.text2)
+            JourneyCardContent(legs: legs, now: 0, title: PlannedLegs.title(result, app: app, l10n: l10n)) {
+                VStack(alignment: .leading, spacing: Space.s) {
+                    if let type {
+                        HStack(spacing: Space.m) {
+                            TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
+                            // A typical type for the line, not a fact about this run (user test 2026-11-07: "X2000" here,
+                            // the planned "SJ 3000 (X55)" on the trip, read as the app not knowing what it was).
+                            Text(l10n.t("add.usuallyType", ["type": type.name])).clack(.caption).foregroundStyle(Ink.text2)
+                        }
                     }
+                    Text(Format.join([
+                        l10n.t("products.\(result.product)"),
+                        result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
+                        result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
+                    ]))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                    .fixedSize(horizontal: false, vertical: true)
                 }
-                // Without the operator's mark the route's name stands in, unless it is only the number again
-                // (user test 2026-11-07: "427 427 ?").
-                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: AddTrainLogic.standInName(result, op: op))
-                Text(Format.join([
-                    result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
-                    result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
-                ]))
-                .clack(.caption).foregroundStyle(Ink.text2)
             }
-            .padding(Space.l)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-            .hairlineBorder(radius: Radius.card)
         }
         .buttonStyle(.press)
         // One sentence for VoiceOver, not a dozen pieces.
@@ -554,84 +545,35 @@ private struct ResultCard: View {
     }
 }
 
-/// Departure, the trip's length on a dashed line, arrival. The times never shrink or wrap; at large text sizes the
-/// three stack instead of squeezing (polish pass 1: "07:2 / 2" at AX3).
-private struct TimesRow: View {
-    let dep: String
-    let arr: String
-    let duration: String
-    let plus: Int
-
-    var body: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(alignment: .firstTextBaseline, spacing: Space.m) {
-                time(dep)
-                Text(duration)
-                    .clack(.caption).foregroundStyle(Ink.text2)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity)
-                    .background { DashedHorizontalLine() }
-                arrival
-            }
-            VStack(alignment: .leading, spacing: Space.xxs) {
-                time(dep)
-                Text(duration).clack(.caption).foregroundStyle(Ink.text2)
-                arrival
-            }
-        }
-        .monospacedDigit()
-    }
-
-    private func time(_ text: String) -> some View {
-        Text(text).clack(.bigTime).foregroundStyle(Ink.text).fixedSize()
-    }
-
-    private var arrival: some View {
-        HStack(alignment: .firstTextBaseline, spacing: Space.xs) {
-            time(arr)
-            if plus > 0 { TimePair.plusText(plus) }
-        }
-        .fixedSize()
-    }
-}
-
-/// While the first results load: a card shaped like a result (times, names, a train, a line), so nothing moves when
+/// While the first results load: a card shaped like a result (header, route, strip, a line), so nothing moves when
 /// the real ones arrive.
 private struct ResultCardSample: View {
     var body: some View {
         Placeholder {
             VStack(alignment: .leading, spacing: Space.s) {
-                TimesRow(dep: "08:03", arr: "10:51", duration: "2h 48m", plus: 0)
                 HStack {
-                    Text(verbatim: "Stockholm C")
+                    Text(verbatim: "SJ 523").clack(.caption)
                     Spacer(minLength: 0)
-                    Text(verbatim: "Göteborg C")
+                    Text(verbatim: "Fri 17 Oct").clack(.caption)
                 }
-                .clack(.stopName).fontWeight(.semibold)
-                Color.clear.frame(height: 28)
-                ServiceHeader(op: nil, number: "523", size: .medium)
+                Text(verbatim: "Stockholm C → Göteborg C").clack(.rowTitle)
+                RoundedRectangle(cornerRadius: Radius.bar).frame(height: 6).padding(.vertical, Space.xxs)
+                HStack {
+                    Text(verbatim: "08:03 Stockholm C")
+                    Spacer(minLength: 0)
+                    Text(verbatim: "10:51 Göteborg C")
+                }
+                .clack(.micro)
                 Text(verbatim: "4 stops between").clack(.caption)
             }
             .padding(Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+            .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         }
     }
 }
 
-private struct DashedHorizontalLine: View {
-    var body: some View {
-        GeometryReader { proxy in
-            Path { path in
-                path.move(to: CGPoint(x: proxy.size.width * 0.06, y: proxy.size.height / 2))
-                path.addLine(to: CGPoint(x: proxy.size.width * 0.94, y: proxy.size.height / 2))
-            }
-            .stroke(Ink.text3, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
-        }
-    }
-}
-
-/// Two trains and the change between them, as one option.
+/// Two trains and the change between them, as one option, drawn as a saved journey is (`JourneyCardContent`).
 private struct ConnectionResultCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -639,34 +581,21 @@ private struct ConnectionResultCard: View {
     var onPick: (() -> Void)?
 
     var body: some View {
-        let first = connection.first
-        let second = connection.second
-        let total = Double(Int(((second.to.time - first.from.time) / 60_000).rounded()))
-        let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: second.to.time, toTz: second.to.tz)
-        let card = VStack(alignment: .leading, spacing: Space.s) {
-            TimesRow(
-                dep: Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock),
-                arr: Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock),
-                duration: Format.duration(total, language: l10n.language), plus: plus
-            )
-            ForEach([first, second], id: \.id) { result in
-                let op = result.operatorId.flatMap { app.operatorsById[$0] }
-                VStack(alignment: .leading, spacing: Space.xxs) {
-                    ServiceHeader(op: op, number: result.trainNumber, size: .small, name: AddTrainLogic.standInName(result, op: op))
-                    (TimePair.text(.init(time: result.from.time, tz: result.from.tz), .init(time: result.to.time, tz: result.to.tz), clock: app.settings.clock)
-                        + Text(verbatim: Format.separator + "\(result.from.name) → \(result.to.name)"))
-                        .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
-                }
-            }
-            Text(l10n.t("add.changeAt", ["station": connection.changeAt.name, "min": String(connection.changeMin)])).clack(.caption).foregroundStyle(Ink.text2)
+        let legs = PlannedLegs.legs([connection.first, connection.second], journeyId: connection.id, app: app)
+        let change = l10n.t("add.changeAt", ["station": connection.changeAt.name, "min": String(connection.changeMin)])
+        let card = JourneyCardContent(legs: legs, now: 0) {
+            Text(change).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
         }
-        .padding(Space.l)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
         Group {
             if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Format.join([
+            TripsSpeech.journey(legs, l10n: l10n, settings: app.settings),
+            legs.map { Format.service($0.operator?.name, $0.trainNumber) }.joined(separator: ", "),
+            change,
+        ], separator: ", "))
+        .accessibilityAddTraits(onPick == nil ? [] : .isButton)
     }
 }
 
@@ -951,7 +880,9 @@ private struct DoneStep: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let leg: LegDetail
     let onAnother: () -> Void
-    @State private var drawn = false
+    /// The train has glided in, then the tick has stamped.
+    @State private var arrived = false
+    @State private var stamped = false
     /// The journey the saved train belongs to (its other trains, saved now or before), when it has one.
     @State private var journey: Journey?
     @State private var alertsBusy = false
@@ -962,19 +893,38 @@ private struct DoneStep: View {
         let legs = (journey?.legs.map(\.leg)).flatMap { $0.count > 1 ? $0 : nil }
         let first = legs?.first ?? l, last = legs?.last ?? l
         let ahead = (l.schedDep?.ms ?? 0) > Date.now.timeIntervalSince1970 * 1000
+        let type = l.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         VStack(spacing: Space.m) {
+            // A small moment (build 87: "Added" felt abrupt): the train's drawing glides in along a short line of
+            // track and stops, then the tick stamps in with the success tap. No confetti; under Reduce Motion it all
+            // fades in where it ends.
+            if let type {
+                ArrivingTrain(type: type, operatorId: l.operatorId, arrived: arrived, reduceMotion: reduceMotion)
+            }
             ZStack {
                 Circle().stroke(Ink.onTime.opacity(0.35), lineWidth: 3)
-                CheckShape().trim(from: 0, to: drawn || reduceMotion ? 1 : 0)
+                CheckShape().trim(from: 0, to: stamped || reduceMotion ? 1 : 0)
                     .stroke(Ink.onTime, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                    .animation(Motion.appear.animation(reduceMotion: reduceMotion), value: drawn)
             }
             .frame(width: 72, height: 72)
+            .scaleEffect(stamped || reduceMotion ? 1 : 1.35)
+            .opacity(stamped ? 1 : 0)
+            .animation(reduceMotion ? Motion.reduced : Motion.signature.animation, value: stamped)
+            .accessibilityHidden(true)
             // Drawn once the view is on screen (user test 2026-11-07: "it never drew a tick, just a ring").
             .task {
-                try? await Task.sleep(for: .milliseconds(150))
-                drawn = true
+                if reduceMotion {
+                    arrived = true
+                    stamped = true
+                    return
+                }
+                try? await Task.sleep(for: .milliseconds(120))
+                arrived = true
+                // The tick once the train has stopped (or at once without a drawing).
+                try? await Task.sleep(for: .milliseconds(type == nil ? 30 : 560))
+                stamped = true
             }
+            .haptic(.success, trigger: stamped) { _, new in new }
             Text(l10n.t("add.added")).clack(.sheetTitle).foregroundStyle(Ink.text)
             // A journey is named whole (user test 2026-11-07: "Added" named only the last of two trains).
             Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text)
@@ -1041,6 +991,39 @@ private struct DoneStep: View {
         }
         UserDefaults.standard.set(true, forKey: FirstRun.alertsAskedKey)
         alertsBusy = false
+    }
+}
+
+/// The saved train's drawing gliding in from the left along a short line of track and easing to a stop over its
+/// middle; with Reduce Motion it fades in where it stops.
+private struct ArrivingTrain: View {
+    let type: TrainType
+    let operatorId: String?
+    let arrived: Bool
+    let reduceMotion: Bool
+
+    private static let width: CGFloat = 240
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            // The track: a hairline that fades out at both ends.
+            Rectangle()
+                .fill(LinearGradient(stops: [
+                    .init(color: Ink.text3.opacity(0), location: 0), .init(color: Ink.text3, location: 0.2),
+                    .init(color: Ink.text3, location: 0.8), .init(color: Ink.text3.opacity(0), location: 1),
+                ], startPoint: .leading, endPoint: .trailing))
+                .frame(height: 1)
+                .opacity(arrived ? 1 : 0)
+            TrainPicture(type: type, operatorId: operatorId, height: 34)
+                .frame(maxWidth: Self.width - Space.xl)
+                .padding(.bottom, Space.xxs)
+                .offset(x: arrived || reduceMotion ? 0 : -Self.width)
+                .opacity(arrived ? 1 : 0)
+        }
+        .frame(width: Self.width, height: 40)
+        .clipped()
+        .animation(reduceMotion ? Motion.reduced : .spring(duration: 0.6, bounce: 0), value: arrived)
+        .accessibilityHidden(true)
     }
 }
 

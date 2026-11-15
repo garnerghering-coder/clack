@@ -50,8 +50,17 @@ struct TrainCard: View {
                     Text(l10n.t("train.historySource")).clack(.micro).foregroundStyle(Ink.text3)
                 }
             }
-            Button(picking ? l10n.t("train.cancel") : l10n.t("train.change")) { picking.toggle() }
-                .buttonStyle(LinkButtonStyle())
+            // A quiet link, not the accent: the screen's one yellow is elsewhere (build 87). Still a full 44 pt target.
+            Button { picking.toggle() } label: {
+                HStack(spacing: Space.xs) {
+                    Text(picking ? l10n.t("train.cancel") : l10n.t("train.change"))
+                    LucideIcon(name: picking ? "chevron-up" : "chevron-right", size: 14)
+                }
+                .clack(.body).fontWeight(.medium).foregroundStyle(Ink.text2)
+                .frame(minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
             if picking { picker(current: leg.leg.trainType, source: source, operatorId: operatorId) }
         }
     }

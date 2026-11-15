@@ -238,7 +238,7 @@ struct TripsScreen: View {
                 await model.load(app.client)
                 await model.loadFollows(app.client)
             }
-            .modifier(SwipeContainer())
+            .swipeRowsContainer()
             .onChange(of: router.tripsScrollTarget, initial: true) { _, target in
                 guard let target else { return }
                 Task {
@@ -287,6 +287,7 @@ struct TripsScreen: View {
                 ReviewCard(leg: leg) { answer in
                     if !(await model.answer(leg, answer, app.client)) { toaster.show(FailureText.line(l10n.t("common.couldntSave"), nil, app: app, l10n: l10n), isError: true) }
                 }
+                .trailingSwipe(id: "review-\(leg.id)", share: shareText([leg]), delete: { deleting = leg })
             }
         }
         FollowingSection(follows: unshared(model.follows))
@@ -308,12 +309,12 @@ struct TripsScreen: View {
         if item.count > 1 {
             JourneyCard(legs: item)
                 .contextMenu { shareButton(item) }
-                .modifier(TripSwipe { shareButton(item) })
+                .trailingSwipe(id: "journey-\(item[0].id)", share: shareText(item), delete: nil)
                 .modifier(LandsWhenAdded(ids: item.map(\.id)))
         } else {
             JourneyCard(legs: item, upcoming: upcoming)
                 .contextMenu { actions(item[0]) }
-                .modifier(TripSwipe { actions(item[0]) })
+                .trailingSwipe(id: "trip-\(item[0].id)", share: shareText(item), delete: { deleting = item[0] })
                 .modifier(LandsWhenAdded(ids: [item[0].id]))
         }
     }
@@ -360,29 +361,5 @@ struct TripsScreen: View {
         .background(Ink.bg)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isHeader)
-    }
-}
-
-/// Swipe actions on a row of the Trips list: iOS 27 lets them work outside a `List` (a `LazyVStack` in a scroll
-/// view), so they're there from iOS 27; before, the hold menu has the same actions.
-private struct TripSwipe<Actions: View>: ViewModifier {
-    @ViewBuilder var actions: Actions
-
-    func body(content: Content) -> some View {
-        if #available(iOS 27.0, *) {
-            content.swipeActions(edge: .trailing, allowsFullSwipe: false) { actions }
-        } else {
-            content
-        }
-    }
-}
-
-private struct SwipeContainer: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 27.0, *) {
-            content.swipeActionsContainer()
-        } else {
-            content
-        }
     }
 }

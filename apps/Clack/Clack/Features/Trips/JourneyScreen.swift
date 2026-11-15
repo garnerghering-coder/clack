@@ -115,8 +115,10 @@ private struct JourneyOverview: View {
         let last = legs[legs.count - 1]
         Page {
             if !routes.isEmpty {
+                // A smaller map on a small phone, so the numbers and the first train still show on the first screen
+                // (build 87: the trains' cards were cut off at the tab bar).
                 MultiRouteMapView(routes: routes, stations: stations, railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel"))
-                    .frame(height: 240)
+                    .containerRelativeFrame(.vertical) { height, _ in min(240, max(150, height * 0.3)) }
                     .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                     .hairlineBorder(radius: Radius.card)
             }

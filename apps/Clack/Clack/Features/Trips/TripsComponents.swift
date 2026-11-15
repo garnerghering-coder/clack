@@ -320,10 +320,11 @@ struct TransferChip: View {
 /// A trip or a journey in the Trips list, one look for both (owner, 2026-11-15: "close the gap" between a past trip
 /// and a past journey): a header (the journey's label, or the train's operator and number), the route, the day as a
 /// slim strip with its times, and for a single train one status line. Each train's operator colour glows beside it.
+/// The card itself is `JourneyCardContent`, which search results use too (owner, build 87: a result should look like
+/// the saved trip it becomes).
 struct JourneyCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
-    @Environment(\.colorScheme) private var scheme
     let legs: [Leg]
     /// Ahead: a single train leads with its countdown and says its platform.
     var upcoming = false
@@ -332,52 +333,12 @@ struct JourneyCard: View {
     /// a card per journey). The whole row opens the journey, or the trip; its trains are there.
     var body: some View {
         let first = legs[0]
-        let last = legs[legs.count - 1]
         let single = legs.count == 1
         let route = single ? AppRoute.trip(first.id) : first.journeyId.map { AppRoute.journey($0) } ?? .trip(first.id)
         NavigationLink(value: route) {
             TimelineView(.periodic(from: .now, by: 60)) { context in
-                let now = context.date.timeIntervalSince1970 * 1000
-                VStack(alignment: .leading, spacing: Space.s) {
-                    HStack(alignment: .center, spacing: Space.s) {
-                        if single {
-                            OperatorBadge(op: first.operator, size: .small)
-                            Text([first.operator?.name, first.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
-                        } else {
-                            Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
-                        }
-                        Spacer(minLength: Space.s)
-                        if let dep = first.schedDep?.ms {
-                            Text(Format.day(dep, tz: TripsLogic.tz(first), language: app.settings.language)).clack(.caption).foregroundStyle(Ink.text2)
-                        }
-                    }
-                    if single && upcoming { CountdownLine(leg: first, now: now) }
-                    Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
-                        .clack(.rowTitle).foregroundStyle(Ink.text)
-                        .fixedSize(horizontal: false, vertical: true)
-                    JourneyBar(legs: legs, now: now)
-                    if single { status(first) } else { journeyStatus(last) }
-                }
-                .padding(Space.l)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    ZStack {
-                        Ink.surface
-                        ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
-                            CSSRadialGradient(
-                                rx: 0.75, ry: 1.1 / Double(legs.count), cx: 1, cy: (Double(index) + 0.6) / Double(legs.count),
-                                stops: [
-                                    .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0.18), location: 0),
-                                    .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0), location: 0.7),
-                                ]
-                            )
-                        }
-                    }
-                }
-                .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-                .hairlineBorder(radius: Radius.card)
-                .opacity(single && first.ride == .notTaken ? 0.55 : 1)
-                .modifier(ZoomSource(id: single ? "trip-\(first.id)" : first.journeyId.map { "journey-\($0)" } ?? "trip-\(first.id)"))
+                JourneyCardContent(legs: legs, upcoming: upcoming, now: context.date.timeIntervalSince1970 * 1000)
+                    .modifier(ZoomSource(id: single ? "trip-\(first.id)" : first.journeyId.map { "journey-\($0)" } ?? "trip-\(first.id)"))
             }
         }
         .buttonStyle(.press)
@@ -386,9 +347,86 @@ struct JourneyCard: View {
         .accessibilityAddTraits(.isButton)
         .accessibilityIdentifier(single ? "trips.leg" : "trips.journey")
     }
+}
+
+/// The inside of a trip's or a journey's card, with no link of its own: the Trips list wraps it in one, search wraps
+/// it in its own button. `status` replaces the line under the strip (search says its changes and stops there).
+struct JourneyCardContent<Status: View>: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(\.colorScheme) private var scheme
+    let legs: [Leg]
+    var upcoming = false
+    /// For the strip's fill (how far each train has gone); 0 for a train not yet taken, as in search.
+    let now: Double
+    /// Said for a single train in place of its operator and number (search: the route's name when no operator is known).
+    var title: String?
+    /// The line under the strip; nil: the saved trip's own.
+    private let status: Status?
+
+    init(legs: [Leg], upcoming: Bool = false, now: Double, title: String? = nil, @ViewBuilder status: () -> Status) {
+        self.legs = legs
+        self.upcoming = upcoming
+        self.now = now
+        self.title = title
+        self.status = status()
+    }
+
+    fileprivate init(legs: [Leg], upcoming: Bool, now: Double, title: String?, noStatus: Void) {
+        self.legs = legs
+        self.upcoming = upcoming
+        self.now = now
+        self.title = title
+        self.status = nil
+    }
+
+    var body: some View {
+        let first = legs[0]
+        let last = legs[legs.count - 1]
+        let single = legs.count == 1
+        VStack(alignment: .leading, spacing: Space.s) {
+            HStack(alignment: .center, spacing: Space.s) {
+                if single {
+                    OperatorBadge(op: first.operator, size: .small)
+                    Text(title ?? [first.operator?.name, first.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
+                } else {
+                    Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                }
+                Spacer(minLength: Space.s)
+                if let dep = first.schedDep?.ms {
+                    Text(Format.day(dep, tz: TripsLogic.tz(first), language: app.settings.language)).clack(.caption).foregroundStyle(Ink.text2)
+                }
+            }
+            if single && upcoming { CountdownLine(leg: first, now: now) }
+            Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
+                .clack(.rowTitle).foregroundStyle(Ink.text)
+                .fixedSize(horizontal: false, vertical: true)
+            JourneyBar(legs: legs, now: now)
+            if let status { status } else if single { legStatus(first) } else { journeyStatus(last) }
+        }
+        .padding(Space.l)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            ZStack {
+                Ink.surface
+                ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
+                    CSSRadialGradient(
+                        rx: 0.75, ry: 1.1 / Double(legs.count), cx: 1, cy: (Double(index) + 0.6) / Double(legs.count),
+                        stops: [
+                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0.18), location: 0),
+                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0), location: 0.7),
+                        ]
+                    )
+                }
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+        .opacity(single && first.ride == .notTaken ? 0.55 : 1)
+    }
 
     /// A single train's line under its strip: whether it needs a check, how late it was (or the platform ahead), how far.
-    private func status(_ leg: Leg) -> some View {
+    private func legStatus(_ leg: Leg) -> some View {
         HStack(spacing: Space.s) {
             if leg.ride == .review { Chip(text: l10n.t("record.needsCheck"), tint: Ink.warnText) }
             if leg.ride == .notTaken { Chip(text: l10n.t("record.notTaken")) }
@@ -420,6 +458,12 @@ struct JourneyCard: View {
     private func distance(_ leg: Leg) -> String {
         let text = Format.distance(leg.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)
         return leg.isEstimatedGeometry ? l10n.t("trips.approxDistance", ["distance": text]) : text
+    }
+}
+
+extension JourneyCardContent where Status == EmptyView {
+    init(legs: [Leg], upcoming: Bool = false, now: Double, title: String? = nil) {
+        self.init(legs: legs, upcoming: upcoming, now: now, title: title, noStatus: ())
     }
 }
 
