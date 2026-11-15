@@ -3,14 +3,13 @@
 //  Clack
 //
 
-import Charts
 import ClackCore
 import ClackDesign
 import SwiftUI
 
 /// "Your 2025 in rail" (owner, 2026-11-15: "visual, interactive, engaging, make it more"; only for a year that's over):
-/// the year as a story on the Passport's yellow. Tap the right side for the next page, the left for the one before,
-/// hold to pause; each page moves on by itself after a while. Only what your trips say; a page with nothing to say is
+/// the year as a story on the Passport's yellow. Tap the right half for the next page, the left half for the one
+/// before, on every page (a month or the Share button keeps its own tap); hold to pause; each page moves on by itself after a while. Only what your trips say; a page with nothing to say is
 /// left out. From the year's own Passport (`GET /passport?year=`, with its months and firsts).
 struct YearRecap: View {
     @Environment(AppModel.self) private var app
@@ -29,6 +28,15 @@ struct YearRecap: View {
     @State private var holding = false
     /// The page has been shown: its numbers count up and its stamps press in once.
     @State private var shown = false
+    /// Which way the last page change went (+1 on, -1 back): the new page comes in from that side.
+    @State private var direction = 1
+    /// The half just tapped, washed briefly.
+    @State private var flash: Side?
+    /// A hold just paused the page: the tap that ends it doesn't also turn the page.
+    @State private var held = false
+    @State private var width: CGFloat = 0
+
+    private enum Side { case left, right }
 
     /// How long a page stays before moving on by itself.
     private static let pageSeconds = 7.0
@@ -39,13 +47,33 @@ struct YearRecap: View {
             if let data {
                 let pages = pages(data)
                 let page = pages[min(index, pages.count - 1)]
-                pageView(page, data)
-                    .id(page)
-                    .padding(.horizontal, Space.xl).padding(.top, Space.xxxl + Space.xl).padding(.bottom, Space.xl)
-                    // A cross-fade: a slide left a faint copy of the page behind (seen on the month chart).
-                    .transition(.opacity)
-                    // Tap zones over the page (the share page's button and the month chart keep their own taps).
-                    .overlay { if page != .share && page != .months { tapZones(count: pages.count) } }
+                ZStack {
+                    pressWash
+                    accessibilityZones(count: pages.count)
+                    pageView(page, data)
+                        .id(page)
+                        .padding(.horizontal, Space.xl).padding(.top, Space.xxxl + Space.xl).padding(.bottom, Space.xl)
+                        // A cross-fade with a few points' nudge from the side it came from (a long slide left a faint
+                        // copy of the page behind); the old page only fades.
+                        .transition(reduceMotion ? .opacity : .asymmetric(insertion: .opacity.combined(with: .offset(x: CGFloat(direction) * 16)), removal: .opacity))
+                }
+                .contentShape(Rectangle())
+                .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+                // The halves are behind everything: a tap anywhere that isn't a month or a button pages, left half
+                // back, right half on (the controls' own taps win over this one).
+                .onTapGesture(coordinateSpace: .local) { point in tap(at: point, count: pages.count) }
+                .simultaneousGesture(
+                    LongPressGesture(minimumDuration: 0.25)
+                        .onEnded { _ in holding = true; held = true }
+                        .sequenced(before: DragGesture(minimumDistance: 0))
+                        .onEnded { _ in
+                            holding = false
+                            Task { @MainActor in
+                                try? await Task.sleep(for: .milliseconds(300))
+                                held = false
+                            }
+                        }
+                )
                 segments(count: pages.count)
             } else if failed {
                 ErrorStateView(message: l10n.t("recap.failed"), retry: { await load() }).padding(Space.xl)
@@ -75,6 +103,8 @@ struct YearRecap: View {
             }
         }
         .onAppear { shown = true }
+        .haptic(.selection, trigger: index)
+        .haptic(.snap, trigger: holding, condition: { _, now in now })
         .sheet(isPresented: $sharing) {
             if let data { ShareSheet(passport: data, year: year, commuter: app.settings.includeCommuter) { sharing = false } }
         }
@@ -85,6 +115,7 @@ struct YearRecap: View {
     private func go(to next: Int, count: Int) {
         let target = max(0, min(count - 1, next))
         guard target != index else { progress = 0; return }
+        direction = target > index ? 1 : -1
         shown = false
         withMotion(.layout, reduceMotion: reduceMotion) { index = target }
         progress = 0
@@ -94,25 +125,44 @@ struct YearRecap: View {
         }
     }
 
-    /// The left third goes back, the rest goes on; a hold pauses.
-    private func tapZones(count: Int) -> some View {
+    /// A tap's half decides: the left half goes back, the right half goes on. A tap that ends a hold does neither.
+    private func tap(at point: CGPoint, count: Int) {
+        guard !held else { held = false; return }
+        let side: Side = point.x < width / 2 ? .left : .right
+        flash = side
+        go(to: index + (side == .left ? -1 : 1), count: count)
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(160))
+            withMotion(.tap, reduceMotion: reduceMotion) { if flash == side { flash = nil } }
+        }
+    }
+
+    /// The tapped half, washed in ink for a moment.
+    private var pressWash: some View {
         HStack(spacing: 0) {
-            Color.clear.contentShape(Rectangle())
-                .frame(maxWidth: .infinity)
-                .onTapGesture { go(to: index - 1, count: count) }
+            Ink.onAccent.opacity(flash == .left ? 0.06 : 0)
+            Ink.onAccent.opacity(flash == .right ? 0.06 : 0)
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    /// Previous and Next for VoiceOver, one half each (taps are handled by the page's own tap, above).
+    private func accessibilityZones(count: Int) -> some View {
+        HStack(spacing: 0) {
+            Color.clear
                 .accessibilityElement()
                 .accessibilityLabel(l10n.t("recap.previous"))
                 .accessibilityAddTraits(.isButton)
                 .accessibilityAction { go(to: index - 1, count: count) }
-            Color.clear.contentShape(Rectangle())
-                .frame(maxWidth: .infinity).layoutPriority(2)
-                .onTapGesture { go(to: index + 1, count: count) }
+            Color.clear
                 .accessibilityElement()
                 .accessibilityLabel(l10n.t("recap.next"))
                 .accessibilityAddTraits(.isButton)
                 .accessibilityAction { go(to: index + 1, count: count) }
         }
-        .simultaneousGesture(LongPressGesture(minimumDuration: 0.25).onChanged { _ in holding = true }.sequenced(before: DragGesture(minimumDistance: 0)).onEnded { _ in holding = false })
+        .allowsHitTesting(false)
     }
 
     /// One segment a page, the current one filling.
@@ -140,7 +190,7 @@ struct YearRecap: View {
 
     private func pages(_ d: Passport) -> [Page] {
         var out: [Page] = [.distance]
-        if (d.months?.count ?? 0) > 1 { out.append(.months) }
+        if (d.months ?? []).contains(where: { $0.trains > 0 }) { out.append(.months) }
         if let f = d.firsts, f.stations > 0 || !f.countries.isEmpty { out.append(.firsts) }
         if d.records.mostRiddenRoute != nil || d.records.busiestStation != nil { out.append(.route) }
         if !trainTypes(d).isEmpty { out.append(.trains) }
@@ -199,58 +249,38 @@ struct YearRecap: View {
                 .opacity(shown ? 1 : 0)
                 .animation(reduceMotion ? nil : .easeOut(duration: 0.6).delay(0.3), value: shown)
                 .environment(\.colorScheme, .light)
+                // A picture here: a tap on it pages like anywhere else.
+                .allowsHitTesting(false)
         }
     }
 
-    /// Trains a month as bars, the busiest lit; tap a month for its numbers.
+    /// All twelve months as tiles, the picked one (the busiest to start) filled; tap a month for its numbers.
     @State private var pickedMonth: String?
 
     private func months(_ d: Passport) -> some View {
-        let byMonth = Dictionary(uniqueKeysWithValues: (d.months ?? []).map { ($0.month, $0) })
-        let keys = (1...12).map { String(format: "%04d-%02d", year, $0) }
-        let busiest = (d.months ?? []).max { $0.trains < $1.trains }?.month
-        let picked = pickedMonth.flatMap { byMonth[$0] } ?? busiest.flatMap { byMonth[$0] }
+        let all = RecapMonth.year(year, d.months, language: app.settings.language)
+        let busiest = all.max { $0.trains < $1.trains }.flatMap { $0.trains > 0 ? $0 : nil }
+        let picked = pickedMonth.flatMap { key in all.first { $0.key == key } } ?? busiest
         return VStack(alignment: .leading, spacing: Space.l) {
             Text(l10n.t("recap.monthsTitle")).clack(.sheetTitle).foregroundStyle(Ink.onAccent)
             if let picked {
-                big(monthName(picked.month))
-                line(l10n.t("recap.monthPick", ["month": monthName(picked.month), "count": String(picked.trains), "distance": Format.distance(picked.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)]))
-            }
-            Chart(keys, id: \.self) { key in
-                BarMark(x: .value("Month", String(monthName(key).prefix(1))), y: .value("Trains", shown ? (byMonth[key]?.trains ?? 0) : 0))
-                    .foregroundStyle(key == (pickedMonth ?? busiest) ? Ink.onAccent : Ink.onAccent.opacity(0.3))
-                    .cornerRadius(Radius.bar)
-            }
-            .chartYAxis(.hidden)
-            .chartXAxis {
-                AxisMarks { _ in AxisValueLabel().foregroundStyle(Ink.onAccent.opacity(0.7)) }
-            }
-            .chartOverlay { proxy in
-                GeometryReader { g in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .onTapGesture { point in
-                            let x = point.x - g[proxy.plotFrame!].origin.x
-                            let slot = Int((x / g[proxy.plotFrame!].width) * 12)
-                            if (0..<12).contains(slot), byMonth[keys[slot]] != nil {
-                                withMotion(.tap, reduceMotion: reduceMotion) { pickedMonth = keys[slot] }
-                                progress = 0
-                            }
-                        }
+                VStack(alignment: .leading, spacing: Space.l) {
+                    big(picked.long)
+                    line(l10n.t("recap.monthPick", ["month": picked.long, "count": String(picked.trains), "distance": Format.distance(picked.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)]))
                 }
+                .accessibilityElement(children: .combine)
             }
-            .frame(height: 200)
+            RecapMonthGrid(
+                months: all, highlighted: picked?.key, grow: shown ? 1 : 0,
+                label: { m in l10n.t("recap.monthCell", count: m.trains, ["month": m.long]) },
+                onPick: { m in
+                    withMotion(.tap, reduceMotion: reduceMotion) { pickedMonth = m.key }
+                    progress = 0
+                }
+            )
             .animation(reduceMotion ? nil : .spring(duration: 0.8, bounce: 0.2), value: shown)
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(keys.compactMap { k in byMonth[k].map { "\(monthName(k)): \($0.trains)" } }.joined(separator: ", "))
-            HStack {
-                Text(l10n.t("recap.monthHint")).clack(.caption).foregroundStyle(Ink.onAccent.opacity(0.7))
-                Spacer()
-                Button { go(to: index + 1, count: pages(d).count) } label: {
-                    LucideIcon(name: "chevron-right", size: 20).foregroundStyle(Ink.onAccent).frame(width: 44, height: 44)
-                }
-                .buttonStyle(.press(radius: 22))
-                .accessibilityLabel(l10n.t("recap.next"))
-            }
+            .haptic(.snap, trigger: pickedMonth, condition: { _, now in now != nil })
+            Text(l10n.t("recap.monthHint")).clack(.caption).foregroundStyle(Ink.onAccent.opacity(0.7))
         }
     }
 
@@ -378,15 +408,6 @@ struct YearRecap: View {
     private func line(_ text: String, prefix: String? = nil) -> some View {
         ((prefix.map { Text(verbatim: "\($0) ").fontWeight(.heavy) } ?? Text(verbatim: "")) + Text(text))
             .clack(.headline).foregroundStyle(Ink.onAccent).fixedSize(horizontal: false, vertical: true)
-    }
-
-    /// "2026-03" as "March".
-    private func monthName(_ yyyymm: String) -> String {
-        let parts = yyyymm.split(separator: "-")
-        guard parts.count == 2, let m = Int(parts[1]), (1...12).contains(m) else { return yyyymm }
-        let formatter = DateFormatter()
-        formatter.locale = Format.locale(app.settings.language)
-        return formatter.standaloneMonthSymbols[m - 1].capitalized
     }
 
     private func load() async {

@@ -14,6 +14,9 @@ import UniformTypeIdentifiers
 /// The card itself, 1080 × 1350 (4:5): a page of the Passport, with its yellow cover, guilloche rings and pearly foil
 /// (the glint frozen mid-sweep) and the code line along the bottom (DESIGN.md, "Holographic surface & share cards").
 /// Left out on purpose: times, ticket or booking details, train numbers, anything about where you are now.
+///
+/// The share sheet no longer uses it (2026-11-15: every card is now `RecapShareCard`); only the design gallery still
+/// shows it.
 struct ShareCardView: View {
     static let width: CGFloat = 1080
     static let height: CGFloat = 1350

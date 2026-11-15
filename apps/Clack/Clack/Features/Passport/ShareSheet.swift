@@ -9,8 +9,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 /// Share card preview (share/ShareSheet.tsx, product brief §10): pick a card, see exactly the image that will be shared,
-/// then share it. Nothing leaves the phone unless you tap Share. Four cards: the year, all time, one journey, one medal.
-/// The map on a card is the routes drawn alone on a dark panel (the web's real-map snapshot is not ported yet).
+/// then share it. Nothing leaves the phone unless you tap Share. Four cards: the year, all time, one journey, one medal,
+/// all as the Year in Rail's story card (`RecapShareCard`, 1080 × 1920; owner, 2026-11-15: the old card's line map
+/// was no use, "use the same one we've just made on the year in review").
 struct ShareSheet: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -28,7 +29,6 @@ struct ShareSheet: View {
     @State private var legId: String?
     @State private var medalKey: String?
     @State private var image: Image?
-    @State private var snapshots: [String: ShareMapSnapshot?] = [:]
 
     private var unit: DistanceUnit { app.settings.distanceUnit }
     private var language: Language { app.settings.language }
@@ -64,6 +64,7 @@ struct ShareSheet: View {
             Group {
                 if let image {
                     image.resizable().scaledToFit()
+                        .frame(maxHeight: 560)
                         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                         .accessibilityLabel(l10n.t("share.previewAlt"))
                 } else if card == nil {
@@ -115,90 +116,76 @@ struct ShareSheet: View {
         Format.distance(m, unit: unit, language: language).replacingOccurrences(of: #"\s?(km|mi)$"#, with: "", options: .regularExpression)
     }
 
-    private func totals(_ p: Passport) -> [ShareCardView.Stat] {
-        [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")),
-         .init(value: String(p.totals.stations), label: l10n.t("passport.stations")),
-         .init(value: String(p.totals.countries), label: l10n.t("share.countries"))]
+    private func cardMedal(_ m: Milestone) -> RecapShareCard.CardMedal {
+        .init(milestone: m, label: l10n.milestoneLabel(m, language: language, home: base.home))
     }
 
-    private var card: ShareCardView? {
+    /// A train type by id: from the Passport's own references, else the app's list.
+    private func trainType(_ id: String?, in p: Passport) -> TrainType? {
+        guard let id else { return nil }
+        return p.refs.trainTypes[id] ?? app.trainTypes.first { $0.id == id }
+    }
+
+    private var card: RecapShareCard? {
         switch variant {
         case .medal:
             guard let md = achieved.first(where: { key($0) == medalKey }) ?? achieved.first else { return nil }
-            return ShareCardView(
-                layout: .medal, kicker: l10n.t("share.medalKicker"), title: l10n.milestoneLabel(md, language: language, home: base.home),
-                sub: md.at.map { l10n.t("share.unlocked", ["date": monthYear($0.ms)]) }, heroValue: "", heroUnit: "",
-                stats: [.init(value: km(base.totals.distanceM), label: unit.rawValue)] + totals(base).prefix(2), routes: [], labels: [],
-                medals: [.init(milestone: md, label: l10n.milestoneLabel(md, language: language, home: base.home))],
-                mrz: PassportMRZ.line(year: nil, km: base.totals.distanceM / 1000, journeys: base.totals.journeys, stations: base.totals.stations)
-            )
+            return RecapShareCard(content: .medal(.init(
+                kicker: l10n.t("share.medalKicker"), medal: cardMedal(md),
+                sub: md.at.map { l10n.t("share.unlocked", ["date": monthYear($0.ms)]) },
+                stats: [.init(value: km(base.totals.distanceM), label: unit.rawValue),
+                        .init(value: String(base.totals.journeys), label: l10n.t("passport.journeys")),
+                        .init(value: String(base.totals.stations), label: l10n.t("passport.stations"))]
+            )))
         case .journey:
-            guard let leg = counted.first(where: { $0.id == legId }) ?? counted.first, let route = base.map.first(where: { $0.legId == leg.id }) else { return nil }
-            let dep = leg.schedDep?.ms
-            let ends = route.stops.compactMap { $0.count == 2 ? LatLon($0[0], $0[1]) : nil }
-            let labels = ends.count == 2 ? [ShareCardView.Label(at: ends[0], text: leg.origin?.name ?? ""), .init(at: ends[1], text: leg.destination?.name ?? "")] : []
-            var onBoard = "—"
-            if let dep, let arr = leg.schedArr?.ms {
-                onBoard = Format.duration(((leg.actualArr?.ms ?? arr) - (leg.actualDep?.ms ?? dep)) / 60_000, language: l10n.language)
+            guard let leg = counted.first(where: { $0.id == legId }) ?? counted.first else { return nil }
+            var stats: [RecapShareCard.Stat] = []
+            if let dep = leg.schedDep?.ms, let arr = leg.schedArr?.ms {
+                stats.append(.init(value: Format.duration(((leg.actualArr?.ms ?? arr) - (leg.actualDep?.ms ?? dep)) / 60_000, language: l10n.language), label: l10n.t("share.onBoard")))
             }
-            return ShareCardView(
-                layout: .stats, kicker: [l10n.t("share.featured"), dep.map(monthYear)].compactMap { $0 }.joined(separator: " · "),
-                title: "\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")", sub: nil,
-                heroValue: km(leg.distanceM ?? 0), heroUnit: unit.rawValue,
-                stats: [.init(value: onBoard, label: l10n.t("share.onBoard")), .init(value: leg.operator?.name ?? "—", label: l10n.t("share.operator"))],
-                routes: [.init(geometry: route.geometry, ends: ends)], labels: labels,
-                medals: achieved.filter { $0.legId == leg.id }.map { .init(milestone: $0, label: l10n.milestoneLabel($0, language: language, home: base.home)) },
-                mrz: PassportMRZ.line(year: leg.schedDep.flatMap { Self.year(ms: $0.ms) }, km: (leg.distanceM ?? 0) / 1000)
-            )
+            if let name = leg.operator?.name { stats.append(.init(value: name, label: l10n.t("share.operator"))) }
+            return RecapShareCard(content: .journey(.init(
+                kicker: [l10n.t("share.featured"), leg.schedDep.map { monthYear($0.ms) }].compactMap { $0 }.joined(separator: " · "),
+                train: trainType(leg.trainType, in: base), operatorId: leg.operatorId,
+                title: "\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")",
+                distance: leg.distanceM.map(km) ?? "—", unit: leg.distanceM == nil ? "" : unit.rawValue,
+                stats: stats,
+                medals: achieved.filter { $0.legId == leg.id }.map(cardMedal)
+            )))
         case .year, .all:
             guard let p = variant == .year ? yearData : all else { return nil }
-            let routes = p.map.map { r in ShareCardView.Route(geometry: r.geometry, ends: r.stops.compactMap { $0.count == 2 ? LatLon($0[0], $0[1]) : nil }) }
             let inYear: (Milestone) -> Bool = { m in
                 guard let at = m.at, let y = shownYear else { return false }
-                var calendar = Calendar(identifier: .gregorian)
-                calendar.timeZone = TimeZone(identifier: "Europe/Stockholm") ?? .current
-                return calendar.component(.year, from: Date(timeIntervalSince1970: at.ms / 1000)) == y
+                return Self.year(ms: at.ms) == y
             }
-            let medals = (variant == .year ? achieved.filter(inYear) : achieved).prefix(4).map { ShareCardView.CardMedal(milestone: $0, label: l10n.milestoneLabel($0, language: language, home: base.home)) }
-            if variant == .year {
-                return ShareCardView(
-                    layout: .stats, kicker: l10n.t("share.yearKicker", ["year": String(shownYear ?? 0)]), title: l10n.t("share.yearTitle", ["year": String(shownYear ?? 0)]), sub: nil,
-                    heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue,
-                    stats: [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")), .init(value: Format.duration(p.totals.minutes, language: l10n.language), label: l10n.t("share.onBoard")), .init(value: String(p.totals.stations), label: l10n.t("passport.stations"))],
-                    routes: routes, labels: [], medals: Array(medals),
-                    mrz: PassportMRZ.line(year: shownYear, km: p.totals.distanceM / 1000, journeys: p.totals.journeys, stations: p.totals.stations)
-                )
+            let medals = (variant == .year ? achieved.filter(inYear) : achieved).prefix(4).map(cardMedal)
+            let trains = p.trainTypes.compactMap { row in
+                trainType(row.key, in: p).map { RecapShareCard.Train(type: $0, operatorId: nil, count: l10n.t("recap.times", ["count": String(row.count)])) }
             }
-            return ShareCardView(
-                layout: .stats, kicker: l10n.t("share.allKicker"), title: l10n.t("share.allTitle"), sub: nil,
-                heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue, stats: totals(p), routes: routes, labels: [], medals: Array(medals),
-                mrz: PassportMRZ.line(year: nil, km: p.totals.distanceM / 1000, journeys: p.totals.journeys, stations: p.totals.stations, countries: p.totals.countries)
-            )
+            let months = variant == .year ? shownYear.map { RecapMonth.year($0, p.months, language: language) } : nil
+            return RecapShareCard(content: .recap(.init(
+                kicker: variant == .year ? l10n.t("recap.open", ["year": String(shownYear ?? 0)]) : l10n.t("share.allTitle"),
+                distance: km(p.totals.distanceM), unit: unit.rawValue,
+                trainsCount: String(p.totals.trains),
+                trainsLine: l10n.t("recap.trains", ["journeys": String(p.totals.journeys), "time": Format.duration(p.totals.minutes, language: l10n.language)]),
+                monthsTitle: l10n.t("recap.monthsTitle"),
+                months: (months?.contains { $0.trains > 0 } ?? false) ? months : nil,
+                route: p.records.mostRiddenRoute?.route,
+                routeLine: p.records.mostRiddenRoute.map { l10n.t("recap.route", ["count": String($0.count)]) },
+                trainsTitle: l10n.t("recap.trainsTitle"),
+                trains: Array(trains.prefix(3)),
+                medals: Array(medals)
+            )))
         }
-    }
-
-    /// The cards' real maps are slow-ish (a second or two), so each set of routes is drawn once per sheet.
-    private func snapshot(for card: ShareCardView) async -> ShareMapSnapshot? {
-        let lines = card.routes.map { $0.geometry.map(Polyline.decode) ?? $0.ends }
-        guard lines.contains(where: { $0.count > 1 }) else { return nil }
-        let key = "\(variant.rawValue)|\(lines.map { "\($0.count):\($0.first?.lat ?? 0),\($0.last?.lon ?? 0)" }.joined(separator: ";"))"
-        if let cached = snapshots[key] { return cached }
-        let made = await ShareMapSnapshotter.make(
-            lines: lines, ends: card.routes.flatMap(\.ends), points: card.labels.map(\.at),
-            size: CGSize(width: ShareCardView.mapBox.width / 2, height: ShareCardView.mapBox.height / 2),
-            base: Config.apiBase, withBasemap: await app.mapHasBasemap()
-        )
-        snapshots[key] = .some(made)
-        return made
     }
 
     private func render() async {
         image = nil
-        guard var card else { return }
-        card.map = await snapshot(for: card)
-        let renderer = ImageRenderer(content: card.environment(\.colorScheme, .dark))
+        guard let card else { return }
+        // Fixed pixel sizes: the light look and the default text size whatever the phone is set to.
+        let renderer = ImageRenderer(content: card.environment(\.colorScheme, .light).environment(\.dynamicTypeSize, .large))
         renderer.scale = 1
-        renderer.proposedSize = ProposedViewSize(width: ShareCardView.width, height: ShareCardView.height)
+        renderer.proposedSize = ProposedViewSize(width: RecapShareCard.width, height: RecapShareCard.height)
         guard let ui = renderer.uiImage else { return }
         image = Image(uiImage: ui)
     }
