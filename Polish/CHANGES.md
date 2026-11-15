@@ -183,12 +183,12 @@ The hotspots the audit expects, from reading the code:
 - Trip detail's per-second ticks.
 
 ## Needs Garner
-1. **Push, then update the hosted server.** The medals, CO₂ per country and punctuality bands are server changes. Until the server is updated, the app shows the new medal families as locked and Danish CO₂ at the old figure.
-2. **Trafikverket's API licence.** It isn't recorded in the app's sources. If it requires a visible credit, add "· Trafikverket" to the map's line (`docs/ATTRIBUTION.md`).
-3. **One exception to "every string in ClackKit's catalog".** App Intents read titles only from the app's own bundle, so the Siri shortcut's title and description are in `apps/Clack/Clack/Localizable.xcstrings`, and its phrases are in `AppShortcuts.xcstrings`. OK to keep, or should CLAUDE.md say so?
-4. **Denmark's CO₂ figure.** I used 42 g/pkm, the low end of the ministry's 42–132 g range for diesel regional trains, as the estimate for non-S-tog DSB trips. A higher figure would be more cautious.
+1. ~~**Push, then update the hosted server.**~~ Done 2026-11-15: the server runs `polish/pass-1`. The medals, CO₂ per country and punctuality bands are server changes. Until the server is updated, the app shows the new medal families as locked and Danish CO₂ at the old figure.
+2. ~~**Trafikverket's API licence.**~~ Answered: no credit needed. It isn't recorded in the app's sources. If it requires a visible credit, add "· Trafikverket" to the map's line (`docs/ATTRIBUTION.md`).
+3. ~~**One exception to "every string in ClackKit's catalog".**~~ Answered: keep it; CLAUDE.md now says so. App Intents read titles only from the app's own bundle, so the Siri shortcut's title and description are in `apps/Clack/Clack/Localizable.xcstrings`, and its phrases are in `AppShortcuts.xcstrings`. OK to keep, or should CLAUDE.md say so?
+4. ~~**Denmark's CO₂ figure.**~~ Answered: an estimate is fine; 42 stays. I used 42 g/pkm, the low end of the ministry's 42–132 g range for diesel regional trains, as the estimate for non-S-tog DSB trips. A higher figure would be more cautious.
 5. **Medal tiers.** Which levels are bronze, silver, gold or platinum is my judgement (`MILESTONE_TIERS`). Have a look.
-6. **The "Late" colour option** on Explore is new, a by-product of the A/B. Keep it, or remove it (one line in `ColorBy`)?
+6. ~~**The "Late" colour option**~~ Answered: keep it. on Explore is new, a by-product of the A/B. Keep it, or remove it (one line in `ColorBy`)?
 7. **The designer's remaining items**, for a later pass:
    - "your trips affected" on Network, incidents merged, numbered pins;
    - platform-first station maps;

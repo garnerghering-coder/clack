@@ -47,9 +47,12 @@ struct TrainArtTests {
         #expect(picture("flytoget", "x3", uncertain: true, "flytoget").asset == "flytoget71-flytoget")
     }
 
-    @Test func anUncertainTypeWithNoDrawnCandidateInThatLiveryStaysTheFaintStandIn() {
-        #expect(picture("x11_x14", "contessa", uncertain: true, "vasttagen").isUnknown)
-        #expect(picture("x11_x14", "contessa", uncertain: true, nil).isStandIn)
+    /// Owner (2026-11-15): a drawn candidate not painted for this operator shows unpainted and whole, like any drawn
+    /// model; only types with no drawing at all fade.
+    @Test func anUncertainTypeWithNoCandidateInThatLiveryShowsTheFirstCandidateUnpainted() {
+        #expect(picture("x11_x14", "contessa", uncertain: true, "vasttagen") == .init(asset: "x11-plain", isStandIn: false, isUnknown: false))
+        #expect(picture("x11_x14", "contessa", uncertain: true, nil).asset == "x11-plain")
+        #expect(picture("dk_lint_ic2", "dk_railcar", uncertain: true, "arriva").asset == "dk_lint41-plain")
     }
 
     @Test func finnishTrainsGetTheirDrawingInVRsLivery() {
@@ -74,7 +77,7 @@ struct TrainArtTests {
             #expect(picture(typeId, nil, "vr").asset == "\(d.model)-plain", "\(typeId)")
         }
         #expect(picture("x74", "flirt", "vr").asset == "x74-vr")
-        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr").isStandIn)
+        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr").asset == "fi_sm5-plain")
     }
 
     @Test func anUncertainFinnishTypeShowsTheCandidateDrawnInTheOperatorsLivery() {

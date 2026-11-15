@@ -299,3 +299,9 @@ Left in build 73, and why:
 |---|---|---|---|---|---|
 | V.1 | Settings switches | Showed in the app-wide accent ink (black on light), not the system green as decided | Explicitly the system green (`Look.toggleTint`) | `Look.swift` | — |
 | V.2 | Journey bar labels at AX3 | "Stockh…", "chang…", "CPH Ai…" | Stacked at the accessibility sizes, nothing cut | `JourneyBar` (`AdaptiveStack`) | — |
+
+## Build 76 (owner's answers to the report, 2026-11-15)
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B76.1 | "X or Y" train types whose candidates aren't painted for this operator ("X11 or X14" on Västtågen) | The nearest stand-in model, unpainted, faded from the back at 80 % | The first drawn candidate, unpainted and whole, like any drawn model without its livery; only types with no drawing at all still fade | `TrainArt.candidatePicture` falls back to `<model>-plain`; `TrainArtTests` | Drop the second loop in `candidatePicture` |

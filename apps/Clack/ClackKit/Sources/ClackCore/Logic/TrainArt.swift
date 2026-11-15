@@ -154,13 +154,21 @@ public nonisolated enum TrainArt {
         "dk_lint_ic2": ["dk_lint41", "dk_ic2"],
     ]
 
-    /// The drawing of a candidate for an uncertain type, in the operator's own livery; nil when none has been drawn
-    /// in it (the unpainted stand-in is used then, as before). The first candidate listed wins.
+    /// The drawing of a candidate for an uncertain type: the first one drawn in the operator's own livery, else the
+    /// first one drawn at all, unpainted, as any drawn model is when its operator's livery isn't drawn (owner,
+    /// 2026-11-15: no fading when the train's own drawing exists). Nil when no candidate is drawn.
     public static func candidatePicture(typeId: String?, operatorId: String?) -> Picture? {
-        guard let typeId, let operatorId, let options = candidates[typeId] else { return nil }
+        guard let typeId, let options = candidates[typeId] else { return nil }
+        if let operatorId {
+            for id in options {
+                if let d = detailed[id], d.liveries.contains(operatorId), !d.notFor.contains(operatorId) {
+                    return Picture(asset: "\(d.model)-\(d.liveryOf[operatorId] ?? operatorId)", isStandIn: false, isUnknown: false)
+                }
+            }
+        }
         for id in options {
-            if let d = detailed[id], d.liveries.contains(operatorId), !d.notFor.contains(operatorId) {
-                return Picture(asset: "\(d.model)-\(d.liveryOf[operatorId] ?? operatorId)", isStandIn: false, isUnknown: false)
+            if let d = detailed[id], !(operatorId.map(d.notFor.contains) ?? false) {
+                return Picture(asset: "\(d.model)-plain", isStandIn: false, isUnknown: false)
             }
         }
         return nil
