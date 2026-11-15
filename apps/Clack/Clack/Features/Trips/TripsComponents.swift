@@ -295,35 +295,46 @@ struct TransferChip: View {
     }
 }
 
-/// A multi-leg journey in the Trips list. Legs in travel order; one card, with each train's operator colour glowing
-/// beside its own row.
+/// A trip or a journey in the Trips list, one look for both (owner, 2026-11-15: "close the gap" between a past trip
+/// and a past journey): a header (the journey's label, or the train's operator and number), the route, the day as a
+/// slim strip with its times, and for a single train one status line. Each train's operator colour glows beside it.
 struct JourneyCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.colorScheme) private var scheme
     let legs: [Leg]
+    /// Ahead: a single train leads with its countdown and says its platform.
+    var upcoming = false
 
     /// One compact row per journey (designer, 2026-11-14: the list repeated the detail screen, a card per train inside
-    /// a card per journey): the label, the route, the day as a slim strip with the times, the changes and the length.
-    /// The whole row opens the journey; its trains are there.
+    /// a card per journey). The whole row opens the journey, or the trip; its trains are there.
     var body: some View {
         let first = legs[0]
         let last = legs[legs.count - 1]
-        let route = first.journeyId.map { AppRoute.journey($0) } ?? .trip(first.id)
+        let single = legs.count == 1
+        let route = single ? AppRoute.trip(first.id) : first.journeyId.map { AppRoute.journey($0) } ?? .trip(first.id)
         NavigationLink(value: route) {
             TimelineView(.periodic(from: .now, by: 60)) { context in
+                let now = context.date.timeIntervalSince1970 * 1000
                 VStack(alignment: .leading, spacing: Space.s) {
-                    HStack(alignment: .firstTextBaseline, spacing: Space.s) {
-                        Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    HStack(alignment: .center, spacing: Space.s) {
+                        if single {
+                            OperatorBadge(op: first.operator, size: .small)
+                            Text([first.operator?.name, first.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
+                        } else {
+                            Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                        }
                         Spacer(minLength: Space.s)
                         if let dep = first.schedDep?.ms {
                             Text(Format.day(dep, tz: TripsLogic.tz(first), language: app.settings.language)).clack(.caption).foregroundStyle(Ink.text2)
                         }
                     }
+                    if single && upcoming { CountdownLine(leg: first, now: now) }
                     Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
                         .clack(.rowTitle).foregroundStyle(Ink.text)
                         .fixedSize(horizontal: false, vertical: true)
-                    JourneyBar(legs: legs, now: context.date.timeIntervalSince1970 * 1000)
+                    JourneyBar(legs: legs, now: now)
+                    if single { status(first) }
                 }
                 .padding(Space.l)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -343,13 +354,37 @@ struct JourneyCard: View {
                 }
                 .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                 .hairlineBorder(radius: Radius.card)
-                .modifier(ZoomSource(id: first.journeyId.map { "journey-\($0)" } ?? "trip-\(first.id)"))
+                .opacity(single && first.ride == .notTaken ? 0.55 : 1)
+                .modifier(ZoomSource(id: single ? "trip-\(first.id)" : first.journeyId.map { "journey-\($0)" } ?? "trip-\(first.id)"))
             }
         }
         .buttonStyle(.press)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(TripsSpeech.journey(legs, l10n: l10n, settings: app.settings))
+        .accessibilityLabel(single ? TripsSpeech.leg(first, l10n: l10n, settings: app.settings) : TripsSpeech.journey(legs, l10n: l10n, settings: app.settings))
         .accessibilityAddTraits(.isButton)
+        .accessibilityIdentifier(single ? "trips.leg" : "trips.journey")
+    }
+
+    /// A single train's line under its strip: whether it needs a check, how late it was (or the platform ahead), how far.
+    private func status(_ leg: Leg) -> some View {
+        HStack(spacing: Space.s) {
+            if leg.ride == .review { Chip(text: l10n.t("record.needsCheck"), tint: Ink.warnText) }
+            if leg.ride == .notTaken { Chip(text: l10n.t("record.notTaken")) }
+            if upcoming {
+                if let platform = leg.depPlatform { Text(l10n.t("trips.platform", ["platform": platform])).clack(.caption).foregroundStyle(Ink.text2) }
+                if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
+            } else if leg.arrDelayMin != nil || leg.canceled, !(leg.dataQuality == .scheduledOnly && leg.status == .planned) {
+                // Only what's known: a trip with no delay data says nothing rather than "—".
+                DelayText(delay: leg.arrDelayMin, canceled: leg.canceled)
+            }
+            Spacer(minLength: Space.s)
+            Text(distance(leg)).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+        }
+    }
+
+    private func distance(_ leg: Leg) -> String {
+        let text = Format.distance(leg.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)
+        return leg.isEstimatedGeometry ? l10n.t("trips.approxDistance", ["distance": text]) : text
     }
 }
 

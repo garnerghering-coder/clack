@@ -120,15 +120,18 @@ private struct JourneyOverview: View {
                     .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                     .hairlineBorder(radius: Radius.card)
             }
-            if let line = summaryLine {
-                Text(line).clack(.body).monospacedDigit().foregroundStyle(Ink.text2)
-                    .fixedSize(horizontal: false, vertical: true)
+            // Shown, not told (owner, 2026-11-15: "walls of text"): the day, the numbers as tiles, the day as a strip,
+            // then each train as a card with its drawing and big times, and each change as a chip between them.
+            if let summary = TripsLogic.journeySummary(legs) {
+                Text(Format.longDate(summary.dep ?? first.schedDep?.ms ?? 0, tz: first.origin?.tz ?? TripsLogic.tz(first), language: app.settings.language))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                tiles(summary, last: last)
             }
             TimelineView(.periodic(from: .now, by: 60)) { context in
-                JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
-                    LegRow(leg: leg, flat: true)
-                } change: { a, b in
-                    JourneyChange(a: a, b: b)
+                let now = context.date.timeIntervalSince1970 * 1000
+                VStack(alignment: .leading, spacing: Space.l) {
+                    JourneyBar(legs: legs, now: now)
+                    JourneyLegs(legs: legs, now: now, drawings: true)
                 }
             }
         }
@@ -137,26 +140,30 @@ private struct JourneyOverview: View {
         .task(id: journey.legs.map(\.leg.id)) { decodeMap() }
     }
 
-    /// "Friday 20 November 2026 · 5h 15m · 712 km · 1 change · arrived 4 min late": once, where the four tiles and the
-    /// bar each said part of it twice.
-    private var summaryLine: String? {
-        guard let summary = TripsLogic.journeySummary(legs) else { return nil }
-        let first = legs[0], last = legs[legs.count - 1]
-        let tz = first.origin?.tz ?? TripsLogic.tz(first)
-        let arrival: String? = {
-            if last.canceled { return l10n.t("delay.cancelled") }
+    /// Door to door, how far, the changes and how it arrived, as four tiles; the arrival in its delay ink.
+    private func tiles(_ summary: TripsLogic.JourneySummary, last: Leg) -> some View {
+        let arrival: (text: String, ink: Color)? = {
+            if last.canceled { return (l10n.t("delay.cancelled"), Ink.veryLateInk) }
             guard last.actualArr != nil || summary.arrivalDelayMin != nil else { return nil }
             let delay = summary.arrivalDelayMin ?? 0
-            return delay > 0 ? l10n.t("journey.arrivedLate", ["min": String(delay)]) : l10n.t("delay.on_time")
+            return delay > 0 ? (Format.delay(delay), DelayBand(delayMin: delay, canceled: false).ink) : (l10n.t("delay.on_time"), Ink.onTimeInk)
         }()
-        return Format.join([
-            Format.longDate(summary.dep ?? first.schedDep?.ms ?? 0, tz: tz, language: app.settings.language),
-            summary.minutes.map { Format.duration($0, language: l10n.language) },
-            summary.distanceM.map { Format.distance($0, unit: app.settings.distanceUnit, language: app.settings.language) },
-            summary.changes == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(summary.changes)]),
-            summary.missedChanges > 0 ? l10n.t("journey.missedChanges", ["n": String(summary.missedChanges)]) : nil,
-            arrival,
-        ])
+        let changes = summary.missedChanges > 0
+            ? l10n.t("journey.missedChanges", ["n": String(summary.missedChanges)])
+            : nil
+        return LazyVGrid(columns: [GridItem(.flexible(), spacing: Space.s), GridItem(.flexible(), spacing: Space.s)], spacing: Space.s) {
+            Tile(label: l10n.t("journey.tileTime"), value: summary.minutes.map { Format.duration($0, language: l10n.language) } ?? Format.unknown)
+            Tile(label: l10n.t("journey.tileDistance"), value: summary.distanceM.map { Format.distance($0, unit: app.settings.distanceUnit, language: app.settings.language) } ?? Format.unknown)
+            Tile(label: l10n.t("journey.tileChanges"), value: String(summary.changes), sub: changes)
+            // The arrival time, and how it went in its ink once known (a dash alone said nothing).
+            Tile(label: l10n.t("journey.tileArrival")) {
+                HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                    Text(summary.arr.map { Format.time($0, tz: last.destination?.tz ?? TripsLogic.tz(last), clock: app.settings.clock) } ?? Format.unknown)
+                        .foregroundStyle(Ink.text)
+                    if let arrival { Text(arrival.text).clack(.caption).foregroundStyle(arrival.ink).lineLimit(1).minimumScaleFactor(0.8) }
+                }
+            }
+        }
     }
 
     private func decodeMap() {

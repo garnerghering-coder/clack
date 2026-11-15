@@ -288,7 +288,7 @@ struct TripsScreen: View {
                 .modifier(TripSwipe { shareButton(item) })
                 .modifier(LandsWhenAdded(ids: item.map(\.id)))
         } else {
-            LegRow(leg: item[0], upcoming: upcoming)
+            JourneyCard(legs: item, upcoming: upcoming)
                 .contextMenu { actions(item[0]) }
                 .modifier(TripSwipe { actions(item[0]) })
                 .modifier(LandsWhenAdded(ids: [item[0].id]))

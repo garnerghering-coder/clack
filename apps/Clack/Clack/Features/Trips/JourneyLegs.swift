@@ -92,6 +92,11 @@ struct JourneyBar: View {
     }
 
     private func summary(dep: Double?, arr: Double?) -> String {
+        // One train: its length alone (owner, 2026-11-15: a trip in the list drawn as a journey is).
+        if legs.count == 1 {
+            guard let dep, let arr, arr > dep else { return "" }
+            return Format.duration((arr - dep) / 60_000, language: l10n.language)
+        }
         let changes = legs.count - 1
         let changeText = changes == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(changes)])
         guard let dep, let arr, arr > dep else { return changeText }
@@ -123,6 +128,8 @@ struct JourneyTrainCard: View {
     let leg: Leg
     let now: Double
     var selected = false
+    /// The train's drawing under its header (the journey's own page, owner 2026-11-15: show, don't tell).
+    var drawing = false
 
     var body: some View {
         let tint = operatorColor(leg.operator?.brandColor, scheme: scheme)
@@ -151,6 +158,11 @@ struct JourneyTrainCard: View {
                 if let d = x.dep, let a = x.arr, a > d {
                     Text(Format.duration((a - d) / 60_000, language: l10n.language)).clack(.caption).foregroundStyle(Ink.text2)
                 }
+            }
+            if drawing {
+                TrainPicture(type: leg.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }, operatorId: leg.operator?.id, height: 44)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .accessibilityHidden(true)
             }
             HStack(alignment: .top, spacing: Space.m) {
                 end(ends.dep, station: leg.origin?.name, platform: leg.depPlatform, alignment: .leading)
@@ -263,6 +275,8 @@ struct JourneyLegs: View {
     var select: ((String) -> Void)?
     /// Where a card goes when it is not a selection: its train, or (the Trips list, owner 2026-11-07) the journey.
     var route: (Leg) -> AppRoute = { .trip($0.id) }
+    /// Each card shows its train's drawing.
+    var drawings = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.m) {
@@ -273,7 +287,7 @@ struct JourneyLegs: View {
                         .buttonStyle(.plain)
                         .accessibilityAddTraits(selected == leg.id ? .isSelected : [])
                 } else {
-                    NavigationLink(value: route(leg)) { JourneyTrainCard(leg: leg, now: now, selected: selected == leg.id) }
+                    NavigationLink(value: route(leg)) { JourneyTrainCard(leg: leg, now: now, selected: selected == leg.id, drawing: drawings) }
                         .buttonStyle(.plain)
                 }
             }
