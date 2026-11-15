@@ -62,6 +62,8 @@ final class LiveMapController {
     private(set) var ready = false
     var onTapTrain: (String) -> Void = { _ in }
     var onTapStation: (_ id: String, _ name: String) -> Void = { _, _ in }
+    /// A disruption's track or pin tapped (Network now open), by id.
+    var onTapDisruption: (String) -> Void = { _ in }
     /// The visible area as "W,S,E,N" (3 decimals) and the zoom, after the map settles.
     var onViewChange: (_ bbox: String, _ zoom: Double) -> Void = { _, _ in }
     /// The camera's pitch now, and its centre, read with the view change (the tilt rule checks the real pitch).
@@ -184,19 +186,35 @@ final class LiveMapController {
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id IN %@", trainIds)
     }
 
-    /// Network now's disruptions: track work and closures along their track, a pin at each (`nil` clears them).
+    /// Network now's disruptions: track work and closures along their track; a pin only for one with no track to draw
+    /// (a Norwegian notice at one stop), so each shows once (owner, 2026-11-15: the dot beside a lit track was noise).
+    /// `nil` clears them.
     func setDisruptions(_ list: [NetworkStatus.Disruption]?) {
         let list = list ?? []
-        let lines: [[String: Any]] = list.flatMap { d in
-            d.tracks.map { part in
-                ["type": "Feature", "properties": ["kind": d.kind.rawValue], "geometry": ["type": "LineString", "coordinates": part.map { [$0.lon, $0.lat] }]] as [String: Any]
-            }
-        }
-        let pins: [[String: Any]] = list.map { d in
+        mapView?.setShape(Self.disruptionLines(list), source: "disruption-lines")
+        let pins: [[String: Any]] = list.filter { $0.tracks.isEmpty }.map { d in
             ["type": "Feature", "properties": ["kind": d.kind.rawValue, "id": d.id], "geometry": ["type": "Point", "coordinates": [d.lon, d.lat]]] as [String: Any]
         }
-        mapView?.setShape(["type": "FeatureCollection", "features": lines], source: "disruption-lines")
         mapView?.setShape(["type": "FeatureCollection", "features": pins], source: "disruption-pins")
+    }
+
+    /// The disruption on show, drawn solid and wider over its dashes (its pin ringed when it has no track); `nil` clears.
+    func setSelectedDisruption(_ d: NetworkStatus.Disruption?) {
+        let list = d.map { [$0] } ?? []
+        mapView?.setShape(Self.disruptionLines(list), source: "disruption-selected")
+        let pins: [[String: Any]] = list.filter { $0.tracks.isEmpty }.map { d in
+            ["type": "Feature", "properties": ["kind": d.kind.rawValue, "id": d.id], "geometry": ["type": "Point", "coordinates": [d.lon, d.lat]]] as [String: Any]
+        }
+        mapView?.setShape(["type": "FeatureCollection", "features": pins], source: "disruption-selected-pin")
+    }
+
+    private static func disruptionLines(_ list: [NetworkStatus.Disruption]) -> [String: Any] {
+        let lines: [[String: Any]] = list.flatMap { d in
+            d.tracks.map { part in
+                ["type": "Feature", "properties": ["kind": d.kind.rawValue, "id": d.id], "geometry": ["type": "LineString", "coordinates": part.map { [$0.lon, $0.lat] }]] as [String: Any]
+            }
+        }
+        return ["type": "FeatureCollection", "features": lines]
     }
 
     func clearCorridor() {
@@ -486,7 +504,16 @@ struct LiveMapView: UIViewRepresentable {
             }
             if let (id, name) = station("live-station-labels", in: CGRect(x: point.x, y: point.y, width: 0.1, height: 0.1)) {
                 controller.onTapStation(id, name)
-            } else if let (id, name) = station("live-stations", in: box) {
+                return
+            }
+            // A disruption's track (a line is thin: the whole fingertip counts) or its pin, before the station squares
+            // along it.
+            let trouble = map.visibleFeatures(in: box, styleLayerIdentifiers: ["disruption-selected-line", "disruption-pins", "disruption-lines"])
+            if let id = trouble.lazy.compactMap({ $0.attribute(forKey: "id") as? String }).first {
+                controller.onTapDisruption(id)
+                return
+            }
+            if let (id, name) = station("live-stations", in: box) {
                 controller.onTapStation(id, name)
             }
         }

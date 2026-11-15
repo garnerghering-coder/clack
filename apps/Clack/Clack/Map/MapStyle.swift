@@ -338,7 +338,7 @@ nonisolated enum MapStyle {
                 "paint": ["line-color": corridorColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.5, 10, 5], "line-opacity": 0.9],
             ],
             // Network now's disruptions (owner, 2026-11-15): track work dashed in the late orange, a closed track dashed in
-            // red, and a pin where each one is (incidents have only the pin); under every train.
+            // red; a pin only for one with no track to draw. The one opened is drawn solid and wider. Under every train.
             [
                 "id": "disruption-lines", "type": "line", "source": "disruption-lines", "layout": ["line-cap": "butt", "line-join": "round"],
                 "paint": [
@@ -352,6 +352,21 @@ nonisolated enum MapStyle {
                     "circle-radius": ["interpolate", ["linear"], ["zoom"], 4, 4.5, 10, 8],
                     "circle-color": ["match", ["get", "kind"], "works", ExploreLogic.delayColors.late, ExploreLogic.delayColors.veryLate],
                     "circle-stroke-color": c.bg, "circle-stroke-width": 2,
+                ],
+            ],
+            [
+                "id": "disruption-selected-line", "type": "line", "source": "disruption-selected", "layout": ["line-cap": "round", "line-join": "round"],
+                "paint": [
+                    "line-color": ["match", ["get", "kind"], "closure", ExploreLogic.delayColors.veryLate, ExploreLogic.delayColors.late],
+                    "line-width": ["interpolate", ["linear"], ["zoom"], 5, 5, 10, 9],
+                ],
+            ],
+            [
+                "id": "disruption-selected-pin", "type": "circle", "source": "disruption-selected-pin",
+                "paint": [
+                    "circle-radius": ["interpolate", ["linear"], ["zoom"], 4, 9, 10, 13], "circle-color": "rgba(0,0,0,0)",
+                    "circle-stroke-color": ["match", ["get", "kind"], "works", ExploreLogic.delayColors.late, ExploreLogic.delayColors.veryLate],
+                    "circle-stroke-width": 3,
                 ],
             ],
             // Zoomed out: a small dot per train in its operator's colour (cheap to draw for a thousand trains); the heading
@@ -462,6 +477,8 @@ nonisolated enum MapStyle {
             sources["corridor"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["disruption-lines"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["disruption-pins"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["disruption-selected"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["disruption-selected-pin"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             // Tracks and platforms apart: a shape collection that mixes lines and polygons draws nothing on iOS.
             sources["station-detail"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["station-platforms"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]

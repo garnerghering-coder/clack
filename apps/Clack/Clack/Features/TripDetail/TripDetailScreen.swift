@@ -458,6 +458,8 @@ struct TripDetailScreen: View {
             // Something wrong with this train or the change after it, at every stage: what happened, what to do, what
             // you're owed. Nothing when all is well.
             DisruptionCard(leg: detail)
+            // Track work or a closed track at a station on the way: opens it on Explore's map.
+            TrackWorkCard(leg: detail, active: stage != .after)
             // A lift out of order where you get on or off: the station's, not the train's.
             StationNoticeCard(leg: detail)
             // Then what matters now (owner, 2026-10-24): before, when and which platform; on the train, where it is and

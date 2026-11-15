@@ -58,6 +58,10 @@ final class ExploreModel {
     private(set) var scheduled: TrainView?
     var notRunning: NotRunningTarget?
     var stationSheet: StationSheetTarget?
+    /// The station sheet that stepped aside for its station map or board, to show again on the way back.
+    var stationToRestore: StationSheetTarget?
+    /// Your trains left to run today, as Network now loaded them (for a disruption's "your trains" lines).
+    var mineToday: [Leg] = []
     /// The top of Explore's sheet on screen (global y), while one is open: the map's corner controls sit above it.
     var sheetTop: CGFloat?
     var legend = false
@@ -71,8 +75,14 @@ final class ExploreModel {
             scheduleRender()
             // Track work, closures and incidents show while Network now is open.
             controller.setDisruptions(showNetwork ? network?.disruptions : nil)
+            if !showNetwork { closeDisruption() }
         }
     }
+    /// One disruption opened (from Network now's list, its track on the map, or a train of yours it touches): its sheet
+    /// over Network now and its track lit (owner, 2026-11-15: "tap on them … go to that spot and tell you what's wrong").
+    private(set) var disruption: NetworkStatus.Disruption?
+    /// A disruption asked for by id before Network now has it (from a trip page); opened when it arrives.
+    private var wantedDisruption: String?
     /// What the dots are coloured by now: the person's choice, or late trains while Network now is open.
     private var colorBy: ExploreLogic.ColorBy { showNetwork ? .lateOnly : controller.display.colorBy }
     private(set) var network: NetworkStatus?
@@ -203,6 +213,10 @@ final class ExploreModel {
         controller.onTapTrain = { [weak self] id in
             self?.searching = false
             Task { await self?.select(id) }
+        }
+        controller.onTapDisruption = { [weak self] id in
+            self?.searching = false
+            self?.openDisruption(id: id)
         }
         controller.onTapStation = { [weak self] id, name in
             guard let self else { return }
@@ -712,6 +726,15 @@ final class ExploreModel {
                 network = answer
                 networkFailed = false
                 if showNetwork { controller.setDisruptions(answer.disruptions) }
+                // The open one kept fresh (the last copy stays when it has dropped out); one asked for opens now.
+                if let open = disruption, let fresh = answer.disruptions?.first(where: { $0.id == open.id }) {
+                    disruption = fresh
+                    controller.setSelectedDisruption(fresh)
+                }
+                if let id = wantedDisruption, let d = answer.disruptions?.first(where: { $0.id == id }) {
+                    wantedDisruption = nil
+                    openDisruption(d)
+                }
             } else if network == nil {
                 networkFailed = true
             }
@@ -789,7 +812,44 @@ final class ExploreModel {
         sheetTop = nil
     }
 
-    /// A disruption tapped in Network now: the map goes to it (its track, or its pin), the sheet stays.
+    /// A disruption opened: Network now underneath (so back returns to it), its sheet on top, its track lit and the
+    /// map gone to it.
+    func openDisruption(_ d: NetworkStatus.Disruption) {
+        deselect()
+        stationSheet = nil
+        notRunning = nil
+        if corridor != nil { closeCorridor() }
+        showNetwork = true
+        disruption = d
+        controller.setSelectedDisruption(d)
+        focus(d)
+    }
+
+    /// By id: from the map, or from a trip page (opening Network now and waiting for it when it isn't loaded yet).
+    func openDisruption(id: String) {
+        if let d = network?.disruptions?.first(where: { $0.id == id }) {
+            openDisruption(d)
+        } else {
+            wantedDisruption = id
+            showNetwork = true
+        }
+    }
+
+    /// The station sheet closes for a screen it opened over the map, remembered to come back.
+    func stepAside(for station: StationSheetTarget) {
+        stationToRestore = station
+        stationSheet = nil
+    }
+
+    /// Back to Network now's list.
+    func closeDisruption() {
+        guard disruption != nil || wantedDisruption != nil else { return }
+        disruption = nil
+        wantedDisruption = nil
+        controller.setSelectedDisruption(nil)
+    }
+
+    /// The map goes to a disruption (its track, or its pin), in the space above the sheet.
     func focus(_ d: NetworkStatus.Disruption) {
         let points = d.tracks.flatMap { $0 }
         if points.count >= 2 {

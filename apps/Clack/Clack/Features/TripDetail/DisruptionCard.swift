@@ -315,3 +315,46 @@ private struct DisruptionBody: View {
         }
     }
 }
+
+/// Track work, a closed track or an incident at a station this train passes, from Network now (owner, 2026-11-15:
+/// "shows me one of my trains will have trouble. Let me tap on it and figure that out"): one line each, opening it on
+/// Explore's map with what's wrong. Only before and during the trip; nothing when there's none.
+struct TrackWorkCard: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(Router.self) private var router
+    let leg: LegDetail
+    let active: Bool
+    @State private var found: [NetworkStatus.Disruption] = []
+
+    var body: some View {
+        Group {
+            if !found.isEmpty {
+                AlertCard(tone: .watch, icon: "construction", title: l10n.t("network.onYourRoute"), dismissKey: "trackwork|\(leg.id)|\(found.map(\.id).joined())") {
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(found) { d in
+                            Button { router.openDisruption(d.id) } label: {
+                                HStack(spacing: Space.m) {
+                                    VStack(alignment: .leading, spacing: Space.xxs) {
+                                        Text(d.places.joined(separator: " – ")).clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
+                                        Text(Format.join([l10n.t("network.kind.\(d.kind.rawValue)"), d.text(l10n.language).map { l10n.shown($0) }]))
+                                            .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2).multilineTextAlignment(.leading)
+                                    }
+                                    Spacer(minLength: 0)
+                                    LucideIcon(name: "chevron-right", size: 16).foregroundStyle(Ink.text3)
+                                }
+                                .frame(minHeight: 44).contentShape(Rectangle())
+                            }
+                            .buttonStyle(.pressRow)
+                            .accessibilityHint(l10n.t("network.openProblem"))
+                        }
+                    }
+                }
+            }
+        }
+        .task(id: "\(leg.id)|\(active)") {
+            guard active, let status = try? await app.client.networkStatus() else { found = []; return }
+            found = NetworkLogic.onRoute(leg.stops, status: status)
+        }
+    }
+}

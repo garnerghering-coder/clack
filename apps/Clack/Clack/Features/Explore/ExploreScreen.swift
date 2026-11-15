@@ -128,6 +128,18 @@ struct ExploreScreen: View {
             // Not awaited here: clearing the request restarts this task, which would cancel the wait.
             Task { await model.focus(target) }
         }
+        .task(id: router.pendingDisruption) {
+            guard let id = router.pendingDisruption else { return }
+            router.pendingDisruption = nil
+            model.openDisruption(id: id)
+        }
+        // The station sheet steps aside for the station map or board it opened, and comes back when you do.
+        .onChange(of: router.explorePath.isEmpty) { _, empty in
+            if empty, let station = model.stationToRestore {
+                model.stationToRestore = nil
+                model.stationSheet = station
+            }
+        }
         .task(id: router.pendingStation) {
             guard let id = router.pendingStation else { return }
             router.pendingStation = nil
@@ -465,25 +477,36 @@ struct ExploreScreen: View {
     @ViewBuilder
     private var panel: some View {
         if model.showNetwork {
-            NetworkPanel(
-                status: model.network, failed: model.networkFailed,
-                onCorridor: { c in model.showCorridor(c) },
-                onTrain: { t in
-                    model.showNetwork = false
-                    Task { await model.select(t.id) }
-                },
-                onDisruption: { d in
-                    // The map goes there; the sheet steps down so it can be seen, and stays.
-                    model.focus(d)
-                    detent = .fraction(0.32)
-                },
-                onTrip: { id in
-                    // Your train: its page, over Explore, with the sheet closed.
-                    model.closePanels()
-                    router.push(.trip(id))
-                },
-                onClose: { model.showNetwork = false }
-            )
+            Group {
+                if let d = model.disruption {
+                    DisruptionSheet(
+                        disruption: d, mine: model.mineToday,
+                        onBack: { model.closeDisruption() },
+                        onClose: { model.showNetwork = false },
+                        onTrip: { id in
+                            model.closePanels()
+                            router.push(.trip(id))
+                        }
+                    )
+                } else {
+                    NetworkPanel(
+                        status: model.network, failed: model.networkFailed,
+                        onCorridor: { c in model.showCorridor(c) },
+                        onTrain: { t in
+                            model.showNetwork = false
+                            Task { await model.select(t.id) }
+                        },
+                        // The map goes there, its track lit, and the sheet tells what's wrong.
+                        onDisruption: { d in model.openDisruption(d) },
+                        onTrip: { id in
+                            // Your train: its page, over Explore, with the sheet closed.
+                            model.closePanels()
+                            router.push(.trip(id))
+                        },
+                        onClose: { model.showNetwork = false }
+                    )
+                }
+            }
             .task { await model.watchNetwork() }
         } else {
             sheets
@@ -492,6 +515,7 @@ struct ExploreScreen: View {
 
     /// The kind of panel showing, for its starting size.
     private var panelKind: String {
+        if model.disruption != nil { return "disruption" }
         if model.showNetwork { return "network" }
         if model.selected != nil || model.scheduled != nil { return "train" }
         if model.notRunning != nil { return "notRunning" }
@@ -537,9 +561,10 @@ struct ExploreScreen: View {
                         Task { await model.openScheduled(number: row.trainNumber, date: date, key: row.trip?.key) }
                     }
                 },
-                onBoard: { router.push(.board(stationId: station.id, arrivals: false)) },
-                onArrivals: { router.push(.board(stationId: station.id, arrivals: true)) },
-                onMap: { router.push(.stationMap(StationMapLink(stationId: station.id))) }
+                // The sheet steps aside for the screen it opens (it would sit over it), and comes back on return.
+                onBoard: { model.stepAside(for: station); router.push(.board(stationId: station.id, arrivals: false)) },
+                onArrivals: { model.stepAside(for: station); router.push(.board(stationId: station.id, arrivals: true)) },
+                onMap: { model.stepAside(for: station); router.push(.stationMap(StationMapLink(stationId: station.id))) }
             )
         }
     }

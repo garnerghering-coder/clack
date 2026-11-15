@@ -9,11 +9,13 @@ import SwiftUI
 
 /// Network now on Explore: how each country runs, then what's wrong where, as rows that take the map there (owner,
 /// 2026-11-15: "show, don't tell"). The map behind shows it too: trains in their delay colours, slow stretches in
-/// orange, track work dashed orange, a closed track dashed red, a pin at each disruption. Read off the live map and the
-/// disruption feeds (`GET /api/live/network`). Status is written, never boxed (DESIGN.md).
+/// orange, track work dashed orange, a closed track dashed red (a pin only where there's no track to draw). A problem
+/// tapped, here or on the map, opens its own sheet (`DisruptionSheet`). Read off the live map and the disruption feeds
+/// (`GET /api/live/network`). Status is written, never boxed (DESIGN.md).
 struct NetworkPanel: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @Environment(ExploreModel.self) private var model
     let status: NetworkStatus?
     let failed: Bool
     var onCorridor: (NetworkStatus.Corridor) -> Void
@@ -26,7 +28,6 @@ struct NetworkPanel: View {
     @State private var mine: [Leg]?
     @State private var allLate = false
     @State private var allOnTrack = false
-    @State private var about = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
@@ -36,12 +37,9 @@ struct NetworkPanel: View {
         .scrollBounceBehavior(.basedOnSize)
         .task {
             let legs = (try? await app.client.legs()) ?? []
-            mine = NetworkLogic.today(legs, now: Date.now.timeIntervalSince1970 * 1000)
-        }
-        .alert(l10n.t("network.about"), isPresented: $about) {
-            Button(l10n.t("common.close"), role: .cancel) {}
-        } message: {
-            Text(l10n.t("network.aboutBody", ["min": String(status?.lateMin ?? 10)]))
+            let today = NetworkLogic.today(legs, now: Date.now.timeIntervalSince1970 * 1000)
+            mine = today
+            model.mineToday = today
         }
     }
 
@@ -56,7 +54,8 @@ struct NetworkPanel: View {
                     }
                 }
                 Spacer(minLength: Space.s)
-                IconButton(icon: "info", label: l10n.t("network.about"), size: .overMap) { about = true }
+                // The close X where every other sheet has it (owner, 2026-11-15); how it's worked out is at the foot.
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let status {
                 yours(status)
@@ -66,6 +65,7 @@ struct NetworkPanel: View {
                 onTrack(status)
                 if let groups = status.cancelled, !groups.isEmpty { cancelled(groups, tz: TimeZone.current.identifier) }
                 if !status.late.isEmpty { lateTrains(status) }
+                InfoNote(l10n.t("network.about"), more: l10n.t("network.aboutBody", ["min": String(status.lateMin)]))
             } else if failed {
                 Text(l10n.t("network.failed")).clack(.body).foregroundStyle(Ink.text2)
             } else {
@@ -97,17 +97,33 @@ struct NetworkPanel: View {
                         let (why, ink): (String, Color) = switch a.why {
                         case .canceled: (l10n.t("network.whyCanceled"), Ink.veryLateInk)
                         case .late(let min): (Format.delay(min), min >= 30 ? Ink.veryLateInk : Ink.lateInk)
-                        case .near(let station): (l10n.t("network.whyNear", ["station": station]), Ink.lateInk)
+                        case .near(let station, _): (l10n.t("network.whyNear", ["station": station]), Ink.lateInk)
                         }
                         row(
                             icon: "train-front", color: ink,
                             title: "\(a.leg.origin?.name ?? "") → \(a.leg.destination?.name ?? "")",
                             detail: service.isEmpty ? nil : service, figure: why, figureInk: ink
-                        ) { onTrip(a.leg.id) }
+                        ) { open(a, status: status) }
                     }
                 }
             }
         }
+    }
+
+    /// A train of yours tapped: what touches it when that has a page (the disruption, the slow stretch), else the
+    /// train's own page (cancelled, late, cancellations at its station).
+    private func open(_ a: NetworkLogic.Affected, status: NetworkStatus) {
+        if case .near(_, let trouble) = a.why {
+            switch trouble {
+            case .disruption(let id):
+                if let d = status.disruptions?.first(where: { $0.id == id }) { return onDisruption(d) }
+            case .corridor(let id):
+                if let c = status.corridors.first(where: { $0.id == id }) { return onCorridor(c) }
+            case .cancelled:
+                break
+            }
+        }
+        onTrip(a.leg.id)
     }
 
     // MARK: countries, as rings
@@ -226,9 +242,10 @@ struct NetworkPanel: View {
                         icon: d.kind == .works ? "construction" : d.kind == .closure ? "ban" : "triangle-alert",
                         color: d.kind == .works ? Ink.late : Ink.veryLate,
                         title: d.places.isEmpty ? kind : d.places.joined(separator: " – "),
-                        detail: Format.join([d.places.isEmpty ? nil : kind, d.words(l10n.language)]),
+                        detail: Format.join([d.places.isEmpty ? nil : kind, d.text(l10n.language).map { l10n.shown($0) }]),
                         figure: until(d), figureInk: Ink.text2
                     ) { onDisruption(d) }
+                    .accessibilityHint(l10n.t("network.openProblem"))
                 }
                 if list.count > 5 {
                     Button {

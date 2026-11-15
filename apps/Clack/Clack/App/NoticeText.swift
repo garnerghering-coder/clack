@@ -74,8 +74,54 @@ final class NoticeText {
             }
             #endif
             #if canImport(Translation)
-            let session = TranslationSession(installedSource: Locale.Language(identifier: source), target: Locale.Language(identifier: target))
+            let session = TranslationSession(installedSource: translatorLanguage(source), target: translatorLanguage(target))
             if let answer = try? await session.translate(text) { return answer.targetText }
+            #endif
+        }
+        return nil
+    }
+
+    /// A longer text (a disruption's whole message) in `language`, translated whole, never shortened: the on-device
+    /// translator where the pair is installed, else Apple's on-device model told to translate and add nothing, else
+    /// as written. Asking starts the work once.
+    func paragraph(_ line: CauseLine, language: String) -> Line {
+        guard let source = line.lang, source != language else { return Line(text: line.text, translated: false) }
+        let key = "¶\(source)>\(language)|\(line.text)"
+        if let hit = done[key] { return hit }
+        if asked.insert(key).inserted {
+            Task { [weak self] in
+                guard let whole = await Self.translate(line.text, from: source, to: language) else { return }
+                self?.done[key] = Line(text: whole, translated: true)
+            }
+        }
+        return Line(text: line.text, translated: false)
+    }
+
+    /// Norwegian comes from the feeds as "no"; the translator knows it as Bokmål.
+    private static func translatorLanguage(_ code: String) -> Locale.Language {
+        Locale.Language(identifier: code == "no" ? "nb" : code)
+    }
+
+    private static func translate(_ text: String, from source: String, to target: String) async -> String? {
+        if #available(iOS 26.0, *) {
+            #if canImport(Translation)
+            let session = TranslationSession(installedSource: translatorLanguage(source), target: translatorLanguage(target))
+            if let answer = try? await session.translate(text) { return answer.targetText }
+            #endif
+            #if canImport(FoundationModels)
+            let model = SystemLanguageModel.default
+            if model.isAvailable, model.supportsLocale(Locale(identifier: target)) {
+                let language = target == "sv" ? "Swedish" : "English"
+                let session = LanguageModelSession(instructions: """
+                    You translate rail service notices into \(language). Translate the whole notice faithfully, sentence \
+                    by sentence. Keep station names, platform numbers, times and dates exactly. Never add, explain or \
+                    leave out anything. Reply with the translation only.
+                    """)
+                if let answer = try? await session.respond(to: text) {
+                    let out = answer.content.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !out.isEmpty { return out }
+                }
+            }
             #endif
         }
         return nil
@@ -93,5 +139,10 @@ extension L10n {
     func shown(_ line: CauseLine) -> String {
         let l = NoticeText.shared.line(line, language: language.rawValue)
         return l.translated ? "\(l.text) · \(t("notice.translated"))" : l.text
+    }
+
+    /// A longer text as shown: translated whole on the phone when it's in another language (see `paragraph`).
+    func shownWhole(_ line: CauseLine) -> NoticeText.Line {
+        NoticeText.shared.paragraph(line, language: language.rawValue)
     }
 }

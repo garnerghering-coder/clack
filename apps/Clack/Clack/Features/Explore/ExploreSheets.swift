@@ -216,6 +216,112 @@ struct CorridorSheet: View {
     }
 }
 
+/// One problem on the network (owner, 2026-11-15: "tap on them … it should go to that spot, and go into a view of
+/// telling you what's wrong with it"): what it is, where, when, the source's own words translated on the phone when
+/// they're in another language, your trains today it touches, and where it comes from. The map behind has gone to it
+/// with its track lit; back returns to Network now. Status is written, never boxed.
+struct DisruptionSheet: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    let disruption: NetworkStatus.Disruption
+    /// Your trains left to run today (Network now loaded them).
+    let mine: [Leg]
+    let onBack: () -> Void
+    let onClose: () -> Void
+    let onTrip: (String) -> Void
+
+    private var d: NetworkStatus.Disruption { disruption }
+    private var kind: String { l10n.t("network.kind.\(d.kind.rawValue)") }
+    private var ink: Color { d.kind == .works ? Ink.lateInk : Ink.veryLateInk }
+
+    var body: some View {
+        LiveSheetCard {
+            HStack(alignment: .top, spacing: Space.s) {
+                IconButton(icon: "chevron-left", label: l10n.t("common.back"), size: .overMap, action: onBack)
+                VStack(alignment: .leading, spacing: Space.xs) {
+                    Text(d.places.isEmpty ? kind : d.places.joined(separator: " – ")).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(3)
+                    HStack(spacing: Space.xs) {
+                        LucideIcon(name: d.kind == .works ? "construction" : d.kind == .closure ? "ban" : "triangle-alert", size: 14).foregroundStyle(ink)
+                        Text(kind).clack(.caption).foregroundStyle(ink)
+                        Flag(country: d.country, size: 14, decorative: true)
+                    }
+                    .accessibilityElement(children: .combine)
+                }
+                Spacer(minLength: 0)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
+            }
+            Text(when).clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+            words
+            yours
+            Text(l10n.t("notice.source", ["source": DelayCauses.sourceName(d.source)])).clack(.micro).foregroundStyle(Ink.text3)
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    /// "From Mon 16 Nov 22:00 until Tue 17 Nov 05:00", "Until 15:00", or that the source gives no end.
+    private var when: String {
+        let tz = Format.zone(country: d.country)
+        let now = Date.now.timeIntervalSince1970 * 1000
+        func at(_ ms: Double) -> String {
+            let time = Format.time(ms, tz: tz, clock: app.settings.clock)
+            return Format.localDate(ms, tz: tz) == Format.localDate(now, tz: tz) ? time : "\(Format.day(ms, tz: tz, now: now, language: app.settings.language)) \(time)"
+        }
+        switch (d.from, d.to) {
+        case let (from?, to?) where from > now: return l10n.t("network.fromUntil", ["from": at(from), "to": at(to)])
+        case let (from?, nil) where from > now: return l10n.t("network.fromOn", ["from": at(from)])
+        case let (_, to?): return l10n.t("network.untilLong", ["to": at(to)])
+        default: return l10n.t("network.noEnd")
+        }
+    }
+
+    /// The source's short words and its longer text, each in the app's language where the phone could translate it.
+    @ViewBuilder
+    private var words: some View {
+        let short = d.text(l10n.language).map { l10n.shownWhole($0) }
+        let long = d.detailText(l10n.language).map { l10n.shownWhole($0) }
+        if short == nil && long == nil {
+            Text(l10n.t("network.noText")).clack(.body).foregroundStyle(Ink.text2)
+        } else {
+            VStack(alignment: .leading, spacing: Space.s) {
+                if let short, short.text != long?.text { Text(short.text).clack(.headline).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
+                if let long { Text(long.text).clack(.body).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true) }
+                if short?.translated == true || long?.translated == true {
+                    Text(l10n.t("network.translatedOnPhone")).clack(.micro).foregroundStyle(Ink.text3)
+                }
+            }
+            .textSelection(.enabled)
+        }
+    }
+
+    /// Your trains today that start or end at one of its places.
+    @ViewBuilder
+    private var yours: some View {
+        let places = Set(d.places)
+        let hit = mine.filter { leg in [leg.origin?.name, leg.destination?.name].contains { $0.map(places.contains) ?? false } }
+        if !hit.isEmpty {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(l10n.t("network.yourTrainsHere")).clack(.captionUpper).foregroundStyle(Ink.text2)
+                ForEach(hit) { leg in
+                    Button { onTrip(leg.id) } label: {
+                        HStack(spacing: Space.m) {
+                            LucideIcon(name: "train-front", size: 18).foregroundStyle(ink).frame(width: 24)
+                            VStack(alignment: .leading, spacing: Space.xxs) {
+                                Text(verbatim: "\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")").clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(2)
+                                let service = Format.join([leg.operator?.name, leg.trainNumber], separator: " ")
+                                if !service.isEmpty { Text(service).clack(.caption).foregroundStyle(Ink.text2) }
+                            }
+                            Spacer(minLength: 0)
+                            LucideIcon(name: "chevron-right", size: 16).foregroundStyle(Ink.text3)
+                        }
+                        .frame(minHeight: 44).contentShape(Rectangle())
+                    }
+                    .buttonStyle(.pressRow)
+                }
+            }
+        }
+    }
+}
+
 /// A train you asked for that isn't on the map: not started yet, finished, or not running today.
 struct NotRunningSheet: View {
     @Environment(AppModel.self) private var app
@@ -247,7 +353,8 @@ struct NotRunningSheet: View {
     }
 }
 
-/// A station tapped on the live map: its next departures, the board and its map.
+/// A station tapped on the live map: its map and full board first, then its next departures. Opening the map or the
+/// board puts the sheet aside until you come back (`ExploreModel.stepAside`).
 struct LiveStationSheet: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -294,7 +401,7 @@ struct LiveStationSheet: View {
         boardFailed = false
         do {
             let board = try await app.client.board(id, arrivals: false)
-            rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(12))
+            rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(6))
         } catch {
             boardFailed = true
         }
@@ -331,26 +438,8 @@ struct LiveStationSheet: View {
             if let visits = passport.data?.stations.first(where: { $0.id == id })?.count, visits > 0 {
                 Text(visits == 1 ? l10n.t("station.visitedOne") : l10n.t("station.visited", ["count": String(visits)])).clack(.caption).foregroundStyle(Ink.text2)
             }
-            if boardFailed {
-                // Not reached is said as such, not as "no trains" (polish pass 1).
-                ErrorStateView(message: l10n.t("board.loadFailed"), retry: { await loadBoard() })
-            } else if let rows {
-                if rows.isEmpty {
-                    if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
-                } else {
-                    // The board itself, here (designer, 2026-11-14: the card was a signpost to another screen): the next
-                    // twelve; the sheet's size says how many show, pulled up for the rest.
-                    TimelineView(.everyMinute) { context in
-                        let now = context.date.timeIntervalSince1970 * 1000
-                        VStack(spacing: 0) {
-                            ForEach(rows) { row in boardRow(row, now: now) }
-                        }
-                    }
-                }
-            } else {
-                // The rows' place, held.
-                ForEach(0..<4, id: \.self) { _ in Skeleton(height: 44, radius: Radius.tag).padding(.vertical, Space.xxs) }
-            }
+            // The way on first, under the name (owner, 2026-11-15: the buttons sat under the whole list): the station
+            // map and the full board, then the next few trains.
             HStack(spacing: Space.m) {
                 if info?.hasMap == true {
                     // The station map as a tile, not a second button (designer, 2026-11-14).
@@ -380,6 +469,26 @@ struct LiveStationSheet: View {
                     }
                     .buttonStyle(.press(radius: Radius.input))
                 }
+            }
+            if boardFailed {
+                // Not reached is said as such, not as "no trains" (polish pass 1).
+                ErrorStateView(message: l10n.t("board.loadFailed"), retry: { await loadBoard() })
+            } else if let rows {
+                if rows.isEmpty {
+                    if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
+                } else {
+                    // The board itself, here (designer, 2026-11-14: the card was a signpost to another screen): the next
+                    // six; the full board has the rest.
+                    TimelineView(.everyMinute) { context in
+                        let now = context.date.timeIntervalSince1970 * 1000
+                        VStack(spacing: 0) {
+                            ForEach(rows) { row in boardRow(row, now: now) }
+                        }
+                    }
+                }
+            } else {
+                // The rows' place, held.
+                ForEach(0..<4, id: \.self) { _ in Skeleton(height: 44, radius: Radius.tag).padding(.vertical, Space.xxs) }
             }
         }
         .task(id: id) {

@@ -17333,23 +17333,6 @@
         }
       }
     },
-    "share.allKicker" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passport · All time"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pass · Totalt"
-          }
-        }
-      }
-    },
     "share.allTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -17448,23 +17431,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gå från {{from}} till {{to}} · {{min}} min"
-          }
-        }
-      }
-    },
-    "share.countries" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Countries"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Länder"
           }
         }
       }
@@ -18213,40 +18179,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "År"
-          }
-        }
-      }
-    },
-    "share.yearKicker" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passport · {{year}}"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pass · {{year}}"
-          }
-        }
-      }
-    },
-    "share.yearTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My {{year}} by train"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mitt {{year}} med tåg"
           }
         }
       }
@@ -26506,13 +26438,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Late means {{min}} minutes or more. A stretch is slow when at least two trains are on it and most of them are late. Reasons are the operators' own. Track work, closed track and disruptions, planned or not, come from Trafikverket (Sweden), Entur (Norway), Rejseplanen (Denmark) and Fintraffic (Finland), each in its own words. Cancelled trains: Sweden only."
+            "value" : "Late means {{min}} minutes or more. A stretch is slow when at least two trains are on it and most of them are late. Reasons are the operators' own. Track work, closed track and disruptions, planned or not, come from Trafikverket (Sweden), Entur (Norway), Rejseplanen (Denmark) and Fintraffic (Finland), each in its own words, translated on your phone when it's in another language. Cancelled trains: Sweden only."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sent betyder {{min}} minuter eller mer. En sträcka går trögt när minst två tåg är på den och de flesta är sena. Orsakerna är trafikbolagens egna. Banarbeten, avstängda spår och störningar, planerade eller inte, kommer från Trafikverket (Sverige), Entur (Norge), Rejseplanen (Danmark) och Fintraffic (Finland), var och en med sina egna ord. Inställda tåg: bara Sverige."
+            "value" : "Sent betyder {{min}} minuter eller mer. En sträcka går trögt när minst två tåg är på den och de flesta är sena. Orsakerna är trafikbolagens egna. Banarbeten, avstängda spår och störningar, planerade eller inte, kommer från Trafikverket (Sverige), Entur (Norge), Rejseplanen (Danmark) och Fintraffic (Finland), var och en med sina egna ord, översatta i telefonen när de är på ett annat språk. Inställda tåg: bara Sverige."
           }
         }
       }
@@ -27227,6 +27159,200 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "det är inställt"
+          }
+        }
+      }
+    },
+    "network.fromUntil" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From {{from}} until {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från {{from}} till {{to}}"
+          }
+        }
+      }
+    },
+    "network.fromOn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From {{from}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från {{from}}"
+          }
+        }
+      }
+    },
+    "network.untilLong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Until {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Till {{to}}"
+          }
+        }
+      }
+    },
+    "network.noEnd" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No end time given"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen sluttid angiven"
+          }
+        }
+      }
+    },
+    "network.noText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The source gives no description, only what kind of problem it is and where."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Källan ger ingen beskrivning, bara vad det är för störning och var."
+          }
+        }
+      }
+    },
+    "network.translatedOnPhone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translated on your phone from the source's language."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Översatt i telefonen från källans språk."
+          }
+        }
+      }
+    },
+    "network.yourTrainsHere" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your trains here today"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dina tåg här i dag"
+          }
+        }
+      }
+    },
+    "network.openProblem" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows where it is and what's wrong"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visar var det är och vad som är fel"
+          }
+        }
+      }
+    },
+    "network.onYourRoute" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouble on your route"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Störning på din sträcka"
+          }
+        }
+      }
+    },
+    "recap.monthCell" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "{{month}}: %lld train"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "{{month}}: %lld trains"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "{{month}}: %lld tåg"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "{{month}}: %lld tåg"
+                }
+              }
+            }
           }
         }
       }

@@ -159,6 +159,15 @@ final class Router {
     var pendingTrain: PendingTrain?
     /// A station Explore should open the sheet of when it appears (`-station <id>`, for screenshots).
     var pendingStation: String?
+    /// A disruption Explore should open in Network now when it appears (a trip page's "Track work on your route").
+    var pendingDisruption: String?
+
+    /// Opens a disruption on Explore's map, in Network now, from anywhere.
+    func openDisruption(_ id: String) {
+        pendingDisruption = id
+        explorePath = []
+        tab = .explore
+    }
 
     struct PendingTrain: Hashable, Sendable {
         var number: String
