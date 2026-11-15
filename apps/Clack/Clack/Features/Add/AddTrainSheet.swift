@@ -14,7 +14,13 @@ struct AddTrainSheet: View {
     @Environment(L10n.self) private var l10n
     @Environment(Router.self) private var router
     let request: Router.AddRequest
-    @State private var model = AddTrainModel()
+    @State private var model: AddTrainModel
+
+    init(request: Router.AddRequest) {
+        self.request = request
+        // Opening with a train starts at "Opening…" from the first frame, not at the search.
+        _model = State(initialValue: AddTrainModel(opening: request.link))
+    }
 
     var body: some View {
         SheetFrame(title: l10n.t("add.title"), onClose: { router.closeAdd() }) {
@@ -68,8 +74,52 @@ struct AddTrainSheet: View {
                 result: picked, originChosen: model.originChosen, backLabel: model.openedWithTrip ? l10n.t("common.back") : nil,
                 onBack: { model.openedWithTrip ? router.closeAdd() : (model.picked = nil) }, onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
             )
+        } else if let link = model.opening {
+            // Opened with a train: say which while it loads, never the empty search with the keyboard up.
+            OpeningStep(link: link) { await model.prefill(link, app.client) }
         } else {
             ScrollViewReader { proxy in SearchStep(scroller: proxy) }
+        }
+    }
+}
+
+// MARK: opening a linked train
+
+/// The sheet opened with a train ("Use this instead" on a disruption, Plan on a train): what's being opened while it
+/// loads, then the confirm step. When it can't be opened, the train named, why, Try again, and the search as the way
+/// on (never an empty search that looks like nothing happened).
+private struct OpeningStep: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(AddTrainModel.self) private var model
+    let link: AddTrainLink
+    let retry: () async -> Void
+
+    /// "SJ 421", or the day when the opener didn't name it.
+    private var train: String {
+        if let title = link.title, !title.isEmpty { return title }
+        let day = Format.isoToNoonMs(link.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? link.date
+        return l10n.t("add.opening.trainOn", ["day": day])
+    }
+
+    var body: some View {
+        if let kind = model.openFailure {
+            ErrorStateView(message: l10n.t("add.opening.failed", ["train": train]), kind: kind, status: model.openRetry.status, retry: retry)
+                .countsError("add.open")
+            Button(l10n.t("add.opening.searchInstead")) { model.searchInstead() }
+                .buttonStyle(LinkButtonStyle())
+                .frame(maxWidth: .infinity)
+                .padding(.top, Space.s)
+        } else {
+            HStack(spacing: Space.s) {
+                ProgressView().controlSize(.small)
+                Text(l10n.t("add.opening.title", ["train": train])).clack(.rowTitle).foregroundStyle(Ink.text)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+            GrowingWait(context: l10n.t("add.opening.slow"), status: model.openRetry.status) {
+                ResultCardSample()
+            }
         }
     }
 }
@@ -111,7 +161,10 @@ private struct SearchStep: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         if model.searchFailed {
-            ErrorStateView(message: l10n.t("add.searchError"), retry: { model.searchAgain() }).countsError("add.search")
+            ErrorStateView(
+                message: model.searchFailure == nil ? l10n.t("add.searchError") : l10n.t("add.searchFailed"),
+                kind: model.searchFailure, status: model.searchRetry.status, retry: { model.searchAgain() }
+            ).countsError("add.search")
         }
 
         if model.query.isEmpty, !model.popular.isEmpty {
@@ -125,9 +178,13 @@ private struct SearchStep: View {
                 Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 stationList(model.suggestionsShown)
             }
-            VStack(spacing: Space.l) {
-                ResultCardSample()
-                ResultCardSample()
+            // Grows with the wait: "Still loading…" after 5 s, why it can take a while after 15 s, and a retry's
+            // countdown when the request is waiting to try again.
+            GrowingWait(context: l10n.t("add.slowSearch"), status: model.searchRetry.status) {
+                VStack(spacing: Space.l) {
+                    ResultCardSample()
+                    ResultCardSample()
+                }
             }
         }
     }
@@ -366,15 +423,33 @@ private struct SearchStep: View {
         }
     }
 
-    /// Why an older day has no results yet: being fetched, failed, or before the record (Norway and Finland say from when).
+    /// Why an older day has no results yet: being fetched, failed, or not in the record. Each country says its own
+    /// (Norway and Finland from when, Denmark which stretches it has); never one country's words for another's day,
+    /// so a value this app doesn't know, or Sweden's "unavailable" for a search that starts abroad, gets the neutral
+    /// line.
     private func historyMessage(_ response: SearchResponse) -> String {
+        let language = app.settings.language
+        let long = { (iso: String) in Format.isoToNoonMs(iso).map { Format.fullDate($0, tz: "UTC", language: language) } ?? iso }
         switch response.history {
         case "loading": return l10n.t("add.historyLoading")
         case "failed": return l10n.t("add.historyFailed")
         case "norway", "finland":
-            let from = response.historyFrom.flatMap(Format.isoToNoonMs).map { Format.fullDate($0, tz: "UTC", language: app.settings.language) } ?? ""
+            let from = response.historyFrom.map(long) ?? ""
             return l10n.t(response.history == "norway" ? "add.historyNorway" : "add.historyFinland", ["date": from])
-        default: return l10n.t("add.historyUnavailable")
+        case "denmark":
+            guard let first = response.historyFrom else { return l10n.t("add.historyNone") }
+            let ranges = AddTrainLogic.coveredRanges(from: first, gaps: response.historyGaps ?? []).map { range in
+                range.to.map { l10n.t("add.historyRange", ["from": long(range.from), "to": long($0)]) }
+                    ?? l10n.t("add.historyRangeOpen", ["from": long(range.from)])
+            }
+            let list = ranges.formatted(.list(type: .and).locale(Format.locale(language)))
+            return l10n.t("add.historyDenmark", ["date": long(model.date), "ranges": list])
+        case "unavailable":
+            // The server says why for the search's first country (its from station, else its to); without stations it
+            // asks Sweden first.
+            let country = response.interpretation.from?.country ?? response.interpretation.to?.country ?? "SE"
+            return l10n.t(country == "SE" ? "add.historyUnavailable" : "add.historyNone")
+        default: return l10n.t("add.historyNone")
         }
     }
 }

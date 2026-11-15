@@ -101,17 +101,31 @@ final class WalkStore {
             do {
                 try await client.upload(["walklogs", id], data: data)
                 markUploaded(id, true)
+                uploadRetry[id] = nil
                 lastError = nil
             } catch {
-                lastError = "Upload failed (\(error.localizedDescription)); it will try again."
+                // The same walk again later, waiting longer each time (up to 1, 2, 4 … 30 min); a refusal waits the longest.
+                // A PUT of the same file, so asking again can't make two.
+                var retry = uploadRetry[id]?.retrier ?? Retrier(Self.uploadPolicy)
+                let wait = retry.failed(error) ?? Self.uploadPolicy.cap
+                uploadRetry[id] = (retry, .now.addingTimeInterval(wait))
+                let minutes = max(1, Int((wait / 60).rounded()))
+                lastError = "Upload failed (\(error.localizedDescription)); it will try again in about \(minutes) min."
             }
             reload()
         }
     }
 
-    /// Every finished walk not yet on the server (called when the list shows, and every minute while it does).
+    /// The uploads' backoff: walks are big and nobody waits on them, so minutes, not seconds.
+    private static let uploadPolicy = RetryPolicy(tries: nil, base: 60, cap: 1800)
+    /// Each failed walk's backoff and when it may try again.
+    private var uploadRetry: [String: (retrier: Retrier, next: Date)] = [:]
+
+    /// Every finished walk not yet on the server (called when the list shows, and every minute while it does), except
+    /// those still waiting out a failure.
     func uploadPending(except running: String?) {
-        for e in entries where !e.uploaded && e.id != running { upload(e.id) }
+        let now = Date.now
+        for e in entries where !e.uploaded && e.id != running && (uploadRetry[e.id]?.next ?? .distantPast) <= now { upload(e.id) }
     }
 
     /// Delete my data: every walk on this phone (the server deletes its copies with the user).

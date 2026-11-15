@@ -12,14 +12,107 @@ public nonisolated struct APIError: Error, Sendable, LocalizedError {
     public let message: String
     /// A leg id, on a 409 from `POST /legs`.
     public let duplicateOf: String?
+    /// How long the server asked to be left alone (a 429's Retry-After header, or "try again in N seconds" in its text).
+    public let retryAfter: TimeInterval?
 
     public var errorDescription: String? { message }
 
-    public init(status: Int, message: String, duplicateOf: String?) {
+    public init(status: Int, message: String, duplicateOf: String?, retryAfter: TimeInterval? = nil) {
         self.status = status
         self.message = message
         self.duplicateOf = duplicateOf
+        self.retryAfter = retryAfter
     }
+
+    /// What kind of failure, as the person is told it and as retrying treats it.
+    public enum Kind: Sendable, Equatable {
+        /// The phone has no connection (or lost it on the way).
+        case offline
+        /// Asked, and no answer in time.
+        case timeout
+        /// The server can't be reached or says it's down for now (502, 503, 504).
+        case serverDown
+        /// The server answered with a fault of its own (500, or an answer that didn't read).
+        case serverError
+        /// Too many requests; the server's wait when it named one.
+        case rateLimited(retryAfter: TimeInterval?)
+        case notFound
+        /// Refused (any other 4xx), with the server's reason.
+        case rejected(String)
+        /// The screen stopped asking (it closed, or the search changed).
+        case cancelled
+
+        /// Asking again can help: no connection, a timeout, the server down, too many requests. A refusal never.
+        public var isRetryable: Bool {
+            switch self {
+            case .offline, .timeout, .serverDown, .rateLimited: true
+            case .serverError, .notFound, .rejected, .cancelled: false
+            }
+        }
+
+        /// The wait the server named, if it did.
+        public var retryAfter: TimeInterval? {
+            if case .rateLimited(let after) = self { return after }
+            return nil
+        }
+    }
+
+    public var kind: Kind {
+        switch status {
+        case 404: .notFound
+        case 429: .rateLimited(retryAfter: retryAfter)
+        case 502, 503, 504: .serverDown
+        case 500..<600: .serverError
+        default: .rejected(message)
+        }
+    }
+
+    /// Any error a request can throw, as a kind: the server's answers by their status, URLSession's by their code.
+    public static func classify(_ error: any Error) -> Kind {
+        if let error = error as? APIError { return error.kind }
+        if error is CancellationError { return .cancelled }
+        if let error = error as? URLError {
+            switch error.code {
+            case .cancelled: return .cancelled
+            case .timedOut: return .timeout
+            case .notConnectedToInternet, .networkConnectionLost, .dataNotAllowed, .internationalRoamingOff, .callIsActive,
+                 .cannotFindHost, .dnsLookupFailed:
+                return .offline
+            case .cannotConnectToHost, .badServerResponse, .zeroByteResource, .cannotParseResponse, .secureConnectionFailed:
+                return .serverDown
+            default: return .offline
+            }
+        }
+        // An answer that didn't decode is the server's fault; asking again gets the same answer.
+        return .serverError
+    }
+
+    /// A Retry-After header (seconds, or an HTTP date), else the seconds in the server's text ("too many requests, try
+    /// again in 12 seconds", apps/server/src/plugins/rateLimit.ts).
+    public static func retryAfter(header: String?, message: String?, now: Date = .now) -> TimeInterval? {
+        if let header = header?.trimmingCharacters(in: .whitespaces), !header.isEmpty {
+            if let seconds = Double(header), seconds >= 0 { return seconds }
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(identifier: "GMT")
+            formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+            if let date = formatter.date(from: header) { return max(0, date.timeIntervalSince(now)) }
+        }
+        if let message, let range = message.range(of: #"try again in (\d+) second"#, options: .regularExpression) {
+            let digits = message[range].filter(\.isNumber)
+            return Double(digits)
+        }
+        return nil
+    }
+}
+
+/// What a request told about reaching the server: it answered, or it couldn't be reached (and how it failed). A 502 or
+/// 504 is the proxy in front saying the server itself didn't answer.
+public nonisolated enum Reach: Sendable, Equatable {
+    case answered
+    case failed(APIError.Kind)
+
+    public var reached: Bool { self == .answered }
 }
 
 private nonisolated struct APIErrorBody: Decodable {
@@ -35,15 +128,15 @@ public nonisolated struct APIClient: Sendable {
     public let session: URLSession
     /// Kept copies of the GETs the web keeps, served when the server can't be reached. Nil in tests.
     public let cache: OfflineCache?
-    /// Told after every request whether the server answered (true) or couldn't be reached (false).
-    public let reachability: (@Sendable (Bool) -> Void)?
+    /// Told after every request whether the server answered or couldn't be reached (and how).
+    public let reachability: (@Sendable (Reach) -> Void)?
 
     /// GETs time out after 15 s (the web client does the same).
     public static let getTimeout: TimeInterval = 15
 
     public init(
         base: URL = Config.apiBase, userID: String, session: URLSession = .shared, cache: OfflineCache? = nil,
-        reachability: (@Sendable (Bool) -> Void)? = nil
+        reachability: (@Sendable (Reach) -> Void)? = nil
     ) {
         self.base = base
         self.userID = userID
@@ -70,31 +163,72 @@ public nonisolated struct APIClient: Sendable {
 
     /// Sends a request and returns the body (empty for 204). `Content-Type` is set only when there is a body:
     /// Fastify rejects an empty body labelled JSON.
-    public func request(_ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil, timeout: TimeInterval? = nil) async throws -> Data {
+    ///
+    /// A failure that can pass (no connection, a timeout, the server down, too many requests) is asked again under
+    /// `policy`: by default a GET up to five times with backoff, a write never by itself. A POST carries an
+    /// `Idempotency-Key`, the same on every try, so asking again can't add the same thing twice. `retryIf` can turn a
+    /// retry down (a GET with a kept copy serves that instead of waiting).
+    public func request(
+        _ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil,
+        timeout: TimeInterval? = nil, policy: RetryPolicy? = nil, retryIf: ((any Error) async -> Bool)? = nil
+    ) async throws -> Data {
         var request = URLRequest(url: url(segments, query: query))
         request.httpMethod = method
         request.setValue(userID, forHTTPHeaderField: "X-Clack-User")
         if method == "GET" { request.timeoutInterval = timeout ?? Self.getTimeout }
+        if method == "POST" { request.setValue(UUID().uuidString, forHTTPHeaderField: "Idempotency-Key") }
         if let body {
             request.httpBody = try JSONEncoder().encode(body)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
+        let policy = policy ?? RetryContext.policy ?? (method == "GET" ? .read : .none)
+        let observer = RetryContext.observer
+        var retrier = Retrier(policy)
+        while true {
+            do {
+                let data = try await attempt(request)
+                if retrier.status != .idle { observer?(.idle) }
+                return data
+            } catch {
+                let kind = APIError.classify(error)
+                let wanted = kind.isRetryable ? await retryIf?(error) ?? true : false
+                guard wanted, let delay = retrier.failed(kind), case .retrying = retrier.status else {
+                    if kind != .cancelled, retrier.status != .idle || kind.isRetryable { observer?(.gaveUp(kind)) }
+                    throw error
+                }
+                observer?(retrier.status)
+                // Woken early when the connection comes back or the app comes to the front.
+                try await RetryWake.shared.sleep(delay)
+            }
+        }
+    }
+
+    /// One try: the answer's body, or the failure (and the server's reachability said either way).
+    private func attempt(_ request: URLRequest) async throws -> Data {
         let (data, response): (Data, URLResponse)
         do {
             (data, response) = try await session.data(for: request)
         } catch {
-            // A network failure or the 15 s timeout means offline; a request the page cancelled doesn't.
-            if (error as? URLError)?.code != .cancelled { reachability?(false) }
+            // A network failure or the 15 s timeout means unreachable; a request the page cancelled doesn't.
+            let kind = APIError.classify(error)
+            if kind != .cancelled { reachability?(.failed(kind)) }
             throw error
         }
-        reachability?(true)
-        guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+        guard let http = response as? HTTPURLResponse else {
+            reachability?(.failed(.serverDown))
+            throw URLError(.badServerResponse)
+        }
+        // The proxy in front answering for a server that didn't is not the server answering.
+        reachability?(http.statusCode == 502 || http.statusCode == 504 ? .failed(.serverDown) : .answered)
         guard (200..<300).contains(http.statusCode) else {
             let parsed = try? JSONDecoder().decode(APIErrorBody.self, from: data)
+            let message = parsed?.error ?? parsed?.message ?? "HTTP \(http.statusCode)"
             throw APIError(
                 status: http.statusCode,
-                message: parsed?.error ?? parsed?.message ?? "HTTP \(http.statusCode)",
-                duplicateOf: parsed?.duplicateOf
+                message: message,
+                duplicateOf: parsed?.duplicateOf,
+                retryAfter: http.statusCode == 429 || http.statusCode == 503
+                    ? APIError.retryAfter(header: http.value(forHTTPHeaderField: "Retry-After"), message: message) : nil
             )
         }
         return data
@@ -109,20 +243,34 @@ public nonisolated struct APIClient: Sendable {
     /// Leaves these kept copies alone when old ones are dropped (the trips about to be ridden).
     public func pin(_ paths: Set<String>) async { await cache?.setPinned(paths) }
 
-    /// A GET, decoded. When the server can't be reached, the kept copy of the same path is used if there is one.
+    /// A GET, decoded. When the server can't be reached, the kept copy of the same path is used if there is one, at
+    /// once: the screen has something to show, and its own loop asks again later.
     public func get<T: Decodable & Sendable>(_ segments: [String], query: [String: String] = [:], timeout: TimeInterval? = nil) async throws -> T {
         let path = "/" + segments.joined(separator: "/")
+        let key = Self.cacheKey(path, query)
+        let cache = cache
         let data: Data
         do {
-            data = try await request("GET", segments, query: query, timeout: timeout)
-        } catch let error as URLError where error.code != .cancelled {
-            // Any HTTP answer, even an error, is not served from the cache; only a failure to reach the server is.
-            guard let cache, let kept = await cache.read(Self.cacheKey(path, query)) else { throw error }
+            data = try await request("GET", segments, query: query, timeout: timeout) { error in
+                // Waiting out a backoff makes sense only when there is nothing kept to show meanwhile.
+                guard Self.servesKept(error), let cache else { return true }
+                return await cache.read(key) == nil
+            }
+        } catch let error where Self.servesKept(error) {
+            // Any answer from the server itself, even an error, is not served from the cache; only a failure to reach it.
+            guard let cache, let kept = await cache.read(key) else { throw error }
             return try JSONDecoder().decode(T.self, from: kept)
         }
         // Responses without a query are kept; so is the Passport, per year and setting (its query is part of the key).
-        if query.isEmpty || path == "/passport" { await cache?.store(Self.cacheKey(path, query), data) }
+        if query.isEmpty || path == "/passport" { await cache?.store(key, data) }
         return try JSONDecoder().decode(T.self, from: data)
+    }
+
+    /// The failures a kept copy stands in for: the server not reached (no connection, no answer in time, the proxy in
+    /// front saying it isn't answering). A 503 is the server's own answer (a source it relies on is down), so it isn't.
+    private static func servesKept(_ error: any Error) -> Bool {
+        if let error = error as? APIError { return error.status == 502 || error.status == 504 }
+        return error is URLError && APIError.classify(error) != .cancelled
     }
 
     /// A request with a JSON body whose answer is decoded (`POST /legs`, `PATCH /legs/:id`, ...).
@@ -144,7 +292,11 @@ public nonisolated struct APIClient: Sendable {
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         guard (200..<300).contains(http.statusCode) else {
             let parsed = try? JSONDecoder().decode(APIErrorBody.self, from: body)
-            throw APIError(status: http.statusCode, message: parsed?.error ?? parsed?.message ?? "HTTP \(http.statusCode)", duplicateOf: nil)
+            let message = parsed?.error ?? parsed?.message ?? "HTTP \(http.statusCode)"
+            throw APIError(
+                status: http.statusCode, message: message, duplicateOf: nil,
+                retryAfter: APIError.retryAfter(header: http.value(forHTTPHeaderField: "Retry-After"), message: message)
+            )
         }
     }
 

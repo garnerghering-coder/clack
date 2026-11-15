@@ -147,6 +147,8 @@ struct RootView: View {
         .onChange(of: app.notifications.openRequest) { _, _ in openAlert() }
         // Your train placed by your phone, and (when you've said yes) helping place it for everyone (RiderReporter).
         .onChange(of: scenePhase, initial: true) { _, phase in if phase == .active { RiderReporter.shared.resume(client: app.client) } }
+        // Back in front: whatever was waiting out a backoff tries again now, not when its wait runs out.
+        .onChange(of: scenePhase) { _, phase in if phase == .active { app.connection.becameActive() } }
         .alert(app.l10n.t("usage.ask.title"), isPresented: Binding(get: { UsageAsk.shared.show && !RiderReporter.shared.showAsk }, set: { UsageAsk.shared.show = $0 })) {
             Button(app.l10n.t("usage.ask.yes")) { Usage.shared.enabled = true }
             Button(app.l10n.t("usage.ask.no"), role: .cancel) { Usage.shared.enabled = false }
@@ -274,7 +276,7 @@ struct RootView: View {
         // being covered (designer, 2026-11-07: the toast landed on Explore's search field; owner, 2026-11-14: a top
         // margin, not an overlay). A safe-area inset moved the content but left the navigation bar under the strip.
         VStack(spacing: 0) {
-            if app.isOffline { OfflineBanner().transition(Motion.transition(from: .top, reduceMotion: reduceMotion)) }
+            if app.isOffline { OfflineBanner(state: app.connectionState).transition(Motion.transition(from: .top, reduceMotion: reduceMotion)) }
             NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
                 root()
                     .appDestinations()

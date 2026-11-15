@@ -181,4 +181,20 @@ public nonisolated enum AddTrainLogic {
     public static func iso(from date: Date, tz: String = Format.defaultZone) -> String {
         Format.localDate(date.timeIntervalSince1970 * 1000, tz: Format.zone(tz))
     }
+
+    /// The days a record covers, from its first day with the gaps taken out (the server's `historyFrom` and
+    /// `historyGaps` for Denmark): each stretch from a day to a day, the last one open (to now). Gaps before the first
+    /// day, or overlapping, are taken as they come.
+    public static func coveredRanges(from first: String, gaps: [DateRange]) -> [(from: String, to: String?)] {
+        var out: [(from: String, to: String?)] = []
+        var start = first
+        for gap in gaps.sorted(by: { $0.from < $1.from }) where gap.to >= start {
+            if gap.from > start, let before = Format.addDaysIso(gap.from, days: -1) { out.append((start, before)) }
+            guard let after = Format.addDaysIso(gap.to, days: 1) else { return out }
+            start = max(start, after)
+        }
+        out.append((start, nil))
+        return out
+    }
+
 }

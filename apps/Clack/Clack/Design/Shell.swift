@@ -109,13 +109,17 @@ struct Page<Content: View>: View {
 /// The offline strip at the top of every screen while the server can't be reached (`.offline-banner`): a written line
 /// in the safe area, so the page moves down under it and nothing is covered (designer, 2026-11-07: it landed on
 /// Explore's search field).
+///
+/// It says which: no connection on the phone, or a connection and Clack's server not answering (so the person doesn't
+/// go looking at their Wi-Fi when the fault is ours).
 struct OfflineBanner: View {
+    var state: ConnectionState.State = .offline
     @Environment(L10n.self) private var l10n
 
     var body: some View {
         HStack(spacing: Space.s) {
-            LucideIcon(name: "wifi-off", size: 14)
-            Text(l10n.t("offline.banner")).lineLimit(1)
+            LucideIcon(name: state == .serverTrouble ? "triangle-alert" : "wifi-off", size: 14)
+            Text(l10n.t(state == .serverTrouble ? "offline.bannerServer" : "offline.banner")).lineLimit(1)
         }
         .clack(.init(size: 12, lineHeight: 16, weight: .semibold, style: .caption))
         .foregroundStyle(Ink.text2)

@@ -74,10 +74,11 @@ extension APIClient {
         do {
             (data, response) = try await session.data(for: request)
         } catch {
-            if (error as? URLError)?.code != .cancelled { reachability?(false) }
+            let kind = APIError.classify(error)
+            if kind != .cancelled { reachability?(.failed(kind)) }
             throw error
         }
-        reachability?(true)
+        reachability?(.answered)
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         switch http.statusCode {
         case 304: return .notModified

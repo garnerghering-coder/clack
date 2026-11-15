@@ -80,11 +80,14 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     /// The time window the journeys cover (epoch ms), from which the app pages earlier and later.
     public var window: Window? = nil
     public let outsideTimetable: Bool
-    /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable`, `norway` or
-    /// `finland` (before that country's record starts).
+    /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable` (before Sweden's
+    /// archive), `norway`, `finland` or `denmark` (a day that country's record doesn't have).
     public let history: String?
-    /// With `norway` or `finland`: the first day that country's trains are on record (YYYY-MM-DD).
+    /// With `norway`, `finland` or `denmark`: the first day that country's record has (YYYY-MM-DD).
     public let historyFrom: String?
+    /// With `denmark`: the stretches after `historyFrom` that no copy of Denmark's timetable covers (inclusive
+    /// YYYY-MM-DD dates; may be empty). Nil from older servers.
+    public var historyGaps: [DateRange]? = nil
     /// A train number with nothing on the date: nearby days (YYYY-MM-DD) it does run on, so the list can say so.
     public var otherDays: [String]? = nil
     /// With results only from abroad: the country (`SE`…) whose days `otherDays` are.
@@ -376,4 +379,15 @@ public nonisolated struct SoonTrain: Codable, Hashable, Sendable, Identifiable {
 
     public var id: String { "\(tripKey)|\(fromSeq)" }
     public var body: CreateLegBody { CreateLegBody(tripKey: tripKey, serviceDate: serviceDate, fromSeq: fromSeq, toSeq: toSeq) }
+}
+
+/// An inclusive stretch of days, `YYYY-MM-DD` to `YYYY-MM-DD` (`historyGaps`).
+public nonisolated struct DateRange: Codable, Hashable, Sendable {
+    public let from: String
+    public let to: String
+
+    public init(from: String, to: String) {
+        self.from = from
+        self.to = to
+    }
 }

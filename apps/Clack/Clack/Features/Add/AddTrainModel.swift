@@ -41,6 +41,17 @@ final class AddTrainModel {
     private(set) var popular: [StationHit] = []
     private(set) var loading = false
     var searchFailed = false
+    /// Why the last search failed (no connection, the server down…), for the error state's wording.
+    private(set) var searchFailure: APIError.Kind?
+    /// The search's retries while they wait ("Trying again in 4 s"), heard from its request.
+    let searchRetry = RetryTracker()
+    /// Opened from a link ("Use this instead", a board's Plan): the train being opened, until its confirm step is in.
+    /// The sheet shows that it's opening it, not an empty search.
+    private(set) var opening: AddTrainLink?
+    /// Opening it failed, and why: the sheet names the train with Try again and a way to search instead.
+    private(set) var openFailure: APIError.Kind?
+    /// Opening's retries while they wait.
+    let openRetry = RetryTracker()
     var filter = AddTrainLogic.Filter.all
     /// Bumped to ask again while an older day's timetable is fetched from the archive.
     private(set) var retry = 0
@@ -77,6 +88,10 @@ final class AddTrainModel {
     var replaceLegId: String?
     /// Delete the replaced trip instead (another train chosen for a trip still ahead).
     var deleteReplaced = false
+
+    init(opening: AddTrainLink? = nil) {
+        self.opening = opening
+    }
 
     /// Changes whenever the search should run again.
     var searchKey: String { "\(query)|\(date)|\(retry)" }
@@ -204,15 +219,15 @@ final class AddTrainModel {
     }
 
     /// One window of journeys, waiting a few times while the server builds a new day's index. Nil when the search
-    /// changed meanwhile or the server didn't answer.
+    /// changed meanwhile or the server didn't answer (its request retries a failure itself, with backoff).
     private func fetchPage(_ client: APIClient, after: Double) async -> [PlannedJourney]? {
         let key = searchKey
         for _ in 0..<6 {
             guard let page = try? await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: Self.pageHours) else { return nil }
             guard key == searchKey else { return nil }
             if page.journeysPending != true { return page.journeys ?? [] }
-            try? await Task.sleep(for: .seconds(3))
-            if Task.isCancelled { return nil }
+            // Still building: a healthy wait, not a failure, so it stays at 3 s.
+            guard await RetryWake.pause(3) else { return nil }
         }
         return nil
     }
@@ -226,18 +241,31 @@ final class AddTrainModel {
         popular = (try? await client.popularStations()) ?? []
     }
 
-    /// Opens straight at the confirm step for a timetable trip.
+    /// Opens straight at the confirm step for a timetable trip. Meanwhile the sheet says what it's opening; a failure
+    /// that can pass is asked again with backoff (the read policy), and one that doesn't says so with the train named.
     func prefill(_ link: AddTrainLink, _ client: APIClient) async {
         openedWithTrip = true
         replaceLegId = link.replaceLegId
+        opening = link
+        openFailure = nil
         do {
-            let trip = try await client.timetableTrip(link.tripKey, date: link.date)
+            let trip = try await openRetry.run { try await client.timetableTrip(link.tripKey, date: link.date) }
             date = link.date
             originChosen = link.fromSeq != nil
             picked = AddTrainLogic.result(from: trip, fromSeq: link.fromSeq, toSeq: link.toSeq)
+            opening = nil
         } catch {
-            searchFailed = true
+            let kind = APIError.classify(error)
+            if kind != .cancelled { openFailure = kind }
         }
+    }
+
+    /// Gives up opening the linked train and goes to the ordinary search (the replaced trip is still replaced by
+    /// whatever is saved).
+    func searchInstead() {
+        opening = nil
+        openFailure = nil
+        openedWithTrip = false
     }
 
     /// A search result was chosen: the picker starts at where you got on unless the search named it.
@@ -271,39 +299,32 @@ final class AddTrainModel {
         }
         do {
             // Today's journeys from ten minutes ago, one page at a time; another day whole. The planner is asked for
-            // the most changes it does, and the filter picks from that.
+            // the most changes it does, and the filter picks from that. A dropped connection or a server still
+            // starting is asked again by the request itself (up to five tries, 1 s, 2 s, 4 s, 8 s apart, sooner when
+            // the connection comes back), and the list says so meanwhile.
             let today = date == Format.todayIso()
             let after: Double? = today ? Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000 : nil
-            let answer = try await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: today ? Self.pageHours : nil)
+            let answer = try await searchRetry.run {
+                try await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: today ? Self.pageHours : nil)
+            }
             response = answer
             pagedJourneys = []
             window = answer.window
             laterEmpty = false
             searchFailed = false
-            failedTries = 0
+            searchFailure = nil
             loading = false
-        } catch is CancellationError {
-            return
-        } catch let error as URLError where error.code == .cancelled {
-            return
         } catch {
+            let kind = APIError.classify(error)
+            if kind == .cancelled { return }
             searchFailed = true
+            searchFailure = kind
             loading = false
-            // A dropped connection or a server still starting: ask again by itself, a few times, 4 s apart.
-            if failedTries < 3 {
-                failedTries += 1
-                try? await Task.sleep(for: .seconds(4))
-                if !Task.isCancelled { retry += 1 }
-            }
         }
     }
 
-    /// Failed searches in a row (reset by an answer), for the automatic retries.
-    private var failedTries = 0
-
     /// Search pressed again (or the text submitted): runs the same search once more after a failure.
     func searchAgain() {
-        failedTries = 0
         if searchFailed { retry += 1 }
     }
 
@@ -312,8 +333,11 @@ final class AddTrainModel {
     /// the next, so a task started per answer would only ever ask once.
     func waitForHistory() async {
         let started = Date.now
+        // Loading is healthy (every 2 s); a failed fetch backs off from 15 s, doubling, up to two minutes.
+        var retrier = Retrier(RetryPolicy(tries: nil, base: 15, cap: 120, every: 2))
         while let history = response?.history, history == "loading" || history == "failed" {
-            try? await Task.sleep(for: .seconds(history == "loading" ? 2 : 15))
+            let wait = history == "loading" ? retrier.succeeded() ?? 2 : retrier.failed(.serverDown) ?? 15
+            guard await RetryWake.pause(wait) else { return }
             if Task.isCancelled || Date.now.timeIntervalSince(started) > 180 { return }
             // The search may have brought the day in while this slept: then there is nothing to ask again.
             guard let now = response?.history, now == "loading" || now == "failed" else { return }
@@ -325,7 +349,8 @@ final class AddTrainModel {
     func waitForJourneys() async {
         let started = Date.now
         while response?.journeysPending == true {
-            try? await Task.sleep(for: .seconds(3))
+            // A healthy wait (the planner is working), so it keeps its pace.
+            guard await RetryWake.pause(3) else { return }
             if Task.isCancelled || Date.now.timeIntervalSince(started) > 120 { return }
             guard response?.journeysPending == true else { return }
             retry += 1

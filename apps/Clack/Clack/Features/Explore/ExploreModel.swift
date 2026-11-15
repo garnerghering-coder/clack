@@ -87,6 +87,10 @@ final class ExploreModel {
     private var colorBy: ExploreLogic.ColorBy { showNetwork ? .lateOnly : controller.display.colorBy }
     private(set) var network: NetworkStatus?
     private(set) var networkFailed = false
+    /// Why the network status couldn't be fetched (the panel's wording).
+    private(set) var networkFailure: APIError.Kind?
+    /// The network poll's backoff after a failure, for the panel's countdown.
+    private(set) var networkRetry = RetryStatus.idle
     /// The corridor on show (highlighted on the map, its sheet open) and whether it has since cleared.
     private(set) var corridor: NetworkStatus.Corridor?
     private(set) var corridorGone = false
@@ -272,6 +276,9 @@ final class ExploreModel {
         // Panning waits 400 ms for the map to settle; the first picture doesn't wait at all.
         if loaded { try? await Task.sleep(for: .milliseconds(400)) }
         guard !Task.isCancelled, let client = app?.client else { return }
+        // After a drop: 1 s, 2 s, 4 s … 30 s (never sooner than the server's `retry:`), at once when the connection
+        // comes back; an event resets it.
+        streamRetrier = Retrier(.stream)
         while !Task.isCancelled {
             // The server sends something every two seconds (the data's age too), so a stream that goes quiet has
             // stalled without failing: the watchdog cancels it and the loop connects again.
@@ -284,17 +291,27 @@ final class ExploreModel {
                     if self.now - self.lastEvent > Self.silenceMs { consumer.cancel(); return }
                 }
             }
+            // A stall or a clean end is the server's side going quiet, not the phone's connection.
+            var dropped: any Error = URLError(.badServerResponse)
             do {
                 try await withTaskCancellationHandler { try await consumer.value } onCancel: { consumer.cancel() }
             } catch {
-                // Down until it comes back.
+                // Down until it comes back. The watchdog's cancel reads as a stall.
+                if APIError.classify(error) != .cancelled { dropped = error }
             }
             watchdog.cancel()
             if Task.isCancelled { return }
             streamDown = true
-            try? await Task.sleep(for: .seconds(5))
+            let wait = streamRetrier.failed(dropped) ?? streamRetrier.policy.cap
+            streamRetry = streamRetrier.status
+            guard await RetryWake.pause(wait) else { return }
         }
     }
+
+    /// The live stream's backoff, kept across reconnects; reset by any event.
+    private var streamRetrier = Retrier(.stream)
+    /// Where the live stream's reconnecting stands (the map's status line can say "trying again in 4 s").
+    private(set) var streamRetry = RetryStatus.idle
 
     /// The quiet after which a stream is taken for stalled.
     nonisolated static let silenceMs = 15_000.0
@@ -303,7 +320,13 @@ final class ExploreModel {
     private func consume(_ stream: AsyncThrowingStream<SSEEvent, Error>) async throws {
         for try await event in stream {
             lastEvent = now
+            if let seconds = event.retrySeconds {
+                streamRetrier.serverHint = seconds
+                continue
+            }
             streamDown = false
+            streamRetrier.succeeded()
+            if streamRetry != .idle { streamRetry = .idle }
             if event.name == "snapshot", let snapshot = await EventStream.decode(LiveSnapshot.self, from: event) {
                 loaded = true
                 lastMessage = now
@@ -687,13 +710,9 @@ final class ExploreModel {
         searchTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(200))
             guard !Task.isCancelled, let self, let client = self.app?.client else { return }
-            // Asked twice: a dropped request on the first try is not "no match" (user test 2026-11-07: "Uppsala",
-            // which the planner knew, got "Inget matchar" here).
-            var hits: [StationHit]?
-            for _ in 0..<2 {
-                hits = try? await client.searchStations(text)
-                if hits != nil || Task.isCancelled { break }
-            }
+            // A dropped request is asked again (the read policy: up to five tries with backoff), so it is not "no
+            // match" (user test 2026-11-07: "Uppsala", which the planner knew, got "Inget matchar" here).
+            let hits = try? await client.searchStations(text)
             guard !Task.isCancelled else { return }
             if let hits { self.stationHits = Array(hits.prefix(5)) } else { self.stationSearchFailed = true }
             self.stationSearchPending = false
@@ -715,16 +734,33 @@ final class ExploreModel {
 
     // MARK: selecting a train
 
-    /// Asks for the network status now and every 30 s while the panel is open.
+    /// Asks for the network status now and every 30 s while the panel is open. A failure backs off instead (2 s, 4 s …
+    /// two minutes), and the panel says when it tries again; the connection coming back asks at once.
     func watchNetwork() async {
         guard let client = app?.client else { return }
+        var retrier = Retrier(.poll(every: 30))
         while showNetwork && !Task.isCancelled {
             #if DEBUG
             if CommandLine.arguments.contains("-networkSample") { return }
             #endif
-            if let answer = try? await client.networkStatus() {
+            var failedWait: TimeInterval?
+            let answer: NetworkStatus?
+            do {
+                // Asked once here: this loop backs off itself.
+                answer = try await RetryPolicy.none.applying { try await client.networkStatus() }
+                retrier.succeeded()
+            } catch {
+                answer = nil
+                let kind = APIError.classify(error)
+                if kind == .cancelled { return }
+                failedWait = retrier.failed(kind)
+                networkFailure = kind
+            }
+            networkRetry = retrier.status
+            if let answer {
                 network = answer
                 networkFailed = false
+                networkFailure = nil
                 if showNetwork { controller.setDisruptions(answer.disruptions) }
                 // The open one kept fresh (the last copy stays when it has dropped out); one asked for opens now.
                 if let open = disruption, let fresh = answer.disruptions?.first(where: { $0.id == open.id }) {
@@ -740,7 +776,7 @@ final class ExploreModel {
             }
             // Asked again soon while the map is still filling (no trains counted yet), else every 30 s.
             let filling = network?.countries.isEmpty ?? true
-            try? await Task.sleep(for: .seconds(filling ? 4 : 30))
+            guard await RetryWake.pause(failedWait ?? (filling ? 4 : 30)) else { return }
         }
     }
 
@@ -869,10 +905,21 @@ final class ExploreModel {
     /// from it; when the stretch has dropped out, the sheet says so and keeps the last figures.
     func watchCorridor() async {
         guard let client = app?.client else { return }
+        // Every 30 s; after a failure 2 s, 4 s … two minutes, at once when the connection comes back.
+        var retrier = Retrier(.poll(every: 30))
+        var wait: TimeInterval = 30
         while corridor != nil && !Task.isCancelled {
-            try? await Task.sleep(for: .seconds(30))
+            guard await RetryWake.pause(wait) else { return }
             guard let open = corridor, !Task.isCancelled else { return }
-            guard let answer = try? await client.networkStatus() else { continue }
+            let answer: NetworkStatus
+            do {
+                answer = try await RetryPolicy.none.applying { try await client.networkStatus() }
+                wait = retrier.succeeded() ?? 30
+            } catch {
+                guard let next = retrier.failed(error) else { return }
+                wait = next
+                continue
+            }
             network = answer
             if let fresh = answer.corridors.first(where: { $0.id == open.id }) {
                 corridor = fresh
@@ -950,19 +997,26 @@ final class ExploreModel {
     private func startStops(_ id: String) {
         stopsTask?.cancel()
         stopsTask = Task { [weak self] in
+            // Every 30 s while the sheet is open; a failure backs off from 2 s to two minutes, and a 503 (Rejseplanen
+            // knows the train but couldn't answer just now) keeps the stops loading while it does.
+            var retrier = Retrier(.poll(every: 30))
             while !Task.isCancelled {
                 guard let self, let client = self.app?.client else { return }
-                var soon = false
+                let wait: TimeInterval
                 do {
-                    self.stops = .list(try await client.liveTrainStops(id))
+                    self.stops = .list(try await RetryPolicy.none.applying { try await client.liveTrainStops(id) })
+                    wait = retrier.succeeded() ?? 30
                 } catch let error as APIError where error.status == 503 {
-                    // Rejseplanen knows the train but couldn't answer just now: still loading, ask again in 5 s.
                     if case .list = self.stops {} else { self.stops = .loading }
-                    soon = true
+                    guard let next = retrier.failed(error) else { return }
+                    wait = next
                 } catch {
+                    let kind = APIError.classify(error)
+                    if kind == .cancelled { return }
                     if case .list = self.stops {} else { self.stops = .none }
+                    wait = retrier.failed(kind) ?? 30
                 }
-                try? await Task.sleep(for: .seconds(soon ? 5 : 30))
+                guard await RetryWake.pause(wait) else { return }
             }
         }
     }
@@ -1020,10 +1074,20 @@ final class ExploreModel {
     private func startScheduledRefresh(number: String, date: String, key: String?) {
         scheduledTask?.cancel()
         scheduledTask = Task { [weak self] in
+            // Every 30 s; after a failure 2 s, 4 s … two minutes (what's shown stays meanwhile).
+            var retrier = Retrier(.poll(every: 30))
+            var wait: TimeInterval = 30
             while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(30))
+                guard await RetryWake.pause(wait) else { return }
                 guard let self, let client = self.app?.client else { return }
-                if let v = try? await client.train(number: number, date: date, key: key), self.scheduled?.number == v.number { self.scheduled = v }
+                do {
+                    let v = try await RetryPolicy.none.applying { try await client.train(number: number, date: date, key: key) }
+                    if self.scheduled?.number == v.number { self.scheduled = v }
+                    wait = retrier.succeeded() ?? 30
+                } catch {
+                    guard let next = retrier.failed(error) else { return }
+                    wait = next
+                }
             }
         }
     }

@@ -294,7 +294,7 @@ struct DisruptionSheet: View {
                 // Still in the source's language: Apple's translator can do it once the language is downloaded (it
                 // asks first; free, on the phone).
                 let pending = [d.text(l10n.language), d.detailText(l10n.language)].compactMap { $0 }
-                    .filter { $0.lang != l10n.language.rawValue && l10n.shownWhole($0).translated == false }
+                    .filter { !Language.same($0.lang ?? "", l10n.language.rawValue) && l10n.shownWhole($0).translated == false }
                 if !pending.isEmpty, #available(iOS 18.0, *) {
                     TranslateButton(lines: pending)
                 }
@@ -420,7 +420,10 @@ struct LiveStationSheet: View {
     @State private var favoriteTaps = 0
     @Environment(Toaster.self) private var toaster
     @Environment(PassportStore.self) private var passport
-    @State private var boardFailed = false
+    /// The board couldn't be fetched, and why.
+    @State private var boardFailure: APIError.Kind?
+    /// Its request's retries while they wait (up to five tries, with backoff).
+    @State private var boardRetry = RetryTracker()
 
     private func boardRow(_ row: BoardRow, now: Double) -> some View {
         let time = row.estimated ?? row.advertised
@@ -446,12 +449,13 @@ struct LiveStationSheet: View {
     }
 
     private func loadBoard() async {
-        boardFailed = false
+        boardFailure = nil
         do {
-            let board = try await app.client.board(id, arrivals: false)
+            let board = try await boardRetry.run { try await app.client.board(id, arrivals: false) }
             rows = Array(board.rows.filter { !$0.done }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(6))
         } catch {
-            boardFailed = true
+            let kind = APIError.classify(error)
+            if kind != .cancelled { boardFailure = kind }
         }
     }
 
@@ -518,9 +522,9 @@ struct LiveStationSheet: View {
                     .buttonStyle(.press(radius: Radius.input))
                 }
             }
-            if boardFailed {
-                // Not reached is said as such, not as "no trains" (polish pass 1).
-                ErrorStateView(message: l10n.t("board.loadFailed"), retry: { await loadBoard() })
+            if let boardFailure {
+                // Not reached is said as such, not as "no trains" (polish pass 1), and why.
+                ErrorStateView(message: l10n.t("board.couldNotLoad"), kind: boardFailure, status: boardRetry.status, retry: { await loadBoard() })
             } else if let rows {
                 if rows.isEmpty {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
@@ -535,8 +539,10 @@ struct LiveStationSheet: View {
                     }
                 }
             } else {
-                // The rows' place, held.
-                ForEach(0..<4, id: \.self) { _ in Skeleton(height: 44, radius: Radius.tag).padding(.vertical, Space.xxs) }
+                // The rows' place, held; a retry waiting says so above them.
+                GrowingWait(status: boardRetry.status) {
+                    ForEach(0..<4, id: \.self) { _ in Skeleton(height: 44, radius: Radius.tag).padding(.vertical, Space.xxs) }
+                }
             }
         }
         .task(id: id) {

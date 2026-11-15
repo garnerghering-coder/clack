@@ -45,12 +45,23 @@ struct FollowingScreen: View {
             guard let first = await app.followed.follow(token: token, app: app) else { gone = true; return }
             journey = first
         }
+        // Every 15 s; a failure backs off (2 s, 4 s … two minutes) and keeps what's shown; at once when the connection
+        // comes back.
+        var retrier = Retrier(.poll(every: 15))
+        var wait: TimeInterval = 15
         while !Task.isCancelled {
-            try? await Task.sleep(for: .seconds(15))
-            switch await app.followed.refresh(token: token, app: app) {
-            case .fresh(let fresh): journey = fresh; gone = false
-            case .gone: gone = true
-            case .failed: break
+            guard await RetryWake.pause(wait) else { return }
+            switch await RetryPolicy.none.applying({ await app.followed.refresh(token: token, app: app) }) {
+            case .fresh(let fresh):
+                journey = fresh
+                gone = false
+                wait = retrier.succeeded() ?? 15
+            case .gone:
+                gone = true
+                wait = retrier.succeeded() ?? 15
+            case .failed(let kind):
+                guard let next = retrier.failed(kind) else { return }
+                wait = next
             }
         }
     }

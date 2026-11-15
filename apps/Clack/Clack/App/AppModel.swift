@@ -86,12 +86,14 @@ final class AppModel {
 
     /// The server couldn't be reached on the last request: the offline strip shows.
     var isOffline: Bool { connection.isOffline }
+    /// Why it couldn't: no connection, or the server isn't answering (the strip says which).
+    var connectionState: ConnectionState.State { connection.state }
 
     init(identity: String = Identity.current(), l10n: L10n? = nil) {
         let connection = ConnectionState()
         let cache = OfflineCache()
-        let client = APIClient(userID: identity, cache: cache) { reachable in
-            Task { @MainActor in connection.report(reachable: reachable) }
+        let client = APIClient(userID: identity, cache: cache) { reach in
+            Task { @MainActor in connection.report(reach) }
         }
         self.identity = identity
         self.l10n = l10n ?? L10n()
@@ -182,14 +184,10 @@ final class AppModel {
 
     private static let languageChosenKey = "clack.language.chosen"
 
-    /// The app language for the phone's preferred languages: the first one Clack has (English or Swedish), else nil.
+    /// The app language for the phone's preferred languages: the first one Clack has (any of `Language.knownCases`),
+    /// else nil.
     nonisolated static func appLanguage(forPreferred preferred: [String]) -> Language? {
-        for code in preferred {
-            let base = code.lowercased().split(separator: "-").first.map(String.init) ?? code
-            if base == "sv" { return .sv }
-            if base == "en" { return .en }
-        }
-        return nil
+        Language.preferred(preferred)
     }
 
     /// The home country a phone's region gives: Sweden, Norway, Finland or Denmark. Any other region gives none, and the server
@@ -244,8 +242,8 @@ final class AppModel {
         let cache = offlineCache
         let connection = connection
         identity = fresh
-        client = APIClient(userID: fresh, cache: cache) { reachable in
-            Task { @MainActor in connection.report(reachable: reachable) }
+        client = APIClient(userID: fresh, cache: cache) { reach in
+            Task { @MainActor in connection.report(reach) }
         }
         live = LiveHub(client: client)
         stations = StationDirectory(client: client)

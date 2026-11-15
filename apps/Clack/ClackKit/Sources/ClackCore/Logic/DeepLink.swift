@@ -13,13 +13,16 @@ public nonisolated struct AddTrainLink: Hashable, Sendable {
     public var toSeq: Int?
     /// A leg to mark "not taken" once this one is saved (replacing a cancelled train).
     public var replaceLegId: String?
+    /// The train as the opener names it ("SJ 421"), for the sheet to say what it's opening while the trip loads.
+    public var title: String?
 
-    public init(tripKey: String, date: String, fromSeq: Int? = nil, toSeq: Int? = nil, replaceLegId: String? = nil) {
+    public init(tripKey: String, date: String, fromSeq: Int? = nil, toSeq: Int? = nil, replaceLegId: String? = nil, title: String? = nil) {
         self.tripKey = tripKey
         self.date = date
         self.fromSeq = fromSeq
         self.toSeq = toSeq
         self.replaceLegId = replaceLegId
+        self.title = title
     }
 }
 

@@ -14,6 +14,16 @@ public nonisolated struct SSEEvent: Equatable, Sendable {
         self.name = name
         self.data = data
     }
+
+    /// The name `EventStream.events` gives the server's `retry:` field, passed on as an event of its own so the
+    /// listener can wait that long before reconnecting. Not a name the server sends.
+    public static let retryName = "clack.retry"
+
+    /// The reconnection wait the server asked for, in seconds, when this is its `retry:` field.
+    public var retrySeconds: TimeInterval? {
+        guard name == Self.retryName, let ms = Double(data) else { return nil }
+        return ms / 1000
+    }
 }
 
 /// Reads the text/event-stream format a line at a time: `event:` and `data:` fields, `:` comment lines (the server's
@@ -21,6 +31,8 @@ public nonisolated struct SSEEvent: Equatable, Sendable {
 public nonisolated struct SSEParser: Sendable {
     private var name = ""
     private var data: [String] = []
+    /// The last `retry:` the server sent (milliseconds), if any.
+    public private(set) var retry: Int?
 
     /// Feeds one line (without its newline); returns an event when the line ends one.
     public mutating func feed(_ rawLine: String) -> SSEEvent? {
@@ -47,7 +59,9 @@ public nonisolated struct SSEParser: Sendable {
         switch field {
         case "event": name = value
         case "data": data.append(value)
-        default: break // id and retry: the app reconnects after 5 s itself, as the server asks.
+        // Only digits count (the spec ignores anything else).
+        case "retry": if !value.isEmpty, value.allSatisfy(\.isASCII), value.allSatisfy(\.isNumber), let ms = Int(value) { retry = ms }
+        default: break // id: the server sends the full state each time, so nothing is replayed.
         }
         return nil
     }
@@ -55,7 +69,8 @@ public nonisolated struct SSEParser: Sendable {
 
 public nonisolated enum EventStream {
     /// Opens a stream and yields its events until it ends or fails. The request timeout is longer than the server's
-    /// heartbeat, so a quiet stream isn't cut.
+    /// heartbeat, so a quiet stream isn't cut. The server's `retry:` comes through as an event named
+    /// `SSEEvent.retryName`; a refusal as an `APIError` (so a 429 or 503 is told from no connection).
     public static func events(url: URL, userID: String, session: URLSession? = nil) -> AsyncThrowingStream<SSEEvent, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
@@ -69,15 +84,25 @@ public nonisolated enum EventStream {
                     request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
                     request.timeoutInterval = 120
                     let (bytes, response) = try await session.bytes(for: request)
-                    guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-                        throw URLError(.badServerResponse)
+                    guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+                    guard (200..<300).contains(http.statusCode) else {
+                        let header = http.value(forHTTPHeaderField: "Retry-After")
+                        throw APIError(
+                            status: http.statusCode, message: "HTTP \(http.statusCode)", duplicateOf: nil,
+                            retryAfter: APIError.retryAfter(header: header, message: nil)
+                        )
                     }
                     var parser = SSEParser()
+                    var retry: Int?
                     // Split on newlines ourselves: `bytes.lines` skips the empty lines that end an event.
                     var line: [UInt8] = []
                     for try await byte in bytes {
                         if byte == 0x0A {
                             if let event = parser.feed(String(decoding: line, as: UTF8.self)) { continuation.yield(event) }
+                            if parser.retry != retry, let ms = parser.retry {
+                                retry = ms
+                                continuation.yield(SSEEvent(name: SSEEvent.retryName, data: String(ms)))
+                            }
                             line.removeAll(keepingCapacity: true)
                         } else {
                             line.append(byte)
@@ -103,16 +128,18 @@ extension EventStream {
 }
 
 /// One shared connection to `GET /api/live/stream` while at least one screen listens (apps/web/src/live.ts): it opens
-/// with the first listener, closes after the last, and reconnects 5 s after a drop. The server sends the full live
+/// with the first listener, closes after the last, and reconnects after a drop with backoff (1 s, 2 s, 4 s … 30 s,
+/// never sooner than the server's `retry:`; at once when the connection comes back). The server sends the full live
 /// state every tick, so nothing needs replaying.
 @MainActor
 public final class LiveHub {
     private var listeners: [UUID: AsyncStream<LiveUpdate>.Continuation] = [:]
     private var task: Task<Void, Never>?
     private let open: @Sendable () -> AsyncThrowingStream<SSEEvent, Error>
-    private let retryDelay: Duration
+    /// A fixed wait in place of the backoff (tests).
+    private let retryDelay: Duration?
 
-    public init(retryDelay: Duration = .seconds(5), open: @escaping @Sendable () -> AsyncThrowingStream<SSEEvent, Error>) {
+    public init(retryDelay: Duration? = nil, open: @escaping @Sendable () -> AsyncThrowingStream<SSEEvent, Error>) {
         self.open = open
         self.retryDelay = retryDelay
     }
@@ -148,19 +175,30 @@ public final class LiveHub {
     private func connectIfNeeded() {
         guard task == nil else { return }
         task = Task { [weak self] in
+            var retrier = Retrier(.stream)
             while !Task.isCancelled {
                 guard let self else { return }
+                var failure: any Error = URLError(.networkConnectionLost)
                 do {
-                    for try await event in self.open() where event.name == "live" {
+                    for try await event in self.open() {
+                        if let seconds = event.retrySeconds { retrier.serverHint = seconds }
+                        guard event.name == "live" else { continue }
+                        retrier.succeeded()
                         if let update = await EventStream.decode(LiveUpdate.self, from: event) {
                             self.deliver(update)
                         }
                     }
                 } catch {
-                    // Fall through to the retry.
+                    failure = error
                 }
                 if Task.isCancelled { return }
-                try? await Task.sleep(for: self.retryDelay)
+                // A stream that ended cleanly is reconnected like a dropped one; after a refusal, only at the slowest pace.
+                let delay = retrier.failed(failure) ?? retrier.policy.cap
+                if let retryDelay {
+                    try? await Task.sleep(for: retryDelay)
+                } else {
+                    _ = try? await RetryWake.shared.sleep(delay)
+                }
             }
         }
     }

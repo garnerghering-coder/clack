@@ -101,7 +101,7 @@ struct OfflineCacheTests {
 struct APIClientOfflineTests {
     private let userID = "11111111-1111-4111-8111-111111111111"
 
-    private func client(cache: OfflineCache?, reach: (@Sendable (Bool) -> Void)? = nil) -> APIClient {
+    private func client(cache: OfflineCache?, reach: (@Sendable (Reach) -> Void)? = nil) -> APIClient {
         APIClient(base: URL(string: "http://localhost:3001")!, userID: userID, session: StubProtocol.session, cache: cache, reachability: reach)
     }
 
@@ -120,7 +120,7 @@ struct APIClientOfflineTests {
     @Test func servesTheKeptCopyWhenTheServerCannotBeReached() async throws {
         let cache = OfflineCache(directory: temporaryDirectory())
         let reached = Box<[Bool]>([])
-        let c = client(cache: cache) { reached.value.append($0) }
+        let c = client(cache: cache) { reached.value.append($0.reached) }
         StubProtocol.handler = { _ in (200, Data("[]".utf8)) }
         let online: [Leg] = try await c.get(["legs"])
         #expect(online.isEmpty)
@@ -133,14 +133,15 @@ struct APIClientOfflineTests {
     @Test func failsWhenThereIsNothingKept() async {
         let c = client(cache: OfflineCache(directory: temporaryDirectory()))
         StubProtocol.handler = { _ in throw URLError(.timedOut) }
-        await #expect(throws: URLError.self) { let _: [Leg] = try await c.get(["legs"]) }
+        // Asked once here: the retries are RetryTests'.
+        await #expect(throws: URLError.self) { let _: [Leg] = try await RetryPolicy.none.applying { try await c.get(["legs"]) } }
     }
 
     @Test func anHTTPErrorIsNotServedFromTheCacheAndMarksTheServerReachable() async throws {
         let cache = OfflineCache(directory: temporaryDirectory())
         await cache.store("/legs", Data("[]".utf8))
         let reached = Box<[Bool]>([])
-        let c = client(cache: cache) { reached.value.append($0) }
+        let c = client(cache: cache) { reached.value.append($0.reached) }
         StubProtocol.handler = { _ in (500, Data(#"{"statusCode":500,"error":"Internal Server Error","message":"upstream"}"#.utf8)) }
         do {
             let _: [Leg] = try await c.get(["legs"])
@@ -176,6 +177,59 @@ struct APIClientOfflineTests {
         try await c.perform("POST", ["legs", "a", "ride"], body: ["answer": "yes"])
         #expect(seen.value[0].value(forHTTPHeaderField: "Content-Type") == nil)
         #expect(seen.value[1].value(forHTTPHeaderField: "Content-Type") == "application/json")
+    }
+
+    // MARK: retries
+
+    @Test func aGetIsAskedAgainWhenTheServerIsDownAndTheScreenHearsIt() async throws {
+        let calls = Box(0)
+        StubProtocol.handler = { _ in
+            calls.value += 1
+            return calls.value == 1 ? (503, Data()) : (200, Data("[]".utf8))
+        }
+        let heard = Box<[RetryStatus]>([])
+        let legs: [Leg] = try await observingRetries({ heard.value.append($0) }) { try await client(cache: nil).get(["legs"]) }
+        #expect(legs.isEmpty)
+        #expect(calls.value == 2)
+        guard case .retrying(1, _, .serverDown) = heard.value.first else {
+            Issue.record("expected a retry, heard \(heard.value)")
+            return
+        }
+        #expect(heard.value.last == .idle)
+    }
+
+    @Test func aRefusalIsNotAskedAgain() async {
+        let calls = Box(0)
+        StubProtocol.handler = { _ in
+            calls.value += 1
+            return (404, Data(#"{"error":"Not found"}"#.utf8))
+        }
+        await #expect(throws: APIError.self) { let _: [Leg] = try await client(cache: nil).get(["legs"]) }
+        #expect(calls.value == 1)
+    }
+
+    @Test func aWriteIsAskedOnceAndCarriesAnIdempotencyKey() async {
+        let seen = Box<[URLRequest]>([])
+        StubProtocol.handler = { request in
+            seen.value.append(request)
+            return (503, Data())
+        }
+        await #expect(throws: APIError.self) { _ = try await client(cache: nil).request("POST", ["legs"], body: ["tripKey": "k"]) }
+        #expect(seen.value.count == 1)
+        let key = seen.value.first?.value(forHTTPHeaderField: "Idempotency-Key")
+        #expect(key.flatMap(UUID.init(uuidString:)) != nil)
+    }
+
+    @Test func aWriteAskedAgainKeepsItsIdempotencyKey() async throws {
+        let seen = Box<[URLRequest]>([])
+        StubProtocol.handler = { request in
+            seen.value.append(request)
+            return seen.value.count == 1 ? (503, Data()) : (204, Data())
+        }
+        _ = try await client(cache: nil).request("POST", ["legs", "a", "refresh"], policy: RetryPolicy(tries: 2))
+        #expect(seen.value.count == 2)
+        let keys = seen.value.map { $0.value(forHTTPHeaderField: "Idempotency-Key") }
+        #expect(keys[0] != nil && keys[0] == keys[1])
     }
 }
 

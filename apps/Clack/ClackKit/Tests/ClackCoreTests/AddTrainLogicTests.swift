@@ -178,3 +178,23 @@ struct AddDateTests {
         #expect(AddTrainLogic.date(fromIso: "nonsense") == nil)
     }
 }
+
+struct CoveredRangesTests {
+    private func pairs(_ r: [(from: String, to: String?)]) -> [String] { r.map { "\($0.from)…\($0.to ?? "")" } }
+
+    @Test func noGapsIsOneOpenStretch() {
+        #expect(pairs(AddTrainLogic.coveredRanges(from: "2024-03-01", gaps: [])) == ["2024-03-01…"])
+    }
+
+    @Test func gapsSplitIt() {
+        let gaps = [DateRange(from: "2024-08-01", to: "2024-08-10"), DateRange(from: "2024-05-01", to: "2024-05-31")]
+        #expect(pairs(AddTrainLogic.coveredRanges(from: "2024-03-01", gaps: gaps)) == [
+            "2024-03-01…2024-04-30", "2024-06-01…2024-07-31", "2024-08-11…",
+        ])
+    }
+
+    @Test func aGapRightAtTheStartMovesTheStart() {
+        let gaps = [DateRange(from: "2024-03-01", to: "2024-03-05"), DateRange(from: "2024-01-01", to: "2024-01-31")]
+        #expect(pairs(AddTrainLogic.coveredRanges(from: "2024-03-01", gaps: gaps)) == ["2024-03-06…"])
+    }
+}

@@ -113,24 +113,31 @@ final class TicketImportModel {
         if known, let number = train.trainNumber, let hit = await search("\(number) \(train.from) → \(train.to)", train, client).match { return (hit, nil) }
         guard let response = first.response else { return (nil, nil) }
         if train.issuer == .db && (response.interpretation.from == nil || response.interpretation.to == nil) { return (nil, .notCovered) }
-        if response.outsideTimetable || response.history == "unavailable" { return (nil, .noTimetable) }
+        if response.outsideTimetable || response.history == "unavailable" || response.history == "denmark" { return (nil, .noTimetable) }
         return (nil, nil)
     }
 
-    /// One search, asked again while the day is being fetched ("loading", every 3 s) or after a failure (every 15 s, or
-    /// a network error), for up to three minutes, like adding a train does.
+    /// One search, asked again while the day is being fetched ("loading", every 3 s) or after a failure (the archive's
+    /// fetch failing, or the request: backing off from 2 s, doubling, up to 30 s; at once when the connection comes
+    /// back), for up to three minutes, like adding a train does. A refusal isn't asked again.
     private nonisolated static func search(_ text: String, _ train: TicketTrain, _ client: APIClient) async -> (match: TripResult?, response: SearchResponse?) {
         let started = Date.now
+        var retrier = Retrier(RetryPolicy(tries: nil, base: 2, cap: 30, every: 3))
         while Date.now.timeIntervalSince(started) < 180 {
-            guard let response = try? await client.search(text, date: train.date) else {
-                try? await Task.sleep(for: .seconds(5))
-                continue
+            let wait: TimeInterval?
+            do {
+                let response = try await RetryPolicy.none.applying { try await client.search(text, date: train.date) }
+                switch response.history {
+                case "loading": wait = retrier.succeeded()
+                case "failed": wait = retrier.failed(.serverDown)
+                default: return (TicketReader.pick(response.results ?? [], for: train), response)
+                }
+            } catch {
+                let kind = APIError.classify(error)
+                guard kind.isRetryable else { return (nil, nil) }
+                wait = retrier.failed(kind)
             }
-            switch response.history {
-            case "loading": try? await Task.sleep(for: .seconds(3))
-            case "failed": try? await Task.sleep(for: .seconds(15))
-            default: return (TicketReader.pick(response.results ?? [], for: train), response)
-            }
+            guard let wait, await RetryWake.pause(wait) else { return (nil, nil) }
         }
         return (nil, nil)
     }

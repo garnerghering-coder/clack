@@ -67,9 +67,13 @@ struct NetworkPanel: View {
                 if !status.late.isEmpty { lateTrains(status) }
                 InfoNote(l10n.t("network.about"), more: l10n.t("network.aboutBody", ["min": String(status.lateMin)]))
             } else if failed {
-                Text(l10n.t("network.failed")).clack(.body).foregroundStyle(Ink.text2)
+                // Why, and when it asks again (the poll backs off); Try now sends the waiting ask at once.
+                ErrorStateView(
+                    message: model.networkFailure == nil ? l10n.t("network.failed") : l10n.t("network.couldNotLoad"),
+                    kind: model.networkFailure, status: model.networkRetry, retry: { RetryWake.shared.wake() }
+                )
             } else {
-                Skeleton(height: 120)
+                GrowingWait(context: l10n.t("network.slow"), status: model.networkRetry) { Skeleton(height: 120) }
             }
         }
         .padding(Space.l)

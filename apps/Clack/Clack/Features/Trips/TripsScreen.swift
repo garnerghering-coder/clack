@@ -13,6 +13,10 @@ import SwiftUI
 final class TripsModel {
     private(set) var legs: [Leg]?
     private(set) var failed = false
+    /// Why the last load failed (no connection, the server down…), for the error state.
+    private(set) var failure: APIError.Kind?
+    /// The load's retries while they wait (up to five tries, with backoff), for the countdown.
+    let retry = RetryTracker()
     /// The list on screen is the phone's kept copy, not yet refreshed (with when it was last fresh).
     private(set) var savedAt: Double?
     private(set) var follows: [Follow] = []
@@ -29,14 +33,18 @@ final class TripsModel {
         }
         do {
             let first = legs == nil
-            legs = try await client.legs()
+            legs = try await retry.run { try await client.legs() }
+            failure = nil
             savedAt = nil
             SavedAt.mark("legs")
             // Asked on a launch where a trip has already ended, not the moment one is added (user test 2026-11-07:
             // the dialog came up on top of adding a past trip, and once mid long-press after Settings).
             if first { UsageAsk.shared.check(legs ?? []) }
         } catch {
+            let kind = APIError.classify(error)
+            if kind == .cancelled { return }
             failed = true
+            failure = kind
         }
     }
 
@@ -154,10 +162,13 @@ struct TripsScreen: View {
         .task { await model.loadFollows(app.client) }
         .task { await model.listen(app.live) }
         // The journeys you follow: fetched now and kept fresh while Trips shows.
+        // Every 30 s; a failure backs off (2 s, 4 s … two minutes), at once when the connection comes back.
         .task {
+            var retrier = Retrier(.poll(every: 30))
             while !Task.isCancelled {
-                await app.followed.load(app)
-                try? await Task.sleep(for: .seconds(30))
+                let wait: TimeInterval? =
+                    if let kind = await RetryPolicy.none.applying({ await app.followed.load(app) }) { retrier.failed(kind) } else { retrier.succeeded() }
+                guard let wait, await RetryWake.pause(wait) else { return }
             }
         }
     }
@@ -186,17 +197,21 @@ struct TripsScreen: View {
                     }
                     .countsError("trips.load")
                 } else if model.failed {
-                    ErrorStateView(message: l10n.t("trips.loadError"), retry: { await model.load(app.client) }).countsError("trips.load")
+                    ErrorStateView(
+                        message: l10n.t("trips.loadError"), kind: model.failure, status: model.retry.status, retry: { await model.load(app.client) }
+                    ).countsError("trips.load")
                 } else if let at = model.savedAt {
                     FreshnessLine(updatedAt: at, clock: app.settings.clock)
                 }
                 FollowedJourneysSection()
                 if model.legs == nil && !model.failed {
                     // Shaped like what comes: the featured card, then two rows (polish pass 1: three 64 pt bars).
-                    VStack(spacing: Space.l) {
-                        Skeleton(height: 300, radius: Radius.card)
-                        Skeleton(height: 84, radius: Radius.card)
-                        Skeleton(height: 84, radius: Radius.card)
+                    GrowingWait(status: model.retry.status) {
+                        VStack(spacing: Space.l) {
+                            Skeleton(height: 300, radius: Radius.card)
+                            Skeleton(height: 84, radius: Radius.card)
+                            Skeleton(height: 84, radius: Radius.card)
+                        }
                     }
                 }
                 if let all = shown {

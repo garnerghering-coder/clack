@@ -17,9 +17,11 @@ struct TrainDetailSheet: View {
     @Environment(\.colorScheme) private var scheme
     let request: Router.TrainRequest
 
-    private enum Phase { case loading, notRunning, failed, ready(TrainView) }
+    private enum Phase { case loading, notRunning, failed(APIError.Kind), ready(TrainView) }
 
     @State private var phase = Phase.loading
+    /// The refresh loop's retries, for the failed state's countdown.
+    @State private var retry = RetryStatus.idle
     @State private var following = false
     @State private var busy = false
 
@@ -29,11 +31,15 @@ struct TrainDetailSheet: View {
             SheetFrame(title: title, onClose: close) {
                 switch phase {
                 case .loading:
-                    Skeleton(height: 120)
-                case .failed:
-                    ErrorStateView(message: l10n.t("liveMap.trainFailed"), retry: {
+                    GrowingWait(status: retry) { Skeleton(height: 120) }
+                case .failed(let kind):
+                    ErrorStateView(message: l10n.t("liveMap.trainCouldNotLoad"), kind: kind, status: retry, retry: {
                         phase = .loading
-                        if let view = try? await app.client.train(number: request.number, date: request.date, key: request.key) { phase = .ready(view) } else { phase = .failed }
+                        do {
+                            phase = .ready(try await app.client.train(number: request.number, date: request.date, key: request.key))
+                        } catch {
+                            phase = .failed(APIError.classify(error))
+                        }
                     })
                 case .notRunning:
                     Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
@@ -58,20 +64,30 @@ struct TrainDetailSheet: View {
     private func close() { router.trainRequest = nil }
 
     private func load() async {
-        // Refreshed every 30 s while it's open, so a running train's times keep up.
+        // Refreshed every 30 s while it's open, so a running train's times keep up; after a failure sooner at first,
+        // then backing off (2 s, 4 s … two minutes), and at once when the connection comes back.
+        var retrier = Retrier(.poll(every: 30))
         while !Task.isCancelled {
+            var wait: TimeInterval?
             do {
-                phase = .ready(try await app.client.train(number: request.number, date: request.date, key: request.key))
+                phase = .ready(try await RetryPolicy.none.applying {
+                    try await app.client.train(number: request.number, date: request.date, key: request.key)
+                })
+                wait = retrier.succeeded()
             } catch let error as APIError where error.status == 404 {
                 if case .ready = phase {} else { phase = .notRunning }
+                wait = retrier.succeeded()
             } catch {
                 // Not reached: said as such, with a way to try again; never "isn't running" (polish pass 1).
-                if case .ready = phase {} else { phase = .failed }
+                let kind = APIError.classify(error)
+                wait = retrier.failed(kind)
+                if case .ready = phase {} else if kind != .cancelled { phase = .failed(kind) }
             }
-            if let follows = try? await app.client.follows() {
+            retry = retrier.status
+            if let follows = try? await RetryPolicy.none.applying({ try await app.client.follows() }) {
                 following = follows.contains { $0.trainNumber == request.number && $0.serviceDate == request.date }
             }
-            try? await Task.sleep(for: .seconds(30))
+            guard let wait, await RetryWake.pause(wait) else { return }
         }
     }
 
@@ -119,7 +135,7 @@ struct TrainDetailSheet: View {
                 } else if let trip = view.trip {
                     Button {
                         close()
-                        router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate))
+                        router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate, title: title))
                     } label: {
                         HStack(spacing: Space.s) {
                             LucideIcon(name: "plus", size: 16)

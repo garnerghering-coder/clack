@@ -15,11 +15,15 @@ final class FollowedJourneys {
     private(set) var journeys: [SharedJourney] = []
     private(set) var loaded = false
 
-    /// Fetches the ones that still work. A failed fetch keeps what is shown.
-    func load(_ app: AppModel) async {
-        if let list = try? await app.client.followedJourneys() {
-            journeys = list
+    /// Fetches the ones that still work. A failed fetch keeps what is shown, and says why (nil: it answered).
+    @discardableResult
+    func load(_ app: AppModel) async -> APIError.Kind? {
+        do {
+            journeys = try await app.client.followedJourneys()
             loaded = true
+            return nil
+        } catch {
+            return APIError.classify(error)
         }
     }
 
@@ -50,7 +54,8 @@ final class FollowedJourneys {
         /// The link no longer works (stopped, or too long ago).
         case gone
         /// No answer (offline, a server hiccup): keep what is shown.
-        case failed
+        /// Not reached, and why.
+        case failed(APIError.Kind)
     }
 
     /// A fresher copy of one followed journey (or the first copy of one just opened).
@@ -62,7 +67,7 @@ final class FollowedJourneys {
         } catch let error as APIError where error.status == 404 {
             return .gone
         } catch {
-            return .failed
+            return .failed(APIError.classify(error))
         }
     }
 }

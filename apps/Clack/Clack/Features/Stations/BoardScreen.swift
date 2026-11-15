@@ -20,7 +20,10 @@ struct BoardScreen: View {
     @State private var missing = false
     @State private var board: Board?
     @State private var earlier: [BoardRow]?
-    @State private var error = false
+    /// The stream failed and there's no board yet: why (no connection, the server down…).
+    @State private var failure: APIError.Kind?
+    /// The stream's reconnecting, for the countdown.
+    @State private var retry = RetryStatus.idle
     @State private var filter = BoardLogic.Filter()
     /// How many rows are showing: 20 to start with, 20 more each time "Show later" is pressed.
     @State private var limit = Self.page
@@ -71,7 +74,9 @@ struct BoardScreen: View {
 
     private struct StreamKey: Hashable { var arrivals: Bool; var hasBoard: Bool }
 
-    /// The live board: the stream sends the current board straight away, then after every poll; it reconnects after a drop.
+    /// The live board: the stream sends the current board straight away, then after every poll. After a drop it
+    /// reconnects with backoff (1 s, 2 s, 4 s … 30 s, never sooner than the server's `retry:`), at once when the
+    /// connection comes back or the app returns to the front.
     private func follow() async {
         guard station?.hasBoard == true else { return }
         board = nil
@@ -79,19 +84,33 @@ struct BoardScreen: View {
         later = nil
         limit = Self.page
         filter.showEarlier = false
-        error = false
+        failure = nil
+        retry = .idle
+        var retrier = Retrier(.stream)
         while !Task.isCancelled {
+            // A stream that ends without an error was closed by the server's side (a restart, the proxy).
+            var dropped: any Error = URLError(.badServerResponse)
             do {
-                for try await event in app.client.boardStream(stationId, arrivals: arrivals) where event.name == "board" {
+                for try await event in app.client.boardStream(stationId, arrivals: arrivals) {
+                    if let seconds = event.retrySeconds { retrier.serverHint = seconds }
+                    guard event.name == "board" else { continue }
                     if let decoded = await EventStream.decode(Board.self, from: event) {
                         board = decoded
-                        error = false
+                        failure = nil
+                        retrier.succeeded()
+                        retry = .idle
                     }
                 }
             } catch {
-                self.error = true
+                dropped = error
             }
-            try? await Task.sleep(for: .seconds(5))
+            if Task.isCancelled { return }
+            // A refusal (another 4xx) isn't asked again quickly: once at the slowest pace.
+            let wait = retrier.failed(dropped) ?? retrier.policy.cap
+            let kind = APIError.classify(dropped)
+            if board == nil, kind != .cancelled { failure = kind }
+            retry = retrier.status
+            guard await RetryWake.pause(wait) else { return }
         }
     }
 
@@ -210,13 +229,17 @@ struct BoardScreen: View {
                         }
                     }
                 }
-            } else if error {
-                Banner(kind: .error) { Text(l10n.t("board.error")) }.countsError("board.load")
+            } else if let failure {
+                // Says why, and that it's already trying again (with Try now); its own subject line.
+                ErrorStateView(message: l10n.t("board.couldNotLoad"), kind: failure, status: retry, retry: { RetryWake.shared.wake() })
+                    .countsError("board.load")
             } else {
-                VStack(alignment: .leading, spacing: Space.m) {
-                    Skeleton(height: 64)
-                    Skeleton(height: 64)
-                    Text(l10n.t("board.loading")).clack(.caption).foregroundStyle(Ink.text2)
+                GrowingWait(context: l10n.t("board.slow")) {
+                    VStack(alignment: .leading, spacing: Space.m) {
+                        Skeleton(height: 64)
+                        Skeleton(height: 64)
+                        Text(l10n.t("board.loading")).clack(.caption).foregroundStyle(Ink.text2)
+                    }
                 }
             }
         }
