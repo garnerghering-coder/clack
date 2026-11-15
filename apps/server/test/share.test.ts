@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { DEFAULT_SETTINGS } from '@clack/shared';
 import { openDb } from '../src/db/client.js';
 import { journeys, legs, sharedJourneys, stations, users } from '../src/db/schema.js';
-import { shareRoutes, sharePageRoutes } from '../src/routes/share.js';
+import { pageLanguage, shareRoutes, sharePageRoutes } from '../src/routes/share.js';
 import { changesOf, createShare, follow, following, publicJourney, revokeShare, SHARE_AFTER_ARRIVAL_MS, unfollow } from '../src/share/shared.js';
 
 const A = '3f1c2b4a-8d9e-4f00-a1b2-c3d4e5f60718';
@@ -171,5 +171,17 @@ describe('the share routes', () => {
     const aasa = (await app.inject({ url: '/.well-known/apple-app-site-association' })).json();
     expect(aasa.applinks.details[0].appIDs).toEqual(['HJTCN7QR8M.com.garnerghering.Clack']);
     expect(aasa.applinks.details[0].components[0]['/']).toBe('/j/*');
+  });
+});
+
+describe('the shared page language', () => {
+  const req = (lang?: string, accept?: string) => ({ query: lang ? { lang } : {}, headers: accept ? { 'accept-language': accept } : {} });
+  it('takes ?lang= first, then the first browser language the app has, else English', () => {
+    expect(pageLanguage(req('sv', 'de-DE'))).toBe('sv');
+    expect(pageLanguage(req('pl'))).toBe('pl');
+    expect(pageLanguage(req('xx', 'es-ES,da;q=0.8'))).toBe('da');
+    expect(pageLanguage(req(undefined, 'no,en;q=0.5'))).toBe('nb');
+    expect(pageLanguage(req(undefined, 'es-ES'))).toBe('en');
+    expect(pageLanguage(req())).toBe('en');
   });
 });

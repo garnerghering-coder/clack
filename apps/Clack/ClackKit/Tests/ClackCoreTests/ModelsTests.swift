@@ -137,8 +137,10 @@ struct DisruptionModelTests {
         let d = try JSONDecoder().decode(NetworkStatus.Disruption.self, from: Data(json.utf8))
         #expect(d.kind == .incident && d.to == nil && d.tracks.isEmpty)
         #expect(d.text(.en) == CauseLine(text: "Fewer tracks: Skøyen", lang: "en", original: nil))
-        // No Swedish: the nearest language it has, named so the phone can translate it.
-        #expect(d.text(.sv) == CauseLine(text: "Færre spor: Skøyen", lang: "no", original: nil))
+        // No Swedish: English when the source has it (build 86), named so the phone can translate it.
+        #expect(d.text(.sv) == CauseLine(text: "Fewer tracks: Skøyen", lang: "en", original: nil))
+        // A Norwegian reader gets Entur's Norwegian ("no" is the app's "nb").
+        #expect(d.text(.nb) == CauseLine(text: "Færre spor: Skøyen", lang: "no", original: nil))
         #expect(d.detailText(.sv)?.lang == "en")
     }
 }

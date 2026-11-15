@@ -82,6 +82,9 @@ describe('Entur causes', () => {
     expect(pickSummary(summary, 'en')).toBe('Delay');
     expect(pickSummary(summary, 'sv')).toBe('Delay');
     expect(pickSummary(summary, 'no')).toBe('Forsinkelse');
+    expect(pickSummary(summary, 'nb')).toBe('Forsinkelse');
+    expect(pickSummary([{ value: 'Forsinkelse', language: 'nob' }, { value: 'Delay', language: 'en' }], 'nb')).toBe('Forsinkelse');
+    expect(pickSummary(summary, 'pl')).toBe('Delay');
     expect(pickSummary([{ value: 'Forsinkelse', language: 'no' }], 'en')).toBe('Forsinkelse');
     expect(pickSummary([], 'en')).toBeNull();
     expect(enturCauses([{ summary }, { summary }], 'sv')).toEqual([{ src: 'entur', text: 'Delay' }]);

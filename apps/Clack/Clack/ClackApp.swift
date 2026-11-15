@@ -51,7 +51,7 @@ struct ClackApp: App {
             .environment(app)
             .environment(app.l10n)
             // Dates, lists, pickers and VoiceOver in the app's language, not the phone's (review D13).
-            .environment(\.locale, Locale(identifier: app.settings.language == .sv ? "sv_SE" : "en_GB"))
+            .environment(\.locale, Format.locale(app.settings.language))
             .task { await app.load() }
             .task { OfflineMaps.configure() }        }
     }

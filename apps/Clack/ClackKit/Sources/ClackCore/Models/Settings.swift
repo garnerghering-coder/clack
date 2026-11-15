@@ -5,18 +5,65 @@
 
 import Foundation
 
+/// The app's languages (build 86: English and Swedish, then Danish, Norwegian Bokmål, Finnish, German, Polish and
+/// French). `knownCases` is the order Settings lists them in.
 public nonisolated enum Language: OpenEnum {
-    case en, sv
+    case en, sv, da, nb, fi, de, pl, fr
     case unknown(String)
 
-    public static let knownCases: [Language] = [.en, .sv]
+    public static let knownCases: [Language] = [.en, .sv, .da, .nb, .fi, .de, .pl, .fr]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
         case .en: "en"
         case .sv: "sv"
+        case .da: "da"
+        case .nb: "nb"
+        case .fi: "fi"
+        case .de: "de"
+        case .pl: "pl"
+        case .fr: "fr"
         case .unknown(let raw): raw
         }
+    }
+
+    /// The language's name in English, for instructions to Apple's on-device model ("respond in Danish").
+    public var englishName: String {
+        switch self {
+        case .en, .unknown: "English"
+        case .sv: "Swedish"
+        case .da: "Danish"
+        case .nb: "Norwegian Bokmål"
+        case .fi: "Finnish"
+        case .de: "German"
+        case .pl: "Polish"
+        case .fr: "French"
+        }
+    }
+
+    /// A language code as one language: the feeds write Norwegian as "no", the app (and Apple) as "nb".
+    public static func normalized(_ code: String) -> String {
+        let lower = code.lowercased()
+        return lower == "no" || lower == "nob" ? "nb" : lower
+    }
+
+    /// Whether two codes are the same language ("no" and "nb" are).
+    public static func same(_ a: String, _ b: String) -> Bool { normalized(a) == normalized(b) }
+
+    /// The app language for a code ("no" and "nb" give Bokmål), nil when the app doesn't have it.
+    public static func known(_ code: String) -> Language? {
+        let c = normalized(code)
+        return knownCases.first { $0.rawValue == c }
+    }
+
+    /// The app language for the phone's preferred languages (`Locale.preferredLanguages`, "da-DK", "nb-NO", "en-GB"):
+    /// the first one the app has, else nil. A new install starts in it; a saved choice is never changed by it.
+    public static func preferred(_ preferred: [String]) -> Language? {
+        for code in preferred {
+            let base = code.split(whereSeparator: { $0 == "-" || $0 == "_" }).first.map(String.init) ?? code
+            if let known = known(base) { return known }
+        }
+        return nil
     }
 }
 

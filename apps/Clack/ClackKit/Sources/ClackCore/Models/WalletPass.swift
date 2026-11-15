@@ -22,7 +22,7 @@ public nonisolated struct WalletPassBody: Encodable, Sendable, Equatable {
     public var format: TicketBarcode.Format
     /// The code's bytes; encoded as base64.
     public var barcode: Data
-    /// The pass's labels: "en" or "sv".
+    /// The pass's labels: an app language code ("en", "sv", "da", …); anything else is "en".
     public var lang: String
 
     public init(issuer: TicketTrain.Issuer, operatorName: String?, trainNumber: String?, from: String, to: String, depAt: Double, arrAt: Double?, coach: String?, seat: String?, barcode: TicketBarcode, lang: String) {
@@ -37,7 +37,7 @@ public nonisolated struct WalletPassBody: Encodable, Sendable, Equatable {
         self.seat = seat
         self.format = barcode.format
         self.barcode = barcode.payload
-        self.lang = lang == "sv" ? "sv" : "en"
+        self.lang = Language.known(lang)?.rawValue ?? "en"
     }
 }
 

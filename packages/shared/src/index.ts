@@ -27,7 +27,9 @@ export const CO2_COMPARISONS = ['flight', 'car_1', 'car_2', 'car_3', 'car_avg', 
 export const CO2_CHOICES = ['flight', 'car_1'] as const satisfies readonly (typeof CO2_COMPARISONS)[number][];
 export type Co2Comparison = (typeof CO2_COMPARISONS)[number];
 
-export const LANGUAGES = ['en', 'sv'] as const;
+/** The app's languages, in the order Settings lists them (build 86 adds Danish to French). Each reads English for a
+ * text not yet translated. */
+export const LANGUAGES = ['en', 'sv', 'da', 'nb', 'fi', 'de', 'pl', 'fr'] as const;
 export type Language = (typeof LANGUAGES)[number];
 
 /** Colour theme: follow the phone, or always dark / light. */

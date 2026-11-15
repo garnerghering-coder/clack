@@ -6,16 +6,20 @@
 import Foundation
 import Observation
 
-/// The app's texts, from the String Catalog `Resources/Localizable.xcstrings` (English and Swedish). Keys are dot paths
-/// ("trips.title"); `{{name}}` placeholders are filled in here, and plural keys use the catalog's plural variations.
-/// Never write user-facing text in Swift: add the key to the catalog, in both languages.
+/// The app's texts, from the String Catalog `Resources/Localizable.xcstrings` (one `.lproj` per `Language`: English,
+/// Swedish, Danish, Norwegian Bokmål, Finnish, German, Polish, French). Keys are dot paths ("trips.title");
+/// `{{name}}` placeholders are filled in here, and plural keys use the catalog's plural variations, chosen by each
+/// language's own rules (Polish has one, few, many and other). A text not yet in a language falls back to English.
+/// Never write user-facing text in Swift: add the key to the catalog, in English and Swedish at least.
 @MainActor
 @Observable
 public final class L10n {
-    /// The language setting from the server (`en` default, not the phone's language). Views update when it changes.
+    /// The language setting from the server (a new install starts in the phone's language when the app has it, else
+    /// English). Views update when it changes.
     public var language: Language
 
-    /// Where each language's compiled strings are (`en.lproj`, `sv.lproj` in this package's resources).
+    /// Where each language's compiled strings are (`en.lproj`, `sv.lproj`, … in this package's resources). A language
+    /// whose `.lproj` isn't there yet (no texts translated) reads English.
     private let bundles: [String: Bundle]
     /// Texts given directly (tests): dot path to text, per language code. Looked up before the bundles.
     private let tables: [String: [String: String]]
@@ -34,7 +38,7 @@ public final class L10n {
         self.language = language
         self.tables = [:]
         var bundles: [String: Bundle] = [:]
-        for code in ["en", "sv"] {
+        for code in Language.knownCases.map(\.rawValue) {
             if let path = bundle.path(forResource: code, ofType: "lproj"), let b = Bundle(path: path) { bundles[code] = b }
         }
         self.bundles = bundles
@@ -51,22 +55,43 @@ public final class L10n {
         var all = values
         all["count"] = String(count)
         if let table = tables[language.rawValue] ?? tables["en"], table["\(key)_one"] != nil || table["\(key)_other"] != nil {
-            let suffixed = "\(key)_\(count == 1 ? "one" : "other")"
-            return interpolate(lookup(suffixed) ?? lookup(key) ?? key, all)
+            let category = Self.pluralCategory(count, language: language)
+            return interpolate(lookup("\(key)_\(category)") ?? lookup("\(key)_other") ?? lookup(key) ?? key, all)
         }
-        guard let format = lookup(key) else { return key }
+        guard let (format, code) = found(key) else { return key }
         guard format.contains("%") else { return interpolate(format, all) }
-        let code = bundles[language.rawValue] != nil ? language.rawValue : "en"
+        // The compiled catalog's plural format picks its variation by the locale's rules, so the locale is the
+        // language the text came from (English rules for an English fallback, Polish rules for Polish).
         return interpolate(String(format: format, locale: Locale(identifier: code), count), all)
     }
 
+    /// The CLDR plural category of a whole number in `language` (used for texts given directly; the bundle's plural
+    /// formats get the same from Foundation). English, Swedish, Danish, Norwegian, Finnish and German: "one" for 1;
+    /// French: "one" for 0 and 1; Polish: "one" for 1, "few" for 2–4, 22–24, … (not 12–14), "many" for the rest.
+    public nonisolated static func pluralCategory(_ count: Int, language: Language) -> String {
+        let n = abs(count)
+        switch language {
+        case .fr:
+            return n <= 1 ? "one" : "other"
+        case .pl:
+            if n == 1 { return "one" }
+            if (2...4).contains(n % 10), !(12...14).contains(n % 100) { return "few" }
+            return "many"
+        default:
+            return n == 1 ? "one" : "other"
+        }
+    }
+
     /// Tries the language, then English.
-    private func lookup(_ key: String) -> String? {
+    private func lookup(_ key: String) -> String? { found(key)?.text }
+
+    /// The text and the language code it was found in: the language, then English.
+    private func found(_ key: String) -> (text: String, code: String)? {
         for code in [language.rawValue, "en"] {
-            if let text = tables[code]?[key] { return text }
+            if let text = tables[code]?[key] { return (text, code) }
             if let bundle = bundles[code] {
                 let text = bundle.localizedString(forKey: key, value: Self.missing, table: nil)
-                if text != Self.missing { return text }
+                if text != Self.missing { return (text, code) }
             }
         }
         return nil

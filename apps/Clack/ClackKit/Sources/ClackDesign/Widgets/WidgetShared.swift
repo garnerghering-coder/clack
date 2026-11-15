@@ -67,7 +67,7 @@ public enum WidgetWords {
     /// The language for texts outside an entry (the widget gallery's names and descriptions).
     public nonisolated static var language: Language {
         if let saved = WidgetSnapshot.load()?.language { return saved }
-        return Locale.current.language.languageCode?.identifier == "sv" ? .sv : .en
+        return Language.preferred(Locale.preferredLanguages) ?? .en
     }
 
     public static func t(_ key: String, _ values: [String: String] = [:]) -> String { l10n(language).t(key, values) }

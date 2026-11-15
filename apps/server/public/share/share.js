@@ -5,7 +5,8 @@
   const token = location.pathname.split('/').filter(Boolean)[1] || '';
   const app = document.getElementById('app');
   const sv = cfg.lang === 'sv';
-  const locale = sv ? 'sv-SE' : 'en-GB';
+  // Dates as the app writes them in each of its languages (Format.locale in the app).
+  const locale = { sv: 'sv-SE', da: 'da-DK', nb: 'nb-NO', fi: 'fi-FI', de: 'de-DE', pl: 'pl-PL', fr: 'fr-FR' }[cfg.lang] || 'en-GB';
   const dark = matchMedia('(prefers-color-scheme: dark)');
 
   const t = (key, vars = {}) => (cfg.strings[key] ?? key).replace(/\{\{(\w+)\}\}/g, (_, n) => (vars[n] ?? ''));

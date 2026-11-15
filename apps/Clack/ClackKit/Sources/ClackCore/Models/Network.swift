@@ -246,9 +246,12 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         private static func pick(_ words: Title?, _ language: Language) -> CauseLine? {
             guard let words else { return nil }
             let all: [(String, String?)] = [("sv", words.sv), ("no", words.no), ("da", words.da), ("en", words.en)]
-            let order = language == .sv ? ["sv", "no", "da", "en"] : ["en", "sv", "no", "da"]
-            for code in order {
-                if let text = all.first(where: { $0.0 == code })?.1?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty {
+            // The reader's own language when the source has it (the feeds' "no" is the app's "nb"), then English,
+            // then the rest as listed. The line keeps the source's code, to translate on the phone.
+            let own = all.filter { Language.same($0.0, language.rawValue) }
+            let english = all.filter { $0.0 == "en" }
+            for (code, words) in own + english + all {
+                if let text = words?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty {
                     return CauseLine(text: text, lang: code, original: nil)
                 }
             }

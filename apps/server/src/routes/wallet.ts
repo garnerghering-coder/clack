@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { FastifyPluginAsync } from 'fastify';
 import { PKPass } from 'passkit-generator';
-import { appString, type StringsLang } from '@clack/shared';
+import { appString, LANGUAGES, type StringsLang } from '@clack/shared';
 import { REPO_ROOT } from '../env.js';
 import { LOCAL_USER_ID } from '../db/client.js';
 
@@ -56,7 +56,7 @@ const bodySchema = {
     seat: text(8),
     format: { enum: Object.keys(FORMATS) },
     barcode: { type: 'string', minLength: 4, maxLength: 12_000, pattern: '^[A-Za-z0-9+/=]+$' },
-    lang: { enum: ['en', 'sv'] },
+    lang: { enum: [...LANGUAGES] },
   },
 } as const;
 

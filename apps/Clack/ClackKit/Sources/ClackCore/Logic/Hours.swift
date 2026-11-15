@@ -307,10 +307,12 @@ extension OpeningHours {
     /// The week, read for a person instead of in OSM's syntax (designer, 2026-11-14: the raw "Mo-Sa 06:00-20:30" was
     /// shown as it was): consecutive days with the same hours on one line, Monday first. Nil when the text can't be
     /// read; then it is shown as listed. Public holidays are left out (the place's card says hours can differ then).
-    public static func week(_ text: String?, language: Language) -> [WeekLine]? {
+    /// `everyDay` is the app's text for a whole week (`stationMap.everyDay`); without it, Swedish or English.
+    public static func week(_ text: String?, language: Language, everyDay: String? = nil) -> [WeekLine]? {
         guard let hours = parse(text) else { return nil }
-        let names = language == .sv ? ["mån", "tis", "ons", "tor", "fre", "lör", "sön"] : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-        if hours.always { return [WeekLine(days: language == .sv ? "Alla dagar" : "Every day", spans: [Hours.Span(start: 0, end: 1440)])] }
+        let names = weekdayNames(language)
+        let everyDay = everyDay ?? (language == .sv ? "Alla dagar" : "Every day")
+        if hours.always { return [WeekLine(days: everyDay, spans: [Hours.Span(start: 0, end: 1440)])] }
         // Each weekday's spans, later rules overriding earlier ones (as `spansOn`, without holidays).
         let days: [[Hours.Span]] = (0..<7).map { wd in
             var out: [Hours.Span] = []
@@ -321,10 +323,24 @@ extension OpeningHours {
         var start = 0
         for wd in 1...7 where wd == 7 || days[wd] != days[start] {
             let label = start == wd - 1 ? names[start] : "\(names[start])–\(names[wd - 1])"
-            lines.append(WeekLine(days: start == 0 && wd == 7 ? (language == .sv ? "Alla dagar" : "Every day") : label, spans: days[start]))
+            lines.append(WeekLine(days: start == 0 && wd == 7 ? everyDay : label, spans: days[start]))
             start = wd
         }
         return lines
+    }
+
+    /// Monday to Sunday, short: the app's own words in English and Swedish, the phone's (CLDR) in the other languages.
+    static func weekdayNames(_ language: Language) -> [String] {
+        switch language {
+        case .sv: return ["mån", "tis", "ons", "tor", "fre", "lör", "sön"]
+        case .en, .unknown: return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        case .da, .nb, .fi, .de, .pl, .fr:
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.locale = Format.locale(language)
+            // Sunday first in Foundation; Monday first here. No trailing full stop ("ma." → "ma").
+            let sundayFirst = calendar.shortStandaloneWeekdaySymbols.map { $0.hasSuffix(".") ? String($0.dropLast()) : $0 }
+            return Array(sundayFirst[1...]) + [sundayFirst[0]]
+        }
     }
 
     /// "06:00–20:30", spans joined by a comma; a span past midnight ends at its clock time.

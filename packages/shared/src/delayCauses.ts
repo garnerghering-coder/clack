@@ -3,7 +3,7 @@
 // the table doesn't know is shown as the source wrote it, never dropped. The app has the same resolver in
 // ClackCore/Logic/DelayCauses.swift, reading the same file.
 import table from '../../../data/delay_causes.json';
-import { appString } from './strings';
+import { appString, type StringsLang } from './strings';
 
 export type CauseSource = 'trv' | 'digitraffic' | 'entur' | 'rejseplanen';
 
@@ -68,7 +68,7 @@ export function resolveCause(cause: DelayCause): ResolvedCause {
 }
 
 /** The words to show for a cause: translated when the table knows it, else as the source wrote it (null: nothing). */
-export function causeText(cause: DelayCause, lang: 'en' | 'sv' = 'en'): string | null {
+export function causeText(cause: DelayCause, lang: StringsLang = 'en'): string | null {
   const r = resolveCause(cause);
   if (r.key) {
     const t = appString(r.key, lang);
@@ -86,7 +86,7 @@ const lowerFirst = (s: string) => (s.length > 1 && s[1] === s[1]!.toUpperCase() 
  * The reasons among a train's causes (not the notices), as phrases for a sentence, in the order seen, no repeats.
  * Accepts the old plain texts too.
  */
-export function delayReasons(causes: (DelayCause | string)[], lang: 'en' | 'sv' = 'en'): string[] {
+export function delayReasons(causes: (DelayCause | string)[], lang: StringsLang = 'en'): string[] {
   const out = new Set<string>();
   for (const c of causes) {
     const cause: DelayCause = typeof c === 'string' ? { src: 'trv', text: c } : c;

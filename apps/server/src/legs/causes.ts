@@ -45,9 +45,16 @@ export interface EnturSituation {
   summary: { value: string; language: string | null }[];
 }
 
-/** A situation's summary in the app's language when Entur has it, else English, else the first one (usually Norwegian). */
+/** Entur writes Norwegian as "no" (or "nob"); the app's Norwegian Bokmål is "nb". The same language either way. */
+const sameLanguage = (a: string | null, b: string) => {
+  const n = (c: string) => (c === 'no' || c === 'nob' ? 'nb' : c);
+  return a != null && n(a.toLowerCase()) === n(b.toLowerCase());
+};
+
+/** A situation's summary in the app's language when Entur has it (Norwegian for an "nb" reader), else English, else
+ * the first one (usually Norwegian). */
 export function pickSummary(summary: EnturSituation['summary'], language: string = 'en'): string | null {
-  const by = (l: string) => summary.find((s) => s.language === l && s.value.trim())?.value.trim();
+  const by = (l: string) => summary.find((s) => sameLanguage(s.language, l) && s.value.trim())?.value.trim();
   return by(language) ?? by('en') ?? summary.find((s) => s.value.trim())?.value.trim() ?? null;
 }
 

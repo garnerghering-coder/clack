@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { and, eq } from 'drizzle-orm';
-import { appKeys, appString, type StringsLang } from '@clack/shared';
+import { appKeys, appLanguage, appString, LANGUAGES, type StringsLang } from '@clack/shared';
 import type { FastifyPluginAsync, FastifyReply } from 'fastify';
 import type { Db } from '../db/client.js';
 import { legs } from '../db/schema.js';
@@ -26,11 +26,15 @@ const TYPES: Record<string, string> = {
   '.json': 'application/json',
 };
 
-/** English or Swedish: `?lang=` first, else the browser's first language. */
-function pageLanguage(req: { query: unknown; headers: Record<string, string | string[] | undefined> }): StringsLang {
-  const asked = (req.query as { lang?: string } | undefined)?.lang;
-  if (asked === 'sv' || asked === 'en') return asked;
-  return /^\s*sv\b/i.test(String(req.headers['accept-language'] ?? '')) ? 'sv' : 'en';
+/** One of the app's languages: `?lang=` first, else the browser's first language the app has, else English. */
+export function pageLanguage(req: { query: unknown; headers: Record<string, string | string[] | undefined> }): StringsLang {
+  const asked = appLanguage((req.query as { lang?: string } | undefined)?.lang, LANGUAGES);
+  if (asked) return asked;
+  for (const tag of String(req.headers['accept-language'] ?? '').split(',')) {
+    const found = appLanguage(tag, LANGUAGES);
+    if (found) return found;
+  }
+  return 'en';
 }
 
 /** Where a link to a journey points: this server's own address, as the phone reached it. */

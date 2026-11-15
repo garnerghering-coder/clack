@@ -8,9 +8,24 @@ import Foundation
 /// Display formatting, a port of `apps/web/src/format.ts`. Times are shown in the station's own time zone, never
 /// the phone's. Times are epoch milliseconds (`Instant.ms`).
 public nonisolated enum Format {
-    /// Dates and numbers in the app's language: "tis 21 okt" in Swedish, "Tue 21 Oct" in English.
+    /// Dates and numbers in the app's language: "tis 21 okt" in Swedish, "Tue 21 Oct" in English (British English:
+    /// day before month, 24-hour), each other language with the country it is chiefly read in.
     public static func locale(_ language: Language) -> Locale {
-        Locale(identifier: language == .sv ? "sv_SE" : "en_GB")
+        Locale(identifier: localeIdentifier(language))
+    }
+
+    /// The identifier `locale` uses ("nb_NO" for Norwegian Bokmål).
+    public static func localeIdentifier(_ language: Language) -> String {
+        switch language {
+        case .en, .unknown: "en_GB"
+        case .sv: "sv_SE"
+        case .da: "da_DK"
+        case .nb: "nb_NO"
+        case .fi: "fi_FI"
+        case .de: "de_DE"
+        case .pl: "pl_PL"
+        case .fr: "fr_FR"
+        }
     }
 
     /// The zone used when nothing says which one a place is in (Sweden, which most trips are in). Norway has the same
@@ -122,16 +137,24 @@ public nonisolated enum Format {
     }
 
     /// `2h 48m`, `45m`, `1d 3h`; in Swedish `2 h 48 min`, `45 min`, `1 d 3 h` (the user test of 2026-11-07 read "2h 48m"
-    /// in the Swedish app as English).
+    /// in the Swedish app as English); in the other languages Foundation's abbreviated units for the language.
     public static func duration(_ minutes: Double, language: Language = .en) -> String {
         let h = Int((minutes / 60).rounded(.down))
         let m = Int(minutes.truncatingRemainder(dividingBy: 60).rounded())
-        if language == .sv {
+        switch language {
+        case .sv:
             if h >= 24 { return "\(h / 24) d \(h % 24) h" }
             return h > 0 ? "\(h) h \(String(format: "%02d", m)) min" : "\(m) min"
+        case .en, .unknown:
+            if h >= 24 { return "\(h / 24)d \(h % 24)h" }
+            return h > 0 ? "\(h)h \(String(format: "%02d", m))m" : "\(m)m"
+        case .da, .nb, .fi, .de, .pl, .fr:
+            // The phone's own abbreviations for the language (CLDR): "2 t, 5 min" in Norwegian, "2 Std., 5 Min." in
+            // German, "2 godz. i 5 min" in Polish; none made up here.
+            let units: Set<Duration.UnitsFormatStyle.Unit> = h >= 24 ? [.days, .hours] : h > 0 ? [.hours, .minutes] : [.minutes]
+            let seconds = h >= 24 ? Int64(h) * 3600 : Int64(h) * 3600 + Int64(m) * 60
+            return Duration.seconds(seconds).formatted(.units(allowed: units, width: .abbreviated).locale(locale(language)))
         }
-        if h >= 24 { return "\(h / 24)d \(h % 24)h" }
-        return h > 0 ? "\(h)h \(String(format: "%02d", m))m" : "\(m)m"
     }
 
     /// `455 km` or `283 mi`; `—` when unknown.

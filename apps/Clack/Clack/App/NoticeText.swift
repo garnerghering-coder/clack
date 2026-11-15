@@ -35,10 +35,11 @@ final class NoticeText {
     private var done: [String: Line] = [:]
     @ObservationIgnored private var asked = Set<String>()
 
-    /// What to show now for `line` in `language` (`en`, `sv`): the short version once ready, the original cut to
-    /// `maxWords` until then. Asking starts the work once.
+    /// What to show now for `line` in `language` (an app language code: `en`, `sv`, `da`, `nb`, …): the short version
+    /// once ready, the original cut to `maxWords` until then. Asking starts the work once. A line already in the
+    /// reader's language (Entur's "no" for a Norwegian reader) is shown as written.
     func line(_ line: CauseLine, language: String) -> Line {
-        guard let source = line.lang, source != language else { return Line(text: line.text, translated: false) }
+        guard let source = line.lang, !Language.same(source, language) else { return Line(text: line.text, translated: false) }
         let key = "\(source)>\(language)|\(line.text)"
         if let hit = done[key] { return hit }
         if asked.insert(key).inserted {
@@ -70,7 +71,7 @@ final class NoticeText {
         let recognizer = NLLanguageRecognizer()
         recognizer.processString(answer)
         guard let found = recognizer.dominantLanguage else { return true }
-        return found.rawValue == target
+        return Language.same(found.rawValue, target)
     }
 
     /// At most `maxWords` words, with "…" when cut.
@@ -85,7 +86,7 @@ final class NoticeText {
             #if canImport(FoundationModels)
             let model = SystemLanguageModel.default
             if model.isAvailable, model.supportsLocale(Locale(identifier: target)) {
-                let language = target == "sv" ? "Swedish" : "English"
+                let language = Self.englishName(target)
                 let session = LanguageModelSession(instructions: """
                     You rewrite short rail service notices for travellers. You MUST respond in \(language), with one plain \
                     sentence of at most 12 words. Keep station names, platform numbers and dates exactly. Never add \
@@ -109,7 +110,7 @@ final class NoticeText {
     /// translator where the pair is installed, else Apple's on-device model told to translate and add nothing, else
     /// as written. Asking starts the work once.
     func paragraph(_ line: CauseLine, language: String) -> Line {
-        guard let source = line.lang, source != language else { return Line(text: line.text, translated: false) }
+        guard let source = line.lang, !Language.same(source, language) else { return Line(text: line.text, translated: false) }
         let key = "¶\(source)>\(language)|\(line.text)"
         if let hit = done[key] { return hit }
         if asked.insert(key).inserted {
@@ -128,9 +129,14 @@ final class NoticeText {
         done["¶\(source)>\(language)|\(line.text)"] = Line(text: translation, translated: true)
     }
 
-    /// Norwegian comes from the feeds as "no"; the translator knows it as Bokmål.
+    /// Norwegian comes from the feeds as "no"; the app and the translator know it as Bokmål ("nb").
     static func translatorLanguage(_ code: String) -> Locale.Language {
-        Locale.Language(identifier: code == "no" ? "nb" : code)
+        Locale.Language(identifier: Language.normalized(code))
+    }
+
+    /// The language's name in English, for the model's instructions ("You MUST respond in Danish").
+    static func englishName(_ code: String) -> String {
+        Language.known(code)?.englishName ?? "English"
     }
 
     private static func translate(_ text: String, from source: String, to target: String) async -> String? {
@@ -142,7 +148,7 @@ final class NoticeText {
             #if canImport(FoundationModels)
             let model = SystemLanguageModel.default
             if model.isAvailable, model.supportsLocale(Locale(identifier: target)) {
-                let language = target == "sv" ? "Swedish" : "English"
+                let language = Self.englishName(target)
                 let session = LanguageModelSession(instructions: """
                     You translate rail service notices into \(language). Translate the whole notice faithfully, sentence \
                     by sentence. Keep station names, platform numbers, times and dates exactly. Never add, explain or \
@@ -174,8 +180,9 @@ extension L10n {
 
     /// A longer text as shown: translated whole on the phone when it's in another language (see `paragraph`).
     func shownWhole(_ line: CauseLine) -> NoticeText.Line {
-        // Danish messages made only of the table's checked sentences read exactly so, on every phone.
-        if line.lang == "da", language.rawValue != "da",
+        // Danish messages made only of the table's checked sentences read exactly so, on every phone but a Danish
+        // reader's, who gets the message as Rejseplanen wrote it.
+        if line.lang == "da", language != .da,
            let checked = DelayCauses.danishSentences(line.text, translate: { t($0, $1) }) {
             return NoticeText.Line(text: checked, translated: true)
         }

@@ -751,7 +751,7 @@ private struct PlaceSearchSheet: View {
             .sorted { a, b in
                 let (ra, rb) = (StationSceneLogic.stateRank(state(a)), StationSceneLogic.stateRank(state(b)))
                 if ra != rb { return ra < rb }
-                return (a.name.isEmpty ? a.category.rawValue : a.name).compare(b.name.isEmpty ? b.category.rawValue : b.name, locale: Locale(identifier: "sv")) == .orderedAscending
+                return (a.name.isEmpty ? a.category.rawValue : a.name).compare(b.name.isEmpty ? b.category.rawValue : b.name, locale: Format.locale(l10n.language)) == .orderedAscending
             }
         let title = mode == .from ? l10n.t("stationMap.pickFrom") : mode == .to ? l10n.t("stationMap.pickTo") : l10n.t("stationMap.searchTitle", ["station": map.name])
         return content(title: title, q: q, shownTracks: shownTracks, shownEntrances: shownEntrances, shownPois: shownPois)
@@ -889,7 +889,7 @@ private struct PoiSheet: View {
                     Text(l10n.t("stationMap.hours").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2)
                     // The week as a person reads it (designer, 2026-11-14: "Mo-Sa 06:00-20:30" was shown raw); what
                     // can't be read is shown as listed, under a line that says so.
-                    if let week = OpeningHours.week(hours, language: l10n.language) {
+                    if let week = OpeningHours.week(hours, language: l10n.language, everyDay: l10n.t("stationMap.everyDay")) {
                         Grid(alignment: .leading, horizontalSpacing: Space.l, verticalSpacing: Space.xs) {
                             ForEach(Array(week.enumerated()), id: \.offset) { _, line in
                                 GridRow {

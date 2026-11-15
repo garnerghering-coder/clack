@@ -25,6 +25,12 @@ describe('mergeSettings', () => {
     expect(() => mergeSettings(DEFAULT_SETTINGS, { notifyLeadMin: 45 })).toThrow('invalid notifyLeadMin');
     expect(() => mergeSettings(DEFAULT_SETTINGS, { notifyArrival: 'yes' })).toThrow('true or false');
   });
+  it('takes every app language and nothing else', () => {
+    for (const l of ['en', 'sv', 'da', 'nb', 'fi', 'de', 'pl', 'fr']) expect(mergeSettings(DEFAULT_SETTINGS, { language: l }).language).toBe(l);
+    expect(() => mergeSettings(DEFAULT_SETTINGS, { language: 'no' })).toThrow('invalid language');
+    expect(() => mergeSettings(DEFAULT_SETTINGS, { language: 'es' })).toThrow('invalid language');
+    expect(DEFAULT_SETTINGS.language).toBe('en');
+  });
   it('does not mutate the input', () => {
     const before = { ...DEFAULT_SETTINGS };
     mergeSettings(DEFAULT_SETTINGS, { clock: '12h' });
