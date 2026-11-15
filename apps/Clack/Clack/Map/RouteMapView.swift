@@ -88,7 +88,8 @@ struct RouteMapView: View {
                 RouteMapRepresentable(
                     handle: handle, base: Config.apiBase, color: color, route: route, context: context, stops: stops,
                     animate: animate, interactive: interactive, controls: controls, showRail: showRail, follow: $follow, moved: $moved,
-                    train: train, fitTrain: fitTrain, progress: progress, withBasemap: basemap, dark: scheme == .dark
+                    train: train, fitTrain: fitTrain, progress: progress, withBasemap: basemap, dark: scheme == .dark,
+                    topInset: topInset, bottomInset: bottomInset
                 )
                 // Re-created when the theme changes: the basemap and every layer take their colours from it.
                 .id("\(scheme == .dark)-\(basemap)")
@@ -164,6 +165,17 @@ private struct RouteMapRepresentable: UIViewRepresentable {
     let progress: Double?
     let withBasemap: Bool
     let dark: Bool
+    var topInset: CGFloat = 0
+    var bottomInset: CGFloat = 0
+
+    /// The route's frame: clear of the bars and buttons drawn over the map (Release check, build 76: the trip map's
+    /// route ran up under the status bar and the "…" and share buttons, because the insets weren't counted).
+    var fitPadding: UIEdgeInsets {
+        var padding = controls && interactive ? MapPadding.interactive : MapPadding.mini
+        padding.top = max(padding.top, topInset + Space.m)
+        padding.bottom = max(padding.bottom, bottomInset + Space.m)
+        return padding
+    }
 
     /// What the map frames: the route (else the stops), and the train when it should stay in view.
     var framed: [LatLon] {
@@ -184,7 +196,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         map.setCenter(CLLocationCoordinate2D(latitude: 62, longitude: 15), zoomLevel: 4, animated: false)
         ctx.coordinator.map = map
         handle.mapView = map
-        handle.padding = controls && interactive ? MapPadding.interactive : MapPadding.mini
+        handle.padding = fitPadding
         handle.fitPoints = framed
         return map
     }
@@ -230,7 +242,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
             mapView.setShape(MapGeometry.points(draw ? Array(p.stops.filter { $0.kind == .end }.prefix(1)) : p.stops), source: "stops")
             lastRouteKey = routeKey(p)
             let fitPoints = p.framed
-            mapView.fit(fitPoints, padding: p.controls && p.interactive ? MapPadding.interactive : MapPadding.mini, maxZoom: 13, animated: false)
+            mapView.fit(fitPoints, padding: p.fitPadding, maxZoom: 13, animated: false)
             if draw { startDrawOn(mapView) } else { applyProgress(mapView) }
             updateTrain(mapView)
         }
