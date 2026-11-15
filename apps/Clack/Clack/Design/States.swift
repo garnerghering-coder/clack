@@ -120,6 +120,19 @@ struct ErrorStateView: View {
 
 /// The words and icon for a kind of failure, shared by the error state and the loading that outlasts a retry.
 enum FailureText {
+    /// A failure in one line, for a toast, banner or caption: the screen's subject ("Couldn't save.") and what to do,
+    /// by whose side failed (`APIError.adviceKey`). Without the failure's own kind, what the connection strip knows.
+    /// A request's failure as a kind; nil for an error that isn't a request's (writing a file on the phone), which
+    /// is no one's connection.
+    static func kind(_ error: any Error) -> APIError.Kind? {
+        error is APIError || error is URLError || error is CancellationError ? APIError.classify(error) : nil
+    }
+
+    @MainActor
+    static func line(_ subject: String, _ kind: APIError.Kind?, app: AppModel, l10n: L10n) -> String {
+        "\(subject) \(l10n.t(APIError.adviceKey(kind ?? app.connectionKind)))"
+    }
+
     static func icon(_ kind: APIError.Kind?, status: RetryStatus) -> String {
         if case .gaveUp = status { return "triangle-alert" }
         switch kind {

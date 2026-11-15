@@ -942,7 +942,7 @@ private struct PoiSheet: View {
     private var fee: String? {
         switch poi.fee {
         case .free: l10n.t("stationMap.free")
-        case .amount(let amount, _): l10n.t("stationMap.fee", ["amount": String(format: "%g", amount)])
+        case .amount(let amount, _): l10n.t("stationMap.fee", ["amount": Format.number(amount, fraction: 2, language: l10n.language)])
         case nil: nil
         }
     }

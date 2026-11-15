@@ -41,6 +41,8 @@ final class AppModel {
 
     /// The last change to settings couldn't be saved.
     private(set) var saveFailed = false
+    /// Why the last settings change didn't save (no connection, or the server), for the banner's words.
+    private(set) var saveFailure: APIError.Kind?
 
     private(set) var state: LoadState = .loading
     private(set) var settings: Settings = .defaults
@@ -88,6 +90,15 @@ final class AppModel {
     var isOffline: Bool { connection.isOffline }
     /// Why it couldn't: no connection, or the server isn't answering (the strip says which).
     var connectionState: ConnectionState.State { connection.state }
+    /// What the strip knows, as a failure's kind, for a failure whose own error wasn't kept: the phone offline, or the
+    /// server not answering; nil while both are fine.
+    var connectionKind: APIError.Kind? {
+        switch connection.state {
+        case .online: nil
+        case .offline: .offline
+        case .serverTrouble: .serverDown
+        }
+    }
 
     init(identity: String = Identity.current(), l10n: L10n? = nil) {
         let connection = ConnectionState()
@@ -218,6 +229,7 @@ final class AppModel {
             settings = previous
             l10n.language = previous.language
             saveFailed = true
+            saveFailure = APIError.classify(error)
         }
     }
 

@@ -205,3 +205,59 @@ struct RetryWakeTests {
         #expect(wake.waiting == 0)
     }
 }
+
+struct ConnectionTrackerTests {
+    @Test func theServerAnsweringAgainAfterTroubleWakesTheRetries() {
+        var c = ConnectionTracker()
+        #expect(c.report(.failed(.serverDown)) == false)
+        #expect(c.report(.failed(.serverDown)) == false)
+        #expect(c.state == .serverTrouble)
+        // The strip clears, and the waiting retries go at once (build 86: Network now sat out a 35 s countdown).
+        #expect(c.report(.answered) == true)
+        #expect(c.state == .online)
+        // Already online: an answer wakes nothing.
+        #expect(c.report(.answered) == false)
+    }
+
+    @Test func anAnswerAfterOfflineWakesTooAndOneLostAnswerSaysNoConnection() {
+        var c = ConnectionTracker()
+        #expect(c.report(.failed(.offline)) == false)
+        #expect(c.state == .offline)
+        #expect(c.report(.answered) == true)
+        _ = c.report(.failed(.timeout))
+        #expect(c.state == .offline)
+        _ = c.report(.failed(.timeout))
+        #expect(c.state == .serverTrouble)
+    }
+
+    @Test func thePathComingBackWakesAndForgetsTheOldFailures() {
+        var c = ConnectionTracker()
+        _ = c.report(.failed(.serverDown))
+        _ = c.report(.failed(.serverDown))
+        #expect(c.pathChanged(satisfied: false) == false)
+        #expect(c.state == .offline)
+        #expect(c.pathChanged(satisfied: true) == true)
+        #expect(c.state == .online)
+        #expect(c.pathChanged(satisfied: true) == false)
+    }
+}
+
+struct FailureAdviceTests {
+    @Test func onlyOfflineSaysCheckYourConnection() {
+        #expect(APIError.adviceKey(.offline) == "failure.checkConnection")
+        #expect(APIError.adviceKey(.serverDown) == "failure.serverNotAnswering")
+        #expect(APIError.adviceKey(.timeout) == "failure.serverNotAnswering")
+        #expect(APIError.adviceKey(.rateLimited(retryAfter: 5)) == "failure.serverNotAnswering")
+        #expect(APIError.adviceKey(.serverError) == "failure.serverFault")
+        #expect(APIError.adviceKey(nil) == "failure.tryAgain")
+        #expect(APIError.adviceKey(.rejected("no")) == "failure.tryAgain")
+    }
+
+    @MainActor @Test func everyAdviceIsInTheCatalogInEveryLanguage() {
+        let keys = ["failure.checkConnection", "failure.serverNotAnswering", "failure.serverFault", "failure.tryAgain"]
+        for language in Language.knownCases {
+            let l10n = L10n(language: language)
+            for key in keys { #expect(l10n.t(key) != key, "\(key) in \(language.rawValue)") }
+        }
+    }
+}

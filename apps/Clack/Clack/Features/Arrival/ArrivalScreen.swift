@@ -42,7 +42,7 @@ struct ArrivalScreen: View {
                         if let journey, !journey.legs.isEmpty { map(journey) }
                     } else if loadFailed {
                         // Said, with a way to try again, instead of a placeholder that never went (polish pass 1).
-                        ErrorStateView(message: l10n.t("arrival.loadFailed"), retry: { await load() })
+                        ErrorStateView(message: l10n.t("arrival.loadFailed"), kind: app.connectionKind, retry: { await load() })
                     } else {
                         Skeleton(height: 120)
                     }

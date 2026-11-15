@@ -100,7 +100,7 @@ struct PassportScreen: View {
                 failed = true
             } else if asked != dataYear {
                 year = dataYear
-                toaster.show(l10n.t("passport.yearFailed"), isError: true)
+                toaster.show(FailureText.line(l10n.t("passport.yearFailed"), APIError.classify(error), app: app, l10n: l10n), isError: true)
             }
         }
     }
@@ -289,7 +289,7 @@ struct PassportScreen: View {
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: Space.m, alignment: .top)], spacing: Space.m) {
                     RecordTile(label: l10n.t("passport.timeLost"), value: Format.duration(d.totalLateMin, language: l10n.language), sub: nil, legId: nil)
-                    RecordTile(label: l10n.t("passport.averageDelay"), value: l10n.t("passport.minutesShort", ["n": d.averageMin.map { String(format: "%g", $0) } ?? "—"]), sub: nil, legId: nil)
+                    RecordTile(label: l10n.t("passport.averageDelay"), value: l10n.t("passport.minutesShort", ["n": d.averageMin.map { Format.number($0, language: settings.language) } ?? "—"]), sub: nil, legId: nil)
                     // Only when something was late: an early or on-time "worst" is no record (user test 2026-11-07:
                     // "Worst delay: −1 min late").
                     if let worst = d.worst, let delay = worst.delayMin, delay > 0 {
@@ -327,7 +327,7 @@ struct PassportScreen: View {
             )
             // The method, in a line, where the number is (designer, 2026-11-14: "sanity-check it or show the method").
             Text(l10n.t("passport.co2Method")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
-            Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? String(format: "%.1f", c.trainKg) : String(Int(c.trainKg.rounded())), "other": grouped(c.comparisonKg), "mode": mode]))
+            Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? Format.number(c.trainKg, fraction: 1, minFraction: 1, language: lang) : grouped(c.trainKg), "other": grouped(c.comparisonKg), "mode": mode]))
                 .clack(.caption).foregroundStyle(Ink.text2)
             NavigationLink(value: AppRoute.about) { DisclosureRowLabel(title: l10n.t("passport.howWeCalculate")) }
                 .buttonStyle(.pressRow)

@@ -219,7 +219,7 @@ struct TripDetailScreen: View {
         if let updated = try? await app.client.answerRide(id, answer) {
             leg = updated
         } else {
-            toaster.show(l10n.t("common.couldntSave"), isError: true)
+            toaster.show(FailureText.line(l10n.t("common.couldntSave"), nil, app: app, l10n: l10n), isError: true)
         }
     }
 
@@ -246,7 +246,7 @@ struct TripDetailScreen: View {
         if let updated = try? await app.client.updateLeg(id, patch) {
             leg = updated
         } else {
-            toaster.show(l10n.t("common.couldntSave"), isError: true)
+            toaster.show(FailureText.line(l10n.t("common.couldntSave"), nil, app: app, l10n: l10n), isError: true)
         }
     }
 
@@ -260,7 +260,7 @@ struct TripDetailScreen: View {
             leg = updated
             toaster.show(l10n.t("detail.kindSaved"))
         } else {
-            toaster.show(l10n.t("common.couldntSave"), isError: true)
+            toaster.show(FailureText.line(l10n.t("common.couldntSave"), nil, app: app, l10n: l10n), isError: true)
         }
     }
 
@@ -310,7 +310,7 @@ struct TripDetailScreen: View {
             app.tripsChanged()
             dismiss()
         } else {
-            toaster.show(l10n.t("detail.deleteFailed"), isError: true)
+            toaster.show(FailureText.line(l10n.t("detail.deleteFailed"), nil, app: app, l10n: l10n), isError: true)
         }
     }
 

@@ -148,12 +148,16 @@ struct SegmentedControl<Value: Hashable>: View {
                 Button {
                     withMotion(.tap, reduceMotion: reduceMotion) { selection = option.value }
                 } label: {
+                    // A label of several words may take two lines (they fit the 44 pt row); one word shrinks
+                    // instead, so it is never hyphenated ("Sys-tem"). An inset keeps neighbours apart (build 86
+                    // check: "Lentämin…", "Samochód benz…", German "System"/"Dunkel" edge to edge).
                     Text(option.label)
                         .clack(.button)
-                        .lineLimit(typeSize.isAccessibilitySize ? 2 : 1)
+                        .lineLimit(typeSize.isAccessibilitySize || option.label.contains(" ") ? 2 : 1)
                         .multilineTextAlignment(.center)
-                        .minimumScaleFactor(0.85)
+                        .minimumScaleFactor(0.7)
                         .foregroundStyle(chosen ? Look.onSelection : Ink.text)
+                        .padding(.horizontal, Space.xs)
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .contentShape(Rectangle())
                 }

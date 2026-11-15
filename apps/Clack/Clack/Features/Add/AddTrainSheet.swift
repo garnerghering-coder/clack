@@ -687,8 +687,12 @@ private struct ConfirmStep: View {
     @State private var picked: AddTrainLogic.Picked
     @State private var duplicate = false
     @State private var error: String?
+    /// Why saving failed (the phone offline, or the server), for the banner's words.
+    @State private var failure: APIError.Kind?
     /// The train's stops couldn't be fetched (said as such, with Try again; not as a save error).
     @State private var loadFailed = false
+    /// Why the stops didn't load, for the error's cause line.
+    @State private var loadFailure: APIError.Kind?
     @State private var saving = false
 
     init(result: TripResult, originChosen: Bool, backLabel: String? = nil, onBack: @escaping () -> Void, onSaved: @escaping (LegDetail) -> Void) {
@@ -717,7 +721,7 @@ private struct ConfirmStep: View {
         .buttonStyle(LinkButtonStyle())
         Text(l10n.t("add.confirmTitle")).clack(.headline).foregroundStyle(Ink.text)
         if loadFailed {
-            ErrorStateView(message: l10n.t("add.tripLoadFailed"), retry: { await load() })
+            ErrorStateView(message: l10n.t("add.tripLoadFailed"), kind: loadFailure ?? app.connectionKind, retry: { await load() })
         } else if trip == nil {
             // The map's place is held from the first frame, so the picker and the stops below don't jump down when
             // the train arrives (polish pass 1: the main button moved about 100 pt under a finger).
@@ -764,7 +768,7 @@ private struct ConfirmStep: View {
                 }
             }
         }
-        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        if error != nil { Banner(kind: .error) { Text(FailureText.line(l10n.t("add.saveFailed"), failure, app: app, l10n: l10n)) } }
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("add.addToClack"), enabled: !(trip == nil || saving || duplicate)) { Task { await save(force: false) } }
             .task(id: result.id) { await load() }
@@ -843,6 +847,7 @@ private struct ConfirmStep: View {
         do {
             trip = try await app.client.timetableTrip(result.key, date: result.serviceDate)
         } catch {
+            loadFailure = APIError.classify(error)
             loadFailed = true
         }
         geometry = await route
@@ -859,6 +864,7 @@ private struct ConfirmStep: View {
             duplicate = true
         } catch {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
+            self.failure = FailureText.kind(error)
         }
         saving = false
     }
@@ -875,6 +881,8 @@ private struct ConfirmConnectionStep: View {
     @State private var dupes: [Int] = []
     @State private var kept: LegDetail?
     @State private var error: String?
+    /// Why saving failed (the phone offline, or the server), for the banner's words.
+    @State private var failure: APIError.Kind?
 
     var body: some View {
         let legs = [connection.first, connection.second]
@@ -897,7 +905,7 @@ private struct ConfirmConnectionStep: View {
                 }
             }
         }
-        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        if error != nil { Banner(kind: .error) { Text(FailureText.line(l10n.t("add.saveFailed"), failure, app: app, l10n: l10n)) } }
         // Pinned at the bottom like every step's main button, above the keyboard and in reach.
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("add.addBoth"), enabled: !(saving || !dupes.isEmpty)) { Task { await save(force: false) } }
@@ -927,6 +935,7 @@ private struct ConfirmConnectionStep: View {
             }
         } catch {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
+            self.failure = FailureText.kind(error)
         }
         saving = false
     }
@@ -1071,6 +1080,8 @@ private struct ManualTripStep: View {
     @State private var trainNumber = ""
     @State private var category = "intercity"
     @State private var error: String?
+    /// Why saving failed (the phone offline, or the server), for the banner's words.
+    @State private var failure: APIError.Kind?
     @State private var saving = false
     @FocusState private var numberFocused: Bool
 
@@ -1115,7 +1126,7 @@ private struct ManualTripStep: View {
             }
         }
         InfoNote(l10n.t("manual.timesNote"), more: l10n.t("manual.timesNoteMore"))
-        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        if error != nil { Banner(kind: .error) { Text(FailureText.line(l10n.t("add.saveFailed"), failure, app: app, l10n: l10n)) } }
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("manual.save"), enabled: ready && !saving) { Task { await save() } }
             .onAppear {
@@ -1171,6 +1182,7 @@ private struct ManualTripStep: View {
             )))
         } catch {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
+            self.failure = FailureText.kind(error)
         }
         saving = false
     }

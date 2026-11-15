@@ -41,6 +41,32 @@ struct FormatTests {
         #expect(!Format.day(t, tz: "Europe/Stockholm", now: t, language: .sv).contains("."))
     }
 
+    /// Each language's own short date: the stops are part of the date outside Swedish (build 86 showed "ma 911").
+    @Test func formatsDaysInEachLanguage() {
+        let zone = "Europe/Stockholm"
+        #expect(Format.day(t, tz: zone, now: t, language: .fi) == "ti 20.10.")
+        #expect(Format.day(t, tz: zone, now: t, language: .de) == "Di. 20. Okt.")
+        #expect(Format.day(t, tz: zone, now: t, language: .pl) == "wt., 20 paź")
+        #expect(Format.day(t, tz: zone, now: t, language: .fr) == "mar. 20 oct.")
+        #expect(Format.day(t, tz: zone, now: t, language: .da) == "tirs. 20. okt.")
+        #expect(Format.day(t, tz: zone, now: ms("2027-03-01T00:00:00Z"), language: .fi) == "ti 20.10.2026")
+        #expect(Format.longDate(t, tz: zone, language: .de) == "Dienstag, 20. Oktober 2026")
+        #expect(Format.longDate(t, tz: zone, language: .en) == "Tuesday 20 October 2026")
+    }
+
+    /// Decimals in the app's language, not the C locale's point (build 86: "16.5 min", "0.8 kg" in German).
+    @Test func formatsNumbersInEachLanguage() {
+        #expect(Format.number(16.5, language: .en) == "16.5")
+        #expect(Format.number(16.5, language: .de) == "16,5")
+        #expect(Format.number(16.5, language: .pl) == "16,5")
+        #expect(Format.number(16.5, language: .fi) == "16,5")
+        #expect(Format.number(16.5, language: .fr) == "16,5")
+        #expect(Format.number(16, language: .de) == "16")
+        #expect(Format.number(0.8, fraction: 1, minFraction: 1, language: .de) == "0,8")
+        #expect(Format.number(2, fraction: 1, minFraction: 1, language: .en) == "2.0")
+        #expect(Format.number(1234.5, language: .de) == "1.234,5")
+    }
+
     @Test func formatsDurationsDistancesAndDelays() {
         #expect(Format.duration(168) == "2h 48m")
         #expect(Format.duration(45) == "45m")

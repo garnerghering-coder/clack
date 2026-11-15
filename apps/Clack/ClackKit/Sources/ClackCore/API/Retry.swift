@@ -288,3 +288,69 @@ public nonisolated final class RetryWake: Sendable {
         waiter.continuation.resume(returning: woken)
     }
 }
+
+/// Whether Clack's server can be reached, and when it can't, why: the rule behind the app's connection strip
+/// (`ConnectionState`), here so it can be tested. The phone's side comes from its path (NWPathMonitor); the server's
+/// from every request: any answer from the server, even an error, means online; failures to reach it again and again
+/// while the phone has a connection mean server trouble.
+public nonisolated struct ConnectionTracker: Sendable, Equatable {
+    public enum State: Sendable, Equatable {
+        case online
+        case offline
+        case serverTrouble
+    }
+
+    public private(set) var state: State = .online
+    /// The phone has a usable connection. Assumed until the monitor first says.
+    public private(set) var hasPath = true
+    /// Failures in a row to reach the server, since its last answer.
+    private var failures = 0
+    /// The last failure was URLSession's "no connection" (it can know before the monitor does).
+    private var lastFailedOffline = false
+    /// Failures in a row, with a connection, before the strip blames the server: one lost answer is as often the
+    /// network's hiccup as the server's. Until then the strip says no connection, as it always did.
+    public static let troubleAfter = 2
+
+    public init() {}
+
+    /// A request's outcome. True when it brought the server back (offline or server trouble, now online): the retries
+    /// waiting out a backoff should go at once, not when their countdown ends (build 86 check: the strip cleared, and
+    /// Network now kept its error and a 35 s countdown).
+    public mutating func report(_ reach: Reach) -> Bool {
+        let before = state
+        switch reach {
+        case .answered:
+            failures = 0
+            lastFailedOffline = false
+        case .failed(let kind):
+            failures += 1
+            lastFailedOffline = kind == .offline
+        }
+        update()
+        return before != .online && state == .online
+    }
+
+    /// The phone's connection changed. True when it came back: the retries waiting should go now.
+    public mutating func pathChanged(satisfied: Bool) -> Bool {
+        let cameBack = satisfied && !hasPath
+        hasPath = satisfied
+        // The failures were the old connection's; the retries this wakes will tell about the new one.
+        if cameBack {
+            failures = 0
+            lastFailedOffline = false
+        }
+        update()
+        return cameBack
+    }
+
+    private mutating func update() {
+        let next: State =
+            if !hasPath { .offline }
+            else if failures == 0 { .online }
+            else if lastFailedOffline { .offline }
+            // One lost answer: what the strip said before stays (no connection, the old single flag), until it repeats.
+            else if failures < Self.troubleAfter { state == .serverTrouble ? .serverTrouble : .offline }
+            else { .serverTrouble }
+        if next != state { state = next }
+    }
+}

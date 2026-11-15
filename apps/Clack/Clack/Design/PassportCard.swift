@@ -106,16 +106,16 @@ struct PassportCard: View {
         let t = data.totals
         var out: [String] = []
         // Under one lap a share reads better than "0.04×"; tiny distances get no comparison at all.
-        if f.earthLaps >= 1 { out.append(l10n.t("passport.flavor.earth", ["n": String(format: "%.1f", f.earthLaps)])) }
+        if f.earthLaps >= 1 { out.append(l10n.t("passport.flavor.earth", ["n": Format.number(f.earthLaps, fraction: 1, minFraction: 1, language: l10n.language)])) }
         else if f.earthLaps >= 0.01 { out.append(l10n.t("passport.flavor.earthPct", ["pct": String(Int((f.earthLaps * 100).rounded()))])) }
         // The length of your own country (an older server only sends Sweden's), then how far across Europe.
         if let home = f.homeLengths {
-            if home >= 0.05 { out.append(l10n.t("passport.flavor.home", ["n": String(format: "%.1f", home), "country": l10n.possessiveCountryName(data.home ?? "SE")])) }
+            if home >= 0.05 { out.append(l10n.t("passport.flavor.home", ["n": Format.number(home, fraction: 1, minFraction: 1, language: l10n.language), "country": l10n.possessiveCountryName(data.home ?? "SE")])) }
         } else if f.swedenLengths >= 0.05 {
-            out.append(l10n.t("passport.flavor.sweden", ["n": String(format: "%.1f", f.swedenLengths)]))
+            out.append(l10n.t("passport.flavor.sweden", ["n": Format.number(f.swedenLengths, fraction: 1, minFraction: 1, language: l10n.language)]))
         }
         if let europe = f.europeLengths {
-            if europe >= 1 { out.append(l10n.t("passport.flavor.europe", ["n": String(format: "%.1f", europe)])) }
+            if europe >= 1 { out.append(l10n.t("passport.flavor.europe", ["n": Format.number(europe, fraction: 1, minFraction: 1, language: l10n.language)])) }
             else if europe >= 0.01 { out.append(l10n.t("passport.flavor.europePct", ["pct": String(Int((europe * 100).rounded()))])) }
         }
         if t.minutes > 0 { out.append(l10n.t("passport.flavor.time", ["time": Format.duration(t.minutes, language: l10n.language)])) }

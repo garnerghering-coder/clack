@@ -106,6 +106,13 @@ final class TripsModel {
 /// The places Trips can be scrolled to from elsewhere.
 enum TripsAnchor: String, Hashable {
     case reviews, history
+
+    /// The view id it scrolls to. History's is the first month's header, whose id carries the language: a pinned
+    /// header kept the same id across a language change and stayed in the old one ("NOVEMBER 2026 · 1 Fahrt" in
+    /// the Polish app, build 86 check).
+    func viewID(_ language: Language) -> String {
+        self == .history ? "\(rawValue)|\(language.rawValue)" : rawValue
+    }
 }
 
 
@@ -237,7 +244,7 @@ struct TripsScreen: View {
                 Task {
                     // Once the list is laid out.
                     try? await Task.sleep(for: .milliseconds(300))
-                    withAnimation(Motion.layout.animation) { scroller.scrollTo(target.rawValue, anchor: .top) }
+                    withAnimation(Motion.layout.animation) { scroller.scrollTo(target.viewID(app.settings.language), anchor: .top) }
                     router.tripsScrollTarget = nil
                 }
             }
@@ -278,17 +285,18 @@ struct TripsScreen: View {
             sectionTitle(l10n.t("trips.toCheck")).id(TripsAnchor.reviews.rawValue)
             ForEach(toCheck) { leg in
                 ReviewCard(leg: leg) { answer in
-                    if !(await model.answer(leg, answer, app.client)) { toaster.show(l10n.t("common.couldntSave"), isError: true) }
+                    if !(await model.answer(leg, answer, app.client)) { toaster.show(FailureText.line(l10n.t("common.couldntSave"), nil, app: app, l10n: l10n), isError: true) }
                 }
             }
         }
         FollowingSection(follows: unshared(model.follows))
         let history = past.filter { !shown.contains($0.id) }
-        ForEach(Array(TripsLogic.months(history, language: app.settings.language).enumerated()), id: \.element.label) { index, month in
+        let language = app.settings.language
+        ForEach(Array(TripsLogic.months(history, language: language).enumerated()), id: \.element.label) { index, month in
             Section {
                 ForEach(month.items, id: \.first?.id) { item in row(item, upcoming: false) }
             } header: {
-                monthHeader(month).id(index == 0 ? TripsAnchor.history.rawValue : "month-\(month.label)")
+                monthHeader(month).id(index == 0 ? TripsAnchor.history.viewID(language) : "month|\(language.rawValue)|\(month.label)")
             }
         }
     }

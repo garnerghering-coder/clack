@@ -57,6 +57,19 @@ public nonisolated struct APIError: Error, Sendable, LocalizedError {
         }
     }
 
+    /// The catalog key of what to do after a failure, said after the screen's own subject ("Couldn't save."): check
+    /// the connection only when the phone is offline; the server not answering (down, too slow, too busy) or at fault
+    /// says so (build 86 check: "Check your connection" while the phone was online and the server down); a refusal or
+    /// an unknown cause just "Try again."
+    public static func adviceKey(_ kind: Kind?) -> String {
+        switch kind {
+        case .offline: "failure.checkConnection"
+        case .timeout, .serverDown, .rateLimited: "failure.serverNotAnswering"
+        case .serverError: "failure.serverFault"
+        case nil, .notFound, .rejected, .cancelled: "failure.tryAgain"
+        }
+    }
+
     public var kind: Kind {
         switch status {
         case 404: .notFound

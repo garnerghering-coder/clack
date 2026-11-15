@@ -12,15 +12,15 @@ import Observation
 /// one and the server isn't answering (`serverTrouble`). The strip at the top says which. The phone's side comes from
 /// NWPathMonitor; the server's from every request (`APIClient.reachability`): any answer from the server itself, even
 /// an error, means online (apps/web/src/api.ts); failures to reach it (no answer in time, the proxy in front saying it
-/// isn't answering) again and again while the phone has a connection mean server trouble.
+/// isn't answering) again and again while the phone has a connection mean server trouble. The rule is
+/// `ConnectionTracker` (ClackCore, tested); this holds it for the views and wakes the waiting retries when the server
+/// or the connection comes back.
 @MainActor
 @Observable
 final class ConnectionState {
-    enum State: Equatable {
-        case online
-        case offline
-        case serverTrouble
-    }
+    typealias State = ConnectionTracker.State
+
+    private var tracker = ConnectionTracker()
 
     private(set) var state: State = .online
 
@@ -28,14 +28,7 @@ final class ConnectionState {
     var isOffline: Bool { state != .online }
 
     /// The phone has a usable connection (NWPathMonitor's `satisfied`). Assumed until the monitor first says.
-    private(set) var hasPath = true
-    /// Failures in a row to reach the server, since its last answer.
-    private var failures = 0
-    /// The last failure was URLSession's "no connection" (it can know before the monitor does).
-    private var lastFailedOffline = false
-    /// Failures in a row, with a connection, before the strip blames the server: one lost answer is as often the
-    /// network's hiccup as the server's. Until then the strip says no connection, as it always did.
-    static let troubleAfter = 2
+    var hasPath: Bool { tracker.hasPath }
 
     private let monitor = NWPathMonitor()
 
@@ -47,17 +40,12 @@ final class ConnectionState {
         monitor.start(queue: DispatchQueue(label: "clack.connection"))
     }
 
-    /// A request's outcome.
+    /// A request's outcome. The server answering again after trouble wakes every retry still waiting, so an open
+    /// screen recovers with the strip instead of sitting out its countdown.
     func report(_ reach: Reach) {
-        switch reach {
-        case .answered:
-            failures = 0
-            lastFailedOffline = false
-        case .failed(let kind):
-            failures += 1
-            lastFailedOffline = kind == .offline
-        }
-        update()
+        let cameBack = tracker.report(reach)
+        publish()
+        if cameBack { RetryWake.shared.wake() }
     }
 
     /// The app came to the front: whatever was waiting to try again goes now.
@@ -66,25 +54,12 @@ final class ConnectionState {
     }
 
     private func pathChanged(satisfied: Bool) {
-        let cameBack = satisfied && !hasPath
-        hasPath = satisfied
-        // The failures were the old connection's; the retries this wakes will tell about the new one.
-        if cameBack {
-            failures = 0
-            lastFailedOffline = false
-        }
-        update()
+        let cameBack = tracker.pathChanged(satisfied: satisfied)
+        publish()
         if cameBack { RetryWake.shared.wake() }
     }
 
-    private func update() {
-        let next: State =
-            if !hasPath { .offline }
-            else if failures == 0 { .online }
-            else if lastFailedOffline { .offline }
-            // One lost answer: what the strip said before stays (no connection, the old single flag), until it repeats.
-            else if failures < Self.troubleAfter { state == .serverTrouble ? .serverTrouble : .offline }
-            else { .serverTrouble }
-        if next != state { state = next }
+    private func publish() {
+        if tracker.state != state { state = tracker.state }
     }
 }

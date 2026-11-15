@@ -174,7 +174,7 @@ struct ExploreScreen: View {
         }
         // Another kind of panel opens at the usual half; another train in the same panel keeps the size you chose.
         .onChange(of: panelKind) { detent = .medium }
-        .onChange(of: model.failure) { _, failure in if let failure { toaster.show(l10n.t(failure.key), isError: true) } }
+        .onChange(of: model.failure) { _, failure in if let failure { toaster.show(FailureText.line(l10n.t(failure.key), failure.kind, app: app, l10n: l10n), isError: true) } }
         // A follow or unfollow the server confirmed (not the list loading).
         .haptic(.success, trigger: model.followsConfirmed)
         #if DEBUG
@@ -343,7 +343,7 @@ struct ExploreScreen: View {
                         }
                         .padding(.vertical, Space.s)
                     } else if model.stationSearchFailed {
-                        Text(l10n.t("liveMap.searchFailed")).clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, Space.s)
+                        Text(FailureText.line(l10n.t("liveMap.searchFailed"), model.stationSearchFailure, app: app, l10n: l10n)).clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, Space.s)
                     } else {
                         Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
                             .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, Space.s)

@@ -51,6 +51,8 @@ final class ExploreModel {
     struct Failure: Equatable {
         let id = UUID()
         let key: String
+        /// Why, when known: the toast says to check the connection only when the phone is offline.
+        var kind: APIError.Kind?
     }
     var failure: Failure?
     private(set) var selected: LiveTrainDetail?
@@ -655,7 +657,7 @@ final class ExploreModel {
             scheduleRender()
         } catch {
             // Unchanged, and said (it used to look like a dead tap).
-            failure = Failure(key: "liveMap.followFailed")
+            failure = Failure(key: "liveMap.followFailed", kind: APIError.classify(error))
         }
     }
 
@@ -688,10 +690,13 @@ final class ExploreModel {
     private(set) var stationSearchPending = false
     /// The last station search didn't get an answer (said as such, not as no match).
     private(set) var stationSearchFailed = false
+    /// Why it didn't: the phone offline, or the server (build 86 check: "Check your connection" with the server down).
+    private(set) var stationSearchFailure: APIError.Kind?
 
     func searchChanged() {
         searchTask?.cancel()
         stationSearchFailed = false
+        stationSearchFailure = nil
         // Composed form: "ö" typed as o + a combining mark (some keyboards, pasted text) must match the station's name.
         let text = query.trimmingCharacters(in: .whitespaces).precomposedStringWithCanonicalMapping
         guard ExploreLogic.searchesStations(text) else {
@@ -704,6 +709,7 @@ final class ExploreModel {
             stationHits = []
             stationSearchPending = false
             stationSearchFailed = true
+            stationSearchFailure = app?.connectionKind
             return
         }
         stationSearchPending = true
@@ -712,7 +718,13 @@ final class ExploreModel {
             guard !Task.isCancelled, let self, let client = self.app?.client else { return }
             // A dropped request is asked again (the read policy: up to five tries with backoff), so it is not "no
             // match" (user test 2026-11-07: "Uppsala", which the planner knew, got "Inget matchar" here).
-            let hits = try? await client.searchStations(text)
+            let hits: [StationHit]?
+            do {
+                hits = try await client.searchStations(text)
+            } catch {
+                hits = nil
+                self.stationSearchFailure = APIError.classify(error)
+            }
             guard !Task.isCancelled else { return }
             if let hits { self.stationHits = Array(hits.prefix(5)) } else { self.stationSearchFailed = true }
             self.stationSearchPending = false
@@ -939,17 +951,21 @@ final class ExploreModel {
         // The ring shows at once, so the tap is seen before the details arrive.
         controller.setSelected(id)
         // A tap that doesn't answer is worse than a slow one: one more try before giving up.
-        var fetched = try? await client.liveTrain(id)
+        var lastError: (any Error)?
+        func fetch() async -> LiveTrainDetail? {
+            do { return try await client.liveTrain(id) } catch { lastError = error; return nil }
+        }
+        var fetched = await fetch()
         if fetched == nil {
             try? await Task.sleep(for: .milliseconds(400))
-            fetched = try? await client.liveTrain(id)
+            fetched = await fetch()
         }
         guard mine == selection else { return }
         guard let detail = fetched else {
             // The ring goes back to what is really selected (nothing, or the train that still is), and the tap is
             // answered in words (polish pass 1: it just went away, a dead tap).
             controller.setSelected(selected?.train.id)
-            failure = Failure(key: "liveMap.trainFailed")
+            failure = Failure(key: "liveMap.trainFailed", kind: lastError.map(APIError.classify))
             return
         }
         selected = detail
@@ -1046,7 +1062,7 @@ final class ExploreModel {
             return
         } catch {
             // Not reached is said as such, not as "this train isn't running" (polish pass 1).
-            failure = Failure(key: "liveMap.trainFailed")
+            failure = Failure(key: "liveMap.trainFailed", kind: APIError.classify(error))
             return
         }
         if let live = view.live, trains[live.id] != nil {

@@ -21,6 +21,8 @@ struct YearRecap: View {
     let milestones: Passport.Milestones
     @State private var data: Passport?
     @State private var failed = false
+    /// Why it failed (the phone offline, or the server), for the error's cause line.
+    @State private var failure: APIError.Kind?
     @State private var sharing = false
     @State private var index = 0
     /// How far the page's own timer has run, 0…1; held, it stops.
@@ -76,7 +78,7 @@ struct YearRecap: View {
                 )
                 segments(count: pages.count)
             } else if failed {
-                ErrorStateView(message: l10n.t("recap.failed"), retry: { await load() }).padding(Space.xl)
+                ErrorStateView(message: l10n.t("recap.failed"), kind: failure ?? app.connectionKind, retry: { await load() }).padding(Space.xl)
             } else {
                 ProgressView().tint(Ink.onAccent).frame(maxHeight: .infinity)
             }
@@ -415,6 +417,7 @@ struct YearRecap: View {
         do {
             data = try await app.client.passport(year: year, commuter: app.settings.includeCommuter, comparison: app.settings.co2Comparison)
         } catch {
+            failure = APIError.classify(error)
             failed = true
         }
     }

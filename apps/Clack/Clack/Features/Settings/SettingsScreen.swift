@@ -23,11 +23,13 @@ private struct SettingsRow<Control: View>: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     let label: String
     var last = false
+    /// The control under the label, as at the accessibility sizes: for a switch whose words need the width.
+    var stacked = false
     @ViewBuilder var control: Control
 
     var body: some View {
         Group {
-            if typeSize.isAccessibilitySize {
+            if typeSize.isAccessibilitySize || stacked {
                 VStack(alignment: .leading, spacing: Space.s) {
                     Text(label).clack(.settingsRow).foregroundStyle(Ink.text)
                     control.frame(maxWidth: .infinity, alignment: .leading)
@@ -93,7 +95,7 @@ struct SettingsScreen: View {
     var body: some View {
         let s = app.settings
         Page {
-            if app.saveFailed { Banner(kind: .error) { Text(l10n.t("settings.saveError")) }.countsError("settings.save") }
+            if app.saveFailed { Banner(kind: .error) { Text(FailureText.line(l10n.t("settings.saveError"), app.saveFailure, app: app, l10n: l10n)) }.countsError("settings.save") }
             #if DEBUG
             // `-ridersSetting` puts the riders' card first, to look at it.
             if CommandLine.arguments.contains("-ridersSetting") { RiderSharingCard() }
@@ -133,12 +135,13 @@ struct SettingsScreen: View {
                     }
                 }
                 // The same switch as on the Passport; an older setting that is no longer offered reads as a petrol car.
-                SettingsRow(label: l10n.t("settings.co2Comparison"), last: true) {
+                // Under its label: beside it, "Bensiiniauto" or "Auto benzynowe" had no room, or the label broke
+                // mid-word (build 86 check).
+                SettingsRow(label: l10n.t("settings.co2Comparison"), last: true, stacked: true) {
                     SegmentedControl(
                         selection: Binding(get: { Settings.co2Choices.contains(s.co2Comparison) ? s.co2Comparison : .car1 }, set: { value in change(SettingsPatch(co2Comparison: value)) }),
                         options: Settings.co2Choices.map { ($0, l10n.t("settings.co2.\($0.rawValue)")) }, small: true
                     )
-                    .frame(maxWidth: 200)
                 }
             }
             Card {
@@ -430,6 +433,8 @@ private struct ExportDataRow: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @State private var phase = Phase.idle
+    /// Why the export failed, for its words (the phone offline, or the server).
+    @State private var failure: APIError.Kind?
     /// The file, once made: the share sheet opens with it at once (one step; it was "prepare", then "share").
     @State private var file: ExportFile?
 
@@ -450,7 +455,7 @@ private struct ExportDataRow: View {
             }
             .buttonStyle(.clack())
             .disabled(phase == .busy)
-            if phase == .failed { Text(l10n.t("settings.exportFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
+            if phase == .failed { Text(FailureText.line(l10n.t("settings.exportFailed"), failure, app: app, l10n: l10n)).clack(.caption).foregroundStyle(Ink.veryLateInk) }
         }
         .padding(.vertical, Space.s)
         .sheet(item: $file) { file in
@@ -467,6 +472,8 @@ private struct ExportDataRow: View {
             phase = .idle
             self.file = ExportFile(url: file)
         } catch {
+            // Writing the file on the phone can fail too; that isn't the server's doing.
+            failure = FailureText.kind(error)
             phase = .failed
         }
     }
@@ -614,16 +621,16 @@ private struct TestToolsRow: View {
         // never appeared (builds 43 and 44).
         VStack(spacing: 0) {
             if shown {
-                NavigationLink("Station walks (test tool)", value: AppRoute.walkLogger)
+                NavigationLink(l10n.t("settings.test.stationWalks"), value: AppRoute.walkLogger)
                     .buttonStyle(.clack(wide: true))
                 Card {
                     SettingsToggle(label: l10n.t("settings.test.walletPasses"), isOn: walletPasses, last: true) { walletPasses = $0 }
                 }
                 .padding(.top, Space.m)
-                NavigationLink("Test alerts", value: AppRoute.testAlerts)
+                NavigationLink(l10n.t("settings.test.alerts"), value: AppRoute.testAlerts)
                     .buttonStyle(.clack(wide: true))
                     .padding(.top, Space.m)
-                NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
+                NavigationLink(l10n.t("settings.test.design")) { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
                     .buttonStyle(.clack(wide: true))
                     .padding(.top, Space.m)
             }

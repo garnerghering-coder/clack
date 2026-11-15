@@ -82,21 +82,36 @@ public nonisolated enum Format {
     public static func day(_ ms: Double, tz: String, now: Double = Date.now.timeIntervalSince1970 * 1000, language: Language = .en) -> String {
         let calendar = calendar(tz)
         let sameYear = calendar.component(.year, from: date(ms)) == calendar.component(.year, from: date(now))
-        // No full stops: Swedish abbreviates "nov." and "sön.", which doubled the stop where a day ends a sentence
-        // ("Inget tåg SJ 421 sön 8 nov..", user test 2026-11-07, run 2).
-        return formatted(ms, tz: tz, language: language, template: sameYear ? "EEEdMMM" : "EEEdMMMy")
-            .replacingOccurrences(of: ",", with: "")
-            .replacingOccurrences(of: ".", with: "")
+        let text = formatted(ms, tz: tz, language: language, template: sameYear ? "EEEdMMM" : "EEEdMMMy")
+        switch language {
+        case .en, .unknown, .sv:
+            // No full stops in Swedish: it abbreviates "nov." and "sön.", which doubled the stop where a day ends a
+            // sentence ("Inget tåg SJ 421 sön 8 nov..", user test 2026-11-07, run 2). No comma in English ("Sun 9 Nov
+            // 2025"). Only these two: elsewhere the stops are part of the date ("ma 9.11." in Finnish, "So. 9. Nov." in
+            // German, "søn. 9. nov." in Danish), and taking them out left "ma 911" (build 86 check).
+            return text.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: ".", with: "")
+        case .da, .nb, .fi, .de, .pl, .fr:
+            return text
+        }
     }
 
     /// "Friday 17 October 2026".
     public static func longDate(_ ms: Double, tz: String, language: Language = .en) -> String {
-        formatted(ms, tz: tz, language: language, template: "EEEEdMMMMy").replacingOccurrences(of: ",", with: "")
+        withoutComma(formatted(ms, tz: tz, language: language, template: "EEEEdMMMMy"), language: language)
     }
 
     /// "1 January 2020" (no weekday).
     public static func fullDate(_ ms: Double, tz: String, language: Language = .en) -> String {
-        formatted(ms, tz: tz, language: language, template: "dMMMMy").replacingOccurrences(of: ",", with: "")
+        withoutComma(formatted(ms, tz: tz, language: language, template: "dMMMMy"), language: language)
+    }
+
+    /// English and Swedish drop the comma after the weekday ("Friday 17 October 2026"); the other languages keep
+    /// their own punctuation ("Sonntag, 9. November 2025", "niedziela, 9 listopada 2025").
+    private static func withoutComma(_ text: String, language: Language) -> String {
+        switch language {
+        case .en, .unknown, .sv: text.replacingOccurrences(of: ",", with: "")
+        case .da, .nb, .fi, .de, .pl, .fr: text
+        }
     }
 
     /// "October 2026".
@@ -166,6 +181,17 @@ public nonisolated enum Format {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 0
         return "\(formatter.string(from: NSNumber(value: value.rounded())) ?? "") \(unit.rawValue)"
+    }
+
+    /// A number in the app's language: "16.5" in English, "16,5" in German, Polish, Finnish, Swedish, with the
+    /// language's grouping. `fraction` is how many decimals at most, `minFraction` at least ("0.8", "2").
+    public static func number(_ value: Double, fraction: Int = 1, minFraction: Int = 0, language: Language = .en) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = locale(language)
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = min(minFraction, fraction)
+        formatter.maximumFractionDigits = fraction
+        return formatter.string(from: NSNumber(value: value)) ?? String(value)
     }
 
     /// What an unknown value shows, everywhere: an em dash.

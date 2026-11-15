@@ -67,7 +67,7 @@ struct JourneyScreen: View {
                 JourneyOverview(journey: journey, legs: legs, onRefresh: { await reload() })
             } else if failed {
                 // Not reached is said as such, with a way to try again (it said "not found", polish pass 1).
-                Page { ErrorStateView(message: l10n.t("journey.loadFailed"), retry: { await reload() }) }
+                Page { ErrorStateView(message: l10n.t("journey.loadFailed"), kind: app.connectionKind, retry: { await reload() }) }
             } else {
                 Page { Skeleton(height: 240, radius: Radius.card) }
             }

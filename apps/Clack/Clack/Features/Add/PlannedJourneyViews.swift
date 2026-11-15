@@ -127,6 +127,8 @@ struct PlannedJourneyStep: View {
     /// The trains saved by the first try when some were already there, for "Keep what I have".
     @State private var savedSoFar: LegDetail?
     @State private var error: String?
+    /// Why saving failed (the phone offline, or the server), for the banner's words.
+    @State private var failure: APIError.Kind?
 
     /// The trains as unsaved trips, with the planner's tier and country so the change cards agree with it.
     private var legs: [Leg] {
@@ -187,7 +189,7 @@ struct PlannedJourneyStep: View {
                 }
             }
         }
-        if error != nil { Banner(kind: .error) { Text(l10n.t("add.saveFailed")) } }
+        if error != nil { Banner(kind: .error) { Text(FailureText.line(l10n.t("add.saveFailed"), failure, app: app, l10n: l10n)) } }
         let ahead = journey.arr > Date.now.timeIntervalSince1970 * 1000
         Color.clear.frame(height: 0)
             .sheetAction(l10n.t("journey.addToTrips"), enabled: !saving && dupes.isEmpty) { Task { await save(force: false) } }
@@ -259,6 +261,7 @@ struct PlannedJourneyStep: View {
             }
         } catch {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
+            self.failure = FailureText.kind(error)
         }
         saving = false
     }
