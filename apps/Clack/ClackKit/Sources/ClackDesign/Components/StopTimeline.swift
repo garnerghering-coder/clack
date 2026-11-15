@@ -22,6 +22,7 @@ public struct StopRail: View {
     public var below = TripDetailLogic.RailHalf()
 
     public static let width: CGFloat = 20
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     public init(
         color: Color, big: Bool = false, ridden: Bool = true, startsHere: Bool = false, endsHere: Bool = false,
@@ -55,6 +56,8 @@ public struct StopRail: View {
                         .overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 2.5))
                         .shadow(color: Color.black.opacity(0.35), radius: 2, y: 1)
                         .position(x: proxy.size.width / 2, y: proxy.size.height * at)
+                        // Each second's small step forward glides instead of ticking; a stop with Reduce Motion.
+                        .animation(reduceMotion ? nil : .easeInOut(duration: 0.8), value: at)
                 }
                 .zIndex(1)
             }

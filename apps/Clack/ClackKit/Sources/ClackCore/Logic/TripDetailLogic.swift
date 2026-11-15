@@ -175,6 +175,9 @@ extension TripDetailLogic {
         case .cancelled:
             return l10n.t("activity.cancelled")
         case .shortTurned:
+            // Where it now ends or starts on your part (build 86), else the stations it no longer reaches.
+            if let to = p.runsToName, p.endsThere == true { return l10n.t("activity.runsOnlyTo", ["station": to]) }
+            if let from = p.runsFromName, p.startsThere == true { return l10n.t("activity.startsFrom", ["station": from]) }
             let names = (p.stationIds ?? []).map { id in stops.first { $0.stationId == id }?.name ?? id }
             return l10n.t("activity.shortTurned", ["stations": names.joined(separator: ", ")])
         case .unknown:
@@ -215,16 +218,49 @@ extension TripDetailLogic {
         }
     }
 
+    /// Where the train was last drawn on a trip's stop rail, kept by the screen between its one-second redraws so the
+    /// train never steps back (build 86: it jumped back each time the phone's own estimate, used after a minute without
+    /// updates, met the next live report). A reference, so updating it doesn't redraw anything.
+    public final class TrainHold: @unchecked Sendable {
+        public var key: String?
+        public var metres: Double?
+
+        public init() {}
+    }
+
+    /// A step back the rail does take: a fresh GPS fix more than this far behind what is drawn (the estimate ran ahead of
+    /// a late train). Anything smaller waits until the train catches up.
+    public static let trainBackStepM: Double = 1000
+
+    /// The drawn place of the train, `metres` along the route: never behind the last one drawn for `key`, unless a GPS
+    /// fix puts it well behind. Pure but for the hold it updates.
+    public static func steadyTrain(_ metres: Double, gps: Bool, key: String, hold: TrainHold?) -> Double {
+        guard let hold else { return metres }
+        var out = metres
+        if hold.key == key, let held = hold.metres, metres < held, !(gps && held - metres > trainBackStepM) { out = held }
+        hold.key = key
+        hold.metres = out
+        return out
+    }
+
     /// For each stop but the last: the share (0 to 1) of the stretch to the next stop the train has covered. A trip that
     /// has arrived is covered all the way; one that hasn't started, not at all; one under way is placed by the train's
-    /// position along the route line (else by the times).
-    public static func segmentFills(stops: [LegStop], route: [LatLon], shown: LiveStateRow?, stage: Stage, now: Double) -> [Double] {
+    /// position along the route line (searched from the stop it last left, so a line that doubles back can't put it on
+    /// the wrong side), else by its progress, else by the times. With a `hold` (and its `key`, the trip) the train only
+    /// moves forward between calls (`steadyTrain`).
+    public static func segmentFills(stops: [LegStop], route: [LatLon], shown: LiveStateRow?, stage: Stage, now: Double, hold: TrainHold? = nil, key: String = "") -> [Double] {
         guard stops.count > 1 else { return [] }
         let pairs = (0..<(stops.count - 1)).map { stops[$0].role.isRidden && stops[$0 + 1].role.isRidden }
         switch stage {
         case .after: return pairs.map { $0 ? 1 : 0 }
         case .before: return pairs.map { _ in 0 }
         case .during: break
+        }
+        // The share of stretch i covered by the clock, from its best-known times.
+        func byTime(_ i: Int) -> Double? {
+            let a = stops[i], b = stops[i + 1]
+            guard pairs[i], let dep = (a.actualDep ?? a.estimatedDep ?? a.schedDep)?.ms, let arr = (b.actualArr ?? b.estimatedArr ?? b.schedArr)?.ms, arr > dep, now >= dep else { return nil }
+            return min(1, (now - dep) / (arr - dep))
         }
         if route.count > 1 {
             let cum = Progress.cumulative(route)
@@ -236,21 +272,27 @@ extension TripDetailLogic {
             }
             let total = cum.last ?? 0
             var train: Double?
-            if let lat = shown?.lat, let lon = shown?.lon { train = Progress.locate(route, cum, lat: lat, lon: lon) }
-            else if let progress = shown?.progress { train = progress * total }
-            if let train {
+            var gps = false
+            if let lat = shown?.lat, let lon = shown?.lon {
+                // From the stop it last left: the same hint the stops get.
+                let left = shown?.prevStopId.flatMap { id in stops.firstIndex { $0.stationId == id } }.map { metres[$0] } ?? 0
+                train = Progress.locate(route, cum, lat: lat, lon: lon, from: left)
+                gps = shown?.positionSource == .gps && shown?.localEstimate != true
+            } else if let progress = shown?.progress {
+                train = progress * total
+            } else {
+                // By the clock: the furthest stretch it has started on.
+                train = (0..<(stops.count - 1)).compactMap { i in byTime(i).map { metres[i] + $0 * (metres[i + 1] - metres[i]) } }.max()
+            }
+            if let found = train {
+                let at = steadyTrain(found, gps: gps, key: key, hold: hold)
                 return (0..<(stops.count - 1)).map { i in
                     guard pairs[i], metres[i + 1] > metres[i] else { return 0 }
-                    return min(1, max(0, (train - metres[i]) / (metres[i + 1] - metres[i])))
+                    return min(1, max(0, (at - metres[i]) / (metres[i + 1] - metres[i])))
                 }
             }
         }
-        return (0..<(stops.count - 1)).map { i in
-            guard pairs[i] else { return 0 }
-            let a = stops[i], b = stops[i + 1]
-            guard let dep = (a.actualDep ?? a.estimatedDep ?? a.schedDep)?.ms, let arr = (b.actualArr ?? b.estimatedArr ?? b.schedArr)?.ms, arr > dep else { return 0 }
-            return min(1, max(0, (now - dep) / (arr - dep)))
-        }
+        return (0..<(stops.count - 1)).map { i in byTime(i) ?? 0 }
     }
 
     /// The two halves of each stop's rail, from the fills: a stretch between two stops is drawn half in the row above

@@ -149,6 +149,11 @@ export function pointAt(line: LatLon[], cum: number[], m: number): { lat: number
  * Without fresh GPS the position is estimated: constant speed between the last stop left and the next one.
  */
 export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, now: number): LiveView {
+  // A train that runs only part of your way is followed on the part it runs, from the first stop it serves to the last
+  // (the stops' flags are per role, see disruption.ts `stopCanceled`); one that runs none of it is cancelled (build 86).
+  const first = stops.findIndex((s) => !s.canceled);
+  const last = stops.length - 1 - [...stops].reverse().findIndex((s) => !s.canceled);
+  if (first >= 0 && last > first && (first > 0 || last < stops.length - 1)) return liveView(stops.slice(first, last + 1), line, gps, now);
   const times = expectedTimes(stops);
   const board = stops[0]!;
   const alight = stops.at(-1)!;

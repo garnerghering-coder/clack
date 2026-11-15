@@ -29,10 +29,8 @@ public struct StatusLine: View {
         case band(DelayBand)
     }
 
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     public let kind: Kind
     public let text: String
-    @State private var dim = false
 
     public init(_ kind: Kind, _ text: String) {
         self.kind = kind
@@ -53,17 +51,34 @@ public struct StatusLine: View {
 
     public var body: some View {
         HStack(spacing: Space.xs) {
-            if kind == .live {
-                Circle().fill(Ink.onTime).frame(width: 8, height: 8)
-                    .opacity(dim ? 0.35 : 1)
-                    .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: dim)
-                    .onAppear { if !reduceMotion { dim = true } }
-                    .accessibilityHidden(true)
-            }
+            if kind == .live { LiveDot() }
             Text(text).lineLimit(2)
         }
         .clack(.chip)
         .foregroundStyle(ink)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// The live dot: 8 pt in the on-time colour, its opacity breathing with the clock (a 1.8 s cycle). Only the opacity
+/// changes: there is no animation in the view tree, so a parent that moves or resizes the line (a header redrawn every
+/// second, a countdown that turns into a status) never carries the dot along with it (build 86: the dot bounced up
+/// and down when a repeating animation picked up a layout change). Steady with Reduce Motion.
+struct LiveDot: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: reduceMotion)) { context in
+            Circle().fill(Ink.onTime).frame(width: 8, height: 8)
+                .opacity(reduceMotion ? 1 : Self.opacity(at: context.date.timeIntervalSinceReferenceDate))
+        }
+        .frame(width: 8, height: 8)
+        .accessibilityHidden(true)
+    }
+
+    /// From 1 down to 0.35 and back, eased (a cosine), once every 1.8 s.
+    static func opacity(at seconds: Double) -> Double {
+        let phase = seconds.truncatingRemainder(dividingBy: 1.8) / 1.8
+        return 0.675 + 0.325 * cos(phase * 2 * .pi)
     }
 }

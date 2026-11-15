@@ -78,6 +78,9 @@ export function recordedStops(db: Db, q: { trainNumber: string | null; serviceDa
       estimatedDep: null,
       platform: c.platform,
       canceled: Boolean(c.canceled_arr || c.canceled_dep),
+      // The two apart, as the record keeps them (actuals.ts makes the stop's flag by its role).
+      arrCanceled: Boolean(c.canceled_arr),
+      depCanceled: Boolean(c.canceled_dep),
       deviations: causes.map((x) => x.text).filter((t): t is string => !!t),
       causes,
       trvTrainNumber: c.source === 'trafikverket' ? c.run_id : null,

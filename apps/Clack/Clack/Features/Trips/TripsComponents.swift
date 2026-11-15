@@ -40,11 +40,15 @@ extension TripsLogic {
     }
 
     /// The countdown as a written status: its words and the kind of status they are (for the ink).
+    /// `partial`: how much of your part the train runs, when the caller has the stops (`Disruption.cancellation`); else
+    /// the leg's own. A train that runs only part of your way says so in place of the countdown (build 86).
     @MainActor
-    static func countdownStatus(_ l10n: L10n, _ leg: Leg, now: Double) -> (kind: StatusLine.Kind, text: String) {
+    static func countdownStatus(_ l10n: L10n, _ leg: Leg, now: Double, partial: PartialRun? = nil) -> (kind: StatusLine.Kind, text: String) {
         let dep = LiveRules.expectedDeparture(leg)
-        if leg.canceled || leg.live?.status == .cancelled { return (.cancelled, l10n.t("status.cancelled")) }
+        let run = partial ?? Disruption.cancellation(leg)
+        if LiveRules.statusKey(leg, live: leg.live, now: now, partial: run) == .cancelled { return (.cancelled, l10n.t("status.cancelled")) }
         if now >= arrivalOf(leg) { return (.arrived, l10n.t("trips.arrived")) }
+        if let text = partialStatus(l10n, leg, run, departed: leg.actualDep != nil || now >= dep) { return (.cancelled, text) }
         // The live state knows where the train is: on its way to your stop, at it, or yet to be 30 minutes from leaving.
         let fresh = leg.live.map { LiveRules.isFresh($0, now: now) } ?? false
         if fresh, let status = leg.live?.status {
@@ -59,6 +63,24 @@ extension TripsLogic {
         let h = (mins % 1440) / 60
         let m = mins % 60
         return (.upcoming, l10n.t("trips.departsIn", ["time": d > 0 ? "\(d)d \(h)h" : h > 0 ? "\(h)h \(m)m" : "\(m) min"]))
+    }
+}
+
+extension TripsLogic {
+    /// What a part-way train does to your trip, in one line (build 86): "Runs only to Lund C", "Starts from Lund C",
+    /// "Doesn't stop at Lund C" where it is only known to miss your stop, "No train Pieksämäki–Jyväskylä". Before you
+    /// leave, where it starts comes first. Nil when it runs all of your way, or none of it.
+    @MainActor
+    static func partialStatus(_ l10n: L10n, _ leg: Leg, _ run: PartialRun?, departed: Bool) -> String? {
+        guard let run, run.kind == .partial else { return nil }
+        let from = run.runsFrom.map { _ in
+            run.startsThere ? l10n.t("trips.startsFrom", ["station": run.runsFromName ?? ""]) : l10n.t("trips.skipsStop", ["station": leg.origin?.name ?? ""])
+        }
+        let to = run.runsTo.map { _ in
+            run.endsThere ? l10n.t("trips.runsOnlyTo", ["station": run.runsToName ?? ""]) : l10n.t("trips.skipsStop", ["station": leg.destination?.name ?? ""])
+        }
+        let gap = run.gaps.first.map { l10n.t("trips.noTrainBetween", ["from": $0.fromName ?? "", "to": $0.toName ?? ""]) }
+        return departed ? (to ?? gap ?? from) : (from ?? to ?? gap)
     }
 }
 

@@ -207,6 +207,12 @@ public nonisolated enum Progress {
     /// The live view of a leg from its ridden stops (board … alight), the route line and an optional GPS fix.
     /// Without fresh GPS the position is estimated: constant speed between the last stop left and the next one.
     public static func liveView(stops: [LiveStop], line: [LatLon], gps: GpsFix?, now: Double) -> LiveView {
+        // A train that runs only part of your way is followed on the part it runs, from the first stop it serves to the
+        // last (the stops' flags are per role, `Disruption.stopCanceled`); one that runs none of it is cancelled (build 86).
+        if let first = stops.firstIndex(where: { !$0.canceled }), let last = stops.lastIndex(where: { !$0.canceled }),
+           last > first, first > 0 || last < stops.count - 1 {
+            return liveView(stops: Array(stops[first...last]), line: line, gps: gps, now: now)
+        }
         let times = expectedTimes(stops)
         let board = stops[0]
         let alight = stops[stops.count - 1]

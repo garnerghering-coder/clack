@@ -1,4 +1,4 @@
-// What the alerts say, in the two languages the app has. The phone isn't running when an alert is made, so the words
+// What the alerts say, in English and Swedish (the app's other languages read English here until written). The phone isn't running when an alert is made, so the words
 // are made here (the app's own strings live in its i18n files; these are only the notification texts). In English a
 // platform is a name, "Platform 5", capitalised as on the app's cards and boards; in Swedish "spår 5" stays lower case
 // inside a sentence, as Trafikverket writes it.
@@ -6,7 +6,8 @@ import type { Language } from '@clack/shared';
 
 type Params = Record<string, string | number>;
 
-const TEXT: Record<Language, Record<string, string>> = {
+// Only English and Swedish are written so far; every other language reads English (`t`) until it is.
+const TEXT: Partial<Record<Language, Record<string, string>>> & { en: Record<string, string> } = {
   en: {
     route: '{from} → {to}',
     reminderPlatform: 'Leaves {time} from Platform {platform}.',
@@ -21,6 +22,10 @@ const TEXT: Record<Language, Record<string, string>> = {
     cancelledTitle: 'Cancelled: {from} → {to}',
     cancelled: 'This train is cancelled. Check the operator for other trains or replacement buses.',
     shortTurned: 'Some stops on this train are cancelled. Open Clack for the details.',
+    runsOnlyTo: 'Runs only to {station} today, not to {to}. Open Clack for ways on from there.',
+    startsFrom: 'Starts from {station} today, not from {from}. Open Clack for ways to get there.',
+    skipsAlightPush: 'Won’t stop at {to} today. The last stop before it is {station}.',
+    skipsBoardPush: 'Won’t stop at {from} today. The first stop on your way is {station}.',
     getOff: 'Get off at {station} in about {min} min.',
     changeTitle: 'Change at {station}',
     changeBoth: 'Arrive on Platform {a}, leave from Platform {b}. {spare} min to spare.',
@@ -64,6 +69,10 @@ const TEXT: Record<Language, Record<string, string>> = {
     cancelledTitle: 'Inställt: {from} → {to}',
     cancelled: 'Tåget är inställt. Kolla med operatören efter andra tåg eller ersättningsbussar.',
     shortTurned: 'Några stopp på tåget är inställda. Öppna Clack för detaljer.',
+    runsOnlyTo: 'Går bara till {station} i dag, inte till {to}. Öppna Clack för hur du kommer vidare.',
+    startsFrom: 'Börjar i {station} i dag, inte i {from}. Öppna Clack för hur du tar dig dit.',
+    skipsAlightPush: 'Stannar inte i {to} i dag. Sista stoppet före är {station}.',
+    skipsBoardPush: 'Stannar inte i {from} i dag. Första stoppet på din väg är {station}.',
     getOff: 'Kliv av i {station} om cirka {min} min.',
     changeTitle: 'Byte i {station}',
     changeBoth: 'Kom på spår {a}, fortsätt från spår {b}. {spare} min till godo.',

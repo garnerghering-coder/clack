@@ -79,7 +79,11 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
       estimatedArr: reported && past(r.arrLive) ? null : r.arrLive,
       estimatedDep: reported && past(r.depLive) ? null : r.depLive,
       platform: r.depPlatform ?? r.arrPlatform,
-      canceled: j.cancelled || r.arrCancelled || r.depCancelled,
+      // Arrival and departure apart (actuals.ts makes the stop's flag by its role on your trip): where the train turns
+      // back only the departure is cancelled, and that station is still served.
+      canceled: callCanceled(j.cancelled, r),
+      arrCanceled: j.cancelled || r.arrCancelled,
+      depCanceled: j.cancelled || r.depCancelled,
       deviations: deviationTexts(causes),
       causes: addCauses([], causes),
       trvTrainNumber: null,
@@ -89,6 +93,16 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
     });
   }
   return out;
+}
+
+/**
+ * The train doesn't call at this stop: the whole train is cancelled, or each of the stop's arrival and departure that
+ * exists is. A station where it turns back (arrival kept) or starts later (departure kept) is still served.
+ */
+export function callCanceled(whole: boolean, s: { arrPlanned: number | null; depPlanned: number | null; arrCancelled: boolean; depCancelled: boolean }): boolean {
+  if (whole) return true;
+  const parts = [s.arrPlanned !== null ? s.arrCancelled : null, s.depPlanned !== null ? s.depCancelled : null].filter((x): x is boolean => x !== null);
+  return parts.length > 0 && parts.every(Boolean);
 }
 
 /** How old a remembered stop list may be when Rejseplanen can't answer now. */
@@ -151,7 +165,7 @@ export async function journeyStopsView(db: Db, jid: string, opts: { now?: number
       estimatedArr: actualArr === null ? s.arrLive : null,
       estimatedDep: actualDep === null ? s.depLive : null,
       platform: s.depPlatform ?? s.arrPlatform,
-      canceled: j.cancelled || s.arrCancelled || s.depCancelled,
+      canceled: callCanceled(j.cancelled, s),
       passed: Boolean(last ? actualArr : actualDep) || ((last ? (s.arrLive ?? s.arrPlanned) : (s.depLive ?? s.depPlanned)) ?? Infinity) + 2 * 60_000 < now,
       source: 'rejseplanen',
       causes,

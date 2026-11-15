@@ -49,7 +49,10 @@ struct JourneyNowSection: View {
             VStack(alignment: .leading, spacing: Space.m) {
                 Text(l10n.t("journey.now")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.kind) {
-                    if TripDetailLogic.isTracking(shown), let shown {
+                    // A train that runs only part of your way says where, in place of "Live" (build 86).
+                    if let part = TripsLogic.partialStatus(l10n, l, Disruption.cancellation(detail), departed: shown?.status == .enRoute || shown?.status == .atStop || l.actualDep != nil) {
+                        StatusLine(.cancelled, part)
+                    } else if TripDetailLogic.isTracking(shown), let shown {
                         LiveStatus(live: shown, now: now)
                     }
                 }
@@ -78,10 +81,12 @@ struct JourneyNowSection: View {
                 LiveModule(leg: l, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
             }
         } else {
-            let status = TripsLogic.countdownStatus(l10n, l, now: now)
+            let run = Disruption.cancellation(detail)
+            let status = TripsLogic.countdownStatus(l10n, l, now: now, partial: run)
             let platform = l.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) } ?? l10n.t("detail.platformLater")
             StatusCard(kind: status.kind, text: status.text) {
-                if !l.canceled {
+                // The platform where you get on, while the train still leaves from there.
+                if !Disruption.fullyCanceled(l, partial: run), run?.runsFrom == nil {
                     Text(platform).clack(.body).foregroundStyle(Ink.text2)
                     if l.depDelayMin != nil { DelayText(delay: l.depDelayMin) }
                 }

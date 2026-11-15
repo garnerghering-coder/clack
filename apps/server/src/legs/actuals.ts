@@ -3,7 +3,7 @@
 // Norwegian stops come from Entur, Finnish trains from Digitraffic (by station and scheduled minute, one train per
 // number and day).
 import { and, eq, gt, lt, ne, sql } from 'drizzle-orm';
-import { delayMinutes, type DelayCause } from '@clack/shared';
+import { cancellationOf, delayMinutes, stopCanceled, type DelayCause } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations, timetableTrips } from '../db/schema.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
@@ -102,7 +102,15 @@ export interface StopActuals {
   platform: string | null;
   /** Finland's stop sector for the train at this stop, when the feed gives one. */
   stopSector?: string | null;
+  /**
+   * Whether the train calls here, as stored: by the stop's role (`stopCanceled`): where you get on, its departure is
+   * cancelled; where you get off, its arrival; elsewhere the whole call. A source may give it merged (either one);
+   * actuals.ts makes it per role from the two below when a source gives them.
+   */
   canceled: boolean;
+  /** The arrival and the departure cancelled, apart, when the source says which (undefined: not said). */
+  arrCanceled?: boolean;
+  depCanceled?: boolean;
   deviations: string[];
   /** The same notices with their source's codes (data/delay_causes.json), for showing them in the app's language. */
   causes?: DelayCause[];
@@ -130,6 +138,26 @@ export function eventsFor(stops: StopForMatch[]): { seq: number; sig: string; ac
     if ((s.role === 'board' || s.role === 'through') && s.schedDep !== null) out.push({ seq: s.seq, sig: s.sig, activity: 'Avgang', at: s.schedDep });
   }
   return out;
+}
+
+/** A source's arrival and departure cancellation (null: not said); a source that gives one flag means both. */
+export function directions(x: StopActuals): { arr: boolean | null; dep: boolean | null } {
+  if (x.arrCanceled !== undefined || x.depCanceled !== undefined) return { arr: x.arrCanceled ?? null, dep: x.depCanceled ?? null };
+  return { arr: x.canceled, dep: x.canceled };
+}
+
+/** Adds what another source says about the stop's cancellations to `have` (either saying cancelled wins). */
+export function mergeCanceled(have: StopActuals, other: StopActuals) {
+  const a = directions(have);
+  const b = directions(other);
+  const or = (x: boolean | null, y: boolean | null) => (x === true || y === true ? true : x === false || y === false ? false : null);
+  const arr = or(a.arr, b.arr);
+  const dep = or(a.dep, b.dep);
+  have.canceled ||= other.canceled;
+  if (arr !== null) have.arrCanceled = arr;
+  else delete have.arrCanceled;
+  if (dep !== null) have.depCanceled = dep;
+  else delete have.depCanceled;
 }
 
 /** Pick the Trafikverket rows that belong to this leg and turn them into per-stop actuals. Pure, for tests. */
@@ -173,6 +201,8 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     // Departure platform wins (it's the one you board at); otherwise the arrival platform.
     if (row.TrackAtLocation && row.TrackAtLocation !== 'x' && (e.activity === 'Avgang' || !a.platform)) a.platform = row.TrackAtLocation;
     a.canceled ||= Boolean(row.Canceled);
+    if (e.activity === 'Ankomst') a.arrCanceled = (a.arrCanceled ?? false) || Boolean(row.Canceled);
+    else a.depCanceled = (a.depCanceled ?? false) || Boolean(row.Canceled);
     for (const d of row.Deviation ?? []) if (!a.deviations.includes(d.Description)) a.deviations.push(d.Description);
     a.causes = addCauses(a.causes ?? [], trvCauses(row.Deviation));
     a.trvTrainNumber ??= row.AdvertisedTrainIdent;
@@ -269,7 +299,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       have.actualArr ??= e.actualArr;
       have.actualDep ??= e.actualDep;
       have.platform ??= e.platform;
-      have.canceled ||= e.canceled;
+      mergeCanceled(have, e);
       have.causes = addCauses(have.causes ?? [], e.causes ?? []);
       for (const t of deviationTexts(e.causes ?? [])) if (!have.deviations.includes(t)) have.deviations.push(t);
     }
@@ -293,7 +323,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       have.estimatedArr ??= e.estimatedArr;
       have.estimatedDep ??= e.estimatedDep;
       have.platform ??= e.platform;
-      have.canceled ||= e.canceled;
+      mergeCanceled(have, e);
       have.causes = addCauses(have.causes ?? [], e.causes ?? []);
     }
   }
@@ -307,7 +337,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       have.actualArr ??= r.actualArr;
       have.actualDep ??= r.actualDep;
       have.platform ??= r.platform;
-      have.canceled ||= r.canceled;
+      mergeCanceled(have, r);
       have.causes = addCauses(have.causes ?? [], r.causes ?? []);
       for (const t of r.deviations) if (!have.deviations.includes(t)) have.deviations.push(t);
     }
@@ -340,6 +370,10 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
     if (arrT !== s.schedArr || depT !== s.schedDep) adjusted.set(s.seq, { arr: arrT, dep: depT });
   }
   for (const [seq, t] of adjusted) Object.assign(stops.find((s) => s.seq === seq)!, { schedArr: t.arr, schedDep: t.dep });
+
+  // Each stop's cancellation by its role, and how much of your part the train runs: only none of it is a cancelled trip.
+  const run = cancellationFor(stops, matched);
+  const nameOf = (id: string | null) => (id ? (db.select({ name: stations.name }).from(stations).where(eq(stations.id, id)).get()?.name ?? null) : null);
 
   const ridden = stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
   const board = stops.find((s) => s.role === 'board');
@@ -410,6 +444,9 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
           // Kept once known: the record and the other sources don't carry it, and mustn't clear it.
           ...(m.stopSector ? { stopSector: m.stopSector } : {}),
           canceled: m.canceled,
+          // The two apart, as the sources said them (null: not said), so the app can tell a turning station.
+          arrCanceled: directions(m).arr,
+          depCanceled: directions(m).dep,
           deviations: m.deviations,
           causes: JSON.stringify(m.causes ?? []),
           trvTrainNumber: m.trvTrainNumber,
@@ -438,7 +475,10 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         arrDelayMin: delayMinutes(alight?.schedArr, actualArr),
         depPlatform: b?.platform ?? (board ? planned.get(board.seq) : undefined) ?? null,
         arrPlatform: a?.platform ?? (alight ? planned.get(alight.seq) : undefined) ?? null,
-        canceled: Boolean(b?.canceled || a?.canceled),
+        // Only a train that runs none of your part is cancelled; one that runs some of it shows that on its stops.
+        canceled: run?.kind === 'full',
+        // With the stations' names, for the lists (they have no stops).
+        cancellation: run ? { ...run, runsFromName: nameOf(run.runsFrom), runsToName: nameOf(run.runsTo), gaps: run.gaps.map((g) => ({ ...g, fromName: nameOf(g.from), toName: nameOf(g.to) })) } : null,
         trvTrainNumbers: [...new Set([...matched.values()].map((m) => m.trvTrainNumber).filter((n): n is string => !!n))],
         borderEvidence: borderEvidence.board || borderEvidence.alight ? borderEvidence : null,
         // Norway's published times for the stops you got on or off at, when they differ from our timetable.
@@ -452,6 +492,31 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   });
   updateRides(db, { legId, now });
   return dataQuality;
+}
+
+/**
+ * Makes each found stop's `canceled` flag per role from what the sources said about its arrival and departure (build
+ * 86): a station where the train turns back keeps its arrival and isn't cancelled; where you get on only the departure
+ * counts, where you get off only the arrival. Then how much of your part the train runs (the shared `cancellationOf`,
+ * which the app runs on the same stops). Pure but for the flags it sets, for tests.
+ */
+export function cancellationFor(
+  stops: { seq: number; stationId: string; role: string; schedArr: number | null; schedDep: number | null }[],
+  matched: Map<number, StopActuals>,
+) {
+  for (const s of stops) {
+    const m = matched.get(s.seq);
+    if (!m) continue;
+    const d = directions(m);
+    m.canceled = stopCanceled(s.role, s.schedArr === null && s.role !== 'alight' ? null : d.arr, s.schedDep === null && s.role !== 'board' ? null : d.dep);
+  }
+  return cancellationOf(
+    stops.map((s) => {
+      const m = matched.get(s.seq);
+      const d = m ? directions(m) : { arr: null, dep: null };
+      return { stationId: s.stationId, role: s.role, canceled: m?.canceled ?? false, arrCanceled: d.arr, depCanceled: d.dep };
+    }),
+  );
 }
 
 /**

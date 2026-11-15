@@ -82,11 +82,17 @@ function rowFor(rows: DtRow[], used: Set<DtRow>, fi: string, type: DtRow['type']
 export function digitrafficStops(stops: StopForDt[], train: DtTrain, now = Date.now()): Map<number, StopActuals> {
   const out = new Map<number, StopActuals>();
   const used = new Set<DtRow>();
-  for (const s of stops) {
+  const boardAt = stops.findIndex((s) => s.role === 'board');
+  const alightAt = stops.findIndex((s) => s.role === 'alight');
+  for (const [i, s] of stops.entries()) {
     if (!s.fi) continue;
-    const want: { type: DtRow['type']; sched: number }[] = [];
+    const want: { type: DtRow['type']; sched: number; flagOnly?: true }[] = [];
     if ((s.role === 'through' || s.role === 'alight') && s.schedArr !== null) want.push({ type: 'ARRIVAL', sched: s.schedArr });
     if ((s.role === 'board' || s.role === 'through') && s.schedDep !== null) want.push({ type: 'DEPARTURE', sched: s.schedDep });
+    // For whether they are cancelled only (build 86): the other half of where you get on and off, the departure from
+    // the stop before yours and the arrival at the one after. They tell where a part-way train starts or ends.
+    if ((s.role === 'board' || (s.role === 'after' && i === alightAt + 1)) && s.schedArr !== null) want.push({ type: 'ARRIVAL', sched: s.schedArr, flagOnly: true });
+    if ((s.role === 'alight' || (s.role === 'before' && i === boardAt - 1)) && s.schedDep !== null) want.push({ type: 'DEPARTURE', sched: s.schedDep, flagOnly: true });
     for (const w of want) {
       const row = rowFor(train.timeTableRows, used, s.fi, w.type, w.sched);
       if (!row) continue;
@@ -94,6 +100,11 @@ export function digitrafficStops(stops: StopForDt[], train: DtTrain, now = Date.
       const a =
         out.get(s.seq) ??
         out.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, stopSector: null, canceled: false, deviations: [], causes: [], trvTrainNumber: null, composition: null, onboard: null, source: 'digitraffic' }).get(s.seq)!;
+      if (w.flagOnly) {
+        if (w.type === 'ARRIVAL') a.arrCanceled = Boolean(row.cancelled || train.cancelled);
+        else a.depCanceled = Boolean(row.cancelled || train.cancelled);
+        continue;
+      }
       // An "actual" time that is still ahead of us is an estimate (the sanity rules in actuals.ts hold it back too).
       const actual = time(row.actualTime);
       const estimate = time(row.liveEstimateTime);
@@ -111,6 +122,10 @@ export function digitrafficStops(stops: StopForDt[], train: DtTrain, now = Date.
       const sector = row.stopSector?.trim();
       if (sector && (w.type === 'DEPARTURE' || !a.stopSector)) a.stopSector = sector;
       a.canceled ||= Boolean(row.cancelled || train.cancelled);
+      // The arrival and the departure apart (actuals.ts makes the stop's flag by its role): where the train turns back
+      // only the departure row is cancelled.
+      if (w.type === 'ARRIVAL') a.arrCanceled = Boolean(row.cancelled || train.cancelled);
+      else a.depCanceled = Boolean(row.cancelled || train.cancelled);
       a.causes = a.causes ?? [];
       for (const c of digitrafficCauses(row.causes)) if (!a.causes.some((x) => x.code === c.code)) a.causes.push(c);
       a.deviations = deviationTexts(a.causes);

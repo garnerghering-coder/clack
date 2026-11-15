@@ -301,7 +301,11 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     /// Whether the platform came from a source (only one that didn't may be typed in). Nil from an older server.
     public var depPlatformFromSource: Bool? = nil
     public var arrPlatformFromSource: Bool? = nil
+    /// The train runs none of your part of the route (build 86: only then; a train that runs some of it is not).
     public let canceled: Bool
+    /// How much of your part a partly cancelled train still runs (server `cancellationOf`); nil when it runs all of
+    /// it, and from older servers (the stops say it then: `Disruption.cancellation(of:)`).
+    public var cancellation: PartialRun? = nil
     /// Metres, along the track once routed.
     public let distanceM: Double?
     public let isEstimatedGeometry: Bool
@@ -437,7 +441,12 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
     public let platform: String?
     /// Finland: where the train stops along the platform ("B4"), as Digitraffic gives it; nil elsewhere and from older servers.
     public var stopSector: String? = nil
+    /// The train doesn't call here for you, by the stop's role (build 86): where you get on, its departure is cancelled;
+    /// where you get off, its arrival; anywhere else the whole call. A station where it turns back is not cancelled.
     public let canceled: Bool
+    /// The arrival and the departure apart, when the feed says which; nil from older servers (then `canceled` stands).
+    public var arrCanceled: Bool? = nil
+    public var depCanceled: Bool? = nil
     /// Trafikverket's Swedish deviation texts (older servers send only these).
     public let deviations: [String]
     /// The same notices with their source's codes, to show in the app's language; nil from older servers.
@@ -537,6 +546,13 @@ public nonisolated struct LegEventPayload: Codable, Hashable, Sendable {
     public var to: String?
     /// `short_turned`: the stations it no longer reaches.
     public var stationIds: [String]?
+    /// `short_turned` (build 86): where it now starts or ends on your part, when it doesn't run all of it.
+    public var runsFrom: String? = nil
+    public var runsFromName: String? = nil
+    public var startsThere: Bool? = nil
+    public var runsTo: String? = nil
+    public var runsToName: String? = nil
+    public var endsThere: Bool? = nil
     /// `departed` and `arrived`: when.
     public var at: Instant?
 
@@ -548,6 +564,71 @@ public nonisolated struct LegEventPayload: Codable, Hashable, Sendable {
         self.to = to
         self.stationIds = stationIds
         self.at = at
+    }
+}
+
+/// A train that runs only part of your way (`packages/shared/src/disruption.ts` `PartialRun`): from the stops' arrival
+/// and departure cancellations. Station ids, with their names where the server sends them.
+public nonisolated struct PartialRun: Codable, Hashable, Sendable {
+    public enum Kind: String, Codable, Sendable {
+        /// It runs none of your part.
+        case full
+        /// It runs some of it.
+        case partial
+    }
+
+    /// A stretch of your part with no train: it stops at `from` and runs again from `to`.
+    public struct Gap: Codable, Hashable, Sendable {
+        public var from: String
+        public var to: String
+        public var fromName: String?
+        public var toName: String?
+
+        public init(from: String, to: String, fromName: String? = nil, toName: String? = nil) {
+            self.from = from
+            self.to = to
+            self.fromName = fromName
+            self.toName = toName
+        }
+    }
+
+    public var kind: Kind
+    /// The first stop of your part it leaves from, when that isn't where you get on.
+    public var runsFrom: String?
+    public var runsFromName: String?
+    /// The last stop of your part it arrives at, when that isn't where you get off.
+    public var runsTo: String?
+    public var runsToName: String?
+    /// Known to start at `runsFrom` (where you get on is its first stop, or the stop before is cancelled too); else it
+    /// may only skip your stop.
+    public var startsThere: Bool
+    /// Known to end at `runsTo`; else it may only skip where you get off.
+    public var endsThere: Bool
+    public var gaps: [Gap]
+
+    public init(kind: Kind, runsFrom: String? = nil, runsFromName: String? = nil, runsTo: String? = nil, runsToName: String? = nil, startsThere: Bool = false, endsThere: Bool = false, gaps: [Gap] = []) {
+        self.kind = kind
+        self.runsFrom = runsFrom
+        self.runsFromName = runsFromName
+        self.runsTo = runsTo
+        self.runsToName = runsToName
+        self.startsThere = startsThere
+        self.endsThere = endsThere
+        self.gaps = gaps
+    }
+
+    enum CodingKeys: String, CodingKey { case kind, runsFrom, runsFromName, runsTo, runsToName, startsThere, endsThere, gaps }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        kind = (try? c.decode(Kind.self, forKey: .kind)) ?? .partial
+        runsFrom = try c.decodeIfPresent(String.self, forKey: .runsFrom)
+        runsFromName = try c.decodeIfPresent(String.self, forKey: .runsFromName)
+        runsTo = try c.decodeIfPresent(String.self, forKey: .runsTo)
+        runsToName = try c.decodeIfPresent(String.self, forKey: .runsToName)
+        startsThere = try c.decodeIfPresent(Bool.self, forKey: .startsThere) ?? false
+        endsThere = try c.decodeIfPresent(Bool.self, forKey: .endsThere) ?? false
+        gaps = try c.decodeIfPresent([Gap].self, forKey: .gaps) ?? []
     }
 }
 

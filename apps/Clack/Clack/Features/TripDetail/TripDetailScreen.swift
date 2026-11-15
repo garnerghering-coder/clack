@@ -58,6 +58,8 @@ struct TripDetailScreen: View {
     @State private var editingManual = false
     /// A field that got the keyboard, to be scrolled into the middle of what the keyboard leaves visible.
     @State private var focusTarget: String?
+    /// Where the stop rail last drew the train, so it only moves forward (`TripDetailLogic.steadyTrain`).
+    @State private var trainHold = TripDetailLogic.TrainHold()
 
     var body: some View {
         GeometryReader { proxy in
@@ -194,10 +196,11 @@ struct TripDetailScreen: View {
         for await update in app.live.updates() {
             guard update.legId == id else { continue }
             live = update.live
-            let wasCanceled = leg?.leg.canceled
+            let wasCanceled = leg.map(Disruption.cancellation)
             await load()
-            // The trip on screen has just been cancelled: one warning haptic, on the change only (polish pass 1).
-            if wasCanceled == false, leg?.leg.canceled == true { canceledNow += 1 }
+            // The trip on screen has just been cancelled, wholly or for part of the way: one warning haptic, on the
+            // change only (polish pass 1).
+            if let was = wasCanceled, let now = leg.map(Disruption.cancellation), was?.kind != now?.kind, now != nil { canceledNow += 1 }
             if let shown = update.events.first(where: { $0.type != .departed }), let leg {
                 let stops = leg.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }
                 let text = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops)
@@ -381,14 +384,17 @@ struct TripDetailScreen: View {
         var tracking: Bool
         var stage: TripDetailLogic.Stage
         var status: LiveRules.TripStatus
+        /// How much of your part the train runs, from its stops (nil: all of it).
+        var run: PartialRun?
     }
 
     private func moment(_ detail: LegDetail, now: Double) -> Moment {
         let shown = TripDetailLogic.shown(detail, live: live, now: now, offline: app.isOffline)
+        let run = Disruption.cancellation(detail)
         return Moment(
             shown: shown, tracking: TripDetailLogic.isTracking(shown),
             stage: TripDetailLogic.stage(detail.leg, live: shown, shown: shown, now: now),
-            status: LiveRules.statusKey(detail.leg, live: live, now: now)
+            status: LiveRules.statusKey(detail.leg, live: live, now: now, partial: run), run: run
         )
     }
 
@@ -502,7 +508,11 @@ struct TripDetailScreen: View {
         return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.kind) {
             // Before and during the ride the status card below says the status in big type; the header doesn't say
             // it again (polish pass 1: "Upcoming" over "Departs in 5d 8h", "Live" over "Arrives 10:55").
-            if m.stage == .after || l.canceled {
+            let departed = m.stage != .before
+            if m.stage != .after, let part = TripsLogic.partialStatus(l10n, l, m.run, departed: departed) {
+                // A train that runs only part of your way: where it runs to or from, at every stage before the end.
+                StatusLine(.cancelled, part)
+            } else if m.stage == .after || status == .cancelled {
                 if tracking, let live {
                     LiveStatus(live: live, now: now)
                 } else {
@@ -532,7 +542,8 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let board = detail.stops.first { $0.role == .board }
         let derived = l.depDelayMin ?? (tracking ? Delay.minutes(advertised: l.schedDep?.ms, actual: board?.estimatedDep?.ms) : nil)
-        let status = TripsLogic.countdownStatus(l10n, l, now: now)
+        let status = TripsLogic.countdownStatus(l10n, l, now: now, partial: m.run)
+        let leaves = !Disruption.fullyCanceled(l, partial: m.run) && m.run?.runsFrom == nil
         // Finland's feed says where along the platform the train stops ("sector B4"): said with the platform, as given.
         let platform = l.depPlatform.map { p in
             board?.stopSector.map { l10n.t("trips.platformSector", ["platform": p, "sector": $0]) } ?? l10n.t("trips.platform", ["platform": p])
@@ -540,7 +551,8 @@ struct TripDetailScreen: View {
         VStack(alignment: .leading, spacing: Space.s) {
             // One status card: the status word big in its ink, then the platform and the delay, under a rule in the same ink.
             StatusCard(kind: status.kind, text: status.text) {
-                if !l.canceled {
+                // The platform where you get on, while the train still leaves from there.
+                if leaves {
                     Text(platform).clack(.body).foregroundStyle(Ink.text2)
                     if derived != nil { DelayText(delay: derived) }
                 }
@@ -596,22 +608,27 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let dtz = l.destination?.tz ?? "Europe/Stockholm"
         let arrived = l.actualArr?.ms
+        let run = Disruption.cancellation(detail)
+        let canceled = Disruption.fullyCanceled(l, partial: run)
+        // Where it ran to, when it ended before your stop.
+        let partial = TripsLogic.partialStatus(l10n, l, run, departed: true)
         Card {
             // Just arrived: welcome first.
-            if !l.canceled, let at = arrived ?? l.schedArr?.ms, Date.now.timeIntervalSince1970 * 1000 - at < 60 * 60_000 {
+            if !canceled, arrived != nil || run?.runsTo == nil, let at = arrived ?? l.schedArr?.ms, Date.now.timeIntervalSince1970 * 1000 - at < 60 * 60_000 {
                 Text(l10n.t("progress.welcome", ["station": l.destination?.name ?? ""])).clack(.welcomeTitle).foregroundStyle(Ink.text)
             }
             // "Arrived 10:55" and the delay beside it.
             HStack(alignment: .firstTextBaseline, spacing: Space.s) {
                 Text(
-                    l.canceled ? l10n.t("status.cancelled")
+                    canceled ? l10n.t("status.cancelled")
+                        : arrived == nil && run?.runsTo != nil ? (partial ?? l10n.t("status.cancelled"))
                         : arrived != nil ? l10n.t("trips.arrivedAt", ["time": Format.time(arrived, tz: dtz, clock: app.settings.clock)])
                         : l10n.t("detail.scheduledArrival", ["time": Format.time(l.schedArr?.ms, tz: dtz, clock: app.settings.clock)])
                 )
                 .clack(.headline).foregroundStyle(Ink.text)
-                if !l.canceled, arrived != nil { DelayText(delay: l.arrDelayMin) }
+                if !canceled, arrived != nil { DelayText(delay: l.arrDelayMin) }
             }
-            if !l.canceled {
+            if !canceled, arrived != nil || run?.runsTo == nil {
                 Text(explanationText(arrived == nil ? nil : l.arrDelayMin)).clack(.caption).foregroundStyle(Ink.text2)
             }
             ride(l)
@@ -667,18 +684,21 @@ struct TripDetailScreen: View {
         let extraDays = (schedDep != nil && schedArr != nil) ? Format.dayOffset(from: schedDep!, fromTz: tz, to: schedArr!, toTz: dtz) : 0
         // Side by side, or one under the other at accessibility text sizes, where two don't fit (user test
         // 2026-11-07, xxxLarge: "DEPARTU…" and the flap digits cut).
+        // A train that runs only part of your way: only the end it doesn't serve is struck through (build 86).
+        let run = Disruption.cancellation(detail)
+        let canceled = Disruption.fullyCanceled(l, partial: run)
         let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: Space.m)) : AnyLayout(HStackLayout(alignment: .top, spacing: Space.m))
         return layout {
             TimeBlock(
                 label: l10n.t("detail.departure"), sched: schedDep, actual: l.actualDep?.ms ?? (tracking ? board?.estimatedDep?.ms : nil),
                 tz: tz, platform: l.depPlatform,
                 delay: l.depDelayMin ?? (tracking ? Delay.minutes(advertised: schedDep, actual: board?.estimatedDep?.ms) : nil),
-                canceled: l.canceled, onSetPlatform: platformAction(.dep, l)
+                canceled: canceled || run?.runsFrom != nil, onSetPlatform: platformAction(.dep, l)
             )
             TimeBlock(
                 label: l10n.t("detail.arrival"), sched: schedArr, actual: l.actualArr?.ms ?? (tracking ? live?.arrivalEta?.ms : nil),
                 tz: dtz, platform: l.arrPlatform, delay: l.arrDelayMin ?? (tracking ? live?.arrivalDelayMin : nil),
-                canceled: l.canceled, extraDays: extraDays, onSetPlatform: platformAction(.arr, l)
+                canceled: canceled || run?.runsTo != nil, extraDays: extraDays, onSetPlatform: platformAction(.arr, l)
             )
         }
     }
@@ -699,7 +719,7 @@ struct TripDetailScreen: View {
         let shown = m.shown, stage = m.stage
         let stops = TripDetailLogic.timelineStops(detail.stops, stage: stage, shown: shown, fullRoute: fullRoute)
         // How far along the line the train is, so the rail shows it between the stops too.
-        let fills = TripDetailLogic.segmentFills(stops: stops, route: routeGeo(detail).route, shown: shown, stage: stage, now: now)
+        let fills = TripDetailLogic.segmentFills(stops: stops, route: routeGeo(detail).route, shown: shown, stage: stage, now: now, hold: trainHold, key: detail.id)
         let halves = TripDetailLogic.railHalves(stops: stops, fills: fills, showTrain: stage == .during)
         let hasHidden = fullRoute || stops.count < detail.stops.count
         return Card {
@@ -707,7 +727,7 @@ struct TripDetailScreen: View {
             VStack(spacing: 0) {
                 ForEach(Array(stops.enumerated()), id: \.element.id) { i, stop in
                     LegStopRow(
-                        stop: stop, color: color, tense: TripDetailLogic.tense(of: stop, shown: shown, stage: stage),
+                        stop: stop, color: color, tense: TripDetailLogic.tense(of: stop, shown: shown, stage: stage), run: m.run,
                         above: halves[i].above, below: halves[i].below,
                         onSetPlatform: stop.role == .board ? platformAction(.dep, detail.leg) : stop.role == .alight ? platformAction(.arr, detail.leg) : nil
                     )
@@ -975,6 +995,8 @@ struct LegStopRow: View {
     let stop: LegStop
     let color: Color
     var tense = TripDetailLogic.StopTense.past
+    /// How much of your part the train runs: says where it ends, starts, or stops for a stretch.
+    var run: PartialRun?
     var above = TripDetailLogic.RailHalf()
     var below = TripDetailLogic.RailHalf()
     var onSetPlatform: (() -> Void)?
@@ -989,6 +1011,12 @@ struct LegStopRow: View {
         var notes: [StopRow.Note] = []
         if stop.role == .board { notes.append(.init(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn"), .accent)) }
         if stop.role == .alight { notes.append(.init(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff"), .accent)) }
+        if let run, ridden {
+            if run.runsTo == stop.stationId { notes.append(.init(l10n.t("detail.trainEndsHere"), .warning)) }
+            if run.runsFrom == stop.stationId { notes.append(.init(l10n.t("detail.trainStartsHere"), .warning)) }
+            for gap in run.gaps where gap.from == stop.stationId { notes.append(.init(l10n.t("detail.noTrainOnTo", ["station": gap.toName ?? ""]), .warning)) }
+            for gap in run.gaps where gap.to == stop.stationId { notes.append(.init(l10n.t("detail.trainAgainHere"), .warning)) }
+        }
         if ridden && stop.reportSource == nil { notes.append(.init(l10n.t("detail.noLiveData"))) }
         if !causes.isEmpty { notes.append(.init(Format.join(causes))) }
         let end = stop.role == .board || stop.role == .alight

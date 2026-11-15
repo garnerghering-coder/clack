@@ -25,6 +25,11 @@ describe('departure reminder', () => {
     const a = reminder(facts({ expDep: T('13:50'), delayMin: 18 }), prefs, T('12:55'), 'sv')!;
     expect(a.body).toBe('Avgår 13:50 (18 min försenat) från spår 5.');
   });
+  it('speaks English in a language whose alerts are not written yet', () => {
+    for (const lang of ['da', 'nb', 'fi', 'de', 'pl', 'fr'] as const) {
+      expect(reminder(facts(), prefs, T('12:40'), lang)!.body, lang).toBe('Leaves 13:32 from Platform 5.');
+    }
+  });
   it('stays quiet when off, cancelled, departed, or about to leave', () => {
     expect(reminder(facts(), { ...prefs, notify: false }, T('13:00'), 'en')).toBeNull();
     expect(reminder(facts(), { ...prefs, notifyLeadMin: 0 }, T('13:00'), 'en')).toBeNull();

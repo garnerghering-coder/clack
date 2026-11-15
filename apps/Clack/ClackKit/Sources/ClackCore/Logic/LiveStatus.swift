@@ -41,8 +41,11 @@ public nonisolated enum LiveRules {
         return (leg.schedDep?.ms ?? 0) + Double(max(0, leg.depDelayMin ?? 0)) * 60_000
     }
 
-    public static func statusKey(_ leg: Leg, live: LiveStateRow?, now: Double) -> TripStatus {
-        if leg.canceled || live?.status == .cancelled { return .cancelled }
+    /// `partial`: how much of your part the train runs (`Disruption.cancellation`), when the caller has the stops; else
+    /// the leg's own. A train that runs some of your way is not cancelled: it is followed on the part it runs (build 86).
+    public static func statusKey(_ leg: Leg, live: LiveStateRow?, now: Double, partial: PartialRun? = nil) -> TripStatus {
+        let run = partial ?? Disruption.cancellation(leg)
+        if run?.kind == .full || (run?.kind != .partial && (leg.canceled || live?.status == .cancelled)) { return .cancelled }
         if let live, isFresh(live, now: now) {
             if live.status == .approaching { return .approaching }
             if live.status == .scheduled { return .planned }

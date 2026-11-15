@@ -142,7 +142,11 @@ struct JourneyTrainCard: View {
         VStack(alignment: .leading, spacing: Space.m) {
             HStack(alignment: .top) {
                 ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, category: leg.kind) {
-                    if let live = leg.live, LiveRules.isFresh(live, now: now), !TripsLogic.reached(leg, now: now).arrived {
+                    let reached = TripsLogic.reached(leg, now: now)
+                    // A train that runs only part of your way says where, in place of "Live" (build 86).
+                    if !reached.arrived, let part = TripsLogic.partialStatus(l10n, leg, Disruption.cancellation(leg), departed: reached.departed) {
+                        StatusLine(.cancelled, part)
+                    } else if let live = leg.live, LiveRules.isFresh(live, now: now), !reached.arrived {
                         LiveStatus(live: live, now: now)
                     } else {
                         let s = TripsLogic.countdownStatus(l10n, leg, now: now)

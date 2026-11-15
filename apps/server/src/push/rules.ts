@@ -91,7 +91,7 @@ export function fromEvents(f: TripFacts, events: { type: string; payload: Record
         if (p.notifyCancel) out.push({ kind: 'cancel', key: 'cancelled', title: t(lang, 'cancelledTitle', { from: f.from, to: f.to }), body: t(lang, 'cancelled'), timeSensitive: true });
         break;
       case 'short_turned':
-        if (p.notifyCancel && !f.canceled) out.push({ kind: 'cancel', key: `short:${[x.stationIds].flat().join(',')}`, title: route, body: t(lang, 'shortTurned'), timeSensitive: true });
+        if (p.notifyCancel && !f.canceled) out.push({ kind: 'cancel', key: `short:${[x.stationIds].flat().join(',')}`, title: route, body: partialLine(f, x, lang), timeSensitive: true });
         break;
       case 'arrived':
         if (p.notifyArrival && f.lastInJourney && !f.canceled)
@@ -100,6 +100,25 @@ export function fromEvents(f: TripFacts, events: { type: string; payload: Record
     }
   }
   return out;
+}
+
+/**
+ * What a part-way train does to your trip, from the short_turned event (build 86): "Runs only to X" or "Starts from X"
+ * where it ends or starts on your part, "Won't stop at ..." where it is only known to miss your stop, else the general
+ * line (stops in the middle cancelled). Never "cancelled" for a train that still runs some of your way.
+ */
+export function partialLine(f: Pick<TripFacts, 'from' | 'to'>, x: Record<string, unknown>, lang: Language): string {
+  const say = (key: string, params: Record<string, string>) => {
+    const s = t(lang, key, params);
+    // A server whose words for this aren't there yet says the general line rather than a key.
+    return s === key ? t(lang, 'shortTurned') : s;
+  };
+  const to = typeof x.runsToName === 'string' ? x.runsToName : null;
+  const from = typeof x.runsFromName === 'string' ? x.runsFromName : null;
+  const parts: string[] = [];
+  if (from) parts.push(say(x.startsThere ? 'startsFrom' : 'skipsBoardPush', { station: from, from: f.from }));
+  if (to) parts.push(say(x.endsThere ? 'runsOnlyTo' : 'skipsAlightPush', { station: to, to: f.to }));
+  return parts.length ? [...new Set(parts)].join(' ') : t(lang, 'shortTurned');
 }
 
 /** "Get off at X in about N min": the next stop is where you get off and it is at most ten minutes away. */

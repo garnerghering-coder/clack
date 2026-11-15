@@ -208,6 +208,8 @@ export const legs = sqliteTable(
     userDepPlatform: text('user_dep_platform'),
     userArrPlatform: text('user_arr_platform'),
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
+    /** How much of your part a partly cancelled train still runs (shared `cancellationOf`, with station names); null when all of it. */
+    cancellation: text('cancellation', { mode: 'json' }).$type<LegCancellation | null>(),
     distanceM: real('distance_m'),
     /** Encoded polyline of the whole leg. */
     geometry: text('geometry'),
@@ -243,6 +245,18 @@ export const legs = sqliteTable(
   (t) => [index('legs_user_dep').on(t.userId, t.schedDep)],
 );
 
+/** `legs.cancellation`: the shared PartialRun with the stations' names, for lists that have no stops. */
+export interface LegCancellation {
+  kind: 'full' | 'partial';
+  runsFrom: string | null;
+  runsFromName: string | null;
+  runsTo: string | null;
+  runsToName: string | null;
+  startsThere: boolean;
+  endsThere: boolean;
+  gaps: { from: string; to: string; fromName: string | null; toName: string | null }[];
+}
+
 export const legStops = sqliteTable(
   'leg_stops',
   {
@@ -259,7 +273,11 @@ export const legStops = sqliteTable(
     platform: text('platform'),
     /** Finland: the stop sector the feed gives for the train at this stop ("B1"; Digitraffic `stopSector`), as given. */
     stopSector: text('stop_sector'),
+    /** By the stop's role: where you get on, its departure is cancelled; where you get off, its arrival; else the whole call. */
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
+    /** The arrival and the departure cancelled, apart, when a source says which (null: not said). */
+    arrCanceled: integer('arr_canceled', { mode: 'boolean' }),
+    depCanceled: integer('dep_canceled', { mode: 'boolean' }),
     /** Stops between origin and destination. */
     passedThrough: integer('passed_through', { mode: 'boolean' }).notNull().default(false),
     /** before | board | through | alight | after: the whole trip is kept so the timeline can show the full route. */

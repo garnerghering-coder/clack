@@ -58,14 +58,15 @@ private struct DisruptionBody: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(Router.self) private var router
+    @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let leg: LegDetail
     let next: Leg?
     let connection: String?
     let journey: [Leg]
-    @State private var alts: Alternatives?
+    /// What each search found, by its key; absent while it's looking.
+    @State private var found: [String: Alternatives] = [:]
     @State private var showAlts = false
-
-    private static let severe: Set<DisruptionKind> = [.canceled, .skipsBoard, .skipsAlight, .connectionMissed]
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
@@ -84,27 +85,27 @@ private struct DisruptionBody: View {
         let schedDep = l.schedDep?.ms ?? 0
         let schedArr = l.schedArr?.ms ?? 0
         let arrived = l.actualArr != nil || (l.status != .planned && schedArr < now)
+        // How much of your part the train runs, from its stops: a part-way train is not a cancelled one (build 86).
+        let run = Disruption.cancellation(leg)
         let assessed = Disruption.assess(
             DisruptionInput(
-                canceled: l.canceled, boardCanceled: board?.canceled ?? false, alightCanceled: alight?.canceled ?? false,
+                canceled: l.canceled, boardCanceled: board?.canceled ?? false, alightCanceled: alight?.canceled ?? false, partial: run,
                 deviations: deviations, depDelayMin: l.depDelayMin, arrDelayMin: l.arrDelayMin, schedDep: schedDep,
                 arrived: arrived, connection: connection
             ),
             now: now
         )
-        if let urgency = assessed.urgency {
+        if assessed.urgency != nil {
             let kinds = assessed.kinds
-            let isSevere = kinds.contains(where: Self.severe.contains)
+            let isSevere = kinds.contains(where: Disruption.severe.contains)
             let final = journey.last ?? l
             let op = l.operator.flatMap { app.operatorsById[$0.id] }
             let train = [op?.name ?? l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")
-            let search = searchParams(now: now, arrived: arrived, severe: isSevere, kinds: kinds, final: final, schedDep: schedDep, schedArr: schedArr)
+            let searches = searches(now: now, arrived: arrived, severe: isSevere, kinds: kinds, run: run, final: final, schedDep: schedDep, schedArr: schedArr)
             let tone: AlertTone = arrived ? .info : (isSevere || kinds.contains(.replacement) ? .severe : .warn)
             let reasons = DelayCauses.reasons(causes) { l10n.t($0) }
             let reasonSources = reasons.map(\.source).reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
-            let altCount = alts.map { $0.direct.count + $0.connections.count }
             let tz = board?.tz ?? "Europe/Stockholm"
-            let _ = urgency
             AlertCard(
                 tone: tone, icon: tone == .info ? "info" : "triangle-alert",
                 title: l10n.t(arrived && kinds.first == .delayed ? "disruption.title.delayed_past" : "disruption.title.\(kinds.first?.rawValue ?? "delayed")"),
@@ -112,32 +113,54 @@ private struct DisruptionBody: View {
             ) {
                 VStack(alignment: .leading, spacing: Space.xs) {
                     ForEach(kinds, id: \.self) { kind in
-                        Text(line(kind, train: train, board: board, alight: alight, next: next, arrived: arrived, tz: tz))
-                            .clack(.body).foregroundStyle(Ink.text)
+                        Text(line(kind, train: train, run: run, board: board, alight: alight, next: next, arrived: arrived, tz: tz))
+                            .clack(.body).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 if !reasons.isEmpty {
                     Text(l10n.t("disruption.why", ["reasons": reasons.map(\.text).joined(separator: l10n.t("disruption.and")), "source": reasonSources.joined(separator: ", ")]))
                         .clack(.body).fontWeight(.semibold).foregroundStyle(Ink.text)
                 }
-                if search != nil {
-                    alternatives(search: search, altCount: altCount, final: final, now: now, schedDep: schedDep, tz: tz, op: op, tone: tone)
+                if !searches.isEmpty {
+                    alternatives(searches, final: final, now: now, schedDep: schedDep, tz: tz, op: op)
                 }
-                rights(journey: journey, kinds: kinds, final: final, op: op)
-                if l.canceled { Text(l10n.t("disruption.passportNote")).clack(.caption).foregroundStyle(Ink.text2) }
+                rights(journey: journey, kinds: kinds, final: final, op: op, run: run)
+                if Disruption.fullyCanceled(l, partial: run) { Text(l10n.t("disruption.passportNote")).clack(.caption).foregroundStyle(Ink.text2) }
             }
-            .task(id: searchKey(search)) { await loadAlternatives(search) }
+            .task(id: searches.map(\.key).joined(separator: "&")) { await load(searches) }
         }
     }
 
     // MARK: the lines
 
-    private func line(_ kind: DisruptionKind, train: String, board: LegStop?, alight: LegStop?, next: Leg?, arrived: Bool, tz: String) -> String {
+    /// The stop of the leg with this station id.
+    private func stop(_ id: String?) -> LegStop? {
+        id.flatMap { id in leg.stops.first { $0.stationId == id && $0.role.isRidden } }
+    }
+
+    /// Best-known departure (or arrival) at a stop.
+    private func departure(_ s: LegStop?) -> Double? { (s?.actualDep ?? s?.estimatedDep ?? s?.schedDep)?.ms }
+    private func arrival(_ s: LegStop?) -> Double? { (s?.actualArr ?? s?.estimatedArr ?? s?.schedArr)?.ms }
+
+    private func line(_ kind: DisruptionKind, train: String, run: PartialRun?, board: LegStop?, alight: LegStop?, next: Leg?, arrived: Bool, tz: String) -> String {
         let l = leg.leg
+        let clock = app.settings.clock
+        let from = stop(run?.runsFrom), to = stop(run?.runsTo)
         switch kind {
         case .canceled: return l10n.t("disruption.canceled", ["train": train])
-        case .skipsBoard: return l10n.t("disruption.skipsBoard", ["train": train, "station": board?.name ?? ""])
-        case .skipsAlight: return l10n.t("disruption.skipsAlight", ["train": train, "station": alight?.name ?? ""])
+        case .startsLater:
+            return l10n.t("disruption.startsLater", ["train": train, "board": board?.name ?? "", "station": from?.name ?? run?.runsFromName ?? "", "time": Format.time(departure(from), tz: from?.tz ?? tz, clock: clock)])
+        case .endsEarly:
+            return l10n.t("disruption.endsEarly", ["train": train, "alight": alight?.name ?? "", "station": to?.name ?? run?.runsToName ?? "", "time": Format.time(arrival(to), tz: to?.tz ?? tz, clock: clock)])
+        case .skipsBoard:
+            guard let from else { return l10n.t("disruption.skipsBoard", ["train": train, "station": board?.name ?? ""]) }
+            return l10n.t("disruption.skipsBoardNearest", ["train": train, "station": board?.name ?? "", "nearest": from.name, "time": Format.time(departure(from), tz: from.tz, clock: clock)])
+        case .skipsAlight:
+            guard let to else { return l10n.t("disruption.skipsAlight", ["train": train, "station": alight?.name ?? ""]) }
+            return l10n.t("disruption.skipsAlightNearest", ["train": train, "station": alight?.name ?? "", "nearest": to.name, "time": Format.time(arrival(to), tz: to.tz, clock: clock)])
+        case .gap:
+            let gap = run?.gaps.first
+            return l10n.t("disruption.gap", ["from": gap?.fromName ?? stop(gap?.from)?.name ?? "", "to": gap?.toName ?? stop(gap?.to)?.name ?? ""])
         case .replacement: return l10n.t("disruption.replacement")
         case .delayed:
             if arrived, let arr = l.arrDelayMin {
@@ -148,7 +171,7 @@ private struct DisruptionBody: View {
             return l10n.t("disruption.connectionMissed", [
                 "station": next?.origin?.name ?? "",
                 "next": [next?.operator?.name, next?.trainNumber].compactMap { $0 }.joined(separator: " "),
-                "time": Format.time(next?.schedDep?.ms, tz: tz, clock: app.settings.clock),
+                "time": Format.time(next?.schedDep?.ms, tz: tz, clock: clock),
             ])
         case .connectionAtRisk: return l10n.t("disruption.connectionAtRisk", ["station": next?.origin?.name ?? ""])
         }
@@ -156,66 +179,128 @@ private struct DisruptionBody: View {
 
     // MARK: alternatives
 
+    /// One way to look for other trains, and what its suggestions do.
     private struct Search: Hashable {
+        enum Use: Hashable {
+            /// Another train for the whole of this one: "Use this instead" replaces it.
+            case instead
+            /// A train to add beside this one (the rest of the way from where it ends, or the way to where it starts).
+            case add
+        }
+
+        /// The header over its suggestions (already in words), or nil for none.
+        var title: String?
         var from: String?
         var to: String?
         var after: Double
+        /// Only those arriving by then (to reach this train where it starts, or runs again).
+        var before: Double?
         var exclude: String?
+        var use: Use
+
+        var key: String { "\(from ?? "")|\(to ?? "")|\(Int(after / 60_000))|\(before.map { String(Int($0 / 60_000)) } ?? "")|\(exclude ?? "")" }
     }
 
-    /// Other ways: from where you are (your station, or the change you'll miss) to the journey's end.
-    private func searchParams(now: Double, arrived: Bool, severe: Bool, kinds: [DisruptionKind], final: Leg, schedDep: Double, schedArr: Double) -> Search? {
-        guard !arrived, severe else { return nil }
+    /// Where to look, by what happened (build 86), the same for every train and country:
+    /// - it runs only to X (or won't stop where you get off): this train to X, then the rest of the way from X; and,
+    ///   before you've left, other trains from where you get on;
+    /// - it starts later at Y (or won't stop where you get on): ways to Y in time for it, then other trains from your
+    ///   station;
+    /// - no train on a stretch: ways from where it stops to where it runs again in time for it, then on from there;
+    /// - cancelled: other trains from your station; a missed change: from the change station.
+    private func searches(now: Double, arrived: Bool, severe: Bool, kinds: [DisruptionKind], run: PartialRun?, final: Leg, schedDep: Double, schedArr: Double) -> [Search] {
+        guard !arrived, severe else { return [] }
         let l = leg.leg
-        if kinds.contains(.connectionMissed), let next, !kinds.contains(.canceled) {
+        let dest = final.destination?.id
+        let started = l.actualDep != nil || now >= LiveRules.expectedDeparture(l)
+        let others = Search(title: nil, from: l.origin?.id, to: dest, after: max(now, schedDep - 30 * 60_000), exclude: l.timetableTripKey, use: .instead)
+        if kinds.contains(.connectionMissed), let next, !kinds.contains(.canceled), run == nil {
             let arrival = l.actualArr?.ms ?? (schedArr + Double(l.arrDelayMin ?? 0) * 60_000)
-            return Search(from: next.origin?.id, to: final.destination?.id, after: arrival + 5 * 60_000, exclude: next.timetableTripKey)
+            return [Search(from: next.origin?.id, to: dest, after: arrival + 5 * 60_000, exclude: next.timetableTripKey, use: .instead)]
         }
-        return Search(from: l.origin?.id, to: final.destination?.id, after: max(now, schedDep - 30 * 60_000), exclude: l.timetableTripKey)
+        guard let run, run.kind == .partial else { return kinds.contains(.canceled) || kinds.contains(.skipsBoard) || kinds.contains(.skipsAlight) ? [others] : [] }
+        var out: [Search] = []
+        let clock = app.settings.clock
+        if let to = stop(run.runsTo), let at = arrival(to) {
+            out.append(Search(
+                title: l10n.t("disruption.rideTo", ["station": to.name, "time": Format.time(at, tz: to.tz, clock: clock)]),
+                from: to.stationId, to: dest, after: max(now, at + 2 * 60_000), exclude: l.timetableTripKey, use: .add
+            ))
+        }
+        if let from = stop(run.runsFrom), let at = departure(from), !started {
+            out.append(Search(
+                title: l10n.t("disruption.getTo", ["station": from.name, "time": Format.time(at, tz: from.tz, clock: clock)]),
+                from: l.origin?.id, to: from.stationId, after: max(now, at - 3 * 3_600_000), before: at - 2 * 60_000, exclude: l.timetableTripKey, use: .add
+            ))
+        }
+        if let gap = run.gaps.first, let a = stop(gap.from), let b = stop(gap.to), let back = departure(b) {
+            out.append(Search(
+                title: l10n.t("disruption.bridgeGap", ["from": a.name, "to": b.name, "time": Format.time(back, tz: b.tz, clock: clock)]),
+                from: a.stationId, to: b.stationId, after: max(now, (arrival(a) ?? now) + 2 * 60_000), before: back - 2 * 60_000, exclude: l.timetableTripKey, use: .add
+            ))
+        }
+        // Other trains from your station, while you're still there.
+        if !started { out.append(Search(title: out.isEmpty ? nil : l10n.t("disruption.otherTrains", ["station": l.origin?.name ?? ""]), from: others.from, to: others.to, after: others.after, exclude: others.exclude, use: .instead)) }
+        return out
     }
 
-    private func searchKey(_ search: Search?) -> String {
-        search.map { "\($0.from ?? "")|\($0.to ?? "")|\(Int($0.after / 60_000))|\($0.exclude ?? "")" } ?? ""
+    private func load(_ searches: [Search]) async {
+        await withTaskGroup(of: (String, Alternatives?).self) { group in
+            for s in searches {
+                guard let from = s.from, let to = s.to, found[s.key] == nil else { continue }
+                group.addTask { [client = app.client] in (s.key, try? await client.alternatives(from: from, to: to, after: s.after, exclude: s.exclude)) }
+            }
+            for await (key, alts) in group { found[key] = alts ?? Alternatives(direct: [], connections: []) }
+        }
     }
 
-    private func loadAlternatives(_ search: Search?) async {
-        guard let search, let from = search.from, let to = search.to else {
-            alts = nil
-            return
-        }
-        alts = try? await app.client.alternatives(from: from, to: to, after: search.after, exclude: search.exclude)
+    /// A search's suggestions, with `before` applied (the server's list is by departure, so the first ones are kept).
+    private func results(_ s: Search) -> Alternatives? {
+        guard let alts = found[s.key] else { return nil }
+        guard let before = s.before else { return alts }
+        return Alternatives(direct: alts.direct.filter { $0.to.time <= before }, connections: alts.connections.filter { $0.second.to.time <= before })
     }
 
     @ViewBuilder
-    private func alternatives(search: Search?, altCount: Int?, final: Leg, now: Double, schedDep: Double, tz: String, op: Operator?, tone: AlertTone) -> some View {
+    private func alternatives(_ searches: [Search], final: Leg, now: Double, schedDep: Double, tz: String, op: Operator?) -> some View {
+        let lists = searches.map(results)
+        let looking = lists.contains { $0 == nil }
+        let count = lists.compactMap { $0 }.reduce(0) { $0 + $1.direct.count + $1.connections.count }
         VStack(alignment: .leading, spacing: Space.s) {
-            Button {
-                showAlts.toggle()
-            } label: {
-                HStack(spacing: Space.s) {
-                    Text(altCount == nil ? l10n.t("disruption.looking")
-                        : altCount == 0 ? l10n.t("disruption.noAlternatives")
-                        : showAlts ? l10n.t("disruption.hideSuggested") : l10n.t("disruption.viewSuggested"))
-                        .clack(.button).fontWeight(.bold).foregroundStyle(Ink.text)
-                    Spacer(minLength: 0)
-                    if let altCount, altCount > 0 { LucideIcon(name: showAlts ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text) }
+            if count > 0 {
+                // A row like "About this train": the words, how many, and a chevron that turns (DESIGN §2.3, no box).
+                Button {
+                    withMotion(.layout, reduceMotion: reduceMotion) { showAlts.toggle() }
+                } label: {
+                    HStack(spacing: Space.s) {
+                        Text(l10n.t(showAlts ? "disruption.hideSuggested" : "disruption.viewSuggested")).clack(.rowTitle).foregroundStyle(Ink.text)
+                        Text(String(count)).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                        Spacer(minLength: Space.s)
+                        LucideIcon(name: "chevron-down", size: 16).foregroundStyle(Ink.text3)
+                            .rotationEffect(.degrees(showAlts ? 180 : 0))
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
-                .padding(.horizontal, Space.l)
-                .frame(minHeight: 44)
-                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-                .hairlineBorder(radius: Radius.input, color: tone.color.opacity(0.4))
-                .opacity(altCount == 0 || altCount == nil ? 0.7 : 1)
+                .buttonStyle(.pressRow)
+                .accessibilityValue(l10n.t(showAlts ? "common.less" : "common.more"))
+            } else {
+                Text(l10n.t(looking ? "disruption.looking" : "disruption.noAlternatives")).clack(.rowTitle).foregroundStyle(Ink.text2)
+                    .frame(minHeight: 44)
+                if !looking { Text(l10n.t("disruption.noneFound")).clack(.caption).foregroundStyle(Ink.text2) }
             }
-            .buttonStyle(.plain)
-            .disabled((altCount ?? 0) == 0)
-            if altCount == 0 { Text(l10n.t("disruption.noneFound")).clack(.caption).foregroundStyle(Ink.text2) }
-            if showAlts, let alts, (altCount ?? 0) > 0 {
+            if showAlts, count > 0 {
                 if final.id != leg.id {
                     Text(l10n.t("disruption.journeyContinues", ["station": final.destination?.name ?? ""])).clack(.caption).foregroundStyle(Ink.text2)
                 }
-                VStack(alignment: .leading, spacing: Space.s) {
-                    ForEach(alts.direct) { r in directRow(r, now: now, schedDep: schedDep, tz: tz) }
-                    ForEach(alts.connections) { c in connectionRow(c, now: now, schedDep: schedDep, tz: tz) }
+                ForEach(Array(zip(searches, lists)), id: \.0) { search, alts in
+                    if let alts, !(alts.direct.isEmpty && alts.connections.isEmpty) {
+                        VStack(alignment: .leading, spacing: Space.s) {
+                            if let title = search.title { Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true) }
+                            ForEach(alts.direct) { r in directRow(r, use: search.use, now: now, schedDep: schedDep, tz: tz) }
+                            ForEach(alts.connections) { c in connectionRow(c, now: now, schedDep: schedDep, tz: tz) }
+                        }
+                    }
                 }
                 InfoNote(l10n.t("disruption.altsNote"), more: l10n.t("disruption.altsNoteMore", ["operator": op?.name ?? l10n.t("disruption.theOperator")]))
             }
@@ -226,7 +311,13 @@ private struct DisruptionBody: View {
         Format.localDate(when, tz: zone) != Format.localDate(max(now, schedDep), tz: tz) ? Format.day(when, tz: zone, language: app.settings.language) : nil
     }
 
-    private func directRow(_ r: TripResult, now: Double, schedDep: Double, tz: String) -> some View {
+    /// "View train live": it goes to the train, so it reads as a link, not a button (DESIGN §2.3).
+    private func liveLink(number: String?, date: String, key: String) -> some View {
+        Button(l10n.t("disruption.viewLive")) { router.presentTrain(number: number ?? "", date: date, key: key) }
+            .buttonStyle(LinkButtonStyle())
+    }
+
+    private func directRow(_ r: TripResult, use: Search.Use, now: Double, schedDep: Double, tz: String) -> some View {
         let op = r.operatorId.flatMap { app.operatorsById[$0] }
         let caption = [
             [op?.name ?? r.routeName, r.trainNumber].compactMap { $0 }.joined(separator: " "),
@@ -238,13 +329,13 @@ private struct DisruptionBody: View {
                 TimePair(dep: .init(time: r.from.time, tz: r.from.tz), arr: .init(time: r.to.time, tz: r.to.tz), clock: app.settings.clock)
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
-                HStack(spacing: Space.s) {
-                    Button(l10n.t("disruption.live")) { router.presentTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
-                        .buttonStyle(.clack(small: true))
-                    Button(l10n.t("disruption.useInstead")) {
-                        router.openAdd(AddTrainLink(tripKey: r.key, date: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, replaceLegId: leg.id))
+                HStack(spacing: Space.l) {
+                    // The one primary action of a suggestion: instead of this train, or beside it.
+                    Button(l10n.t(use == .instead ? "disruption.useInstead" : "disruption.addThis")) {
+                        router.openAdd(AddTrainLink(tripKey: r.key, date: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, replaceLegId: use == .instead ? leg.id : nil, title: [op?.name ?? r.routeName, r.trainNumber].compactMap { $0 }.joined(separator: " ")))
                     }
                     .buttonStyle(.clack(.primary, small: true))
+                    liveLink(number: r.trainNumber, date: r.serviceDate, key: r.key)
                 }
                 .padding(.top, Space.xs)
             }
@@ -266,36 +357,42 @@ private struct DisruptionBody: View {
                 TimePair(dep: .init(time: c.first.from.time, tz: c.first.from.tz), arr: .init(time: c.second.to.time, tz: c.second.to.tz), clock: app.settings.clock)
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
-                Button(l10n.t("disruption.live")) { router.presentTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
-                    .buttonStyle(.clack(small: true)).padding(.top, Space.xs)
+                liveLink(number: c.first.trainNumber, date: c.first.serviceDate, key: c.first.key)
             }
             Spacer(minLength: 0)
         }
+        .padding(.bottom, Space.m)
+        .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
     }
 
     // MARK: what you may be owed
 
     @ViewBuilder
-    private func rights(journey: [Leg], kinds: [DisruptionKind], final: Leg, op: Operator?) -> some View {
+    private func rights(journey: [Leg], kinds: [DisruptionKind], final: Leg, op: Operator?, run: PartialRun?) -> some View {
         let km = journey.reduce(0.0) { $0 + ($1.distanceM ?? 0) } / 1000
         let countries = journey.flatMap { [$0.origin?.country, $0.destination?.country].compactMap { $0 } }.reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
         let finalDelay = final.id == leg.id ? leg.leg.arrDelayMin : final.arrDelayMin
+        // Your journey on this train is cancelled when it doesn't take you from where you get on or to where you get
+        // off, wholly or for part of the way; a stop skipped in the middle, or a stretch by bus, isn't that.
+        let cancelledForYou = Disruption.fullyCanceled(leg.leg, partial: run) || run?.runsFrom != nil || run?.runsTo != nil
         let rights = Disruption.passengerRights(
-            countries: countries, journeyKm: km, arrDelayMin: kinds.contains(.connectionMissed) ? nil : finalDelay, canceled: leg.leg.canceled
+            countries: countries, journeyKm: km, arrDelayMin: kinds.contains(.connectionMissed) ? nil : finalDelay, canceled: cancelledForYou
         )
         let operatorName = op?.name ?? l10n.t("disruption.theOperator")
-        VStack(alignment: .leading, spacing: Space.s) {
+        VStack(alignment: .leading, spacing: Space.xs) {
             Text(l10n.t("disruption.rightsTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            Text(rightsText(rights, operatorName: operatorName)).clack(.caption).foregroundStyle(Ink.text2)
-            HStack(spacing: Space.m) {
+            Text(rightsText(rights, operatorName: operatorName)).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+            // Links, in accent ink (DESIGN §2.3): each opens a page outside the app.
+            FlowLayout(spacing: Space.l, lineSpacing: 0) {
                 if let url = rightsLink(rights) {
-                    Link(l10n.t(rights == .seShort(priceReduction: true) || rights == .seShort(priceReduction: false) ? "disruption.linkSe" : "disruption.linkEu"), destination: url)
+                    Button(l10n.t(rights == .seShort(priceReduction: true) || rights == .seShort(priceReduction: false) ? "disruption.linkSe" : "disruption.linkEu")) { openURL(url) }
+                        .buttonStyle(LinkButtonStyle())
                 }
                 if let ticketUrl = op?.ticketUrl, let url = URL(string: ticketUrl) {
-                    Link(l10n.t("disruption.linkOperator", ["operator": op?.name ?? ""]), destination: url)
+                    Button(l10n.t("disruption.linkOperator", ["operator": op?.name ?? ""])) { openURL(url) }
+                        .buttonStyle(LinkButtonStyle())
                 }
             }
-            .clack(.caption).fontWeight(.semibold).tint(Ink.accentInk)
         }
     }
 
@@ -311,7 +408,7 @@ private struct DisruptionBody: View {
         switch rights {
         case .operator: nil
         case .seShort: URL(string: Disruption.rightsLinkSweden)
-        case .eu: Disruption.rightsLinkEU[app.settings.language == .sv ? .sv : .en].flatMap(URL.init(string:))
+        case .eu: URL(string: Disruption.rightsLinkEU(app.settings.language))
         }
     }
 }

@@ -82,8 +82,13 @@ describe('live view', () => {
     s[2]!.actualArr = T('10:23');
     expect(liveView(s, line, null, T('10:24')).status).toBe('arrived');
     const c = stops();
+    c[0]!.canceled = true;
     c[2]!.canceled = true;
     expect(liveView(c, line, null, T('10:05')).status).toBe('cancelled');
+    // Only where you get off cancelled: it runs to B, and is followed there (build 86).
+    const p = stops();
+    p[2]!.canceled = true;
+    expect(liveView(p, line, null, T('10:05')).status).toBe('en_route');
   });
 });
 

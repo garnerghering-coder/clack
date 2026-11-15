@@ -96,25 +96,27 @@ export const searchRoutes =
     });
 
     // Other ways to get there (disruption help): direct trains leaving `from` for `to` at or after `after`, today and
-    // tomorrow, without the train you can't take; with one change when there are none. Timetable only: the client
-    // says so and links each one to its live view.
-    app.get<{ Querystring: { from?: string; to?: string; after?: string; exclude?: string } }>('/alternatives', async (req, reply) => {
+    // tomorrow, without the train you can't take; with one change when there are none. `before` (optional, ms): only
+    // those arriving by then, to reach a train that starts later on your way in time for it (build 86). Timetable only:
+    // the client says so and links each one to its live view.
+    app.get<{ Querystring: { from?: string; to?: string; after?: string; before?: string; exclude?: string } }>('/alternatives', async (req, reply) => {
       const { from, to, exclude } = req.query;
       const after = Number(req.query.after);
-      if (!from || !to || !Number.isFinite(after)) return reply.code(400).send({ error: 'from, to and after (ms) are required' });
+      const before = req.query.before === undefined ? Infinity : Number(req.query.before);
+      if (!from || !to || !Number.isFinite(after) || Number.isNaN(before)) return reply.code(400).send({ error: 'from, to and after (ms) are required; before (ms) is optional' });
       // The day where the journey starts: its station's time zone (Finland is an hour ahead of Sweden).
       const tz = db.select({ tz: stations.tz }).from(stations).where(eq(stations.id, from)).get()?.tz ?? COUNTRIES.SE.tz;
       const day = todayIn(tz, after);
       const direct = [day, addDays(day, 1)]
         .flatMap((d) => searchByRoute(db, from, to, d))
-        .filter((r) => r.from.time >= after && r.key !== exclude)
+        .filter((r) => r.from.time >= after && r.to.time <= before && r.key !== exclude)
         .sort((a, b) => a.from.time - b.from.time)
         .slice(0, 4);
       const connections = direct.length
         ? []
         : [day, addDays(day, 1)]
             .flatMap((d) => searchConnections(db, from, to, d))
-            .filter((c) => c.first.from.time >= after && c.first.key !== exclude)
+            .filter((c) => c.first.from.time >= after && c.second.to.time <= before && c.first.key !== exclude && c.second.key !== exclude)
             .slice(0, 3);
       return { direct, connections };
     });

@@ -204,6 +204,8 @@ function loadLeg(db: Db, legId: string) {
       estimatedDep: legStops.estimatedDep,
       platform: legStops.platform,
       canceled: legStops.canceled,
+      arrCanceled: legStops.arrCanceled,
+      depCanceled: legStops.depCanceled,
       trvTrainNumber: legStops.trvTrainNumber,
     })
     .from(legStops)
@@ -226,7 +228,7 @@ function loadLeg(db: Db, legId: string) {
   // The whole trip, stop to stop, including before you board: where the train may be on its way to you.
   const route: LatLon[] = all.map((s) => [s.lat, s.lon]);
   const forEntur = all.map((s) => ({ nsrId: s.nsrId, country: s.country, schedArr: ms(s.schedArr), schedDep: ms(s.schedDep) }));
-  return { leg, ridden, line, route, forEntur };
+  return { leg, all, ridden, line, route, forEntur };
 }
 
 function summary(loaded: NonNullable<ReturnType<typeof loadLeg>>): LegSummary {
@@ -239,6 +241,8 @@ function summary(loaded: NonNullable<ReturnType<typeof loadLeg>>): LegSummary {
     arrPlatform: leg.arrPlatform,
     canceled: leg.canceled,
     canceledStops: ridden.filter((s) => s.canceled).map((s) => s.stationId),
+    // The whole trip, so the short-turn event can say where a part-way train now starts or ends (build 86).
+    stops: loaded.all.map((s) => ({ stationId: s.stationId, name: s.name, role: s.role, canceled: s.canceled, arrCanceled: s.arrCanceled, depCanceled: s.depCanceled })),
     departedAt: ms(leg.actualDep),
     arrivedAt: ms(leg.actualArr),
   };

@@ -90,10 +90,17 @@ struct LiveViewTests {
         s[2].actualArr = T("10:23")
         #expect(Progress.liveView(stops: s, line: line, gps: nil, now: T("10:24")).status == .arrived)
         var c = stops()
+        c[0].canceled = true
         c[2].canceled = true
         let v = Progress.liveView(stops: c, line: line, gps: nil, now: T("10:05"))
         #expect(v.status == .cancelled)
         #expect(v.progress == nil)
+        // Only where you get off cancelled: it runs to the stop before, and is followed there (build 86).
+        var p = stops()
+        p[2].canceled = true
+        let part = Progress.liveView(stops: p, line: line, gps: nil, now: T("10:05"))
+        #expect(part.status == .enRoute)
+        #expect(part.nextStopId == p[1].stationId)
     }
 }
 
