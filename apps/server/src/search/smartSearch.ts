@@ -1,11 +1,11 @@
 // Turns one free-text query + date into an interpretation (shown as chips), station suggestions and train results.
-import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { normName } from '../lib/geo.js';
 import type { HistoryState } from '../import/history.js';
 import { loadBrands } from '../dataFiles.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { COUNTRIES, tzOf } from '../lib/countries.js';
+import { danishDays } from './danishDays.js';
 import { buildOperatorMatcher, parseQuery } from './parse.js';
 import { searchStations, type StationHit, type StationIndex } from './stations.js';
 import { daysWithNumber, searchByNumber, searchByRoute, searchConnections, type Connection, type TripResult } from './timetable.js';
@@ -36,9 +36,11 @@ export interface SmartSearchResult {
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
-  history?: HistoryState['state'] | 'norway' | 'finland';
-  /** With `norway` or `finland`: the first day that country's record has (YYYY-MM-DD), for the message. */
+  history?: HistoryState['state'] | 'norway' | 'finland' | 'denmark';
+  /** With `norway`, `finland` or `denmark`: the first day that country's record has (YYYY-MM-DD), for the message. */
   historyFrom?: string;
+  /** With `denmark`: the stretches after `historyFrom` that no copy of Denmark's timetable covers (inclusive dates). */
+  historyGaps?: { from: string; to: string }[];
   /** A train number with nothing on `date`: the nearby days (service dates) it does run, for the message. */
   otherDays?: string[];
   /** With results only from abroad: `otherDays` are the days the number runs in this country (the home country). */
@@ -116,26 +118,31 @@ export function createSmartSearch(
     if (date < windowStart && (q.trainNumber || (from && to))) {
       // Older days: Sweden's from its archive (fetched the first time a day is asked for), Norway's and Finland's
       // from the observed record (SPEC §5.6). The countries of the stations, or all three for a train number alone.
-      // Denmark's past days are in its own timetable (every imported copy keeps its dates), so a day is ready when that
-      // timetable has trains on it, and unavailable before its first import (2026).
+      // Denmark's past days are in its own timetable (every imported copy keeps its dates, old copies from the
+      // Mobility Database too: DENMARK_DATA_FINDINGS.md), so a day is ready when that timetable has trains on it; any
+      // other day is answered with the first day it has and the stretches no copy covers (search/danishDays.ts).
       type Where = 'SE' | 'NO' | 'FI' | 'DK';
-      const danish = () =>
-        db.get<{ one: number }>(sql`
-          SELECT 1 AS one FROM timetable_trip_dates d JOIN timetable_trips t ON t.key = d.trip_key
-          WHERE d.service_date = ${date} AND t.source = ${COUNTRIES.DK.timetableSource} LIMIT 1`)
-          ? ('ready' as const)
-          : ('unavailable' as const);
+      const danish = () => {
+        const dk = danishDays(db);
+        return dk.days.has(date) ? ('ready' as const) : dk.from ? ('denmark' as const) : ('unavailable' as const);
+      };
       const where = (c: string | undefined): Where => (c === 'NO' || c === 'FI' || c === 'DK' ? c : 'SE');
       const countries: Where[] = from || to ? [...new Set([from, to].filter(Boolean).map((s) => where(s!.country)))] : ['SE', 'NO', 'FI', 'DK'];
       const states = countries.map((c) => ({ c, state: c === 'SE' ? history(date).state : c === 'DK' ? danish() : record.ensure(c, date) }));
       if (states.some((s) => s.state === 'loading')) out.history = 'loading';
       else if (states.some((s) => s.state === 'ready')) out.history = 'ready';
       else {
-        // None has the day: say why for the first (Norway and Finland name the day their record starts).
+        // None has the day: say why for the first (Norway and Finland name the day their record starts, Denmark that
+        // day and its gaps).
         const s = states[0]!;
         const rec = s.c === 'NO' || s.c === 'FI' ? s.c : null;
         out.history = rec && s.state === 'unavailable' ? (rec === 'NO' ? 'norway' : 'finland') : s.state;
         if (rec && s.state === 'unavailable') out.historyFrom = record.from(rec);
+        if (s.state === 'denmark') {
+          const dk = danishDays(db);
+          out.historyFrom = dk.from!;
+          out.historyGaps = dk.gaps;
+        }
       }
       if (out.history !== 'ready') {
         out.outsideTimetable = true;

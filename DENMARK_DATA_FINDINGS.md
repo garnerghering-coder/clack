@@ -63,6 +63,27 @@ for a date) and deletes the zip; `data/cache/rejseplanen/history.json` records w
 from 2016–2019 may be in another shape: a failure is noted there and the run goes on. CC BY 4.0. The token is
 `MOBILITY_DB_REFRESH_TOKEN` in `.env`, exchanged for a one-hour access token (`POST /v1/tokens`).
 
+**What the copies cover, and the gaps (checked 2026-11-15).** The run of 2026-10-27 (`history.json`, 125 entries)
+imported every listed copy: none failed, eight had no trains (0 trips: 2016-09-14, 2020-11-02, 2021-02-17-2,
+2021-06-07 and 2021-09-01-2 to -5, each with a full copy of the same day or the next beside it). The list has no copy between `mdb-1292-20210928` and `mdb-1292-202502130029`: the
+older ids are dated (`YYYYMMDD`), the newer ones carry a time too (`YYYYMMDDHHMM`), so the two runs look like two
+different collections; why there is nothing in between is not recorded anywhere we have (unverified). It is not a
+paging cut: the datasets endpoint returns up to 500 by default (`limit_query_param_datasets_endpoint`, default 500,
+in MobilityData's `docs/DatabaseCatalogAPI.yaml`) and the run got 125. Each copy is imported from the day before its
+download for 100 days (`importGtfsDenmark`'s window), so the local database (`data/app.db`, read-only query of the
+distinct Danish service dates) has Danish trains on 1,896 days from 2016-07-26 to 2027-01-27, with three gaps:
+
+| From | To | Why |
+|---|---|---|
+| 2017-06-08 | 2018-08-09 | no copy listed between 2017-03-15 and 2018-08-11 |
+| 2019-09-26 | 2020-09-26 | no copy listed between 2019-07-05 and 2020-09-28 |
+| 2021-12-23 | 2025-02-11 | no copy listed between 2021-09-28 (its timetable ends 2021-12-22) and 2025-02-13 |
+
+Search answers a day in a gap (or before 2016-07-26) with the first day on record and the gaps (`history: "denmark"`,
+`historyFrom`, `historyGaps`: search/danishDays.ts), not Sweden's archive message. The only way to fill them is a copy
+from another archive (none found yet; train-archive.eu starts 2026-09-30), or the Mobility Database adding older
+copies: `npm run import -- denmark-history` lists the copies again and imports only those not in `history.json`.
+
 **train-archive.eu.** Garner phoned them on 2026-10-27: Clack may use any of their data, with no limits (verbal; the
 Danish source's licence field is empty). Token `TRAIN_ARCHIVE_TOKEN` in `.env`, sent as `X-Api-Key`. The file list is
 `https://www.train-archive.eu/api/sources.json` (no token needed); 60-odd sources in Europe, among them Sweden

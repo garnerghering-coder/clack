@@ -3,6 +3,7 @@
 // `changeid` deltas, and re-based every 20 minutes so the window moves with the clock.
 import { delayMinutes } from '@clack/shared';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
+import type { RetryOptions } from '../lib/retry.js';
 import { isTrain, type TrvBoardRow } from '../boards/board.js';
 import { parseComposition, type Composition } from '../legs/trainTypes.js';
 import { trvCauses } from '../legs/causes.js';
@@ -211,12 +212,13 @@ export class AnnouncementCache {
     (this.byTrain.get(k) ?? this.byTrain.set(k, new Set()).get(k)!).add(r.ActivityId);
   }
 
-  private query(from: number, to: number, changeId: string) {
+  private query(from: number, to: number, changeId: string, retry?: RetryOptions) {
     return trvQuery<{ TrainAnnouncement?: AnnRow[]; INFO?: { LASTCHANGEID?: string } }>(
       `<QUERY objecttype="TrainAnnouncement" schemaversion="1.9" changeid="${changeId}"><FILTER>` +
         `<EQ name="Advertised" value="true"/><GTE name="AdvertisedTimeAtLocation" value="${new Date(from).toISOString()}"/>` +
         `<LT name="AdvertisedTimeAtLocation" value="${new Date(to).toISOString()}"/></FILTER>${FIELDS.map((f) => `<INCLUDE>${f}</INCLUDE>`).join('')}</QUERY>`,
       this.opts.fetchImpl,
+      retry,
     );
   }
 
@@ -235,18 +237,15 @@ export class AnnouncementCache {
       for (let t = from; t < from + BEFORE_MS + AFTER_MS; t += SLICE_MS) starts.push(t);
       const ids: (string | null)[] = await Promise.all(
         starts.map(async (t) => {
-          for (let attempt = 0; ; attempt++) {
-            try {
-              const r = await this.query(t, t + SLICE_MS, '0');
-              for (const row of r.TrainAnnouncement ?? []) this.put(row);
-              this.dirty = true;
-              return r.INFO?.LASTCHANGEID ?? null;
-            } catch (e) {
-              if (attempt >= 1) {
-                this.opts.log?.(`live map: announcements ${new Date(t).toISOString().slice(11, 16)}+30 min failed: ${(e as Error).message.slice(0, 120)}`);
-                return null;
-              }
-            }
+          try {
+            // Each slice tried twice, whatever the failure (a timeout or an "Internal error" too), about a second apart.
+            const r = await this.query(t, t + SLICE_MS, '0', { attempts: 2, baseMs: 1000, retryOn: () => true });
+            for (const row of r.TrainAnnouncement ?? []) this.put(row);
+            this.dirty = true;
+            return r.INFO?.LASTCHANGEID ?? null;
+          } catch (e) {
+            this.opts.log?.(`live map: announcements ${new Date(t).toISOString().slice(11, 16)}+30 min failed: ${(e as Error).message.slice(0, 120)}`);
+            return null;
           }
         }),
       );

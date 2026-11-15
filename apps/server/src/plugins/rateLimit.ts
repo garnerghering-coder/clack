@@ -50,6 +50,9 @@ export async function rateLimitPlugin(app: FastifyInstance) {
     keyGenerator: (req) => `${FILES.test(pathOf(req)) ? 'files' : 'api'}:${idOf(req) ?? `ip:${req.ip}`}`,
     max: (_req, key) => (String(key).startsWith('files:') ? perFiles : String(key).includes(':ip:') ? perAddress : perUser),
     allowList: (req) => STREAM.test(pathOf(req)) || UNLIMITED.test(pathOf(req)),
+    // A 429 says when to come back twice: Retry-After (whole seconds, what the app's retry reads) and the body's text.
+    // The plugin sends the header by default; set here so a later default can't drop it.
+    addHeaders: { 'retry-after': true },
     // The same shape as the server's own errors: { error: string } (the code is the status, 429).
     errorResponseBuilder: (_req, ctx) => ({ statusCode: 429, error: `too many requests, try again in ${Math.max(1, Math.ceil(ctx.ttl / 1000))} seconds` }),
   });

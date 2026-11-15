@@ -3,16 +3,24 @@
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings';
 import { config } from '../env.js';
 import { feedFailed, feedOk } from '../lib/health.js';
+import { isTimeout, isTransient, withRetry } from '../lib/retry.js';
 
 const JP_URL = 'https://api.entur.io/journey-planner/v3/graphql';
 const RT_URL = 'https://api.entur.io/realtime/v1/gtfs-rt';
 const TIMEOUT_MS = 20_000;
 
-export class EnturError extends Error {}
+export class EnturError extends Error {
+  constructor(
+    message: string,
+    readonly status?: number,
+  ) {
+    super(message);
+  }
+}
 /** Over the per-minute quota: nothing is sent until `until`. */
 export class EnturRateLimited extends EnturError {
   constructor(readonly until: number) {
-    super(`Entur quota reached; waiting until ${new Date(until).toISOString()}`);
+    super(`Entur quota reached; waiting until ${new Date(until).toISOString()}`, 429);
   }
 }
 
@@ -31,32 +39,39 @@ export function resetAt(headers: Headers, now = Date.now()): number {
   return now + 60_000;
 }
 
+/**
+ * One request, tried again once after about a second on a 5xx or a network error (lib/retry.ts; not a timeout, which
+ * already took 20 s). A 429 is never retried: it blocks every request until Entur's reset time, retries included.
+ */
 async function enturFetch(url: string, init: RequestInit = {}, fetchImpl: typeof fetch = fetch): Promise<Response> {
   if (Date.now() < blockedUntil) throw new EnturRateLimited(blockedUntil);
-  let res: Response;
   try {
-    res = await fetchImpl(url, {
-      ...init,
-      headers: { 'ET-Client-Name': config.enturClientName, ...(init.headers as Record<string, string> | undefined) },
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    const res = await withRetry(
+      async () => {
+        // Another request may have hit the quota while this one waited to retry.
+        if (Date.now() < blockedUntil) throw new EnturRateLimited(blockedUntil);
+        const res = await fetchImpl(url, {
+          ...init,
+          headers: { 'ET-Client-Name': config.enturClientName, ...(init.headers as Record<string, string> | undefined) },
+          signal: AbortSignal.timeout(TIMEOUT_MS),
+        });
+        if (res.status === 429) {
+          blockedUntil = resetAt(res.headers);
+          throw new EnturRateLimited(blockedUntil);
+        }
+        if (!res.ok) throw new EnturError(`Entur ${res.status}: ${(await res.text()).slice(0, 300)}`, res.status);
+        return res;
+      },
+      { attempts: 2, baseMs: 1000, retryOn: (e) => !(e instanceof EnturRateLimited) && !isTimeout(e) && isTransient(e) },
+    );
+    feedOk('entur');
+    return res;
   } catch (e) {
-    feedFailed('entur', e);
+    // A 4xx (not 429) is our request's fault, not the feed's.
+    const status = (e as EnturError).status;
+    if (e instanceof EnturRateLimited || status === undefined || status >= 500) feedFailed('entur', e);
     throw e;
   }
-  if (res.status === 429) {
-    blockedUntil = resetAt(res.headers);
-    const e = new EnturRateLimited(blockedUntil);
-    feedFailed('entur', e);
-    throw e;
-  }
-  if (!res.ok) {
-    const e = new EnturError(`Entur ${res.status}: ${(await res.text()).slice(0, 300)}`);
-    if (res.status >= 500) feedFailed('entur', e);
-    throw e;
-  }
-  feedOk('entur');
-  return res;
 }
 
 /** One Journey Planner GraphQL query. */

@@ -62,12 +62,37 @@ describe('Rejseplanen client', () => {
     let t = 0;
     let calls = 0;
     const fetchImpl = (async () => (calls++, new Response('nope', { status: 500 }))) as typeof fetch;
-    const c = new RejseplanenClient({ fetchImpl, now: () => t, limiter: new TokenBucket(30, () => t) });
+    const c = new RejseplanenClient({ fetchImpl, now: () => t, limiter: new TokenBucket(30, () => t), sleep: async () => {} });
     for (let i = 0; i < 5; i++) await expect(c.journeyDetails('x')).rejects.toThrow('HTTP 500');
     await expect(c.journeyDetails('x')).rejects.toBeInstanceOf(RejseplanenUnavailable);
-    expect(calls).toBe(5);
+    // Each failed call was tried again once (lib/retry.ts), but counts as one failure towards the rest.
+    expect(calls).toBe(10);
     t += 10 * 60_000 + 1;
     expect(c.available()).toBe(true);
+  });
+  it('retries a 5xx once, only with a token of its own from the limit', async () => {
+    const t = 0;
+    let calls = 0;
+    const fetchImpl = (async () => (calls++ === 0 ? new Response('busy', { status: 503 }) : new Response(JSON.stringify(ok)))) as typeof fetch;
+    const c = new RejseplanenClient({ fetchImpl, now: () => t, limiter: new TokenBucket(2, () => t), sleep: async () => {} });
+    await c.journeyDetails('x');
+    expect(calls).toBe(2);
+    // Both tokens spent: the next call is skipped, nothing sent.
+    await expect(c.journeyDetails('x')).rejects.toBeInstanceOf(RejseplanenUnavailable);
+    expect(calls).toBe(2);
+    // With one token left, a failure is not retried beyond the limit.
+    let n = 0;
+    const failing = (async () => (n++, new Response('busy', { status: 503 }))) as typeof fetch;
+    const one = new RejseplanenClient({ fetchImpl: failing, now: () => t, limiter: new TokenBucket(1, () => t), sleep: async () => {} });
+    await expect(one.journeyDetails('x')).rejects.toThrow('HTTP 503');
+    expect(n).toBe(1);
+  });
+  it('does not retry a 4xx', async () => {
+    let n = 0;
+    const fetchImpl = (async () => (n++, new Response('no', { status: 400 }))) as typeof fetch;
+    const c = new RejseplanenClient({ fetchImpl, now: () => 0, limiter: new TokenBucket(30, () => 0), sleep: async () => {} });
+    await expect(c.journeyDetails('x')).rejects.toThrow('HTTP 400');
+    expect(n).toBe(1);
   });
   it('skips rather than queues when the limit is used up', async () => {
     const t = 0;

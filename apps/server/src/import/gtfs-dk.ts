@@ -21,6 +21,7 @@ import { refreshStationPopularity } from './gtfs-se3.js';
 import { calendarRow, serviceDates } from './gtfs-fi.js';
 import { matchStation, type ExistingStation } from './gtfs-no.js';
 import { countryOf, TZ_BY_COUNTRY } from './stations.js';
+import { danishServiceDates, forgetDanishDays } from '../search/danishDays.js';
 import { platformOf, tripDetail, tripDetailArgs, TRIP_DETAIL_COLUMNS, TRIP_DETAIL_UPDATE, TRIP_DETAIL_VALUES, UPSERT_STOP_SQL, type TripDetail } from './detail.js';
 
 export const SOURCE = 'gtfs_dk';
@@ -96,7 +97,7 @@ export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: str
     else if (cd.exception_type === '2') (removed.get(cd.service_id!) ?? removed.set(cd.service_id!, new Set()).get(cd.service_id!)!).add(cd.date!);
   }
   // fillGaps (old copies, imported newest first): only dates no import has covered yet, and nothing is deleted.
-  const covered = new Set<string>(opts.fillGaps ? (db.$client.prepare(`select distinct d.service_date from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where t.source = ?`).all(SOURCE) as { service_date: string }[]).map((r) => r.service_date) : []);
+  const covered = new Set<string>(opts.fillGaps ? danishServiceDates(db) : []);
   const dates = new Map<string, string[]>();
   for (const sid of services) {
     const ds = serviceDates(calendar.get(sid), added.get(sid) ?? [], removed.get(sid) ?? new Set(), from, to).map(ymdToIso).filter((d) => !covered.has(d));
@@ -249,6 +250,7 @@ export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: str
       .values({ source: SOURCE, startedAt: new Date(t0), finishedAt: new Date(), status: 'ok', notes: JSON.stringify({ trips: patterns.length, window: [windowStart, windowEnd], excluded }) })
       .run();
   });
+  forgetDanishDays(db);
   const summary = { trips: patterns.length, tripDates, stations: { matched, created: newStations.size }, excluded, numbersMissing, window: [windowStart, windowEnd] as [string, string], ms: Date.now() - t0 };
   log(
     `Denmark imported in ${(summary.ms / 1000).toFixed(1)} s: ${summary.trips} trips, ${summary.tripDates} trip-dates, stations ${matched} matched + ${newStations.size} new; left out ${excluded.abroad} also in Sweden's or Norway's feed, ${excluded.unmatched} with an unplaced stop; ${numbersMissing} without a train number`,

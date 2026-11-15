@@ -1,7 +1,8 @@
 // Rejseplanen's live data, from the backend its own phone app uses (HAFAS "mgate"; DENMARK_DATA_FINDINGS.md). No key
 // or login: the AID is the one published in hafas-client's `rejseplanen` profile. It is not an API Rejseplanen has
 // granted us (the API 2.0 key is pending), so Clack keeps its use light and can do without it:
-//  - one shared limit of 30 requests a minute; callers that find none left skip their turn rather than queue;
+//  - one shared limit of 30 requests a minute; callers that find none left skip their turn rather than queue, and a
+//    failed request is tried again once only with a token of its own;
 //  - after 5 failures in a row it rests for 10 minutes (boards fall back to the timetable, the map to estimates);
 //  - REJSEPLANEN_LIVE=off turns it off.
 // Positions are worked out by Rejseplanen from live delays, not GPS, so Clack shows them as estimated.
@@ -9,6 +10,7 @@
 import { TokenBucket } from '../digitraffic/client.js';
 import { parseNotice, type Notice } from './notices.js';
 import { feedFailed, feedOk } from '../lib/health.js';
+import { isTimeout, isTransient, realSleep, retryAfterMs, withRetry } from '../lib/retry.js';
 import { serviceTimeToUtc, ymdToIso } from '../lib/time.js';
 
 export const ENDPOINT = 'https://mobilapps.rejseplanen.dk/bin/iphone.exe';
@@ -53,6 +55,8 @@ export interface ClientOptions {
   fetchImpl?: typeof fetch;
   now?: () => number;
   limiter?: TokenBucket;
+  /** For tests: the wait before a retry. */
+  sleep?: (ms: number) => Promise<void>;
 }
 
 /** One client per process: the limit and the rest are shared by the map, the boards and the legs. */
@@ -60,6 +64,7 @@ export class RejseplanenClient {
   private readonly fetchImpl: typeof fetch;
   private readonly now: () => number;
   private readonly limiter: TokenBucket;
+  private readonly sleep: (ms: number) => Promise<void>;
   private fails = 0;
   private restUntil = 0;
   calls = 0;
@@ -68,6 +73,7 @@ export class RejseplanenClient {
     this.fetchImpl = opts.fetchImpl ?? fetch;
     this.now = opts.now ?? Date.now;
     this.limiter = opts.limiter ?? new TokenBucket(MAX_REQUESTS_PER_MINUTE, this.now);
+    this.sleep = opts.sleep ?? realSleep;
   }
 
   /** Whether a request may be made now (switched on, not resting). */
@@ -78,23 +84,39 @@ export class RejseplanenClient {
   async call<T = Record<string, unknown>>(meth: string, req: unknown): Promise<{ res: T; common: Common }> {
     if (!this.available()) throw new RejseplanenUnavailable('Rejseplanen is resting or switched off');
     if (!this.limiter.tryTake(this.now())) throw new RejseplanenUnavailable('Rejseplanen request limit reached');
-    this.calls++;
     try {
-      const r = await this.fetchImpl(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'User-Agent': 'Clack (+https://getclack.app)' },
-        body: JSON.stringify({ ...BODY, svcReqL: [{ meth, req }] }),
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const body = (await r.json()) as { err?: string; svcResL?: { err?: string; errTxt?: string; res?: T & { common?: Common } }[] };
-      const s = body.svcResL?.[0];
-      if (body.err && body.err !== 'OK') throw new Error(body.err);
-      if (!s || s.err !== 'OK' || !s.res) throw new Error(`${meth}: ${s?.err ?? 'no answer'} ${s?.errTxt ?? ''}`.trim());
+      const out = await withRetry(
+        async () => {
+          this.calls++;
+          const r = await this.fetchImpl(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'User-Agent': 'Clack (+https://getclack.app)' },
+            body: JSON.stringify({ ...BODY, svcReqL: [{ meth, req }] }),
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+          });
+          if (!r.ok) throw Object.assign(new Error(`HTTP ${r.status}`), { status: r.status, retryAfterMs: retryAfterMs(r.headers.get('retry-after')) });
+          const body = (await r.json()) as { err?: string; svcResL?: { err?: string; errTxt?: string; res?: T & { common?: Common } }[] };
+          const s = body.svcResL?.[0];
+          // HAFAS's own errors come in a 200: the request's fault, not retried.
+          const answered = (m: string) => Object.assign(new Error(m), { status: r.status });
+          if (body.err && body.err !== 'OK') throw answered(body.err);
+          if (!s || s.err !== 'OK' || !s.res) throw answered(`${meth}: ${s?.err ?? 'no answer'} ${s?.errTxt ?? ''}`.trim());
+          return { res: s.res, common: s.res.common ?? {} };
+        },
+        {
+          // Once, on a 5xx, a 429 or a network error (not a timeout: that took 15 s already), and only with a token of
+          // its own from the shared limit: a retry never takes the map's or a board's turn beyond the 30 a minute.
+          attempts: 2,
+          baseMs: 500,
+          sleep: this.sleep,
+          retryOn: (e) => !isTimeout(e) && isTransient(e) && this.available() && this.limiter.tryTake(this.now()),
+        },
+      );
       this.fails = 0;
       feedOk('rejseplanen', this.now());
-      return { res: s.res, common: s.res.common ?? {} };
+      return out;
     } catch (e) {
+      // One failure per call, however many tries it took.
       if (++this.fails >= FAILS_TO_REST) this.restUntil = this.now() + REST_MS;
       feedFailed('rejseplanen', e, this.now());
       throw e;

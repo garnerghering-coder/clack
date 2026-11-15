@@ -36,10 +36,15 @@ describe('rate limiting', () => {
     for (let i = 0; i < 5; i++) expect((await hit('/api/things', { 'x-clack-user': A })).statusCode).toBe(200);
     const over = await hit('/api/things', { 'x-clack-user': A });
     expect(over.statusCode).toBe(429);
-    expect(over.headers['retry-after']).toBeDefined();
+    // Retry-After in whole seconds (at most the minute's window), the same wait the body names.
+    const retryAfter = String(over.headers['retry-after']);
+    expect(retryAfter).toMatch(/^\d+$/);
+    expect(Number(retryAfter)).toBeGreaterThanOrEqual(1);
+    expect(Number(retryAfter)).toBeLessThanOrEqual(60);
     const body = over.json();
     expect(body.statusCode).toBe(429);
     expect(body.error).toMatch(/too many requests, try again in \d+ seconds/);
+    expect(body.error).toContain(`in ${retryAfter} seconds`);
   });
 
   it('counts each phone id on its own, and the ?u= form counts as the same id', async () => {

@@ -6,6 +6,7 @@
 // license CC 4.0 BY".
 import { config } from '../env.js';
 import { feedFailed, feedOk } from '../lib/health.js';
+import { realSleep, retryAfterMs as readRetryAfter, withRetry } from '../lib/retry.js';
 
 export const DIGITRAFFIC_BASE = 'https://rata.digitraffic.fi/api/v1/';
 export const DIGITRAFFIC_CREDIT = 'Source: Fintraffic / digitraffic.fi, license CC 4.0 BY';
@@ -21,6 +22,7 @@ export class DigitrafficError extends Error {
   constructor(
     message: string,
     readonly status?: number,
+    readonly retryAfterMs: number | null = null,
   ) {
     super(message);
   }
@@ -73,52 +75,39 @@ export interface DigitrafficOptions {
   timeoutMs?: number;
 }
 
-const realSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+/** Seconds or an HTTP date in Retry-After, as a wait in ms (capped at a minute); null when absent or unreadable. */
+export const retryAfterMs = (h: string | null, now = Date.now()) => readRetryAfter(h, now, MAX_WAIT_MS);
 
-/** Seconds or an HTTP date in Retry-After, as a wait in ms (capped); null when absent or unreadable. */
-export function retryAfterMs(h: string | null, now = Date.now()): number | null {
-  if (!h) return null;
-  const secs = Number(h);
-  const ms = Number.isFinite(secs) ? secs * 1000 : Date.parse(h) - now;
-  return Number.isFinite(ms) && ms >= 0 ? Math.min(ms, MAX_WAIT_MS) : null;
-}
-
-/** GET `path` (relative to the API base, or a full URL) with the right headers, the limiter and retries on 429/5xx. */
+/**
+ * GET `path` (relative to the API base, or a full URL) with the right headers, the limiter and retries on 429/5xx and
+ * network errors (lib/retry.ts): 1, 2, 4 s without jitter, Retry-After on a 429 (else at least 10 s), every try
+ * taking a token from the limiter.
+ */
 export async function digitrafficFetch(path: string, opts: DigitrafficOptions = {}): Promise<Response> {
   const url = /^https?:/.test(path) ? path : DIGITRAFFIC_BASE + path.replace(/^\//, '');
   const fetchImpl = opts.fetchImpl ?? fetch;
   const sleep = opts.sleep ?? realSleep;
   const limiter = opts.limiter ?? sharedLimiter;
-  const attempts = opts.maxAttempts ?? MAX_ATTEMPTS;
-  let last: Error = new DigitrafficError('no attempt made');
-  for (let attempt = 1; attempt <= attempts; attempt++) {
-    for (let w = limiter.waitMs(); w > 0; w = limiter.waitMs()) await sleep(w);
-    limiter.tryTake();
-    let wait = BACKOFF_MS * 2 ** (attempt - 1);
-    let fatal = false;
-    try {
-      const res = await fetchImpl(url, { headers: digitrafficHeaders(opts.user, opts.accept), signal: AbortSignal.timeout(opts.timeoutMs ?? TIMEOUT_MS) });
-      if (res.ok) {
-        feedOk('digitraffic');
-        return res;
-      }
-      const body = (await res.text().catch(() => '')).slice(0, 200);
-      last = new DigitrafficError(`Digitraffic ${res.status}: ${body}`, res.status);
+  try {
+    return await withRetry(
+      async () => {
+        for (let w = limiter.waitMs(); w > 0; w = limiter.waitMs()) await sleep(w);
+        limiter.tryTake();
+        const res = await fetchImpl(url, { headers: digitrafficHeaders(opts.user, opts.accept), signal: AbortSignal.timeout(opts.timeoutMs ?? TIMEOUT_MS) });
+        if (res.ok) {
+          feedOk('digitraffic');
+          return res;
+        }
+        const body = (await res.text().catch(() => '')).slice(0, 200);
+        throw new DigitrafficError(`Digitraffic ${res.status}: ${body}`, res.status, res.status === 429 ? retryAfterMs(res.headers.get('retry-after')) : null);
+      },
       // 4xx other than 429 is our mistake (wrong path, missing header): retrying won't help.
-      if (res.status !== 429 && res.status < 500) {
-        feedFailed('digitraffic', last);
-        fatal = true;
-        throw last;
-      }
-      if (res.status === 429) wait = retryAfterMs(res.headers.get('retry-after')) ?? Math.max(wait, 10_000);
-    } catch (e) {
-      if (fatal) throw e;
-      last = e as Error;
-    }
-    if (attempt < attempts) await sleep(wait);
+      { attempts: opts.maxAttempts ?? MAX_ATTEMPTS, baseMs: BACKOFF_MS, capMs: MAX_WAIT_MS, jitter: 'none', rateLimitedMinMs: 10_000, retryAfterCapMs: MAX_WAIT_MS, sleep },
+    );
+  } catch (e) {
+    feedFailed('digitraffic', e);
+    throw e;
   }
-  feedFailed('digitraffic', last);
-  throw last;
 }
 
 export async function fetchJson<T>(path: string, opts: DigitrafficOptions = {}): Promise<T> {

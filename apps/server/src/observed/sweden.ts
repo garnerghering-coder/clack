@@ -55,15 +55,8 @@ export async function fetchDay(date: string, opts: { fetchImpl?: typeof fetch } 
     const from = iso(start + h * 3600_000);
     const to = iso(start + (h + SLICE_HOURS) * 3600_000);
     const q = `<QUERY objecttype="TrainAnnouncement" schemaversion="1.9"><FILTER><AND><GTE name="AdvertisedTimeAtLocation" value="${from}"/><LT name="AdvertisedTimeAtLocation" value="${to}"/></AND></FILTER></QUERY>`;
-    let rows: Announcement[] | undefined;
-    for (let attempt = 1; !rows; attempt++) {
-      try {
-        rows = ((await trvQuery<{ TrainAnnouncement?: Announcement[] }>(q, opts.fetchImpl)).TrainAnnouncement ?? []) as Announcement[];
-      } catch (e) {
-        if (attempt >= 3) throw e;
-        await new Promise((r) => setTimeout(r, 5_000 * attempt));
-      }
-    }
+    // Three tries, any failure (an hour of the record is worth the wait), about 5 s and 10 s apart (lib/retry.ts).
+    const rows = ((await trvQuery<{ TrainAnnouncement?: Announcement[] }>(q, opts.fetchImpl, { attempts: 3, baseMs: 5_000, retryOn: () => true })).TrainAnnouncement ?? []) as Announcement[];
     for (const a of rows) if (serviceDateOf(a) === date) out.push(a);
   }
   return out;

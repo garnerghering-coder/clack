@@ -1,10 +1,20 @@
 // Trafikverket Open API client. The key never leaves the server.
 import { config } from '../env.js';
 import { feedFailed, feedOk } from '../lib/health.js';
+import { isTimeout, isTransient, retryAfterMs, withRetry, type RetryOptions } from '../lib/retry.js';
 
 const URL = 'https://api.trafikinfo.trafikverket.se/v2/data.json';
 
-export class TrafikverketError extends Error {}
+export class TrafikverketError extends Error {
+  constructor(
+    message: string,
+    /** The HTTP status; none for an error in a 200 answer (the query's fault). */
+    readonly status?: number,
+    readonly retryAfterMs: number | null = null,
+  ) {
+    super(message);
+  }
+}
 
 /**
  * Nationwide queries take Trafikverket 10–60 s (measured 2026-10-21; one station is under a second), and past
@@ -12,29 +22,36 @@ export class TrafikverketError extends Error {}
  */
 const TIMEOUT_MS = 90_000;
 
+/**
+ * Retried by default (lib/retry.ts): a 5xx, a 429 or a network error, once, after about a second. Not a timeout (a
+ * second 90 s wait helps no one waiting on a board) nor a 4xx or an error in the answer (the query's fault). Callers
+ * that can wait pass their own (observed/sweden.ts, livemap/announcements.ts).
+ */
+const TRV_RETRY: RetryOptions = { attempts: 2, baseMs: 1000, retryOn: (e) => !isTimeout(e) && isTransient(e) };
+
 /** POST one <QUERY> and return its result object (e.g. { TrainStation: [...] }). */
-export async function trvQuery<T = Record<string, unknown[]>>(query: string, fetchImpl: typeof fetch = fetch): Promise<T> {
+export async function trvQuery<T = Record<string, unknown[]>>(query: string, fetchImpl: typeof fetch = fetch, retry: RetryOptions = {}): Promise<T> {
   if (!config.trafikverketApiKey) throw new TrafikverketError('TRAFIKVERKET_API_KEY is not set in .env');
   const body = `<REQUEST><LOGIN authenticationkey="${config.trafikverketApiKey}" />${query}</REQUEST>`;
-  let res: Response;
-  let text: string;
   try {
-    res = await fetchImpl(URL, { method: 'POST', headers: { 'Content-Type': 'text/xml' }, body, signal: AbortSignal.timeout(TIMEOUT_MS) });
-    text = await res.text();
+    const result = await withRetry(async () => {
+      const res = await fetchImpl(URL, { method: 'POST', headers: { 'Content-Type': 'text/xml' }, body, signal: AbortSignal.timeout(TIMEOUT_MS) });
+      const text = await res.text();
+      if (!res.ok) throw new TrafikverketError(`Trafikverket ${res.status}: ${text.slice(0, 300)}`, res.status, retryAfterMs(res.headers.get('retry-after')));
+      const r = JSON.parse(text).RESPONSE.RESULT[0];
+      // An error inside a 2xx answer (RESULT[0].ERROR) keeps that status: not retried by default, the feed is up.
+      if (r.ERROR) throw new TrafikverketError(`Trafikverket: ${r.ERROR.MESSAGE}`, res.status);
+      return r as T;
+    }, { ...TRV_RETRY, ...retry });
+    feedOk('trafikverket');
+    return result;
   } catch (e) {
-    feedFailed('trafikverket', e);
+    const status = (e as TrafikverketError).status;
+    // The feed answered: the query's fault (a 4xx says nothing about the feed either way).
+    if (status !== undefined && status < 300) feedOk('trafikverket');
+    else if (status === undefined || status >= 500 || status === 429) feedFailed('trafikverket', e);
     throw e;
   }
-  if (!res.ok) {
-    const e = new TrafikverketError(`Trafikverket ${res.status}: ${text.slice(0, 300)}`);
-    // A 4xx is our query's fault, not the feed's.
-    if (res.status >= 500 || res.status === 429) feedFailed('trafikverket', e);
-    throw e;
-  }
-  feedOk('trafikverket');
-  const result = JSON.parse(text).RESPONSE.RESULT[0];
-  if (result.ERROR) throw new TrafikverketError(`Trafikverket: ${result.ERROR.MESSAGE}`);
-  return result as T;
 }
 
 export interface TrvStation {
