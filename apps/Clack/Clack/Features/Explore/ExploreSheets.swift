@@ -476,19 +476,25 @@ struct LiveStationSheet: View {
 
     var body: some View {
         LiveSheetCard {
-            HStack(spacing: Space.s) {
-                Text(name).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(2)
-                Spacer(minLength: 0)
-                IconButton(
-                    icon: "star", label: l10n.t(favorite ? "stations.unfavorite" : "stations.favorite"), size: .overMap, selected: favorite
-                ) { Task { await toggleFavorite() } }
-                    .haptic(.selection, trigger: favoriteTaps)
-                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
-            }
-            if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
-            // Yours: how often you've been here, from your Passport (designer, 2026-11-14: "make it personal").
-            if let visits = passport.data?.stations.first(where: { $0.id == id })?.count, visits > 0 {
-                Text(visits == 1 ? l10n.t("station.visitedOne") : l10n.t("station.visited", ["count": String(visits)])).clack(.caption).foregroundStyle(Ink.text2)
+            // One tight header (designer, build 87: D10, the name, county and visits read loose): the name, then the
+            // county and how often you've been here on one line under it.
+            VStack(alignment: .leading, spacing: Space.xxs) {
+                HStack(spacing: Space.s) {
+                    Text(name).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(2)
+                    Spacer(minLength: 0)
+                    IconButton(
+                        icon: "star", label: l10n.t(favorite ? "stations.unfavorite" : "stations.favorite"), size: .overMap, selected: favorite
+                    ) { Task { await toggleFavorite() } }
+                        .haptic(.selection, trigger: favoriteTaps)
+                    IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
+                }
+                // Yours: how often you've been here, from your Passport (designer, 2026-11-14: "make it personal").
+                let visits = passport.data?.stations.first(where: { $0.id == id })?.count ?? 0
+                let sub = Format.join([
+                    info?.county,
+                    visits > 0 ? (visits == 1 ? l10n.t("station.visitedOne") : l10n.t("station.visited", ["count": String(visits)])) : nil,
+                ])
+                if !sub.isEmpty { Text(sub).clack(.caption).foregroundStyle(Ink.text2) }
             }
             // The way on first, under the name (owner, 2026-11-15: the buttons sat under the whole list): the station
             // map and the full board, then the next few trains.

@@ -269,22 +269,27 @@ struct PassportScreen: View {
                 // under it (designer, 2026-11-14: "67% on time" rested on 6 of 112 trains).
                 if d.basedOn < Self.headlineMinimum {
                     Text(l10n.t("passport.basedOn", count: d.basedOn)).clack(.headline).foregroundStyle(Ink.text)
-                    Text("\(Int((d.onTimePct ?? 0).rounded()))% \(l10n.t("passport.onTime"))").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                    Text("\(Int((d.onTimePct ?? 0).rounded()))% \(l10n.t("passport.onTime"))").clack(.banner).monospacedDigit().foregroundStyle(Ink.text)
                 } else {
                     HStack(alignment: .firstTextBaseline, spacing: Space.m) {
                         Text("\(Int((d.onTimePct ?? 0).rounded()))%").clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
                             .contentTransition(.numericText(value: d.onTimePct ?? 0))
-                        Text(l10n.t("passport.onTime")).clack(.caption).foregroundStyle(Ink.text2)
+                        // The figure's words in the text ink, so the headline reads as one (designer, build 87: D13).
+                        Text(l10n.t("passport.onTime")).clack(.banner).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 SegmentedBar(segments: bands.map { .init(id: $0.key, count: $0.count, color: $0.band.fill) })
                 VStack(alignment: .leading, spacing: Space.xs) {
                     ForEach(bands, id: \.key) { band in
-                        HStack(spacing: Space.xs) {
-                            Circle().fill(band.band.fill).frame(width: 8, height: 8)
-                            Text("\(l10n.t("passport.bands.\(band.key)")) · \(band.count) (\(total > 0 ? Int((100 * Double(band.count) / Double(total)).rounded()) : 0)%)")
+                        // Each band a line of its own: the name, then its count and share, both in the text ink.
+                        HStack(spacing: Space.s) {
+                            Circle().fill(band.band.fill).frame(width: 8, height: 8).accessibilityHidden(true)
+                            Text(l10n.t("passport.bands.\(band.key)")).clack(.caption).fontWeight(.medium)
+                            Spacer(minLength: Space.s)
+                            Text("\(band.count) · \(total > 0 ? Int((100 * Double(band.count) / Double(total)).rounded()) : 0)%").clack(.caption).fontWeight(.semibold).monospacedDigit()
                         }
-                        .clack(.caption).foregroundStyle(Ink.text2)
+                        .foregroundStyle(Ink.text)
+                        .accessibilityElement(children: .combine)
                     }
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: Space.m, alignment: .top)], spacing: Space.m) {
@@ -319,16 +324,17 @@ struct PassportScreen: View {
         return Card {
             Text(l10n.t("passport.co2")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             (Text(grouped(c.savedKg)) + Text(" kg").font(TextRole.bigUnit.font).foregroundStyle(Ink.text2)).clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
-            Text(l10n.t("passport.co2Saved", ["mode": mode])).clack(.caption).foregroundStyle(Ink.text2)
+            Text(l10n.t("passport.co2Saved", ["mode": mode])).clack(.banner).foregroundStyle(Ink.text)
             // Flying or a petrol car (owner feedback 2026-10-21); the same setting as in Settings, saved (2026-11-07).
             SegmentedControl(
                 selection: Binding(get: { activeComparison }, set: { value in Task { await app.update(SettingsPatch(co2Comparison: value)) } }),
                 options: Settings.co2Choices.map { ($0, $0 == .flight ? l10n.t("passport.co2Flying") : l10n.t("passport.co2Car")) }, small: true
             )
-            // The method, in a line, where the number is (designer, 2026-11-14: "sanity-check it or show the method").
-            Text(l10n.t("passport.co2Method")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+            // The two figures behind the number in the text ink, then the method as the one quiet line (designer,
+            // 2026-11-14: "sanity-check it or show the method"; build 87: D13, stacked grey captions).
             Text(l10n.t("passport.co2Detail", ["train": c.trainKg < 10 ? Format.number(c.trainKg, fraction: 1, minFraction: 1, language: lang) : grouped(c.trainKg), "other": grouped(c.comparisonKg), "mode": mode]))
-                .clack(.caption).foregroundStyle(Ink.text2)
+                .clack(.caption).fontWeight(.medium).monospacedDigit().foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
+            Text(l10n.t("passport.co2Method")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
             NavigationLink(value: AppRoute.about) { DisclosureRowLabel(title: l10n.t("passport.howWeCalculate")) }
                 .buttonStyle(.pressRow)
         }

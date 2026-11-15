@@ -6,8 +6,9 @@
 import ClackCore
 import SwiftUI
 
-/// `.platform-chip`: a platform number in a small tag (radius 6). Changed, it is written in the late ink on a faint late
-/// tint, with the old number struck through before it.
+/// `.platform-chip`: a platform number in a small tag (radius 6). The number is the row's anchor beside the time, so it
+/// is body-sized and bold (designer, build 87: "track numbers lack weight"). Changed, it is written in the late ink on a
+/// faint late tint, with the old number struck through before it.
 public struct PlatformTag: View {
     @Environment(L10n.self) private var l10n
     public let platform: String
@@ -22,17 +23,15 @@ public struct PlatformTag: View {
         let changed = changedFrom != nil
         HStack(spacing: Space.xs) {
             if let changedFrom, !changedFrom.isEmpty {
-                Text(changedFrom).strikethrough().foregroundStyle(Ink.text3).fontWeight(.medium)
+                Text(changedFrom).clack(.chip).strikethrough().foregroundStyle(Ink.text3).fontWeight(.medium)
             }
-            Text(platform)
+            Text(platform).clack(.rowTitle).fontWeight(.bold)
         }
-        .clack(.chip)
-        .fontWeight(.bold)
         .monospacedDigit()
         .foregroundStyle(changed ? Ink.lateInk : Ink.text)
         .padding(.vertical, Space.xxs)
         .padding(.horizontal, Space.s)
-        .frame(minWidth: 32)
+        .frame(minWidth: 36)
         .background(changed ? Ink.late.opacity(0.18) : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
         .fixedSize()
         .accessibilityElement(children: .ignore)
@@ -53,12 +52,12 @@ public struct UnknownPlatformTag: View {
 
     public var body: some View {
         let tag = Text(verbatim: "—")
-            .clack(.chip)
+            .clack(.rowTitle)
             .fontWeight(.bold)
             .foregroundStyle(onSet == nil ? Ink.text3 : Ink.text2)
             .padding(.vertical, Space.xxs)
             .padding(.horizontal, Space.s)
-            .frame(minWidth: 32)
+            .frame(minWidth: 36)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
             .fixedSize()
         if let onSet {

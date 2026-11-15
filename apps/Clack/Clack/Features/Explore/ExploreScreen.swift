@@ -231,6 +231,11 @@ struct ExploreScreen: View {
             try? await Task.sleep(for: .seconds(3))
             model.showFilters = true
         }
+        // `-exploreLegend` opens the map's key (ⓘ).
+        if args.contains("-exploreLegend") {
+            try? await Task.sleep(for: .seconds(3))
+            model.legend = true
+        }
         guard let at = args.firstIndex(of: "-exploreSearch") else { return }
         let text = args.indices.contains(at + 1) ? args[at + 1] : ""
         try? await Task.sleep(for: .seconds(3))
@@ -440,35 +445,80 @@ struct ExploreScreen: View {
         .hairlineBorder(radius: Radius.controlSm)
     }
 
+    /// The map's key (ⓘ): every mark the live map draws, each swatch drawn as the map draws it (`MapStyle`
+    /// `liveTrainLayers`), then what the colours mean for the current "Colour by" (designer, build 87: D6).
     private var legendCard: some View {
-        VStack(alignment: .leading, spacing: Space.s) {
-            legendRow(l10n.t("liveMap.legendTrain")) { Circle().fill(Ink.text2).overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 1)).frame(width: 10, height: 10) }
-            legendRow(l10n.t("liveMap.legendStation")) {
-                RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: Radius.bar).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
+        let dot = Circle().fill(Ink.text2).overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 1)).frame(width: 8, height: 8)
+        return ScrollView {
+            VStack(alignment: .leading, spacing: Space.s) {
+                legendRow(l10n.t("liveMap.legendTrain")) { dot.frame(width: 10, height: 10) }
+                // `train-mine`: a yellow halo, filled faintly.
+                legendRow(l10n.t("liveMap.legendMine")) {
+                    ZStack { Circle().fill(Ink.accent.opacity(0.28)).overlay(Circle().strokeBorder(Ink.accent, lineWidth: 2)); dot }.frame(width: 20, height: 20)
+                }
+                // `train-followed`: a ring in the text colour.
+                legendRow(l10n.t("liveMap.legendFollowed")) {
+                    ZStack { Circle().strokeBorder(Ink.text, lineWidth: 2); dot }.frame(width: 18, height: 18)
+                }
+                legendRow(l10n.t("liveMap.legendStation")) {
+                    RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: Radius.bar).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
+                }
+                legendRow(l10n.t("liveMap.legendDone")) { RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.accent).frame(width: 22, height: 4) }
+                legendRow(l10n.t("liveMap.legendAhead")) { dashed(Ink.accent, dash: [4, 3]) }
+                Divider()
+                // `corridor-glow` under `corridor-body`, then `train-corridor`, `disruption-lines` (works, closures).
+                legendRow(l10n.t("liveMap.legendSlow")) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.late.opacity(0.25)).frame(width: 22, height: 9).blur(radius: 1.5)
+                        RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.late).frame(width: 22, height: 4)
+                    }
+                }
+                legendRow(l10n.t("liveMap.legendSlowTrain")) {
+                    ZStack { Circle().strokeBorder(Ink.late, lineWidth: 2.5); dot }.frame(width: 18, height: 18)
+                }
+                legendRow(l10n.t("network.kind.works")) { dashed(Ink.late) }
+                legendRow(l10n.t("network.kind.closure")) { dashed(Ink.veryLate) }
+                Divider()
+                VStack(alignment: .leading, spacing: Space.xs) {
+                    Text(l10n.t("liveMap.legendColourBy", ["mode": l10n.t("liveMap.colorBy.\(model.controller.display.colorBy.rawValue)")]))
+                        .foregroundStyle(Ink.text)
+                    ColorByLegend(by: model.controller.display.colorBy)
+                }
+                InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
+                // The full credits, here and in Settings › About.
+                Divider()
+                Text(l10n.t("liveMap.credits")).fixedSize(horizontal: false, vertical: true)
+                if let credit = model.laserCredit3D { Text(l10n.t("explore.credit.\(credit)")).fixedSize(horizontal: false, vertical: true) }
             }
-            legendRow(l10n.t("liveMap.legendDone")) { RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.accent).frame(width: 22, height: 4) }
-            legendRow(l10n.t("liveMap.legendAhead")) {
-                Rectangle().stroke(Ink.accent, style: StrokeStyle(lineWidth: 4, dash: [4, 3])).frame(width: 22, height: 4)
-            }
-            InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
-            // The full credits, here and in Settings › About.
-            Divider()
-            Text(l10n.t("liveMap.credits")).fixedSize(horizontal: false, vertical: true)
-            if let credit = model.laserCredit3D { Text(l10n.t("explore.credit.\(credit)")).fixedSize(horizontal: false, vertical: true) }
+            .clack(.caption).foregroundStyle(Ink.text2)
+            .padding(.vertical, Space.l).padding(.horizontal, Space.l)
         }
-        .clack(.caption).foregroundStyle(Ink.text2)
-        .padding(.vertical, Space.l).padding(.horizontal, Space.l)
-        .frame(maxWidth: 280, alignment: .leading)
+        .scrollBounceBehavior(.basedOnSize)
+        .frame(maxWidth: 280, maxHeight: max(240, containerBottom * 0.62), alignment: .leading)
+        .fixedSize(horizontal: false, vertical: true)
         .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
     }
 
+    /// A dashed line as the map dashes track work and closures (`disruption-lines`: dash 1.2 × width, gap 1 × width).
+    /// One line, dashed (a rectangle's stroke would dash its outline twice over).
+    private func dashed(_ color: Color, dash: [CGFloat] = [5, 4]) -> some View {
+        Path { p in
+            p.move(to: CGPoint(x: 0, y: 2))
+            p.addLine(to: CGPoint(x: 22, y: 2))
+        }
+        .stroke(color, style: StrokeStyle(lineWidth: 4, dash: dash))
+        .frame(width: 22, height: 4)
+    }
+
+    /// One key line: the swatch in a fixed column, the words beside it, read as one by VoiceOver (the words say it).
     private func legendRow<Mark: View>(_ text: String, @ViewBuilder mark: () -> Mark) -> some View {
         HStack(spacing: Space.s) {
-            mark().frame(width: 22)
-            Text(text)
+            mark().frame(width: 22).accessibilityHidden(true)
+            Text(text).fixedSize(horizontal: false, vertical: true)
         }
+        .accessibilityElement(children: .combine)
     }
 
     // MARK: sheets (one at a time; a selected train hides the others)

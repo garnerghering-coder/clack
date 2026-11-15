@@ -58,13 +58,24 @@ struct NetworkPanel: View {
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let status {
-                yours(status)
+                // The overview first (rings, counts), then two groups apart (designer, build 87: D7, "train delays and
+                // track problems mixed"): what trains are doing, then what's wrong with the track.
                 countries(status)
                 counts(status)
-                corridors(status)
-                onTrack(status)
-                if let groups = status.cancelled, !groups.isEmpty { cancelled(groups, tz: TimeZone.current.identifier) }
-                if !status.late.isEmpty { lateTrains(status) }
+                let trains = (mine?.isEmpty == false) || !status.corridors.isEmpty || !(status.cancelled ?? []).isEmpty || !status.late.isEmpty
+                let track = !(status.disruptions ?? []).isEmpty
+                if trains {
+                    group("network.groupTrains") {
+                        yours(status)
+                        corridors(status)
+                        if let groups = status.cancelled, !groups.isEmpty { cancelled(groups, tz: TimeZone.current.identifier) }
+                        if !status.late.isEmpty { lateTrains(status) }
+                    }
+                }
+                if trains && track { Divider().overlay(Ink.hairline) }
+                if track {
+                    group("network.groupTrack") { onTrack(status) }
+                }
                 InfoNote(l10n.t("network.about"), more: l10n.t("network.aboutBody", ["min": String(status.lateMin)]))
             } else if failed {
                 // Why, and when it asks again (the poll backs off); Try now sends the waiting ask at once.
@@ -212,6 +223,14 @@ struct NetworkPanel: View {
         .buttonStyle(.pressRow)
     }
 
+    /// A group's title (Trains, Track) above its lists, a step up from the lists' own headers.
+    private func group<Content: View>(_ key: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: Space.m) {
+            Text(l10n.t(key)).clack(.alertTitle).foregroundStyle(Ink.text).accessibilityAddTraits(.isHeader)
+            content()
+        }
+    }
+
     private func header(_ key: String) -> some View {
         Text(l10n.t(key)).clack(.captionUpper).foregroundStyle(Ink.text2)
     }
@@ -239,7 +258,6 @@ struct NetworkPanel: View {
         let list = (status.disruptions ?? []).sorted { (order[$0.kind] ?? 3, $0.country) < (order[$1.kind] ?? 3, $1.country) }
         if !list.isEmpty {
             VStack(alignment: .leading, spacing: 0) {
-                header("network.onTrack")
                 ForEach(allOnTrack ? list : Array(list.prefix(5))) { d in
                     let kind = l10n.t("network.kind.\(d.kind.rawValue)")
                     row(
@@ -349,7 +367,7 @@ enum NetworkWording {
     /// "3 trains cancelled from 18:19 · a bus replaces all", or "… · a bus replaces 1", or "… · no bus given".
     static func cancelledLine(_ g: NetworkStatus.CancelledGroup, l10n: L10n, tz: String, clock: ClockFormat) -> String {
         let head = l10n.t("network.cancelledTrains", count: g.trains, ["count": String(g.trains), "time": Format.time(g.firstAt, tz: tz, clock: clock)])
-        let bus = g.bus == 0 ? l10n.t("network.noBus") : g.bus == g.trains ? l10n.t("network.busAll") : l10n.t("network.busSome", ["count": String(g.bus)])
+        let bus = g.bus == 0 ? l10n.t("network.noBus") : g.bus == g.trains ? l10n.t(g.trains == 1 ? "network.busAllOne" : "network.busAll") : l10n.t("network.busSome", ["count": String(g.bus)])
         return "\(head) · \(bus)"
     }
 

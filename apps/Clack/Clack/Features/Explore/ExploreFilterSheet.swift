@@ -29,7 +29,7 @@ struct ExploreFilterSheet: View {
                         options: ExploreLogic.ColorBy.allCases.map { ($0, l10n.t("liveMap.colorBy.\($0.rawValue)")) }
                     )
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                    legend(model.controller.display.colorBy)
+                    ColorByLegend(by: model.controller.display.colorBy)
                 } header: {
                     Text(l10n.t("liveMap.colorBy"))
                 }
@@ -98,36 +98,6 @@ struct ExploreFilterSheet: View {
         }
     }
 
-    /// What the colours mean, under the picker; the operator mode needs no legend (the colour is the logo's).
-    @ViewBuilder
-    private func legend(_ by: ExploreLogic.ColorBy) -> some View {
-        let items: [(String, String)] = switch by {
-        case .operatorBrand: []
-        case .product: ExploreLogic.products.map { (ExploreLogic.productColors[$0] ?? ExploreLogic.otherColor, l10n.t("products.\($0)")) }
-        case .delay: [
-            (ExploreLogic.delayColors.onTime, l10n.t("liveMap.legend.onTime")), (ExploreLogic.delayColors.slight, "1–15"),
-            (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"), (ExploreLogic.delayColors.unknown, l10n.t("liveMap.legend.unknown")),
-        ]
-        case .country: ["SE", "NO", "DK", "FI"].map { (ExploreLogic.countryColors[$0]!, l10n.t("countries.\($0)")) }
-        case .lateOnly: [
-            (ExploreLogic.otherColor, l10n.t("liveMap.legend.onTimeOrSlight")), (ExploreLogic.delayColors.slight, "6–15"),
-            (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"),
-        ]
-        }
-        if items.isEmpty {
-            Text(l10n.t("liveMap.colorBy.operatorHint")).font(.footnote).foregroundStyle(.secondary)
-        } else {
-            FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
-                ForEach(items, id: \.1) { hex, name in
-                    HStack(spacing: Space.xs) {
-                        Circle().fill(operatorColor(hex, scheme: scheme)).frame(width: 10, height: 10)
-                        Text(name).font(.footnote).foregroundStyle(.secondary)
-                    }
-                }
-            }
-        }
-    }
-
     private func setColorBy(_ new: ExploreLogic.ColorBy) {
         var d = model.controller.display
         d.colorBy = new
@@ -158,5 +128,42 @@ struct ExploreFilterSheet: View {
             d.save()
             if path == \.myLocation && on { model.controller.showUserDot() }
         }))
+    }
+}
+
+/// What the dot colours mean for a "Colour by" choice, as dots with their words; the operator mode needs no key (the
+/// colour is the logo's). Under the filter sheet's picker and in the map's legend (ⓘ), one source for both.
+struct ColorByLegend: View {
+    @Environment(L10n.self) private var l10n
+    @Environment(\.colorScheme) private var scheme
+    let by: ExploreLogic.ColorBy
+
+    var body: some View {
+        let items: [(String, String)] = switch by {
+        case .operatorBrand: []
+        case .product: ExploreLogic.products.map { (ExploreLogic.productColors[$0] ?? ExploreLogic.otherColor, l10n.t("products.\($0)")) }
+        case .delay: [
+            (ExploreLogic.delayColors.onTime, l10n.t("liveMap.legend.onTime")), (ExploreLogic.delayColors.slight, "1–15"),
+            (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"), (ExploreLogic.delayColors.unknown, l10n.t("liveMap.legend.unknown")),
+        ]
+        case .country: ["SE", "NO", "DK", "FI"].map { (ExploreLogic.countryColors[$0]!, l10n.t("countries.\($0)")) }
+        case .lateOnly: [
+            (ExploreLogic.otherColor, l10n.t("liveMap.legend.onTimeOrSlight")), (ExploreLogic.delayColors.slight, "6–15"),
+            (ExploreLogic.delayColors.late, "16–30"), (ExploreLogic.delayColors.veryLate, "31+"),
+        ]
+        }
+        if items.isEmpty {
+            Text(l10n.t("liveMap.colorBy.operatorHint")).font(.footnote).foregroundStyle(.secondary)
+        } else {
+            FlowLayout(spacing: Space.m, lineSpacing: Space.s) {
+                ForEach(items, id: \.1) { hex, name in
+                    HStack(spacing: Space.xs) {
+                        Circle().fill(operatorColor(hex, scheme: scheme)).frame(width: 10, height: 10)
+                        Text(name).font(.footnote).foregroundStyle(.secondary)
+                    }
+                    .accessibilityElement(children: .combine)
+                }
+            }
+        }
     }
 }

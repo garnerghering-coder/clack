@@ -260,7 +260,11 @@ nonisolated enum MapStyle {
     /// detail (`station-platforms-3d`, `station-structures`, heights in metres above the rails, the map's flat ground)
     /// and every train's cars as boxes (`trains-close-3d`). Colours as the full-screen 3D view's; the camera tilts
     /// only where a station has measured structures (`ExploreModel.model3DZoom`).
-    /// Roofs are see-through (0.45) so the trains standing under them show (owner, 2026-10-30).
+    /// Roofs are see-through (0.45) so the trains standing under them show (owner, 2026-10-30). Buildings a shade
+    /// lighter and more see-through too (owner, build 87: "make the trains visible through them … but I still want them
+    /// there and noticed"); platforms keep their weight. The cars are drawn *before* the see-through structures: a
+    /// fill-extrusion writes depth, so a car drawn after a building behind it would be hidden; drawn first, it shows
+    /// through the building's and the roof's colour.
     static func stationModelLayers(_ c: Colors, dark isDark: Bool) -> [[String: Any]] {
         let height: [Any] = ["get", "height"], base: [Any] = ["get", "base"]
         return [
@@ -269,18 +273,18 @@ nonisolated enum MapStyle {
                 "paint": ["fill-extrusion-color": ["case", ["==", ["get", "cls"], "sector"], c.text, isDark ? "#4a4a4a" : "#d6d6d6"], "fill-extrusion-height": height, "fill-extrusion-base": 0, "fill-extrusion-opacity": 0.95],
             ],
             [
+                "id": "model-cars", "type": "fill-extrusion", "source": "trains-close-3d", "minzoom": 15,
+                "paint": ["fill-extrusion-color": ["get", "color"], "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 1],
+            ],
+            [
                 "id": "model-buildings", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
                 "filter": ["==", ["get", "cls"], "building"],
-                "paint": ["fill-extrusion-color": isDark ? "#2e2e2e" : "#e6e6e6", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.85],
+                "paint": ["fill-extrusion-color": isDark ? "#3a3a3a" : "#e2e2e2", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.7],
             ],
             [
                 "id": "model-roofs", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
                 "filter": ["==", ["get", "cls"], "roof"],
                 "paint": ["fill-extrusion-color": isDark ? "#3a3a3a" : "#c4c4c4", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.45],
-            ],
-            [
-                "id": "model-cars", "type": "fill-extrusion", "source": "trains-close-3d", "minzoom": 15,
-                "paint": ["fill-extrusion-color": ["get", "color"], "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 1],
             ],
         ]
     }

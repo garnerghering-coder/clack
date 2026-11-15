@@ -34,7 +34,7 @@ Black, white and greys carry the interface; **signal yellow** is the one accent.
 | `accent` | `#F8D64A` | `#F8D64A` | Signal yellow fills; black type on top (`on-accent` `#0A0A0A`) |
 | `accent-ink` | `#F8D64A` | `#0A0A0A` | Accent as text or icon (links, active tab icon) |
 
-Maps follow the theme (dark: `#151515` land on `#0A0A0A` water; light: `#F7F7F7` land on `#DFE2E5` water). The strong colour for unknown operators and live-map clusters is yellow on dark and black on light; your own train on the live map always gets a yellow halo.
+Maps follow the theme (dark: `#151515` land on `#0A0A0A` water; light: `#F7F7F7` land on `#DFE2E5` water). The strong colour for unknown operators is yellow on dark and black on light (Explore never groups trains into clusters, at any zoom: owner, 2026-10-27); your own train on the live map always gets a yellow halo.
 
 **Delay colors (final, owner-approved bands).** Applied to delay badges, stop times, timeline segments and the Passport delay chart. *Always* show the number or word too (e.g. "+8"), never color alone.
 
@@ -85,7 +85,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. On a dep
 Shared pieces, one spec each; the screens use these instead of their own copies.
 
 - **StopTimeline** (StopRail + StopRow): 2 pt rail; travelled = operator colour, ahead dotted, not ridden = hairline. Dots 10 pt, 14 pt at your stops. Time on the right in split-flap .sm in band ink, scheduled struck in caption. Platform in a fixed column with PlatformTag. A compact variant.
-- **BoardRow**: time as FlapTime text; destination in rowTitle 600; via and service in caption; PlatformTag; DelayText. A compact variant.
+- **BoardRow**: time as FlapTime text; destination in rowTitle 600; via and service in caption; PlatformTag (the number body-sized and bold, the row's anchor: build 87); DelayText (a delay, a cancellation and "Bus replaced" bold in their full ink, the bus line in `late-ink`; "On time" quiet in text-2 at medium). A changed platform and its "Changed" in `late-ink`, semibold. A compact variant.
 - **StatusLine**: one line of written status. Live with an 8 pt pulsing dot in on-time ink, stale, upcoming, boarding, on its way, arrived, cancelled, estimated.
 - **ServiceHeader**: OperatorBadge at 20/28/36 only, "SJ 529", optional category chip and StatusLine.
 - **TimePair**: "08:03 – 10:51", one "+1" style (captionUpper, inline), monospaced digits.
@@ -116,7 +116,9 @@ lighter (the flat car lines hand over at 15). Near a station with measured struc
 16 and flattens again below 15.5 or away from it; tilting by hand is allowed only then. The ground stays flat at rail
 level (MapLibre on iOS draws no terrain). The attribution line adds Lantmäteriet's credit while its heights are shown. Station names, platform numbers and train labels draw over the 3D (owner, 2026-10-30). A selected train shown as cars
 gets a signal-yellow outline on the ground round them instead of the ring, and the camera keeps it centred in the
-space above its sheet until the map is dragged. Roofs on Explore are at 45 % opacity so trains under them show.
+space above its sheet until the map is dragged. Roofs on Explore are at 45 % opacity so trains under them show;
+buildings a shade lighter at 70 % (owner, build 87: trains visible through them, the buildings still there and
+noticed), drawn after the cars so a train inside or behind one shows through it. Platforms keep their weight (95 %).
 
 **Platform sectors (owner, 2026-10-30):** a platform with lettered sectors ("2a", "2b") shows them as separate pieces
 when close, on Explore and on the station map: a line across the platform in the text ink where one sector meets the

@@ -114,7 +114,7 @@ public struct BoardRowView<Badge: View>: View {
             Spacer(minLength: 0)
             VStack(alignment: .trailing, spacing: Space.xs) {
                 if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) }
-                if line.platformFrom != nil { Text(l10n.t("board.changed")).clack(.caption).foregroundStyle(Ink.lateInk) }
+                if line.platformFrom != nil { Text(l10n.t("board.changed")).clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.lateInk) }
                 delay
                 if let done = line.done { Text(done).clack(.caption).foregroundStyle(Ink.text2) }
             }
@@ -148,7 +148,7 @@ public struct BoardRowView<Badge: View>: View {
             Group {
                 if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) } else { UnknownPlatformTag() }
             }
-            .frame(minWidth: 36, alignment: .trailing)
+            .frame(minWidth: 40, alignment: .trailing)
         }
         .frame(minHeight: dense ? nil : 44)
     }

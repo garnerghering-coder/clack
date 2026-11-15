@@ -45,11 +45,14 @@ public struct DelayText: View {
 
     public var body: some View {
         let band = DelayBand(delayMin: delay, canceled: canceled)
+        let quiet = mutedOnTime && band == .onTime
         Text(canceled && replacedByBus ? l10n.t("delay.busReplaced") : label(band))
             .clack(.delay)
-            .fontWeight(band == .unknown ? .semibold : .bold)
+            // Trouble in its full ink and bold; a quiet "On time" (a board) in text-2 at medium, so it doesn't compete.
+            .fontWeight(quiet ? .medium : band == .unknown ? .semibold : .bold)
             .monospacedDigit()
-            .foregroundStyle(canceled && replacedByBus ? Ink.late : (mutedOnTime && band == .onTime ? Ink.text2 : band.ink))
+            // The bus line in the late *ink*: the late fill is too light to read as text on white (designer, build 87).
+            .foregroundStyle(canceled && replacedByBus ? Ink.lateInk : (quiet ? Ink.text2 : band.ink))
             .lineLimit(1)
             .fixedSize()
     }

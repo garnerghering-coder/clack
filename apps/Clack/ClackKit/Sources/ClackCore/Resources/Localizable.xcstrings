@@ -90380,6 +90380,483 @@
           }
         }
       }
+    },
+    "liveMap.legendMine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yellow halo: your train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gult sken: ditt tåg"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gult skær: dit tog"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gul glorie: toget ditt"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keltainen hehku: junasi"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gelber Schein: dein Zug"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Żółta poświata: twój pociąg"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Halo jaune : votre train"
+          }
+        }
+      }
+    },
+    "liveMap.legendFollowed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ring: a train you follow"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ring: ett tåg du följer"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ring: et tog, du følger"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ring: et tog du følger"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rengas: seuraamasi juna"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ring: ein Zug, dem du folgst"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Obwódka: pociąg, który obserwujesz"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anneau : un train que vous suivez"
+          }
+        }
+      }
+    },
+    "liveMap.legendSlow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange line: a slow stretch, most trains late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange linje: en trög sträcka, de flesta tåg sena"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orange linje: en langsom strækning, de fleste tog forsinkede"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oransje linje: en treg strekning, de fleste tog forsinket"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oranssi viiva: hidas osuus, useimmat junat myöhässä"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orange Linie: ein langsamer Abschnitt, die meisten Züge verspätet"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pomarańczowa linia: wolny odcinek, większość pociągów opóźniona"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ligne orange : un tronçon lent, la plupart des trains en retard"
+          }
+        }
+      }
+    },
+    "liveMap.legendSlowTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange ring: a late train on that stretch"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange ring: ett försenat tåg på sträckan"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orange ring: et forsinket tog på strækningen"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oransje ring: et forsinket tog på strekningen"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oranssi rengas: myöhässä oleva juna osuudella"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orange Ring: ein verspäteter Zug auf dem Abschnitt"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pomarańczowa obwódka: opóźniony pociąg na tym odcinku"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anneau orange : un train en retard sur ce tronçon"
+          }
+        }
+      }
+    },
+    "liveMap.legendColourBy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colours: {{mode}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Färger: {{mode}}"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Farver: {{mode}}"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Farger: {{mode}}"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Värit: {{mode}}"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Farben: {{mode}}"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kolory: {{mode}}"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Couleurs : {{mode}}"
+          }
+        }
+      }
+    },
+    "network.groupTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåg"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tog"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tog"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Junat"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Züge"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pociągi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Trains"
+          }
+        }
+      }
+    },
+    "network.groupTrack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spåret"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sporet"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sporet"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rata"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Strecke"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Voies"
+          }
+        }
+      }
+    },
+    "network.busAllOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a bus replaces it"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "buss ersätter"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "en togbus erstatter det"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "buss for tog"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "bussi korvaa sen"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ein Bus ersetzt ihn"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "zastępuje go autobus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "un car le remplace"
+          }
+        }
+      }
+    },
+    "common.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Slet"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Slett"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Poista"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Löschen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Usuń"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Supprimer"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
