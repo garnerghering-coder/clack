@@ -105,17 +105,25 @@ final class NotificationManager: NSObject {
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
+    // The completion-handler forms, each handler called on the main thread: with the `async` forms, Swift's bridge
+    // called the system's handler from a background thread, where UIKit's snapshot update asserts, and every tap on a
+    // notification crashed the app (build 83, reproduced in the simulator 2026-11-15).
+
     /// An alert that arrives while the app is open still shows, as a banner.
-    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        [.banner, .sound, .list]
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        DispatchQueue.main.async { completionHandler([.banner, .sound, .list]) }
     }
 
     /// Tapping an alert opens the trip it is about (a change opens the whole journey, an arrival its celebration).
-    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let info = response.notification.request.content.userInfo
-        guard let legId = info["legId"] as? String else { return }
-        let request = DeepLink.forAlert(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "", shareToken: info["shareToken"] as? String)
-        await MainActor.run { NotificationManager.shared.openRequest = request }
+        let request = (info["legId"] as? String).map { legId in
+            DeepLink.forAlert(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "", shareToken: info["shareToken"] as? String)
+        }
+        DispatchQueue.main.async {
+            if let request { NotificationManager.shared.openRequest = request }
+            completionHandler()
+        }
     }
 }
 

@@ -68,6 +68,9 @@ final class LiveMapController {
     var onViewChange: (_ bbox: String, _ zoom: Double) -> Void = { _, _ in }
     /// The camera's pitch now, and its centre, read with the view change (the tilt rule checks the real pitch).
     var pitch: Double { Double(mapView?.camera.pitch ?? 0) }
+    /// A tilt or flatten is on its way: the pitch it's heading for isn't asked for again until it lands (or gives up).
+    private(set) var tiltInFlight = false
+    private var tiltToken = 0
     var centre: CLLocationCoordinate2D? { mapView?.centerCoordinate }
     var onReady: () -> Void = {}
     /// A new map view was made (its style isn't loaded yet).
@@ -325,6 +328,13 @@ final class LiveMapController {
         camera.altitude = MLNAltitudeForZoomLevel(mapView.zoomLevel, degrees, mapView.centerCoordinate.latitude, mapView.bounds.size)
         // Reduce Motion: straight there.
         let duration = UIAccessibility.isReduceMotionEnabled ? 0 : 0.6
+        tiltToken += 1
+        let token = tiltToken
+        tiltInFlight = true
+        // Landed or not, the move is over after its duration: then a pitch still wrong may be asked for again.
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.25) { [weak self] in
+            if self?.tiltToken == token { self?.tiltInFlight = false }
+        }
         mapView.setCamera(camera, withDuration: duration, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut)) { [weak mapView] in
             // Only once it really is flat: if a gesture cut the animation short, the next view change asks again
             // (`ExploreLogic.pitchNeedsFix`), so tilting must stay allowed until then.
@@ -467,7 +477,10 @@ struct LiveMapView: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
-            controller.reportView()
+            // Never from inside MapLibre's own callback: what the view change sets off can move the camera again
+            // (the tilt), and a camera move started here re-entered this callback until the app ran out of stack
+            // (zooming out of the tilted map crashed, build 83). The next turn of the main loop is soon enough.
+            DispatchQueue.main.async { [controller] in controller.reportView() }
         }
 
         // MARK: images, drawn on demand (the web's `styleimagemissing`)

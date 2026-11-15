@@ -514,7 +514,6 @@ final class ExploreModel {
     /// The view moved: at close zoom fetch the detail for it (debounced, cached by the rounded box); below, clear.
     private func viewChangedForDetail() {
         detailTask?.cancel()
-        updateTilt()
         guard zoom >= Self.detailZoom, let bbox else {
             if detailShownKey != nil {
                 detailHasStructures = false
@@ -525,9 +524,12 @@ final class ExploreModel {
                 detailTracks = []
                 controller.clearStationDetail()
                 controller.setTrainCars(["type": "FeatureCollection", "features": [Any]()])
+            } else {
+                updateTilt()
             }
             return
         }
+        updateTilt()
         let parts = bbox.split(separator: ",").compactMap { Double($0) }
         guard parts.count == 4 else { return }
         // Tilted, a box round the centre (the visible one reaches the horizon; ExploreLogic.detailBox).
@@ -598,7 +600,7 @@ final class ExploreModel {
         if want != tilted {
             tilted = want
             controller.setTilt(want ? Self.tiltDegrees : 0)
-        } else if ExploreLogic.pitchNeedsFix(pitch: controller.pitch, tilted: tilted) {
+        } else if !controller.tiltInFlight, ExploreLogic.pitchNeedsFix(pitch: controller.pitch, tilted: tilted) {
             // A gesture cut the last tilt or flatten short: ask again (polish pass 1).
             controller.setTilt(tilted ? Self.tiltDegrees : 0)
         }

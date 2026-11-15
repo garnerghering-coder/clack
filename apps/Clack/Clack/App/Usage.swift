@@ -143,14 +143,34 @@ final class Usage: NSObject, MXMetricManagerSubscriber {
         }
     }
 
-    /// "exception 1 · Clack +12345": what happened and the first frame in Clack's own binary.
-    nonisolated private static func signature(_ what: String, _ tree: MXCallStackTree) -> String {
-        let json = String(data: tree.jsonRepresentation(), encoding: .utf8) ?? ""
-        let frame = json.range(of: #""binaryName"\s*:\s*"Clack[^"]*"[^}]*"offsetIntoBinaryTextSegment"\s*:\s*\d+"#, options: .regularExpression)
-            .map { String(json[$0]) }
-            .map { $0.replacingOccurrences(of: #"[^\w+ ]"#, with: " ", options: .regularExpression) }
-            .map { $0.split(separator: " ").filter { $0 != "binaryName" && $0 != "offsetIntoBinaryTextSegment" }.joined(separator: " ") }
-        return [what.isEmpty ? "unknown" : what, frame].compactMap { $0 }.joined(separator: " · ")
+    /// "exception 10 signal 6 · Foundation+1234 > UIKitCore+5678 > UIKitCore+91 > Clack+12345": what happened, the top
+    /// frames of the crashed thread (any binary: the cause is often in UIKit or MapLibre, as with the notification tap
+    /// in build 83), and the first frame in Clack's own binary when it isn't among them. Read from the report's JSON,
+    /// not by pattern: the key order isn't fixed, and the old pattern found nothing in either crash of build 83.
+    nonisolated static func signature(_ what: String, _ tree: MXCallStackTree) -> String {
+        signature(what, json: tree.jsonRepresentation())
+    }
+
+    nonisolated static func signature(_ what: String, json: Data) -> String {
+        var frames: [String] = []
+        var clack: String?
+        if let root = try? JSONSerialization.jsonObject(with: json) as? [String: Any],
+           let stacks = root["callStacks"] as? [[String: Any]] {
+            let thread = stacks.first { ($0["threadAttributed"] as? Bool) == true } ?? stacks.first
+            // The crashed thread is a chain: each frame's first sub-frame is the one it was called from.
+            var frame = (thread?["callStackRootFrames"] as? [[String: Any]])?.first
+            while let f = frame {
+                let name = (f["binaryName"] as? String) ?? "?"
+                let label = "\(name)+\((f["offsetIntoBinaryTextSegment"] as? Int) ?? 0)"
+                if frames.count < 4 { frames.append(label) }
+                if clack == nil, name.hasPrefix("Clack") { clack = label }
+                if frames.count >= 4, clack != nil { break }
+                frame = (f["subFrames"] as? [[String: Any]])?.first
+            }
+        }
+        if let clack, !frames.contains(clack) { frames.append(clack) }
+        let head = what.isEmpty ? "unknown" : what
+        return frames.isEmpty ? head : "\(head) · \(frames.joined(separator: " > "))"
     }
 }
 
