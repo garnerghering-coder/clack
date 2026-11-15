@@ -41,7 +41,8 @@ final class TapTests: XCTestCase {
     private func scrollToRow(_ app: XCUIApplication, startingWith text: String) -> XCUIElement {
         let row = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", text)).firstMatch
         var tries = 0
-        while !(row.exists && row.isHittable) && tries < 12 {
+        // Single trips have the journey's taller row since build 79: more swipes to reach the same trip.
+        while !(row.exists && row.isHittable) && tries < 24 {
             app.swipeUp()
             tries += 1
         }
