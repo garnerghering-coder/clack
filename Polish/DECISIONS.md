@@ -335,3 +335,11 @@ Left in build 73, and why:
 |---|---|---|---|---|---|
 | B79.1 | A single trip in the Trips list | A gradient pill: badge, route, a meta line of text, service, delay and distance on the side | The journey's row: operator and number above, the route, the day as a strip with its times and length, one status line (check marks, delay when known, distance); upcoming ones lead with the countdown and say the platform | `JourneyCard` takes one leg (`upcoming`), `JourneyBar` says only the length for one train; `TripsScreen.row` | `LegRow` in `row` |
 | B79.2 | Journey page | Map, one sentence of numbers, a text timeline of rows | Map, the day, four tiles (door to door, distance, changes, arrival time with how it went in its ink), the strip, then each train as a card with its drawing and big split-flap times, a chip at each change | `JourneyOverview`, `JourneyTrainCard(drawing:)`, `JourneyLegs(drawings:)` | The commit |
+
+## Build 80 (owner, 2026-11-15: the year in rail "needs to be visual, interactive, engaging"; only for a year that's over)
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B80.1 | Where the recap is offered | This year's (unfinished) recap on the Passport | Only on a past year's Passport page, for that year; none for the year still running | `PassportScreen.recapYear` | `thisYear` again |
+| B80.2 | The year's data (server) | Totals and the busiest month only | Plus trains and distance month by month (`months`) and what was new that year (`firsts`: new stations, first countries) | `computePassport`, `firstsOf`; Swift `Passport.months/firsts`; tests | Drop the fields |
+| B80.3 | The recap | A paged view of big numbers and lines | A story: progress segments, tap right/left, hold to pause, each page moving on by itself; the km counting up over the year's map, a month chart (tap a month), new countries' flags stamping in, top route and station, the drawings of the trains ridden, the year's medals pressing in with one success haptic, records, the share card. Reduce Motion: no count-up or stamps | `YearRecap` (rewritten, Swift Charts) | The commit |

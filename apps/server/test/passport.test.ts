@@ -66,6 +66,18 @@ describe('passport', () => {
     expect(computePassport(more, { includeCommuter: true, comparison: 'flight' }).years).toEqual([2026, 2025]);
   });
 
+  it('gives a year its months and what was new in it (the year in rail)', () => {
+    const before = leg({ id: 'old', schedDep: T('2025-03-01', '08:00'), stops: [st('N', 'SE', 'board'), st('Jö', 'SE', 'alight')] });
+    const y = computePassport([before, ...day, leg({ id: 'nov', schedDep: T('2026-11-02', '08:00'), distanceM: 50_000 })], { year: 2026, includeCommuter: true, comparison: 'flight' });
+    expect(y.months).toEqual([
+      { month: '2026-10', trains: 2, distanceM: 576_000 },
+      { month: '2026-11', trains: 1, distanceM: 50_000 },
+    ]);
+    // Nässjö and Jönköping were seen in 2025; Kolding, A and B are new, and so is Denmark.
+    expect(y.firsts).toEqual({ stations: 3, countries: ['DK'] });
+    expect(computePassport(day, { includeCommuter: true, comparison: 'flight' }).firsts).toBeNull();
+  });
+
   it("doesn't count a cancelled train as ridden", () => {
     const p2 = computePassport([...day, leg({ id: 'x', canceled: true })], { includeCommuter: true, comparison: 'flight' });
     expect(p2.totals.trains).toBe(2);

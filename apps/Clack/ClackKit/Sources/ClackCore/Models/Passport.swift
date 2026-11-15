@@ -508,8 +508,36 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
     public let milestones: Milestones
     public let review: [Review]
     public let refs: Refs
+    /// Trains and distance month by month, oldest first ("2026-03"); nil from an older server.
+    public let months: [Month]?
+    /// For a year: the stations and countries first visited in it; nil for all time or from an older server.
+    public let firsts: Firsts?
 
-    public init(years: [Int], home: String? = nil, scope: Scope, totals: Totals, flavor: Flavor, records: Records, operators: [CountRow], products: [CountRow], trainTypes: [CountRow], delays: Delays, countries: [CountryRow], stations: [StationVisit], co2: Co2, map: [MapRoute], milestones: Milestones, review: [Review], refs: Refs) {
+    public nonisolated struct Month: Codable, Hashable, Sendable {
+        public let month: String
+        public let trains: Int
+        public let distanceM: Double
+
+        public init(month: String, trains: Int, distanceM: Double) {
+            self.month = month
+            self.trains = trains
+            self.distanceM = distanceM
+        }
+    }
+
+    public nonisolated struct Firsts: Codable, Hashable, Sendable {
+        public let stations: Int
+        public let countries: [String]
+
+        public init(stations: Int, countries: [String]) {
+            self.stations = stations
+            self.countries = countries
+        }
+    }
+
+    public init(years: [Int], home: String? = nil, scope: Scope, totals: Totals, flavor: Flavor, records: Records, operators: [CountRow], products: [CountRow], trainTypes: [CountRow], delays: Delays, countries: [CountryRow], stations: [StationVisit], co2: Co2, map: [MapRoute], milestones: Milestones, review: [Review], refs: Refs, months: [Month]? = nil, firsts: Firsts? = nil) {
+        self.months = months
+        self.firsts = firsts
         self.years = years
         self.home = home
         self.scope = scope

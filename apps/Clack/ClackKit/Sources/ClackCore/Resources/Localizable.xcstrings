@@ -26574,13 +26574,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "on trains this year."
+            "value" : "on trains in {{year}}."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "med tåg i år."
+            "value" : "med tåg under {{year}}."
           }
         }
       }
@@ -26659,13 +26659,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "medals earned this year."
+            "value" : "medals earned in {{year}}."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "medaljer i år."
+            "value" : "medaljer under {{year}}."
           }
         }
       }
@@ -26717,6 +26717,278 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunde inte hämta ditt år. Kontrollera anslutningen och försök igen."
+          }
+        }
+      }
+    },
+    "recap.monthsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Month by month"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Månad för månad"
+          }
+        }
+      }
+    },
+    "recap.monthPick" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{month}}: {{count}} trains, {{distance}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{month}}: {{count}} tåg, {{distance}}"
+          }
+        }
+      }
+    },
+    "recap.monthHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap a month"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tryck på en månad"
+          }
+        }
+      }
+    },
+    "recap.newStations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "stations you'd never been to."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "stationer du aldrig varit på."
+          }
+        }
+      }
+    },
+    "recap.firstCountries" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First time in"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Första gången i"
+          }
+        }
+      }
+    },
+    "recap.trainsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What you rode"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det du åkte"
+          }
+        }
+      }
+    },
+    "recap.times" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "× {{count}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "× {{count}}"
+          }
+        }
+      }
+    },
+    "recap.station" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your station: {{count}} times on or off."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din station: {{count}} gånger på eller av."
+          }
+        }
+      }
+    },
+    "recap.recordsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Records"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rekord"
+          }
+        }
+      }
+    },
+    "recap.longest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longest ride"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Längsta resan"
+          }
+        }
+      }
+    },
+    "recap.earliest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Earliest train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidigaste tåget"
+          }
+        }
+      }
+    },
+    "recap.latest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest arrival"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senaste ankomsten"
+          }
+        }
+      }
+    },
+    "recap.mostLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mest försenad"
+          }
+        }
+      }
+    },
+    "recap.next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nästa"
+          }
+        }
+      }
+    },
+    "recap.previous" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Föregående"
+          }
+        }
+      }
+    },
+    "recap.pageOf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page {{n}} of {{count}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sida {{n}} av {{count}}"
           }
         }
       }

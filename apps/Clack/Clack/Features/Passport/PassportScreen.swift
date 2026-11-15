@@ -31,12 +31,23 @@ struct PassportScreen: View {
         // `-share` opens the share sheet straight away, to check the cards; `-passportMap` the full-screen map.
         _sharing = State(initialValue: CommandLine.arguments.contains("-share"))
         _mapOpen = State(initialValue: CommandLine.arguments.contains("-passportMap"))
-        // `-recap` opens this year's recap.
+        // `-recap` opens the latest finished year's recap.
         _recapOpen = State(initialValue: CommandLine.arguments.contains("-recap"))
         #endif
     }
 
     private var settings: Settings { app.settings }
+
+    /// The year whose recap is offered: the one showing, once it's over (2026 has none until it ends).
+    private var recapYear: Int? {
+        let thisYear = Calendar(identifier: .gregorian).component(.year, from: .now)
+        #if DEBUG
+        // `-recap` opens the latest year that's over, whatever is showing.
+        if CommandLine.arguments.contains("-recap"), let past = data?.years.first(where: { $0 < thisYear }) { return past }
+        #endif
+        guard let dataYear, dataYear < thisYear else { return nil }
+        return dataYear
+    }
     /// Old settings may hold a comparison no longer offered; it shows as a petrol car.
     private var activeComparison: Co2Comparison { Settings.co2Choices.contains(settings.co2Comparison) ? settings.co2Comparison : .car1 }
 
@@ -193,18 +204,17 @@ struct PassportScreen: View {
             }
             .buttonStyle(.press(radius: Radius.sheet))
             .accessibilityHint(l10n.t("passport.breakdownHint"))
-            // The year told in a few pages, ending on the share card (designer, 2026-11-14).
-            let thisYear = Calendar(identifier: .gregorian).component(.year, from: .now)
-            if data.years.contains(thisYear) {
+            // The year told as a story (owner, 2026-11-15): only for a year that's over, on that year's own page.
+            if let recapYear {
                 Button { recapOpen = true } label: {
                     HStack(spacing: Space.s) {
                         LucideIcon(name: "sun", size: 18).foregroundStyle(Ink.text)
-                        DisclosureRowLabel(title: l10n.t("recap.open", ["year": String(thisYear)]))
+                        DisclosureRowLabel(title: l10n.t("recap.open", ["year": String(recapYear)]))
                     }
                 }
                 .buttonStyle(.pressRow)
                 .fullScreenCover(isPresented: $recapOpen) {
-                    YearRecap(year: thisYear, milestones: data.milestones)
+                    YearRecap(year: recapYear, milestones: data.milestones)
                         .environment(app).environment(l10n).environment(toaster)
                 }
             }

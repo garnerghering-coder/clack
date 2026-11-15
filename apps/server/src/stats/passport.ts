@@ -285,12 +285,26 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
     countries: [...countries].map(([code, count]) => ({ code, legs: count })).sort((a, b) => b.legs - a.legs),
     stations: [...visits.values()].sort((a, b) => b.count - a.count),
     co2: { comparison: opts.comparison, ...co2ForLegs(rides, opts.comparison) },
+    // The year in rail (build 80): trains and distance month by month, oldest first, and what was new this year.
+    months: [...months].sort((a, b) => (a.key < b.key ? -1 : 1)).map((m) => ({ month: m.key, trains: m.count, distanceM: m.distanceM })),
+    firsts: opts.year ? firstsOf(all, opts.year, opts.includeCommuter, visits, countries) : null,
     map: rides.map((l) => ({
       legId: l.id,
       operatorId: l.operatorId,
       geometry: l.geometry,
       stops: [l.stops[0], l.stops.at(-1)].filter(Boolean).map((s) => [s!.lat, s!.lon]),
     })),
+  };
+}
+
+/** Stations and countries first visited in `year`: in it, and in no trip before it. */
+function firstsOf(all: PassportLeg[], year: number, includeCommuter: boolean, visits: Map<string, unknown>, countries: Map<string, number>) {
+  const before = all.filter((l) => !l.canceled && localParts(l.schedDep, l.tz).year < year && (includeCommuter || l.category !== 'commuter'));
+  const seenStations = new Set(before.flatMap((l) => l.stops.filter((s) => s.role === 'board' || s.role === 'alight').map((s) => s.stationId)));
+  const seenCountries = new Set(before.flatMap((l) => l.stops.map((s) => s.country)));
+  return {
+    stations: [...visits.keys()].filter((id) => !seenStations.has(id)).length,
+    countries: [...countries.keys()].filter((c) => !seenCountries.has(c)),
   };
 }
 
