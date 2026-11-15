@@ -87,3 +87,15 @@ the Sources page and map attribution credit it as: `Source: Fintraffic / digitra
 - Kept: on `leg_stops.stop_sector` (the departure row's at a stop, else the arrival's), and in the observed record's
   `extra` per call (it was already kept there). Norway's NSR has lettered sectors with positions on some quays (4 of
   19 at Oslo S), drawn on the station maps since build 64; no Norwegian feed says which sector a train stops at.
+
+## RUMA notices: track work and traffic restrictions (checked 2026-11-15)
+
+- `GET /api/v1/trafficrestriction-notifications.json?state=SENT`: restrictions with `limitation` (e.g.
+  `CLOSED_FROM_TRAFFIC`), `startDate`/`endDate`, a point `location` [lon, lat] and `locations[].identifierRanges[].location`,
+  the track as MultiLineString coordinates [lon, lat]. One in force on 2026-11-15 (a closed track near Pori until 1 Dec).
+- `GET /api/v1/trackwork-notifications.json?state=ACTIVE`: 39 notices, each with `workParts[]` (`startDay`,
+  `permissionMinimumDuration`, `locations` with the same geometry); 5 had a part starting that day. Many sit in yards
+  and touch no train; only today's parts are shown.
+- Same headers as the rest of the API (`Digitraffic-User`, `Accept-Encoding: gzip`). Used by Network now
+  (`livemap/disruptions.ts`, docs/NETWORK_STATUS.md).
+

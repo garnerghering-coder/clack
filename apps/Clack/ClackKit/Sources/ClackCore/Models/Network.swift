@@ -169,8 +169,10 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
     /// Sweden only for now (Trafikverket's announcements); nil from an older server.
     public let cancelled: [CancelledGroup]?
     public let cancelledTrains: Int?
+    /// Track work, closures and incidents now (server `livemap/disruptions.ts`); nil from an older server.
+    public let disruptions: [Disruption]?
 
-    public init(at: Double, lateMin: Int, countries: [String: Country], corridors: [Corridor], late: [LateTrain], cancelled: [CancelledGroup]? = nil, cancelledTrains: Int? = nil) {
+    public init(at: Double, lateMin: Int, countries: [String: Country], corridors: [Corridor], late: [LateTrain], cancelled: [CancelledGroup]? = nil, cancelledTrains: Int? = nil, disruptions: [Disruption]? = nil) {
         self.at = at
         self.lateMin = lateMin
         self.countries = countries
@@ -178,5 +180,62 @@ public nonisolated struct NetworkStatus: Codable, Hashable, Sendable {
         self.late = late
         self.cancelled = cancelled
         self.cancelledTrains = cancelledTrains
+        self.disruptions = disruptions
+    }
+
+    /// Track work, a closed track or an incident on the network now: Trafikverket's events (Sweden), Digitraffic's
+    /// RUMA notices (Finland) and Entur's situations about trains (Norway).
+    public nonisolated struct Disruption: Codable, Hashable, Sendable, Identifiable {
+        public enum Kind: String, Codable, Sendable { case works, closure, incident }
+        public struct Title: Codable, Hashable, Sendable {
+            public let sv: String?
+            public let en: String?
+            public let no: String?
+
+            public init(sv: String? = nil, en: String? = nil, no: String? = nil) {
+                self.sv = sv
+                self.en = en
+                self.no = no
+            }
+        }
+
+        public let id: String
+        public let country: String
+        public let kind: Kind
+        public let title: Title?
+        public let places: [String]
+        public let from: Double?
+        public let to: Double?
+        public let lat: Double
+        public let lon: Double
+        /// Encoded polylines along the track; empty for a pin alone.
+        public let lines: [String]
+        public let source: String
+
+        public init(id: String, country: String, kind: Kind, title: Title?, places: [String], from: Double?, to: Double?, lat: Double, lon: Double, lines: [String], source: String) {
+            self.id = id
+            self.country = country
+            self.kind = kind
+            self.title = title
+            self.places = places
+            self.from = from
+            self.to = to
+            self.lat = lat
+            self.lon = lon
+            self.lines = lines
+            self.source = source
+        }
+
+        /// The track it covers, decoded.
+        public var tracks: [[LatLon]] { lines.map { Polyline.decode($0) }.filter { $0.count >= 2 } }
+
+        /// The source's words in the language asked for, else any (Swedish events only come in Swedish).
+        public func words(_ language: Language) -> String? {
+            guard let title else { return nil }
+            switch language {
+            case .sv: return title.sv ?? title.no ?? title.en
+            default: return title.en ?? title.sv ?? title.no
+            }
+        }
     }
 }

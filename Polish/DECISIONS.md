@@ -320,3 +320,11 @@ Left in build 73, and why:
 | B77.4 | Station sheet's board tile | "Full board" / "Hela tavlan" | "Timeboard" / "Tidtavla" | `board.fullBoard` | Old strings |
 | B77.5 | Trips card map | A glass "Route preview" / "Route" / position tag on the map | The map alone; the status line says live or estimated | `FeaturedCard.card` | The commit |
 | B77.6 | Trip page "Estimated route" | A glass box over the map | A caption line under the map | `TripDetailScreen.content` | The commit |
+
+## Build 78 (owner, 2026-11-15: Network now, show track work and closures, show don't tell)
+
+| ID | Element | Before | After | How | Undo |
+|---|---|---|---|---|---|
+| B78.1 | Disruptions (server) | Network now knew late trains and cancellations only | Track work, closed track and incidents now: Trafikverket OperativeEvent (Sweden), Digitraffic RUMA (Finland), Entur SX about trains (Norway, from the archive's poll); every source five-minutely, a failing one keeps its last answer | `livemap/disruptions.ts` (new, tested), `disruptions` on `/api/live/network`, `latestSituations()` in `observed/norway.ts`; docs/NETWORK_STATUS.md, FINLAND_DATA_FINDINGS.md | Drop the field |
+| B78.2 | The map in Network now | Trains in delay colours, slow stretches orange | Plus track work dashed orange, a closed track dashed red, a pin at each disruption | `MapStyle` layers `disruption-lines`/`-pins`, `LiveMapController.setDisruptions`, `ExploreModel.showNetwork` | Remove the layers |
+| B78.3 | Network now panel | Country lines "12 of 300 trains late" with bars, corridor cards with sentences, a long explanation, "All N late trains" as a yellow link | Four rings (share on time, flag), one row of counts that is also the map's key, compact rows (icon, where, one figure) that take the map there, late trains as bars, "All N" as a row with a chevron, the explanation behind ⓘ | `NetworkPanel` (rewritten), `ExploreModel.focus(_:)`, 3 icons (`construction`, `ban`, `timer`) | The commit |

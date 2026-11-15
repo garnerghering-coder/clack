@@ -5,6 +5,7 @@
 import type { DelayCause } from '@clack/shared';
 import { countryOfLiveId } from '../lib/countries.js';
 import type { LiveTrain } from './ingest.js';
+import type { Disruption } from './disruptions.js';
 
 export const LATE_MIN = 10;
 export const MIN_TRAINS = 2;
@@ -87,6 +88,8 @@ export interface NetworkStatus {
   cancelled?: CancelledGroup[];
   /** How many cancelled trains that is in all, before the list is cut. */
   cancelledTrains?: number;
+  /** Track work, closures and incidents now (livemap/disruptions.ts): Sweden, Finland and Norway. */
+  disruptions?: Disruption[];
 }
 
 /** One cancelled train, as the ingest gives it. */

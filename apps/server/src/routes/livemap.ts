@@ -4,6 +4,7 @@ import { countryOfLiveId } from '../lib/countries.js';
 import { journeyStopsView } from '../rejseplanen/stops.js';
 import { mapHealth } from '../livemap/denmark.js';
 import { cancelledGroups, networkStatus, type NetworkStatus } from '../livemap/network.js';
+import { Disruptions } from '../livemap/disruptions.js';
 import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
@@ -326,6 +327,7 @@ export const liveMapRoutes =
     // Network status: corridors where most trains are running 10+ minutes late now (livemap/network.ts). Read off the
     // live map, so it is as fresh as the map; worked out at most every 15 s.
     let network: { at: number; body: NetworkStatus } | null = null;
+    const disruptions = new Disruptions(db);
     app.get('/live/network', async () => {
       const now = Date.now();
       if (!network || now - network.at > 15_000) {
@@ -338,6 +340,8 @@ export const liveMapRoutes =
         const cancelled = ingest.cancelledTrains();
         body.cancelled = cancelledGroups(cancelled);
         body.cancelledTrains = cancelled.length;
+        // Track work, closures and incidents, each source asked at most every five minutes.
+        body.disruptions = disruptions.current(now);
         // Not kept while the map is still filling (no trains yet): the next ask works it out again.
         if (ingest.trains.size === 0) return body;
         network = { at: now, body };

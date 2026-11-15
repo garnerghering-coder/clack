@@ -126,3 +126,17 @@ struct APIClientTests {
         #expect(url.absoluteString == "http://localhost:3001/api/search?date=2026-10-23&q=Stockholm%20C")
     }
 }
+
+/// Network now's disruptions (build 78): what the server sends decodes, and the words follow the app's language.
+struct DisruptionModelTests {
+    @Test func aDisruptionDecodesAndSpeaksTheAppsLanguage() throws {
+        let json = """
+        {"id":"no:1","country":"NO","kind":"incident","title":{"en":"Fewer tracks: Skøyen","no":"Færre spor: Skøyen"},
+         "places":["Skøyen"],"from":1,"to":null,"lat":59.92,"lon":10.68,"lines":[],"source":"entur"}
+        """
+        let d = try JSONDecoder().decode(NetworkStatus.Disruption.self, from: Data(json.utf8))
+        #expect(d.kind == .incident && d.to == nil && d.tracks.isEmpty)
+        #expect(d.words(.en) == "Fewer tracks: Skøyen")
+        #expect(d.words(.sv) == "Færre spor: Skøyen")
+    }
+}

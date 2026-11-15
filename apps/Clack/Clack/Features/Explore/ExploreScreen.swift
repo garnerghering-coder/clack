@@ -472,6 +472,11 @@ struct ExploreScreen: View {
                     model.showNetwork = false
                     Task { await model.select(t.id) }
                 },
+                onDisruption: { d in
+                    // The map goes there; the sheet steps down so it can be seen, and stays.
+                    model.focus(d)
+                    detent = .fraction(0.32)
+                },
                 onClose: { model.showNetwork = false }
             )
             .task { await model.watchNetwork() }

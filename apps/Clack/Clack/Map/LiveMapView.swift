@@ -184,6 +184,21 @@ final class LiveMapController {
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id IN %@", trainIds)
     }
 
+    /// Network now's disruptions: track work and closures along their track, a pin at each (`nil` clears them).
+    func setDisruptions(_ list: [NetworkStatus.Disruption]?) {
+        let list = list ?? []
+        let lines: [[String: Any]] = list.flatMap { d in
+            d.tracks.map { part in
+                ["type": "Feature", "properties": ["kind": d.kind.rawValue], "geometry": ["type": "LineString", "coordinates": part.map { [$0.lon, $0.lat] }]] as [String: Any]
+            }
+        }
+        let pins: [[String: Any]] = list.map { d in
+            ["type": "Feature", "properties": ["kind": d.kind.rawValue, "id": d.id], "geometry": ["type": "Point", "coordinates": [d.lon, d.lat]]] as [String: Any]
+        }
+        mapView?.setShape(["type": "FeatureCollection", "features": lines], source: "disruption-lines")
+        mapView?.setShape(["type": "FeatureCollection", "features": pins], source: "disruption-pins")
+    }
+
     func clearCorridor() {
         mapView?.setShape(MapGeometry.lines([]), source: "corridor")
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", "")

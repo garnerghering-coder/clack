@@ -26143,6 +26143,261 @@
         }
       }
     },
+    "network.kind.works" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track work"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Banarbete"
+          }
+        }
+      }
+    },
+    "network.kind.closure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track closed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avstängt spår"
+          }
+        }
+      }
+    },
+    "network.kind.incident" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disruption"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Störning"
+          }
+        }
+      }
+    },
+    "network.kind.slow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slow"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trögt"
+          }
+        }
+      }
+    },
+    "network.kind.cancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelled"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställda"
+          }
+        }
+      }
+    },
+    "network.onTrack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On the track"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "På spåret"
+          }
+        }
+      }
+    },
+    "network.until" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "until {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "till {{time}}"
+          }
+        }
+      }
+    },
+    "network.untilDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "until {{day}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "till {{day}}"
+          }
+        }
+      }
+    },
+    "network.allOnTrack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All {{count}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla {{count}}"
+          }
+        }
+      }
+    },
+    "network.onTimePct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{pct}} %"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{pct}} %"
+          }
+        }
+      }
+    },
+    "network.countryA11y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{country}}: {{pct}} percent on time, {{late}} of {{trains}} trains late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{country}}: {{pct}} procent i tid, {{late}} av {{trains}} tåg sena"
+          }
+        }
+      }
+    },
+    "network.countA11y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{kind}}: {{count}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{kind}}: {{count}}"
+          }
+        }
+      }
+    },
+    "network.about" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Network now"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om trafikläget"
+          }
+        }
+      }
+    },
+    "network.aboutBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Late means {{min}} minutes or more. A stretch is slow when at least two trains are on it and most of them are late. Reasons are the operators' own. Track work, closed track and disruptions come from Trafikverket (Sweden), Fintraffic (Finland) and Entur (Norway); Denmark has no such source yet. Cancelled trains: Sweden only."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sent betyder {{min}} minuter eller mer. En sträcka går trögt när minst två tåg är på den och de flesta är sena. Orsakerna är trafikbolagens egna. Banarbeten, avstängda spår och störningar kommer från Trafikverket (Sverige), Fintraffic (Finland) och Entur (Norge); för Danmark finns ingen sådan källa än. Inställda tåg: bara Sverige."
+          }
+        }
+      }
+    },
+    "network.cancelledShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} cancelled"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{count}} inställda"
+          }
+        }
+      }
+    },
     "speech.fromTo" : {
       "extractionState" : "manual",
       "localizations" : {

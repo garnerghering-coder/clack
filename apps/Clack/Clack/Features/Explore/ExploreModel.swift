@@ -65,7 +65,13 @@ final class ExploreModel {
     /// The network status panel (the button beside the filters), its answer, and whether asking failed.
     /// Network now is open: the map shows the status meanwhile, late trains in colour (designer, 2026-11-14).
     var showNetwork = false {
-        didSet { if showNetwork != oldValue { needsFullRender = true; scheduleRender() } }
+        didSet {
+            guard showNetwork != oldValue else { return }
+            needsFullRender = true
+            scheduleRender()
+            // Track work, closures and incidents show while Network now is open.
+            controller.setDisruptions(showNetwork ? network?.disruptions : nil)
+        }
     }
     /// What the dots are coloured by now: the person's choice, or late trains while Network now is open.
     private var colorBy: ExploreLogic.ColorBy { showNetwork ? .lateOnly : controller.display.colorBy }
@@ -705,6 +711,7 @@ final class ExploreModel {
             if let answer = try? await client.networkStatus() {
                 network = answer
                 networkFailed = false
+                if showNetwork { controller.setDisruptions(answer.disruptions) }
             } else if network == nil {
                 networkFailed = true
             }
@@ -780,6 +787,16 @@ final class ExploreModel {
         stationSheet = nil
         showNetwork = false
         sheetTop = nil
+    }
+
+    /// A disruption tapped in Network now: the map goes to it (its track, or its pin), the sheet stays.
+    func focus(_ d: NetworkStatus.Disruption) {
+        let points = d.tracks.flatMap { $0 }
+        if points.count >= 2 {
+            controller.fit(points, padding: UIEdgeInsets(top: 140, left: 60, bottom: min(420, controller.height * 0.5), right: 60))
+        } else {
+            controller.ease(to: CLLocationCoordinate2D(latitude: d.lat, longitude: d.lon), minZoom: 10, offset: 0)
+        }
     }
 
     func closeCorridor() {

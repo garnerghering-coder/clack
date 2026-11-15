@@ -28,6 +28,8 @@ const ICONS = [
   'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed', 'utensils',
   // Medals added in polish pass 1.
   'sunrise', 'moon-star', 'calendar-days', 'sun-snow', 'calendar-range', 'flame', 'landmark', 'bridge', 'mountain-snow', 'sun', 'waves', 'history', 'badge-check',
+  // Network now's disruptions (build 78): track work, a closed track, slow stretches.
+  'construction', 'ban', 'timer',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];
 // Icons that also get a "-filled" version (the same outline, filled in): the favourite star, on and off.

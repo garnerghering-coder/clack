@@ -27,9 +27,20 @@ Thresholds live in `apps/server/src/livemap/network.ts` (`LATE_MIN`, `MIN_TRAINS
 | Finland | Digitraffic live trains | Cause codes on the rows passed (`causes`, category codes) | Delays and reasons |
 | Denmark | Rejseplanen journey positions | Rejseplanen HIM messages, per journey | Delays only; HIM messages are next |
 
+## Disruptions: track work, closed track, incidents (build 78)
+
+`livemap/disruptions.ts`, in `/api/live/network` as `disruptions`, each source asked at most every five minutes:
+
+| Country | Source | What counts | Where on the map |
+|---|---|---|---|
+| Sweden | Trafikverket `OperativeEvent` (ols.open 1.0) | Events with a `TrafficImpact`, not ended; code 16 (Banarbete/transport) is track work, the rest incidents. An event with no end not updated for 24 h is taken as left open (one from May was still open in November). | `EventSection` from and to signatures → stations or Trafikverket locations → the track between |
+| Finland | Digitraffic RUMA: `trafficrestriction-notifications?state=SENT`, `trackwork-notifications?state=ACTIVE` | Restrictions in force now (`CLOSED_FROM_TRAFFIC`, `CLOSED_FROM_ELECTRIC_ROLLING_STOCK` are a closed track, the rest track work); track-work notices with a part starting today | The notices' own track geometry |
+| Norway | Entur SIRI-SX, the list the archive's 10-minute poll fetched (Entur rate-limits a second ask) | Open situations from a train operator (codespaces NSB, VYG, GOA, FLT, SJN) that name a station we know | A pin at the station named most |
+| Denmark | none | Rejseplanen's notices are free text per journey | — |
+
 ## Not done yet
 
 - Norway's and Denmark's reasons (above).
-- Disruptions with no trains moving (a closed line shows no trains, so no corridor): Trafikverket's
-  TrainMessage/OperativeEvent and Entur's situations describe those, and could be shown as their own list.
+- Trafikverket's planned engineering works (only overrunning work is an OperativeEvent); RailwayEvent's reason codes
+  are archived but not read.
 - History: whether a corridor is slow every evening. The observed record has what's needed.

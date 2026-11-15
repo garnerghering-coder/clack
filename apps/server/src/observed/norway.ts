@@ -208,6 +208,10 @@ export const resetNorwayState = () => state.clear();
 
 const SX_URL = 'https://api.entur.io/realtime/v1/rest/sx';
 const seenSituations = new Set<string>();
+/** The whole list from the last poll, for Network now's disruptions (livemap/disruptions.ts): Entur limits how often
+ * one client may ask, so the map reads this instead of asking again. */
+let latest: { at: number; situations: unknown[] } | null = null;
+export const latestSituations = () => latest;
 
 /**
  * Poll every current situation (~480, 0.7 MB, all modes) and keep those new or changed since the last poll, as Entur
@@ -219,6 +223,7 @@ export async function pollSituations(db: Db, opts: { now?: number; fetchImpl?: t
   if (!res.ok) throw new Error(`Entur SX ${res.status}`);
   const body = (await res.json()) as { Siri?: { ServiceDelivery?: { SituationExchangeDelivery?: { Situations?: { PtSituationElement?: unknown[] } }[] } } };
   const all = body.Siri?.ServiceDelivery?.SituationExchangeDelivery?.[0]?.Situations?.PtSituationElement ?? [];
+  latest = { at: now, situations: all };
   const fresh = all.filter((s) => {
     const h = createHash('sha1').update(JSON.stringify(s)).digest('hex');
     if (seenSituations.has(h)) return false;
