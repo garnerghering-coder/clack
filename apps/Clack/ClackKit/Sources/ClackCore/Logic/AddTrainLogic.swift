@@ -46,6 +46,49 @@ public nonisolated enum AddTrainLogic {
         return "\(interpretation?.operator.map { "\($0.text) " } ?? "")\(station.name) → "
     }
 
+    /// One search, as it is sent: the text, and the stations picked in the field when there are two. Typing never sends
+    /// one; picking the second station, Return, or a tapped number, example or recent route does (owner, 2026-11-17).
+    public nonisolated struct Commit: Hashable, Sendable {
+        public let text: String
+        public let fromId: String?
+        public let toId: String?
+
+        public init(text: String, fromId: String? = nil, toId: String? = nil) {
+            self.text = text
+            self.fromId = fromId
+            self.toId = toId
+        }
+    }
+
+    /// What to search for the field as it stands: both stations by id (the text only adds an operator or a number);
+    /// one station and text as "From → text"; else the text. Nil when there is nothing to search.
+    public static func commit(from: StationHit?, to: StationHit?, text: String) -> Commit? {
+        let t = text.trimmingCharacters(in: .whitespaces)
+        if let from, let to { return Commit(text: t, fromId: from.id, toId: to.id) }
+        if let from { return t.isEmpty ? nil : Commit(text: "\(from.name) → \(t)") }
+        return t.isEmpty ? nil : Commit(text: t)
+    }
+
+    /// The text left in the field once a station is picked: the operator, if one was typed ("SJ "), so it still
+    /// filters the trains.
+    public static func residue(after interpretation: SearchResponse.Interpretation?) -> String {
+        interpretation?.operator.map { "\($0.text) " } ?? ""
+    }
+
+    /// "SJ 523" when the text reads as a train number, for the row that searches it; nil otherwise.
+    public static func numberSearch(_ interpretation: SearchResponse.Interpretation?) -> String? {
+        guard let number = interpretation?.trainNumber else { return nil }
+        return [interpretation?.operator?.text, number].compactMap { $0 }.joined(separator: " ")
+    }
+
+    /// A search typed as text that named both stations (and no number): the stations to show as picked, so the field
+    /// says what was searched.
+    public static func pickedRoute(from response: SearchResponse) -> (from: StationHit, to: StationHit)? {
+        let i = response.interpretation
+        guard i.trainNumber == nil, let from = i.from, let to = i.to else { return nil }
+        return (from, to)
+    }
+
     /// The query rebuilt from what the search understood, with one part removed.
     public static func rebuilt(operator op: String?, number: String?, from: String?, to: String?) -> String {
         let head = [op, number].compactMap { $0 }.joined(separator: " ")

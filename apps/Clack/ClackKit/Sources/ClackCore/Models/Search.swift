@@ -29,6 +29,28 @@ public nonisolated struct HistoryPrepared: Codable, Hashable, Sendable {
     public let sweden: String
 }
 
+/// `GET /api/search/warm`: the planner is building the day.
+public nonisolated struct PlannerWarming: Codable, Hashable, Sendable {
+    public let warming: Bool
+}
+
+/// `GET /api/routes/recent`: a route the person has added before.
+public nonisolated struct RecentRoute: Codable, Hashable, Sendable, Identifiable {
+    public let from: StationHit
+    public let to: StationHit
+    /// How many trips the person has on it, and when the last was added (epoch ms); nil from the first servers.
+    public let count: Int?
+    public let last: Double?
+    public var id: String { "\(from.id)>\(to.id)" }
+
+    public init(from: StationHit, to: StationHit, count: Int? = nil, last: Double? = nil) {
+        self.from = from
+        self.to = to
+        self.count = count
+        self.last = last
+    }
+}
+
 /// `GET /api/search`: how the smart search read the text, station suggestions, and the trains or connections found.
 public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public nonisolated struct Window: Codable, Hashable, Sendable {

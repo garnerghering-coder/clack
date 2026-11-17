@@ -90,8 +90,14 @@ extension APIClient {
 
     /// `changes` (0–5) is the most changes a journey may have; `after` (epoch ms) and `hours` ask for one window of
     /// journeys instead of the whole service day, for paging earlier and later (the window may run into the next day).
-    public func search(_ text: String, date: String, changes: Int? = nil, after: Double? = nil, hours: Int? = nil) async throws -> SearchResponse {
+    /// `fromId`/`toId`: the stations picked in the app, searched as they are (the text then carries only an operator or
+    /// a train number).
+    public func search(_ text: String, date: String, fromId: String? = nil, toId: String? = nil, changes: Int? = nil, after: Double? = nil, hours: Int? = nil) async throws -> SearchResponse {
         var query = ["q": text, "date": date]
+        if let fromId, let toId {
+            query["from"] = fromId
+            query["to"] = toId
+        }
         // The phone's region, for reading a bare train number when the settings have no home country yet (the server
         // only uses SE, NO, FI or DK).
         if let region = Locale.current.region?.identifier { query["region"] = region }
@@ -100,6 +106,22 @@ extension APIClient {
         if let hours { query["hours"] = String(hours) }
         return try await get(["search"], query: query)
     }
+
+    /// While typing: how the text reads and the stations to pick from, nothing from the timetable (`results` is nil).
+    /// `fromId`: the origin is picked, and the text is the destination.
+    public func suggest(_ text: String, date: String, fromId: String? = nil) async throws -> SearchResponse {
+        var query = ["q": text, "date": date]
+        if let fromId { query["from"] = fromId }
+        return try await get(["search", "suggest"], query: query, timeout: Self.searchTimeout)
+    }
+
+    /// Starts building the day's journey planner, so the search that follows doesn't wait for it. Answers at once.
+    public func warmPlanner(date: String) async throws {
+        let _: PlannerWarming = try await get(["search", "warm"], query: ["date": date])
+    }
+
+    /// The person's last routes (each pair once, the last added first).
+    public func recentRoutes() async throws -> [RecentRoute] { try await get(["routes", "recent"]) }
 
     /// Starts fetching an older day's timetable as soon as the day is picked, so it's ready when the search runs.
     /// Answers at once; what it says isn't needed (the search reports the same).

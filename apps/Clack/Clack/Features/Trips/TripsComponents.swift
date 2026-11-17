@@ -390,6 +390,7 @@ struct JourneyCardContent<Status: View>: View {
                     OperatorBadge(op: first.operator, size: .small)
                     Text(title ?? [first.operator?.name, first.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
                 } else {
+                    OperatorStack(operators: legs.map(\.operator))
                     Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
                 }
                 Spacer(minLength: Space.s)

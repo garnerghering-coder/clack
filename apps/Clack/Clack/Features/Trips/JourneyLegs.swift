@@ -22,6 +22,8 @@ struct JourneyBar: View {
     let now: Double
     /// The train in focus, drawn a little taller.
     var selected: String?
+    /// The times and stations under the strip; off where a headline already says them (a search result).
+    var showsLabels = true
 
     private struct Piece: Identifiable {
         let id: String
@@ -73,22 +75,26 @@ struct JourneyBar: View {
             }
             .frame(height: 10)
             // Stacked at the accessibility sizes, so the names and the changes aren't cut (polish pass 1, AX3).
-            AdaptiveStack(spacing: Space.s) {
-                Text(verbatim: "\(Format.time(dep, tz: first.map(TripsLogic.tz) ?? "Europe/Stockholm", clock: app.settings.clock)) \(first?.origin?.name ?? "")")
-                Spacer(minLength: Space.xs)
-                Text(summary(dep: dep, arr: arr)).multilineTextAlignment(.center)
-                Spacer(minLength: Space.xs)
-                Text(verbatim: "\(Format.time(arr, tz: last?.destination?.tz ?? "Europe/Stockholm", clock: app.settings.clock)) \(last?.destination?.name ?? "")")
-                    .multilineTextAlignment(.trailing)
-            }
-            .clack(.micro).monospacedDigit().foregroundStyle(Ink.text2)
-            .lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+            if showsLabels { labels(first: first, last: last, dep: dep, arr: arr) }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel([
             "\(first?.origin?.name ?? "") → \(last?.destination?.name ?? "")",
             summary(dep: dep, arr: arr),
         ].joined(separator: ", "))
+    }
+
+    private func labels(first: Leg?, last: Leg?, dep: Double?, arr: Double?) -> some View {
+        AdaptiveStack(spacing: Space.s) {
+            Text(verbatim: "\(Format.time(dep, tz: first.map(TripsLogic.tz) ?? "Europe/Stockholm", clock: app.settings.clock)) \(first?.origin?.name ?? "")")
+            Spacer(minLength: Space.xs)
+            Text(summary(dep: dep, arr: arr)).multilineTextAlignment(.center)
+            Spacer(minLength: Space.xs)
+            Text(verbatim: "\(Format.time(arr, tz: last?.destination?.tz ?? "Europe/Stockholm", clock: app.settings.clock)) \(last?.destination?.name ?? "")")
+                .multilineTextAlignment(.trailing)
+        }
+        .clack(.micro).monospacedDigit().foregroundStyle(Ink.text2)
+        .lineLimit(typeSize.isAccessibilitySize ? nil : 2)
     }
 
     private func summary(dep: Double?, arr: Double?) -> String {

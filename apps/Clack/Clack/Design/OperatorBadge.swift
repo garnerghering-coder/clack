@@ -38,7 +38,9 @@ struct OperatorBadge: View {
                         .frame(width: points - inset * 2, height: points - inset * 2)
                         .clipShape(RoundedRectangle(cornerRadius: (Radius.badge * points / BadgeSize.large.points).rounded() * 0.5, style: .continuous))
                         .frame(width: points, height: points)
-                        .background(Color.white)
+                        // The margin in the logo's own colour where its edge is one colour (SJ's green), so no white
+                        // frame appears around a logo that has none (owner, 2026-11-17); white for one drawn on clear.
+                        .background(Color(uiColor: LogoStore.shared.edgeColor(for: url) ?? .white))
                         .clipShape(shape)
                         .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
                 } else {
@@ -54,7 +56,7 @@ struct OperatorBadge: View {
         .accessibilityLabel(op?.name ?? "")
     }
 
-    /// Every logo sits inside the same white margin (designer, 2026-11-07: with a margin on six logos only, the marks
+    /// Every logo sits inside the same margin (white, or the logo's edge colour) (designer, 2026-11-07: with a margin on six logos only, the marks
     /// in a departure list came in two sizes and the rows jittered). Before, only the logos that ran to their edges
     /// (Mälartåg, Norrtåg, Öresundståg, Pågatåg, Tågab, X-tåget) had one (owner, 2026-10-25).
     static let logoInset: CGFloat = 0.12
@@ -77,5 +79,49 @@ struct OperatorBadge: View {
             .lineLimit(1)
             .frame(width: points, height: points)
             .background(known ?? strongColor(scheme), in: shape)
+    }
+}
+
+/// A journey's operators as their badges, in the order they're ridden, each a little over the next (owner,
+/// 2026-11-17: a journey's header had no logo where a train's has one). One badge per operator. A thin gap is cut out
+/// of each badge where the one before it sits, so the overlap reads on any background (a card, the tinted hero).
+struct OperatorStack: View {
+    let operators: [(any OperatorDisplay)?]
+    var size: BadgeSize = .small
+    /// The most badges shown; a journey with more operators shows the first ones.
+    static let limit = 4
+
+    var body: some View {
+        let shown = Self.distinct(operators)
+        let points = size.points
+        let step = points * 0.7
+        let gap: CGFloat = 1.5
+        let radius = (Radius.badge * points / BadgeSize.large.points).rounded()
+        HStack(spacing: step - points) {
+            ForEach(Array(shown.enumerated()), id: \.offset) { i, op in
+                OperatorBadge(op: op, size: size)
+                    .mask {
+                        Rectangle()
+                            .overlay(alignment: .topLeading) {
+                                if i > 0 {
+                                    RoundedRectangle(cornerRadius: radius + gap, style: .continuous)
+                                        .frame(width: points + gap * 2, height: points + gap * 2)
+                                        .offset(x: -step - gap, y: -gap)
+                                        .blendMode(.destinationOut)
+                                }
+                            }
+                            .compositingGroup()
+                    }
+                    .zIndex(Double(shown.count - i))
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(shown.compactMap { $0?.name }.formatted(.list(type: .and)))
+    }
+
+    /// Each operator once, first ridden first; an unknown one once.
+    static func distinct(_ operators: [(any OperatorDisplay)?]) -> [(any OperatorDisplay)?] {
+        var seen = Set<String>()
+        return Array(operators.filter { seen.insert($0?.name ?? "?").inserted }.prefix(limit))
     }
 }

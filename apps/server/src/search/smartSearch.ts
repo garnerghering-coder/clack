@@ -47,6 +47,17 @@ export interface SmartSearchResult {
   otherDaysCountry?: string;
 }
 
+/** What the app already knows, and how much it wants. */
+export interface SearchOptions {
+  /** Stations already picked in the app (their ids): used as they are, and the text only adds an operator, a number or,
+   * with `fromId` alone, the destination being typed. An id the index doesn't have is ignored. */
+  fromId?: string;
+  toId?: string;
+  /** Only read the text: the interpretation and the station suggestions, no timetable (the app asks this while you
+   * type, and searches once the route or the number is chosen). */
+  suggestOnly?: boolean;
+}
+
 /** Older Norwegian and Finnish days, from the observed record (observed/timetable.ts). */
 export interface RecordDays {
   ensure: (country: 'NO' | 'FI', date: string) => 'ready' | 'loading' | 'failed' | 'unavailable';
@@ -76,15 +87,31 @@ export function createSmartSearch(
       .map((h) => strip(h)!);
   };
 
-  return (query: string, date: string): SmartSearchResult => {
+  const byId = (id: string | undefined): StationHit | undefined => {
+    if (!id) return undefined;
+    const s = index().entries.find((e) => e.station.id === id)?.station;
+    return s ? { id: s.id, name: s.name, code: s.trvSignature, country: s.country, county: s.county ?? null } : undefined;
+  };
+
+  return (query: string, date: string, opts: SearchOptions = {}): SmartSearchResult => {
     const q = parseQuery(query, matchOperator);
     const out: SmartSearchResult = { date, interpretation: { typing: null }, suggestions: [], results: null, outsideTimetable: false };
     if (q.operatorId) out.interpretation.operator = { id: q.operatorId, text: q.operatorText! };
     if (q.trainNumber) out.interpretation.trainNumber = q.trainNumber;
 
-    let from: StationHit | undefined;
-    let to: StationHit | undefined;
-    if (q.hasSeparator) {
+    let from = byId(opts.fromId);
+    let to = from ? byId(opts.toId) : undefined;
+    if (from && to) {
+      // Both picked: nothing to read but the operator or number.
+    } else if (from) {
+      // The origin is picked and the text is the destination being typed.
+      const text = q.hasSeparator ? q.toText : q.fromText;
+      out.interpretation.typing = 'to';
+      if (text) {
+        to = opts.suggestOnly ? undefined : strip(best(text));
+        out.suggestions = searchStations(index(), text, 6).filter((h) => h.id !== from!.id).map((h) => strip(h)!);
+      }
+    } else if (q.hasSeparator) {
       from = strip(best(q.fromText));
       to = strip(best(q.toText));
       out.interpretation.typing = 'to';
@@ -94,13 +121,20 @@ export function createSmartSearch(
       if (q.splittable && !(whole && whole.score >= SPLIT)) {
         // "Snälltåget Stockholm Malmö": try every split into two strong station matches.
         const words = q.fromText.split(' ');
-        let bestSplit: { a: StationHit; b: StationHit; score: number } | null = null;
+        let bestSplit: { a: StationHit; b: StationHit; score: number; cut: number } | null = null;
         for (let i = 1; i < words.length; i++) {
           const a = best(words.slice(0, i).join(' '), SPLIT);
           const b = best(words.slice(i).join(' '), SPLIT);
-          if (a && b && a.id !== b.id && (!bestSplit || a.score + b.score > bestSplit.score)) bestSplit = { a, b, score: a.score + b.score };
+          if (a && b && a.id !== b.id && (!bestSplit || a.score + b.score > bestSplit.score)) bestSplit = { a, b, score: a.score + b.score, cut: i };
         }
-        if (bestSplit) {
+        if (bestSplit && opts.suggestOnly) {
+          // While typing, the second half is the destination still being written: suggest stations for it rather than
+          // settle on one ("Uppsala Sto" is Uppsala C and a list of Sto…).
+          const rest = words.slice(bestSplit.cut).join(' ');
+          from = strip(bestSplit.a);
+          out.interpretation.typing = 'to';
+          out.suggestions = searchStations(index(), rest, 6).filter((h) => h.id !== from!.id).map((h) => strip(h)!);
+        } else if (bestSplit) {
           from = strip(bestSplit.a);
           to = strip(bestSplit.b);
         }
@@ -112,6 +146,7 @@ export function createSmartSearch(
     }
     if (from) out.interpretation.from = from;
     if (to) out.interpretation.to = to;
+    if (opts.suggestOnly) return out;
 
     // "Today" is the day where the search starts: Helsinki is an hour ahead of Stockholm and Oslo.
     const windowStart = addDays(todayIn(tzOf((from ?? to)?.country) ?? COUNTRIES.SE.tz), -1);

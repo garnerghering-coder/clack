@@ -26,7 +26,9 @@ band 0.73-1.86, through the cab door to the face; red down to 2.72; dark grey st
 0.78-1.84. The door leaves light grey from the band's top edge to the bottom, a narrow window in each leaf.
 Livery `dsb` (red #c0142a, sampled #b8111f-#c02b56 in sun, #db0412 at dusk on 163): the refurbished look. Livery
 `dsb-grey` (the 2003-05 grey and blue design): 162 and the Rødekro photo; drawn because the refurbishment and repaint
-ran to 2026, so a few sets may still carry it: unverified which, if any, still do. The original white with red doors
+ran to 2026, so a few sets may still carry it: unverified which, if any, still do. Open (owner, 2026-11-17,
+unverified): he sees the rubber-nosed sets grey more often than red at Danish stations; red stays the default until a
+dated photo of a set in service says otherwise (DENMARK_DATA_FINDINGS.md, Open questions). The original white with red doors
 is not drawn (repainted 2003-05).
 Unverified / estimated: everything below the body and the face's profile (dk_ic3.py's estimates); the door width
 (1.58 m here, 1.52 on the IC3); the second car's first window (Rødekro, in the grey livery); the red livery's roof

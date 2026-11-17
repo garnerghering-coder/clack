@@ -83,7 +83,10 @@ struct FeaturedCard: View {
                 // headed by its service, as before.
                 if isJourney {
                     HStack(spacing: Space.m) {
-                        Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                        HStack(spacing: Space.s) {
+                            OperatorStack(operators: legs.map(\.operator), size: .medium)
+                            Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                        }
                         Spacer(minLength: 0)
                         switch state {
                         case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))

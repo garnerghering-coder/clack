@@ -198,3 +198,42 @@ struct CoveredRangesTests {
         #expect(pairs(AddTrainLogic.coveredRanges(from: "2024-03-01", gaps: gaps)) == ["2024-03-06…"])
     }
 }
+
+/// Typing suggests, and only a pick, Return or a tap searches (owner, 2026-11-17).
+struct SearchCommitTests {
+    @Test func twoPickedStationsSearchByIdWithTheTextAsTheOperator() {
+        let c = AddTrainLogic.commit(from: hit("Uppsala C", id: "u"), to: hit("Stockholm C", id: "cst"), text: " SJ ")
+        #expect(c == AddTrainLogic.Commit(text: "SJ", fromId: "u", toId: "cst"))
+    }
+
+    @Test func oneStationAndTextSearchAsARoute() {
+        #expect(AddTrainLogic.commit(from: hit("Uppsala C"), to: nil, text: "Stockholm") == AddTrainLogic.Commit(text: "Uppsala C → Stockholm"))
+        #expect(AddTrainLogic.commit(from: hit("Uppsala C"), to: nil, text: "  ") == nil)
+    }
+
+    @Test func textAloneSearchesAsTyped() {
+        #expect(AddTrainLogic.commit(from: nil, to: nil, text: "SJ 523 ") == AddTrainLogic.Commit(text: "SJ 523"))
+        #expect(AddTrainLogic.commit(from: nil, to: nil, text: "") == nil)
+    }
+
+    @Test func pickingKeepsTheOperatorTyped() {
+        #expect(AddTrainLogic.residue(after: interpretation(typing: "from", op: "SJ")) == "SJ ")
+        #expect(AddTrainLogic.residue(after: interpretation(typing: "from")) == "")
+        #expect(AddTrainLogic.residue(after: nil) == "")
+    }
+
+    @Test func aNumberGetsItsOwnSearchRow() {
+        let op = SearchResponse.Interpretation.OperatorText(id: "sj", text: "SJ")
+        #expect(AddTrainLogic.numberSearch(.init(operator: op, trainNumber: "523", from: nil, to: nil, typing: nil)) == "SJ 523")
+        #expect(AddTrainLogic.numberSearch(.init(operator: nil, trainNumber: "421", from: nil, to: nil, typing: nil)) == "421")
+        #expect(AddTrainLogic.numberSearch(interpretation(typing: "from")) == nil)
+    }
+
+    @Test func aTypedRouteThatNamedBothStationsShowsThemAsPicked() {
+        let both = SearchResponse.Interpretation(operator: nil, trainNumber: nil, from: hit("Uppsala C", id: "u"), to: hit("Stockholm C", id: "cst"), typing: nil)
+        let r = SearchResponse(date: "2026-11-17", interpretation: both, suggestions: [], results: [], connections: nil, outsideTimetable: false, history: nil)
+        #expect(AddTrainLogic.pickedRoute(from: r)?.to.id == "cst")
+        let number = SearchResponse.Interpretation(operator: nil, trainNumber: "523", from: hit("Uppsala C", id: "u"), to: hit("Stockholm C", id: "cst"), typing: nil)
+        #expect(AddTrainLogic.pickedRoute(from: SearchResponse(date: "2026-11-17", interpretation: number, suggestions: [], results: [], connections: nil, outsideTimetable: false, history: nil)) == nil)
+    }
+}

@@ -183,20 +183,41 @@ Opens as a full-height bottom sheet. Title "Add a train", close button top-right
 
 ### 5.1 Layout, top to bottom
 1. **Date row:** pill chips **Today · Tomorrow · Pick date**, plus the selected date shown ("Fri 17 Oct"). Choosing a past date shows a subtle hint "Past trip". Date picker is a native-feeling calendar; years are quickly selectable (people add old trips).
-2. **Search field** (autofocus): placeholder "Train number, route, or operator". Under it, three tappable example chips: `SJ 523`, `Stockholm → Göteborg`, `Snälltåget Stockholm Malmö`.
-3. **Interpretation chips:** as the user types, show how the input is understood as removable chips, e.g. `SJ` · `train 523`, or `Stockholm C` → `Göteborg C`. Tapping a chip's × edits that part. This makes the "smart" parsing visible and debuggable.
-4. **Autocomplete dropdown** (while typing a station): rows with station name, small subtitle (e.g. county), recents first with a clock icon. Accent- and case-insensitive ("Goteborg" finds "Göteborg C"). After choosing the first station, the field shows "Stockholm C →" and the cursor waits for the destination.
-5. **Results list** (once the query is complete): see 5.2.
+2. **Search field** (autofocus): placeholder "SJ 523 or Stockholm Göteborg".
+3. **Picked stations as chips** (owner, 2026-11-17): typing never searches. While you type, only what to pick is
+   shown: stations (accent- and case-insensitive, "Goteborg" finds "Göteborg C"), or for a train number one row,
+   "Search SJ 523". Picking a station puts it in the field as a chip ("Uppsala C →") and the cursor waits for the
+   destination, with popular stations offered under it; picking the second station searches. Return takes the top
+   station while one is being picked, else searches what is typed ("Uppsala Stockholm" then shows as the two chips).
+   Tapping a chip takes it off (and the one after it). With both picked, a swap button searches the way back. An
+   operator typed first ("SJ upps…") stays as text and filters the trains.
+4. **Empty field:** one list style throughout (round 32 pt tile, title, caption, hairlines between rows, as the station
+   rows): the ticket hint ("Have a ticket?"), **Your routes** ("Uppsala C → Stockholm C · 3 trips · last Thu 12 Nov",
+   one tap searches), then **Popular stations**. No example chips: the placeholder shows both forms.
+5. **Results list** (once the search runs): the keyboard goes down and skeleton cards shaped like the results show at
+   once, with the picked stations in them; see 5.2. The server starts building the day's planner when the first
+   station is picked, and the next "Show later" page is fetched as soon as the list is in.
 6. Footer link: **"Can't find it? Add manually"** (opens the manual form, §5.4).
 
 ### 5.2 Results
-Each result is a card:
-- Large times "08:03 → 10:51" (split-flap style, smaller than hero), duration "2h 48m" between them.
-- Operator badge + name, train number, category chip (High-speed / InterCity / Regional / Commuter / Night / Heritage).
-- If the date is today: live delay "+4 now" and platform if known.
-- Sorted by departure time. Filter chips above the list: **All · Long-distance · Regional · Commuter**.
-- Only **direct trains** appear (Clack is not a journey planner). If none: "No direct train found. Add each train separately." with the manual add link.
-- If the chosen date is older than the live timetable window the app searches the historical archive: show a spinner "Searching the archive…". If nothing is found: "We couldn't find this train in the timetable archive. You can add it manually."
+Each result is a card (owner, 2026-11-17, after SJ's results: what you compare is when it leaves, when it arrives and
+how long it takes):
+- The times as the headline, "06:10 – 11:28" (display face), "+1" when it arrives the next day, and the length on the
+  right ("5h 18m").
+- No route line and no date: the list is the route and the day searched. A result from or to another station in the
+  town says so ("From Stockholm City"); a train-number result names its stations under the times.
+- The trains drawn side by side from the card's edge, at one scale on one rail line: the type that usually runs the
+  line (no "usually" note; unpainted where unknown). One train whole; two half the row each; three 38/31/31%; four or
+  more 31% for the first and the rest shared (at least a nose and cab). Whole when it fits, cut from the back when not.
+  The first (the one you board) in front, each later one slid a little under the one before with a thin gap along its
+  outline, fading in from its rear to full at about half its length (it sits behind, so the noses stay crisp); no dimming. Under them the strip drawn to scale with the waits.
+- The operators' logos (stacked, each once) and names ("SJ + Öresundståg", or "SJ 523" for one train); "Direct" or
+  "2 changes", and "Fastest"; each change with its comfort; a train's kind and stops between.
+- Sorted by departure, with a day line where the list crosses midnight. Filter chips **All · Long-distance · Regional ·
+  Commuter** for a station's trains (not for a train number); the journeys' Filters sheet for changes and comfort.
+- The list's ends: **Show earlier** / **Show later** as quiet full-width buttons, and its last row **Can't find your
+  train? Add it by hand with the times you know**.
+- If the chosen date is older than the live timetable window the app searches the historical archive and says so.
 
 ### 5.3 Confirm step
 Tapping a result opens **"Where did you get on and off?"**:
@@ -212,7 +233,7 @@ A simple form: **From** and **To** (station autocomplete), **Date**, optional **
 A success state in the sheet: green check animation, summary of the leg, and two buttons: **View trip** and **Add another** (keeps the date and the last stations as recents so logging a day of travel or a back-catalogue of old trips is fast). No CSV import in Phase 1.
 
 ### 5.6 States
-Loading skeletons for results; offline/API-down banner "Timetable search needs a connection"; empty query shows recents and examples.
+Loading skeletons shaped like the result cards, from the moment the search runs; offline/API-down: the failure says whose it is and retries; empty query shows the ticket hint, your routes and popular stations.
 
 ## 6. Screen: Trip detail — P0
 

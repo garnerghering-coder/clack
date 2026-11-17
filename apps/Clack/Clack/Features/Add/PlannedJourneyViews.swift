@@ -72,41 +72,27 @@ enum PlannedLegs {
     }
 }
 
-/// A planned journey in the results, drawn as a saved trip or journey is in Trips (`JourneyCardContent`), with what
-/// only search says under the strip: direct or each change with its comfort, and the fastest of the list.
+/// A planned journey in the results (owner, 2026-11-17: what you compare is when it leaves, when it gets there and how
+/// long it takes; the route is the one you searched): `SearchResultCard` with each change and its comfort.
 struct JourneyResultCard: View {
-    @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     let journey: PlannedJourney
+    /// The stations searched: a journey from or to another station in the town says so.
+    var searchedFrom: String?
+    var searchedTo: String?
     var onPick: (() -> Void)?
 
     var body: some View {
-        let legs = PlannedLegs.legs(journey.legs, journeyId: journey.id, app: app)
-        let single = legs.count == 1
-        let card = JourneyCardContent(legs: legs, now: 0, title: single ? PlannedLegs.title(journey.legs[0], app: app, l10n: l10n) : nil) {
-            VStack(alignment: .leading, spacing: Space.xs) {
-                if journey.changes.isEmpty || journey.fastest == true {
-                    HStack(spacing: Space.s) {
-                        if journey.changes.isEmpty { Text(l10n.t("journey.direct")).clack(.caption).foregroundStyle(Ink.text2) }
-                        if journey.fastest == true { Text(l10n.t("journey.fastest")).clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.accentInk) }
-                    }
-                }
-                ForEach(Array(journey.changes.enumerated()), id: \.offset) { _, c in
-                    ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort, typicalLateMin: c.typicalLateMin)
-                }
+        SearchResultCard(
+            trains: journey.legs, summary: changesText, fastest: journey.fastest == true,
+            searchedFrom: searchedFrom, searchedTo: searchedTo,
+            speech: journey.changes.map { l10n.t("change.line", ["station": $0.name, "min": String($0.gapMin)]) + ", " + l10n.t("comfort.\($0.comfort.rawValue)") },
+            onPick: onPick
+        ) {
+            ForEach(Array(journey.changes.enumerated()), id: \.offset) { _, c in
+                ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort, typicalLateMin: c.typicalLateMin)
             }
         }
-        Group {
-            if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Format.join([
-            single ? TripsSpeech.leg(legs[0], l10n: l10n, settings: app.settings) : TripsSpeech.journey(legs, l10n: l10n, settings: app.settings),
-            changesText,
-            journey.changes.map { l10n.t("change.line", ["station": $0.name, "min": String($0.gapMin)]) + ", " + l10n.t("comfort.\($0.comfort.rawValue)") }.joined(separator: ", "),
-            journey.fastest == true ? l10n.t("journey.fastest") : nil,
-        ], separator: ", "))
-        .accessibilityAddTraits(onPick == nil ? [] : .isButton)
     }
 
     private var changesText: String {
@@ -115,6 +101,225 @@ struct JourneyResultCard: View {
         case 1: l10n.t("journey.oneChange")
         default: l10n.t("journey.changes", ["n": String(journey.changes.count)])
         }
+    }
+}
+
+/// One search result, a train or a journey (owner, 2026-11-17, after SJ's results). Top to bottom:
+/// - the times as the headline ("06:10 – 11:28") with the length on the right;
+/// - the trains drawn side by side, each later one fading in (`TrainStrip`), then the strip to scale with the waits
+///   (`JourneyBar`, without its labels: the headline has them);
+/// - the operators' logos and names, then direct or the changes;
+/// - `details`: each change, or a train's kind and stops.
+/// No route line and no date: the list is the route and the day searched. A result from or to another station in the
+/// town names it.
+struct SearchResultCard<Details: View>: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(\.colorScheme) private var scheme
+    let trains: [TripResult]
+    /// "Direct", "2 changes".
+    let summary: String
+    var fastest = false
+    var searchedFrom: String?
+    var searchedTo: String?
+    /// What VoiceOver adds after the summary (the changes).
+    var speech: [String] = []
+    var onPick: (() -> Void)?
+    @ViewBuilder var details: Details
+
+    var body: some View {
+        let legs = PlannedLegs.legs(trains, journeyId: trains.map(\.id).joined(separator: "+"), app: app)
+        let first = trains[0], last = trains[trains.count - 1]
+        let dep = Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)
+        let arr = Format.time(last.to.time, tz: last.to.tz, clock: app.settings.clock)
+        let duration = Format.duration((last.to.time - first.from.time) / 60_000, language: l10n.language)
+        let nextDay = Format.localDate(last.to.time, tz: last.to.tz) != Format.localDate(first.from.time, tz: first.from.tz)
+        let services = trains.count == 1
+            ? PlannedLegs.title(first, app: app, l10n: l10n)
+            : Self.operatorNames(trains, app: app)
+        let elsewhere = [
+            searchedFrom.flatMap { $0 == first.from.stationId ? nil : l10n.t("add.fromStation", ["station": first.from.name]) },
+            searchedTo.flatMap { $0 == last.to.stationId ? nil : l10n.t("add.toStation", ["station": last.to.name]) },
+        ].compactMap { $0 }
+        let card = VStack(alignment: .leading, spacing: Space.s) {
+            // The length beside the times, or under them when both don't fit on one line (the largest text sizes).
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .firstTextBaseline, spacing: Space.s) {
+                    times(dep: dep, arr: arr, nextDay: nextDay)
+                    Spacer(minLength: Space.s)
+                    Text(duration).clack(.headline).monospacedDigit().foregroundStyle(Ink.text).lineLimit(1)
+                }
+                VStack(alignment: .leading, spacing: Space.xxs) {
+                    times(dep: dep, arr: arr, nextDay: nextDay)
+                    Text(duration).clack(.headline).monospacedDigit().foregroundStyle(Ink.text)
+                }
+            }
+            // Nothing searched by stations (a train number): where it runs, said once.
+            if searchedFrom == nil && searchedTo == nil {
+                Text(verbatim: "\(first.from.name) → \(last.to.name)").clack(.rowTitle).foregroundStyle(Ink.text)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            if !elsewhere.isEmpty {
+                Text(elsewhere.joined(separator: Format.separator)).clack(.caption).foregroundStyle(Ink.text2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            TrainStrip(trains: trains)
+                // From the card's edge, as the trains run in from off the card.
+                .padding(.leading, -Space.l)
+            JourneyBar(legs: legs, now: 0, showsLabels: false)
+            HStack(spacing: Space.s) {
+                OperatorStack(operators: legs.map(\.operator))
+                Text(services).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(2)
+            }
+            HStack(spacing: Space.s) {
+                Text(summary).clack(.caption).foregroundStyle(Ink.text2)
+                if fastest { Text(l10n.t("journey.fastest")).clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.accentInk) }
+            }
+            details
+        }
+        .padding(Space.l)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            ZStack {
+                Ink.surface
+                ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
+                    CSSRadialGradient(
+                        rx: 0.75, ry: 1.1 / Double(legs.count), cx: 1, cy: (Double(index) + 0.6) / Double(legs.count),
+                        stops: [
+                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0.18), location: 0),
+                            .init(color: operatorColor(leg.operator?.brandColor, scheme: scheme).opacity(0), location: 0.7),
+                        ]
+                    )
+                }
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+        Group {
+            if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
+        }
+        // One sentence for VoiceOver, not a dozen pieces.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Format.join([
+            searchedFrom == nil && searchedTo == nil ? "\(first.from.name) → \(last.to.name)" : nil,
+            l10n.t("add.cardLabel", ["dep": dep, "arr": arr, "duration": duration]),
+            services, summary, fastest ? l10n.t("journey.fastest") : nil,
+        ] + elsewhere + speech, separator: ", "))
+        .accessibilityAddTraits(onPick == nil ? [] : .isButton)
+    }
+
+    /// "06:10 – 11:28", "+1" when it arrives the next day (a night train).
+    private func times(dep: String, arr: String, nextDay: Bool) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: Space.xxs) {
+            Text(verbatim: "\(dep) – \(arr)").clack(.bigTime).monospacedDigit().foregroundStyle(Ink.text)
+                .lineLimit(1).minimumScaleFactor(0.8)
+            if nextDay { Text(verbatim: "+1").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text2) }
+        }
+    }
+
+    /// "SJ + Öresundståg": each operator once, in the order ridden.
+    static func operatorNames(_ trains: [TripResult], app: AppModel) -> String {
+        var seen = Set<String>()
+        return trains.compactMap { t -> String? in
+            let name = t.operatorId.flatMap { app.operatorsById[$0]?.name } ?? AddTrainLogic.standInName(t, op: nil)
+            guard let name, seen.insert(name).inserted else { return nil }
+            return name
+        }.joined(separator: " + ")
+    }
+}
+
+/// The trains of a result drawn side by side, as on SJ's results (owner, 2026-11-17): at one scale on one rail line,
+/// each in its share of the row (`TrainStripLayout`), whole when it fits and cut from the back when it doesn't. The
+/// first, the one you board, is in front; each later one slides a little under the one before it, with a thin gap cut
+/// out along that train's outline (as the stacked logos have), so every nose stands out on any background. The train
+/// that usually runs the line, as `TrainPicture` draws it: unpainted where the type isn't known, nothing guessed.
+struct TrainStrip: View {
+    @Environment(AppModel.self) private var app
+    let trains: [TripResult]
+    static var height: CGFloat { CGFloat(TrainStripLayout.height) }
+    /// The gap around the train in front, in points.
+    static let gap: CGFloat = 1.5
+
+    private struct Drawn {
+        let type: TrainType?
+        let operatorId: String?
+        /// At `TrainStripLayout.scale`: the drawing's own size (its canvas, in drawing units) × the scale.
+        let size: CGSize
+    }
+
+    var body: some View {
+        let scale = CGFloat(TrainStripLayout.scale)
+        let drawn = trains.map { train -> Drawn in
+            let type = train.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
+            let picture = TrainArt.picture(typeId: type?.id, art: type?.art, uncertain: type?.uncertain ?? false, operatorId: train.operatorId)
+            let canvas = UIImage(named: picture.asset)?.size ?? CGSize(width: 900, height: 176)
+            return Drawn(type: type, operatorId: train.operatorId, size: CGSize(width: canvas.width * scale, height: canvas.height * scale))
+        }
+        GeometryReader { g in
+            let slots = TrainStripLayout.slots(naturals: drawn.map { Double($0.size.width) }, width: Double(g.size.width))
+            HStack(alignment: .bottom, spacing: 0) {
+                ForEach(drawn.indices, id: \.self) { i in
+                    let slot = slots[i]
+                    piece(drawn[i], width: CGFloat(slot.width))
+                        .mask {
+                            if i > 0 {
+                                // The train in front, as it sits over this one (its nose `overlap` in from this one's
+                                // rear), blurred a little so the cut reaches just past its outline.
+                                let front = drawn[i - 1]
+                                let frontWidth = CGFloat(slots[i - 1].width)
+                                Rectangle()
+                                    .overlay(alignment: .bottomLeading) {
+                                        ZStack {
+                                            piece(front, width: frontWidth)
+                                            piece(front, width: frontWidth)
+                                        }
+                                        .blur(radius: Self.gap)
+                                        .offset(x: CGFloat(slot.overlap) - frontWidth)
+                                        .blendMode(.destinationOut)
+                                    }
+                                    .compositingGroup()
+                            } else {
+                                Rectangle()
+                            }
+                        }
+                        // Each later train fades in from its rear, from under the nose in front to full strength about
+                        // halfway along what shows of it, as on SJ's (owner, 2026-11-17: "more drastic"). It sits
+                        // behind, so the noses in front stay crisp.
+                        .mask {
+                            if i > 0 {
+                                LinearGradient(stops: [
+                                    .init(color: .clear, location: 0),
+                                    .init(color: .black.opacity(0.15), location: Self.fadeStart(slot)), // design-lint: allow a mask's opacity, not a colour shown
+                                    .init(color: .black, location: Self.fadeEnd), // design-lint: allow a mask's opacity, not a colour shown
+                                ], startPoint: .leading, endPoint: .trailing) // design-lint: allow a mask's opacity, not a colour shown
+                            } else {
+                                Rectangle()
+                            }
+                        }
+                        .padding(.leading, -CGFloat(slot.overlap))
+                        .zIndex(Double(drawn.count - i))
+                }
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+        }
+        .frame(height: Self.height)
+        .accessibilityHidden(true)
+    }
+
+    /// Where a later train's fade is at full strength, as a share of its width.
+    static let fadeEnd: Double = 0.55
+
+    /// Where the train in front's nose ends over this one: the fade is still faint there.
+    static func fadeStart(_ slot: TrainStripLayout.Slot) -> Double {
+        min(fadeEnd - 0.05, slot.overlap / max(1, slot.width))
+    }
+
+    /// One train at the strip's scale, cut from the back to `width` (its nose kept).
+    private func piece(_ d: Drawn, width: CGFloat) -> some View {
+        TrainPicture(type: d.type, operatorId: d.operatorId, height: d.size.height)
+            .frame(width: d.size.width, height: d.size.height)
+            .frame(width: width, height: d.size.height, alignment: .trailing)
+            .clipped()
     }
 }
 

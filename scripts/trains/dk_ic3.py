@@ -22,6 +22,9 @@ Sources (retrieved 2026-10-28):
   look with lime green door panels (160, 5202, same day as 190) has no source naming it or its share of the fleet;
   the logo on 160's face is not DSB's red hexagon (too small to identify): `dsb-silver`, unverified whose scheme it is.
   No source found for grey/blue sets still running in 2026: the 2002-07 livery is not drawn.
+  Open (owner, 2026-11-17, unverified): standing at Danish stations he has seen these rubber-nosed sets grey more often
+  than red. That may be the stainless `dsb-silver` look (160) or IR4s still in the 2003-05 grey and blue; `dsb` (red)
+  stays the default until a dated photo of a set in service says otherwise (DENMARK_DATA_FINDINGS.md, Open questions).
 Measuring (160.webp, 2000x1500):
 - The car side is one plane: the window band's top and bottom edges and the top of the dark bottom strip are straight
   (6 columns each, residuals <= 1 px) and meet at the vanishing point (-905, 381). Along the band's bottom edge,

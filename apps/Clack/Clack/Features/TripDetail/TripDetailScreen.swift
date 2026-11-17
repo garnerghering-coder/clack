@@ -464,7 +464,10 @@ struct TripDetailScreen: View {
             }
             if let journey {
                 VStack(alignment: .leading, spacing: Space.s) {
-                    Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    HStack(spacing: Space.s) {
+                        OperatorStack(operators: journey.legs.map(\.operator))
+                        Text(l10n.t("journey.label", count: journey.legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    }
                     JourneyBar(legs: journey.legs, now: now, selected: detail.id)
                 }
             }

@@ -36,7 +36,7 @@ history. The owner is Garner (he/him).
 - Status is written, not boxed: no pill-shaped badges, no 999px radii. Use the radius tokens (`--r-tag`,
   `--r-control-sm`, `--r-input`, `--r-card`, `--r-sheet`) and the ink colours in `apps/Clack/Clack/Design/Tokens.swift` (moving to `ClackKit/ClackDesign`).
 - Every user-facing string goes in the String Catalog `apps/Clack/ClackKit/Sources/ClackCore/Resources/Localizable.xcstrings`,
-  in English and Swedish (keys are dot paths, read with `L10n.t`). The server reads the same catalog for delay causes and
+  in all eight of its languages: English, Swedish, Danish, Norwegian Bokmål, Finnish, German, Polish and French (keys are dot paths, read with `L10n.t`). The server reads the same catalog for delay causes and
   the privacy page (`packages/shared/src/strings.ts`). One exception: App Intents (Siri, Shortcuts) read their titles only from
   the app's own bundle, so those are in `apps/Clack/Clack/Localizable.xcstrings` and the spoken phrases in `AppShortcuts.xcstrings`.
 - API keys live only in `.env` (see `.env.example`). Never commit them.

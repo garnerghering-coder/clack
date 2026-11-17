@@ -28,15 +28,24 @@ struct AddTrainSheet: View {
         }
         .environment(model)
         .task { await model.loadPopular(app.client) }
+        .task { await model.loadRecentRoutes(app.client) }
         .task {
             if let link = request.link { await model.prefill(link, app.client) }
             if let query = request.query {
                 if let date = request.date { model.date = date }
-                model.query = query
                 model.replaceLegId = request.replaceLegId
                 model.deleteReplaced = request.deleteReplaced
+                // Opened with a search (another screen's "find another train"): searched at once.
+                model.search(text: query)
             }
+            #if DEBUG
+            // `-addQuery` fills the field on launch and searches it, to check the results.
+            if request.query == nil, request.link == nil, !model.query.isEmpty { model.search(text: model.query) }
+            #endif
         }
+        .task(id: model.suggestKey) { await model.runSuggest(app.client) }
+        // The next Show later, fetched as soon as the list's window is known.
+        .task(id: model.window?.end) { await model.prefetchLater(app.client) }
         .task(id: model.searchKey) {
             await model.runSearch(app.client)
             #if DEBUG
@@ -63,7 +72,7 @@ struct AddTrainSheet: View {
         if let saved = model.saved {
             DoneStep(leg: saved) { model.reset() }
         } else if model.manual {
-            ManualTripStep(date: model.date, from: model.interpretation?.from, to: model.interpretation?.to) { model.manual = false } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
+            ManualTripStep(date: model.date, from: model.routeFrom, to: model.routeTo) { model.manual = false } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
         } else if let journey = model.pickedJourney {
             PlannedJourneyStep(journey: journey) { model.pickedJourney = nil } onSaved: { model.didSave($0, app.client); app.justAdded = $0.leg.id; app.tripsChanged() }
         } else if let connection = model.pickedConnection {
@@ -136,71 +145,146 @@ private struct SearchStep: View {
 
     var body: some View {
         @Bindable var model = model
-        DateRow(date: $model.date, tz: Format.zone(country: model.interpretation?.from?.country))
-        SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
-            .onAppear { focused = true }
-            // Searching gives the results the whole screen: the keyboard and the station suggestions go away.
-            .onSubmit {
-                focused = false
-                model.searchAgain()
-            }
-            // So do the results themselves, once the search is whole (both stations, or a train number): the list gets
-            // the screen and a tap on a card can't land on a key (user test 2026-11-07, five of seven testers).
-            .onChange(of: model.response.map(Self.isWholeSearch) ?? false) { _, whole in if whole { focused = false } }
+        DateRow(date: $model.date, tz: Format.zone(country: model.routeFrom?.country))
+        routeField
+            .onAppear { focused = !model.searching }
+            // Return takes the top station while one is being picked (the cursor then waits for the destination), else
+            // searches what's there.
+            .onSubmit { model.submit(app.client) }
+            // The keyboard is up while picking and goes down when the search runs (a pick or Return, both on purpose),
+            // so typing is never interrupted (owner, 2026-11-17) and a tap on a card can't land on a key.
+            .onChange(of: model.searching) { _, searching in focused = !searching }
 
-        if model.query.isEmpty {
-            FlowLayout(spacing: Space.s, lineSpacing: Space.s) {
-                Text(l10n.t("add.examples")).clack(.caption).foregroundStyle(Ink.text2)
-                ForEach(AddTrainLogic.examples, id: \.self) { example in
-                    ChipButton(text: example) { model.query = example }
+        if model.searching {
+            searchResults
+        } else {
+            picking
+        }
+    }
+
+    // MARK: the field
+
+    /// One smart field, the picked stations as chips above the text: "Uppsala C →", then the destination being typed.
+    private var routeField: some View {
+        let text = Binding(get: { model.query }, set: { model.edit($0) })
+        let prompt = model.fromStation == nil ? l10n.t("add.placeholder") : l10n.t("add.toPrompt")
+        // Both picked and nothing else typed: the chips say it all, and the empty text line folds away.
+        let showsText = model.toStation == nil || !model.query.trimmingCharacters(in: .whitespaces).isEmpty
+        return SearchField(text: text, prompt: prompt, focus: $focused, showsText: showsText, showsIcon: model.fromStation == nil) {
+            if let from = model.fromStation {
+                HStack(alignment: .center, spacing: Space.s) {
+                    FlowLayout(spacing: Space.xs, lineSpacing: Space.xs) {
+                        stationChip(from, isFrom: true)
+                        Text(verbatim: "→").clack(.rowTitle).foregroundStyle(Ink.text2).frame(minHeight: 44).accessibilityHidden(true)
+                        if let to = model.toStation { stationChip(to, isFrom: false) }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    if model.toStation != nil {
+                        // The trip the other way, searched at once (the way home).
+                        Button { model.swap() } label: {
+                            LucideIcon(name: "arrow-down-up", size: 18).foregroundStyle(Ink.text2)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(l10n.t("add.swapStations"))
+                    }
+                }
+                .padding(.top, Space.xs)
+            }
+        }
+    }
+
+    /// A picked station: tapping it takes it (and the one after it) off, back to picking.
+    private func stationChip(_ station: StationHit, isFrom: Bool) -> some View {
+        ChipButton(text: station.name, active: true, removable: true) {
+            model.unpick(from: isFrom)
+            focused = true
+        }
+        .accessibilityLabel(l10n.t("add.removeStation", ["station": station.name]))
+    }
+
+    // MARK: picking
+
+    /// While typing: only what to pick (stations, the number to search), never results. With nothing typed: a ticket's
+    /// way in, your routes, popular stations. Every list is the same row (`SearchListRow`) under the same header
+    /// (`SearchSection`) (owner, 2026-11-17: one system, not pieces dropped in).
+    @ViewBuilder
+    private var picking: some View {
+        let typed = !model.query.trimmingCharacters(in: .whitespaces).isEmpty
+        if let number = model.numberSearch {
+            SearchListRow(
+                title: l10n.t("add.searchNumber", ["train": number]),
+                detail: Format.isoToNoonMs(model.date).map { Format.day($0, tz: "UTC", language: app.settings.language) } ?? model.date,
+                action: { model.search() }
+            ) { IconTile(name: "search") }
+        }
+        if !model.suggestions.isEmpty {
+            SearchSection(title: l10n.t("add.stations"))
+            stationList(model.suggestions)
+        }
+        if !typed && model.fromStation == nil {
+            // The other way in, said once where people look for it (user test 2026-11-07: nobody knew).
+            SearchListRow(title: l10n.t("add.ticketRowTitle"), detail: l10n.t("add.ticketRowDetail")) { IconTile(name: "ticket") }
+            if !model.recentRoutes.isEmpty {
+                SearchSection(title: l10n.t("add.recentRoutes"))
+                VStack(spacing: 0) {
+                    ForEach(Array(model.recentRoutes.enumerated()), id: \.element.id) { i, route in
+                        SearchListRow(title: "\(route.from.name) → \(route.to.name)", detail: recentDetail(route), action: { model.pick(route) }) {
+                            IconTile(name: "history")
+                        }
+                        .rowDivider(i < model.recentRoutes.count - 1)
+                    }
                 }
             }
-            // The other way in, said once where people look for it (user test 2026-11-07: nobody knew).
-            Text(l10n.t("add.shareTicketHint")).clack(.caption).foregroundStyle(Ink.text2)
-                .fixedSize(horizontal: false, vertical: true)
         }
+        if !typed, !model.popular.isEmpty {
+            // Before anything is typed, and as destinations once the origin is picked.
+            SearchSection(title: l10n.t("add.popular"))
+            stationList(model.popular.filter { $0.id != model.fromStation?.id })
+        }
+    }
+
+    /// "3 trips · last 12 Nov".
+    private func recentDetail(_ route: RecentRoute) -> String? {
+        let count = route.count.map { l10n.t("add.recentRouteTrips", count: $0) }
+        let last = route.last.map { l10n.t("add.recentRouteLast", ["day": Format.day($0, tz: Format.defaultZone, language: app.settings.language)]) }
+        let line = Format.join([count, last])
+        return line.isEmpty ? nil : line
+    }
+
+    private func stationList(_ stations: [StationHit]) -> some View {
+        VStack(spacing: 0) {
+            ForEach(Array(stations.enumerated()), id: \.element.id) { i, station in
+                StationRow(station: station) { model.pick(station, app.client) }
+                    .rowDivider(i < stations.count - 1)
+            }
+        }
+    }
+
+    // MARK: searching
+
+    @ViewBuilder
+    private var searchResults: some View {
         if model.searchFailed {
             ErrorStateView(
                 message: model.searchFailure == nil ? l10n.t("add.searchError") : l10n.t("add.searchFailed"),
                 kind: model.searchFailure, status: model.searchRetry.status, retry: { model.searchAgain() }
             ).countsError("add.search")
         }
-
-        if model.query.isEmpty, !model.popular.isEmpty {
-            Text(l10n.t("add.popular")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            stationList(model.popular)
-        } else if let response = model.response {
+        if let response = model.response {
             results(response)
-        } else if model.loading {
-            // The first search of a query: the quick station names already, the journeys still coming.
-            if !model.suggestionsShown.isEmpty {
-                Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                stationList(model.suggestionsShown)
-            }
-            // Grows with the wait: "Still loading…" after 5 s, why it can take a while after 15 s, and a retry's
-            // countdown when the request is waiting to try again.
+        } else if !model.searchFailed {
+            // From the moment the search is asked for: cards shaped like the ones coming, with the picked stations, so
+            // nothing moves when they arrive. Grows with the wait: "Still loading…" after 5 s, why it can take a while
+            // after 15 s, and a retry's countdown when the request is waiting to try again.
             GrowingWait(context: l10n.t("add.slowSearch"), status: model.searchRetry.status) {
                 VStack(spacing: Space.l) {
-                    ResultCardSample()
-                    ResultCardSample()
+                    ForEach(0..<3, id: \.self) { _ in
+                        ResultCardSample(from: model.fromStation?.name, to: model.toStation?.name, typeLine: !model.expectsJourneys)
+                    }
                 }
             }
-        }
-    }
-
-    /// A search that has all it needs: two stations with the planner's answer in, or a train number with its results.
-    nonisolated private static func isWholeSearch(_ r: SearchResponse) -> Bool {
-        (r.interpretation.from != nil && r.interpretation.to != nil && r.journeys != nil) || (r.interpretation.trainNumber != nil && r.results != nil)
-    }
-
-    private func pick(_ station: StationHit) {
-        model.query = AddTrainLogic.query(afterPicking: station, query: model.query, interpretation: model.interpretation)
-        focused = true
-    }
-
-    private func stationList(_ stations: [StationHit]) -> some View {
-        VStack(spacing: 0) {
-            ForEach(stations) { station in StationRow(station: station) { pick(station) } }
         }
     }
 
@@ -253,11 +337,6 @@ private struct SearchStep: View {
     /// changes (it filters, it doesn't sort), and when it leaves nothing, the offer to include more changes.
     @ViewBuilder
     private func journeyResults(_ response: SearchResponse) -> some View {
-        // While typing, the stations to pick from; once the search is sent, only the results.
-        if focused, !model.suggestionsShown.isEmpty {
-            Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            stationList(model.suggestionsShown)
-        }
         journeyFilterBar(count: model.journeys?.count ?? 0)
         // A whole day whose first train leaves late: said in words, so a reduced timetable (works, a Sunday) isn't
         // mistaken for a list anchored to the wrong hour, and nobody pages into the day before looking for the morning.
@@ -270,7 +349,7 @@ private struct SearchStep: View {
         // Paging: six hours earlier or later per press. The button names the day it reaches into when that is another
         // day, and every day's first journey carries a day line (user test 2026-11-07: "the date chip lied to me").
         if model.window != nil {
-            pagingButton(model.earlierDay(language: app.settings.language).map { l10n.t("add.showEarlierDay", ["day": $0]) } ?? l10n.t("board.showEarlier"), busy: model.pagingEarlier) {
+            pagingButton(model.earlierDay(language: app.settings.language).map { l10n.t("add.showEarlierDay", ["day": $0]) } ?? l10n.t("board.showEarlier"), icon: "chevron-up", busy: model.pagingEarlier) {
                 let first = model.journeys?.first?.id
                 await model.showEarlierJourneys(app.client)
                 // The new rows go in above: keep what was at the top where it was, so nothing jumps and a drag at the
@@ -285,7 +364,7 @@ private struct SearchStep: View {
                         Text(day).clack(.captionUpper).foregroundStyle(Ink.text2).frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, i > 0 ? 8 : 0)
                     }
-                    JourneyResultCard(journey: journey) { model.pickedJourney = journey }.id(journey.id)
+                    JourneyResultCard(journey: journey, searchedFrom: model.routeFrom?.id, searchedTo: model.routeTo?.id) { model.pickedJourney = journey }.id(journey.id)
                 }
                 // Some journeys are hidden by the change filter (owner, 2026-10-30: a 4-change night via
                 // København was found but never shown): offer them under the list too, not only when none pass.
@@ -311,36 +390,40 @@ private struct SearchStep: View {
         }
         if model.window != nil {
             if model.laterEmpty { Text(l10n.t("add.noLaterJourneys")).clack(.caption).foregroundStyle(Ink.text2) }
-            pagingButton(model.laterDay(language: app.settings.language).map { l10n.t("add.showLaterDay", ["day": $0]) } ?? l10n.t("board.showLater"), busy: model.pagingLater) { await model.showLaterJourneys(app.client) }
+            pagingButton(model.laterDay(language: app.settings.language).map { l10n.t("add.showLaterDay", ["day": $0]) } ?? l10n.t("board.showLater"), icon: "chevron-down", busy: model.pagingLater) { await model.showLaterJourneys(app.client) }
         }
-        Button(l10n.t("manual.cta")) { model.manual = true }
-            .buttonStyle(LinkButtonStyle())
-            .frame(maxWidth: .infinity)
-            .padding(.top, Space.s)
+        manualRow
     }
 
-    /// Show earlier / Show later as a plain system link, replaced by a spinner and "Looking for more…" while it runs.
-    private func pagingButton(_ label: String, busy: Bool, action: @escaping () async -> Void) -> some View {
-        HStack(spacing: Space.s) {
-            if busy {
-                ProgressView().controlSize(.small)
-                Text(l10n.t("add.searchingMore")).clack(.caption).foregroundStyle(Ink.text2)
-            } else {
-                Button(label) { Task { await action() } }.buttonStyle(LinkButtonStyle())
+    /// The list's last row: the way to a train the timetable doesn't have.
+    private var manualRow: some View {
+        SearchListRow(title: l10n.t("add.manualRowTitle"), detail: l10n.t("add.manualRowDetail"), action: { model.manual = true }) {
+            IconTile(name: "plus")
+        }
+        .padding(.top, Space.s)
+    }
+
+    /// Show earlier / Show later: a quiet full-width button at each end of the list, the same size while it loads (a
+    /// spinner and "Looking for more…"), so nothing moves under the finger.
+    private func pagingButton(_ label: String, icon: String, busy: Bool, action: @escaping () async -> Void) -> some View {
+        Button { Task { await action() } } label: {
+            HStack(spacing: Space.s) {
+                if busy {
+                    ProgressView().controlSize(.small)
+                    Text(l10n.t("add.searchingMore"))
+                } else {
+                    LucideIcon(name: icon, size: 16)
+                    Text(label)
+                }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .buttonStyle(.clack(.secondary, small: true, wide: true))
+        .disabled(busy)
     }
 
     @ViewBuilder
     private func trainResults(_ response: SearchResponse) -> some View {
         let interpretation = response.interpretation
-        let hasResults = !(response.results ?? []).isEmpty
-        if !model.suggestionsShown.isEmpty
-            && !(interpretation.to != nil && model.suggestionsShown.first?.id == interpretation.to?.id && hasResults) {
-            Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            stationList(model.suggestionsShown)
-        }
         if response.outsideTimetable {
             Banner {
                 HStack(spacing: Space.s) {
@@ -350,19 +433,28 @@ private struct SearchStep: View {
             }
         }
         if let list = response.results, !list.isEmpty {
-            // One row that scrolls sideways, in every language (polish pass 1: it wrapped to two lines in English and
-            // ran off the edge in Swedish).
-            ScrollView(.horizontal) {
-                HStack(spacing: Space.s) {
-                    ForEach(AddTrainLogic.Filter.allCases, id: \.self) { filter in
-                        ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
+            // The kinds of train, to narrow a station's list; never for a train number, which names its train. One row
+            // that scrolls sideways, in every language (polish pass 1: it wrapped to two lines in English and ran off
+            // the edge in Swedish).
+            if interpretation.trainNumber == nil {
+                ScrollView(.horizontal) {
+                    HStack(spacing: Space.s) {
+                        ForEach(AddTrainLogic.Filter.allCases, id: \.self) { filter in
+                            ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
+                        }
                     }
                 }
+                .scrollIndicators(.hidden)
+                .scrollClipDisabled()
             }
-            .scrollIndicators(.hidden)
-            .scrollClipDisabled()
             if model.hasHiddenEarlier {
-                Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
+                Button { model.showEarlier = true } label: {
+                    HStack(spacing: Space.s) {
+                        LucideIcon(name: "chevron-up", size: 16)
+                        Text(l10n.t("board.showEarlier"))
+                    }
+                }
+                .buttonStyle(.clack(.secondary, small: true, wide: true))
             }
             if model.showingOnlyDeparted {
                 Text(l10n.t("add.departedToday")).clack(.caption).foregroundStyle(Ink.text2)
@@ -375,7 +467,7 @@ private struct SearchStep: View {
             }
             VStack(spacing: Space.l) {
                 ForEach(model.results ?? []) { result in
-                    ResultCard(result: result) { model.pick(result) }
+                    ResultCard(result: result, searchedFrom: model.routeFrom?.id, searchedTo: model.routeTo?.id) { model.pick(result) }
                 }
             }
         }
@@ -401,10 +493,7 @@ private struct SearchStep: View {
             }
         }
         if response.outsideTimetable ? response.history != "loading" : response.results != nil {
-            Button(l10n.t("manual.cta")) { model.manual = true }
-                .buttonStyle(LinkButtonStyle())
-                .frame(maxWidth: .infinity)
-                .padding(.top, Space.s)
+            manualRow
         }
     }
 
@@ -498,73 +587,57 @@ private struct DateRow: View {
 
 // MARK: results
 
-/// A train in the results, drawn as the saved trip it becomes (`JourneyCardContent`; owner, build 87), with what only
-/// search says under the strip: the type the line usually runs, with its drawing, and the stops between.
+/// A train in the results (`SearchResultCard`), with what only search says: its kind, the stops between, and the
+/// other numbers it runs under.
 private struct ResultCard: View {
-    @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     let result: TripResult
+    var searchedFrom: String?
+    var searchedTo: String?
     let onPick: () -> Void
 
     var body: some View {
-        let op = result.operatorId.flatMap { app.operatorsById[$0] }
-        let type = result.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
-        let dep = Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)
-        let arr = Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)
-        let duration = Format.duration(Double(result.durationMin), language: l10n.language)
-        let legs = PlannedLegs.legs([result], journeyId: result.id, app: app)
-        Button(action: onPick) {
-            JourneyCardContent(legs: legs, now: 0, title: PlannedLegs.title(result, app: app, l10n: l10n)) {
-                VStack(alignment: .leading, spacing: Space.s) {
-                    if let type {
-                        HStack(spacing: Space.m) {
-                            TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
-                            // A typical type for the line, not a fact about this run (user test 2026-11-07: "X2000" here,
-                            // the planned "SJ 3000 (X55)" on the trip, read as the app not knowing what it was).
-                            Text(l10n.t("add.usuallyType", ["type": type.name])).clack(.caption).foregroundStyle(Ink.text2)
-                        }
-                    }
-                    Text(Format.join([
-                        l10n.t("products.\(result.product)"),
-                        result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
-                        result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
-                    ]))
-                    .clack(.caption).foregroundStyle(Ink.text2)
-                    .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+        SearchResultCard(trains: [result], summary: l10n.t("journey.direct"), searchedFrom: searchedFrom, searchedTo: searchedTo, onPick: onPick) {
+            Text(Format.join([
+                l10n.t("products.\(result.product)"),
+                result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : nil,
+                result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
+            ]))
+            .clack(.caption).foregroundStyle(Ink.text2)
+            .fixedSize(horizontal: false, vertical: true)
         }
-        .buttonStyle(.press)
-        // One sentence for VoiceOver, not a dozen pieces.
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(l10n.t("add.resultLabel", [
-            "train": [op?.name, result.trainNumber].compactMap { $0 }.joined(separator: " "),
-            "from": result.from.name, "dep": dep, "to": result.to.name, "arr": arr, "duration": duration,
-        ]))
-        .accessibilityAddTraits(.isButton)
     }
 }
 
-/// While the first results load: a card shaped like a result (header, route, strip, a line), so nothing moves when
-/// the real ones arrive.
+/// While the results load: a card shaped like the ones coming (`SearchResultCard`: the times, the trains, the strip, the
+/// operator, a line), so nothing moves when the real ones arrive. `typeLine` keeps the old parameter's place for a
+/// train number's results (the same shape now).
 private struct ResultCardSample: View {
+    var from: String?
+    var to: String?
+    var typeLine = false
+
     var body: some View {
         Placeholder {
             VStack(alignment: .leading, spacing: Space.s) {
-                HStack {
-                    Text(verbatim: "SJ 523").clack(.caption)
-                    Spacer(minLength: 0)
-                    Text(verbatim: "Fri 17 Oct").clack(.caption)
+                HStack(alignment: .firstTextBaseline) {
+                    Text(verbatim: "08:03 – 10:51").clack(.bigTime)
+                    Spacer(minLength: Space.s)
+                    Text(verbatim: "2 h 48 min").clack(.headline)
                 }
-                Text(verbatim: "Stockholm C → Göteborg C").clack(.rowTitle)
-                RoundedRectangle(cornerRadius: Radius.bar).frame(height: 6).padding(.vertical, Space.xxs)
-                HStack {
-                    Text(verbatim: "08:03 Stockholm C")
-                    Spacer(minLength: 0)
-                    Text(verbatim: "10:51 Göteborg C")
+                // Two trains as the strip lays them out (half the row each, a cab car about 23 pt high).
+                HStack(alignment: .bottom, spacing: Space.xxs) {
+                    RoundedRectangle(cornerRadius: Radius.tag).frame(width: 150, height: 23)
+                    RoundedRectangle(cornerRadius: Radius.tag).frame(width: 110, height: 23)
                 }
-                .clack(.micro)
-                Text(verbatim: "4 stops between").clack(.caption)
+                .frame(height: TrainStrip.height, alignment: .bottom)
+                .padding(.leading, -Space.l)
+                RoundedRectangle(cornerRadius: Radius.bar).frame(height: 6).frame(height: 10)
+                HStack(spacing: Space.s) {
+                    RoundedRectangle(cornerRadius: Radius.tag).frame(width: 20, height: 20)
+                    Text(verbatim: "SJ 523").clack(.rowTitle)
+                }
+                Text(verbatim: "1 change").clack(.caption)
             }
             .padding(Space.l)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -573,29 +646,17 @@ private struct ResultCardSample: View {
     }
 }
 
-/// Two trains and the change between them, as one option, drawn as a saved journey is (`JourneyCardContent`).
+/// Two trains and the change between them, as one option (`SearchResultCard`).
 private struct ConnectionResultCard: View {
-    @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     let connection: TimetableConnection
     var onPick: (() -> Void)?
 
     var body: some View {
-        let legs = PlannedLegs.legs([connection.first, connection.second], journeyId: connection.id, app: app)
         let change = l10n.t("add.changeAt", ["station": connection.changeAt.name, "min": String(connection.changeMin)])
-        let card = JourneyCardContent(legs: legs, now: 0) {
+        SearchResultCard(trains: [connection.first, connection.second], summary: l10n.t("journey.oneChange"), speech: [change], onPick: onPick) {
             Text(change).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
         }
-        Group {
-            if let onPick { Button(action: onPick) { card }.buttonStyle(.press) } else { card }
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Format.join([
-            TripsSpeech.journey(legs, l10n: l10n, settings: app.settings),
-            legs.map { Format.service($0.operator?.name, $0.trainNumber) }.joined(separator: ", "),
-            change,
-        ], separator: ", "))
-        .accessibilityAddTraits(onPick == nil ? [] : .isButton)
     }
 }
 
@@ -1353,5 +1414,73 @@ extension AddTrainLogic {
 
     static func standInName(_ result: TripResult, op: Operator?) -> String? {
         standInName(routeName: result.routeName, trainNumber: result.trainNumber, op: op)
+    }
+}
+
+// MARK: the search's lists
+
+/// One row of the search's lists (your routes, a number to search, a ticket's way in, add by hand), laid out as
+/// `StationRow` is: a 32 pt round tile, the title, a caption, 52 pt high. Without an action it is a hint, not a button.
+private struct SearchListRow<Tile: View>: View {
+    let title: String
+    var detail: String?
+    var action: (() -> Void)?
+    @ViewBuilder var tile: Tile
+
+    var body: some View {
+        if let action {
+            Button(action: action) { content }.buttonStyle(.plain)
+        } else {
+            content.accessibilityElement(children: .combine)
+        }
+    }
+
+    private var content: some View {
+        HStack(spacing: Space.m) {
+            tile.frame(width: 32, height: 32)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(title).clack(.rowTitle).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
+                if let detail {
+                    Text(detail).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, Space.m)
+        .frame(minHeight: 52)
+        .contentShape(Rectangle())
+    }
+}
+
+/// An icon in a round tile the size of a station's flag, so every row in the lists lines up.
+private struct IconTile: View {
+    let name: String
+
+    var body: some View {
+        LucideIcon(name: name, size: 16).foregroundStyle(Ink.text2)
+            .frame(width: 32, height: 32)
+            .background(Ink.surfaceRaised, in: Circle())
+            .accessibilityHidden(true)
+    }
+}
+
+/// The header over each of the search's lists: left-aligned, with room above it.
+private struct SearchSection: View {
+    let title: String
+
+    var body: some View {
+        Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, Space.l)
+            .accessibilityAddTraits(.isHeader)
+    }
+}
+
+private extension View {
+    /// A hairline under a row, from the text's edge (after the tile), between the rows of a list.
+    func rowDivider(_ show: Bool) -> some View {
+        overlay(alignment: .bottom) {
+            if show { Rectangle().fill(Ink.hairline).frame(height: 1).padding(.leading, 32 + Space.m) }
+        }
     }
 }

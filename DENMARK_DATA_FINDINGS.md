@@ -143,3 +143,13 @@ it; `LIVE_MAP_DENMARK=off` keeps Danish trains off the map. Without it, Danish b
 (`live: false`), and the map places Danish trains from the archive's latest 15-minute TripUpdate file (Parquet,
 Brotli; 20–35 min old; only stops with an update are listed, so the next stop can be a few ahead), at most one file
 every 5 minutes (`livemap/denmarkFallback.ts`). **Not done yet:** moving to API 2.0 when the key comes.
+
+## Open questions
+
+- **IC3/IR4 livery in service (owner, 2026-11-17, unverified).** Garner, at Danish stations, has seen the rubber-nosed
+  IC3/IR4 sets grey more often than red. The sources behind the drawings say the opposite: every IC3 got the red design
+  in its 2018-20 overhaul and the IR4 refurbishment to red ran 2021-26 (`scripts/trains/dk_ic3.py`, `dk_ir4.py`, from
+  da.wikipedia). What he saw may be the stainless look drawn as `dk_ic3-dsb-silver` (whose scheme it is is unverified)
+  or IR4s still in the 2003-05 grey and blue (`dk_ir4-dsb-grey`). Red stays DSB's default. To settle: a dated
+  2025-26 photo, or a fleet list, of sets in service; then the default is one line in `TrainArt.swift`
+  (`Detailed(... liveries:)` / `liveryOf`).

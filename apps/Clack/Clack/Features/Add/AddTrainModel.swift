@@ -19,9 +19,18 @@ final class AddTrainModel {
         if let i = args.firstIndex(of: "-addDate"), args.indices.contains(i + 1) { return args[i + 1] }
         #endif
         return Format.todayIso()
-    }() { didSet { if date != oldValue { showEarlier = false } } }
+    }() {
+        didSet {
+            guard date != oldValue else { return }
+            showEarlier = false
+            // Another day's answer is not this one's: the skeletons stand in until it comes, never the old day's trains.
+            clearAnswer()
+        }
+    }
     /// Today's list starts at now; this brings back the trains that left more than ten minutes ago.
     var showEarlier = false
+    /// The text typed after the stations picked (the field's chips): a station being typed, an operator or a number.
+    /// Typing never searches; it only asks for suggestions.
     var query = {
         #if DEBUG
         // `-addQuery "Stockholm → Göteborg"` fills the search field on launch, to check the results.
@@ -30,15 +39,32 @@ final class AddTrainModel {
         #endif
         return ""
     }() { didSet { if query != oldValue { showEarlier = false } } }
+    /// The stations picked so far, shown as chips in the field. Picking the second one searches (owner, 2026-11-17).
+    private(set) var fromStation: StationHit?
+    private(set) var toStation: StationHit?
+    /// What was last searched; nil while the person is still typing or picking.
+    private(set) var committed: AddTrainLogic.Commit?
     private(set) var response: SearchResponse?
-    /// Station names for the part being typed, from the quick station search, shown while the full search (which
-    /// also plans journeys and can take a second) is still out (owner, 2026-10-30).
-    private(set) var quickSuggestions: [StationHit] = []
-    /// What to offer as stations: the quick ones while a search is loading, else the full search's.
-    var suggestionsShown: [StationHit] {
-        loading && !quickSuggestions.isEmpty ? quickSuggestions : (response?.suggestions ?? [])
+    /// How the text being typed reads and the stations to pick from (`GET /search/suggest`: nothing from the
+    /// timetable, so it answers at once).
+    private(set) var suggestion: SearchResponse?
+    /// The stations to offer while typing.
+    var suggestions: [StationHit] { committed == nil && toStation == nil ? suggestion?.suggestions ?? [] : [] }
+    /// "SJ 523" while the text reads as a train number: the row that searches it.
+    var numberSearch: String? { committed == nil && toStation == nil ? AddTrainLogic.numberSearch(suggestion?.interpretation) : nil }
+    /// The station the text names before the one still being typed ("Uppsala Sto": Uppsala C), picked together with
+    /// the destination when one is tapped.
+    private var typedOrigin: StationHit? {
+        guard fromStation == nil, suggestion?.interpretation.typing == "to" else { return nil }
+        return suggestion?.interpretation.from
     }
+    /// Where the trip starts, picked or read from the search.
+    var routeFrom: StationHit? { fromStation ?? interpretation?.from }
+    var routeTo: StationHit? { toStation ?? interpretation?.to }
     private(set) var popular: [StationHit] = []
+    private(set) var recentRoutes: [RecentRoute] = []
+    /// Days whose planner the server was asked to start building, so each is asked once.
+    private var warmed = Set<String>()
     private(set) var loading = false
     var searchFailed = false
     /// Why the last search failed (no connection, the server down…), for the error state's wording.
@@ -65,7 +91,14 @@ final class AddTrainModel {
     var pickedJourney: PlannedJourney?
     /// Most changes a journey may have: 0 direct only, up to 5; two by default. Filters, doesn't sort (the planner is
     /// always asked for the most, so changing the filter never searches again).
-    var maxChanges = AddTrainModel.defaultMaxChanges
+    var maxChanges = {
+        #if DEBUG
+        // `-addChanges 5` starts the change filter there, to look at journeys with many trains.
+        let args = CommandLine.arguments
+        if let i = args.firstIndex(of: "-addChanges"), args.indices.contains(i + 1), let n = Int(args[i + 1]) { return n }
+        #endif
+        return AddTrainModel.defaultMaxChanges
+    }()
     static let defaultMaxChanges = 2
     static let maxChangesLimit = 5
     /// One page of journeys: six hours, moved earlier or later on request.
@@ -73,6 +106,8 @@ final class AddTrainModel {
     private static var pageMs: Double { Double(pageHours) * 3600_000 }
     /// Journeys from Show earlier and Show later, added to the first answer's; the window the whole list covers.
     private(set) var pagedJourneys: [PlannedJourney] = []
+    /// The next Show later's journeys, fetched as soon as the list is in so the button answers at once.
+    private var prefetchedLater: (key: String, after: Double, page: [PlannedJourney])?
     private(set) var window: SearchResponse.Window?
     private(set) var pagingEarlier = false
     private(set) var pagingLater = false
@@ -93,8 +128,20 @@ final class AddTrainModel {
         self.opening = opening
     }
 
-    /// Changes whenever the search should run again.
-    var searchKey: String { "\(query)|\(date)|\(retry)" }
+    /// Changes whenever the search should run again: a new search, another day, or asking again. Not the typing.
+    var searchKey: String {
+        guard let c = committed else { return "" }
+        return "\(c.text)|\(c.fromId ?? "")|\(c.toId ?? "")|\(date)|\(retry)"
+    }
+
+    /// Changes whenever the suggestions should be asked for again.
+    var suggestKey: String { "\(query)|\(fromStation?.id ?? "")|\(toStation?.id ?? "")|\(committed == nil)" }
+
+    /// The search out is for two stations (journeys), not a train number.
+    private(set) var expectsJourneys = true
+
+    /// A search is out or in: the results' part of the screen shows, not the suggestions.
+    var searching: Bool { committed != nil }
 
     var interpretation: SearchResponse.Interpretation? { response?.interpretation }
 
@@ -209,6 +256,14 @@ final class AddTrainModel {
     /// Six more hours of journeys after the list.
     func showLaterJourneys(_ client: APIClient) async {
         guard let w = window, !pagingLater else { return }
+        // Fetched ahead (`prefetchLater`): no wait.
+        if let ahead = prefetchedLater, ahead.key == searchKey, ahead.after == w.end {
+            prefetchedLater = nil
+            pagedJourneys += ahead.page
+            window = .init(start: w.start, end: w.end + Self.pageMs)
+            laterEmpty = ahead.page.isEmpty
+            return
+        }
         pagingLater = true
         defer { pagingLater = false }
         if let page = await fetchPage(client, after: w.end) {
@@ -218,12 +273,22 @@ final class AddTrainModel {
         }
     }
 
+    /// Fetches the next Show later's page in the background once the list's window is known (and again after each
+    /// press), so the button opens it at once.
+    func prefetchLater(_ client: APIClient) async {
+        guard let w = window, prefetchedLater?.after != w.end else { return }
+        let key = searchKey
+        guard let page = await fetchPage(client, after: w.end), key == searchKey, window?.end == w.end else { return }
+        prefetchedLater = (key, w.end, page)
+    }
+
     /// One window of journeys, waiting a few times while the server builds a new day's index. Nil when the search
     /// changed meanwhile or the server didn't answer (its request retries a failure itself, with backoff).
     private func fetchPage(_ client: APIClient, after: Double) async -> [PlannedJourney]? {
         let key = searchKey
+        guard let c = committed else { return nil }
         for _ in 0..<6 {
-            guard let page = try? await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: Self.pageHours) else { return nil }
+            guard let page = try? await client.search(c.text, date: date, fromId: c.fromId, toId: c.toId, changes: Self.maxChangesLimit, after: after, hours: Self.pageHours) else { return nil }
             guard key == searchKey else { return nil }
             if page.journeysPending != true { return page.journeys ?? [] }
             // Still building: a healthy wait, not a failure, so it stays at 3 s.
@@ -239,6 +304,144 @@ final class AddTrainModel {
 
     func loadPopular(_ client: APIClient) async {
         popular = (try? await client.popularStations()) ?? []
+    }
+
+    func loadRecentRoutes(_ client: APIClient) async {
+        recentRoutes = (try? await client.recentRoutes()) ?? []
+    }
+
+    // MARK: typing, picking, searching
+
+    /// The field's text changed by the person: back to picking (the last search's results make way for suggestions).
+    func edit(_ text: String) {
+        guard text != query else { return }
+        query = text
+        if committed != nil { clearSearch() }
+    }
+
+    /// A suggested station was tapped. The first becomes the origin chip (and the server starts on the day's planner);
+    /// the second, or one tapped while the text already named the origin, completes the route and searches.
+    func pick(_ station: StationHit, _ client: APIClient) {
+        let residue = AddTrainLogic.residue(after: suggestion?.interpretation)
+        if let origin = fromStation ?? typedOrigin, origin.id != station.id {
+            fromStation = origin
+            toStation = station
+            query = residue
+            suggestion = nil
+            search()
+        } else {
+            fromStation = station
+            query = residue
+            suggestion = nil
+            warm(client)
+        }
+    }
+
+    /// A chip was tapped: that station and the one after it are taken off, and the search with them.
+    func unpick(from: Bool) {
+        if from { fromStation = nil }
+        toStation = nil
+        clearSearch()
+    }
+
+    /// Both stations the other way round, searched again (the trip home).
+    func swap() {
+        guard let from = fromStation, let to = toStation else { return }
+        fromStation = to
+        toStation = from
+        search()
+    }
+
+    /// A route from Recent: both stations picked, searched.
+    func pick(_ route: RecentRoute) {
+        fromStation = route.from
+        toStation = route.to
+        query = ""
+        search()
+    }
+
+    /// Text put in whole and searched: an example, or a search opened from another screen.
+    func search(text: String) {
+        fromStation = nil
+        toStation = nil
+        query = text
+        search()
+    }
+
+    /// Return in the field: while a station is being picked (nothing reads as a number), the top suggestion is taken,
+    /// as a tap would; else the field is searched as it stands.
+    func submit(_ client: APIClient) {
+        if committed == nil, toStation == nil, numberSearch == nil, let top = suggestions.first {
+            pick(top, client)
+        } else {
+            search()
+        }
+    }
+
+    /// Searches the field as it stands (the second pick, Return, the number row). The same search again only asks again
+    /// after a failure.
+    func search() {
+        guard let c = AddTrainLogic.commit(from: fromStation, to: toStation, text: query) else { return }
+        if c == committed {
+            if searchFailed { retry += 1 }
+            return
+        }
+        clearAnswer()
+        // What the skeletons look like: train cards for a number, journeys otherwise.
+        expectsJourneys = suggestion?.interpretation.trainNumber == nil || c.fromId != nil
+        committed = c
+        // Loading from this frame: the skeletons show at once, not after the request has gone out.
+        loading = true
+    }
+
+    /// Back to picking: no search, no answer.
+    private func clearSearch() {
+        committed = nil
+        clearAnswer()
+        loading = false
+        searchFailed = false
+        searchFailure = nil
+    }
+
+    private func clearAnswer() {
+        response = nil
+        pagedJourneys = []
+        window = nil
+        prefetchedLater = nil
+        laterEmpty = false
+    }
+
+    /// Asks the server to start building the day's planner (once per day), while the destination is still typed.
+    private func warm(_ client: APIClient) {
+        guard !warmed.contains(date) else { return }
+        warmed.insert(date)
+        let day = date
+        Task { try? await client.warmPlanner(date: day) }
+    }
+
+    /// The suggestions for the text being typed, after a short pause; a newer keystroke cancels this one. An older
+    /// server without the suggest step gets the plain station search for the part being typed.
+    func runSuggest(_ client: APIClient) async {
+        let text = query.trimmingCharacters(in: .whitespaces)
+        guard committed == nil, toStation == nil, !text.isEmpty else {
+            suggestion = nil
+            return
+        }
+        try? await Task.sleep(for: .milliseconds(120))
+        if Task.isCancelled { return }
+        do {
+            let answer = try await client.suggest(text, date: date, fromId: fromStation?.id)
+            if Task.isCancelled { return }
+            suggestion = answer
+        } catch {
+            if APIError.classify(error) == .cancelled || Task.isCancelled { return }
+            let hits = (try? await client.searchStations(AddTrainLogic.typedTerm(text), limit: 6)) ?? []
+            if Task.isCancelled { return }
+            suggestion = SearchResponse(
+                date: date, interpretation: .init(operator: nil, trainNumber: nil, from: nil, to: nil, typing: fromStation == nil ? "from" : "to"),
+                suggestions: hits.filter { $0.id != fromStation?.id }, results: nil, connections: nil, outsideTimetable: false, history: nil
+            )
+        }
     }
 
     /// Opens straight at the confirm step for a timetable trip. Meanwhile the sheet says what it's opening; a failure
@@ -274,29 +477,14 @@ final class AddTrainModel {
         picked = result
     }
 
-    /// Runs the search after a short pause; a newer search (or the sheet closing) cancels this one.
+    /// Runs the search that was asked for (no pause: it was asked for on purpose); a newer one, another day, or the
+    /// sheet closing cancels it.
     func runSearch(_ client: APIClient) async {
-        let text = query.trimmingCharacters(in: .whitespaces)
-        guard !text.isEmpty else {
-            response = nil
-            pagedJourneys = []
-            window = nil
+        guard let c = committed else {
             loading = false
             return
         }
         loading = true
-        try? await Task.sleep(for: .milliseconds(150))
-        if Task.isCancelled { return }
-        let term = AddTrainLogic.typedTerm(text)
-        if term.count >= 2 {
-            Task { [weak self] in
-                let hits = (try? await client.searchStations(term, limit: 8)) ?? []
-                guard let self, AddTrainLogic.typedTerm(self.query) == term else { return }
-                self.quickSuggestions = hits
-            }
-        } else {
-            quickSuggestions = []
-        }
         do {
             // Today's journeys from ten minutes ago, one page at a time; another day whole. The planner is asked for
             // the most changes it does, and the filter picks from that. A dropped connection or a server still
@@ -305,7 +493,15 @@ final class AddTrainModel {
             let today = date == Format.todayIso()
             let after: Double? = today ? Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000 : nil
             let answer = try await searchRetry.run {
-                try await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: today ? Self.pageHours : nil)
+                try await client.search(c.text, date: date, fromId: c.fromId, toId: c.toId, changes: Self.maxChangesLimit, after: after, hours: today ? Self.pageHours : nil)
+            }
+            guard c == committed, !Task.isCancelled else { return }
+            // Not a search yet (one station alone, Return before its suggestions came): back to picking, with the
+            // stations it read to choose from.
+            if answer.results == nil, answer.journeys == nil, !answer.outsideTimetable, answer.journeysPending != true {
+                clearSearch()
+                suggestion = answer
+                return
             }
             response = answer
             pagedJourneys = []
@@ -314,16 +510,23 @@ final class AddTrainModel {
             searchFailed = false
             searchFailure = nil
             loading = false
+            // Typed as text ("Uppsala Stockholm" and Return): the stations it found become the chips, so the field
+            // says what was searched. The search itself stays as it was asked.
+            if fromStation == nil || toStation == nil, let route = AddTrainLogic.pickedRoute(from: answer) {
+                fromStation = route.from
+                toStation = route.to
+                query = AddTrainLogic.residue(after: answer.interpretation)
+            }
         } catch {
             let kind = APIError.classify(error)
-            if kind == .cancelled { return }
+            if kind == .cancelled || c != committed { return }
             searchFailed = true
             searchFailure = kind
             loading = false
         }
     }
 
-    /// Search pressed again (or the text submitted): runs the same search once more after a failure.
+    /// Try again after a failure.
     func searchAgain() {
         if searchFailed { retry += 1 }
     }
@@ -359,6 +562,8 @@ final class AddTrainModel {
 
     /// A day before yesterday was picked: start fetching its timetable now, before anything is typed.
     func prepareHistory(_ client: APIClient) async {
+        // A new day with the origin already picked: its planner, too.
+        if fromStation != nil { warm(client) }
         guard let yesterday = Format.addDaysIso(Format.todayIso(), days: -1), date < yesterday else { return }
         try? await client.prepareHistory(date: date)
     }
@@ -386,6 +591,10 @@ final class AddTrainModel {
         pickedJourney = nil
         maxChanges = 2
         minComfort = 0
+        fromStation = nil
+        toStation = nil
         query = ""
+        suggestion = nil
+        clearSearch()
     }
 }

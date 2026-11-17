@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { dayIndexWithin, planCached, rank } from '../search/planner.js';
+import { dayIndex, dayIndexWithin, planCached, rank } from '../search/planner.js';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
@@ -10,8 +10,8 @@ import { daysWithNumber, productOf, searchByRoute, searchConnections, tripStops 
 import { typicalTrainType } from '../legs/trainTypes.js';
 import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
-import { eq } from 'drizzle-orm';
-import { stations } from '../db/schema.js';
+import { and, desc, eq, inArray, ne } from 'drizzle-orm';
+import { legs, stations } from '../db/schema.js';
 import { COUNTRIES, tzOf } from '../lib/countries.js';
 import { searchHomeCountry } from '../search/homeCountry.js';
 
@@ -26,10 +26,30 @@ export const searchRoutes =
 
     const countryOfResult = (r: { from: { country?: string } }) => r.from.country;
 
-    app.get<{ Querystring: { q?: string; date?: string; changes?: string; after?: string; hours?: string; region?: string } }>('/search', async (req, reply) => {
+    // While the person types: how the text reads and the stations to pick from, nothing from the timetable, so it
+    // answers at once. `from` (a station id): the origin is already picked and the text is the destination.
+    app.get<{ Querystring: { q?: string; date?: string; from?: string } }>('/search/suggest', async (req, reply) => {
       const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
-      const out = search(req.query.q ?? '', date);
+      return search(req.query.q ?? '', date, { fromId: req.query.from, suggestOnly: true });
+    });
+
+    // Starts building a day's journey planner as soon as the app knows the day and the first station, so the search
+    // that follows doesn't wait for it. Answers at once. Only that day: the cache holds four, and today and tomorrow
+    // (which today's six-hour window runs into) are kept warm already (warmPlanner).
+    app.get<{ Querystring: { date?: string } }>('/search/warm', async (req, reply) => {
+      const date = req.query.date ?? '';
+      if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
+      dayIndex(db, date).catch((e) => log(`planner: warming ${date} failed: ${(e as Error).message}`));
+      return { warming: true };
+    });
+
+    // `from` and `to` (station ids): the stations picked in the app, searched as they are; `q` then carries only an
+    // operator or a train number.
+    app.get<{ Querystring: { q?: string; date?: string; changes?: string; after?: string; hours?: string; region?: string; from?: string; to?: string } }>('/search', async (req, reply) => {
+      const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
+      if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
+      const out = search(req.query.q ?? '', date, { fromId: req.query.from, toId: req.query.to });
       // A bare number matches trains in every country: the ones in this person's home country first (user test
       // 2026-11-07: "421" gave a Danish IC 421 above SJ's). Stable, so exact numbers still come before variants.
       if (out.interpretation.trainNumber && out.results && out.results.length > 0 && !out.interpretation.operator) {
@@ -85,6 +105,9 @@ export const searchRoutes =
       }
       return out;
     });
+
+    // The person's own routes, the last added first, each pair once: one tap searches it again (DESIGN §5.6).
+    app.get('/routes/recent', async (req) => recentRoutes(db, req.userId));
 
     // The app calls this as soon as an older day is picked, before anything is typed, so the archive import for that
     // day is under way (or done) by the time the search runs. Returns at once with where it stands.
@@ -159,3 +182,40 @@ export const searchRoutes =
       };
     });
   };
+
+/** The user's last distinct routes (origin → destination of the trips they added, newest first), at most `limit`, each
+ * with how many trips it has and when the latest of them ran (its departure, else when it was added; epoch ms). Trips they said they didn't take are left out. */
+export function recentRoutes(db: Db, userId: string, limit = 4) {
+  const rows = db
+    .select({ from: legs.originStationId, to: legs.destStationId, added: legs.createdAt, dep: legs.schedDep })
+    .from(legs)
+    .where(and(eq(legs.userId, userId), ne(legs.ride, 'not_taken')))
+    .orderBy(desc(legs.createdAt))
+    .limit(200)
+    .all();
+  const counts = new Map<string, number>();
+  const latest = new Map<string, number>();
+  for (const r of rows) {
+    const key = `${r.from}>${r.to}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+    const at = (r.dep ?? r.added)?.getTime();
+    if (at != null && at > (latest.get(key) ?? -Infinity)) latest.set(key, at);
+  }
+  const seen = new Set<string>();
+  const pairs = rows.filter((r) => r.from !== r.to && !seen.has(`${r.from}>${r.to}`) && seen.add(`${r.from}>${r.to}`)).slice(0, limit);
+  if (!pairs.length) return [];
+  const ids = [...new Set(pairs.flatMap((p) => [p.from, p.to]))];
+  const byId = new Map(
+    db
+      .select({ id: stations.id, name: stations.name, code: stations.trvSignature, country: stations.country })
+      .from(stations)
+      .where(inArray(stations.id, ids))
+      .all()
+      .map((s) => [s.id, s]),
+  );
+  return pairs.flatMap((p) => {
+    const from = byId.get(p.from);
+    const to = byId.get(p.to);
+    return from && to ? [{ from, to, count: counts.get(`${p.from}>${p.to}`) ?? 1, last: latest.get(`${p.from}>${p.to}`) ?? null }] : [];
+  });
+}

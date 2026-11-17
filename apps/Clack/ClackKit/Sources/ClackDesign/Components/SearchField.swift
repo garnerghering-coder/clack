@@ -12,6 +12,13 @@ public struct SearchField: View {
     public let prompt: String
     public var overMap = false
     private let focus: FocusState<Bool>.Binding?
+    /// What's already chosen, drawn in the field above the text (Add a train's picked stations).
+    private let tokens: AnyView?
+    /// False once the tokens say it all (both stations picked, nothing typed): the text line folds away, kept in place
+    /// so the field keeps its identity and focus.
+    private let showsText: Bool
+    /// False when the tokens lead the field (they say what it is), which leaves them its width.
+    private let showsIcon: Bool
     @FocusState private var ownFocus: Bool
 
     public static let height: CGFloat = 48
@@ -21,22 +28,49 @@ public struct SearchField: View {
         self.prompt = prompt
         self.overMap = overMap
         self.focus = focus
+        self.tokens = nil
+        self.showsText = true
+        self.showsIcon = true
+    }
+
+    public init<Tokens: View>(text: Binding<String>, prompt: String, focus: FocusState<Bool>.Binding? = nil, showsText: Bool = true, showsIcon: Bool = true, @ViewBuilder tokens: () -> Tokens) {
+        _text = text
+        self.prompt = prompt
+        self.overMap = false
+        self.focus = focus
+        self.tokens = AnyView(tokens())
+        self.showsText = showsText
+        self.showsIcon = showsIcon
     }
 
     private var focused: Bool { focus?.wrappedValue ?? ownFocus }
 
     public var body: some View {
         let shape = RoundedRectangle(cornerRadius: Radius.input, style: .continuous)
-        HStack(spacing: Space.s) {
+        HStack(spacing: showsIcon ? Space.s : 0) {
+            // Folded rather than removed, so the text field after it keeps its identity (and focus).
             LucideIcon(name: "search", size: 18).foregroundStyle(Ink.text2)
-            field
-                .clack(.searchField)
-                .foregroundStyle(Ink.text)
-                .tint(Ink.accentLine)
-                .noAutocapitalization()
-                .autocorrectionDisabled()
-                .submitLabel(.search)
-                .accessibilityLabel(prompt)
+                .frame(width: showsIcon ? nil : 0)
+                .opacity(showsIcon ? 1 : 0)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 0) {
+                // Always the same structure (the tokens may be empty): adding a row must not rebuild the text field and drop its focus.
+                tokens
+                field
+                    .clack(.searchField)
+                    .foregroundStyle(Ink.text)
+                    .tint(Ink.accentLine)
+                    .noAutocapitalization()
+                    .autocorrectionDisabled()
+                    .submitLabel(.search)
+                    .accessibilityLabel(prompt)
+                    .frame(minHeight: tokens == nil || !showsText ? nil : Self.height - 4)
+                    .frame(height: showsText ? nil : 0)
+                    .opacity(showsText ? 1 : 0)
+                    .allowsHitTesting(showsText)
+                    .accessibilityHidden(!showsText)
+            }
+            .padding(.bottom, showsText ? 0 : Space.xs)
         }
         .padding(.horizontal, Space.m)
         .frame(minHeight: Self.height)
