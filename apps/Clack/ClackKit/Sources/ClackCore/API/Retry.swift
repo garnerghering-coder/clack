@@ -209,11 +209,14 @@ public final class RetryTracker {
 }
 
 extension RetryWake {
-    /// A loop's wait: `seconds`, or less when the connection comes back or the app comes to the front. False when the
-    /// task was cancelled (the loop should stop).
-    public static func pause(_ seconds: TimeInterval) async -> Bool {
+    /// A loop's wait: `seconds`, or less when the connection comes back or the app comes to the front; and while the
+    /// app is away from the screen, until it's back (a poll doesn't ask for what nobody sees, and doesn't send a
+    /// request iOS is about to freeze). False when the task was cancelled (the loop should stop).
+    public static func pause(_ seconds: TimeInterval, presence: AppPresence = .shared) async -> Bool {
         do {
             try await shared.sleep(seconds)
+            await presence.untilInFront()
+            try Task.checkCancellation()
             return true
         } catch {
             return false
@@ -291,8 +294,11 @@ public nonisolated final class RetryWake: Sendable {
 
 /// Whether Clack's server can be reached, and when it can't, why: the rule behind the app's connection strip
 /// (`ConnectionState`), here so it can be tested. The phone's side comes from its path (NWPathMonitor); the server's
-/// from every request: any answer from the server, even an error, means online; failures to reach it again and again
-/// while the phone has a connection mean server trouble.
+/// from every request: any answer from the server, even an error, means online. The server is blamed only when it
+/// keeps not answering for a while: at least `troubleAfter` failures over at least `troubleSeconds`, with no answer
+/// between (build 90: before, two failures in a row did it, and the requests that died together when the app came
+/// back from the background made two in the same instant). Until then the strip says nothing: the screen waiting
+/// shows its own "trying again".
 public nonisolated struct ConnectionTracker: Sendable, Equatable {
     public enum State: Sendable, Equatable {
         case online
@@ -305,52 +311,66 @@ public nonisolated struct ConnectionTracker: Sendable, Equatable {
     public private(set) var hasPath = true
     /// Failures in a row to reach the server, since its last answer.
     private var failures = 0
+    /// When the first of them came.
+    private var firstFailure: Date?
     /// The last failure was URLSession's "no connection" (it can know before the monitor does).
     private var lastFailedOffline = false
-    /// Failures in a row, with a connection, before the strip blames the server: one lost answer is as often the
-    /// network's hiccup as the server's. Until then the strip says no connection, as it always did.
-    public static let troubleAfter = 2
+    /// Failures, with a connection, before the strip blames the server…
+    public static let troubleAfter = 3
+    /// …spread over at least this long (the retries back off 1 s, 2 s, 4 s …, so a server really down shows in 20–30 s).
+    public static let troubleSeconds: TimeInterval = 20
+    /// URLSession's "no connection" shows at once only from the second in a row, a moment apart: one is as often a
+    /// connection that went stale while the app was away.
+    public static let offlineSeconds: TimeInterval = 2
 
     public init() {}
 
     /// A request's outcome. True when it brought the server back (offline or server trouble, now online): the retries
     /// waiting out a backoff should go at once, not when their countdown ends (build 86 check: the strip cleared, and
     /// Network now kept its error and a 35 s countdown).
-    public mutating func report(_ reach: Reach) -> Bool {
+    public mutating func report(_ reach: Reach, now: Date = .now) -> Bool {
         let before = state
         switch reach {
         case .answered:
             failures = 0
+            firstFailure = nil
             lastFailedOffline = false
         case .failed(let kind):
             failures += 1
+            if firstFailure == nil { firstFailure = now }
             lastFailedOffline = kind == .offline
         }
-        update()
+        update(now: now)
         return before != .online && state == .online
     }
 
     /// The phone's connection changed. True when it came back: the retries waiting should go now.
-    public mutating func pathChanged(satisfied: Bool) -> Bool {
+    public mutating func pathChanged(satisfied: Bool, now: Date = .now) -> Bool {
         let cameBack = satisfied && !hasPath
         hasPath = satisfied
         // The failures were the old connection's; the retries this wakes will tell about the new one.
-        if cameBack {
-            failures = 0
-            lastFailedOffline = false
-        }
-        update()
+        if cameBack { forget() }
+        update(now: now)
         return cameBack
     }
 
-    private mutating func update() {
+    /// Starts counting afresh (the app came back to the front on new connections: what failed before says nothing).
+    public mutating func forget(now: Date = .now) {
+        failures = 0
+        firstFailure = nil
+        lastFailedOffline = false
+        update(now: now)
+    }
+
+    private mutating func update(now: Date) {
+        let span = firstFailure.map { now.timeIntervalSince($0) } ?? 0
         let next: State =
             if !hasPath { .offline }
             else if failures == 0 { .online }
-            else if lastFailedOffline { .offline }
-            // One lost answer: what the strip said before stays (no connection, the old single flag), until it repeats.
-            else if failures < Self.troubleAfter { state == .serverTrouble ? .serverTrouble : .offline }
-            else { .serverTrouble }
+            else if lastFailedOffline, failures >= 2, span >= Self.offlineSeconds { .offline }
+            else if failures >= Self.troubleAfter, span >= Self.troubleSeconds { .serverTrouble }
+            // Not yet: what the strip says stays (nothing, or the trouble it already named).
+            else { state == .online ? .online : state }
         if next != state { state = next }
     }
 }

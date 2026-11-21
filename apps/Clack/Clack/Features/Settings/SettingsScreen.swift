@@ -608,7 +608,7 @@ struct PrivacyScreen: View {
     }
 }
 
-/// The owner's test tools (station walks, the Wallet pass switch, test alerts, the design gallery): in Xcode and
+/// The owner's test tools (station walks, the Wallet pass switch, test alerts, the design gallery, the network log): in Xcode and
 /// TestFlight builds, never in App Store builds, all by the one rule in `BuildChannel` (none of them is `#if DEBUG`,
 /// which left them out of TestFlight).
 private struct TestToolsRow: View {
@@ -631,6 +631,9 @@ private struct TestToolsRow: View {
                     .buttonStyle(.clack(wide: true))
                     .padding(.top, Space.m)
                 NavigationLink(l10n.t("settings.test.design")) { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
+                    .buttonStyle(.clack(wide: true))
+                    .padding(.top, Space.m)
+                NavigationLink(l10n.t("settings.test.networkLog")) { NetworkLogScreen() }
                     .buttonStyle(.clack(wide: true))
                     .padding(.top, Space.m)
             }

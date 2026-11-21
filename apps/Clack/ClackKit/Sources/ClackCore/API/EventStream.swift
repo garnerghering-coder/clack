@@ -68,52 +68,84 @@ public nonisolated struct SSEParser: Sendable {
 }
 
 public nonisolated enum EventStream {
-    /// Opens a stream and yields its events until it ends or fails. The request timeout is longer than the server's
-    /// heartbeat, so a quiet stream isn't cut. The server's `retry:` comes through as an event named
-    /// `SSEEvent.retryName`; a refusal as an `APIError` (so a 429 or 503 is told from no connection).
-    public static func events(url: URL, userID: String, session: URLSession? = nil) -> AsyncThrowingStream<SSEEvent, Error> {
+    /// Opens a stream and yields its events until it ends or fails. The server's `retry:` comes through as an event
+    /// named `SSEEvent.retryName`; a refusal as an `APIError` (so a 429 or 503 is told from no connection).
+    ///
+    /// While the app is away from the screen the stream is closed, and it opens again when the app is back
+    /// (`AppPresence`): the reader sees one stream, without a failure, and the server sends its full state again on
+    /// the new connection.
+    public static func events(
+        url: URL, userID: String, session: URLSession? = nil, presence: AppPresence = .shared
+    ) -> AsyncThrowingStream<SSEEvent, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
-                    let configuration = URLSessionConfiguration.default
-                    configuration.timeoutIntervalForRequest = 120
-                    configuration.timeoutIntervalForResource = .infinity
-                    let session = session ?? URLSession(configuration: configuration)
-                    var request = URLRequest(url: url)
-                    request.setValue(userID, forHTTPHeaderField: "X-Clack-User")
-                    request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
-                    request.timeoutInterval = 120
-                    let (bytes, response) = try await session.bytes(for: request)
-                    guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
-                    guard (200..<300).contains(http.statusCode) else {
-                        let header = http.value(forHTTPHeaderField: "Retry-After")
-                        throw APIError(
-                            status: http.statusCode, message: "HTTP \(http.statusCode)", duplicateOf: nil,
-                            retryAfter: APIError.retryAfter(header: header, message: nil)
-                        )
-                    }
-                    var parser = SSEParser()
-                    var retry: Int?
-                    // Split on newlines ourselves: `bytes.lines` skips the empty lines that end an event.
-                    var line: [UInt8] = []
-                    for try await byte in bytes {
-                        if byte == 0x0A {
-                            if let event = parser.feed(String(decoding: line, as: UTF8.self)) { continuation.yield(event) }
-                            if parser.retry != retry, let ms = parser.retry {
-                                retry = ms
-                                continuation.yield(SSEEvent(name: SSEEvent.retryName, data: String(ms)))
-                            }
-                            line.removeAll(keepingCapacity: true)
-                        } else {
-                            line.append(byte)
+                    while true {
+                        await presence.untilInFront()
+                        try Task.checkCancellation()
+                        let epoch = presence.epoch
+                        let connection = Task { try await read(url: url, userID: userID, session: session ?? Connections.shared.streams, into: continuation) }
+                        let leaving = presence.whenLeaving { connection.cancel() }
+                        // Left between reading the epoch and listening for it.
+                        if presence.epoch != epoch { connection.cancel() }
+                        let ended = await withTaskCancellationHandler { await connection.result } onCancel: { connection.cancel() }
+                        presence.forget(leaving)
+                        try Task.checkCancellation()
+                        // The app left (or was frozen with it open): open again once it's back.
+                        if presence.epoch != epoch {
+                            let line = url.path + ": closed while the app was away"
+                            NetworkLog.shared.note(line)
+                            continue
                         }
+                        try ended.get()
+                        break
                     }
                     continuation.finish()
                 } catch {
+                    if NetworkLog.shared.enabled, !(error is CancellationError) {
+                        NetworkLog.shared.note(url.path + " stream failed: " + String(describing: error))
+                    }
                     continuation.finish(throwing: error)
                 }
             }
             continuation.onTermination = { _ in task.cancel() }
+        }
+    }
+
+    /// One connection: its events, until the server ends it or it fails.
+    private static func read(
+        url: URL, userID: String, session: URLSession, into continuation: AsyncThrowingStream<SSEEvent, Error>.Continuation
+    ) async throws {
+        var request = URLRequest(url: url)
+        request.setValue(userID, forHTTPHeaderField: "X-Clack-User")
+        request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+        request.timeoutInterval = 120
+        let log = NetworkLog.shared.enabled ? UUID() : nil
+        let (bytes, response) = try await session.bytes(for: request, delegate: log.map { MetricsCatcher(id: $0) })
+        guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+        if let log { NetworkLog.shared.note("stream \(url.path) opened → \(http.statusCode)", id: log) }
+        guard (200..<300).contains(http.statusCode) else {
+            let header = http.value(forHTTPHeaderField: "Retry-After")
+            throw APIError(
+                status: http.statusCode, message: "HTTP \(http.statusCode)", duplicateOf: nil,
+                retryAfter: APIError.retryAfter(header: header, message: nil)
+            )
+        }
+        var parser = SSEParser()
+        var retry: Int?
+        // Split on newlines ourselves: `bytes.lines` skips the empty lines that end an event.
+        var line: [UInt8] = []
+        for try await byte in bytes {
+            if byte == 0x0A {
+                if let event = parser.feed(String(decoding: line, as: UTF8.self)) { continuation.yield(event) }
+                if parser.retry != retry, let ms = parser.retry {
+                    retry = ms
+                    continuation.yield(SSEEvent(name: SSEEvent.retryName, data: String(ms)))
+                }
+                line.removeAll(keepingCapacity: true)
+            } else {
+                line.append(byte)
+            }
         }
     }
 }

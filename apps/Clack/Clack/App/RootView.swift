@@ -148,7 +148,17 @@ struct RootView: View {
         // Your train placed by your phone, and (when you've said yes) helping place it for everyone (RiderReporter).
         .onChange(of: scenePhase, initial: true) { _, phase in if phase == .active { RiderReporter.shared.resume(client: app.client) } }
         // Back in front: whatever was waiting out a backoff tries again now, not when its wait runs out.
-        .onChange(of: scenePhase) { _, phase in if phase == .active { app.connection.becameActive() } }
+        // Test builds keep the Network log (Settings > test tools).
+        .task { NetworkLog.shared.enabled = await BuildChannel.current().showsTestTools }
+        // Away from the screen: the streams close and the polls wait until it's back (iOS freezes the app soon after,
+        // and what it held open died with it). Started in the background (a refresh, an alert): away from the start.
+        .onChange(of: scenePhase, initial: true) { _, phase in
+            switch phase {
+            case .active: app.connection.becameActive()
+            case .background: app.connection.wentAway()
+            default: break
+            }
+        }
         .alert(app.l10n.t("usage.ask.title"), isPresented: Binding(get: { UsageAsk.shared.show && !RiderReporter.shared.showAsk }, set: { UsageAsk.shared.show = $0 })) {
             Button(app.l10n.t("usage.ask.yes")) { Usage.shared.enabled = true }
             Button(app.l10n.t("usage.ask.no"), role: .cancel) { Usage.shared.enabled = false }

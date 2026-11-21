@@ -71,11 +71,13 @@ extension APIClient {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         if let etag { request.setValue(etag, forHTTPHeaderField: "If-None-Match") }
         let (data, response): (Data, URLResponse)
+        let epoch = AppPresence.shared.epoch
         do {
             (data, response) = try await session.data(for: request)
         } catch {
+            // Cut by the app leaving the screen: says nothing about the server.
             let kind = APIError.classify(error)
-            if kind != .cancelled { reachability?(.failed(kind)) }
+            if kind != .cancelled, AppPresence.shared.epoch == epoch { reachability?(.failed(kind)) }
             throw error
         }
         reachability?(.answered)

@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import os
 import Testing
 @testable import ClackCore
 
@@ -207,39 +208,145 @@ struct RetryWakeTests {
 }
 
 struct ConnectionTrackerTests {
-    @Test func theServerAnsweringAgainAfterTroubleWakesTheRetries() {
+    let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+
+    @Test func theServerIsBlamedOnlyWhenItKeepsNotAnsweringAndItsAnswerWakesTheRetries() {
         var c = ConnectionTracker()
-        #expect(c.report(.failed(.serverDown)) == false)
-        #expect(c.report(.failed(.serverDown)) == false)
+        #expect(c.report(.failed(.serverDown), now: t0) == false)
+        #expect(c.report(.failed(.timeout), now: t0.addingTimeInterval(5)) == false)
+        #expect(c.state == .online)
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(21))
         #expect(c.state == .serverTrouble)
         // The strip clears, and the waiting retries go at once (build 86: Network now sat out a 35 s countdown).
-        #expect(c.report(.answered) == true)
+        #expect(c.report(.answered, now: t0.addingTimeInterval(22)) == true)
         #expect(c.state == .online)
         // Already online: an answer wakes nothing.
-        #expect(c.report(.answered) == false)
+        #expect(c.report(.answered, now: t0.addingTimeInterval(23)) == false)
     }
 
-    @Test func anAnswerAfterOfflineWakesTooAndOneLostAnswerSaysNoConnection() {
+    @Test func requestsThatFailTogetherDoNotBlameTheServer() {
+        // Build 89: the requests open when the app came back all failed in the same instant, and two did it.
         var c = ConnectionTracker()
-        #expect(c.report(.failed(.offline)) == false)
-        #expect(c.state == .offline)
-        #expect(c.report(.answered) == true)
-        _ = c.report(.failed(.timeout))
-        #expect(c.state == .offline)
-        _ = c.report(.failed(.timeout))
+        for i in 0..<8 { _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(Double(i) * 0.01)) }
+        #expect(c.state == .online)
+    }
+
+    @Test func anAnswerBetweenStartsTheCountAgain() {
+        var c = ConnectionTracker()
+        _ = c.report(.failed(.timeout), now: t0)
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(10))
+        _ = c.report(.answered, now: t0.addingTimeInterval(15))
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(25))
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(30))
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(40))
+        #expect(c.state == .online)
+        _ = c.report(.failed(.timeout), now: t0.addingTimeInterval(46))
         #expect(c.state == .serverTrouble)
+    }
+
+    @Test func noConnectionShowsFromTheSecondInARowAndAnAnswerWakes() {
+        var c = ConnectionTracker()
+        _ = c.report(.failed(.offline), now: t0)
+        #expect(c.state == .online)
+        _ = c.report(.failed(.offline), now: t0.addingTimeInterval(3))
+        #expect(c.state == .offline)
+        #expect(c.report(.answered, now: t0.addingTimeInterval(4)) == true)
+        #expect(c.state == .online)
     }
 
     @Test func thePathComingBackWakesAndForgetsTheOldFailures() {
         var c = ConnectionTracker()
-        _ = c.report(.failed(.serverDown))
-        _ = c.report(.failed(.serverDown))
+        _ = c.report(.failed(.serverDown), now: t0)
+        _ = c.report(.failed(.serverDown), now: t0.addingTimeInterval(10))
+        _ = c.report(.failed(.serverDown), now: t0.addingTimeInterval(20))
+        #expect(c.state == .serverTrouble)
         #expect(c.pathChanged(satisfied: false) == false)
         #expect(c.state == .offline)
         #expect(c.pathChanged(satisfied: true) == true)
         #expect(c.state == .online)
         #expect(c.pathChanged(satisfied: true) == false)
     }
+
+    @Test func forgettingClearsTrouble() {
+        var c = ConnectionTracker()
+        _ = c.report(.failed(.serverDown), now: t0)
+        _ = c.report(.failed(.serverDown), now: t0.addingTimeInterval(10))
+        _ = c.report(.failed(.serverDown), now: t0.addingTimeInterval(20))
+        c.forget()
+        #expect(c.state == .online)
+    }
+}
+
+struct AppPresenceTests {
+    @Test func leavingMovesTheEpochAndRunsTheHandlersOnce() {
+        let p = AppPresence()
+        let calls = OSAllocatedUnfairLock(initialState: 0)
+        let id = p.whenLeaving { calls.withLock { $0 += 1 } }
+        #expect(p.epoch == 0)
+        p.left(now: Date(timeIntervalSince1970: 0))
+        p.left(now: Date(timeIntervalSince1970: 5))
+        #expect(p.epoch == 1)
+        #expect(calls.withLock { $0 } == 1)
+        #expect(p.returned(now: Date(timeIntervalSince1970: 40)) == 40)
+        #expect(p.returned() == nil)
+        p.forget(id)
+        p.left()
+        #expect(calls.withLock { $0 } == 1)
+    }
+
+    @Test func waitingEndsWhenTheAppIsBack() async {
+        let p = AppPresence()
+        p.left()
+        let waiting = Task { await p.untilInFront(); return p.inFront }
+        try? await Task.sleep(for: .milliseconds(20))
+        p.returned()
+        #expect(await waiting.value == true)
+    }
+
+    @Test func aPollWaitsWhileTheAppIsAwayAndStopsWhenCancelled() async {
+        let p = AppPresence()
+        p.left()
+        let poll = Task { await RetryWake.pause(0, presence: p) }
+        try? await Task.sleep(for: .milliseconds(20))
+        poll.cancel()
+        #expect(await poll.value == false)
+    }
+
+    @Test func aStreamClosesWhenTheAppLeavesAndOpensAgainWhenItIsBack() async throws {
+        let p = AppPresence()
+        let opened = OSAllocatedUnfairLock(initialState: 0)
+        StreamStub.handler = { _ in
+            opened.withLock { $0 += 1 }
+            return Data("event: live\ndata: {}\n\n".utf8)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [StreamStub.self]
+        let session = URLSession(configuration: configuration)
+        let url = URL(string: "https://example.invalid/api/live/stream")!
+        var iterator = EventStream.events(url: url, userID: "u", session: session, presence: p).makeAsyncIterator()
+        #expect(try await iterator.next()?.name == "live")
+        // The stub's stream stays open; leaving closes it, coming back opens it again, without a failure in between.
+        p.left()
+        p.returned()
+        #expect(try await iterator.next()?.name == "live")
+        #expect(opened.withLock { $0 } == 2)
+    }
+}
+
+/// A server that sends one event and then holds the stream open.
+private final class StreamStub: URLProtocol, @unchecked Sendable {
+    nonisolated(unsafe) static var handler: ((URLRequest) -> Data)?
+
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "text/event-stream"])!
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        if let data = Self.handler?(request) { client?.urlProtocol(self, didLoad: data) }
+    }
+
+    override func stopLoading() {}
 }
 
 struct FailureAdviceTests {

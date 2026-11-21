@@ -138,7 +138,10 @@ private nonisolated struct APIErrorBody: Decodable {
 public nonisolated struct APIClient: Sendable {
     public let base: URL
     public let userID: String
-    public let session: URLSession
+    /// The session the requests go on: the one given (tests), else `Connections.shared`'s, which is new after a while
+    /// away from the screen.
+    public var session: URLSession { fixedSession ?? Connections.shared.requests }
+    private let fixedSession: URLSession?
     /// Kept copies of the GETs the web keeps, served when the server can't be reached. Nil in tests.
     public let cache: OfflineCache?
     /// Told after every request whether the server answered or couldn't be reached (and how).
@@ -148,12 +151,12 @@ public nonisolated struct APIClient: Sendable {
     public static let getTimeout: TimeInterval = 15
 
     public init(
-        base: URL = Config.apiBase, userID: String, session: URLSession = .shared, cache: OfflineCache? = nil,
+        base: URL = Config.apiBase, userID: String, session: URLSession? = nil, cache: OfflineCache? = nil,
         reachability: (@Sendable (Reach) -> Void)? = nil
     ) {
         self.base = base
         self.userID = userID
-        self.session = session
+        self.fixedSession = session
         self.cache = cache
         self.reachability = reachability
     }
@@ -198,12 +201,20 @@ public nonisolated struct APIClient: Sendable {
         let observer = RetryContext.observer
         var retrier = Retrier(policy)
         while true {
+            let epoch = AppPresence.shared.epoch
             do {
-                let data = try await attempt(request)
+                let data = try await attempt(request, epoch: epoch)
                 if retrier.status != .idle { observer?(.idle) }
                 return data
             } catch {
                 let kind = APIError.classify(error)
+                // A read frozen on the way (the app left the screen with it open): asked again at once, not counted as
+                // a failure. The epoch moves only when the app leaves, so this can't loop. A write is left to its
+                // caller, as always.
+                if method == "GET", kind != .cancelled, kind.isRetryable, AppPresence.shared.epoch != epoch {
+                    try Task.checkCancellation()
+                    continue
+                }
                 let wanted = kind.isRetryable ? await retryIf?(error) ?? true : false
                 guard wanted, let delay = retrier.failed(kind), case .retrying = retrier.status else {
                     if kind != .cancelled, retrier.status != .idle || kind.isRetryable { observer?(.gaveUp(kind)) }
@@ -216,21 +227,27 @@ public nonisolated struct APIClient: Sendable {
         }
     }
 
-    /// One try: the answer's body, or the failure (and the server's reachability said either way).
-    private func attempt(_ request: URLRequest) async throws -> Data {
+    /// One try: the answer's body, or the failure (and the server's reachability said either way). A failure of a
+    /// request that began before the app last left the screen says nothing: the freeze cut it, not the server.
+    private func attempt(_ request: URLRequest, epoch: Int) async throws -> Data {
         let (data, response): (Data, URLResponse)
+        let log = NetworkLog.shared.enabled ? UUID() : nil
+        let started = Date()
         do {
-            (data, response) = try await session.data(for: request)
+            (data, response) = try await session.data(for: request, delegate: log.map { MetricsCatcher(id: $0) })
         } catch {
             // A network failure or the 15 s timeout means unreachable; a request the page cancelled doesn't.
             let kind = APIError.classify(error)
-            if kind != .cancelled { reachability?(.failed(kind)) }
+            let frozen = AppPresence.shared.epoch != epoch
+            if kind != .cancelled, !frozen { reachability?(.failed(kind)) }
+            if let log { NetworkLog.shared.note(Self.logLine(request, started, failure: error, frozen: frozen), id: log) }
             throw error
         }
         guard let http = response as? HTTPURLResponse else {
             reachability?(.failed(.serverDown))
             throw URLError(.badServerResponse)
         }
+        if let log { NetworkLog.shared.note(Self.logLine(request, started, status: http.statusCode), id: log) }
         // The proxy in front answering for a server that didn't is not the server answering.
         reachability?(http.statusCode == 502 || http.statusCode == 504 ? .failed(.serverDown) : .answered)
         guard (200..<300).contains(http.statusCode) else {
@@ -245,6 +262,19 @@ public nonisolated struct APIClient: Sendable {
             )
         }
         return data
+    }
+
+    /// A request's line in the Network log: method, path, outcome and how long it took.
+    static func logLine(_ request: URLRequest, _ started: Date, status: Int? = nil, failure: (any Error)? = nil, frozen: Bool = false) -> String {
+        let path = request.url.map { $0.path + ($0.query.map { "?" + $0 } ?? "") } ?? "?"
+        let ms = Int((Date().timeIntervalSince(started) * 1000).rounded())
+        var outcome = status.map { String($0) } ?? "failed"
+        if let failure {
+            outcome = (failure as? URLError).map { "URLError \($0.code.rawValue)" } ?? String(describing: failure)
+            outcome += " (\(APIError.classify(failure)))"
+            if frozen { outcome += ", cut by the app leaving" }
+        }
+        return "\(request.httpMethod ?? "GET") \(path) → \(outcome) in \(ms) ms"
     }
 
     /// The path a copy is kept under: the path itself, and for the Passport its query too (sorted, so the same choices match).

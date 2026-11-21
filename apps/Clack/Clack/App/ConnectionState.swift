@@ -13,8 +13,8 @@ import Observation
 /// NWPathMonitor; the server's from every request (`APIClient.reachability`): any answer from the server itself, even
 /// an error, means online (apps/web/src/api.ts); failures to reach it (no answer in time, the proxy in front saying it
 /// isn't answering) again and again while the phone has a connection mean server trouble. The rule is
-/// `ConnectionTracker` (ClackCore, tested); this holds it for the views and wakes the waiting retries when the server
-/// or the connection comes back.
+/// `ConnectionTracker` (ClackCore, tested); this holds it for the views, wakes the waiting retries when the server
+/// or the connection comes back, and tells the network when the app leaves the screen and comes back (`AppPresence`).
 @MainActor
 @Observable
 final class ConnectionState {
@@ -32,10 +32,17 @@ final class ConnectionState {
 
     private let monitor = NWPathMonitor()
 
+    /// The interface the phone last used (Wi-Fi, mobile), to tell a switch from a mere update.
+    private var interface: NWInterface.InterfaceType?
+
+    /// Away longer than this, the connections held before are taken for dead: the next requests go on new ones.
+    static let staleAfter: TimeInterval = 30
+
     init() {
         monitor.pathUpdateHandler = { [weak self] path in
             let satisfied = path.status == .satisfied
-            Task { @MainActor in self?.pathChanged(satisfied: satisfied) }
+            let interface = path.availableInterfaces.first?.type
+            Task { @MainActor in self?.pathChanged(satisfied: satisfied, interface: interface) }
         }
         monitor.start(queue: DispatchQueue(label: "clack.connection"))
     }
@@ -48,15 +55,45 @@ final class ConnectionState {
         if cameBack { RetryWake.shared.wake() }
     }
 
-    /// The app came to the front: whatever was waiting to try again goes now.
+    /// The app left the screen: the streams close, the polls wait (`AppPresence`).
+    func wentAway() {
+        AppPresence.shared.left()
+        NetworkLog.shared.note("app left the screen")
+    }
+
+    /// The app came to the front: the streams and polls go again, and whatever was waiting to try again goes now.
+    /// After a while away the old connections are left behind first, so nothing waits 15 s on one that died while the app
+    /// was frozen, and the failures from before count for nothing.
     func becameActive() {
+        let away = AppPresence.shared.returned()
+        if let away {
+            NetworkLog.shared.note("app back after \(Int(away)) s")
+            if away > Self.staleAfter {
+                freshConnections()
+                tracker.forget()
+                publish()
+            }
+        }
         if isOffline || RetryWake.shared.waiting > 0 { RetryWake.shared.wake() }
     }
 
-    private func pathChanged(satisfied: Bool) {
+    private func pathChanged(satisfied: Bool, interface: NWInterface.InterfaceType?) {
+        let switched = satisfied && self.interface != nil && interface != self.interface
+        if satisfied { self.interface = interface }
         let cameBack = tracker.pathChanged(satisfied: satisfied)
         publish()
-        if cameBack { RetryWake.shared.wake() }
+        if switched || cameBack {
+            NetworkLog.shared.note(switched ? "network switched to \(interface.map { "\($0)" } ?? "?")" : "connection back")
+            // A switch (Wi-Fi to mobile) strands the connections on the old one: new ones, then everyone tries again.
+            freshConnections()
+            RetryWake.shared.wake()
+        }
+    }
+
+    /// The next requests and streams go on new sessions, so on new connections (`Connections`).
+    private func freshConnections() {
+        Connections.shared.renew()
+        NetworkLog.shared.note("new connections from here on")
     }
 
     private func publish() {
