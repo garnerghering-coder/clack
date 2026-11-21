@@ -319,8 +319,8 @@ struct TransferChip: View {
 
 /// A trip or a journey in the Trips list, one look for both (owner, 2026-11-15: "close the gap" between a past trip
 /// and a past journey): a header (the journey's label, or the train's operator and number), the route, the day as a
-/// slim strip with its times, and for a single train one status line. Each train's operator colour glows beside it.
-/// The card itself is `JourneyCardContent`, which search results use too (owner, build 87: a result should look like
+/// trains drawn side by side (`TrainStrip`, as in search), the day as a slim strip with its times, and for a single
+/// train one status line. Each train's operator colour glows beside it. The card itself is `JourneyCardContent`, which search results use too (owner, build 87: a result should look like
 /// the saved trip it becomes).
 struct JourneyCard: View {
     @Environment(AppModel.self) private var app
@@ -402,6 +402,9 @@ struct JourneyCardContent<Status: View>: View {
             Text(verbatim: "\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
                 .clack(.rowTitle).foregroundStyle(Ink.text)
                 .fixedSize(horizontal: false, vertical: true)
+            // The trains, drawn as the search results draw them (owner, build 90), in from the card's edge.
+            TrainStrip(legs: legs)
+                .padding(.leading, -Space.l)
             JourneyBar(legs: legs, now: now)
             if let status { status } else if single { legStatus(first) } else { journeyStatus(last) }
         }

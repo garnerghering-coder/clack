@@ -233,9 +233,20 @@ struct SearchResultCard<Details: View>: View {
 /// first, the one you board, is in front; each later one slides a little under the one before it, with a thin gap cut
 /// out along that train's outline (as the stacked logos have), so every nose stands out on any background. The train
 /// that usually runs the line, as `TrainPicture` draws it: unpainted where the type isn't known, nothing guessed.
+///
+/// The Trips list draws its trips the same way (owner, build 90), with each saved trip's own train type.
 struct TrainStrip: View {
     @Environment(AppModel.self) private var app
-    let trains: [TripResult]
+    /// Each train's type and operator, the one you board first.
+    private let trains: [(typeId: String?, operatorId: String?)]
+
+    init(trains: [TripResult]) {
+        self.trains = trains.map { ($0.trainType, $0.operatorId) }
+    }
+
+    init(legs: [Leg]) {
+        self.trains = legs.map { ($0.trainType, $0.operatorId ?? $0.operator?.id) }
+    }
     static var height: CGFloat { CGFloat(TrainStripLayout.height) }
     /// The gap around the train in front, in points.
     static let gap: CGFloat = 1.5
@@ -250,7 +261,7 @@ struct TrainStrip: View {
     var body: some View {
         let scale = CGFloat(TrainStripLayout.scale)
         let drawn = trains.map { train -> Drawn in
-            let type = train.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
+            let type = train.typeId.flatMap { id in app.trainTypes.first { $0.id == id } }
             let picture = TrainArt.picture(typeId: type?.id, art: type?.art, uncertain: type?.uncertain ?? false, operatorId: train.operatorId)
             let canvas = UIImage(named: picture.asset)?.size ?? CGSize(width: 900, height: 176)
             return Drawn(type: type, operatorId: train.operatorId, size: CGSize(width: canvas.width * scale, height: canvas.height * scale))
